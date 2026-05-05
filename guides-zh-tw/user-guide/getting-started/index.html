@@ -886,12 +886,12 @@
 </tr>
 <tr>
 <td>VPN</td>
-<td>OpenVPN（平台位於 <code>192.168.109.0/24</code> 私網）</td>
+<td>OpenVPN（平台位於私有網路，服務入口使用 <code>cscc.nthu.edu.tw</code> DNS）</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><em>截圖建議：</em> 登入頁畫面（<code>http://192.168.109.1:30080</code>），有 username / password / CAPTCHA 三個欄位。</p>
+<p><em>截圖建議：</em> 登入頁畫面（<code>https://dashboard.cscc.nthu.edu.tw</code>），有 username / password / CAPTCHA 三個欄位。</p>
 </blockquote>
 <hr />
 <h2 id="step-1-vpn">Step 1 — 連 VPN<a class="headerlink" href="#step-1-vpn" title="Permanent link">&para;</a></h2>
@@ -917,14 +917,14 @@
 </tr>
 </tbody>
 </table>
-<p>匯入管理員提供的 <code>Platform-VPN.ovpn</code> 設定檔，使用 LDAP 帳密登入 VPN。連線成功後可以 <code>ping 192.168.109.200</code> 驗證。</p>
+<p>匯入管理員提供的 <code>Platform-VPN.ovpn</code> 設定檔，使用 LDAP 帳密登入 VPN。連線成功後可以用 <code>nslookup dashboard.cscc.nthu.edu.tw</code> 驗證 DNS。</p>
 <blockquote>
 <p><strong>如果連不上：</strong> UDP port <code>31194</code> 必須沒有被防火牆擋住。</p>
 </blockquote>
 <hr />
 <h2 id="step-2">Step 2 — 登入平台<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h2>
 <p>打開瀏覽器：</p>
-<div class="highlight"><pre><span></span><code>http://192.168.109.1:30080
+<div class="highlight"><pre><span></span><code>https://dashboard.cscc.nthu.edu.tw
 </code></pre></div>
 <p>輸入：</p>
 <ul>

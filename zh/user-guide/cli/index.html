@@ -1024,7 +1024,7 @@
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
 <h3 id="tls-internal-ca">TLS / Internal CA<a class="headerlink" href="#tls-internal-ca" title="Permanent link">&para;</a></h3>
-<p><code>dashboard.cscc.nthu.edu.tw</code> may present an internal CA certificate that is not in the default trust store.
+<p><code>api.cscc.nthu.edu.tw</code> may present an internal CA certificate that is not in the default trust store.
 If login prints <code>x509: certificate signed by unknown authority</code>, configure one of the following:</p>
 <table>
 <thead>
@@ -1036,7 +1036,7 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <tbody>
 <tr>
 <td><code>CSCC_API_URL</code></td>
-<td>API base URL, e.g. <code>https://dashboard.cscc.nthu.edu.tw</code></td>
+<td>API base URL, e.g. <code>https://api.cscc.nthu.edu.tw</code></td>
 </tr>
 <tr>
 <td><code>CSCC_API_CA_CERT_PATH</code></td>
@@ -1086,12 +1086,43 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <p>This verifies the saved token and prints the current user and role information. Role changes take effect immediately because authorization is resolved from the backend RBAC/Casbin state on each request.</p>
 <hr />
 <h2 id="build-images">Build Images<a class="headerlink" href="#build-images" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;image-name&gt;<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;image-name&gt;<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
 </code></pre></div>
-<p>The build request and log stream use:</p>
+<p>The CLI packs the target directory into a <code>.tar.gz</code> build context, submits it to <code>/api/v1/images/build</code>, and streams the build logs by default. The directory must contain a Dockerfile at the build-context root.</p>
+<p>Useful options:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--project</code></td>
+<td>Project ID that owns the image build</td>
+</tr>
+<tr>
+<td><code>--name</code></td>
+<td>Short image name, for example <code>trainer-api</code></td>
+</tr>
+<tr>
+<td><code>--tag</code></td>
+<td>Optional image tag. Omit it to use the platform default</td>
+</tr>
+<tr>
+<td><code>--follow=false</code></td>
+<td>Submit the build without streaming logs</td>
+</tr>
+</tbody>
+</table>
+<p>The CLI reads the API endpoint from <code>CSCC_API_URL</code> or the saved login config. Use the gateway API host for production:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
+</code></pre></div>
+<p>The build request and log stream use the user token created by <code>cscc-cli login</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="err">Authorization: Bearer cscc_...</span>
 </code></pre></div>
-<p>No <code>CSCC_API_KEY</code>, <code>PLATFORM_API_KEY</code>, or <code>X-API-Key</code> header is required for CLI builds.</p>
+<p>No <code>CSCC_API_KEY</code>, <code>PLATFORM_API_KEY</code>, or <code>X-API-Key</code> header is required for CLI builds. The project must have <strong>Image Build Permission</strong> enabled, and your project role must allow builds.</p>
 <hr />
 <h2 id="token-management">Token Management<a class="headerlink" href="#token-management" title="Permanent link">&para;</a></h2>
 <p>List active API tokens:</p>

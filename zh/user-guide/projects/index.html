@@ -663,6 +663,45 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        建置專案映像
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="建置專案映像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        來源模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         設定檔版本控制
       
     </span>
@@ -672,7 +711,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         操作設定檔
@@ -688,7 +727,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         管理成員
@@ -710,7 +749,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -978,6 +1017,45 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        建置專案映像
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="建置專案映像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        來源模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         設定檔版本控制
       
     </span>
@@ -987,7 +1065,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         操作設定檔
@@ -1003,7 +1081,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         管理成員
@@ -1025,7 +1103,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1113,9 +1191,9 @@
 </div>
 <hr />
 <h2 id="_5">專案詳情標籤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>點擊專案卡片開啟詳情頁面。詳情頁面有五個標籤：</p>
+<p>點擊專案卡片開啟詳情頁面。核心標籤包含總覽、設定、計畫、建置與資源；映像、成員、儲存等標籤會依您的專案角色顯示。</p>
 <p><img alt="專案詳情標籤" src="../assets/screenshots/project-detail-tabs.png" />
-<em>圖 2：專案詳情頁面，包含總覽、設定、部署、成員和儲存標籤。</em></p>
+<em>圖 2：專案詳情頁面，包含總覽、設定、計畫、建置、資源與依角色顯示的標籤。</em></p>
 <table>
 <thead>
 <tr>
@@ -1133,21 +1211,87 @@
 <td>版本化的設定檔（Kubernetes YAML、腳本）</td>
 </tr>
 <tr>
-<td><strong>部署</strong></td>
-<td>活躍及歷史工作負載部署</td>
+<td><strong>計畫</strong></td>
+<td>綁定的資源計畫、時段與配額範圍</td>
 </tr>
 <tr>
-<td><strong>成員</strong></td>
-<td>團隊成員及其角色</td>
+<td><strong>建置</strong></td>
+<td>專案容器映像建置、來源選擇、資源設定與 Kaniko log</td>
 </tr>
 <tr>
-<td><strong>儲存</strong></td>
-<td>繫結的 PVC 及其權限</td>
+<td><strong>資源</strong></td>
+<td>執行中的專案工作負載與 Kubernetes 資源檢視</td>
+</tr>
+<tr>
+<td><strong>映像 / 成員 / 儲存</strong></td>
+<td>依角色顯示的映像管理、成員管理或儲存權限標籤</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_6">設定檔版本控制<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_6">建置專案映像<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>當專案需要允許清單中沒有的容器映像時，請使用 <strong>建置</strong> 標籤。專案管理者與專案管理員可在專案啟用 image build 後觸發建置；一般專案成員可以查看狀態與 log，但不能啟動或刪除建置。</p>
+<h3 id="_7">來源模式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>來源</th>
+<th>使用時機</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>上傳 archive</strong></td>
+<td>上傳 <code>.tar.gz</code> 或 <code>.zip</code> build context，Dockerfile 需放在根目錄</td>
+</tr>
+<tr>
+<td><strong>從 Storage</strong></td>
+<td>從個人儲存或您有讀取權限的專案儲存路徑建置</td>
+</tr>
+<tr>
+<td><strong>只貼 Dockerfile</strong></td>
+<td>直接貼上 Dockerfile，平台會建立最小 build context</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">建置設定<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>映像名稱</strong></td>
+<td>短名稱，例如 <code>trainer-api</code>；完整 Harbor 路徑由平台產生</td>
+</tr>
+<tr>
+<td><strong>Tag</strong></td>
+<td>選填；留空使用平台預設，也可填 <code>v1.0.1</code> 等版本</td>
+</tr>
+<tr>
+<td><strong>CPU 核心</strong></td>
+<td>build job 的 CPU request，不可超過專案剩餘 build 容量</td>
+</tr>
+<tr>
+<td><strong>Memory（GB）</strong></td>
+<td>build job 的記憶體 request，不可超過專案剩餘 build 容量</td>
+</tr>
+<tr>
+<td><strong>Timeout（分鐘）</strong></td>
+<td>正整數；超時後 build job 會被停止</td>
+</tr>
+</tbody>
+</table>
+<p>提交後，建置歷史會顯示狀態、來源類型、資源需求、目的映像與即時 log。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace。建置者本人或專案管理者可以從歷史中刪除 build artifact。</p>
+<div class="admonition note">
+<p class="admonition-title">建置權限由專案治理控制</p>
+<p>如果建置表單無法送出，請請平台管理員確認該專案已啟用 <strong>Image Build Permission</strong>，且已綁定有效的資源計畫。</p>
+</div>
+<hr />
+<h2 id="_9">設定檔版本控制<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>設定檔使用內容定址儲存——每個版本不可變且以 SHA-256 雜湊值識別。</p>
 <pre class="mermaid"><code>sequenceDiagram
     participant 使用者
@@ -1161,7 +1305,7 @@
     CAS--&gt;&gt;API: blob_id
     API--&gt;&gt;儀表板: config_commit_id（不可變）
     儀表板--&gt;&gt;使用者: 版本已建立 ✓</code></pre>
-<h3 id="_7">操作設定檔<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_10">操作設定檔<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ol>
 <li>前往 <strong>專案 → [您的專案] → 設定</strong> 標籤。</li>
 <li>點擊 <strong>+ 新增設定</strong> 上傳 YAML 檔案或在編輯器中貼上內容。</li>
@@ -1176,7 +1320,7 @@
 <p>只有專案中擁有 <strong>管理者</strong> 或更高角色的成員才能建立或編輯設定檔。</p>
 </div>
 <hr />
-<h2 id="_8">管理成員<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_11">管理成員<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ol>
 <li>開啟專案並前往 <strong>成員</strong> 標籤。</li>
 <li>點擊 <strong>+ 新增成員</strong>（需要 <strong>專案管理員</strong> 角色）。</li>
@@ -1235,7 +1379,7 @@
 </table>
 <p>若 GPU 長條已滿（100%），新的工作區啟動將排入佇列等待資源釋放。</p>
 <hr />
-<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_12">常見問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>看不到 + 新增專案 按鈕。</summary>
 <p>所有已登入使用者都能看到該按鈕。若未顯示，請嘗試強制重新整理（<code>Ctrl+Shift+R</code>）。若問題持續，請聯繫管理員。</p>

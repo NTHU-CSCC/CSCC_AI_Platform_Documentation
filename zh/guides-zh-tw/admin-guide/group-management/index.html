@@ -1074,7 +1074,26 @@
 <p>訓練工作負載建議：<strong>資料集與 checkpoint</strong> 放 <code>juicefs-gpu23-rwx</code>；<strong>單一 job 暫存檔</strong> 放本地 RWO，最後再寫回 JuiceFS。</p>
 </blockquote>
 <h3 id="registry-policy">Registry Policy<a class="headerlink" href="#registry-policy" title="Permanent link">&para;</a></h3>
-<p>選擇此群組的 Project Build 應該推到哪個 Harbor 路線。對應到 Harbor 中的 robot account 與 project namespace。</p>
+<p>選擇此群組的 Project Build 應該推到哪個 Harbor 路線。對應到 Harbor 中的 robot account 與 project namespace。一般使用者只會在 Dashboard 的 Builds / Images 頁面看到結果；Harbor UI 本身是管理服務，預設保留給 admin 使用。</p>
+<p>常見路線：</p>
+<table>
+<thead>
+<tr>
+<th>Registry Policy</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>推送到 <code>harbor.cscc.nthu.edu.tw</code> 的平台預設 Harbor lane</td>
+</tr>
+<tr>
+<td><code>gpu23-harbor</code></td>
+<td>推送到 GPU23 專用 Harbor lane，適合需要分離映像 blob 或 GPU23 儲存策略的群組</td>
+</tr>
+</tbody>
+</table>
 <h3 id="root">Root 容器允許<a class="headerlink" href="#root" title="Permanent link">&para;</a></h3>
 <p>關閉時，此群組底下的專案 YAML 會被強制套用 <code>runAsNonRoot: true</code>，並在嘗試以 root 啟動時被 admission controller 拒絕。</p>
 <h3 id="hostpath">HostPath 白名單<a class="headerlink" href="#hostpath" title="Permanent link">&para;</a></h3>

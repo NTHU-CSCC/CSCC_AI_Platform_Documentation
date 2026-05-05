@@ -1116,7 +1116,7 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">需要 VPN</p>
-<p>平台運行於私有網路（<code>192.168.109.0/24</code>）。您必須透過 OpenVPN 連線後才能存取任何平台服務。</p>
+<p>平台運行於私有網路。請先透過 OpenVPN 連線，再使用 <code>cscc.nthu.edu.tw</code> 底下的 DNS 名稱；不要直接瀏覽底層基礎設施網址。</p>
 </div>
 <hr />
 <h2 id="1-vpn">步驟 1 — 安裝 VPN 用戶端<a class="headerlink" href="#1-vpn" title="Permanent link">&para;</a></h2>
@@ -1161,15 +1161,15 @@
 <div class="admonition tip">
 <p class="admonition-title">驗證連線</p>
 <p>開啟終端機並執行：
-<div class="highlight"><pre><span></span><code>ping 192.168.109.200
+<div class="highlight"><pre><span></span><code>nslookup dashboard.cscc.nthu.edu.tw
 </code></pre></div>
-如果收到回應，表示已連線。若未收到，請檢查 UDP 連接埠 <strong>31194</strong> 是否被防火牆封鎖。</p>
+如果名稱可以解析且儀表板可以開啟，表示已連線。若未成功，請檢查 UDP 連接埠 <strong>31194</strong> 是否被防火牆封鎖。</p>
 </div>
 <hr />
 <h2 id="3">步驟 3 — 登入平台<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <ol>
 <li>開啟瀏覽器並前往：
-    <div class="highlight"><pre><span></span><code>http://192.168.109.1:30080
+    <div class="highlight"><pre><span></span><code>https://dashboard.cscc.nthu.edu.tw
 </code></pre></div></li>
 <li>您將看到包含三個欄位的登入頁面：</li>
 </ol>
@@ -1349,7 +1349,7 @@
 </ol>
 <hr />
 <h2 id="_3">服務快速參考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>連線 VPN 後，所有服務透過 <code>192.168.109.1</code> 存取：</p>
+<p>一般使用者只需要使用平台儀表板。API 與其他服務主機名稱都會經由 Gateway 路由，保留給儀表板、CLI、整合流程或管理員使用。</p>
 <table>
 <thead>
 <tr>
@@ -1361,36 +1361,16 @@
 <tbody>
 <tr>
 <td><strong>儀表板</strong></td>
-<td><code>http://192.168.109.1:30080</code></td>
-<td>平台主介面</td>
-</tr>
-<tr>
-<td><strong>Grafana</strong></td>
-<td><code>http://192.168.109.1:30300</code></td>
-<td>叢集監控儀表板</td>
-</tr>
-<tr>
-<td><strong>MinIO 控制台</strong></td>
-<td><code>http://192.168.109.1:30301</code></td>
-<td>物件儲存管理</td>
-</tr>
-<tr>
-<td><strong>pgAdmin</strong></td>
-<td><code>http://192.168.109.1:30302</code></td>
-<td>資料庫管理</td>
-</tr>
-<tr>
-<td><strong>LDAP Admin</strong></td>
-<td><code>http://192.168.109.1:30303/lam</code></td>
-<td>使用者目錄管理（僅限管理員）</td>
+<td><code>https://dashboard.cscc.nthu.edu.tw</code></td>
+<td>使用者的平台主介面</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_4">常見問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>VPN 已連線但無法存取 192.168.109.1</summary>
-<p>確認本機防火牆已開放 UDP 連接埠 <strong>31194</strong>。部分企業網路會封鎖非標準 UDP 連接埠。請嘗試從其他網路連線，或請網路管理員開放該連接埠。</p>
+<summary>VPN 已連線但儀表板 DNS 無法解析</summary>
+<p>確認 VPN 用戶端有套用設定檔中的 DNS 設定。部分用戶端需要啟用 DNS update scripts 或重新匯入設定檔。使用者入口是 <code>https://dashboard.cscc.nthu.edu.tw</code>。</p>
 </details>
 <details class="question">
 <summary>驗證碼輸入正確但仍顯示錯誤</summary>

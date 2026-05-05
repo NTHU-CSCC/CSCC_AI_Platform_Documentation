@@ -1116,7 +1116,7 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">VPN is required</p>
-<p>The platform runs on a private network (<code>192.168.109.0/24</code>). You must connect via OpenVPN before you can reach any platform service.</p>
+<p>The platform runs on a private network. Connect via OpenVPN first, then use the DNS names under <code>cscc.nthu.edu.tw</code>; do not browse raw infrastructure URLs.</p>
 </div>
 <hr />
 <h2 id="step-1-install-a-vpn-client">Step 1 — Install a VPN Client<a class="headerlink" href="#step-1-install-a-vpn-client" title="Permanent link">&para;</a></h2>
@@ -1161,15 +1161,15 @@
 <div class="admonition tip">
 <p class="admonition-title">Verify connectivity</p>
 <p>Open a terminal and run:
-<div class="highlight"><pre><span></span><code>ping 192.168.109.200
+<div class="highlight"><pre><span></span><code>nslookup dashboard.cscc.nthu.edu.tw
 </code></pre></div>
-If you see replies, you are connected. If not, check that UDP port <strong>31194</strong> is not blocked by your firewall.</p>
+If the name resolves and the dashboard opens, you are connected. If not, check that UDP port <strong>31194</strong> is not blocked by your firewall.</p>
 </div>
 <hr />
 <h2 id="step-3-sign-in-to-the-platform">Step 3 — Sign In to the Platform<a class="headerlink" href="#step-3-sign-in-to-the-platform" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Open your browser and navigate to:
-    <div class="highlight"><pre><span></span><code>http://192.168.109.1:30080
+    <div class="highlight"><pre><span></span><code>https://dashboard.cscc.nthu.edu.tw
 </code></pre></div></li>
 <li>You will see the login page with three fields:</li>
 </ol>
@@ -1349,7 +1349,7 @@ If you see replies, you are connected. If not, check that UDP port <strong>31194
 </ol>
 <hr />
 <h2 id="service-quick-reference">Service Quick Reference<a class="headerlink" href="#service-quick-reference" title="Permanent link">&para;</a></h2>
-<p>All services are accessed via <code>192.168.109.1</code> after VPN connection:</p>
+<p>Regular users should use only the platform dashboard. The API and service hostnames are routed through the gateway and are reserved for the dashboard, CLI, integrations, or administrators.</p>
 <table>
 <thead>
 <tr>
@@ -1361,36 +1361,16 @@ If you see replies, you are connected. If not, check that UDP port <strong>31194
 <tbody>
 <tr>
 <td><strong>Dashboard</strong></td>
-<td><code>http://192.168.109.1:30080</code></td>
-<td>Main platform UI</td>
-</tr>
-<tr>
-<td><strong>Grafana</strong></td>
-<td><code>http://192.168.109.1:30300</code></td>
-<td>Cluster monitoring dashboards</td>
-</tr>
-<tr>
-<td><strong>MinIO Console</strong></td>
-<td><code>http://192.168.109.1:30301</code></td>
-<td>Object storage management</td>
-</tr>
-<tr>
-<td><strong>pgAdmin</strong></td>
-<td><code>http://192.168.109.1:30302</code></td>
-<td>Database management</td>
-</tr>
-<tr>
-<td><strong>LDAP Admin</strong></td>
-<td><code>http://192.168.109.1:30303/lam</code></td>
-<td>User directory management (admin only)</td>
+<td><code>https://dashboard.cscc.nthu.edu.tw</code></td>
+<td>Main platform UI for users</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>VPN connects but I cannot reach 192.168.109.1</summary>
-<p>Ensure UDP port <strong>31194</strong> is open on your local firewall. Some corporate networks block non-standard UDP ports. Try from a different network or ask your network admin to whitelist the port.</p>
+<summary>VPN connects but dashboard DNS does not resolve</summary>
+<p>Ensure your VPN client accepts the DNS settings from the profile. Some clients require enabling DNS update scripts or importing the profile again. The user-facing entrypoint is <code>https://dashboard.cscc.nthu.edu.tw</code>.</p>
 </details>
 <details class="question">
 <summary>CAPTCHA is wrong but I typed it correctly</summary>

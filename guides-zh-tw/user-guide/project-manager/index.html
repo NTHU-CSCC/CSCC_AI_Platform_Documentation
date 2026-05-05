@@ -1037,6 +1037,7 @@
 </blockquote>
 <hr />
 <h2 id="builds">Builds（容器映像建置）<a class="headerlink" href="#builds" title="Permanent link">&para;</a></h2>
+<p>Builds 只有在平台管理員替專案開啟 <strong>Image Build Permission</strong> 並綁定有效資源計畫後才能送出。若按鈕是 disabled，請先確認專案治理設定與剩餘 build CPU / memory。</p>
 <h3 id="build">開始一個 Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
 <p>進 <strong>Builds</strong> 頁籤 → <strong>Start Build</strong>。三種來源：</p>
 <table>
@@ -1099,10 +1100,10 @@
 <ul>
 <li>Build 列表會即時顯示狀態（Pending / Running / Succeeded / Failed）。</li>
 <li>點該筆 Build 看 <strong>live log</strong>（後端使用 <code>live</code> 模式串流）。</li>
-<li>Running 狀態下可點 <strong>Cancel</strong> 取消。</li>
+<li>你建立的 Build 或你管理的專案 Build 可以從歷史中刪除；如果仍在 Running，後端會先停止 Kubernetes build job，再清理 Harbor artifact 與 allow-list metadata。</li>
 </ul>
 <blockquote>
-<p>Build 完成的 image 會推到該專案 Group 對應的 Harbor registry path。Tag 推送由群組的 <strong>Registry Policy</strong> 決定。</p>
+<p>Build 完成的 image 會推到該專案 Group 對應的 Harbor registry path，例如 <code>harbor.cscc.nthu.edu.tw/&lt;group&gt;/&lt;image&gt;:&lt;tag&gt;</code>。實際 registry lane 由群組的 <strong>Registry Policy</strong> 決定。</p>
 </blockquote>
 <hr />
 <h2 id="images">Images（允許的映像清單）<a class="headerlink" href="#images" title="Permanent link">&para;</a></h2>
@@ -1113,7 +1114,7 @@
 <p>操作：</p>
 <ol>
 <li><strong>Images</strong> 頁籤 → <strong>+ Add Image</strong>。</li>
-<li>輸入完整 image 名稱（例：<code>harbor.cscc/nlp-lab/trainer:v1.0.1</code>）。</li>
+<li>輸入完整 image 名稱（例：<code>harbor.cscc.nthu.edu.tw/nlp-lab/trainer:v1.0.1</code>）。</li>
 <li>平台會檢查 image 是否存在、且是否符合該群組的 Registry Policy；不符會被擋下來。</li>
 <li>加入後，所有專案成員在啟動 Workspace 時就能選此 image。</li>
 </ol>
