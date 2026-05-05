@@ -1,0 +1,22 @@
+/* Screenshot figure captions */
+img + em {
+  display: block;
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Grid cards layout */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Role badge colors */
+.badge-admin   { background: #e53935; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+.badge-manager { background: #1976d2; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+.badge-user    { background: #388e3c; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
