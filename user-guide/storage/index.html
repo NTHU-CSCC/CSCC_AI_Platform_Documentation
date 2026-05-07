@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -640,6 +642,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../groups/" class="md-nav__link">
         
   
@@ -783,10 +813,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#storage-profiles-and-lanes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage Profiles and Lanes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#training-storage-pattern" class="md-nav__link">
     <span class="md-ellipsis">
       
         Training Storage Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-stage-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Stage Cache
       
     </span>
   </a>
@@ -980,10 +1032,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#storage-profiles-and-lanes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage Profiles and Lanes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#training-storage-pattern" class="md-nav__link">
     <span class="md-ellipsis">
       
         Training Storage Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-stage-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Stage Cache
       
     </span>
   </a>
@@ -1086,7 +1160,7 @@
 </table>
 <hr />
 <h2 id="storage-list-page">Storage List Page<a class="headerlink" href="#storage-list-page" title="Permanent link">&para;</a></h2>
-<p><img alt="Storage list page" src="../assets/screenshots/storage-list.png" />
+<p><img alt="Storage list page" src="../../assets/screenshots/storage-list.png" />
 <em>Figure 1: Storage page with Personal and Group tabs. Each PVC shows capacity, status, and a Browse button.</em></p>
 <p>The Storage page has two tabs:</p>
 <ul>
@@ -1113,7 +1187,7 @@
 <hr />
 <h2 id="browsing-storage-files">Browsing Storage Files<a class="headerlink" href="#browsing-storage-files" title="Permanent link">&para;</a></h2>
 <p>Click <strong>Browse</strong> next to any PVC to open the file browser.</p>
-<p><img alt="Storage file browser" src="../assets/screenshots/storage-browser.png" />
+<p><img alt="Storage file browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 2: Storage file browser showing directory listing with upload, download, and delete capabilities.</em></p>
 <p>The file browser supports:
 - Navigate directories
@@ -1135,6 +1209,46 @@
 <p class="admonition-title">Mount path convention</p>
 <p>Use consistent mount paths across workspaces so your code always finds data at the same location regardless of which workspace is running.</p>
 </div>
+<hr />
+<h2 id="storage-profiles-and-lanes">Storage Profiles and Lanes<a class="headerlink" href="#storage-profiles-and-lanes" title="Permanent link">&para;</a></h2>
+<p>When admins or group admins provision a new PVC, they pick a <strong>Storage Profile</strong> that maps to a backing storage class and a <em>lane</em>. Each lane is tuned for a different workload shape.</p>
+<table>
+<thead>
+<tr>
+<th>Profile</th>
+<th>Backend</th>
+<th>Lane</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JuiceFS RWX</strong></td>
+<td>JuiceFS over object storage</td>
+<td><code>shared-rwx</code></td>
+<td>Cross-node datasets and checkpoints visible to many pods</td>
+</tr>
+<tr>
+<td><strong>Legacy RWX</strong></td>
+<td>NFS / legacy share</td>
+<td><code>legacy-rwx</code></td>
+<td>Long-standing shared data already on the legacy mount</td>
+</tr>
+<tr>
+<td><strong>Longhorn (Fast RWO)</strong></td>
+<td>Longhorn replicated block</td>
+<td><code>fast-rwo</code></td>
+<td>Single-pod hot scratch — fastest reads and writes</td>
+</tr>
+<tr>
+<td><strong>Default</strong></td>
+<td>Cluster default</td>
+<td>varies</td>
+<td>Group admin lets the platform pick</td>
+</tr>
+</tbody>
+</table>
+<p>The profile picker shows availability and a recommendation per option; unavailable profiles are greyed out with the reason.</p>
 <hr />
 <h2 id="training-storage-pattern">Training Storage Pattern<a class="headerlink" href="#training-storage-pattern" title="Permanent link">&para;</a></h2>
 <p>For model training on gpu1, gpu2, and gpu3, admins can provision group storage on <code>juicefs-gpu23-rwx</code>. This is the preferred shared path for datasets, checkpoints, and final artifacts that need to be visible across nodes.</p>
@@ -1166,6 +1280,47 @@
 </tbody>
 </table>
 <p>Copy only the final results from scratch back to the shared JuiceFS mount. This keeps repeated reads fast through node-local cache while avoiding unnecessary shared-write pressure.</p>
+<hr />
+<h2 id="fast-stage-cache">Fast-Stage Cache<a class="headerlink" href="#fast-stage-cache" title="Permanent link">&para;</a></h2>
+<p>Fast-stage transfers stage data from a group RWX volume into a project-local <strong>Fast RWO</strong> PVC, so a single training job can read at node-local speed without touching the shared filesystem.</p>
+<ol>
+<li>On the project's <strong>Storage</strong> tab, click <strong>Data Path</strong> next to a bound RWX volume.</li>
+<li>Select <strong>Fast-stage Cache</strong> in the modal.</li>
+<li>Fill in the form:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target Namespace</strong></td>
+<td>Where the fast PVC will be created (your project namespace by default).</td>
+</tr>
+<tr>
+<td><strong>Fast PVC Name</strong></td>
+<td>DNS-safe name, defaults to <code>fast-&lt;source-pvc&gt;</code>.</td>
+</tr>
+<tr>
+<td><strong>Fast Capacity (Gi)</strong></td>
+<td>Must be at least the source PVC capacity.</td>
+</tr>
+<tr>
+<td><strong>Checksum Mode</strong></td>
+<td><code>Size + mtime</code> is the default; choose <code>SHA-256</code> for strict verification or <code>None</code> to skip checks.</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Click <strong>Start Fast Stage</strong>. The platform launches a one-off Job that copies the data and reports status.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Sync results back</p>
+<p>Fast-stage is intended as a hot read cache. When training finishes, copy final artifacts back to the shared RWX mount — the fast PVC is project-local and not visible to peers.</p>
+</div>
 <hr />
 <h2 id="storage-permissions">Storage Permissions<a class="headerlink" href="#storage-permissions" title="Permanent link">&para;</a></h2>
 <p>Group storage PVCs have per-user permission levels:</p>

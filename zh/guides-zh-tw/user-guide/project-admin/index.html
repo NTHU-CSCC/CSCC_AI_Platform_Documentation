@@ -400,6 +400,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -966,6 +996,12 @@
 <td style="text-align: center;"></td>
 </tr>
 <tr>
+<td>設定其他成員的專案資源配額</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
 <td>申請刪除專案</td>
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;"></td>
@@ -1037,10 +1073,13 @@
 <h3 id="_4">變更 / 移除成員<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>在成員列上的 Role 下拉切換 <code>user</code> / <code>manager</code> / <code>admin</code>。</li>
+<li>在成員列上的 Quota 控制設定個別 GPU / CPU / Memory 上限。</li>
 <li>點該列的「移除」即時把該人從專案踢出。</li>
+<li>勾選多位成員後，可用批次工具列一次移除、改角色或套用相同 quota。</li>
 </ul>
 <blockquote>
-<p><strong>不可降級自己的角色</strong>：前端會擋你把自己從 Admin 降級，避免專案沒有 Admin。</p>
+<p><strong>不可降級自己的角色</strong>：前端會擋你把自己從 Admin 降級，避免專案沒有 Admin。
+<strong>Group 成員不可在專案頁移除</strong>：必須回到 Group 成員管理處理，因為權限是從群組繼承。</p>
 </blockquote>
 <hr />
 <h2 id="bind-plan">把專案綁定到資源計畫（Bind Plan）<a class="headerlink" href="#bind-plan" title="Permanent link">&para;</a></h2>

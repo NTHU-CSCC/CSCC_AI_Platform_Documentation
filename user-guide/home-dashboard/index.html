@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -621,6 +623,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#per-node-gpu-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-Node GPU Allocation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resource-usage-chart" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -744,6 +757,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -936,6 +977,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#per-node-gpu-allocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Per-Node GPU Allocation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resource-usage-chart" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1006,7 +1058,7 @@
 <h2 id="dashboard-layout">Dashboard Layout<a class="headerlink" href="#dashboard-layout" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TD
     subgraph TopRow["Top Row"]
-        A["GPU Availability Card\n(cluster-wide GPU slots)"]
+        A["GPU Availability Card\n(cluster-wide GPU units)"]
         B["Project Summary\n(active projects count)"]
     end
     subgraph MiddleRow["Middle Row"]
@@ -1030,53 +1082,70 @@
 <tbody>
 <tr>
 <td><strong>GPU Availability Card</strong></td>
-<td>Cluster-wide free vs. allocated GPU slots across all nodes</td>
-<td>On page load</td>
+<td>Cluster-wide free vs. allocated GPU units, plus preemptible-queue indicator</td>
+<td>On page load and every 10 seconds</td>
+</tr>
+<tr>
+<td><strong>Per-Node GPU Allocation</strong></td>
+<td>Grid of every GPU node with free SM percentage and busy/free counts</td>
+<td>On page load and every 10 seconds</td>
 </tr>
 <tr>
 <td><strong>Project Summary</strong></td>
 <td>Total projects you belong to</td>
-<td>On page load</td>
+<td>On page load and every 10 seconds</td>
 </tr>
 <tr>
 <td><strong>Resource Usage Chart</strong></td>
-<td>Bar chart of GPU/CPU/memory quota consumed vs. total allocated per project</td>
-<td>On page load</td>
+<td>GPU/CPU/memory quota consumed vs. total allocated per project, plus plan-window status</td>
+<td>On page load and every 10 seconds; countdown ticks every second</td>
 </tr>
 <tr>
 <td><strong>Activity Feed</strong></td>
 <td>Chronological log of recent platform events (workspace starts, project changes, storage operations)</td>
-<td>On page load</td>
+<td>On page load and every 10 seconds</td>
 </tr>
 <tr>
 <td><strong>My GPU Jobs</strong></td>
-<td>Table of your currently running workspaces and batch jobs with status badges</td>
-<td>On page load</td>
+<td>Table of your currently running workspaces and batch jobs with GPU, SM share, and memory</td>
+<td>On page load and every 15 seconds</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="reading-gpu-availability">Reading GPU Availability<a class="headerlink" href="#reading-gpu-availability" title="Permanent link">&para;</a></h2>
 <p>The <strong>GPU Availability Card</strong> shows the current state of the cluster's GPU pool.</p>
-<p><img alt="Home dashboard GPU availability card" src="../assets/screenshots/home-dashboard-overview.png" />
+<p><img alt="Home dashboard GPU availability card" src="../../assets/screenshots/home-dashboard-overview.png" />
 <em>Figure 1: Home dashboard showing GPU availability, resource usage, and active jobs. Replace this placeholder with an actual screenshot.</em></p>
 <p>Steps to read the GPU card:</p>
 <ol>
 <li>Look at the <strong>allocated / total</strong> fraction (e.g., <code>6 / 8 GPUs</code>).</li>
 <li>Free GPUs = total − allocated. If free GPUs is 0, your workspace launch will be queued.</li>
+<li>The card also shows a <strong>Preemptible queues</strong> count — when GPUs are exhausted but preemptible queues exist, higher-priority workloads can still be scheduled by evicting lower-priority pods.</li>
 <li>Click the card to navigate to the Admin Monitoring page (admin users only) for per-node breakdown.</li>
 </ol>
 <div class="admonition info">
-<p class="admonition-title">MPS replicas vs physical GPUs</p>
-<p>If MPS is enabled, one physical GPU can appear as multiple virtual slots (configured by <code>GPU_REPLICAS_PER_GPU</code>). The card reflects virtual slot counts, not physical GPU counts.</p>
+<p class="admonition-title">DRA effective GPU units</p>
+<p>The card reports effective GPU units from DRA labels and live ResourceClaim bindings. A 1-GPU claim at 50% SM counts as 0.5 GPU only while DRA has bound it to a live Pod.</p>
 </div>
+<hr />
+<h2 id="per-node-gpu-allocation">Per-Node GPU Allocation<a class="headerlink" href="#per-node-gpu-allocation" title="Permanent link">&para;</a></h2>
+<p>Beneath the availability card, the <strong>Per-Node GPU Allocation</strong> grid shows every GPU node as a small tile with:</p>
+<ul>
+<li>Node name and GPU model</li>
+<li>A free SM percentage bar (<code>{{pct}}% free</code>) per device</li>
+<li>An <em>Available</em> / <em>Busy</em> badge so you can pick a less-contested model</li>
+<li>Total GPU count on the node</li>
+</ul>
+<p>Use this grid to spot which models are idle before submitting a workload, or to confirm a specific node has capacity for a fractional claim.</p>
 <hr />
 <h2 id="resource-usage-chart">Resource Usage Chart<a class="headerlink" href="#resource-usage-chart" title="Permanent link">&para;</a></h2>
 <p>The chart displays your usage across all projects you belong to.</p>
 <ul>
 <li>Each bar represents one project.</li>
 <li>The bar fill shows consumed quota (GPU-hours, CPU-hours, or memory).</li>
-<li>Hover a bar to see exact numbers.</li>
+<li>Each project row shows whether the bound resource plan is always active, closing, opening, or expired.</li>
+<li>Plan-window countdowns update once per second without requiring a page refresh.</li>
 </ul>
 <hr />
 <h2 id="activity-feed">Activity Feed<a class="headerlink" href="#activity-feed" title="Permanent link">&para;</a></h2>
@@ -1109,7 +1178,7 @@
 </tr>
 <tr>
 <td>GPU</td>
-<td>Number of GPU slots consumed</td>
+<td>Effective GPU units consumed</td>
 </tr>
 <tr>
 <td>Status</td>
@@ -1134,7 +1203,7 @@
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>Why is my GPU count 0 on the availability card?</summary>
-<p>The card shows virtual MPS slots. If all slots are allocated, you'll see 0 available. Check the Activity Feed — a workspace that finished recently may have freed slots within a minute.</p>
+<p>The card shows effective DRA GPU availability. If all compatible GPUs or SM shares are allocated, you'll see 0 available. Check the Activity Feed — a workspace that finished recently may have freed capacity within a minute.</p>
 </details>
 <details class="question">
 <summary>The activity feed is empty — is something wrong?</summary>
@@ -1142,7 +1211,7 @@
 </details>
 <details class="question">
 <summary>My running workspace is not in the jobs table.</summary>
-<p>The table polls on page load. Refresh the page (<code>F5</code> or the browser refresh button) to pick up workspaces started after the page loaded.</p>
+<p>The table refreshes every 15 seconds. Refresh the page (<code>F5</code> or the browser refresh button) if the workspace still does not appear after the next poll.</p>
 </details>
 
 

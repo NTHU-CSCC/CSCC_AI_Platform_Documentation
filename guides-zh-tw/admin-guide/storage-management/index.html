@@ -400,6 +400,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -1149,6 +1179,7 @@
 <li>一個 worker node 重開</li>
 </ul>
 <p>成功的寫入必須在恢復後仍存在；中斷的訓練 pod 應該能 remount 並 resume，或以 Kubernetes 可預期的失敗結束。</p>
+<p>production TiDB/PD metadata cluster 使用三個 PD replica，並以 hard node anti-affinity 分散在 gpu1、gpu2、gpu3。若沒有更多可排程節點，不要啟用額外 PD failover replica，否則會留下無法排程的 Pending pod。</p>
 
 
 

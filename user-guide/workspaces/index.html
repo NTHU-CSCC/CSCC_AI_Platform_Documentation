@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -694,6 +696,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-queue-and-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduling Queue and Priority
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#connect-to-your-workspace" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -727,10 +751,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-sharing-with-mps" class="md-nav__link">
+  <a href="#gpu-allocation-with-dra" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Sharing with MPS
+        GPU Allocation with DRA
       
     </span>
   </a>
@@ -772,6 +796,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -981,6 +1033,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-queue-and-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduling Queue and Priority
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#connect-to-your-workspace" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1014,10 +1088,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-sharing-with-mps" class="md-nav__link">
+  <a href="#gpu-allocation-with-dra" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Sharing with MPS
+        GPU Allocation with DRA
       
     </span>
   </a>
@@ -1072,12 +1146,12 @@
     Stopped --&gt; [*] : Click Delete</code></pre>
 <hr />
 <h2 id="workspace-list-page">Workspace List Page<a class="headerlink" href="#workspace-list-page" title="Permanent link">&para;</a></h2>
-<p><img alt="Workspace list page" src="../assets/screenshots/workspaces-list.png" />
+<p><img alt="Workspace list page" src="../../assets/screenshots/workspaces-list.png" />
 <em>Figure 1: Workspace list showing running and stopped workspaces with status badges.</em></p>
 <p>The list page shows all your workspaces with:</p>
 <ul>
 <li><strong>Status badge</strong> — Running (green), Starting (yellow), Stopped (grey), Error (red)</li>
-<li><strong>GPU count</strong> — number of GPU slots allocated</li>
+<li><strong>GPU count</strong> — effective GPU units allocated through DRA</li>
 <li><strong>Project</strong> — which project the workspace belongs to</li>
 <li><strong>Open</strong> button — appears only when status is Running</li>
 <li><strong>Start / Stop / Delete</strong> action buttons</li>
@@ -1103,7 +1177,7 @@
 <li>Click <strong>Workspaces</strong> in the left sidebar.</li>
 <li>Click <strong>+ New Workspace</strong> (top-right).</li>
 </ol>
-<p><img alt="New workspace form" src="../assets/screenshots/workspace-new-form.png" />
+<p><img alt="New workspace form" src="../../assets/screenshots/workspace-new-form.png" />
    <em>Figure 2: New workspace creation form with project, image, GPU, and storage fields.</em></p>
 <ol>
 <li>Fill in the form:</li>
@@ -1129,8 +1203,20 @@
 <td>Container image — choose from the project allowlist</td>
 </tr>
 <tr>
+<td><strong>Scheduling Queue</strong></td>
+<td>Platform queue used for priority and preemption policy. Bound queues come from the project plan; the <strong>default</strong> queue is always available.</td>
+</tr>
+<tr>
 <td><strong>GPU Count</strong></td>
-<td>Number of virtual GPU slots (limited by project quota)</td>
+<td>Number of physical GPUs requested through DRA; fractional effective usage comes from SM percentage.</td>
+</tr>
+<tr>
+<td><strong>GPU Model</strong></td>
+<td>One of the GPU models allowed by your plan (e.g., RTX 5090, RTX 6000 Pro). Models outside the plan allowlist are hidden.</td>
+</tr>
+<tr>
+<td><strong>SM Percentage</strong></td>
+<td>Compute share for DRA GPU allocation — 100% is a full GPU; smaller values count as fractional effective GPU usage.</td>
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
@@ -1155,6 +1241,40 @@
 <p class="admonition-title">Idle Reaper</p>
 <p>Workspaces that are idle for an extended period may be automatically stopped by the platform's idle reaper to free GPU resources. You will see an idle warning banner on the workspace list page before this happens.</p>
 </div>
+<hr />
+<h2 id="scheduling-queue-and-priority">Scheduling Queue and Priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>
+<p>Each workspace chooses a <strong>platform scheduling queue</strong>. Queues carry a <strong>priority</strong> value, an optional <strong>preemptible</strong> flag, and an optional <strong>deserved GPU</strong> limit set by an admin. DRA GPU workspaces are scheduled by Kubernetes <code>default-scheduler</code>; the queue is still used by the platform for policy, labels, and preemption decisions.</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Effect on your workspace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Higher priority</strong></td>
+<td>Scheduled before pods in lower-priority queues when GPUs are scarce.</td>
+</tr>
+<tr>
+<td><strong>Preemptible queue</strong></td>
+<td>Your pod may be evicted to make room for a higher-priority workload. The platform sends a termination signal, then deletes the pod.</td>
+</tr>
+<tr>
+<td><strong>Default queue</strong></td>
+<td>Always available, no priority guarantees. Use it when your project has no plan or the plan window is closed.</td>
+</tr>
+</tbody>
+</table>
+<p>The launch form lists the queues bound to the project's plan, plus the default queue. If no plan is bound, only the default queue is selectable.</p>
+<hr />
+<h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
+<p>If a project plan defines a weekly or one-off <strong>schedule window</strong>, workspaces in plan-bound queues only run while the window is open.</p>
+<ul>
+<li>The list page shows a live countdown — <em>Plan window closes in HH:MM:SS</em> — when the window is active.</li>
+<li>When the window closes, pods running in plan-bound queues may be evicted by the platform's plan-window reaper. The default queue is unaffected.</li>
+<li>A banner offers a one-click <strong>Switch to Default Queue</strong> action when the window has expired and you want to keep working at lower priority.</li>
+</ul>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to Your Workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
 <p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform proxies your browser session to the pod — no port-forwarding needed.</p>
@@ -1191,12 +1311,13 @@
 <h2 id="bulk-delete-admin-ide-manager">Bulk Delete (Admin / IDE Manager)<a class="headerlink" href="#bulk-delete-admin-ide-manager" title="Permanent link">&para;</a></h2>
 <p>Users with the <code>IDE_MANAGE</code> permission can select multiple workspaces and delete them in bulk using the <strong>Bulk Delete</strong> toolbar that appears when checkboxes are ticked.</p>
 <hr />
-<h2 id="gpu-sharing-with-mps">GPU Sharing with MPS<a class="headerlink" href="#gpu-sharing-with-mps" title="Permanent link">&para;</a></h2>
-<p>NVIDIA Multi-Process Service (MPS) allows multiple workspaces to share one physical GPU using virtual slots. A physical GPU might be split into 10 or 100 virtual slots depending on cluster configuration.</p>
+<h2 id="gpu-allocation-with-dra">GPU Allocation with DRA<a class="headerlink" href="#gpu-allocation-with-dra" title="Permanent link">&para;</a></h2>
+<p>GPU allocation uses Kubernetes Dynamic Resource Allocation (DRA). When you request a GPU model and SM percentage, the platform creates a ResourceClaim for the workspace.</p>
 <ul>
-<li>Requesting <strong>1 GPU slot</strong> does not mean you get an entire physical GPU.</li>
-<li>Use <code>nvidia-smi</code> inside your workspace to check actual GPU allocation.</li>
-<li>For exclusive GPU access, contact your admin to discuss dedicated node scheduling.</li>
+<li><strong>GPU Count</strong> is the number of physical GPUs requested.</li>
+<li><strong>SM Percentage</strong> controls the effective share for quota accounting and GPU sharing.</li>
+<li>Use <code>nvidia-smi</code> inside your workspace to check visible devices and runtime behavior.</li>
+<li>For exclusive or model-specific access, select 100% SM and a model allowed by your plan, or ask an admin to adjust the plan.</li>
 </ul>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
@@ -1210,11 +1331,19 @@
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>
-<p>Click the workspace name to see the error detail. Common causes: image pull failure (image not in allowlist), insufficient quota (another workspace is using all slots), or node scheduling failure. Submit a <a href="../requests/">Request</a> if you need help.</p>
+<p>Click the workspace name to see the error detail. Common causes: image pull failure (image not in allowlist), insufficient quota, unavailable DRA device class, or node scheduling failure. Submit a <a href="../requests/">Request</a> if you need help.</p>
 </details>
 <details class="question">
 <summary>Can I have multiple workspaces running at once?</summary>
 <p>Yes, as long as their total GPU consumption stays within your project's quota.</p>
+</details>
+<details class="question">
+<summary>My workspace was evicted with reason 'Plan window expired'.</summary>
+<p>The plan-window reaper stops pods in plan-bound queues when the schedule closes. Restart it inside the next window, or switch the workspace to the default queue using the banner on the list page.</p>
+</details>
+<details class="question">
+<summary>Why are some GPU models greyed out in the launch form?</summary>
+<p>The plan attached to your project specifies an allowed GPU model list. Models outside that list are hidden. Ask a project manager to bind a plan that includes the model you need.</p>
 </details>
 
 

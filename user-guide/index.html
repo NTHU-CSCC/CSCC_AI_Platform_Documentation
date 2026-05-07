@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -620,6 +622,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -863,6 +893,7 @@
 <li><strong>Manage projects</strong> with defined GPU/CPU/memory quotas, versioned config files, and team members</li>
 <li><strong>Collaborate in groups</strong> with shared storage and role-based access</li>
 <li><strong>Submit requests</strong> for additional resources, storage, or image access</li>
+<li><strong>Read announcements</strong> for maintenance windows, incidents, and policy updates</li>
 <li><strong>Monitor your resource usage</strong> and active GPU jobs from the dashboard</li>
 </ul>
 <hr />
@@ -888,6 +919,7 @@
     end
 
     subgraph Infrastructure
+        Home --&gt; Announcements[Announcements]
         Home --&gt; Requests[Requests]
         Home --&gt; Settings[Settings]
     end</code></pre>
@@ -914,7 +946,7 @@
 </tr>
 <tr>
 <td><strong>Infrastructure</strong></td>
-<td>Requests, Settings</td>
+<td>Announcements, Requests, Settings</td>
 </tr>
 </tbody>
 </table>

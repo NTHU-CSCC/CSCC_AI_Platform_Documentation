@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -697,6 +699,28 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        排程佇列與優先序
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        計畫窗口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         連線到工作區
       
     </span>
@@ -727,10 +751,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mps-gpu" class="md-nav__link">
+  <a href="#dra-gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MPS GPU 共享
+        透過 DRA 配置 GPU
       
     </span>
   </a>
@@ -738,7 +762,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -772,6 +796,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -984,6 +1036,28 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
+        排程佇列與優先序
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        計畫窗口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         連線到工作區
       
     </span>
@@ -1014,10 +1088,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mps-gpu" class="md-nav__link">
+  <a href="#dra-gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MPS GPU 共享
+        透過 DRA 配置 GPU
       
     </span>
   </a>
@@ -1025,7 +1099,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1072,12 +1146,12 @@
     已停止 --&gt; [*] : 點擊刪除</code></pre>
 <hr />
 <h2 id="_3">工作區列表頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="工作區列表頁面" src="../assets/screenshots/workspaces-list.png" />
+<p><img alt="工作區列表頁面" src="../../../assets/screenshots/workspaces-list.png" />
 <em>圖 1：工作區列表，顯示運行中和已停止的工作區及狀態標籤。</em></p>
 <p>列表頁面顯示您所有工作區的：</p>
 <ul>
 <li><strong>狀態標籤</strong> — 運行中（綠色）、啟動中（黃色）、已停止（灰色）、錯誤（紅色）</li>
-<li><strong>GPU 數量</strong> — 已分配的 GPU 槽位數</li>
+<li><strong>GPU 數量</strong> — 透過 DRA 配置的有效 GPU 數</li>
 <li><strong>專案</strong> — 工作區所屬的專案</li>
 <li><strong>開啟</strong> 按鈕 — 僅在狀態為運行中時顯示</li>
 <li><strong>啟動 / 停止 / 刪除</strong> 操作按鈕</li>
@@ -1103,7 +1177,7 @@
 <li>點擊左側選單的 <strong>工作區</strong>。</li>
 <li>點擊 <strong>+ 新增工作區</strong>（右上角）。</li>
 </ol>
-<p><img alt="新增工作區表單" src="../assets/screenshots/workspace-new-form.png" />
+<p><img alt="新增工作區表單" src="../../../assets/screenshots/workspace-new-form.png" />
    <em>圖 2：新增工作區表單，包含專案、映像檔、GPU 和儲存欄位。</em></p>
 <ol>
 <li>填寫表單：</li>
@@ -1129,16 +1203,20 @@
 <td>容器映像檔——從專案允許清單中選擇</td>
 </tr>
 <tr>
+<td><strong>排程佇列</strong></td>
+<td>用於優先序與搶佔政策的平台佇列。已綁定佇列來自專案計畫；<strong>預設</strong>佇列永遠可用。</td>
+</tr>
+<tr>
 <td><strong>GPU 數量</strong></td>
-<td>虛擬 GPU 槽位數（受專案配額限制）</td>
+<td>透過 DRA 請求的實體 GPU 數；SM 百分比會決定有效配額消耗。</td>
 </tr>
 <tr>
 <td><strong>GPU 型號</strong></td>
-<td>選擇特定型號（如 RTX 5090）。系統會從叢集庫存中取得可用型號。</td>
+<td>計畫允許的其中一種 GPU 型號（如 RTX 5090、RTX 6000 Pro）。不在允許清單中的型號不會顯示。</td>
 </tr>
 <tr>
-<td><strong>SM %</strong></td>
-<td>核心計算比例（1-100%），預設為 100%。</td>
+<td><strong>SM 百分比</strong></td>
+<td>DRA GPU 配置的計算比例——100% 等於完整 GPU，較小值會以 fractional GPU 計入配額。</td>
 </tr>
 <tr>
 <td><strong>CPU / 記憶體</strong></td>
@@ -1164,7 +1242,41 @@
 <p>閒置超過一定時間的工作區可能會被平台的閒置回收機制自動停止，以釋放 GPU 資源。在此之前，工作區列表頁面會顯示閒置警告橫幅。</p>
 </div>
 <hr />
-<h2 id="_6">連線到工作區<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_6">排程佇列與優先序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>每個工作區會選擇一個 <strong>平台排程佇列</strong>。佇列帶有 <strong>優先序</strong>、可選的 <strong>可被搶佔</strong> 旗標，以及由管理員設定的 <strong>deserved GPU</strong> 上限。DRA GPU 工作區由 Kubernetes <code>default-scheduler</code> 排程；佇列仍由平台用於政策、標籤與搶佔判斷。</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>對工作區的影響</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>較高優先序</strong></td>
+<td>GPU 緊張時，會比低優先序佇列中的 Pod 先被排程。</td>
+</tr>
+<tr>
+<td><strong>可被搶佔的佇列</strong></td>
+<td>您的 Pod 可能被驅逐以讓出資源給更高優先序的工作。平台會先送出終止訊號再刪除 Pod。</td>
+</tr>
+<tr>
+<td><strong>預設佇列</strong></td>
+<td>永遠可用，不保證優先序。當專案沒有綁定計畫，或計畫窗口關閉時使用。</td>
+</tr>
+</tbody>
+</table>
+<p>啟動表單會列出專案計畫綁定的佇列，加上預設佇列。若沒有綁定計畫，僅預設佇列可選。</p>
+<hr />
+<h2 id="_7">計畫窗口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>若專案計畫定義了每週或一次性的 <strong>排程窗口</strong>，使用計畫綁定佇列的工作區只能在窗口開啟期間運行。</p>
+<ul>
+<li>列表頁面會即時倒數——<em>計畫窗口將於 HH:MM:SS 後關閉</em>——窗口生效時顯示。</li>
+<li>窗口關閉後，計畫綁定佇列中的 Pod 可能被平台的 plan-window reaper 驅逐。預設佇列不受影響。</li>
+<li>窗口已關閉時，會出現一鍵 <strong>切換為預設佇列</strong> 的橫幅，方便您以較低優先序繼續工作。</li>
+</ul>
+<hr />
+<h2 id="_8">連線到工作區<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>工作區進入 <strong>運行中</strong> 狀態後，點擊 <strong>開啟</strong>。平台會將您的瀏覽器連線代理到 Pod——無需設定 port-forwarding。</p>
 <ul>
 <li><strong>JupyterLab</strong>：開啟於 <code>/lab</code>——標準 Jupyter 介面</li>
@@ -1199,15 +1311,16 @@
 <h2 id="ide">批次刪除（管理員 / IDE 管理者）<a class="headerlink" href="#ide" title="Permanent link">&para;</a></h2>
 <p>擁有 <code>IDE_MANAGE</code> 權限的使用者可以勾選多個工作區，使用勾選後出現的 <strong>批次刪除</strong> 工具列進行批次操作。</p>
 <hr />
-<h2 id="mps-gpu">MPS GPU 共享<a class="headerlink" href="#mps-gpu" title="Permanent link">&para;</a></h2>
-<p>NVIDIA 多行程服務（MPS）允許多個工作區透過虛擬槽位共享一張實體 GPU。根據叢集設定，一張實體 GPU 可能分為 10 或 100 個虛擬槽位。</p>
+<h2 id="dra-gpu">透過 DRA 配置 GPU<a class="headerlink" href="#dra-gpu" title="Permanent link">&para;</a></h2>
+<p>GPU 配置使用 Kubernetes Dynamic Resource Allocation（DRA）。當您選擇 GPU 型號與 SM 百分比時，平台會為工作區建立 ResourceClaim。</p>
 <ul>
-<li>請求 <strong>1 個 GPU 槽位</strong> 不代表您獲得整張實體 GPU。</li>
-<li>在工作區中使用 <code>nvidia-smi</code> 檢查實際 GPU 分配。</li>
-<li>若需要獨佔 GPU，請聯繫管理員討論專用節點排程。</li>
+<li><strong>GPU 數量</strong> 是請求的實體 GPU 數。</li>
+<li><strong>SM 百分比</strong> 會影響配額計算與 GPU 共享比例。</li>
+<li>在工作區中使用 <code>nvidia-smi</code> 檢查可見裝置與實際執行情況。</li>
+<li>若需要獨佔或指定型號，請選擇 100% SM 與計畫允許的型號，或請管理員調整計畫。</li>
 </ul>
 <hr />
-<h2 id="_7">常見問題<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>狀態顯示運行中但「開啟」按鈕未出現。</summary>
 <p>代理服務可能需要額外幾秒鐘啟動。等待 10 秒後重新整理頁面。若問題持續，Pod 可能處於異常重啟迴圈——請聯繫管理員。</p>
@@ -1218,11 +1331,19 @@
 </details>
 <details class="question">
 <summary>我看到錯誤狀態，該怎麼辦？</summary>
-<p>點擊工作區名稱查看錯誤詳情。常見原因：映像檔拉取失敗（映像檔不在允許清單中）、配額不足（其他工作區佔用了所有槽位）、或節點排程失敗。如需協助，請提交 <a href="../requests/">申請</a>。</p>
+<p>點擊工作區名稱查看錯誤詳情。常見原因：映像檔拉取失敗（映像檔不在允許清單中）、配額不足、DRA DeviceClass 不可用，或節點排程失敗。如需協助，請提交 <a href="../requests/">申請</a>。</p>
 </details>
 <details class="question">
 <summary>可以同時運行多個工作區嗎？</summary>
 <p>可以，只要它們的 GPU 消耗總量不超過專案配額。</p>
+</details>
+<details class="question">
+<summary>工作區被以「Plan window expired」原因驅逐了。</summary>
+<p>plan-window reaper 會在排程窗口關閉時停止計畫綁定佇列中的 Pod。請於下個窗口開啟後重新啟動，或透過列表頁的橫幅將工作區切換到預設佇列。</p>
+</details>
+<details class="question">
+<summary>為什麼啟動表單裡有些 GPU 型號被灰掉？</summary>
+<p>專案綁定的計畫指定了允許的 GPU 型號清單，清單外的型號不會顯示。請專案管理者改綁包含您所需型號的計畫。</p>
 </details>
 
 

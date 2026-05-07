@@ -400,6 +400,8 @@
       
         
       
+        
+      
     
     
     
@@ -629,6 +631,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../user-guide/announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../user-guide/groups/" class="md-nav__link">
         
   
@@ -834,10 +864,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-mps" class="md-nav__link">
+  <a href="#gpu-dra-sm-share" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU 共享（MPS）
+        GPU 配置（DRA / SM Share）
       
     </span>
   </a>
@@ -974,12 +1004,12 @@
 <h2 id="bulk-delete-ide_manage">Bulk Delete（需要 IDE_MANAGE 權限）<a class="headerlink" href="#bulk-delete-ide_manage" title="Permanent link">&para;</a></h2>
 <p>擁有 <code>IDE_MANAGE</code> 權限（通常為 Project Manager 以上 + 平台 Admin）的人可以勾選多個 Workspace 一次刪除。Bulk delete 工具列在勾選後出現。</p>
 <hr />
-<h2 id="gpu-mps">GPU 共享（MPS）<a class="headerlink" href="#gpu-mps" title="Permanent link">&para;</a></h2>
-<p>平台用 NVIDIA Multi-Process Service（MPS）把實體 GPU 切成虛擬 slot。一張實體 GPU 可能被切成 10 / 100 個 slot。</p>
+<h2 id="gpu-dra-sm-share">GPU 配置（DRA / SM Share）<a class="headerlink" href="#gpu-dra-sm-share" title="Permanent link">&para;</a></h2>
+<p>平台使用 Kubernetes DRA ResourceClaim 配置 GPU。啟動工作區時選擇 GPU 數量、GPU 型號與 SM 百分比；SM 百分比會決定有效 GPU 配額消耗。</p>
 <ul>
-<li><strong>GPU 數 = 1 不代表整張卡。</strong></li>
-<li>進 Workspace 後跑 <code>nvidia-smi</code> 看實際分到的記憶體 / utilization。</li>
-<li>想要獨佔 GPU → 透過 Request 找平台 Admin 安排專屬節點 / queue。</li>
+<li><strong>1 張 GPU + 50% SM</strong> 會以 0.5 GPU 計入配額。</li>
+<li>進 Workspace 後跑 <code>nvidia-smi</code> 看可見裝置、記憶體與 utilization。</li>
+<li>想要獨佔 GPU → 選 100% SM 與計畫允許的型號，或透過 Request 請平台 Admin 調整計畫 / queue。</li>
 </ul>
 <hr />
 <h2 id="idle-reaper">Idle Reaper<a class="headerlink" href="#idle-reaper" title="Permanent link">&para;</a></h2>

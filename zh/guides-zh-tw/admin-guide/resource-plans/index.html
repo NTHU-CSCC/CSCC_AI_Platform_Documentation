@@ -400,6 +400,8 @@
       
         
       
+        
+      
     
     
     
@@ -629,6 +631,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../user-guide/announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../user-guide/groups/" class="md-nav__link">
         
   
@@ -824,10 +854,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3-volcano" class="md-nav__link">
+  <a href="#step-3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 3 — 綁定 Volcano 佇列
+        Step 3 — 綁定平台佇列
       
     </span>
   </a>
@@ -851,21 +881,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#volcano" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        綁定 Volcano 佇列
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        編輯計畫
+        綁定平台佇列
       
     </span>
   </a>
@@ -876,6 +895,17 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
+        編輯計畫
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         刪除計畫
       
     </span>
@@ -884,10 +914,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mps-time-window" class="md-nav__link">
+  <a href="#schedule-window" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MPS Time Window 機制
+        Schedule Window 機制
       
     </span>
   </a>
@@ -924,7 +954,7 @@
 <h2 id="_1">計畫、佇列與專案的關係<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph LR
     Plan["Resource Plan\n(配額樣板)"]
-    Queue["Volcano Queue\n(實際排程器)"]
+    Queue["平台 Queue\n(優先序 / 搶佔政策)"]
     Project["Project"]
     Workspace["Workspace / IDE"]
 
@@ -936,7 +966,8 @@
 <p><strong>理解重點：</strong></p>
 <ul>
 <li><strong>Plan</strong> 是「配額 + 時段樣板」，本身不會做排程。</li>
-<li><strong>Volcano Queue</strong> 才是真正在 Kubernetes 上執行 GPU 隔離、優先級、preemption 的物件。</li>
+<li><strong>平台 Queue</strong> 控制優先序、preemption、deserved GPU 與選用 GPU 型號政策；相容欄位會同步到 Volcano Queue CRD。</li>
+<li>DRA GPU Pod 由 Kubernetes <code>default-scheduler</code> 與 ResourceClaim 排程。</li>
 <li>一個 Plan 可以綁多個 Queue（讓不同時段或不同 GPU 機種使用不同 queue）。</li>
 <li>一個 Project 會被綁定到一個 Plan，由該 Plan 提供配額。</li>
 </ul>
@@ -994,7 +1025,7 @@
 <tbody>
 <tr>
 <td><strong>GPU 限制</strong></td>
-<td>此 Plan 上限的虛擬 GPU 配額</td>
+<td>此 Plan 上限的 DRA 有效 GPU 單位</td>
 <td><code>4</code></td>
 </tr>
 <tr>
@@ -1013,14 +1044,14 @@
 <td><code>500</code></td>
 </tr>
 <tr>
-<td><strong>Time Window (minutes)</strong></td>
-<td>MPS 預約時段長度</td>
-<td><code>60</code></td>
+<td><strong>Schedule Window</strong></td>
+<td>允許使用 plan-bound queue 的每週或一次性時段</td>
+<td><code>Mon 09:00-18:00</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="step-3-volcano">Step 3 — 綁定 Volcano 佇列<a class="headerlink" href="#step-3-volcano" title="Permanent link">&para;</a></h3>
-<p>在 <strong>PlanQueueSelector</strong> 中勾選一或多個 Volcano Queue：</p>
+<h3 id="step-3">Step 3 — 綁定平台佇列<a class="headerlink" href="#step-3" title="Permanent link">&para;</a></h3>
+<p>在 <strong>PlanQueueSelector</strong> 中勾選一或多個平台 Queue：</p>
 <ul>
 <li>通常會搭配「主要排程佇列」+「default-batch（fallback）」</li>
 <li>若計畫有時段限制，當時段關閉時使用者可切到 default queue</li>
@@ -1031,9 +1062,9 @@
 <li>點 <strong>建立計畫</strong>。</li>
 </ol>
 <hr />
-<h2 id="volcano">綁定 Volcano 佇列<a class="headerlink" href="#volcano" title="Permanent link">&para;</a></h2>
+<h2 id="_4">綁定平台佇列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>開啟計畫 → 編輯 → 在 <strong>Queues</strong> 區塊勾選 / 取消勾選佇列。</p>
-<p><strong>Volcano Queue 主要欄位：</strong></p>
+<p><strong>Queue 主要欄位：</strong></p>
 <table>
 <thead>
 <tr>
@@ -1068,16 +1099,16 @@
 </tr>
 <tr>
 <td><strong>GPU Resource Key</strong></td>
-<td>DRA DeviceClass，例：<code>nvidia.com/gpu</code> 或 <code>nvidia.com/mig-1g.5gb</code></td>
+<td>DRA resource key / DeviceClass 對應，例：<code>nvidia.com/rtx6000pro</code></td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>新版重點：</strong> Queue 現在支援 <strong>Kubernetes Preemption（priority class）</strong>，與 Volcano 的 priority 共同決定誰會被踢出去。
+<p><strong>新版重點：</strong> Queue 現在以平台 DB 紀錄為主，DRA 工作負載走 <code>default-scheduler</code>；Volcano Queue CRD 仍用於 policy compatibility。
 設定保留 GPU = 0 代表此佇列為「犧牲佇列」，當資源不足時最早被踢。</p>
 </blockquote>
 <hr />
-<h2 id="_4">編輯計畫<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">編輯計畫<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
 <li>在計畫列表點 <strong>編輯</strong>。</li>
 <li>調整任何欄位。</li>
@@ -1088,19 +1119,19 @@
 若把上限調低，超過上限的執行中 Workspace 可能在下一個排程週期被驅逐。</p>
 </blockquote>
 <hr />
-<h2 id="_5">刪除計畫<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">刪除計畫<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
 <li>先把所有專案的 Plan 綁定改到別的計畫（或解除綁定）。</li>
 <li>在計畫列表點 <strong>刪除</strong> → 確認。</li>
 </ol>
 <p>如果還有專案綁定，刪除動作會被拒絕。</p>
 <hr />
-<h2 id="mps-time-window">MPS Time Window 機制<a class="headerlink" href="#mps-time-window" title="Permanent link">&para;</a></h2>
-<p><code>Time Window</code> 欄位控制 MPS GPU 槽位預約的保留時間。預設搭配環境變數 <code>GPU_MPS_WINDOW_MINUTES</code>（預設 60 分鐘）：</p>
+<h2 id="schedule-window">Schedule Window 機制<a class="headerlink" href="#schedule-window" title="Permanent link">&para;</a></h2>
+<p>Schedule Window 控制 plan-bound queue 何時可用：</p>
 <ol>
-<li>使用者啟動 N 個 GPU slot 的 Workspace → 系統保留 N 個 slot 達 <code>GPU_MPS_WINDOW_MINUTES</code> 分鐘。</li>
-<li>即使在時段內停止 Workspace，slot 仍會被保留直到時段結束。</li>
-<li>此機制可避免 MPS daemon 因頻繁配置 / 釋放而不穩定。</li>
+<li>使用者只能在時段開啟時使用 plan-bound queue 啟動工作。</li>
+<li><code>default-batch</code> 仍可作為較低優先序 fallback。</li>
+<li>DRA ResourceClaim 只有在已有 GPU allocation 且綁定 live Pod 時才消耗配額與 GPU-hours；pending standalone claim 不消耗配額，也不再有獨立的舊式 slot reservation window。</li>
 </ol>
 <p>時段一旦關閉，<strong>該佇列上的執行中 job 可能被驅逐</strong>。前端會在剩餘 &lt; 1 hour 顯示倒數提示，並提供 <strong>切換至 default queue</strong> 按鈕。</p>
 

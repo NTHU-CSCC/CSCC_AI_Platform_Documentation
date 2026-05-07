@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -640,6 +642,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../groups/" class="md-nav__link">
         
   
@@ -772,10 +802,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        儲存 Profile 與通道
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         模型訓練儲存建議
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Stage 快取
       
     </span>
   </a>
@@ -958,10 +1010,32 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        儲存 Profile 與通道
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         模型訓練儲存建議
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fast-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fast-Stage 快取
       
     </span>
   </a>
@@ -1057,7 +1131,7 @@
 </table>
 <hr />
 <h2 id="_3">儲存列表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="儲存列表頁面" src="../assets/screenshots/storage-list.png" />
+<p><img alt="儲存列表頁面" src="../../../assets/screenshots/storage-list.png" />
 <em>圖 1：儲存列表頁面，分別顯示個人儲存和群組儲存及其使用量。</em></p>
 <p>導航至左側選單的 <strong>儲存</strong>，您將看到：</p>
 <ul>
@@ -1073,7 +1147,7 @@
 </ul>
 <hr />
 <h2 id="_4">瀏覽檔案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="檔案瀏覽器" src="../assets/screenshots/storage-browser.png" />
+<p><img alt="檔案瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 2：內建檔案瀏覽器，支援上傳、下載和刪除操作。</em></p>
 <p>點擊 PVC 名稱可開啟內建檔案瀏覽器：</p>
 <ul>
@@ -1097,6 +1171,46 @@
 <li>如有需要，重複步驟新增更多掛載。</li>
 </ol>
 <p>在工作區中，掛載路徑的表現就像一般的目錄。</p>
+<hr />
+<h2 id="profile">儲存 Profile 與通道<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h2>
+<p>管理員或群組管理員建立 PVC 時，會選擇一個 <strong>Storage Profile</strong>，背後對應到具體的 storage class 與 <em>lane</em>。每個 lane 針對不同的工作型態調校。</p>
+<table>
+<thead>
+<tr>
+<th>Profile</th>
+<th>後端</th>
+<th>Lane</th>
+<th>適用情境</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JuiceFS RWX</strong></td>
+<td>JuiceFS over object storage</td>
+<td><code>shared-rwx</code></td>
+<td>多節點共享的資料集與 checkpoint</td>
+</tr>
+<tr>
+<td><strong>Legacy RWX</strong></td>
+<td>NFS / 既有共享儲存</td>
+<td><code>legacy-rwx</code></td>
+<td>已存在於舊有共享儲存上的資料</td>
+</tr>
+<tr>
+<td><strong>Longhorn (Fast RWO)</strong></td>
+<td>Longhorn 區塊儲存</td>
+<td><code>fast-rwo</code></td>
+<td>單一 Pod 的熱 scratch——讀寫最快</td>
+</tr>
+<tr>
+<td><strong>Default</strong></td>
+<td>叢集預設</td>
+<td>視情況</td>
+<td>由平台依群組策略決定</td>
+</tr>
+</tbody>
+</table>
+<p>profile 選單會顯示每個選項的可用性與建議用途；不可用的選項會以灰色顯示並列出原因。</p>
 <hr />
 <h2 id="_6">模型訓練儲存建議<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>在 gpu1、gpu2、gpu3 上進行模型訓練時，管理員可為群組配置 <code>juicefs-gpu23-rwx</code>。這是跨節點共享資料集、checkpoint 和最終成果的建議路徑。</p>
@@ -1128,6 +1242,47 @@
 </tbody>
 </table>
 <p>訓練結束後再把 final artifacts 從 scratch 同步回 JuiceFS。這樣可利用節點本機快取提升重複讀取，同時降低共享寫入壓力。</p>
+<hr />
+<h2 id="fast-stage">Fast-Stage 快取<a class="headerlink" href="#fast-stage" title="Permanent link">&para;</a></h2>
+<p>Fast-stage 把資料從群組 RWX 磁區暫存到專案本機的 <strong>Fast RWO</strong> PVC，讓單一訓練 job 能以節點本機速度讀取，不必直接打共享檔案系統。</p>
+<ol>
+<li>在專案的 <strong>儲存</strong> 標籤中，點擊已綁定 RWX 磁區旁的 <strong>Data Path</strong>。</li>
+<li>在彈出視窗中選 <strong>Fast-stage Cache</strong>。</li>
+<li>填寫表單：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>目標 Namespace</strong></td>
+<td>建立 fast PVC 的位置（預設為您的專案 namespace）</td>
+</tr>
+<tr>
+<td><strong>Fast PVC 名稱</strong></td>
+<td>DNS-safe 名稱，預設為 <code>fast-&lt;source-pvc&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Fast 容量（Gi）</strong></td>
+<td>不可小於原始 PVC 容量</td>
+</tr>
+<tr>
+<td><strong>Checksum 模式</strong></td>
+<td>預設 <code>Size + mtime</code>；嚴格驗證可選 <code>SHA-256</code>，或選 <code>None</code> 跳過檢查</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>點擊 <strong>Start Fast Stage</strong>，平台會啟動一次性 Job 完成複製並回報狀態。</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">把成果同步回去</p>
+<p>Fast-stage 設計成熱讀快取。訓練結束後請把最終 artifact 寫回共享 RWX 磁區——fast PVC 是專案私有的，群組其他成員看不到。</p>
+</div>
 <hr />
 <h2 id="_7">權限與存取控制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>

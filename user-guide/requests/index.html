@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -640,6 +642,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../groups/" class="md-nav__link">
         
   
@@ -800,6 +830,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image Requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#track-your-request" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -936,6 +977,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image Requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#track-your-request" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1028,7 +1080,7 @@
     Rejected --&gt; [*]</code></pre>
 <hr />
 <h2 id="my-requests-page">My Requests Page<a class="headerlink" href="#my-requests-page" title="Permanent link">&para;</a></h2>
-<p><img alt="Requests list page" src="../assets/screenshots/requests-list.png" />
+<p><img alt="Requests list page" src="../../assets/screenshots/requests-list.png" />
 <em>Figure 1: Requests list showing request cards with type tags, status badges, and creation dates.</em></p>
 <p>The Requests page lists all requests you have submitted, with:</p>
 <ul>
@@ -1044,7 +1096,7 @@
 <li>Click <strong>Requests</strong> in the left sidebar.</li>
 <li>Click <strong>+ New Request</strong> (top-right).</li>
 </ol>
-<p><img alt="New request form" src="../assets/screenshots/request-new-form.png" />
+<p><img alt="New request form" src="../../assets/screenshots/request-new-form.png" />
    <em>Figure 2: New request creation form with type selector, title, and description fields.</em></p>
 <ol>
 <li>Fill in the form:</li>
@@ -1058,16 +1110,20 @@
 </thead>
 <tbody>
 <tr>
+<td><strong>Project</strong></td>
+<td>Optional — link the request to a project so admins see its current GPU quota. The selected project's GPU bar appears beside the picker.</td>
+</tr>
+<tr>
 <td><strong>Type</strong></td>
-<td>Select the request category from the dropdown</td>
+<td>Select the request category from the tag grid (Resource, Access, Feature, Bug, Question, Other).</td>
 </tr>
 <tr>
 <td><strong>Title</strong></td>
-<td>Short, descriptive title (e.g., "Request 4 GPU slots for project LLM-Training")</td>
+<td>Short, descriptive title (e.g., "Request 4 GPU units for project LLM-Training").</td>
 </tr>
 <tr>
 <td><strong>Description</strong></td>
-<td>Detailed explanation — include project name, reason, duration, and any urgency</td>
+<td>Rich-text editor — supports formatting, code blocks, and inline image uploads. Drag screenshots in to attach evidence.</td>
 </tr>
 </tbody>
 </table>
@@ -1079,13 +1135,39 @@
 <p>A clear description speeds up admin review. For resource requests, include: which project needs the quota, how many GPUs you need, for how long, and the research objective.</p>
 </div>
 <hr />
+<h2 id="image-requests">Image Requests<a class="headerlink" href="#image-requests" title="Permanent link">&para;</a></h2>
+<p>When you need a base image that is not in the platform's allowed list, use the <strong>Request Image</strong> form (linked from the project Images tab and the dashboard image catalog). It is a structured request type that an admin can act on without back-and-forth.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Registry</strong></td>
+<td>Optional. Defaults to <code>docker.io</code> when blank.</td>
+</tr>
+<tr>
+<td><strong>Repository</strong></td>
+<td>Image path without tag, e.g. <code>pytorch/pytorch</code> or <code>nvidia/*</code> (use <code>*</code> for wildcard requests).</td>
+</tr>
+<tr>
+<td><strong>Tag</strong></td>
+<td>Optional. Defaults to <code>latest</code>, or <code>*</code> when the repository is a wildcard.</td>
+</tr>
+</tbody>
+</table>
+<p>A live preview shows the canonical image reference admins will review. Once approved, the image is added to the platform allowlist and becomes selectable from the workspace and deploy forms.</p>
+<hr />
 <h2 id="track-your-request">Track Your Request<a class="headerlink" href="#track-your-request" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Open your request from the list.</li>
 <li>The detail page shows the full message thread.</li>
 <li>If an admin asks for more information, you'll see their message in the thread — reply using the text box at the bottom.</li>
 </ol>
-<p><img alt="Request detail with message thread" src="../assets/screenshots/request-detail.png" />
+<p><img alt="Request detail with message thread" src="../../assets/screenshots/request-detail.png" />
 <em>Figure 3: Request detail page showing status history and message thread between user and admin.</em></p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>

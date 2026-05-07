@@ -406,6 +406,8 @@
       
         
       
+        
+      
     
     
     
@@ -618,6 +620,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -871,6 +901,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#api-key-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Key &amp; CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Key &amp; CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#active-api-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active API Tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-ca-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI CA Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-questions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1013,6 +1082,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#api-key-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Key &amp; CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Key &amp; CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#active-api-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Active API Tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-ca-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI CA Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-questions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1048,8 +1156,8 @@
 <p><strong>Access:</strong> All authenticated users. Navigate via <strong>Settings</strong> in the left sidebar (Infrastructure section).</p>
 <hr />
 <h2 id="settings-tabs">Settings Tabs<a class="headerlink" href="#settings-tabs" title="Permanent link">&para;</a></h2>
-<p><img alt="Settings page tabs" src="../assets/screenshots/settings-tabs.png" />
-<em>Figure 1: Settings page showing the four tabs: Profile, Security, Notifications, and Preferences.</em></p>
+<p><img alt="Settings page tabs" src="../../assets/screenshots/settings-tabs.png" />
+<em>Figure 1: Settings page showing the tabs: Profile, Security, Notifications, Preferences, and API Key &amp; CLI.</em></p>
 <table>
 <thead>
 <tr>
@@ -1073,6 +1181,10 @@
 <tr>
 <td><strong>Preferences</strong></td>
 <td>Select your display language</td>
+</tr>
+<tr>
+<td><strong>API Key &amp; CLI</strong></td>
+<td>Manage personal API tokens and download the CLI CA certificate</td>
 </tr>
 </tbody>
 </table>
@@ -1140,6 +1252,22 @@
 <p>Select your preferred display language from the dropdown. The UI will reload in the selected language.</p>
 <p>Available languages depend on your platform configuration. Contact your admin if your language is missing.</p>
 <hr />
+<h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
+<p>This tab is the entry point for the <a href="../cli/"><code>cscc-cli</code></a> tool. It does two things:</p>
+<h3 id="active-api-tokens">Active API Tokens<a class="headerlink" href="#active-api-tokens" title="Permanent link">&para;</a></h3>
+<p>The token list shows every active API token issued for your account, with prefix, last-used time, and expiry. From here you can:</p>
+<ul>
+<li><strong>Create token</strong> — generate a new token with an optional name. The full token value is shown <strong>once</strong>; copy it before closing the dialog.</li>
+<li><strong>Revoke</strong> — invalidate any token. CLI sessions using that token will stop working on their next call.</li>
+</ul>
+<p>Tokens default to a 90-day lifetime, and your account is capped at 20 active tokens at a time.</p>
+<div class="admonition warning">
+<p class="admonition-title">One-time reveal</p>
+<p>The cleartext token is never stored on the backend — only its SHA-256 hash. If you lose the value, revoke it and create a new one.</p>
+</div>
+<h3 id="cli-ca-setup">CLI CA Setup<a class="headerlink" href="#cli-ca-setup" title="Permanent link">&para;</a></h3>
+<p>If your workstation does not yet trust the platform's internal TLS certificate, click <strong>Download CLI CA</strong> to save <code>platform-internal-root-ca.pem</code>. The page shows the exact install command to run; once it is in place, <code>cscc-cli</code> auto-detects the file from <code>~/.config/cscc-cli/</code>.</p>
+<hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>I can't change my password — the field is greyed out.</summary>
@@ -1148,6 +1276,10 @@
 <details class="question">
 <summary>I'm not receiving email notifications even though they're enabled.</summary>
 <p>Check your spam folder. If emails are not arriving, contact your admin to verify the platform's SMTP configuration is set up correctly.</p>
+</details>
+<details class="question">
+<summary>I lost my API token. Can I recover it?</summary>
+<p>No — only the hash is stored. Revoke the lost token from the <strong>API Key &amp; CLI</strong> tab and create a new one.</p>
 </details>
 
 

@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -788,6 +790,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -1198,7 +1228,7 @@
 <ol>
 <li>填寫所有欄位後點擊 <strong>登入</strong>。</li>
 </ol>
-<p><img alt="登入頁面" src="../assets/screenshots/signin-form.png" />
+<p><img alt="登入頁面" src="../../../assets/screenshots/signin-form.png" />
 <em>圖 1：包含使用者名稱、密碼和驗證碼欄位的登入頁面。</em></p>
 <pre class="mermaid"><code>sequenceDiagram
     participant 使用者
@@ -1234,7 +1264,7 @@
 <tbody>
 <tr>
 <td><strong>GPU 可用性</strong></td>
-<td>叢集中可用與已分配的 GPU 數量</td>
+<td>叢集中可用與已分配的 DRA GPU 單位</td>
 </tr>
 <tr>
 <td><strong>專案摘要</strong></td>
@@ -1250,11 +1280,11 @@
 </tr>
 <tr>
 <td><strong>GPU 任務</strong></td>
-<td>使用 GPU 的運行中工作區，含 MPS 單位和記憶體資訊</td>
+<td>使用 GPU 的運行中工作區，含 SM 比例和記憶體資訊</td>
 </tr>
 </tbody>
 </table>
-<p><img alt="首頁儀表板概覽" src="../assets/screenshots/home-dashboard-overview.png" />
+<p><img alt="首頁儀表板概覽" src="../../../assets/screenshots/home-dashboard-overview.png" />
 <em>圖 2：首頁儀表板，顯示 GPU 可用性卡片和活動任務表格。</em></p>
 <hr />
 <h2 id="5">步驟 5 — 檢查您的專案<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
@@ -1263,7 +1293,7 @@
 <li>您的帳號建立時會自動產生一個 <strong>個人專案</strong>——尋找與您使用者名稱同名的專案。</li>
 <li>點擊專案卡片查看 <strong>配額</strong>（GPU、CPU、記憶體上限）和 <strong>成員</strong>。</li>
 </ol>
-<p><img alt="專案列表" src="../assets/screenshots/projects-list.png" />
+<p><img alt="專案列表" src="../../../assets/screenshots/projects-list.png" />
 <em>圖 3：專案頁面，顯示含配額摘要的個人專案卡片。</em></p>
 <div class="admonition info">
 <p class="admonition-title">看不到專案？</p>
@@ -1306,7 +1336,7 @@
 </tr>
 <tr>
 <td><strong>GPU</strong></td>
-<td>GPU 數量（如：1）</td>
+<td>GPU 數量與選用 SM 比例（例如 1 張 GPU、100% SM）</td>
 </tr>
 <tr>
 <td><strong>儲存</strong></td>
@@ -1319,7 +1349,7 @@
 <li>等待狀態從 <strong>啟動中</strong>（黃色）變為 <strong>運行中</strong>（綠色）。</li>
 <li>點擊 <strong>開啟</strong>——IDE 將在新分頁中開啟。</li>
 </ol>
-<p><img alt="新增工作區表單" src="../assets/screenshots/workspace-new-form.png" />
+<p><img alt="新增工作區表單" src="../../../assets/screenshots/workspace-new-form.png" />
 <em>圖 4：工作區建立表單，包含專案、IDE 類型和資源欄位。</em></p>
 <div class="admonition warning">
 <p class="admonition-title">工作區無法啟動？</p>
@@ -1337,7 +1367,7 @@
 <li>點擊 <strong>瀏覽</strong>——將開啟 FileBrowser 介面，您可以上傳、下載、重新命名和整理檔案。</li>
 <li>此處儲存的檔案在工作區重新啟動後仍會保留。</li>
 </ol>
-<p><img alt="儲存瀏覽器" src="../assets/screenshots/storage-browser.png" />
+<p><img alt="儲存瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 5：FileBrowser 介面，顯示個人儲存內容。</em></p>
 <hr />
 <h2 id="8">步驟 8 — 加入群組（選用）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>

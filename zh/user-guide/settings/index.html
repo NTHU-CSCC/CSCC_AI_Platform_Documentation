@@ -406,6 +406,8 @@
       
         
       
+        
+      
     
     
     
@@ -618,6 +620,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -854,6 +884,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#api-key-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Key &amp; CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Key &amp; CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已啟用的 API token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-ca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI CA 安裝
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -979,6 +1048,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#api-key-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API Key &amp; CLI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Key &amp; CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已啟用的 API token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-ca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI CA 安裝
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1038,11 +1146,15 @@
 <td><strong>偏好設定</strong></td>
 <td>語言、主題、預設工作區設定</td>
 </tr>
+<tr>
+<td><strong>API Key &amp; CLI</strong></td>
+<td>管理個人 API token，並下載 CLI CA 憑證</td>
+</tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_3">個人檔案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="個人檔案頁面" src="../assets/screenshots/settings-profile.png" />
+<p><img alt="個人檔案頁面" src="../../../assets/screenshots/settings-profile.png" />
 <em>圖 1：個人檔案標籤頁，可編輯顯示名稱和電子郵件。</em></p>
 <ol>
 <li>前往 <strong>設定 → 個人檔案</strong>。</li>
@@ -1056,7 +1168,7 @@
 </div>
 <hr />
 <h2 id="_4">安全性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="安全性頁面" src="../assets/screenshots/settings-security.png" />
+<p><img alt="安全性頁面" src="../../../assets/screenshots/settings-security.png" />
 <em>圖 2：安全性標籤頁，包含密碼變更表單。</em></p>
 <h3 id="_5">變更密碼<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
@@ -1139,6 +1251,22 @@
 </table>
 <p>變更偏好設定後會自動儲存，重新整理頁面後即時生效。</p>
 <hr />
+<h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
+<p>此標籤是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，提供兩件事：</p>
+<h3 id="api-token">已啟用的 API token<a class="headerlink" href="#api-token" title="Permanent link">&para;</a></h3>
+<p>token 列表會顯示您帳號下每個有效的 API token，以及 prefix、上次使用時間與到期時間。在這裡可以：</p>
+<ul>
+<li><strong>建立 token</strong> — 產生新的 token，可填寫名稱。完整 token 值僅 <strong>顯示一次</strong>，請於關閉對話框前複製。</li>
+<li><strong>撤銷</strong> — 立即作廢任何 token，使用該 token 的 CLI session 在下一次呼叫時就會失效。</li>
+</ul>
+<p>token 預設效期 90 天，每個帳號最多同時保留 20 個有效 token。</p>
+<div class="admonition warning">
+<p class="admonition-title">僅顯示一次</p>
+<p>後端不會儲存 token 明文，只儲存 SHA-256 雜湊。若 token 遺失，請撤銷後重新建立。</p>
+</div>
+<h3 id="cli-ca">CLI CA 安裝<a class="headerlink" href="#cli-ca" title="Permanent link">&para;</a></h3>
+<p>如果您的工作站尚未信任平台內部 TLS 憑證，點擊 <strong>下載 CLI CA</strong> 取得 <code>platform-internal-root-ca.pem</code>。頁面同時提供完整安裝指令；放到 <code>~/.config/cscc-cli/</code> 之後，<code>cscc-cli</code> 會自動偵測使用。</p>
+<hr />
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>我忘記密碼了。</summary>
@@ -1151,6 +1279,10 @@
 <details class="question">
 <summary>我可以刪除帳號嗎？</summary>
 <p>帳號刪除需由管理員操作。請提交一般申請說明您想要刪除帳號。管理員會處理資料保留政策後完成帳號刪除。</p>
+</details>
+<details class="question">
+<summary>我的 API token 不見了，能找回嗎？</summary>
+<p>無法。後端只保留雜湊值。請在 <strong>API Key &amp; CLI</strong> 標籤撤銷遺失的 token，並建立新的。</p>
 </details>
 
 

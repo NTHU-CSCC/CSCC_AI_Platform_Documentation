@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -621,6 +623,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各節點 GPU 配置狀態
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -643,7 +656,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu_1" class="md-nav__link">
+  <a href="#gpu_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         我的 GPU 任務
@@ -744,6 +757,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -936,6 +977,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        各節點 GPU 配置狀態
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -958,7 +1010,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu_1" class="md-nav__link">
+  <a href="#gpu_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         我的 GPU 任務
@@ -1006,7 +1058,7 @@
 <h2 id="_2">儀表板布局<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TD
     subgraph 頂部區域["頂部區域"]
-        A["GPU 可用性卡片\n（叢集級 GPU 數量）"]
+        A["GPU 可用性卡片\n（叢集級 GPU 單位）"]
         B["專案摘要\n（活躍專案數）"]
     end
     subgraph 中間區域["中間區域"]
@@ -1030,53 +1082,70 @@
 <tbody>
 <tr>
 <td><strong>GPU 可用性卡片</strong></td>
-<td>叢集所有節點中可用與已分配的 GPU 數量</td>
-<td>頁面載入時</td>
+<td>叢集所有節點中可用與已分配的 GPU 單位</td>
+<td>頁面載入時，之後每 10 秒更新</td>
+</tr>
+<tr>
+<td><strong>各節點 GPU 配置狀態</strong></td>
+<td>每個 GPU 節點的實體 GPU、SM 剩餘比例與忙碌狀態</td>
+<td>頁面載入時，之後每 10 秒更新</td>
 </tr>
 <tr>
 <td><strong>專案摘要</strong></td>
 <td>您所屬的專案總數</td>
-<td>頁面載入時</td>
+<td>頁面載入時，之後每 10 秒更新</td>
 </tr>
 <tr>
 <td><strong>資源使用圖表</strong></td>
-<td>各專案 GPU/CPU/記憶體配額消耗與總分配量的長條圖</td>
-<td>頁面載入時</td>
+<td>各專案 GPU/CPU/記憶體配額消耗、總分配量與計畫時段狀態</td>
+<td>頁面載入時，之後每 10 秒更新；倒數每秒更新</td>
 </tr>
 <tr>
 <td><strong>活動紀錄</strong></td>
 <td>近期平台事件的時序日誌（工作區啟動、專案變更、儲存操作）</td>
-<td>頁面載入時</td>
+<td>頁面載入時，之後每 10 秒更新</td>
 </tr>
 <tr>
 <td><strong>我的 GPU 任務</strong></td>
-<td>您目前運行中的工作區和批次任務及狀態標籤</td>
-<td>頁面載入時</td>
+<td>您目前運行中的工作區和批次任務，含 GPU、SM 比例與狀態</td>
+<td>頁面載入時，之後每 15 秒更新</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="gpu">閱讀 GPU 可用性<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
 <p><strong>GPU 可用性卡片</strong> 顯示叢集 GPU 資源池的即時狀態。</p>
-<p><img alt="首頁儀表板 GPU 可用性卡片" src="../assets/screenshots/home-dashboard-overview.png" />
+<p><img alt="首頁儀表板 GPU 可用性卡片" src="../../../assets/screenshots/home-dashboard-overview.png" />
 <em>圖 1：首頁儀表板，顯示 GPU 可用性、資源使用量和運行中的任務。請以實際截圖取代此預留圖片。</em></p>
 <p>閱讀 GPU 卡片的步驟：</p>
 <ol>
 <li>查看 <strong>已分配 / 總數</strong> 比例（如：<code>6 / 8 GPUs</code>）。</li>
 <li>可用 GPU = 總數 − 已分配。若可用為 0，您的工作區啟動將排入佇列等待。</li>
+<li>卡片同時會顯示 <strong>可被搶佔的佇列</strong> 數量——當 GPU 已用完但仍有可被搶佔的佇列時，較高優先序的工作仍可透過驅逐低優先序 Pod 取得資源。</li>
 <li>點擊卡片可導覽至管理監控頁面（僅限管理員）查看各節點細節。</li>
 </ol>
 <div class="admonition info">
-<p class="admonition-title">MPS 虛擬槽位 vs 實體 GPU</p>
-<p>若啟用 MPS，一張實體 GPU 可顯示為多個虛擬槽位（由 <code>GPU_REPLICAS_PER_GPU</code> 設定）。卡片顯示的是虛擬槽位數，非實體 GPU 數。</p>
+<p class="admonition-title">DRA 有效 GPU 單位</p>
+<p>卡片會依 DRA 標籤與 live ResourceClaim binding 顯示有效 GPU 單位。例如 1 張 GPU 搭配 50% SM，只有在 DRA 綁定到 live Pod 時才會在配額與可用性檢視中計為 0.5 GPU。</p>
 </div>
+<hr />
+<h2 id="gpu_1">各節點 GPU 配置狀態<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
+<p>GPU 可用性卡片下方的 <strong>各節點 GPU 配置狀態</strong> 網格，會把每個 GPU 節點以小卡片呈現：</p>
+<ul>
+<li>節點名稱與 GPU 型號</li>
+<li>各裝置的 SM 剩餘比例（<code>{{pct}}% 剩餘</code>）長條</li>
+<li><em>Available</em> / <em>Busy</em> 標籤，方便挑選目前較空閒的型號</li>
+<li>該節點的 GPU 總數</li>
+</ul>
+<p>送出工作前先看這個網格，可以快速判斷哪些型號還有空、或確認某節點是否還有容量接受 fractional claim。</p>
 <hr />
 <h2 id="_4">資源使用圖表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>圖表顯示您所屬所有專案的使用量。</p>
 <ul>
 <li>每個長條代表一個專案。</li>
 <li>長條的填充量顯示已消耗的配額（GPU 時數、CPU 時數或記憶體）。</li>
-<li>將滑鼠移至長條上可查看確切數值。</li>
+<li>每個專案列會顯示綁定資源計畫目前是全天候啟用、即將關閉、即將開啟或已過期。</li>
+<li>計畫時段倒數每秒更新，不需要重新整理頁面。</li>
 </ul>
 <hr />
 <h2 id="_5">活動紀錄<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -1089,7 +1158,7 @@
 </ul>
 <p>點擊任何活動項目可直接導覽至相關資源。</p>
 <hr />
-<h2 id="gpu_1">我的 GPU 任務<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
+<h2 id="gpu_2">我的 GPU 任務<a class="headerlink" href="#gpu_2" title="Permanent link">&para;</a></h2>
 <p><strong>我的 GPU 任務</strong> 表格列出您的活躍工作區和批次任務：</p>
 <table>
 <thead>
@@ -1134,7 +1203,7 @@
 <h2 id="_6">常見問題<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>為什麼 GPU 可用性卡片顯示為 0？</summary>
-<p>卡片顯示的是 MPS 虛擬槽位數。若所有槽位都已分配，會顯示 0。查看活動紀錄——最近完成的工作區可能在一分鐘內釋放槽位。</p>
+<p>卡片顯示的是 DRA 有效 GPU 可用量。若相容 GPU 或 SM 比例都已分配，會顯示 0。查看活動紀錄——最近完成的工作區可能在一分鐘內釋放容量。</p>
 </details>
 <details class="question">
 <summary>活動紀錄是空的——是否有問題？</summary>
@@ -1142,7 +1211,7 @@
 </details>
 <details class="question">
 <summary>我運行中的工作區沒有出現在任務表格中。</summary>
-<p>表格在頁面載入時取得資料。重新整理頁面（<code>F5</code> 或瀏覽器重新整理按鈕）即可取得頁面載入後啟動的工作區。</p>
+<p>表格每 15 秒更新一次。若下一次輪詢後仍未出現，請重新整理頁面（<code>F5</code> 或瀏覽器重新整理按鈕）。</p>
 </details>
 
 

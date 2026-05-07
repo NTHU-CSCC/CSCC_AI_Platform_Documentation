@@ -400,6 +400,8 @@
       
         
       
+        
+      
     
     
     
@@ -609,6 +611,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user-guide/announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -1090,7 +1120,7 @@
 </tr>
 <tr>
 <td><code>gpu23-harbor</code></td>
-<td>推送到 GPU23 專用 Harbor lane，適合需要分離映像 blob 或 GPU23 儲存策略的群組</td>
+<td>推送到 GPU23 專用 Harbor lane；此群組的 image build 會進入 <code>platform-build-gpu23</code>，排到 gpu2/gpu3，CPU/RAM 仍受限，disk 使用 GPU23 <code>/data2</code> scratch lane（每個 build 200Gi，namespace 總量 2Ti）</td>
 </tr>
 </tbody>
 </table>

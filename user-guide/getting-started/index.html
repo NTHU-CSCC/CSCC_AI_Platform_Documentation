@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -788,6 +790,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -1198,7 +1228,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 <ol>
 <li>Fill in all three fields and click <strong>SIGN IN</strong>.</li>
 </ol>
-<p><img alt="Sign-in page" src="../assets/screenshots/signin-form.png" />
+<p><img alt="Sign-in page" src="../../assets/screenshots/signin-form.png" />
 <em>Figure 1: Login page with username, password, and CAPTCHA fields.</em></p>
 <pre class="mermaid"><code>sequenceDiagram
     participant User
@@ -1234,7 +1264,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 <tbody>
 <tr>
 <td><strong>GPU Availability</strong></td>
-<td>Free vs. allocated GPU slots across the cluster</td>
+<td>Free vs. allocated DRA GPU units across the cluster</td>
 </tr>
 <tr>
 <td><strong>Project Summary</strong></td>
@@ -1250,11 +1280,11 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 </tr>
 <tr>
 <td><strong>Active GPU Jobs</strong></td>
-<td>Running workspaces with GPU, MPS units, and memory</td>
+<td>Running workspaces with GPU, SM share, and memory</td>
 </tr>
 </tbody>
 </table>
-<p><img alt="Home dashboard overview" src="../assets/screenshots/home-dashboard-overview.png" />
+<p><img alt="Home dashboard overview" src="../../assets/screenshots/home-dashboard-overview.png" />
 <em>Figure 2: Home dashboard showing GPU availability card and active jobs table.</em></p>
 <hr />
 <h2 id="step-5-check-your-project">Step 5 — Check Your Project<a class="headerlink" href="#step-5-check-your-project" title="Permanent link">&para;</a></h2>
@@ -1263,7 +1293,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 <li>A <strong>personal project</strong> is auto-created when your account is provisioned — look for a project named after your username.</li>
 <li>Click the project card to view its <strong>quota</strong> (GPU, CPU, Memory limits) and <strong>members</strong>.</li>
 </ol>
-<p><img alt="Projects list" src="../assets/screenshots/projects-list.png" />
+<p><img alt="Projects list" src="../../assets/screenshots/projects-list.png" />
 <em>Figure 3: Projects page showing personal project card with quota summary.</em></p>
 <div class="admonition info">
 <p class="admonition-title">No project visible?</p>
@@ -1306,7 +1336,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 </tr>
 <tr>
 <td><strong>GPU</strong></td>
-<td>Number of GPU slots (e.g., 1)</td>
+<td>Number of GPUs and optional SM share (e.g., 1 GPU at 100% SM)</td>
 </tr>
 <tr>
 <td><strong>Storage</strong></td>
@@ -1319,7 +1349,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 <li>Wait for the status badge to change from <strong>Starting</strong> (yellow) → <strong>Running</strong> (green).</li>
 <li>Click <strong>Open</strong> — your IDE opens in a new browser tab.</li>
 </ol>
-<p><img alt="New workspace form" src="../assets/screenshots/workspace-new-form.png" />
+<p><img alt="New workspace form" src="../../assets/screenshots/workspace-new-form.png" />
 <em>Figure 4: Workspace creation form with project, IDE type, and resource fields.</em></p>
 <div class="admonition warning">
 <p class="admonition-title">Workspace won't start?</p>
@@ -1337,7 +1367,7 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 <li>Click <strong>Browse</strong> — a FileBrowser UI opens where you can upload, download, rename, and organise files.</li>
 <li>Files stored here persist across workspace restarts.</li>
 </ol>
-<p><img alt="Storage browser" src="../assets/screenshots/storage-browser.png" />
+<p><img alt="Storage browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 5: FileBrowser interface showing personal storage contents.</em></p>
 <hr />
 <h2 id="step-8-join-a-group-optional">Step 8 — Join a Group (Optional)<a class="headerlink" href="#step-8-join-a-group-optional" title="Permanent link">&para;</a></h2>

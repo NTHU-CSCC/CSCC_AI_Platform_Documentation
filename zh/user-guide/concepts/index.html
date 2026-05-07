@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -585,6 +587,39 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        排程佇列、優先序與搶佔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        計畫窗口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dra-resource-claim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA Resource Claim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         角色權限
       
     </span>
@@ -594,7 +629,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         系統角色
@@ -605,7 +640,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         專案角色
@@ -616,7 +651,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         群組角色
@@ -632,7 +667,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         儲存權限模型
@@ -643,7 +678,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         關鍵術語
@@ -761,6 +796,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -945,6 +1008,39 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        排程佇列、優先序與搶佔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        計畫窗口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dra-resource-claim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA Resource Claim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         角色權限
       
     </span>
@@ -954,7 +1050,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         系統角色
@@ -965,7 +1061,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         專案角色
@@ -976,7 +1072,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         群組角色
@@ -992,7 +1088,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         儲存權限模型
@@ -1003,7 +1099,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         關鍵術語
@@ -1076,12 +1172,64 @@
 <pre class="mermaid"><code>flowchart LR
     Admin["管理員定義\n資源計畫"] --&gt;|指派給| Project[專案]
     Project --&gt;|配額強制於| Launch[工作區啟動]
-    Launch --&gt;|透過排程| Queue[Volcano 佇列]
-    Queue --&gt;|強制| GPULimit[GPU / CPU 上限]</code></pre>
-<p>每個專案由管理員指派一個 <strong>資源計畫</strong>。當您啟動工作區時，平台會在透過 Volcano GPU 排程器排程 Pod 之前，驗證您是否有足夠的配額。</p>
+    Launch --&gt;|建立| DRA["DRA ResourceClaim"]
+    Launch --&gt;|使用| Queue[平台佇列]
+    DRA --&gt;|配置| GPULimit["GPU / SM 比例"]
+    Queue --&gt;|套用| Priority["優先序 / 搶佔政策"]</code></pre>
+<p>每個專案由管理員指派一個 <strong>資源計畫</strong>。當您啟動工作區時，平台會先驗證專案配額與個別使用者配額，再為 Pod 建立 Kubernetes DRA 資源。</p>
+<p>計畫同時帶有：</p>
+<ul>
+<li><strong>允許的 GPU 型號</strong> 清單——啟動表單中只會顯示這些型號。</li>
+<li>選用的 <strong>排程窗口</strong>，限制計畫綁定佇列何時可用（見下方 <em>計畫窗口</em>）。</li>
+<li>一個或多個 <strong>綁定佇列</strong>，附帶優先序、搶佔與 GPU 型號政策。</li>
+</ul>
 <hr />
-<h2 id="_4">角色權限<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="_5">系統角色<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h2 id="_4">排程佇列、優先序與搶佔<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>工作負載會選擇一個 <strong>平台佇列</strong>。佇列紀錄仍會同步到 Volcano Queue CRD 作為政策相容層；DRA GPU Pod 則透過 Kubernetes <code>default-scheduler</code> 與 ResourceClaim 排程。每個佇列具備優先序、可選的搶佔旗標，以及可選的 <em>deserved GPU</em> 上限：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>意義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>優先序</strong></td>
+<td>當 GPU 緊張時，優先序較高的佇列會先排程。</td>
+</tr>
+<tr>
+<td><strong>可被搶佔</strong></td>
+<td>此佇列中的 Pod 可以被驅逐，把 GPU 讓給更高優先序的佇列。</td>
+</tr>
+<tr>
+<td><strong>Deserved GPU</strong></td>
+<td>即使其他佇列競爭，也能保證的 GPU 底量。值為 <code>0</code> 表示「victim」佇列，會優先被排乾資源。</td>
+</tr>
+</tbody>
+</table>
+<p>預設佇列永遠可用；計畫綁定的佇列會與預設佇列並列在工作區及部署表單中。</p>
+<hr />
+<h2 id="_5">計畫窗口<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><strong>計畫窗口</strong> 是計畫綁定佇列可使用的時間區段。窗口以外，計畫綁定佇列停止排程新的 Pod，且平台 plan-window reaper 可能會驅逐這些佇列中正在執行的 Pod；預設佇列不受影響。</p>
+<p>儀表板會顯示距離下個邊界（開啟／關閉）的即時倒數，使用者可以選擇切到預設佇列或等下一個窗口開啟，避免被驅逐。</p>
+<hr />
+<h2 id="dra-resource-claim">DRA Resource Claim<a class="headerlink" href="#dra-resource-claim" title="Permanent link">&para;</a></h2>
+<p>平台上的 GPU 透過 <strong>Kubernetes Dynamic Resource Allocation（DRA）</strong> ResourceClaim 配置。每個 claim 描述：</p>
+<ul>
+<li><strong>裝置類別</strong>（例如特定 GPU 型號）</li>
+<li><strong>SM 比例</strong>——描述要求的 GPU 計算時間比例</li>
+<li><strong>VRAM 模式</strong>——<code>elastic</code> 與其他 claim 共享 VRAM；<code>hard_cap</code> 強制使用上限</li>
+</ul>
+<p>claim 有兩種建立方式：</p>
+<ul>
+<li><strong>inline claim</strong>——啟動工作區時自動建立、與 Pod 共生命週期，Pod 刪除時 claim 也跟著消失。</li>
+<li><strong>專案管理 claim</strong>——從專案的 <em>GPU Claims</em> 標籤建立，可被 Pod 或 Deployment 設定檔重複使用。它在 Kubernetes DRA 完成配置且 <code>reservedFor</code> 指向 live Pod 前都是 pending contract；只有 bound 狀態會計入配額與 resource-hours。</li>
+</ul>
+<p>設定檔會透過具名部署時 slot 參照專案管理 claim，例如 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。slot 名稱不是 claim 名稱；部署者會把每個 slot 對應到自己的 ResourceClaim。單一 Kubernetes Deployment 無法讓不同 replica 使用不同 claim，因為所有 replica 共用同一份 PodTemplate；若只有部分 Pod 要使用 claim，請拆成多個 Deployment。</p>
+<hr />
+<h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1129,7 +1277,7 @@
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
-<td>管理 Volcano 佇列</td>
+<td>管理平台佇列</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
@@ -1148,7 +1296,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_6">專案角色<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_8">專案角色<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1197,7 +1345,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_7">群組角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_9">群組角色<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1230,7 +1378,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_8">儲存權限模型<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_10">儲存權限模型<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>儲存權限採用雙路徑繼承模型：</p>
 <pre class="mermaid"><code>flowchart TD
     GroupAdmin["群組管理員\n設定權限"] --&gt;|批次設定| GroupStorage["群組 PVC\n（權限來源）"]
@@ -1242,7 +1390,7 @@
 <li><strong>非群組的專案成員</strong> 權限直接在專案層級管理。</li>
 </ul>
 <hr />
-<h2 id="_9">關鍵術語<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_11">關鍵術語<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1256,20 +1404,40 @@
 <td>持久化磁區宣告——Kubernetes 儲存資源，Pod 重啟後資料仍保留</td>
 </tr>
 <tr>
-<td><strong>Volcano 佇列</strong></td>
-<td>Kubernetes 原生批次佇列，強制 GPU/CPU 配額和優先排程</td>
+<td><strong>平台佇列</strong></td>
+<td>命名的排程政策，控制優先序、搶佔、計畫窗口與選用 GPU 型號親和性</td>
+</tr>
+<tr>
+<td><strong>計畫窗口</strong></td>
+<td>計畫綁定佇列可使用的時間區段</td>
+</tr>
+<tr>
+<td><strong>搶佔（Preemption）</strong></td>
+<td>驅逐可被搶佔佇列中的 Pod，把資源讓給更高優先序的工作</td>
+</tr>
+<tr>
+<td><strong>DRA</strong></td>
+<td>Dynamic Resource Allocation，Kubernetes 透過 ResourceClaim 物件配置 GPU 的 API</td>
+</tr>
+<tr>
+<td><strong>ResourceClaim</strong></td>
+<td>DRA 物件，用來請求 fractional 或整顆 GPU；平台管理的 standalone claim 只有綁定 live Pod 時才消耗配額</td>
 </tr>
 <tr>
 <td><strong>設定檔</strong></td>
 <td>版本化的 Kubernetes YAML/設定，以內容定址的不可變方式儲存</td>
 </tr>
 <tr>
-<td><strong>MPS</strong></td>
-<td>多行程服務——NVIDIA 技術，允許多個行程共享一張 GPU</td>
+<td><strong>SM 比例</strong></td>
+<td>Streaming Multiprocessor share percentage，用於描述 fractional GPU compute allocation</td>
 </tr>
 <tr>
 <td><strong>資源計畫</strong></td>
-<td>命名範本，定義專案的 GPU、CPU 和記憶體上限</td>
+<td>命名範本，定義專案的 GPU、CPU、記憶體上限、允許的 GPU 型號與排程窗口</td>
+</tr>
+<tr>
+<td><strong>儲存通道（Storage Lane）</strong></td>
+<td>對應 PVC 配置方式的 profile（<code>shared-rwx</code>、<code>legacy-rwx</code>、<code>fast-rwo</code>）</td>
 </tr>
 <tr>
 <td><strong>內容定址儲存（CAS）</strong></td>

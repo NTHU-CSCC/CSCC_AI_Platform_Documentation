@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -620,6 +622,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
   
 
     
@@ -863,6 +893,7 @@
 <li><strong>管理專案</strong>，包含 GPU/CPU/記憶體配額、版本化設定檔及團隊成員</li>
 <li><strong>群組協作</strong>，共享儲存空間與角色權限控制</li>
 <li><strong>提交申請</strong>，申請額外資源、儲存空間或映像檔存取權限</li>
+<li><strong>閱讀公告</strong>，掌握維護時段、事件通知與政策更新</li>
 <li><strong>監控資源使用量</strong>及運行中的 GPU 任務</li>
 </ul>
 <hr />
@@ -888,6 +919,7 @@
     end
 
     subgraph 基礎設施
+        Home --&gt; Announcements[公告]
         Home --&gt; Requests[申請]
         Home --&gt; Settings[設定]
     end</code></pre>
@@ -914,7 +946,7 @@
 </tr>
 <tr>
 <td><strong>基礎設施</strong></td>
-<td>申請、設定</td>
+<td>公告、申請、設定</td>
 </tr>
 </tbody>
 </table>

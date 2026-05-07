@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -699,6 +701,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu-claims-dra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU Claims (DRA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GPU Claims (DRA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-claim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Claim
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window-countdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window Countdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#config-file-versioning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -721,6 +762,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA GPU Requests vs. Reusable GPU Claims
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -731,6 +783,17 @@
     <span class="md-ellipsis">
       
         Managing Members
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources Tab
       
     </span>
   </a>
@@ -811,6 +874,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -1053,6 +1144,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu-claims-dra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU Claims (DRA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GPU Claims (DRA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-claim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Claim
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window-countdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window Countdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#config-file-versioning" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1075,6 +1205,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA GPU Requests vs. Reusable GPU Claims
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1085,6 +1226,17 @@
     <span class="md-ellipsis">
       
         Managing Members
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources Tab
       
     </span>
   </a>
@@ -1145,7 +1297,7 @@
     Active --&gt; [*] : Admin Deletes</code></pre>
 <hr />
 <h2 id="project-page-layout">Project Page Layout<a class="headerlink" href="#project-page-layout" title="Permanent link">&para;</a></h2>
-<p><img alt="Projects list view" src="../assets/screenshots/projects-list.png" />
+<p><img alt="Projects list view" src="../../assets/screenshots/projects-list.png" />
 <em>Figure 1: Projects list showing grid view with GPU usage bars per project.</em></p>
 <p>The Projects page supports two view modes:</p>
 <ul>
@@ -1191,9 +1343,9 @@
 </div>
 <hr />
 <h2 id="project-detail-tabs">Project Detail Tabs<a class="headerlink" href="#project-detail-tabs" title="Permanent link">&para;</a></h2>
-<p>Click a project card to open its detail page. The detail page includes core tabs for Overview, Config, Plan, Builds, and Resources, plus role-dependent tabs such as Images, Members, and Storage.</p>
-<p><img alt="Project detail tabs" src="../assets/screenshots/project-detail-tabs.png" />
-<em>Figure 2: Project detail page with Overview, Config, Plan, Builds, Resources, and role-dependent tabs.</em></p>
+<p>Click a project card to open its detail page. The detail page includes core tabs for Overview, Config, Plan, Builds, GPU Claims, and Resources, plus role-dependent tabs such as Images, Members, and Storage.</p>
+<p><img alt="Project detail tabs" src="../../assets/screenshots/project-detail-tabs.png" />
+<em>Figure 2: Project detail page with Overview, Config, Plan, Builds, GPU Claims, Resources, and role-dependent tabs.</em></p>
 <table>
 <thead>
 <tr>
@@ -1212,19 +1364,23 @@
 </tr>
 <tr>
 <td><strong>Plan</strong></td>
-<td>Bound resource plan, schedule, and quota envelope</td>
+<td>Bound resource plan, schedule window, allowed GPU models, and quota envelope</td>
 </tr>
 <tr>
 <td><strong>Builds</strong></td>
 <td>Project-scoped image builds, archive, storage, or Dockerfile source selection, resource controls, and Kaniko build logs</td>
 </tr>
 <tr>
+<td><strong>GPU Claims</strong></td>
+<td>DRA-based ResourceClaims that can be prepared ahead of time and consume GPU only while bound to live Pods</td>
+</tr>
+<tr>
 <td><strong>Resources</strong></td>
-<td>Running project workloads and Kubernetes resource views</td>
+<td>Live per-user GPU/CPU/memory usage and expandable Kubernetes resource views</td>
 </tr>
 <tr>
 <td><strong>Images / Members / Storage</strong></td>
-<td>Additional tabs shown when your role allows image management, membership management, or storage access</td>
+<td>Additional tabs shown when your role allows image management, membership management, quota controls, or storage access</td>
 </tr>
 </tbody>
 </table>
@@ -1273,23 +1429,88 @@
 </tr>
 <tr>
 <td><strong>CPU Cores</strong></td>
-<td>Build CPU request. It cannot exceed the remaining project build capacity.</td>
+<td>Build CPU request. It cannot exceed the remaining project build capacity or the platform maximum of <code>4</code>.</td>
 </tr>
 <tr>
 <td><strong>Memory (GB)</strong></td>
-<td>Build memory request. It cannot exceed the remaining project build capacity.</td>
+<td>Build memory request. It cannot exceed the remaining project build capacity or the platform maximum of <code>16</code>.</td>
 </tr>
 <tr>
 <td><strong>Timeout (minutes)</strong></td>
-<td>Positive integer. The build job is stopped when the timeout is reached.</td>
+<td>Positive integer up to the platform maximum (<code>120</code> by default). Kubernetes also stops the job at this deadline.</td>
 </tr>
 </tbody>
 </table>
-<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy. The builder or a project manager can delete build artifacts from the build history.</p>
+<p>Local disk for Kaniko cache and temporary layers is capped by the platform admin
+per environment; it is not user-selectable from the build form. Uploaded archive
+contexts are checked for unsafe paths and expanded-size limits before the builder
+uses them. DockerHub base images are pulled through the platform Harbor
+proxy-cache path when it is configured.</p>
+<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy; GPU23 Harbor groups build in the dedicated GPU23 lane. The builder or a project manager can delete build artifacts from the build history.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If the start form is disabled, ask a platform admin to enable <strong>Image Build Permission</strong> for the project and confirm that the project has an active resource plan.</p>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Build from personal storage</p>
+<p>The <strong>From Storage</strong> mode resolves your personal volume from the platform database first, then falls back to the standard <code>user-&lt;name&gt;-storage</code> namespace and <code>user-&lt;name&gt;-disk</code> PVC if the database record is missing but the namespace exists in the cluster. If you still see <em>personal storage is not initialized</em>, open the <strong>Storage</strong> page once to trigger initialization or ask an admin to re-run user storage init.</p>
+</div>
+<hr />
+<h2 id="gpu-claims-dra">GPU Claims (DRA)<a class="headerlink" href="#gpu-claims-dra" title="Permanent link">&para;</a></h2>
+<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that can be prepared for a project
+ahead of deployment. A claim is pending while it has no live Pod binding; it
+starts consuming quota and GPU-hours only after Kubernetes DRA allocates it and
+binds it to a running Pod. Each claim is created through the Kubernetes Dynamic
+Resource Allocation API and can be selected from the deploy dialog when a Pod or
+Deployment template uses a deploy-time GPU claim slot annotation.</p>
+<h3 id="create-a-claim">Create a Claim<a class="headerlink" href="#create-a-claim" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claim Name</strong></td>
+<td>DNS-safe name used by deployments.</td>
+</tr>
+<tr>
+<td><strong>GPU Device Class</strong></td>
+<td>The model the scheduler reserves — limited to your plan's allowed models.</td>
+</tr>
+<tr>
+<td><strong>SM Share</strong></td>
+<td>Compute slice from 1% to 100%. The effective GPU count is shown beside the form.</td>
+</tr>
+<tr>
+<td><strong>VRAM Mode</strong></td>
+<td><code>Elastic</code> shares VRAM with peers; <code>Hard cap</code> enforces the selected percentage.</td>
+</tr>
+<tr>
+<td><strong>VRAM Share</strong></td>
+<td>Used only when <strong>Hard cap</strong> is selected; the platform derives the pinned memory from the smallest matching DRA ResourceSlice memory for the selected GPU Device Class.</td>
+</tr>
+</tbody>
+</table>
+<p>A pending claim has <code>0</code> GPU-hours and does not reduce quota. The table shows
+owner, allocation node, current status (<code>pending</code>, <code>bound</code>, or <code>terminating</code>),
+the <code>reservedFor</code> count reported by DRA, and a delete action. Delete is allowed
+for pending claims and rejected while a live Pod is using the claim.</p>
+<div class="admonition note">
+<p class="admonition-title">Claim ownership</p>
+<p>Project Members can create claims under their own namespace. Project Managers can also list and delete claims belonging to other members of the project.</p>
+</div>
+<hr />
+<h2 id="plan-window-countdown">Plan Window Countdown<a class="headerlink" href="#plan-window-countdown" title="Permanent link">&para;</a></h2>
+<p>When a project's resource plan defines a schedule window, the <strong>Plan</strong> tab shows a live countdown to the next boundary:</p>
+<ul>
+<li><em>Window closes in HH:MM:SS</em> while the window is open.</li>
+<li><em>Window opens in HH:MM:SS</em> when the next window is upcoming.</li>
+<li><em>Always active</em> if no schedule restriction is defined.</li>
+</ul>
+<p>The same countdown surfaces on the workspace launch form and on individual deployments. Pods running in plan-bound queues are subject to the platform's plan-window reaper when the window expires.</p>
 <hr />
 <h2 id="config-file-versioning">Config File Versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
 <p>Config files are stored using Content-Addressable Storage — each version is immutable and identified by a SHA-256 hash.</p>
@@ -1312,7 +1533,17 @@
 <li>Each save creates a new, immutable version — old versions are never overwritten.</li>
 <li>Click the <strong>History</strong> icon next to a config to view all versions.</li>
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
+<li>In the deploy dialog, pick the scheduling queue. If the YAML contains GPU claim slots, choose one of your reserved GPU claims for each slot for this deploy only.</li>
 </ol>
+<h3 id="dra-gpu-requests-vs-reusable-gpu-claims">DRA GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#dra-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Template GPU requests</strong> use DRA resource keys in the YAML container request, for example <code>nvidia.com/gpu-0: "1"</code> or <code>nvidia.com/rtx6000: "1"</code>, plus optional SM percentage and GPU model metadata. The platform creates the runtime DRA claim during deployment.</li>
+<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. They are pending until a live Pod uses them, then quota and resource-hours count the bound effective GPU once per claim. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own claims in the deploy dialog.</li>
+<li><code>{{gpuClaimName}}</code> is still supported as the default slot for older config files. Multiple Pods or Deployments can use the same slot to intentionally share the same claim, while different resources can use different slots and therefore different claims.</li>
+<li>Kubernetes Deployments use one PodTemplate for every replica. If only some replicas should use a claim, split the workload into multiple Deployments, for example one claimed Deployment and one unclaimed Deployment.</li>
+<li>Services, ConfigMaps, and unannotated workloads are not injected with GPU claims.</li>
+<li>Do not put <code>{{gpuClaimName}}</code> in <code>spec.resourceClaims[].resourceClaimName</code> or <code>resourceClaimTemplateName</code>; those fields are reserved for platform injection.</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Config files require Project Manager role</p>
 <p>Only project members with <strong>Manager</strong> or higher role can create or edit config files.</p>
@@ -1322,7 +1553,7 @@
 <ol>
 <li>Open the project and go to the <strong>Members</strong> tab.</li>
 <li>Click <strong>+ Add Members</strong> (requires <strong>Project Admin</strong> role).</li>
-<li>Search for users by username or email.</li>
+<li>Search for users by username or email. The add-member page loads project context, current members, and a paginated user list in one request.</li>
 <li>Select a role for each user:</li>
 </ol>
 <table>
@@ -1334,7 +1565,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Member</strong></td>
+<td><strong>User</strong></td>
 <td>Launch workspaces, view configs</td>
 </tr>
 <tr>
@@ -1343,13 +1574,49 @@
 </tr>
 <tr>
 <td><strong>Admin</strong></td>
-<td>Add/remove members, delete project</td>
+<td>Add/remove members, set member quotas, delete project</td>
 </tr>
 </tbody>
 </table>
 <ol>
 <li>Click <strong>Confirm</strong> to save.</li>
 </ol>
+<p>Project Admins can also select multiple rows in the Members tab and batch-remove users, batch-change roles, or batch-set per-user quotas. Project Managers and Project Admins can view member quotas; Project Users can view only their own quota. A per-user quota of <code>0</code> for GPU, CPU, or memory means that resource is unlimited for that member, still bounded by the project plan.</p>
+<p>Removing a direct member also removes that member's project namespace, project storage permission overrides, and per-user quota. Group-inherited members must be removed from the owning group instead.</p>
+<hr />
+<h2 id="resources-tab">Resources Tab<a class="headerlink" href="#resources-tab" title="Permanent link">&para;</a></h2>
+<p>The <strong>Resources</strong> tab summarizes live usage by project member:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User</td>
+<td>Project member or namespace owner</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>Effective DRA GPU units currently used</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Requested or observed CPU cores</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Memory in MiB</td>
+</tr>
+<tr>
+<td>Pods</td>
+<td>Number of active pods in that member namespace</td>
+</tr>
+</tbody>
+</table>
+<p>Project Admins, Project Managers, and platform Admin/Manager roles see all project members. Regular Project Users see only their own resource row. Expand a row to inspect pods and Kubernetes resources, or terminate resources you are allowed to manage.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU Quota Overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>
 <p>The Overview tab shows a quota bar for each resource type:</p>
@@ -1363,7 +1630,7 @@
 <tbody>
 <tr>
 <td>GPU</td>
-<td>Virtual GPU slots consumed vs. plan limit</td>
+<td>Effective DRA GPU units consumed vs. plan limit</td>
 </tr>
 <tr>
 <td>CPU</td>
@@ -1389,6 +1656,14 @@
 <details class="question">
 <summary>My project quota is 0 GPUs. How do I get more?</summary>
 <p>Submit a Resource Request via <a href="../requests/">Requests</a>. An admin will review and bind a Resource Plan to your project.</p>
+</details>
+<details class="question">
+<summary>What's the difference between a workspace's GPU and a GPU Claim?</summary>
+<p>A workspace launch creates an inline ResourceClaim that lives with the pod. A <strong>GPU Claim</strong> is a standalone ResourceClaim that survives across deployments — useful when several jobs need the same fractional GPU and you want to avoid rescheduling churn.</p>
+</details>
+<details class="question">
+<summary>Why is the Deploy button disabled?</summary>
+<p>Either the project has no active plan bound, or the plan window is currently closed and only the default queue is selectable. Check the <strong>Plan</strong> tab for the next opening time.</p>
 </details>
 
 

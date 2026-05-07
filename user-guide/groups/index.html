@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/groups/">
       
       
-        <link rel="prev" href="../cli/">
+        <link rel="prev" href="../announcements/">
       
       
         <link rel="next" href="../storage/">
@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -620,6 +622,34 @@
     
   
     CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
   
 
     
@@ -1015,12 +1045,13 @@
     Group --&gt;|owns| GroupStorage["Group Storage PVCs"]</code></pre>
 <hr />
 <h2 id="groups-list-page">Groups List Page<a class="headerlink" href="#groups-list-page" title="Permanent link">&para;</a></h2>
-<p><img alt="Groups list page" src="../assets/screenshots/groups-list.png" />
-<em>Figure 1: Groups list showing group cards with member count and storage information.</em></p>
+<p><img alt="Groups list page" src="../../assets/screenshots/groups-list.png" />
+<em>Figure 1: Groups list showing group cards with member count, storage information, and policy badges.</em></p>
 <p>Each group card shows:
 - Group name and description
 - Number of members
 - Associated storage PVCs
+- <strong>Storage Policy</strong> and <strong>Registry Policy</strong> badges — assigned by an admin to control which storage classes are available when provisioning a new group PVC and which Harbor namespace receives the group's image builds
 - Actions: <strong>View</strong>, <strong>Edit</strong> (admin only), <strong>Delete</strong> (admin only)</p>
 <hr />
 <h2 id="view-a-group">View a Group<a class="headerlink" href="#view-a-group" title="Permanent link">&para;</a></h2>
@@ -1048,7 +1079,7 @@
 <li>Select users from the results list.</li>
 <li>Click <strong>Add</strong> to confirm.</li>
 </ol>
-<p><img alt="Add members to group" src="../assets/screenshots/group-add-members.png" />
+<p><img alt="Add members to group" src="../../assets/screenshots/group-add-members.png" />
 <em>Figure 2: Add members dialog with user search and selection.</em></p>
 <hr />
 <h2 id="storage-permission-inheritance">Storage Permission Inheritance<a class="headerlink" href="#storage-permission-inheritance" title="Permanent link">&para;</a></h2>
@@ -1110,7 +1141,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CLI">
+          <a href="../announcements/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Announcements">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1120,7 +1151,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                CLI
+                Announcements
               </div>
             </div>
           </a>

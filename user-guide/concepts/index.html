@@ -408,6 +408,8 @@
       
         
       
+        
+      
     
     
     
@@ -575,6 +577,39 @@
     <span class="md-ellipsis">
       
         Quota Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scheduling-queues-priority-and-preemption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduling Queues, Priority, and Preemption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dra-resource-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA Resource Claims
       
     </span>
   </a>
@@ -781,6 +816,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../groups/" class="md-nav__link">
         
   
@@ -942,6 +1005,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scheduling-queues-priority-and-preemption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scheduling Queues, Priority, and Preemption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plan Window
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dra-resource-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRA Resource Claims
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#role-based-permissions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1076,9 +1172,61 @@
 <pre class="mermaid"><code>flowchart LR
     Admin["Admin defines\nResource Plan"] --&gt;|assigned to| Project
     Project --&gt;|quota enforced on| Launch[Workspace Launch]
-    Launch --&gt;|scheduled via| Queue[Volcano Queue]
-    Queue --&gt;|enforces| GPULimit[GPU / CPU Limits]</code></pre>
-<p>Each project is assigned a <strong>Resource Plan</strong> by an admin. When you launch a workspace, the platform verifies you have sufficient quota before scheduling the pod via the Volcano GPU scheduler.</p>
+    Launch --&gt;|requests| DRA["DRA ResourceClaim"]
+    Launch --&gt;|uses| Queue["Platform Queue"]
+    DRA --&gt;|allocates| GPULimit["GPU / SM Share"]
+    Queue --&gt;|applies| Priority["Priority / Preemption Policy"]</code></pre>
+<p>Each project is assigned a <strong>Resource Plan</strong> by an admin. When you launch a workspace, the platform verifies project quota and any per-user quota before creating Kubernetes DRA resources for the pod.</p>
+<p>A plan also carries:</p>
+<ul>
+<li>An <strong>allowed GPU model</strong> list — only these models are selectable from the launch form.</li>
+<li>An optional <strong>schedule window</strong> that restricts when plan-bound queues are usable (see <em>Plan Window</em> below).</li>
+<li>One or more <strong>bound queues</strong> with their priority, preemption, and GPU-model policy.</li>
+</ul>
+<hr />
+<h2 id="scheduling-queues-priority-and-preemption">Scheduling Queues, Priority, and Preemption<a class="headerlink" href="#scheduling-queues-priority-and-preemption" title="Permanent link">&para;</a></h2>
+<p>Workloads choose a <strong>platform queue</strong>. Queue records are synced to Volcano Queue CRDs for policy compatibility, while DRA GPU pods run through Kubernetes <code>default-scheduler</code> with ResourceClaims. A queue owns a priority value, an optional preemptible flag, and an optional <em>deserved GPU</em> limit:</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Priority</strong></td>
+<td>Higher-priority queues are scheduled first when GPUs are scarce.</td>
+</tr>
+<tr>
+<td><strong>Preemptible</strong></td>
+<td>Pods in this queue can be evicted to free GPUs for higher-priority queues.</td>
+</tr>
+<tr>
+<td><strong>Deserved GPU</strong></td>
+<td>The GPU floor a queue is guaranteed even when other queues compete. A <code>0</code> value marks a queue as a "victim" eligible to be drained first.</td>
+</tr>
+</tbody>
+</table>
+<p>The default queue is always available; plan-bound queues are listed alongside it on the workspace and deploy forms.</p>
+<hr />
+<h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
+<p>A <strong>plan window</strong> is the time interval during which a project's plan-bound queues are usable. Outside the window, plan-bound queues stop scheduling new pods and the platform's plan-window reaper may evict pods already running in those queues. Pods on the default queue are not affected.</p>
+<p>The dashboard shows live countdowns for the next boundary (open/close), so users can avoid eviction by switching to the default queue or waiting for the next window.</p>
+<hr />
+<h2 id="dra-resource-claims">DRA Resource Claims<a class="headerlink" href="#dra-resource-claims" title="Permanent link">&para;</a></h2>
+<p>GPU access on the platform is provisioned through <strong>Kubernetes Dynamic Resource Allocation (DRA)</strong> ResourceClaims. Each claim describes:</p>
+<ul>
+<li>A <strong>device class</strong> (e.g., a specific GPU model)</li>
+<li>An <strong>SM share</strong> percentage that describes the requested compute-time share</li>
+<li>A <strong>VRAM policy</strong> — <code>elastic</code> shares VRAM with peers, <code>hard_cap</code> enforces a strict ceiling</li>
+</ul>
+<p>There are two ways a claim is created:</p>
+<ul>
+<li><strong>Inline claim</strong> — the workspace launch flow creates a ResourceClaim that lives with the pod and disappears when the pod is deleted.</li>
+<li><strong>Project-managed claim</strong> — created from a project's <em>GPU Claims</em> tab and reused by Pod or Deployment config files across launches. It is a pending contract until Kubernetes DRA allocates it and <code>reservedFor</code> points at a live Pod; only that bound state counts against quota and resource-hours.</li>
+</ul>
+<p>Config files refer to project-managed claims through named deploy-time slots, for example <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>. The slot name is not the claim name; the deploying user maps each slot to one of their own ResourceClaims. A single Kubernetes Deployment cannot assign different claims to different replicas because every replica shares one PodTemplate, so split the workload into multiple Deployments when only some pods should use a claim.</p>
 <hr />
 <h2 id="role-based-permissions">Role-Based Permissions<a class="headerlink" href="#role-based-permissions" title="Permanent link">&para;</a></h2>
 <h3 id="system-roles">System Roles<a class="headerlink" href="#system-roles" title="Permanent link">&para;</a></h3>
@@ -1129,7 +1277,7 @@
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
-<td>Manage Volcano queues</td>
+<td>Manage platform queues</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
@@ -1256,20 +1404,40 @@
 <td>Persistent Volume Claim — a Kubernetes storage resource that survives pod restarts</td>
 </tr>
 <tr>
-<td><strong>Volcano Queue</strong></td>
-<td>A Kubernetes-native batch queue that enforces GPU/CPU quotas and priority scheduling</td>
+<td><strong>Platform Queue</strong></td>
+<td>A named scheduling policy that controls priority, preemption, queue windows, and optional GPU model affinity</td>
+</tr>
+<tr>
+<td><strong>Plan Window</strong></td>
+<td>The time interval during which a project's plan-bound queues are usable</td>
+</tr>
+<tr>
+<td><strong>Preemption</strong></td>
+<td>Eviction of a pod in a preemptible queue so a higher-priority workload can run</td>
+</tr>
+<tr>
+<td><strong>DRA</strong></td>
+<td>Dynamic Resource Allocation — Kubernetes API that provisions GPUs via ResourceClaim objects</td>
+</tr>
+<tr>
+<td><strong>ResourceClaim</strong></td>
+<td>A DRA object that requests a fractional or whole GPU; platform-managed standalone claims consume quota only while bound to live Pods</td>
 </tr>
 <tr>
 <td><strong>Config File</strong></td>
 <td>A versioned Kubernetes YAML/config stored with content-addressable immutability</td>
 </tr>
 <tr>
-<td><strong>MPS</strong></td>
-<td>Multi-Process Service — NVIDIA technology allowing multiple processes to share one GPU</td>
+<td><strong>SM share</strong></td>
+<td>Streaming Multiprocessor share percentage used to describe fractional GPU compute allocation</td>
 </tr>
 <tr>
 <td><strong>Resource Plan</strong></td>
-<td>A named template defining GPU, CPU, and memory limits for a project</td>
+<td>A named template defining GPU, CPU, memory limits, allowed GPU models, and schedule windows for a project</td>
+</tr>
+<tr>
+<td><strong>Storage Lane</strong></td>
+<td>A profile (<code>shared-rwx</code>, <code>legacy-rwx</code>, <code>fast-rwo</code>) that selects how a PVC is provisioned</td>
 </tr>
 <tr>
 <td><strong>Content-Addressable Storage (CAS)</strong></td>
