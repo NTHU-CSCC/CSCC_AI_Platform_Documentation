@@ -1372,7 +1372,7 @@
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
-<td>DRA-based ResourceClaims that can be prepared ahead of time and consume GPU only while bound to live Pods</td>
+<td>DRA-based ResourceClaims that reserve GPU slices ahead of time and can be reused by deployments</td>
 </tr>
 <tr>
 <td><strong>Resources</strong></td>
@@ -1429,24 +1429,21 @@
 </tr>
 <tr>
 <td><strong>CPU Cores</strong></td>
-<td>Build CPU request. It cannot exceed the remaining project build capacity or the platform maximum of <code>4</code>.</td>
+<td>Build CPU request. It cannot exceed the remaining project build capacity.</td>
 </tr>
 <tr>
 <td><strong>Memory (GB)</strong></td>
-<td>Build memory request. It cannot exceed the remaining project build capacity or the platform maximum of <code>16</code>.</td>
+<td>Build memory request. It cannot exceed the remaining project build capacity.</td>
 </tr>
 <tr>
 <td><strong>Timeout (minutes)</strong></td>
-<td>Positive integer up to the platform maximum (<code>120</code> by default). Kubernetes also stops the job at this deadline.</td>
+<td>Positive integer. The build job is stopped when the timeout is reached.</td>
 </tr>
 </tbody>
 </table>
 <p>Local disk for Kaniko cache and temporary layers is capped by the platform admin
-per environment; it is not user-selectable from the build form. Uploaded archive
-contexts are checked for unsafe paths and expanded-size limits before the builder
-uses them. DockerHub base images are pulled through the platform Harbor
-proxy-cache path when it is configured.</p>
-<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy; GPU23 Harbor groups build in the dedicated GPU23 lane. The builder or a project manager can delete build artifacts from the build history.</p>
+per environment; it is not user-selectable from the build form.</p>
+<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy. The builder or a project manager can delete build artifacts from the build history.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If the start form is disabled, ask a platform admin to enable <strong>Image Build Permission</strong> for the project and confirm that the project has an active resource plan.</p>
@@ -1457,12 +1454,7 @@ proxy-cache path when it is configured.</p>
 </div>
 <hr />
 <h2 id="gpu-claims-dra">GPU Claims (DRA)<a class="headerlink" href="#gpu-claims-dra" title="Permanent link">&para;</a></h2>
-<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that can be prepared for a project
-ahead of deployment. A claim is pending while it has no live Pod binding; it
-starts consuming quota and GPU-hours only after Kubernetes DRA allocates it and
-binds it to a running Pod. Each claim is created through the Kubernetes Dynamic
-Resource Allocation API and can be selected from the deploy dialog when a Pod or
-Deployment template uses a deploy-time GPU claim slot annotation.</p>
+<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that reserve a GPU slice for the project ahead of deployment. Each claim is created through the Kubernetes Dynamic Resource Allocation API and can be selected from the deploy dialog when a Pod or Deployment template uses a deploy-time GPU claim slot annotation.</p>
 <h3 id="create-a-claim">Create a Claim<a class="headerlink" href="#create-a-claim" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1490,14 +1482,11 @@ Deployment template uses a deploy-time GPU claim slot annotation.</p>
 </tr>
 <tr>
 <td><strong>VRAM Share</strong></td>
-<td>Used only when <strong>Hard cap</strong> is selected; the platform derives the pinned memory from the smallest matching DRA ResourceSlice memory for the selected GPU Device Class.</td>
+<td>Used only when <strong>Hard cap</strong> is selected.</td>
 </tr>
 </tbody>
 </table>
-<p>A pending claim has <code>0</code> GPU-hours and does not reduce quota. The table shows
-owner, allocation node, current status (<code>pending</code>, <code>bound</code>, or <code>terminating</code>),
-the <code>reservedFor</code> count reported by DRA, and a delete action. Delete is allowed
-for pending claims and rejected while a live Pod is using the claim.</p>
+<p>A claim counts against the project GPU quota as soon as it is created — delete it to stop the GPU-hour timer. The table shows owner, allocation node, current status (<code>Reserved</code>, <code>Allocated</code>, or <code>In use by &lt;deployment&gt;</code>), and a delete action.</p>
 <div class="admonition note">
 <p class="admonition-title">Claim ownership</p>
 <p>Project Members can create claims under their own namespace. Project Managers can also list and delete claims belonging to other members of the project.</p>
@@ -1538,7 +1527,7 @@ for pending claims and rejected while a live Pod is using the claim.</p>
 <h3 id="dra-gpu-requests-vs-reusable-gpu-claims">DRA GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#dra-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Template GPU requests</strong> use DRA resource keys in the YAML container request, for example <code>nvidia.com/gpu-0: "1"</code> or <code>nvidia.com/rtx6000: "1"</code>, plus optional SM percentage and GPU model metadata. The platform creates the runtime DRA claim during deployment.</li>
-<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. They are pending until a live Pod uses them, then quota and resource-hours count the bound effective GPU once per claim. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own claims in the deploy dialog.</li>
+<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own claims in the deploy dialog.</li>
 <li><code>{{gpuClaimName}}</code> is still supported as the default slot for older config files. Multiple Pods or Deployments can use the same slot to intentionally share the same claim, while different resources can use different slots and therefore different claims.</li>
 <li>Kubernetes Deployments use one PodTemplate for every replica. If only some replicas should use a claim, split the workload into multiple Deployments, for example one claimed Deployment and one unclaimed Deployment.</li>
 <li>Services, ConfigMaps, and unannotated workloads are not injected with GPU claims.</li>

@@ -1224,7 +1224,7 @@
 <p>There are two ways a claim is created:</p>
 <ul>
 <li><strong>Inline claim</strong> — the workspace launch flow creates a ResourceClaim that lives with the pod and disappears when the pod is deleted.</li>
-<li><strong>Project-managed claim</strong> — created from a project's <em>GPU Claims</em> tab and reused by Pod or Deployment config files across launches. It is a pending contract until Kubernetes DRA allocates it and <code>reservedFor</code> points at a live Pod; only that bound state counts against quota and resource-hours.</li>
+<li><strong>Project-managed claim</strong> — created from a project's <em>GPU Claims</em> tab and reused by Pod or Deployment config files across launches; it counts against quota until you delete it.</li>
 </ul>
 <p>Config files refer to project-managed claims through named deploy-time slots, for example <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>. The slot name is not the claim name; the deploying user maps each slot to one of their own ResourceClaims. A single Kubernetes Deployment cannot assign different claims to different replicas because every replica shares one PodTemplate, so split the workload into multiple Deployments when only some pods should use a claim.</p>
 <hr />
@@ -1421,7 +1421,7 @@
 </tr>
 <tr>
 <td><strong>ResourceClaim</strong></td>
-<td>A DRA object that requests a fractional or whole GPU; platform-managed standalone claims consume quota only while bound to live Pods</td>
+<td>A DRA object that reserves a fractional or whole GPU for a pod or a deployment</td>
 </tr>
 <tr>
 <td><strong>Config File</strong></td>

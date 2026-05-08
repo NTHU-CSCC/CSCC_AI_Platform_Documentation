@@ -1111,20 +1111,20 @@
 </tr>
 <tr>
 <td><strong>CPU 核心</strong></td>
-<td>不可超過剩餘 build 配額或平台上限 <code>4</code></td>
+<td>不可超過剩餘 build 配額</td>
 </tr>
 <tr>
 <td><strong>Memory（GB）</strong></td>
-<td>不可超過剩餘 build 配額或平台上限 <code>16</code></td>
+<td>同上</td>
 </tr>
 <tr>
 <td><strong>Timeout（分鐘）</strong></td>
-<td>上限預設 <code>120</code>；Build job 超過時由 Kubernetes 自動中止</td>
+<td>Build job 超過時自動中止</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>新版重點：</strong> Build job 已支援 CPU / Memory 設定與 Timeout。Build 期間用的資源也會佔用專案配額；Kaniko cache 與暫存 layer 的本機磁碟由平台環境統一設定上限。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；DockerHub base image 會走平台設定的 Harbor proxy-cache。</p>
+<p><strong>新版重點：</strong> Build job 已支援 CPU / Memory 設定與 Timeout。Build 期間用的資源也會佔用專案配額；Kaniko cache 與暫存 layer 的本機磁碟由平台環境統一設定上限。</p>
 </blockquote>
 <h3 id="_3">監看 / 取消<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
