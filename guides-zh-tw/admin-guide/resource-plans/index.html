@@ -1131,7 +1131,7 @@
 <ol>
 <li>使用者只能在時段開啟時使用 plan-bound queue 啟動工作。</li>
 <li><code>default-batch</code> 仍可作為較低優先序 fallback。</li>
-<li>配額消耗來自 DRA ResourceClaim 與 live namespace usage，不再有獨立的舊式 slot reservation window。</li>
+<li>DRA ResourceClaim 只有在已有 GPU allocation 且綁定 live Pod 時才消耗配額與 GPU-hours；pending standalone claim 不消耗配額，也不再有獨立的舊式 slot reservation window。</li>
 </ol>
 <p>時段一旦關閉，<strong>該佇列上的執行中 job 可能被驅逐</strong>。前端會在剩餘 &lt; 1 hour 顯示倒數提示，並提供 <strong>切換至 default queue</strong> 按鈕。</p>
 

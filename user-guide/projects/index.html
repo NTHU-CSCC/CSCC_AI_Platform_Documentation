@@ -787,6 +787,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Managing Members">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-inheritance-and-effective-project-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group Inheritance and Effective Project Role
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1230,6 +1247,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Managing Members">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-inheritance-and-effective-project-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group Inheritance and Effective Project Role
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1372,7 +1406,7 @@
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
-<td>DRA-based ResourceClaims that reserve GPU slices ahead of time and can be reused by deployments</td>
+<td>DRA-based ResourceClaims that can be prepared ahead of time and consume GPU only while bound to live Pods</td>
 </tr>
 <tr>
 <td><strong>Resources</strong></td>
@@ -1429,21 +1463,24 @@
 </tr>
 <tr>
 <td><strong>CPU Cores</strong></td>
-<td>Build CPU request. It cannot exceed the remaining project build capacity.</td>
+<td>Build CPU request. It cannot exceed the remaining project build capacity or the platform maximum of <code>4</code>.</td>
 </tr>
 <tr>
 <td><strong>Memory (GB)</strong></td>
-<td>Build memory request. It cannot exceed the remaining project build capacity.</td>
+<td>Build memory request. It cannot exceed the remaining project build capacity or the platform maximum of <code>16</code>.</td>
 </tr>
 <tr>
 <td><strong>Timeout (minutes)</strong></td>
-<td>Positive integer. The build job is stopped when the timeout is reached.</td>
+<td>Positive integer up to the platform maximum (<code>120</code> by default). Kubernetes also stops the job at this deadline.</td>
 </tr>
 </tbody>
 </table>
 <p>Local disk for Kaniko cache and temporary layers is capped by the platform admin
-per environment; it is not user-selectable from the build form.</p>
-<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy. The builder or a project manager can delete build artifacts from the build history.</p>
+per environment; it is not user-selectable from the build form. Uploaded archive
+contexts are checked for unsafe paths and expanded-size limits before the builder
+uses them. DockerHub base images are pulled through the platform Harbor
+proxy-cache path when it is configured.</p>
+<p>After submission, the build history shows status, source type, requested resources, destination image, and live logs. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy; GPU23 Harbor groups build in the dedicated GPU23 lane. The builder or a project manager can delete build artifacts from the build history.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If the start form is disabled, ask a platform admin to enable <strong>Image Build Permission</strong> for the project and confirm that the project has an active resource plan.</p>
@@ -1454,7 +1491,12 @@ per environment; it is not user-selectable from the build form.</p>
 </div>
 <hr />
 <h2 id="gpu-claims-dra">GPU Claims (DRA)<a class="headerlink" href="#gpu-claims-dra" title="Permanent link">&para;</a></h2>
-<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that reserve a GPU slice for the project ahead of deployment. Each claim is created through the Kubernetes Dynamic Resource Allocation API and can be selected from the deploy dialog when a Pod or Deployment template uses a deploy-time GPU claim slot annotation.</p>
+<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that can be prepared for a project
+ahead of deployment. A claim is pending while it has no live Pod binding; it
+starts consuming quota and GPU-hours only after Kubernetes DRA allocates it and
+binds it to a running Pod. Each claim is created through the Kubernetes Dynamic
+Resource Allocation API and can be selected from the deploy dialog when a Pod or
+Deployment template uses a deploy-time GPU claim slot annotation.</p>
 <h3 id="create-a-claim">Create a Claim<a class="headerlink" href="#create-a-claim" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1470,7 +1512,11 @@ per environment; it is not user-selectable from the build form.</p>
 </tr>
 <tr>
 <td><strong>GPU Device Class</strong></td>
-<td>The model the scheduler reserves — limited to your plan's allowed models.</td>
+<td>The model the scheduler reserves, such as <code>rtx5090.gpu.nvidia.com</code>; the form defaults to the first concrete model and lists <code>gpu.nvidia.com (Any)</code> only as an explicit generic placement choice.</td>
+</tr>
+<tr>
+<td><strong>GPU Count</strong></td>
+<td>Physical cards reserved by this claim. Multi-GPU claims remain one claim-scoped allocation.</td>
 </tr>
 <tr>
 <td><strong>SM Share</strong></td>
@@ -1482,11 +1528,19 @@ per environment; it is not user-selectable from the build form.</p>
 </tr>
 <tr>
 <td><strong>VRAM Share</strong></td>
-<td>Used only when <strong>Hard cap</strong> is selected.</td>
+<td>Used only when <strong>Hard cap</strong> is selected; the platform derives the pinned memory from the smallest matching DRA ResourceSlice memory for the selected GPU Device Class.</td>
 </tr>
 </tbody>
 </table>
-<p>A claim counts against the project GPU quota as soon as it is created — delete it to stop the GPU-hour timer. The table shows owner, allocation node, current status (<code>Reserved</code>, <code>Allocated</code>, or <code>In use by &lt;deployment&gt;</code>), and a delete action.</p>
+<p>A Deployment that uses a reusable claim points every replica at the same
+ResourceClaim. For example, a 2-GPU <code>rtx5090.gpu.nvidia.com</code> claim remains one
+shared 2-GPU allocation; platform labels keep <code>dra-gpu-count=2</code>,
+<code>dra-effective-gpu=2</code>, and <code>dra-gpu-model=rtx5090</code>, while quota and GPU-hours
+count it once per claim instead of once per replica.</p>
+<p>A pending claim has <code>0</code> GPU-hours and does not reduce quota. The table shows
+owner, allocation node, current status (<code>pending</code>, <code>bound</code>, or <code>terminating</code>),
+the <code>reservedFor</code> count reported by DRA, and a delete action. Delete is allowed
+for pending claims and rejected while a live Pod is using the claim.</p>
 <div class="admonition note">
 <p class="admonition-title">Claim ownership</p>
 <p>Project Members can create claims under their own namespace. Project Managers can also list and delete claims belonging to other members of the project.</p>
@@ -1527,7 +1581,7 @@ per environment; it is not user-selectable from the build form.</p>
 <h3 id="dra-gpu-requests-vs-reusable-gpu-claims">DRA GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#dra-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Template GPU requests</strong> use DRA resource keys in the YAML container request, for example <code>nvidia.com/gpu-0: "1"</code> or <code>nvidia.com/rtx6000: "1"</code>, plus optional SM percentage and GPU model metadata. The platform creates the runtime DRA claim during deployment.</li>
-<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own claims in the deploy dialog.</li>
+<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. They are pending until a live Pod uses them, then quota and resource-hours count the bound effective GPU once per claim, even when a Deployment has multiple replicas. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own claims in the deploy dialog.</li>
 <li><code>{{gpuClaimName}}</code> is still supported as the default slot for older config files. Multiple Pods or Deployments can use the same slot to intentionally share the same claim, while different resources can use different slots and therefore different claims.</li>
 <li>Kubernetes Deployments use one PodTemplate for every replica. If only some replicas should use a claim, split the workload into multiple Deployments, for example one claimed Deployment and one unclaimed Deployment.</li>
 <li>Services, ConfigMaps, and unannotated workloads are not injected with GPU claims.</li>
@@ -1571,7 +1625,16 @@ per environment; it is not user-selectable from the build form.</p>
 <li>Click <strong>Confirm</strong> to save.</li>
 </ol>
 <p>Project Admins can also select multiple rows in the Members tab and batch-remove users, batch-change roles, or batch-set per-user quotas. Project Managers and Project Admins can view member quotas; Project Users can view only their own quota. A per-user quota of <code>0</code> for GPU, CPU, or memory means that resource is unlimited for that member, still bounded by the project plan.</p>
+<p><strong>Group-inherited members in batch actions.</strong> Per-user quota is stored at the project level, so group-inherited members are selectable in the Members table and can be included in a <strong>batch-set quota</strong> action. The <strong>batch-remove</strong> and <strong>batch-role</strong> actions are disabled whenever the selection contains a group-inherited member, because their membership and role come from the owning group and must be changed there. A Group Admin viewing a project owned by their group is treated as an effective Project Admin (see <a href="#group-inheritance-and-effective-project-role">Group Inheritance and Effective Project Role</a> below), so they will see the selection checkboxes and can drive batch quota updates without first being added as a direct project member.</p>
 <p>Removing a direct member also removes that member's project namespace, project storage permission overrides, and per-user quota. Group-inherited members must be removed from the owning group instead.</p>
+<h3 id="group-inheritance-and-effective-project-role">Group Inheritance and Effective Project Role<a class="headerlink" href="#group-inheritance-and-effective-project-role" title="Permanent link">&para;</a></h3>
+<p>When a project is owned by a group, the platform resolves each caller's effective project role as follows:</p>
+<ol>
+<li>If the user has an <strong>explicit project member record</strong>, that role wins (<code>admin</code> / <code>manager</code> / <code>user</code>).</li>
+<li>Otherwise, for personal projects, the <strong>personal owner</strong> is treated as <code>admin</code>.</li>
+<li>Otherwise, the user's <strong>group role</strong> in the owning group is used as the effective project role. A Group Admin therefore acts as a Project Admin on every project owned by that group, even without an explicit <code>project_members</code> row.</li>
+</ol>
+<p>This is why a Group Admin (e.g. <code>u26000007</code> in <code>G260000105</code>) can call <code>PUT /api/v1/projects/{projectId}/members/quotas</code> against a group-owned project (e.g. <code>P26000116</code>) and see the batch selection UI in the Members tab without being added as a direct member.</p>
 <hr />
 <h2 id="resources-tab">Resources Tab<a class="headerlink" href="#resources-tab" title="Permanent link">&para;</a></h2>
 <p>The <strong>Resources</strong> tab summarizes live usage by project member:</p>
@@ -1606,6 +1669,7 @@ per environment; it is not user-selectable from the build form.</p>
 </tbody>
 </table>
 <p>Project Admins, Project Managers, and platform Admin/Manager roles see all project members. Regular Project Users see only their own resource row. Expand a row to inspect pods and Kubernetes resources, or terminate resources you are allowed to manage.</p>
+<p>For Pod rows, hover, focus, or tap the status badge to inspect recent Kubernetes events. This is useful when a Pod appears to be creating but Kubernetes is actually reporting image pull errors such as <code>ImagePullBackOff</code> or <code>ErrImagePull</code>.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU Quota Overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>
 <p>The Overview tab shows a quota bar for each resource type:</p>

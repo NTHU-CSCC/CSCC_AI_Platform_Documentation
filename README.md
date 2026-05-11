@@ -18,7 +18,7 @@ The site is published in two languages, with Traditional Chinese as the default:
 
 ## About this repository
 
-This repository hosts the **built static site** served by GitHub Pages. The Markdown sources and MkDocs configuration are maintained separately in the `docs-builder` project and published here on each release.
+This repository hosts the **built static site** served by GitHub Pages. The Markdown sources and MkDocs configuration live in [NTHU-CSCC/CSCC_AI_Platform](https://github.com/NTHU-CSCC/CSCC_AI_Platform) under `docs/` and `mkdocs.yml`; each push to `release` rebuilds and publishes this repo via the `pages` workflow.
 
 - Built with [MkDocs](https://www.mkdocs.org/) + [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
 - Application repository: [NTHU-CSCC/CSCC_AI_Platform](https://github.com/NTHU-CSCC/CSCC_AI_Platform)

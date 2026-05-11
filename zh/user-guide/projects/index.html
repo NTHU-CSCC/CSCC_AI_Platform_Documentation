@@ -787,6 +787,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="管理成員">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effective-project-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        群組繼承與 Effective Project Role
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -873,7 +890,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -1230,6 +1247,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="管理成員">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#effective-project-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        群組繼承與 Effective Project Role
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1372,7 +1406,7 @@
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
-<td>以 DRA 為基礎的 ResourceClaim，可預先保留 GPU 切片並被多個 deployment 重複使用</td>
+<td>以 DRA 為基礎的 ResourceClaim，可預先建立，且只在綁定 live Pod 時消耗 GPU</td>
 </tr>
 <tr>
 <td><strong>資源</strong></td>
@@ -1429,20 +1463,20 @@
 </tr>
 <tr>
 <td><strong>CPU 核心</strong></td>
-<td>build job 的 CPU request，不可超過專案剩餘 build 容量</td>
+<td>build job 的 CPU request，不可超過專案剩餘 build 容量，也不可超過平台上限 <code>4</code></td>
 </tr>
 <tr>
 <td><strong>Memory（GB）</strong></td>
-<td>build job 的記憶體 request，不可超過專案剩餘 build 容量</td>
+<td>build job 的記憶體 request，不可超過專案剩餘 build 容量，也不可超過平台上限 <code>16</code></td>
 </tr>
 <tr>
 <td><strong>Timeout（分鐘）</strong></td>
-<td>正整數；超時後 build job 會被停止</td>
+<td>正整數，上限預設為 <code>120</code>；Kubernetes 也會在此 deadline 停止 job</td>
 </tr>
 </tbody>
 </table>
-<p>Kaniko cache 與暫存 layer 使用的本機磁碟由平台管理員依環境設定上限，使用者無法在建置表單中自行調整。</p>
-<p>提交後，建置歷史會顯示狀態、來源類型、資源需求、目的映像與即時 log。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace。建置者本人或專案管理者可以從歷史中刪除 build artifact。</p>
+<p>Kaniko cache 與暫存 layer 使用的本機磁碟由平台管理員依環境設定上限，使用者無法在建置表單中自行調整。上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
+<p>提交後，建置歷史會顯示狀態、來源類型、資源需求、目的映像與即時 log。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。建置者本人或專案管理者可以從歷史中刪除 build artifact。</p>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
 <p>如果建置表單無法送出，請請平台管理員確認該專案已啟用 <strong>Image Build Permission</strong>，且已綁定有效的資源計畫。</p>
@@ -1453,7 +1487,12 @@
 </div>
 <hr />
 <h2 id="gpu-claimsdra">GPU Claims（DRA）<a class="headerlink" href="#gpu-claimsdra" title="Permanent link">&para;</a></h2>
-<p><strong>GPU Claims</strong> 標籤列出可在部署前預先保留 GPU 切片的 ResourceClaim。每個 claim 透過 Kubernetes Dynamic Resource Allocation API 建立；當 Pod 或 Deployment template 使用部署時 GPU claim slot annotation 時，可在部署對話框中選取。</p>
+<p><strong>GPU Claims</strong> 標籤列出可在部署前預先建立的 ResourceClaim。claim
+在沒有 live Pod binding 時維持 <code>pending</code>，不會消耗 GPU 配額或
+GPU-hours；只有 Kubernetes DRA 配置完成且 <code>reservedFor</code> 指向 live Pod
+後才開始計算。每個 claim 透過 Kubernetes Dynamic Resource Allocation
+API 建立；當 Pod 或 Deployment template 使用部署時 GPU claim slot
+annotation 時，可在部署對話框中選取。</p>
 <h3 id="claim">建立 Claim<a class="headerlink" href="#claim" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1469,7 +1508,11 @@
 </tr>
 <tr>
 <td><strong>GPU 裝置類別</strong></td>
-<td>排程器要保留的型號——僅顯示計畫允許清單內的型號。</td>
+<td>排程器要保留的型號，例如 <code>rtx5090.gpu.nvidia.com</code>；表單會預設選第一個具體型號，只有想接受任意 NVIDIA GPU 時才明確選 <code>gpu.nvidia.com (Any)</code>。</td>
+</tr>
+<tr>
+<td><strong>GPU 數量</strong></td>
+<td>此 claim 保留的實體 GPU 張數；多 GPU claim 仍是一個 claim-scoped allocation。</td>
 </tr>
 <tr>
 <td><strong>SM 比例</strong></td>
@@ -1485,7 +1528,12 @@
 </tr>
 </tbody>
 </table>
-<p>claim 一旦建立就會立刻計入專案 GPU 配額——刪除 claim 才會停止 GPU-hour 計時。表格會顯示擁有者、配置節點、目前狀態（<code>Reserved</code>、<code>Allocated</code>，或 <code>In use by &lt;deployment&gt;</code>），以及刪除按鈕。</p>
+<p>使用可重複 claim 的 Deployment 會讓每個 replica 指向同一個
+ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一個共享的
+2-GPU allocation；平台 labels 會保留 <code>dra-gpu-count=2</code>、
+<code>dra-effective-gpu=2</code>、<code>dra-gpu-model=rtx5090</code>，配額與 GPU-hours 也會以
+每個 claim 計算一次，而不是每個 replica 計算一次。</p>
+<p>pending claim 的 GPU-hours 為 <code>0</code>，也不會降低剩餘配額。表格會顯示擁有者、配置節點、目前狀態（<code>pending</code>、<code>bound</code> 或 <code>terminating</code>）、DRA 回報的 <code>reservedFor</code> 數量，以及刪除按鈕。pending claim 可直接刪除；若已有 live Pod 正在使用，刪除會被拒絕。</p>
 <div class="admonition note">
 <p class="admonition-title">Claim 擁有權</p>
 <p>專案成員可以在自己的 namespace 下建立 claim。專案管理者另可列出與刪除其他成員建立的 claim。</p>
@@ -1527,7 +1575,7 @@
 <h3 id="dra-gpu-request-gpu-claim">DRA GPU Request 與可重複使用的 GPU Claim<a class="headerlink" href="#dra-gpu-request-gpu-claim" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>YAML GPU request</strong> 是容器資源需求，例如 <code>nvidia.com/gpu-0: "1"</code> 或 <code>nvidia.com/rtx6000: "1"</code>，可搭配 SM 百分比與 GPU 型號 metadata。平台會在部署時建立執行用的 DRA claim。</li>
-<li><strong>可重複使用的 GPU claim</strong> 是在 <strong>GPU Claims</strong> 標籤預先建立的獨立 claim。若使用 Resource Wizard，請選 <strong>部署時選保留 claim</strong>，並填入 <strong>部署時顯示的 slot 名稱</strong>，例如 <code>train-a</code>；這是部署視窗中的欄位名稱，不是 claim 名稱。若手寫 YAML，請在 Pod metadata annotation 或 Deployment pod-template annotation 放入 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。部署者會在部署對話框中把每個 slot 對應到自己的 claim。</li>
+<li><strong>可重複使用的 GPU claim</strong> 是在 <strong>GPU Claims</strong> 標籤預先建立的獨立 claim。它在 live Pod 使用前保持 pending；綁定後，即使 Deployment 有多個 replica，配額與 resource-hours 也會以每個 claim 的有效 GPU 計算一次。若使用 Resource Wizard，請選 <strong>部署時選保留 claim</strong>，並填入 <strong>部署時顯示的 slot 名稱</strong>，例如 <code>train-a</code>；這是部署視窗中的欄位名稱，不是 claim 名稱。若手寫 YAML，請在 Pod metadata annotation 或 Deployment pod-template annotation 放入 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。部署者會在部署對話框中把每個 slot 對應到自己的 claim。</li>
 <li>舊有的 <code>{{gpuClaimName}}</code> 仍是預設 slot。多個 Pod 或 Deployment 可以使用同一個 slot 來刻意共用同一個 claim；不同資源也可以使用不同 slot 對應不同 claim。</li>
 <li>Kubernetes Deployment 的所有 replica 共用同一份 PodTemplate。若只有部分 replica 要使用 claim，請拆成多個 Deployment，例如一個有 claim 的 Deployment 與一個沒有 claim 的 Deployment。</li>
 <li>Service、ConfigMap 與未標註的 workload 不會被注入 GPU claim。</li>
@@ -1571,7 +1619,16 @@
 <li>點擊 <strong>確認</strong> 儲存。</li>
 </ol>
 <p>Project Admin 也可以在 Members 標籤勾選多個成員，批次移除、批次變更角色，或批次設定個別 GPU/CPU/Memory 配額。Project Manager 與 Project Admin 可查看成員配額；Project User 只能查看自己的配額。個別配額中的 <code>0</code> 代表該資源不設個人上限，但仍受專案計畫總配額限制。</p>
+<p><strong>群組繼承成員的批次操作。</strong> 個別配額是儲存在專案層級,因此群組繼承的成員在 Members 表格也可以勾選並納入「<strong>批次設定配額</strong>」。一旦選取的成員中含有群組繼承的成員,「<strong>批次移除</strong>」與「<strong>批次變更角色</strong>」按鈕會自動停用 — 這兩項權限源自擁有群組,必須回到群組層級調整。Group Admin 在自己擁有的群組所屬專案上會被視為 effective Project Admin(見下方 <a href="#群組繼承與-effective-project-role">群組繼承與 Effective Project Role</a>),不需要先被加為直接成員,就能看到 Members 表格的勾選方塊並執行批次配額更新。</p>
 <p>移除直接加入的成員時，平台也會清掉該成員的專案 namespace、專案儲存權限覆蓋與個別配額。透過群組繼承的成員必須從群組層級移除。</p>
+<h3 id="effective-project-role">群組繼承與 Effective Project Role<a class="headerlink" href="#effective-project-role" title="Permanent link">&para;</a></h3>
+<p>群組擁有的專案上,平台依下列順序決定使用者的 effective project role:</p>
+<ol>
+<li>若使用者有<strong>明確的 project member 紀錄</strong>,採用該 role(<code>admin</code> / <code>manager</code> / <code>user</code>)。</li>
+<li>否則,若是個人專案,<strong>personal owner</strong> 視為 <code>admin</code>。</li>
+<li>否則,採用該使用者在<strong>擁有群組中的 role</strong> 作為 effective project role。因此 Group Admin 對該群組下的所有專案都等同於 Project Admin,即使沒有 <code>project_members</code> 紀錄。</li>
+</ol>
+<p>這也是為什麼 Group Admin(例如 <code>G260000105</code> 中的 <code>u26000007</code>)可以直接對群組擁有的專案(例如 <code>P26000116</code>)呼叫 <code>PUT /api/v1/projects/{projectId}/members/quotas</code>,並且在 Members 標籤看到批次勾選介面,不需要先被加為該專案的直接成員。</p>
 <hr />
 <h2 id="_13">資源標籤<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p><strong>資源</strong> 標籤依專案成員彙整即時使用量：</p>

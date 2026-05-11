@@ -924,10 +924,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-ca-setup" class="md-nav__link">
+  <a href="#advanced-cli-ca-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI CA Setup
+        Advanced CLI CA Fallback
       
     </span>
   </a>
@@ -1105,10 +1105,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-ca-setup" class="md-nav__link">
+  <a href="#advanced-cli-ca-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI CA Setup
+        Advanced CLI CA Fallback
       
     </span>
   </a>
@@ -1184,7 +1184,7 @@
 </tr>
 <tr>
 <td><strong>API Key &amp; CLI</strong></td>
-<td>Manage personal API tokens and download the CLI CA certificate</td>
+<td>Manage personal API tokens and advanced CLI CA fallback downloads</td>
 </tr>
 </tbody>
 </table>
@@ -1258,6 +1258,9 @@
 <p>The token list shows every active API token issued for your account, with prefix, last-used time, and expiry. From here you can:</p>
 <ul>
 <li><strong>Create token</strong> — generate a new token with an optional name. The full token value is shown <strong>once</strong>; copy it before closing the dialog.</li>
+<li><strong>CLI import</strong> — the reveal dialog includes a copyable
+  <code>cscc-cli login --api-url ... --token cscc_...</code> command after the token is
+  created.</li>
 <li><strong>Revoke</strong> — invalidate any token. CLI sessions using that token will stop working on their next call.</li>
 </ul>
 <p>Tokens default to a 90-day lifetime, and your account is capped at 20 active tokens at a time.</p>
@@ -1265,8 +1268,14 @@
 <p class="admonition-title">One-time reveal</p>
 <p>The cleartext token is never stored on the backend — only its SHA-256 hash. If you lose the value, revoke it and create a new one.</p>
 </div>
-<h3 id="cli-ca-setup">CLI CA Setup<a class="headerlink" href="#cli-ca-setup" title="Permanent link">&para;</a></h3>
-<p>If your workstation does not yet trust the platform's internal TLS certificate, click <strong>Download CLI CA</strong> to save <code>platform-internal-root-ca.pem</code>. The page shows the exact install command to run; once it is in place, <code>cscc-cli</code> auto-detects the file from <code>~/.config/cscc-cli/</code>.</p>
+<h3 id="advanced-cli-ca-fallback">Advanced CLI CA Fallback<a class="headerlink" href="#advanced-cli-ca-fallback" title="Permanent link">&para;</a></h3>
+<p>Official <code>cscc-cli</code> releases already include the platform internal root CA. Use
+<strong>Download CLI CA</strong> only for custom CLI builds, emergency CA rotation windows, or
+TLS troubleshooting. Setting <code>CSCC_API_CA_CERT_PATH</code> overrides the CA embedded in
+the official CLI binary.</p>
+<p>The CLI setup commands use <code>VITE_PUBLIC_API_URL</code> or runtime <code>apiUrl</code> when the
+dashboard deployment provides one. If not, the page derives the API host by
+replacing a <code>dashboard.*</code> hostname with <code>api.*</code>, then appends <code>/api/v1</code>.</p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">

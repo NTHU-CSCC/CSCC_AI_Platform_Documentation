@@ -686,6 +686,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#import-a-dashboard-created-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import a dashboard-created token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stateless-token-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stateless token override
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tls-internal-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -697,10 +719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#download-and-trust-cli-ca-from-settings" class="md-nav__link">
+  <a href="#advanced-download-and-trust-cli-ca-from-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download and trust CLI CA from settings
+        Advanced: download and trust CLI CA from settings
       
     </span>
   </a>
@@ -951,6 +973,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#import-a-dashboard-created-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import a dashboard-created token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stateless-token-override" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stateless token override
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tls-internal-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -962,10 +1006,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#download-and-trust-cli-ca-from-settings" class="md-nav__link">
+  <a href="#advanced-download-and-trust-cli-ca-from-settings" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download and trust CLI CA from settings
+        Advanced: download and trust CLI CA from settings
       
     </span>
   </a>
@@ -1046,16 +1090,36 @@
 <p><strong>Access:</strong> All authenticated users.</p>
 <hr />
 <h2 id="login">Login<a class="headerlink" href="#login" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+<p><code>cscc-cli</code> no longer falls back to an internal Kubernetes service name. On a new
+machine, provide the public API URL explicitly with <code>--api-url</code> or <code>CSCC_API_URL</code>.
+The value may include <code>/api/v1</code>; the CLI normalizes it automatically.</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
 <p>The CLI prompts for your password and calls <code>/api/v1/cli/login</code>. This flow does <strong>not</strong> use CAPTCHA and does <strong>not</strong> require <code>X-API-Key</code>.</p>
 <p>On success, the CLI stores a <code>cscc_...</code> user API token in its local config file with <code>0600</code> permissions. The backend stores only a SHA-256 hash of the token, so the cleartext token is shown only once during creation.</p>
 <p>Optional token name:</p>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
+<h3 id="import-a-dashboard-created-token">Import a dashboard-created token<a class="headerlink" href="#import-a-dashboard-created-token" title="Permanent link">&para;</a></h3>
+<p>You can also create an API token from <strong>Settings → API Key &amp; CLI</strong> in the
+dashboard and import it into <code>cscc-cli</code>:</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--token<span class="w"> </span>cscc_...
+</code></pre></div>
+<p>The CLI verifies the token with <code>/api/v1/auth/status</code> before saving it. This is
+useful when browser login is already available and you do not want to type your
+password in the terminal.</p>
+<h3 id="stateless-token-override">Stateless token override<a class="headerlink" href="#stateless-token-override" title="Permanent link">&para;</a></h3>
+<p>For automation, set <code>CSCC_API_TOKEN</code> instead of saving local config:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="nv">CSCC_API_TOKEN</span><span class="o">=</span>cscc_...<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
+</code></pre></div>
+<p><code>CSCC_DEV_TOKEN</code> is still accepted as a deprecated compatibility alias, but new
+scripts should use <code>CSCC_API_TOKEN</code>.</p>
 <h3 id="tls-internal-ca">TLS / Internal CA<a class="headerlink" href="#tls-internal-ca" title="Permanent link">&para;</a></h3>
-<p><code>api.cscc.nthu.edu.tw</code> may present an internal CA certificate that is not in the default trust store.
-If login prints <code>x509: certificate signed by unknown authority</code>, configure one of the following:</p>
+<p>Official <code>cscc-cli</code> releases include the platform internal root CA, so most
+users do not need to download a certificate separately. If the platform root CA
+is rotated, download the newly published CLI binary before reconnecting.</p>
+<p>Manual CA configuration is still available for custom CLI builds, emergency CA
+rotation windows, and TLS troubleshooting:</p>
 <table>
 <thead>
 <tr>
@@ -1066,7 +1130,11 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <tbody>
 <tr>
 <td><code>CSCC_API_URL</code></td>
-<td>API base URL, e.g. <code>https://api.cscc.nthu.edu.tw</code></td>
+<td>API base URL, e.g. <code>https://api.cscc.nthu.edu.tw/api/v1</code></td>
+</tr>
+<tr>
+<td><code>CSCC_API_TOKEN</code></td>
+<td>Optional stateless <code>cscc_...</code> token override</td>
 </tr>
 <tr>
 <td><code>CSCC_API_CA_CERT_PATH</code></td>
@@ -1087,28 +1155,25 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 </tbody>
 </table>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>/Users/me/platform-internal-root-ca.pem<span class="w"> </span>./cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>/Users/me/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<h3 id="download-and-trust-cli-ca-from-settings">Download and trust CLI CA from settings<a class="headerlink" href="#download-and-trust-cli-ca-from-settings" title="Permanent link">&para;</a></h3>
+<h3 id="advanced-download-and-trust-cli-ca-from-settings">Advanced: download and trust CLI CA from settings<a class="headerlink" href="#advanced-download-and-trust-cli-ca-from-settings" title="Permanent link">&para;</a></h3>
 <p>Open <code>https://dashboard.cscc.nthu.edu.tw/settings</code> and open <strong>API Key &amp; CLI</strong>.</p>
+<p>Use this only when you are running a custom CLI build, testing a CA rotation, or
+debugging TLS trust. The official CLI already has the platform CA embedded.</p>
 <ol>
-<li>Click <strong>Download CLI CA</strong> to save <code>platform-internal-root-ca.pem</code> to your machine.</li>
-<li>Run the generated command from dashboard (or copy it manually):</li>
+<li>Click <strong>Download CLI CA</strong> to save <code>platform-internal-root-ca.pem</code>.</li>
+<li>Run the install command generated by the dashboard.</li>
+<li>Verify the CLI connection with the manual CA override:</li>
 </ol>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/cscc-cli<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>&lt;dashboard-host&gt;/api/v1/me/cli-ca<span class="w"> </span>-o<span class="w"> </span>~/.config/cscc-cli/platform-internal-root-ca.pem
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>~/.config/cscc-cli/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<ol>
-<li>Use it for all CLI commands:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>~/.config/cscc-cli/platform-internal-root-ca.pem<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
-</code></pre></div>
-<p>First-run on a machine with internal CA:</p>
-<ol>
-<li>Obtain <code>platform-internal-root-ca.pem</code> (or <code>ca.crt</code>) from your internal platform admin bundle.</li>
-<li>Save it to a local path, for example <code>~/.config/cscc-cli/platform-internal-root-ca.pem</code> .</li>
-<li>Set <code>CSCC_API_CA_CERT_PATH</code> and retry login.</li>
-<li>If you prefer not to set the env each time, place the file into <code>~/.config/cscc-cli/</code> with one of the above names and login will auto-detect it.</li>
-</ol>
+<p>If you prefer not to set the env each time, place <code>platform-internal-root-ca.pem</code>
+or <code>ca.crt</code> into <code>~/.config/cscc-cli/</code>; the CLI auto-detects those names after
+checking explicit env and saved config paths.</p>
 <hr />
 <h2 id="check-identity">Check Identity<a class="headerlink" href="#check-identity" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>whoami
@@ -1116,9 +1181,41 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <p>This verifies the saved token and prints the current user and role information. Role changes take effect immediately because authorization is resolved from the backend RBAC/Casbin state on each request.</p>
 <hr />
 <h2 id="build-images">Build Images<a class="headerlink" href="#build-images" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;image-name&gt;<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
+<p>Upload mode is the default and accepts a directory, a <code>.tar.gz</code>, or a <code>.zip</code>
+archive:</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
+cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>./context.tar.gz
 </code></pre></div>
-<p>The CLI packs the target directory into a <code>.tar.gz</code> build context, submits it to <code>/api/v1/images/build</code>, and streams the build logs by default. The directory must contain a Dockerfile at the build-context root.</p>
+<p>For directories, the CLI packs the target directory into a <code>.tar.gz</code> build
+context. The context or uploaded archive must contain a root-level Dockerfile.</p>
+<p>Dockerfile-only mode matches the dashboard's pasted-Dockerfile flow and calls
+<code>/api/v1/images/build/dockerfile</code>:</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dockerfile<span class="w"> </span>./Dockerfile
+
+cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</span><span class="w"> </span>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dockerfile<span class="w"> </span>-
+</code></pre></div>
+<p>Storage mode builds from a readable platform storage path and calls
+<code>/api/v1/images/build/from-storage</code>:</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-source<span class="w"> </span>personal<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
+
+cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-source<span class="w"> </span>project_storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-id<span class="w"> </span>&lt;storage-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
+</code></pre></div>
 <p>Useful options:</p>
 <table>
 <thead>
@@ -1141,12 +1238,49 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <td>Optional image tag. Omit it to use the platform default</td>
 </tr>
 <tr>
+<td><code>--source</code></td>
+<td><code>upload</code>, <code>dockerfile</code>, or <code>storage</code></td>
+</tr>
+<tr>
+<td><code>--dockerfile</code></td>
+<td>Dockerfile path, or <code>-</code> for stdin, when <code>--source dockerfile</code></td>
+</tr>
+<tr>
+<td><code>--storage-source</code></td>
+<td><code>personal</code> or <code>project_storage</code> when <code>--source storage</code></td>
+</tr>
+<tr>
+<td><code>--storage-path</code></td>
+<td>Source path inside the selected storage</td>
+</tr>
+<tr>
+<td><code>--storage-id</code></td>
+<td>Project storage ID for <code>project_storage</code> builds</td>
+</tr>
+<tr>
+<td><code>--cpu-cores</code></td>
+<td>Optional CPU request for the build job</td>
+</tr>
+<tr>
+<td><code>--memory-gb</code></td>
+<td>Optional memory request in GiB</td>
+</tr>
+<tr>
+<td><code>--timeout-minutes</code></td>
+<td>Optional build timeout override</td>
+</tr>
+<tr>
 <td><code>--follow=false</code></td>
 <td>Submit the build without streaming logs</td>
 </tr>
 </tbody>
 </table>
-<p>The CLI reads the API endpoint from <code>CSCC_API_URL</code> or the saved login config. Use the gateway API host for production:</p>
+<p>After submission, <code>--follow=true</code> polls until build logs are available, streams
+<code>/api/v1/images/build/:jobName/logs?follow=true</code>, and stops with the final
+<code>completed</code>, <code>failed</code>, or <code>deleted</code> status when the backend reports one.</p>
+<p>The CLI reads the API endpoint from <code>--api-url</code> during login/import, then from
+<code>CSCC_API_URL</code>, then from saved config. There is no internal-service fallback.
+Use the gateway API host for production:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
 <p>The build request and log stream use the user token created by <code>cscc-cli login</code>:</p>
@@ -1164,7 +1298,7 @@ If login prints <code>x509: certificate signed by unknown authority</code>, conf
 <p>Log out from the current machine:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span><span class="nb">logout</span>
 </code></pre></div>
-<p>Logout first calls <code>DELETE /api/v1/me/api-tokens/current</code> to revoke the currently used token, then keeps TLS settings in config and clears local token fields so the certificate cache can be reused.</p>
+<p>Logout first calls <code>DELETE /api/v1/me/api-tokens/current</code> to revoke the currently used token, then keeps TLS settings in config and clears local token fields so manual certificate overrides can be reused.</p>
 <hr />
 <h2 id="defaults">Defaults<a class="headerlink" href="#defaults" title="Permanent link">&para;</a></h2>
 <table>

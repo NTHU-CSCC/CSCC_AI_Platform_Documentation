@@ -795,7 +795,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -1224,9 +1224,9 @@
 <p>claim 有兩種建立方式：</p>
 <ul>
 <li><strong>inline claim</strong>——啟動工作區時自動建立、與 Pod 共生命週期，Pod 刪除時 claim 也跟著消失。</li>
-<li><strong>專案管理 claim</strong>——從專案的 <em>GPU Claims</em> 標籤建立，可被 Pod 或 Deployment 設定檔重複使用，刪除前都會持續計入配額。</li>
+<li><strong>專案管理 claim</strong>——從專案的 <em>GPU Claims</em> 標籤建立，可被 Pod 或 Deployment 設定檔重複使用。它在 Kubernetes DRA 完成配置且 <code>reservedFor</code> 指向 live Pod 前都是 pending contract；只有 bound 狀態會計入配額與 resource-hours。</li>
 </ul>
-<p>設定檔會透過具名部署時 slot 參照專案管理 claim，例如 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。slot 名稱不是 claim 名稱；部署者會把每個 slot 對應到自己的 ResourceClaim。單一 Kubernetes Deployment 無法讓不同 replica 使用不同 claim，因為所有 replica 共用同一份 PodTemplate；若只有部分 Pod 要使用 claim，請拆成多個 Deployment。</p>
+<p>設定檔會透過具名部署時 slot 參照專案管理 claim，例如 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。slot 名稱不是 claim 名稱；部署者會把每個 slot 對應到自己的 ResourceClaim。多 replica Deployment 會共用同一個 claim allocation，並以每個 claim 計算一次。單一 Kubernetes Deployment 無法讓不同 replica 使用不同 claim，因為所有 replica 共用同一份 PodTemplate；若只有部分 Pod 要使用 claim，請拆成多個 Deployment。</p>
 <hr />
 <h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -1421,7 +1421,7 @@
 </tr>
 <tr>
 <td><strong>ResourceClaim</strong></td>
-<td>DRA 物件，可為 Pod 或 Deployment 保留 fractional 或整顆 GPU</td>
+<td>DRA 物件，用來請求 fractional 或整顆 GPU；平台管理的 standalone claim 只有綁定 live Pod 時才消耗配額</td>
 </tr>
 <tr>
 <td><strong>設定檔</strong></td>

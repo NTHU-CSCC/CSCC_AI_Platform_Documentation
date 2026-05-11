@@ -1317,6 +1317,7 @@
 <li><strong>GPU Count</strong> is the number of physical GPUs requested.</li>
 <li><strong>SM Percentage</strong> controls the effective share for quota accounting and GPU sharing.</li>
 <li>Use <code>nvidia-smi</code> inside your workspace to check visible devices and runtime behavior.</li>
+<li>A running GPU workspace is bound only when the Pod has both platform DRA labels and Kubernetes <code>resourceClaims</code>. Labels alone mean the workspace is visible to platform policy, but no GPU has been attached to the Pod.</li>
 <li>For exclusive or model-specific access, select 100% SM and a model allowed by your plan, or ask an admin to adjust the plan.</li>
 </ul>
 <hr />

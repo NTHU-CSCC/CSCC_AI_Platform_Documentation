@@ -610,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -950,6 +950,14 @@
 <p>匯入管理員提供的 <code>Platform-VPN.ovpn</code> 設定檔，使用 LDAP 帳密登入 VPN。連線成功後可以用 <code>nslookup dashboard.cscc.nthu.edu.tw</code> 驗證 DNS。</p>
 <blockquote>
 <p><strong>如果連不上：</strong> UDP port <code>31194</code> 必須沒有被防火牆擋住。</p>
+<p><strong>Windows 已連上但連不到 <code>192.168.109.1</code>：</strong> 請在 PowerShell
+執行 <code>route print | findstr 192.168.109</code>，確認有一條經過 OpenVPN
+介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新匯入最新版
+<code>Platform-VPN.ovpn</code>。</p>
+<p>VPN 設定檔會接受 <code>cscc.nthu.edu.tw</code> 所需的平台 DNS，但不啟用
+<code>block-outside-dns</code>。可用
+<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 確認平台 DNS，或用
+<code>http://192.168.109.1:30080</code> 做低階連線檢查。</p>
 </blockquote>
 <hr />
 <h2 id="step-2">Step 2 — 登入平台<a class="headerlink" href="#step-2" title="Permanent link">&para;</a></h2>

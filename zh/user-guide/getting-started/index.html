@@ -789,7 +789,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -1194,6 +1194,17 @@
 <div class="highlight"><pre><span></span><code>nslookup dashboard.cscc.nthu.edu.tw
 </code></pre></div>
 如果名稱可以解析且儀表板可以開啟，表示已連線。若未成功，請檢查 UDP 連接埠 <strong>31194</strong> 是否被防火牆封鎖。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Windows 路由檢查</p>
+<p>如果 OpenVPN 顯示已連線但連不到 <code>192.168.109.1</code>，請開啟 PowerShell
+執行 <code>route print | findstr 192.168.109</code>。輸出應該要有一條經過
+OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新匯入最新版
+<code>Platform-VPN.ovpn</code>。</p>
+<p>VPN 設定檔會接受 <code>cscc.nthu.edu.tw</code> 所需的平台 DNS，但不啟用
+<code>block-outside-dns</code>。可用
+<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 確認平台 DNS，或用
+<code>http://192.168.109.1:30080</code> 做低階連線檢查。</p>
 </div>
 <hr />
 <h2 id="3">步驟 3 — 登入平台<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>

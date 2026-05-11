@@ -610,7 +610,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -1076,10 +1076,12 @@
 <li>在成員列上的 Quota 控制設定個別 GPU / CPU / Memory 上限。</li>
 <li>點該列的「移除」即時把該人從專案踢出。</li>
 <li>勾選多位成員後，可用批次工具列一次移除、改角色或套用相同 quota。</li>
+<li><strong>群組繼承的成員也可以勾選</strong>,因為個別配額是存在專案層級的,可以參與「批次設定 quota」。但是只要選取項目中含有群組繼承的成員,「批次移除」與「批次變更角色」就會自動停用,因為這兩項必須回到擁有群組調整。</li>
 </ul>
 <blockquote>
 <p><strong>不可降級自己的角色</strong>：前端會擋你把自己從 Admin 降級，避免專案沒有 Admin。
-<strong>Group 成員不可在專案頁移除</strong>：必須回到 Group 成員管理處理，因為權限是從群組繼承。</p>
+<strong>Group 成員不可在專案頁移除</strong>：必須回到 Group 成員管理處理，因為權限是從群組繼承。
+<strong>Group Admin 在群組擁有的專案上等同 Project Admin</strong>：即使沒被加為直接成員,也能看到批次勾選介面、能對 group-inherited 成員批次設定 per-user quota。後端的 <code>PUT /api/v1/projects/{id}/members/quotas</code> 會通過授權檢查(<code>ResolveProjectRole</code> 從 group role 推導出 <code>admin</code>)。</p>
 </blockquote>
 <hr />
 <h2 id="bind-plan">把專案綁定到資源計畫（Bind Plan）<a class="headerlink" href="#bind-plan" title="Permanent link">&para;</a></h2>

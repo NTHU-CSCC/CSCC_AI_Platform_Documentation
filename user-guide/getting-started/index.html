@@ -1195,6 +1195,17 @@
 </code></pre></div>
 If the name resolves and the dashboard opens, you are connected. If not, check that UDP port <strong>31194</strong> is not blocked by your firewall.</p>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Windows route check</p>
+<p>If OpenVPN shows connected but <code>192.168.109.1</code> is unreachable, open
+PowerShell and run <code>route print | findstr 192.168.109</code>. The output should
+include a <code>192.168.109.0</code> route through the OpenVPN adapter. If it is
+missing, re-import the latest <code>Platform-VPN.ovpn</code>.</p>
+<p>The VPN profile accepts platform DNS for <code>cscc.nthu.edu.tw</code>, but does not
+enable <code>block-outside-dns</code>. Use <code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code>
+to confirm platform DNS and <code>http://192.168.109.1:30080</code> for low-level
+connectivity checks.</p>
+</div>
 <hr />
 <h2 id="step-3-sign-in-to-the-platform">Step 3 — Sign In to the Platform<a class="headerlink" href="#step-3-sign-in-to-the-platform" title="Permanent link">&para;</a></h2>
 <ol>

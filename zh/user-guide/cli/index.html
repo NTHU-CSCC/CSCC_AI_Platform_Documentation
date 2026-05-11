@@ -31,7 +31,7 @@
     
     
       
-        <title>CLI - GPU Cluster Management Platform — User Guide</title>
+        <title>命令列工具 - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CLI
+              命令列工具
             
           </span>
         </div>
@@ -630,7 +630,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -648,7 +648,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -686,6 +686,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        匯入由儀表板建立的 token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        無狀態 token 覆寫
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tls-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -700,7 +722,7 @@
   <a href="#cli-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        從設定下載並信任 CLI CA
+        進階：從設定頁下載並信任 CLI CA
       
     </span>
   </a>
@@ -716,7 +738,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        檢查身份
+        確認身分
       
     </span>
   </a>
@@ -727,7 +749,18 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置映像
+        建置映像檔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Token 管理
       
     </span>
   </a>
@@ -736,17 +769,6 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        權杖管理
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -951,6 +973,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        匯入由儀表板建立的 token
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        無狀態 token 覆寫
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tls-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -965,7 +1009,7 @@
   <a href="#cli-ca" class="md-nav__link">
     <span class="md-ellipsis">
       
-        從設定下載並信任 CLI CA
+        進階：從設定頁下載並信任 CLI CA
       
     </span>
   </a>
@@ -981,7 +1025,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        檢查身份
+        確認身分
       
     </span>
   </a>
@@ -992,7 +1036,18 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置映像
+        建置映像檔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#token_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Token 管理
       
     </span>
   </a>
@@ -1001,17 +1056,6 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        權杖管理
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -1041,21 +1085,37 @@
   
 
 
-<h1 id="_1">命令列介面<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>使用 <code>cscc-cli</code> 進行身份驗證、提交映像建置、串流建置記錄，以及管理您自己的 API 權杖。</p>
-<p><strong>適用對象：</strong> 所有已驗證的使用者。</p>
+<h1 id="_1">命令列工具<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>使用 <code>cscc-cli</code> 登入平台、提交映像檔建置、串流建置日誌，並管理自己的 API token。</p>
+<p><strong>存取權限：</strong> 所有已登入使用者。</p>
 <hr />
 <h2 id="_2">登入<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+<p><code>cscc-cli</code> 不再 fallback 到 Kubernetes 內部 service 名稱。新機器首次使用時，
+請用 <code>--api-url</code> 或 <code>CSCC_API_URL</code> 明確指定公開 API URL。URL 可包含
+<code>/api/v1</code>，CLI 會自動正規化。</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<p>CLI 會提示您輸入密碼，並呼叫 <code>/api/v1/cli/login</code>。此流程<strong>不</strong>使用 CAPTCHA，也<strong>不</strong>需要 <code>X-API-Key</code>。</p>
-<p>成功後，CLI 會將 <code>cscc_...</code> 使用者 API 權杖以 <code>0600</code> 權限儲存於本機設定檔。後端僅儲存權杖的 SHA-256 雜湊，因此明文權杖只會在建立當下顯示一次。</p>
-<p>可選的權杖名稱：</p>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
+<p>CLI 會提示您輸入密碼，並呼叫 <code>/api/v1/cli/login</code>。此流程<strong>不使用 CAPTCHA</strong>，也<strong>不需要 <code>X-API-Key</code></strong>。</p>
+<p>登入成功後，CLI 會把 <code>cscc_...</code> 使用者 API token 存在本機設定檔，權限為 <code>0600</code>。後端只保存 token 的 SHA-256 雜湊，因此明文 token 只會在建立時顯示一次。</p>
+<p>可選擇 token 名稱：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
+<h3 id="token">匯入由儀表板建立的 token<a class="headerlink" href="#token" title="Permanent link">&para;</a></h3>
+<p>您也可以在儀表板的 <strong>設定 → API Key &amp; CLI</strong> 建立 API token，然後匯入
+<code>cscc-cli</code>：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--token<span class="w"> </span>cscc_...
+</code></pre></div>
+<p>CLI 會先用 <code>/api/v1/auth/status</code> 驗證 token，成功後才存入本機設定。這適合
+已經登入瀏覽器、不想在終端機再次輸入密碼的情境。</p>
+<h3 id="token_1">無狀態 token 覆寫<a class="headerlink" href="#token_1" title="Permanent link">&para;</a></h3>
+<p>自動化腳本可使用 <code>CSCC_API_TOKEN</code>，不必儲存本機設定：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="nv">CSCC_API_TOKEN</span><span class="o">=</span>cscc_...<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
+</code></pre></div>
+<p><code>CSCC_DEV_TOKEN</code> 仍作為舊版相容 alias，但新的腳本應改用 <code>CSCC_API_TOKEN</code>。</p>
 <h3 id="tls-ca">TLS / 內部 CA<a class="headerlink" href="#tls-ca" title="Permanent link">&para;</a></h3>
-<p><code>api.cscc.nthu.edu.tw</code> 可能呈現預設信任儲存區未包含的內部 CA 憑證。
-若登入時出現 <code>x509: certificate signed by unknown authority</code>，請設定下列其中一項：</p>
+<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA，因此大多數使用者不需要另外下載
+憑證。若平台 root CA 輪替，請先下載新發布的 CLI binary 再重新連線。</p>
+<p>手動 CA 設定仍保留給自訂 CLI build、緊急 CA 輪替期間，以及 TLS 除錯：</p>
 <table>
 <thead>
 <tr>
@@ -1066,60 +1126,91 @@
 <tbody>
 <tr>
 <td><code>CSCC_API_URL</code></td>
-<td>API base URL，例如 <code>https://api.cscc.nthu.edu.tw</code></td>
+<td>API base URL，例如 <code>https://api.cscc.nthu.edu.tw/api/v1</code></td>
+</tr>
+<tr>
+<td><code>CSCC_API_TOKEN</code></td>
+<td>選用的無狀態 <code>cscc_...</code> token 覆寫</td>
 </tr>
 <tr>
 <td><code>CSCC_API_CA_CERT_PATH</code></td>
-<td>一個或多個 PEM 檔案，以 <code>,</code> 或 <code>;</code> 分隔</td>
+<td>一個或多個 PEM 檔路徑，可用 <code>,</code> 或 <code>;</code> 分隔</td>
 </tr>
 <tr>
 <td><code>CSCC_API_TLS_SERVER_NAME</code></td>
-<td>可選的 TLS SNI 名稱（未設定時退回設定檔）</td>
+<td>選用 TLS SNI 名稱；未設定時使用 config fallback</td>
 </tr>
 <tr>
 <td><code>SSL_CERT_FILE</code></td>
-<td>包含內部根 CA 的 PEM 檔案路徑</td>
+<td>包含內部 root CA 的 PEM 檔路徑</td>
 </tr>
 <tr>
 <td><code>REQUESTS_CA_BUNDLE</code></td>
-<td>替代環境變數，指向包含內部根 CA 的 PEM 套件</td>
+<td>另一個 PEM bundle 路徑環境變數</td>
 </tr>
 </tbody>
 </table>
 <p>範例：</p>
-<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>/Users/me/platform-internal-root-ca.pem<span class="w"> </span>./cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>/Users/me/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<h3 id="cli-ca">從設定下載並信任 CLI CA<a class="headerlink" href="#cli-ca" title="Permanent link">&para;</a></h3>
-<p>開啟 <code>https://dashboard.cscc.nthu.edu.tw/settings</code>，並點選 <strong>API Key &amp; CLI</strong>。</p>
+<h3 id="cli-ca">進階：從設定頁下載並信任 CLI CA<a class="headerlink" href="#cli-ca" title="Permanent link">&para;</a></h3>
+<p>開啟 <code>https://dashboard.cscc.nthu.edu.tw/settings</code>，進入 <strong>API Key &amp; CLI</strong>。</p>
+<p>只有在使用自訂 CLI build、測試 CA 輪替或除錯 TLS trust 時才需要這個流程。
+官方 CLI 已內建平台 CA。</p>
 <ol>
-<li>點選 <strong>Download CLI CA</strong>，將 <code>platform-internal-root-ca.pem</code> 儲存到您的電腦。</li>
-<li>執行儀表板提供的指令（或手動複製）：</li>
+<li>點擊 <strong>Download CLI CA</strong>，儲存 <code>platform-internal-root-ca.pem</code>。</li>
+<li>執行儀表板產生的安裝指令。</li>
+<li>用手動 CA override 驗證 CLI 連線：</li>
 </ol>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/cscc-cli<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>&lt;dashboard-host&gt;/api/v1/me/cli-ca<span class="w"> </span>-o<span class="w"> </span>~/.config/cscc-cli/platform-internal-root-ca.pem
+<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>~/.config/cscc-cli/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<ol>
-<li>在所有 CLI 指令中使用：</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>~/.config/cscc-cli/platform-internal-root-ca.pem<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
-</code></pre></div>
-<p>在具有內部 CA 的機器上首次執行：</p>
-<ol>
-<li>從內部平台管理員的套件中取得 <code>platform-internal-root-ca.pem</code>（或 <code>ca.crt</code>）。</li>
-<li>將其儲存到本機路徑，例如 <code>~/.config/cscc-cli/platform-internal-root-ca.pem</code>。</li>
-<li>設定 <code>CSCC_API_CA_CERT_PATH</code> 並重試登入。</li>
-<li>若不希望每次都設定環境變數，將該檔案放入 <code>~/.config/cscc-cli/</code> 並使用上述其中一個檔名，登入時會自動偵測。</li>
-</ol>
+<p>若不想每次設定環境變數，可將 <code>platform-internal-root-ca.pem</code> 或 <code>ca.crt</code>
+放在 <code>~/.config/cscc-cli/</code>；CLI 會在檢查明確 env 與 saved config path 後自動偵測。</p>
 <hr />
-<h2 id="_3">檢查身份<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">確認身分<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<p>此指令會驗證已儲存的權杖，並列印目前的使用者與角色資訊。角色變更會立即生效，因為授權在每次請求時都會從後端 RBAC/Casbin 狀態解析。</p>
+<p>此指令會驗證已儲存的 token，並印出目前使用者與角色資訊。角色變更會立即生效，因為每次請求都會由後端 RBAC/Casbin 狀態重新解析授權。</p>
 <hr />
-<h2 id="_4">建置映像<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;image-name&gt;<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
+<h2 id="_4">建置映像檔<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>Upload 模式為預設，接受目錄、<code>.tar.gz</code> 或 <code>.zip</code>：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
+cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>./context.tar.gz
 </code></pre></div>
-<p>CLI 會將目標目錄打包為 <code>.tar.gz</code> 建置內容、提交至 <code>/api/v1/images/build</code>，並預設串流建置記錄。該目錄的建置內容根目錄必須包含 Dockerfile。</p>
-<p>實用選項：</p>
+<p>若來源是目錄，CLI 會打包成 <code>.tar.gz</code> build context；目錄或上傳的 archive
+根目錄必須包含 Dockerfile。</p>
+<p>Dockerfile-only 模式與儀表板貼上 Dockerfile 的流程一致，會呼叫
+<code>/api/v1/images/build/dockerfile</code>：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dockerfile<span class="w"> </span>./Dockerfile
+
+cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</span><span class="w"> </span>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dockerfile<span class="w"> </span>-
+</code></pre></div>
+<p>Storage 模式會從可讀的平台 storage path 建置，並呼叫
+<code>/api/v1/images/build/from-storage</code>：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-source<span class="w"> </span>personal<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
+
+cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-source<span class="w"> </span>project_storage<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-id<span class="w"> </span>&lt;storage-id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
+</code></pre></div>
+<p>常用選項：</p>
 <table>
 <thead>
 <tr>
@@ -1130,43 +1221,79 @@
 <tbody>
 <tr>
 <td><code>--project</code></td>
-<td>擁有此映像建置的專案 ID</td>
+<td>擁有此映像檔建置的專案 ID</td>
 </tr>
 <tr>
 <td><code>--name</code></td>
-<td>簡短的映像名稱，例如 <code>trainer-api</code></td>
+<td>簡短映像檿名稱，例如 <code>trainer-api</code></td>
 </tr>
 <tr>
 <td><code>--tag</code></td>
-<td>可選的映像標籤。省略則使用平台預設值</td>
+<td>選用映像檔 tag；省略時使用平台預設值</td>
+</tr>
+<tr>
+<td><code>--source</code></td>
+<td><code>upload</code>、<code>dockerfile</code> 或 <code>storage</code></td>
+</tr>
+<tr>
+<td><code>--dockerfile</code></td>
+<td><code>--source dockerfile</code> 時的 Dockerfile 路徑，或用 <code>-</code> 讀 stdin</td>
+</tr>
+<tr>
+<td><code>--storage-source</code></td>
+<td><code>--source storage</code> 時使用 <code>personal</code> 或 <code>project_storage</code></td>
+</tr>
+<tr>
+<td><code>--storage-path</code></td>
+<td>所選 storage 內的來源路徑</td>
+</tr>
+<tr>
+<td><code>--storage-id</code></td>
+<td><code>project_storage</code> 建置使用的專案 storage ID</td>
+</tr>
+<tr>
+<td><code>--cpu-cores</code></td>
+<td>選用建置 CPU request</td>
+</tr>
+<tr>
+<td><code>--memory-gb</code></td>
+<td>選用建置記憶體 request，單位 GiB</td>
+</tr>
+<tr>
+<td><code>--timeout-minutes</code></td>
+<td>選用建置 timeout 覆寫</td>
 </tr>
 <tr>
 <td><code>--follow=false</code></td>
-<td>提交建置但不串流記錄</td>
+<td>只提交建置，不串流日誌</td>
 </tr>
 </tbody>
 </table>
-<p>CLI 會從 <code>CSCC_API_URL</code> 或已儲存的登入設定讀取 API 端點。正式環境請使用閘道 API 主機：</p>
+<p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
+<code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
+<code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止且印出狀態。</p>
+<p>CLI 會依序從登入/匯入時的 <code>--api-url</code>、<code>CSCC_API_URL</code>、已儲存 config 取得
+API endpoint；沒有內部 service fallback。Production 請使用 gateway API host：</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
-<p>建置請求和記錄串流會使用 <code>cscc-cli login</code> 建立的使用者權杖：</p>
+<p>建置請求與日誌串流會使用 <code>cscc-cli login</code> 建立的使用者 token：</p>
 <div class="highlight"><pre><span></span><code><span class="err">Authorization: Bearer cscc_...</span>
 </code></pre></div>
-<p>CLI 建置不需要 <code>CSCC_API_KEY</code>、<code>PLATFORM_API_KEY</code> 或 <code>X-API-Key</code> 標頭。專案必須啟用 <strong>Image Build Permission</strong>，且您的專案角色須允許建置。</p>
+<p>CLI 建置不需要 <code>CSCC_API_KEY</code>、<code>PLATFORM_API_KEY</code> 或 <code>X-API-Key</code> header。專案必須啟用 <strong>Image Build Permission</strong>，且您的專案角色必須允許建置。</p>
 <hr />
-<h2 id="_5">權杖管理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>列出有效的 API 權杖：</p>
+<h2 id="token_2">Token 管理<a class="headerlink" href="#token_2" title="Permanent link">&para;</a></h2>
+<p>列出有效 API token：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>tokens<span class="w"> </span>list
 </code></pre></div>
-<p>依 ID 撤銷權杖：</p>
+<p>用 token ID 撤銷 token：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>tokens<span class="w"> </span>revoke<span class="w"> </span>&lt;token-id&gt;
 </code></pre></div>
-<p>從目前機器登出：</p>
+<p>登出目前機器：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span><span class="nb">logout</span>
 </code></pre></div>
-<p>登出時會先呼叫 <code>DELETE /api/v1/me/api-tokens/current</code> 撤銷目前使用的權杖，然後保留設定中的 TLS 設定並清除本機權杖欄位，讓憑證快取可重複使用。</p>
+<p>登出會先呼叫 <code>DELETE /api/v1/me/api-tokens/current</code> 撤銷目前使用的 token，接著保留 TLS 設定並清除本機 token 欄位，讓手動憑證 override 可以重複使用。</p>
 <hr />
-<h2 id="_6">預設值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_5">預設值<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1179,22 +1306,22 @@
 <tr>
 <td><code>USER_API_TOKEN_TTL_HOURS</code></td>
 <td style="text-align: right;"><code>2160</code></td>
-<td>權杖存活時間（小時，90 天）</td>
+<td>Token 有效時間，以小時計算（90 天）</td>
 </tr>
 <tr>
 <td><code>USER_API_TOKEN_MAX_ACTIVE</code></td>
 <td style="text-align: right;"><code>20</code></td>
-<td>每位使用者最多可有的有效權杖數</td>
+<td>每位使用者最多可同時持有的有效 token 數</td>
 </tr>
 <tr>
 <td><code>CLI_LOGIN_MAX_ATTEMPTS</code></td>
 <td style="text-align: right;"><code>5</code></td>
-<td>鎖定前允許的登入失敗次數</td>
+<td>登入失敗幾次後鎖定</td>
 </tr>
 <tr>
 <td><code>CLI_LOGIN_LOCKOUT_SECONDS</code></td>
 <td style="text-align: right;"><code>900</code></td>
-<td>鎖定時間（秒）</td>
+<td>鎖定時間，單位為秒</td>
 </tr>
 </tbody>
 </table>

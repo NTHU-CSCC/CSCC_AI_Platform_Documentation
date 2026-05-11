@@ -1009,6 +1009,7 @@
 <ul>
 <li><strong>1 張 GPU + 50% SM</strong> 會以 0.5 GPU 計入配額。</li>
 <li>進 Workspace 後跑 <code>nvidia-smi</code> 看可見裝置、記憶體與 utilization。</li>
+<li>GPU Workspace 真正綁到 GPU 時，Pod 必須同時有平台 DRA labels 與 Kubernetes <code>resourceClaims</code>。只有 labels 代表平台政策看得到 GPU 需求，但 Pod 尚未實際掛上 GPU。</li>
 <li>想要獨佔 GPU → 選 100% SM 與計畫允許的型號，或透過 Request 請平台 Admin 調整計畫 / queue。</li>
 </ul>
 <hr />

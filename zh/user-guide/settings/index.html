@@ -619,7 +619,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -907,10 +907,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-ca" class="md-nav__link">
+  <a href="#cli-ca-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI CA 安裝
+        進階 CLI CA fallback
       
     </span>
   </a>
@@ -1071,10 +1071,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-ca" class="md-nav__link">
+  <a href="#cli-ca-fallback" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CLI CA 安裝
+        進階 CLI CA fallback
       
     </span>
   </a>
@@ -1148,13 +1148,13 @@
 </tr>
 <tr>
 <td><strong>API Key &amp; CLI</strong></td>
-<td>管理個人 API token，並下載 CLI CA 憑證</td>
+<td>管理個人 API token，並提供進階 CLI CA fallback 下載</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_3">個人檔案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="個人檔案頁面" src="../../../assets/screenshots/settings-tabs.png" />
+<p><img alt="個人檔案頁面" src="../assets/screenshots/settings-profile.png" />
 <em>圖 1：個人檔案標籤頁，可編輯顯示名稱和電子郵件。</em></p>
 <ol>
 <li>前往 <strong>設定 → 個人檔案</strong>。</li>
@@ -1168,7 +1168,7 @@
 </div>
 <hr />
 <h2 id="_4">安全性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="安全性頁面" src="../../../assets/screenshots/settings-tabs.png" />
+<p><img alt="安全性頁面" src="../assets/screenshots/settings-security.png" />
 <em>圖 2：安全性標籤頁，包含密碼變更表單。</em></p>
 <h3 id="_5">變更密碼<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
@@ -1257,6 +1257,8 @@
 <p>token 列表會顯示您帳號下每個有效的 API token，以及 prefix、上次使用時間與到期時間。在這裡可以：</p>
 <ul>
 <li><strong>建立 token</strong> — 產生新的 token，可填寫名稱。完整 token 值僅 <strong>顯示一次</strong>，請於關閉對話框前複製。</li>
+<li><strong>CLI 匯入</strong> — token 顯示對話框會同時提供可複製的
+  <code>cscc-cli login --api-url ... --token cscc_...</code> 匯入指令。</li>
 <li><strong>撤銷</strong> — 立即作廢任何 token，使用該 token 的 CLI session 在下一次呼叫時就會失效。</li>
 </ul>
 <p>token 預設效期 90 天，每個帳號最多同時保留 20 個有效 token。</p>
@@ -1264,8 +1266,12 @@
 <p class="admonition-title">僅顯示一次</p>
 <p>後端不會儲存 token 明文，只儲存 SHA-256 雜湊。若 token 遺失，請撤銷後重新建立。</p>
 </div>
-<h3 id="cli-ca">CLI CA 安裝<a class="headerlink" href="#cli-ca" title="Permanent link">&para;</a></h3>
-<p>如果您的工作站尚未信任平台內部 TLS 憑證，點擊 <strong>下載 CLI CA</strong> 取得 <code>platform-internal-root-ca.pem</code>。頁面同時提供完整安裝指令；放到 <code>~/.config/cscc-cli/</code> 之後，<code>cscc-cli</code> 會自動偵測使用。</p>
+<h3 id="cli-ca-fallback">進階 CLI CA fallback<a class="headerlink" href="#cli-ca-fallback" title="Permanent link">&para;</a></h3>
+<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA。只有在自訂 CLI build、緊急
+CA 輪替期間，或 TLS 除錯時才需要使用 <strong>下載 CLI CA</strong>。設定
+<code>CSCC_API_CA_CERT_PATH</code> 會覆寫官方 CLI binary 內建的 CA。</p>
+<p>CLI 設定指令會優先使用部署提供的 <code>VITE_PUBLIC_API_URL</code> 或 runtime <code>apiUrl</code>。
+若未設定，頁面會把 <code>dashboard.*</code> 主機名稱推導為 <code>api.*</code>，再加上 <code>/api/v1</code>。</p>
 <hr />
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">

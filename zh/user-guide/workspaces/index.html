@@ -795,7 +795,7 @@
   <span class="md-ellipsis">
     
   
-    CLI
+    命令列工具
   
 
     
@@ -1317,6 +1317,7 @@
 <li><strong>GPU 數量</strong> 是請求的實體 GPU 數。</li>
 <li><strong>SM 百分比</strong> 會影響配額計算與 GPU 共享比例。</li>
 <li>在工作區中使用 <code>nvidia-smi</code> 檢查可見裝置與實際執行情況。</li>
+<li>GPU 工作區真正綁到 GPU 時，Pod 必須同時有平台 DRA labels 與 Kubernetes <code>resourceClaims</code>。如果只有 labels 而沒有 <code>resourceClaims</code>，代表平台政策看得到 GPU 需求，但 Pod 尚未實際掛上 GPU。</li>
 <li>若需要獨佔或指定型號，請選擇 100% SM 與計畫允許的型號，或請管理員調整計畫。</li>
 </ul>
 <hr />
@@ -1399,13 +1400,13 @@
         
         
           
-          <a href="../cli/" class="md-footer__link md-footer__link--next" aria-label="下一页: CLI">
+          <a href="../cli/" class="md-footer__link md-footer__link--next" aria-label="下一页: 命令列工具">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                CLI
+                命令列工具
               </div>
             </div>
             <div class="md-footer__button md-icon">

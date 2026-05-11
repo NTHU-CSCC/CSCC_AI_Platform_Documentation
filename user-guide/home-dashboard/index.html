@@ -1126,7 +1126,7 @@
 </ol>
 <div class="admonition info">
 <p class="admonition-title">DRA effective GPU units</p>
-<p>The card reports effective GPU units from DRA labels and ResourceClaims. A 1-GPU claim at 50% SM counts as 0.5 GPU for quota and availability views.</p>
+<p>The card reports effective GPU units from DRA labels and live ResourceClaim bindings. A 1-GPU claim at 50% SM counts as 0.5 GPU only while DRA has bound it to a live Pod.</p>
 </div>
 <hr />
 <h2 id="per-node-gpu-allocation">Per-Node GPU Allocation<a class="headerlink" href="#per-node-gpu-allocation" title="Permanent link">&para;</a></h2>
