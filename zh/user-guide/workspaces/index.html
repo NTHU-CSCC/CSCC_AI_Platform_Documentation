@@ -1200,7 +1200,7 @@
 </tr>
 <tr>
 <td><strong>映像檔</strong></td>
-<td>容器映像檔——從專案允許清單中選擇。Root profile 只會在專案與所屬群組都允許 Root 容器時顯示。</td>
+<td>容器映像檔——從專案允許清單中選擇。<strong>Root shell</strong> 開關只會在專案與所屬群組都允許 Root 容器時可用。</td>
 </tr>
 <tr>
 <td><strong>排程佇列</strong></td>
@@ -1242,8 +1242,8 @@
 <p>閒置超過一定時間的工作區可能會被平台的閒置回收機制自動停止，以釋放 GPU 資源。在此之前，工作區列表頁面會顯示閒置警告橫幅。</p>
 </div>
 <div class="admonition warning">
-<p class="admonition-title">Root workspace profile</p>
-<p>Root profile 會讓 IDE process 在容器內以 UID 0 執行。這不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。若看不到 root profile，請請管理員同時在所屬群組與專案啟用 Root 容器。</p>
+<p class="admonition-title">Root shell</p>
+<p><strong>Root shell</strong> 開關會讓 IDE process 在容器內以 UID 0 執行。這不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。若開關無法使用，請管理員同時在所屬群組與專案啟用 Root 容器。</p>
 </div>
 <hr />
 <h2 id="_6">排程佇列與優先序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>

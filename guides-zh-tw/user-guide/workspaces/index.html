@@ -955,7 +955,7 @@
     K8s--&gt;&gt;API: Pod Running
     API--&gt;&gt;User: Workspace URL</code></pre>
 <p>通常從 Starting → Running 需要 30~120 秒；第一次 pull image 可能更久。</p>
-<p>Root profile 只會在專案與所屬群組都允許 Root 容器時顯示。它會讓 IDE process 在容器內以 UID 0 執行，但不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。</p>
+<p><strong>Root shell</strong> 開關只會在專案與所屬群組都允許 Root 容器時可用。它會讓 IDE process 在容器內以 UID 0 執行，但不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。</p>
 <hr />
 <h2 id="_3">連線<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>點 <strong>Open</strong> → 平台會 proxy 你的瀏覽器 session 到 pod，<strong>不需要 port-forwarding</strong>。</p>

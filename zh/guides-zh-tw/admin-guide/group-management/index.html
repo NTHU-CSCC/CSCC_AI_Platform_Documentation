@@ -1056,7 +1056,7 @@
 </tr>
 <tr>
 <td><strong>Root 容器允許</strong></td>
-<td>是否允許此群組擁有的專案在 YAML 中明確設定 <code>runAsUser: 0</code>、<code>runAsNonRoot: false</code>，以及顯示 IDE root profile。預設關閉。</td>
+<td>是否允許此群組擁有的專案在 YAML 中明確設定 <code>runAsUser: 0</code>、<code>runAsNonRoot: false</code>，以及啟用 IDE Root shell 開關。預設關閉。</td>
 </tr>
 <tr>
 <td><strong>HostPath 白名單</strong></td>
@@ -1125,7 +1125,7 @@
 </tbody>
 </table>
 <h3 id="root">Root 容器允許<a class="headerlink" href="#root" title="Permanent link">&para;</a></h3>
-<p>關閉時，此群組底下的專案 YAML 會被強制套用 <code>runAsNonRoot: true</code>，並在嘗試以 root 啟動時被 admission controller 拒絕；IDE root profile 也不會出現在工作區啟動表單中。</p>
+<p>關閉時，此群組底下的專案 YAML 會被強制套用 <code>runAsNonRoot: true</code>，並在嘗試以 root 啟動時被 admission controller 拒絕；IDE Root shell 開關也會在工作區啟動表單中停用。</p>
 <h3 id="hostpath">HostPath 白名單<a class="headerlink" href="#hostpath" title="Permanent link">&para;</a></h3>
 <p>每筆規則包含「Host 來源路徑」與「權限（唯讀 / 讀寫）」。<strong>只有列在這裡的路徑</strong> 才能透過 configfile <code>HostPathMountPolicy</code> 或 Kubernetes hostPath volume 掛載；其他路徑會被擋下。</p>
 <hr />
