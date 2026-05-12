@@ -1192,7 +1192,7 @@
 <tbody>
 <tr>
 <td><strong>Project</strong></td>
-<td>Select which project this workspace belongs to (determines quota)</td>
+<td>Select which project this workspace belongs to (determines quota). The form defaults to your personal project when one is available.</td>
 </tr>
 <tr>
 <td><strong>Name</strong></td>
@@ -1200,7 +1200,7 @@
 </tr>
 <tr>
 <td><strong>Image</strong></td>
-<td>Container image — choose from the project allowlist. The <strong>Root shell</strong> toggle is available only when both the project and owning group allow root containers.</td>
+<td>Container image — choose from the project allowlist. The <strong>Root shell</strong> toggle is available for personal projects when the project allows root containers; group-owned projects require both the project and owning group to allow root containers.</td>
 </tr>
 <tr>
 <td><strong>Scheduling Queue</strong></td>
@@ -1243,7 +1243,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p>The <strong>Root shell</strong> toggle runs the IDE process as UID 0 inside the container. It does not grant privileged pods, host namespaces, unrestricted hostPath access, Kubernetes RBAC, or extra Linux capabilities. If the toggle is disabled, ask an admin to enable root containers on both the owning group and the project.</p>
+<p>The <strong>Root shell</strong> toggle runs the IDE process as UID 0 inside the container. It does not grant privileged pods, host namespaces, unrestricted hostPath access, Kubernetes RBAC, or extra Linux capabilities. If the toggle is disabled, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
 </div>
 <hr />
 <h2 id="scheduling-queue-and-priority">Scheduling Queue and Priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>

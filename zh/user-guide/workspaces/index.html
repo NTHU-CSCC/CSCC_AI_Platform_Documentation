@@ -1192,7 +1192,7 @@
 <tbody>
 <tr>
 <td><strong>專案</strong></td>
-<td>選擇此工作區所屬專案（決定配額）</td>
+<td>選擇此工作區所屬專案（決定配額）。若有 personal project，表單會預設選取它。</td>
 </tr>
 <tr>
 <td><strong>名稱</strong></td>
@@ -1200,7 +1200,7 @@
 </tr>
 <tr>
 <td><strong>映像檔</strong></td>
-<td>容器映像檔——從專案允許清單中選擇。<strong>Root shell</strong> 開關只會在專案與所屬群組都允許 Root 容器時可用。</td>
+<td>容器映像檔——從專案允許清單中選擇。personal project 只要專案允許 Root 容器即可啟用 <strong>Root shell</strong>；群組專案則需要專案與所屬群組都允許。</td>
 </tr>
 <tr>
 <td><strong>排程佇列</strong></td>
@@ -1243,7 +1243,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p><strong>Root shell</strong> 開關會讓 IDE process 在容器內以 UID 0 執行。這不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。若開關無法使用，請管理員同時在所屬群組與專案啟用 Root 容器。</p>
+<p><strong>Root shell</strong> 開關會讓 IDE process 在容器內以 UID 0 執行。這不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。若開關無法使用，請管理員在該專案啟用 Root 容器；若是群組專案，也需要所屬群組允許 Root 容器。</p>
 </div>
 <hr />
 <h2 id="_6">排程佇列與優先序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
