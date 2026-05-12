@@ -1200,7 +1200,7 @@
 </tr>
 <tr>
 <td><strong>Image</strong></td>
-<td>Container image — choose from the project allowlist</td>
+<td>Container image — choose from the project allowlist. Root profiles appear only when both the project and owning group allow root containers.</td>
 </tr>
 <tr>
 <td><strong>Scheduling Queue</strong></td>
@@ -1240,6 +1240,10 @@
 <div class="admonition warning">
 <p class="admonition-title">Idle Reaper</p>
 <p>Workspaces that are idle for an extended period may be automatically stopped by the platform's idle reaper to free GPU resources. You will see an idle warning banner on the workspace list page before this happens.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Root workspace profiles</p>
+<p>Root profiles run the IDE process as UID 0 inside the container. They do not grant privileged pods, host namespaces, unrestricted hostPath access, Kubernetes RBAC, or extra Linux capabilities. If you do not see a root profile, ask an admin to enable root containers on both the owning group and the project.</p>
 </div>
 <hr />
 <h2 id="scheduling-queue-and-priority">Scheduling Queue and Priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>
