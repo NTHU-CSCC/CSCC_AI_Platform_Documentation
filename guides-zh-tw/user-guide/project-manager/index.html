@@ -1062,6 +1062,7 @@
 <li>每次儲存都會建立新的不可變版本。</li>
 <li>點 History 圖示看歷史；點 <strong>Deploy</strong> 把某版本部署。</li>
 </ol>
+<p>容器 YAML 的 <code>resources.requests.memory</code> 與 <code>resources.limits.memory</code> 至少必須是 <code>128Mi</code>。請使用 <code>Mi</code> / <code>Gi</code> 單位；裸數字在 Kubernetes 代表 bytes，例如 <code>memory: "1"</code> 會被平台驗證拒絕。</p>
 <blockquote>
 <p><em>截圖建議：</em> Configurations 頁籤的 file tree、編輯器、版本歷史側欄。</p>
 </blockquote>

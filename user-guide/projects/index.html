@@ -1578,6 +1578,7 @@ for pending claims and rejected while a live Pod is using the claim.</p>
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
 <li>In the deploy dialog, pick the scheduling queue. If the YAML contains GPU claim slots, choose one of your reserved GPU claims for each slot for this deploy only.</li>
 </ol>
+<p>For container resources, set <code>resources.requests.memory</code> and <code>resources.limits.memory</code> to at least <code>128Mi</code>. Always include <code>Mi</code> or <code>Gi</code>; bare numbers in Kubernetes memory quantities mean bytes, so <code>memory: "1"</code> is rejected before deployment.</p>
 <h3 id="dra-gpu-requests-vs-reusable-gpu-claims">DRA GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#dra-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Template GPU requests</strong> use DRA resource keys in the YAML container request, for example <code>nvidia.com/gpu-0: "1"</code> or <code>nvidia.com/rtx6000: "1"</code>, plus optional SM percentage and GPU model metadata. The platform creates the runtime DRA claim during deployment.</li>

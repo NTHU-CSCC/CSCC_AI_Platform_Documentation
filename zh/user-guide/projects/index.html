@@ -1572,6 +1572,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 <li>在彈出的部署對話框中選擇 <strong>佇列 (Queue)</strong>。若 YAML 包含 GPU claim slot，請為每個 slot 選擇本次部署要使用的已保留 GPU claim。</li>
 <li>如果您使用 <strong>資源嚮導 (Resource Wizard)</strong> 建立設定，可以在容器資源設定中直接選定 GPU 型號，系統會自動在產生的 YAML 中加上對應的標籤。</li>
 </ol>
+<p>容器資源中的 <code>resources.requests.memory</code> 與 <code>resources.limits.memory</code> 至少必須是 <code>128Mi</code>。請一律寫出 <code>Mi</code> 或 <code>Gi</code> 單位；Kubernetes 的裸數字代表 bytes，因此 <code>memory: "1"</code> 會在部署前被拒絕。</p>
 <h3 id="dra-gpu-request-gpu-claim">DRA GPU Request 與可重複使用的 GPU Claim<a class="headerlink" href="#dra-gpu-request-gpu-claim" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>YAML GPU request</strong> 是容器資源需求，例如 <code>nvidia.com/gpu-0: "1"</code> 或 <code>nvidia.com/rtx6000: "1"</code>，可搭配 SM 百分比與 GPU 型號 metadata。平台會在部署時建立執行用的 DRA claim。</li>
