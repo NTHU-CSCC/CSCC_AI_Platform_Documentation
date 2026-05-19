@@ -1547,6 +1547,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 <li>若沒有排程限制則顯示 <em>Always active</em>。</li>
 </ul>
 <p>相同的倒數也會出現在工作區啟動表單與個別部署上。窗口關閉後，計畫綁定佇列中的 Pod 會受到平台 plan-window reaper 的處理。</p>
+<p>佇列也可以由管理員設定執行時間上限。當你選擇的佇列有 runtime limit 時，後端會套用到 Pod、Deployment、Job，並在 Kubernetes 建立時間加上該秒數後停止工作負載。這是管理員政策；在 YAML 中自行設定 <code>platform-go/runtime-limit-seconds</code> 不能提高、停用或覆寫此限制。</p>
 <hr />
 <h2 id="_10">設定檔版本控制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>設定檔使用內容定址儲存——每個版本不可變且以 SHA-256 雜湊值識別。</p>

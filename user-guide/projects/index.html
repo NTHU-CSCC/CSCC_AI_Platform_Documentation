@@ -1554,6 +1554,11 @@ for pending claims and rejected while a live Pod is using the claim.</p>
 <li><em>Always active</em> if no schedule restriction is defined.</li>
 </ul>
 <p>The same countdown surfaces on the workspace launch form and on individual deployments. Pods running in plan-bound queues are subject to the platform's plan-window reaper when the window expires.</p>
+<p>Queues may also define a runtime limit. When your selected queue has a runtime
+limit, the backend applies it to Pod, Deployment, and Job workloads and stops the
+workload after that many seconds from Kubernetes creation time. This value is an
+admin policy; setting <code>platform-go/runtime-limit-seconds</code> in your YAML cannot
+increase, disable, or override it.</p>
 <hr />
 <h2 id="config-file-versioning">Config File Versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
 <p>Config files are stored using Content-Addressable Storage — each version is immutable and identified by a SHA-256 hash.</p>
