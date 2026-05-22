@@ -993,7 +993,7 @@
 <li>設定 <strong>預設容量</strong>（例：<code>50Gi</code>）。</li>
 <li>點 <strong>Initialize</strong>。</li>
 </ol>
-<p>平台會為每位被選使用者各建立一份 PVC，使用環境變數 <code>DEFAULT_STORAGE_CLASS_NAME</code> 中設定的 storage class（預設 <code>longhorn</code>）。</p>
+<p>平台會為每位被選使用者各建立一份 PVC，使用環境變數 <code>DEFAULT_STORAGE_CLASS_NAME</code> 中設定的 storage class（預設 <code>juicefs</code>）。</p>
 <blockquote>
 <p><em>截圖建議：</em> <code>/admin/storage</code> Users 頁籤，顯示使用者列表、容量、狀態 badge、批次初始化按鈕。</p>
 </blockquote>
@@ -1025,7 +1025,7 @@
 <h2 id="group-pvc">群組儲存（Group PVC）<a class="headerlink" href="#group-pvc" title="Permanent link">&para;</a></h2>
 <p>群組 PVC 是「共享儲存」，整個群組的成員都可以掛載（依個別權限決定可讀 / 可寫）。</p>
 <h3 id="storage-class">Storage Class 政策<a class="headerlink" href="#storage-class" title="Permanent link">&para;</a></h3>
-<p>平台透過 <code>GROUP_STORAGE_CLASS_OPTIONS</code> 提供四條儲存路線：</p>
+<p>Production 與 sandbox 透過 <code>GROUP_STORAGE_CLASS_OPTIONS</code> 以 JuiceFS 作為預設儲存路線；Longhorn 路線只保留為受限相容選項。dev overlay 在安裝 JuiceFS CSI/storage 前仍以 <code>longhorn</code> 作為預設。</p>
 <table>
 <thead>
 <tr>
@@ -1036,14 +1036,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>longhorn</code></td>
+<td><code>juicefs</code></td>
 <td>不限制</td>
-<td>預設 personal 與小型 project PVC</td>
+<td>預設 personal、project PVC、訓練資料與 checkpoint，節點快取使用 <code>/data</code></td>
 </tr>
 <tr>
 <td><code>juicefs-gpu23-rwx</code></td>
 <td>限制</td>
-<td>跨節點訓練資料 / checkpoint（gpu1/gpu2/gpu3 共享）</td>
+<td>既有 JuiceFS 指派的舊 profile 名稱</td>
 </tr>
 <tr>
 <td><code>longhorn-gpu23-group</code></td>
@@ -1059,7 +1059,7 @@
 </table>
 <blockquote>
 <p><strong>群組儲存策略</strong>：在群組設定的「Storage Policy」會限制此群組能用的 Storage Class，這裡的選單也會自動只顯示該群組允許的選項。</p>
-<p><strong>Fast-stage 政策</strong>：<code>longhorn-gpu23-fast-rwo-v2</code> 只保留給專案內的 fast-stage 快取 PVC，不應直接建立成群組 PVC。fast-stage 的來源必須是共享 RWX 群組儲存，例如 <code>juicefs-gpu23-rwx</code> 或明確設定的舊版 RWX fallback。Transfer Job 會 request/limit <code>500m</code> CPU 與 <code>512Mi</code> memory，後端會在建立快取 PVC 或 Job 前檢查有效專案 plan 配額。舊版 <code>longhorn-gpu23-fast-rwo</code> 只作為既有不可變 StorageClass 的相容與回復路徑。</p>
+<p><strong>Fast-stage 政策</strong>：<code>longhorn-gpu23-fast-rwo-v2</code> 只保留給專案內的 fast-stage 快取 PVC，不應直接建立成群組 PVC。fast-stage 的來源必須是共享 RWX 群組儲存，例如 <code>juicefs</code>、<code>juicefs-gpu23-rwx</code> 或明確設定的舊版 RWX fallback。Transfer Job 會 request/limit <code>500m</code> CPU 與 <code>512Mi</code> memory，後端會在建立快取 PVC 或 Job 前檢查有效專案 plan 配額。舊版 <code>longhorn-gpu23-fast-rwo</code> 只作為既有不可變 StorageClass 的相容與回復路徑。</p>
 </blockquote>
 <h3 id="pvc">建立群組 PVC<a class="headerlink" href="#pvc" title="Permanent link">&para;</a></h3>
 <ol>
@@ -1167,6 +1167,7 @@
 <h2 id="juicefs">JuiceFS 操作流程<a class="headerlink" href="#juicefs" title="Permanent link">&para;</a></h2>
 <p>允許訓練 job 使用 JuiceFS 路線之前，先跑：</p>
 <div class="highlight"><pre><span></span><code>scripts/storage/verify-juicefs-gpu23.sh
+<span class="nv">SHARED_RWX_BENCH_STORAGE_CLASS</span><span class="o">=</span>juicefs<span class="w"> </span>scripts/storage/benchmark-shared-rwx.sh
 <span class="nv">SHARED_RWX_BENCH_STORAGE_CLASS</span><span class="o">=</span>juicefs-gpu23-rwx<span class="w"> </span>scripts/storage/benchmark-shared-rwx.sh
 </code></pre></div>
 <blockquote>

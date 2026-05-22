@@ -1707,7 +1707,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 </tr>
 </tbody>
 </table>
-<p>Project Admins, Project Managers, and platform Admin/Manager roles see all project members. Regular Project Users see only their own resource row. Expand a row to inspect pods and Kubernetes resources, or terminate resources you are allowed to manage. System namespaces such as <code>kube-system</code> are never deleted from the project Resources tab.</p>
+<p>Project Admins, Project Managers, and platform Admin/Manager roles see all project members. Regular Project Users see only their own resource row. Expand a row to inspect pods and Kubernetes resources, or terminate resources you are allowed to manage. The platform authorizes your own resources by the verified user ID on the project namespace, so stale display usernames do not block deletion of your own Pods, Deployments, Jobs, Services, ConfigMaps, Ingresses, StatefulSets, or unmanaged ResourceClaims. System namespaces such as <code>kube-system</code> are never deleted from the project Resources tab, and Secret deletion remains limited to project managers and admins.</p>
 <p>For Pod rows, hover, focus, or tap the status badge to inspect recent Kubernetes events. This is useful when a Pod appears to be creating but Kubernetes is actually reporting image pull errors such as <code>ImagePullBackOff</code> or <code>ErrImagePull</code>.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU Quota Overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>

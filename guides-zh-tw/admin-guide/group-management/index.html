@@ -996,7 +996,7 @@
 </tr>
 <tr>
 <td>Storage Policy</td>
-<td>例：<code>預設儲存</code>、<code>juicefs-gpu23-rwx</code></td>
+<td>例：<code>預設儲存</code>、<code>juicefs</code></td>
 </tr>
 <tr>
 <td>Registry Policy</td>
@@ -1087,7 +1087,7 @@
 <td>預設、單節點高 IOPS、適合個人或小型專案</td>
 </tr>
 <tr>
-<td><code>juicefs-gpu23-rwx</code></td>
+<td><code>juicefs</code></td>
 <td>多節點共享 RWX，適合訓練資料集 / checkpoints</td>
 </tr>
 <tr>
@@ -1101,7 +1101,7 @@
 </tbody>
 </table>
 <blockquote>
-<p>訓練工作負載建議：<strong>資料集與 checkpoint</strong> 放 <code>juicefs-gpu23-rwx</code>；<strong>單一 job 暫存檔</strong> 放本地 RWO，最後再寫回 JuiceFS。</p>
+<p>訓練工作負載建議：<strong>資料集與 checkpoint</strong> 放 <code>juicefs</code>；<strong>單一 job 暫存檔</strong> 放本地 RWO，最後再寫回 JuiceFS。</p>
 </blockquote>
 <h3 id="registry-policy">Registry Policy<a class="headerlink" href="#registry-policy" title="Permanent link">&para;</a></h3>
 <p>選擇此群組的 Project Build 應該推到哪個 Harbor 路線。對應到 Harbor 中的 robot account 與 project namespace。一般使用者只會在 Dashboard 的 Builds / Images 頁面看到結果；Harbor UI 本身是管理服務，預設保留給 admin 使用。</p>

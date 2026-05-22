@@ -1257,7 +1257,7 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <p>The profile picker shows availability and a recommendation per option; unavailable profiles are greyed out with the reason.</p>
 <hr />
 <h2 id="training-storage-pattern">Training Storage Pattern<a class="headerlink" href="#training-storage-pattern" title="Permanent link">&para;</a></h2>
-<p>For model training on gpu1, gpu2, and gpu3, admins can provision group storage on <code>juicefs-gpu23-rwx</code>. This is the preferred shared path for datasets, checkpoints, and final artifacts that need to be visible across nodes.</p>
+<p>For model training on gpu1, gpu2, and gpu3, admins can provision group storage on <code>juicefs</code>. This is the preferred shared path for datasets, checkpoints, and final artifacts that need to be visible across nodes.</p>
 <p>For checkpoint-heavy jobs, use this layout:</p>
 <table>
 <thead>
