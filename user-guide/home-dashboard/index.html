@@ -623,10 +623,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-node-gpu-allocation" class="md-nav__link">
+  <a href="#gpu-cluster-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Per-Node GPU Allocation
+        GPU Cluster Status
       
     </span>
   </a>
@@ -977,10 +977,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#per-node-gpu-allocation" class="md-nav__link">
+  <a href="#gpu-cluster-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Per-Node GPU Allocation
+        GPU Cluster Status
       
     </span>
   </a>
@@ -1086,8 +1086,8 @@
 <td>On page load and every 10 seconds</td>
 </tr>
 <tr>
-<td><strong>Per-Node GPU Allocation</strong></td>
-<td>Grid of every GPU node with free SM percentage and busy/free counts</td>
+<td><strong>GPU Cluster Status</strong></td>
+<td>Node-by-node physical GPU cards with MPS allocation totals and per-device SM status</td>
 <td>On page load and every 10 seconds</td>
 </tr>
 <tr>
@@ -1129,15 +1129,15 @@
 <p>The card reports effective GPU units from DRA labels and live ResourceClaim bindings. A 1-GPU claim at 50% SM counts as 0.5 GPU only while DRA has bound it to a live Pod.</p>
 </div>
 <hr />
-<h2 id="per-node-gpu-allocation">Per-Node GPU Allocation<a class="headerlink" href="#per-node-gpu-allocation" title="Permanent link">&para;</a></h2>
-<p>Beneath the availability card, the <strong>Per-Node GPU Allocation</strong> grid shows every GPU node as a small tile with:</p>
+<h2 id="gpu-cluster-status">GPU Cluster Status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
+<p>Beneath the availability card, the <strong>GPU Cluster Status</strong> grid shows every GPU node with:</p>
 <ul>
 <li>Node name and GPU model</li>
-<li>A free SM percentage bar (<code>{{pct}}% free</code>) per device</li>
-<li>An <em>Available</em> / <em>Busy</em> badge so you can pick a less-contested model</li>
-<li>Total GPU count on the node</li>
+<li>Physical GPU cards with the GPU index and model</li>
+<li>Per-node MPS allocation totals, such as <code>3 / 8 MPS</code></li>
+<li>Per-device SM status bars and utilization percentage</li>
 </ul>
-<p>Use this grid to spot which models are idle before submitting a workload, or to confirm a specific node has capacity for a fractional claim.</p>
+<p>Use this grid to spot which models are idle before submitting a workload, or to confirm a node has capacity for a fractional claim. The Home Dashboard does not show other users' names, Pod names, Job IDs, or detailed per-workload mapping.</p>
 <hr />
 <h2 id="resource-usage-chart">Resource Usage Chart<a class="headerlink" href="#resource-usage-chart" title="Permanent link">&para;</a></h2>
 <p>The chart displays your usage across all projects you belong to.</p>
