@@ -1176,7 +1176,7 @@
     Launch --&gt;|uses| Queue["Platform Queue"]
     DRA --&gt;|allocates| GPULimit["GPU / SM Share"]
     Queue --&gt;|applies| Priority["Priority / Preemption Policy"]</code></pre>
-<p>Each project is assigned a <strong>Resource Plan</strong> by an admin. When you launch a workspace, the platform verifies project quota and any per-user quota before creating Kubernetes DRA resources for the pod.</p>
+<p>Each project is assigned a <strong>Resource Plan</strong> by an admin. When you launch a workspace, the platform verifies project quota and any per-user quota before creating Kubernetes DRA resources for the pod. If the per-user quota store cannot be read, launches fail closed instead of treating the member as unlimited.</p>
 <p>A plan also carries:</p>
 <ul>
 <li>An <strong>allowed GPU model</strong> list — only these models are selectable from the launch form.</li>
@@ -1224,7 +1224,7 @@
 <p>There are two ways a claim is created:</p>
 <ul>
 <li><strong>Inline claim</strong> — the workspace launch flow creates a ResourceClaim that lives with the pod and disappears when the pod is deleted.</li>
-<li><strong>Project-managed claim</strong> — created from a project's <em>GPU Claims</em> tab and reused by Pod or Deployment config files across launches. It is a pending contract until Kubernetes DRA allocates it and <code>reservedFor</code> points at a live Pod; only that bound state counts against quota and resource-hours.</li>
+<li><strong>Project-managed claim</strong> — created from a project's <em>GPU Claims</em> tab and reused by Pod or Deployment config files across launches. It reserves effective GPU quota at creation time, remains a pending contract until Kubernetes DRA allocates it and <code>reservedFor</code> points at a live Pod, and accrues resource-hours only while bound.</li>
 </ul>
 <p>Config files refer to project-managed claims through named deploy-time slots, for example <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>. The slot name is not the claim name; the deploying user maps each slot to one of their own ResourceClaims. A Deployment with multiple replicas shares the same claim allocation and is counted once per claim. A single Kubernetes Deployment cannot assign different claims to different replicas because every replica shares one PodTemplate, so split the workload into multiple Deployments when only some pods should use a claim.</p>
 <hr />
@@ -1387,7 +1387,7 @@
     DirectPerms --&gt; ProjectView</code></pre>
 <ul>
 <li><strong>Group members</strong> always inherit storage permissions from the group level. Their permissions cannot be overridden at the project level.</li>
-<li><strong>Non-group project members</strong> have permissions managed directly at the project level.</li>
+<li><strong>Direct project members who are not in the source group</strong> have permissions managed directly at the project level. Users outside the project cannot receive project-level storage grants.</li>
 </ul>
 <hr />
 <h2 id="key-terms">Key Terms<a class="headerlink" href="#key-terms" title="Permanent link">&para;</a></h2>
@@ -1421,7 +1421,7 @@
 </tr>
 <tr>
 <td><strong>ResourceClaim</strong></td>
-<td>A DRA object that requests a fractional or whole GPU; platform-managed standalone claims consume quota only while bound to live Pods</td>
+<td>A DRA object that requests a fractional or whole GPU; platform-managed standalone claims reserve quota at creation and accrue resource-hours only while bound to live Pods</td>
 </tr>
 <tr>
 <td><strong>Config File</strong></td>

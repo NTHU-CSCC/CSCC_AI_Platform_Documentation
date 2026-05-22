@@ -1059,7 +1059,7 @@
 </table>
 <blockquote>
 <p><strong>群組儲存策略</strong>：在群組設定的「Storage Policy」會限制此群組能用的 Storage Class，這裡的選單也會自動只顯示該群組允許的選項。</p>
-<p><strong>Fast-stage 政策</strong>：<code>longhorn-gpu23-fast-rwo</code> 只保留給專案內的 fast-stage 快取 PVC，不應直接建立成群組 PVC。fast-stage 的來源必須是共享 RWX 群組儲存，例如 <code>juicefs-gpu23-rwx</code> 或明確設定的舊版 RWX fallback。</p>
+<p><strong>Fast-stage 政策</strong>：<code>longhorn-gpu23-fast-rwo-v2</code> 只保留給專案內的 fast-stage 快取 PVC，不應直接建立成群組 PVC。fast-stage 的來源必須是共享 RWX 群組儲存，例如 <code>juicefs-gpu23-rwx</code> 或明確設定的舊版 RWX fallback。Transfer Job 會 request/limit <code>500m</code> CPU 與 <code>512Mi</code> memory，後端會在建立快取 PVC 或 Job 前檢查有效專案 plan 配額。舊版 <code>longhorn-gpu23-fast-rwo</code> 只作為既有不可變 StorageClass 的相容與回復路徑。</p>
 </blockquote>
 <h3 id="pvc">建立群組 PVC<a class="headerlink" href="#pvc" title="Permanent link">&para;</a></h3>
 <ol>

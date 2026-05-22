@@ -1266,17 +1266,18 @@
 </tr>
 <tr>
 <td><strong>預設佇列</strong></td>
-<td>永遠可用，不保證優先序。當專案沒有綁定計畫，或計畫窗口關閉時使用。</td>
+<td>最低優先序的 fallback 佇列；仍需要有效的專案計畫，且必須被該計畫允許。</td>
 </tr>
 </tbody>
 </table>
-<p>啟動表單會列出專案計畫綁定的佇列，加上預設佇列。若沒有綁定計畫，僅預設佇列可選。</p>
+<p>啟動表單會列出專案有效計畫允許的佇列。若沒有綁定計畫，工作區啟動會被拒絕，直到管理員綁定有效計畫。
+GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model allowlist 與 queue GPU model policy；即使未選 GPU 型號、由平台從佇列或 generic 預設值解析，也不能繞過檢查。若後端無法載入 queue policy，工作區會被拒絕，而不是回退成不限制 GPU 型號。</p>
 <hr />
 <h2 id="_7">計畫窗口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>若專案計畫定義了每週或一次性的 <strong>排程窗口</strong>，使用計畫綁定佇列的工作區只能在窗口開啟期間運行。</p>
 <ul>
 <li>列表頁面會即時倒數——<em>計畫窗口將於 HH:MM:SS 後關閉</em>——窗口生效時顯示。</li>
-<li>窗口關閉後，計畫綁定佇列中的 Pod 可能被平台的 plan-window reaper 驅逐。預設佇列不受影響。</li>
+<li>窗口關閉後，計畫綁定佇列中的 Pod 可能被平台的 plan-window reaper 驅逐。新的工作區啟動需要有效計畫窗口開啟。</li>
 <li>窗口已關閉時，會出現一鍵 <strong>切換為預設佇列</strong> 的橫幅，方便您以較低優先序繼續工作。</li>
 </ul>
 <hr />
@@ -1320,6 +1321,7 @@
 <ul>
 <li><strong>GPU 數量</strong> 是請求的實體 GPU 數。</li>
 <li><strong>SM 百分比</strong> 會影響配額計算與 GPU 共享比例。</li>
+<li>工作區配額檢查會把 <code>submitted</code>、<code>waiting_infra</code>、<code>queued</code> 與 <code>running</code> job 都視為活躍需求。</li>
 <li>在工作區中使用 <code>nvidia-smi</code> 檢查可見裝置與實際執行情況。</li>
 <li>GPU 工作區真正綁到 GPU 時，Pod 必須同時有平台 DRA labels 與 Kubernetes <code>resourceClaims</code>。如果只有 labels 而沒有 <code>resourceClaims</code>，代表平台政策看得到 GPU 需求，但 Pod 尚未實際掛上 GPU。</li>
 <li>若需要獨佔或指定型號，請選擇 100% SM 與計畫允許的型號，或請管理員調整計畫。</li>

@@ -945,7 +945,10 @@
 
 
 <h1 id="resource-plans">新增資源計畫（Resource Plans）<a class="headerlink" href="#resource-plans" title="Permanent link">&para;</a></h1>
-<p>「資源計畫（Resource Plan）」是一份具名的配額樣板。把計畫綁定到專案後，該專案就會直接套用樣板中的 GPU / CPU / Memory 上限與排程設定。</p>
+<p>「資源計畫（Resource Plan）」是一份具名的配額樣板。把計畫綁定到專案後，該專案就會直接套用樣板中的 GPU / CPU / Memory 上限與排程設定。
+Plan 綁定會同時驗證 Plan ID 與 Project ID；任一方不存在時會回 <code>404 Not Found</code>，不會產生假成功或修改專案。
+變更專案的 Plan 綁定會立即執行後端管制：若新 Plan 目前不在有效時段內，既有工作會被標記驅逐並 best-effort 清理 Kubernetes 資源；若新 Plan 的 Queue allowlist 不包含既有 job 使用的 queue，該 job 也會被驅逐。
+若改綁到 active Plan，但專案 live Kubernetes 使用量加上現有 submitted / queued / running 資源保留量已超過新 Plan 的 GPU / CPU / Memory 上限，後端會回 <code>409 Conflict</code> 並保持原綁定不變。</p>
 <blockquote>
 <p><strong>權限：</strong> 僅 <code>Admin</code> 可建立 / 編輯 / 刪除資源計畫。
 路徑：<strong>Admin Panel → 計畫</strong>（<code>/admin/plans</code>）。</p>
@@ -1029,6 +1032,11 @@
 <td><code>4</code></td>
 </tr>
 <tr>
+<td><strong>允許 GPU 型號</strong></td>
+<td>此 Plan 允許的 DRA DeviceClass。IDE 與 config 部署會檢查解析後的 DeviceClass，包含由佇列或預設值推導出的值。</td>
+<td><code>rtx5090.gpu.nvidia.com</code></td>
+</tr>
+<tr>
 <td><strong>CPU 限制</strong></td>
 <td>CPU 核心數</td>
 <td><code>16</code></td>
@@ -1063,7 +1071,10 @@
 </ol>
 <hr />
 <h2 id="_4">綁定平台佇列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>開啟計畫 → 編輯 → 在 <strong>Queues</strong> 區塊勾選 / 取消勾選佇列。</p>
+<p>開啟計畫 → 編輯 → 在 <strong>Queues</strong> 區塊勾選 / 取消勾選佇列。
+當 Plan 的 Queue 清單變更時，後端會同步檢查並驅逐不再允許的 active workload；
+若無法列出或驅逐受影響工作，這次綁定更新會被拒絕並回滾，避免 Queue policy
+只部分套用。</p>
 <p><strong>Queue 主要欄位：</strong></p>
 <table>
 <thead>
@@ -1116,7 +1127,7 @@
 </ol>
 <blockquote>
 <p><strong>影響範圍：</strong> 修改 Plan 的配額會 <strong>立即</strong> 套用到所有綁定該 Plan 的專案。
-若把上限調低，超過上限的執行中 Workspace 可能在下一個排程週期被驅逐。</p>
+若把 active Plan 上限調低，而任何已綁定專案的 live Kubernetes 使用量或 submitted / queued / running 資源保留量已超過新上限，更新會回 <code>409 Conflict</code>；請先排空或移轉既有工作。</p>
 </blockquote>
 <hr />
 <h2 id="_6">刪除計畫<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -1131,9 +1142,11 @@
 <ol>
 <li>使用者只能在時段開啟時使用 plan-bound queue 啟動工作。</li>
 <li><code>default-batch</code> 仍可作為較低優先序 fallback。</li>
-<li>DRA ResourceClaim 只有在已有 GPU allocation 且綁定 live Pod 時才消耗配額與 GPU-hours；pending standalone claim 不消耗配額，也不再有獨立的舊式 slot reservation window。</li>
+<li>Standalone DRA ResourceClaim 建立時會保留有效 GPU 配額；只有在已有 GPU allocation 且綁定 live Pod 時才累計 GPU-hours，也不再有獨立的舊式 slot reservation window。</li>
 </ol>
-<p>時段一旦關閉，<strong>該佇列上的執行中 job 可能被驅逐</strong>。前端會在剩餘 &lt; 1 hour 顯示倒數提示，並提供 <strong>切換至 default queue</strong> 按鈕。</p>
+<p>時段一旦關閉，<strong>該佇列上的執行中 job 可能被驅逐</strong>。前端會在剩餘 &lt; 1 hour 顯示倒數提示，並提供 <strong>切換至 default queue</strong> 按鈕。
+管理員把專案改綁到另一個 Plan 時，也會套用相同的 active-window 與 Queue allowlist 檢查，避免既有工作繞過新的 Plan。
+若新 Plan 是 active，live Kubernetes 使用量與既有 submitted / queued / running 資源保留量也必須符合新 Plan 的 GPU / CPU / Memory 上限。</p>
 
 
 

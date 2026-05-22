@@ -1266,17 +1266,18 @@
 </tr>
 <tr>
 <td><strong>Default queue</strong></td>
-<td>Always available, no priority guarantees. Use it when your project has no plan or the plan window is closed.</td>
+<td>Lowest-priority fallback queue. It still requires an active project plan and must be allowed by that plan.</td>
 </tr>
 </tbody>
 </table>
-<p>The launch form lists the queues bound to the project's plan, plus the default queue. If no plan is bound, only the default queue is selectable.</p>
+<p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds an active plan.
+For GPU workspaces, the backend validates the resolved DRA DeviceClass against the plan GPU model allowlist and any queue GPU model policy, including when you leave the model field blank and the platform resolves it from the queue or generic default. If the queue policy cannot be loaded, the workspace is rejected instead of falling back to an unrestricted GPU model.</p>
 <hr />
 <h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>If a project plan defines a weekly or one-off <strong>schedule window</strong>, workspaces in plan-bound queues only run while the window is open.</p>
 <ul>
 <li>The list page shows a live countdown — <em>Plan window closes in HH:MM:SS</em> — when the window is active.</li>
-<li>When the window closes, pods running in plan-bound queues may be evicted by the platform's plan-window reaper. The default queue is unaffected.</li>
+<li>When the window closes, pods running in plan-bound queues may be evicted by the platform's plan-window reaper. New workspace launches require an open active plan window.</li>
 <li>A banner offers a one-click <strong>Switch to Default Queue</strong> action when the window has expired and you want to keep working at lower priority.</li>
 </ul>
 <hr />
@@ -1320,6 +1321,7 @@
 <ul>
 <li><strong>GPU Count</strong> is the number of physical GPUs requested.</li>
 <li><strong>SM Percentage</strong> controls the effective share for quota accounting and GPU sharing.</li>
+<li>Workspace quota checks count <code>submitted</code>, <code>waiting_infra</code>, <code>queued</code>, and <code>running</code> jobs as active demand.</li>
 <li>Use <code>nvidia-smi</code> inside your workspace to check visible devices and runtime behavior.</li>
 <li>A running GPU workspace is bound only when the Pod has both platform DRA labels and Kubernetes <code>resourceClaims</code>. Labels alone mean the workspace is visible to platform policy, but no GPU has been attached to the Pod.</li>
 <li>For exclusive or model-specific access, select 100% SM and a model allowed by your plan, or ask an admin to adjust the plan.</li>

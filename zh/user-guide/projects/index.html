@@ -1406,7 +1406,7 @@
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
-<td>以 DRA 為基礎的 ResourceClaim，可預先建立，且只在綁定 live Pod 時消耗 GPU</td>
+<td>以 DRA 為基礎的 ResourceClaim，可預先建立；建立時保留有效 GPU 配額，只有綁定 live Pod 時才累計 GPU-hours</td>
 </tr>
 <tr>
 <td><strong>資源</strong></td>
@@ -1475,8 +1475,10 @@
 </tr>
 </tbody>
 </table>
-<p>Kaniko cache 與暫存 layer 使用的本機磁碟由平台管理員依環境設定上限，使用者無法在建置表單中自行調整。上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
-<p>提交後，建置歷史會顯示狀態、來源類型、資源需求、目的映像與即時 log。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。建置者本人或專案管理者可以從歷史中刪除 build artifact。</p>
+<p>Build quota 檢查會先計入 pending 與 syncing 的 image build，再看較舊的 completed 歷史，因此活躍中的 build job 不會因為建置歷史過長而被漏算。</p>
+<p>Kaniko cache 與暫存 layer 使用的本機磁碟由平台管理員依環境設定上限，使用者無法在建置表單中自行調整。上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；Storage build 的來源路徑會正規化在所選 PVC root 底下，parent directory traversal 無法逃出掛載的來源 volume；DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
+<p>提交後，建置歷史會顯示狀態、來源類型、資源需求、目的映像與即時 log。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。仍具備目前專案成員身分的建置者本人，或專案管理者，可以從歷史中刪除 build artifact。</p>
+<p>專案管理者只能為目前管理的專案提交 image allowlist request，並移除屬於目前專案的 image allowlist 項目；專案成員可以查看該專案的 image request 歷史。Global catalog publication 與其他專案的映像規則仍需由具備管理權限的端點處理。</p>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
 <p>如果建置表單無法送出，請請平台管理員確認該專案已啟用 <strong>Image Build Permission</strong>，且已綁定有效的資源計畫。</p>
@@ -1488,11 +1490,11 @@
 <hr />
 <h2 id="gpu-claimsdra">GPU Claims（DRA）<a class="headerlink" href="#gpu-claimsdra" title="Permanent link">&para;</a></h2>
 <p><strong>GPU Claims</strong> 標籤列出可在部署前預先建立的 ResourceClaim。claim
-在沒有 live Pod binding 時維持 <code>pending</code>，不會消耗 GPU 配額或
-GPU-hours；只有 Kubernetes DRA 配置完成且 <code>reservedFor</code> 指向 live Pod
-後才開始計算。每個 claim 透過 Kubernetes Dynamic Resource Allocation
-API 建立；當 Pod 或 Deployment template 使用部署時 GPU claim slot
-annotation 時，可在部署對話框中選取。</p>
+在沒有 live Pod binding 時維持 <code>pending</code>，建立時會先保留有效 GPU
+配額；GPU-hours 則只有在 Kubernetes DRA 配置完成且 <code>reservedFor</code>
+指向 live Pod 後才開始計算。每個 claim 透過 Kubernetes Dynamic
+Resource Allocation API 建立；當 Pod 或 Deployment template 使用部署時
+GPU claim slot annotation 時，可在部署對話框中選取。</p>
 <h3 id="claim">建立 Claim<a class="headerlink" href="#claim" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1533,7 +1535,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 2-GPU allocation；平台 labels 會保留 <code>dra-gpu-count=2</code>、
 <code>dra-effective-gpu=2</code>、<code>dra-gpu-model=rtx5090</code>，配額與 GPU-hours 也會以
 每個 claim 計算一次，而不是每個 replica 計算一次。</p>
-<p>pending claim 的 GPU-hours 為 <code>0</code>，也不會降低剩餘配額。表格會顯示擁有者、配置節點、目前狀態（<code>pending</code>、<code>bound</code> 或 <code>terminating</code>）、DRA 回報的 <code>reservedFor</code> 數量，以及刪除按鈕。pending claim 可直接刪除；若已有 live Pod 正在使用，刪除會被拒絕。</p>
+<p>pending claim 的 GPU-hours 為 <code>0</code>，但仍會占用專案與個別使用者的有效 GPU 配額。表格會顯示擁有者、配置節點、目前狀態（<code>pending</code>、<code>bound</code> 或 <code>terminating</code>）、DRA 回報的 <code>reservedFor</code> 數量，以及刪除按鈕。pending claim 可直接刪除；若已有 live Pod 正在使用，刪除會被拒絕。</p>
 <div class="admonition note">
 <p class="admonition-title">Claim 擁有權</p>
 <p>專案成員可以在自己的 namespace 下建立 claim。專案管理者另可列出與刪除其他成員建立的 claim。</p>
@@ -1546,7 +1548,8 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 <li>下一個窗口尚未開啟時顯示 <em>Window opens in HH:MM:SS</em>。</li>
 <li>若沒有排程限制則顯示 <em>Always active</em>。</li>
 </ul>
-<p>相同的倒數也會出現在工作區啟動表單與個別部署上。窗口關閉後，計畫綁定佇列中的 Pod 會受到平台 plan-window reaper 的處理。</p>
+<p>相同的倒數也會出現在工作區啟動表單與個別部署上。若 plan 變成 inactive、被移除，或不再允許某個佇列，active reservation 即使尚未建立 Kubernetes Pod 也會被標記為 evicted，避免延遲提交在 plan 授權變更後才啟動。窗口關閉後，計畫綁定佇列中的 Pod 會受到平台 plan-window reaper 的處理。沒有 active plan 的專案 namespace 會發布限制性的 policy data，因此直接 Kubernetes admission 會拒絕 workload Pod，而不是把專案視為永遠允許。</p>
+<p>佇列也可以由管理員設定執行時間上限。當你選擇的佇列有 runtime limit 時，後端會套用到 Pod、Deployment、Job，並在 Kubernetes 建立時間加上該秒數後停止工作負載。這是管理員政策；在 YAML 中自行設定 <code>platform-go/runtime-limit-seconds</code> 不能提高、停用或覆寫此限制。若後端無法載入所選佇列的 runtime policy，部署與 dry-run validation 會被拒絕，而不是在沒有佇列 runtime limit 的情況下啟動。</p>
 <p>佇列也可以由管理員設定執行時間上限。當你選擇的佇列有 runtime limit 時，後端會套用到 Pod、Deployment、Job，並在 Kubernetes 建立時間加上該秒數後停止工作負載。這是管理員政策；在 YAML 中自行設定 <code>platform-go/runtime-limit-seconds</code> 不能提高、停用或覆寫此限制。</p>
 <hr />
 <h2 id="_10">設定檔版本控制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -1573,12 +1576,22 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 <li>在彈出的部署對話框中選擇 <strong>佇列 (Queue)</strong>。若 YAML 包含 GPU claim slot，請為每個 slot 選擇本次部署要使用的已保留 GPU claim。</li>
 <li>如果您使用 <strong>資源嚮導 (Resource Wizard)</strong> 建立設定，可以在容器資源設定中直接選定 GPU 型號，系統會自動在產生的 YAML 中加上對應的標籤。</li>
 </ol>
+<p>部署、direct-create、dry-run validation、刪除 instance 與查詢 instance Pod 狀態需要 <strong>Project Manager</strong> 以上權限；此權限可來自直接專案成員角色、擁有群組角色、personal project 擁有者，或平台管理員。Workload submit 需要有效的專案存取權。只知道或猜到 config version ID 不足以在專案 namespace 中操作。存取權、plan window、queue-plan 與配額拒絕會回傳 <code>403 Forbidden</code>。
+部署 namespace ownership 會由後端以已驗證的 user ID 到平台資料庫解析使用者名稱；過期或被竄改的 token username claim 不會導向不同的 Kubernetes namespace。
+部署配額檢查會合併 Kubernetes namespace 的即時用量與資料庫中的 active job reservation。<code>submitted</code>、<code>waiting_infra</code>、<code>queued</code> 與 <code>running</code> job 都會視為活躍需求；等待基礎設施重試或 scheduler placement 的 workload 在完成或被清理前，仍會占用其請求的配額。
+Workload submit 只接受平台可管理的 <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資源。<code>CronJob</code>、<code>DaemonSet</code>、<code>StatefulSet</code>、<code>ReplicaSet</code> 這類 autonomous controller 會被拒絕，因為它們的 Pod 數量無法由單次提交時的 quota reservation 精準限制。
+Config workload 資源必須透過平台 executor 執行。Direct-create 僅限 ConfigMap、Service 這類非 workload 資源，避免 workload 繞過 executor-backed quota reservation 與 plan governance。</p>
 <p>容器資源中的 <code>resources.requests.memory</code> 與 <code>resources.limits.memory</code> 至少必須是 <code>128Mi</code>。請一律寫出 <code>Mi</code> 或 <code>Gi</code> 單位；Kubernetes 的裸數字代表 bytes，因此 <code>memory: "1"</code> 會在部署前被拒絕。</p>
+<p>設定檔 YAML 必須把平台管理的 Kubernetes metadata 交給後端產生。請不要設定 <code>metadata.namespace</code>、<code>metadata.generateName</code>、<code>metadata.ownerReferences</code> 或 <code>metadata.finalizers</code>；平台會依專案與部署者決定 namespace、命名、生命週期與清理方式。
+儲存卷請使用 <code>{{userVolume}}</code> 來引用自己的個人 PVC。手寫 literal PVC
+名稱只允許在 group-owned project 中引用擁有群組儲存清單內既有的 PVC；
+personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC 名稱。</p>
 <h3 id="dra-gpu-request-gpu-claim">DRA GPU Request 與可重複使用的 GPU Claim<a class="headerlink" href="#dra-gpu-request-gpu-claim" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>YAML GPU request</strong> 是容器資源需求，例如 <code>nvidia.com/gpu-0: "1"</code> 或 <code>nvidia.com/rtx6000: "1"</code>，可搭配 SM 百分比與 GPU 型號 metadata。平台會在部署時建立執行用的 DRA claim。</li>
-<li><strong>可重複使用的 GPU claim</strong> 是在 <strong>GPU Claims</strong> 標籤預先建立的獨立 claim。它在 live Pod 使用前保持 pending；綁定後，即使 Deployment 有多個 replica，配額與 resource-hours 也會以每個 claim 的有效 GPU 計算一次。若使用 Resource Wizard，請選 <strong>部署時選保留 claim</strong>，並填入 <strong>部署時顯示的 slot 名稱</strong>，例如 <code>train-a</code>；這是部署視窗中的欄位名稱，不是 claim 名稱。若手寫 YAML，請在 Pod metadata annotation 或 Deployment pod-template annotation 放入 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。部署者會在部署對話框中把每個 slot 對應到自己的 claim。</li>
+<li><strong>YAML GPU request</strong> 是 container 或 initContainer 的資源需求，例如 <code>nvidia.com/gpu-0: "1"</code>、<code>nvidia.com/rtx6000: "1"</code>，或 <code>nvidia.com/h100: "1"</code> 這類其他型號 key，可搭配 SM 百分比與 GPU 型號 metadata。平台會把所有 <code>nvidia.com/&lt;model&gt;</code> GPU key 計入 quota，將解析出的 DeviceClass 與 active plan 允許的 GPU 型號比對，在 DRA 注入時移除這些 marker resource，並在部署時建立執行用的 DRA claim。</li>
+<li><strong>可重複使用的 GPU claim</strong> 是在 <strong>GPU Claims</strong> 標籤預先建立的獨立 claim。它在 live Pod 使用前保持 pending；綁定後，即使 Deployment 有多個 replica，配額與 resource-hours 也會以每個 claim 的有效 GPU 計算一次。若使用 Resource Wizard，請選 <strong>部署時選保留 claim</strong>，並填入 <strong>部署時顯示的 slot 名稱</strong>，例如 <code>train-a</code>；這是部署視窗中的欄位名稱，不是 claim 名稱。若手寫 YAML，請在 Pod metadata annotation 或 Deployment pod-template annotation 放入 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。部署者會在部署對話框中把每個 slot 對應到自己由平台管理的 claim；手動或外部建立的 Kubernetes ResourceClaim 會被拒絕。</li>
 <li>舊有的 <code>{{gpuClaimName}}</code> 仍是預設 slot。多個 Pod 或 Deployment 可以使用同一個 slot 來刻意共用同一個 claim；不同資源也可以使用不同 slot 對應不同 claim。</li>
+<li>若 API 部署請求同時傳入 <code>gpu_claim_name</code> 與 <code>gpu_claim_bindings.default</code>，兩者必須指向同一個 claim；預設值衝突會被拒絕。</li>
 <li>Kubernetes Deployment 的所有 replica 共用同一份 PodTemplate。若只有部分 replica 要使用 claim，請拆成多個 Deployment，例如一個有 claim 的 Deployment 與一個沒有 claim 的 Deployment。</li>
 <li>Service、ConfigMap 與未標註的 workload 不會被注入 GPU claim。</li>
 <li>不要把 <code>{{gpuClaimName}}</code> 放在 <code>spec.resourceClaims[].resourceClaimName</code> 或 <code>resourceClaimTemplateName</code>；這些欄位保留給平台部署時注入。</li>
@@ -1664,7 +1677,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 </tr>
 </tbody>
 </table>
-<p>Project Admin、Project Manager 與平台 Admin/Manager 可以看到所有成員。一般 Project User 只會看到自己的資源列。展開列後可檢查 Pod 與 Kubernetes 資源，並依權限終止資源。</p>
+<p>Project Admin、Project Manager 與平台 Admin/Manager 可以看到所有成員。一般 Project User 只會看到自己的資源列。展開列後可檢查 Pod 與 Kubernetes 資源，並依權限終止資源。<code>kube-system</code> 這類系統 namespace 不會透過專案 Resources 標籤刪除。</p>
 <hr />
 <h2 id="gpu">GPU 配額概覽<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
 <p>總覽標籤顯示各資源類型的配額長條：</p>

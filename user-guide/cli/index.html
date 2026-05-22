@@ -1100,6 +1100,9 @@ The value may include <code>/api/v1</code>; the CLI normalizes it automatically.
 <p>Optional token name:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
+<p>Token names are trimmed, limited to 100 characters, and cannot contain control
+characters. If the name is omitted or only whitespace, the backend uses the
+default <code>cscc-cli</code> name.</p>
 <h3 id="import-a-dashboard-created-token">Import a dashboard-created token<a class="headerlink" href="#import-a-dashboard-created-token" title="Permanent link">&para;</a></h3>
 <p>You can also create an API token from <strong>Settings → API Key &amp; CLI</strong> in the
 dashboard and import it into <code>cscc-cli</code>:</p>
@@ -1323,12 +1326,12 @@ Use the gateway API host for production:</p>
 <tr>
 <td><code>CLI_LOGIN_MAX_ATTEMPTS</code></td>
 <td style="text-align: right;"><code>5</code></td>
-<td>Failed login attempts before lockout</td>
+<td>Failed password-login attempts before browser/CLI lockout</td>
 </tr>
 <tr>
 <td><code>CLI_LOGIN_LOCKOUT_SECONDS</code></td>
 <td style="text-align: right;"><code>900</code></td>
-<td>Lockout window in seconds</td>
+<td>Browser/CLI password-login lockout window in seconds</td>
 </tr>
 </tbody>
 </table>

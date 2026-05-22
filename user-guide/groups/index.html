@@ -1093,7 +1093,10 @@ caused by client-side filtering.</p>
     GroupPVC --&gt;|inherited, read-only rows| ProjectStoragePage["Project Storage Page\n(group member rows)"]
     ProjectAdmin["Project Admin\nmanages non-group members"] --&gt;|direct management| DirectRows["Project PVC permissions\n(non-group members only)"]
     DirectRows --&gt; ProjectStoragePage</code></pre>
-<p><strong>Key rule:</strong> If you are a group member, your storage permissions on a project-bound PVC are always determined by the group — they cannot be overridden at the project level. The project storage page shows your inherited row as <strong>read-only</strong> with an info badge linking to the group permissions page.</p>
+<p><strong>Key rule:</strong> If you are a group member, your storage permissions on a project-bound PVC are always determined by the group — they cannot be overridden at the project level. Project-level storage grants are only for direct project members who are not in the source group. The project storage page shows inherited rows as <strong>read-only</strong> with an info badge linking to the group permissions page.</p>
+<p>Group storage permissions apply only to current members of the source group.
+When a user is removed from the group, any stale explicit permission row no
+longer grants effective access.</p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
