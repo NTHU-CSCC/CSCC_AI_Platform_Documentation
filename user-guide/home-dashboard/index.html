@@ -1087,7 +1087,7 @@
 </tr>
 <tr>
 <td><strong>GPU Cluster Status</strong></td>
-<td>Node-by-node physical GPU cards with MPS allocation totals and per-device SM status</td>
+<td>De-identified GPU node cards with MPS allocation totals and per-device SM status</td>
 <td>On page load and every 10 seconds</td>
 </tr>
 <tr>
@@ -1130,14 +1130,15 @@
 </div>
 <hr />
 <h2 id="gpu-cluster-status">GPU Cluster Status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
-<p>Beneath the availability card, the <strong>GPU Cluster Status</strong> grid shows every GPU node with:</p>
+<p>Beneath the availability card, the <strong>GPU Cluster Status</strong> grid shows de-identified GPU nodes with:</p>
 <ul>
-<li>Node name and GPU model</li>
+<li>A display label such as <code>GPU node 1</code> and the GPU model</li>
 <li>Physical GPU cards with the GPU index and model</li>
 <li>Per-node MPS allocation totals, such as <code>3 / 8 MPS</code></li>
 <li>Per-device SM status bars and utilization percentage</li>
 </ul>
-<p>Use this grid to spot which models are idle before submitting a workload, or to confirm a node has capacity for a fractional claim. The Home Dashboard does not show other users' names, Pod names, Job IDs, or detailed per-workload mapping.</p>
+<p>Use this grid to spot which models are idle before submitting a workload, or to confirm a node has capacity for a fractional claim. The Home Dashboard does not show other users' names, Pod names, Job IDs, or detailed per-workload mapping.
+It also hides real Kubernetes node names, namespaces, and GPU UUIDs; administrators can see those details from the Admin views.</p>
 <hr />
 <h2 id="resource-usage-chart">Resource Usage Chart<a class="headerlink" href="#resource-usage-chart" title="Permanent link">&para;</a></h2>
 <p>The chart displays your usage across all projects you belong to.</p>

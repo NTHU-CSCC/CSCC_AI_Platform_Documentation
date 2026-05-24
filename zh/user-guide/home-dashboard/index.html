@@ -1087,7 +1087,7 @@
 </tr>
 <tr>
 <td><strong>各節點 GPU 配置狀態</strong></td>
-<td>每個 GPU 節點的實體 GPU、SM 剩餘比例與忙碌狀態</td>
+<td>去識別化 GPU 節點卡片、MPS 配置總量與各 GPU 的 SM 狀態</td>
 <td>頁面載入時，之後每 10 秒更新</td>
 </tr>
 <tr>
@@ -1130,14 +1130,15 @@
 </div>
 <hr />
 <h2 id="gpu_1">各節點 GPU 配置狀態<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
-<p>GPU 可用性卡片下方的 <strong>各節點 GPU 配置狀態</strong> 網格，會把每個 GPU 節點以小卡片呈現：</p>
+<p>GPU 可用性卡片下方的 <strong>各節點 GPU 配置狀態</strong> 網格，會把 GPU 節點以去識別化小卡片呈現：</p>
 <ul>
-<li>節點名稱與 GPU 型號</li>
+<li><code>GPU node 1</code> 這類顯示名稱與 GPU 型號</li>
 <li>各裝置的 SM 剩餘比例（<code>{{pct}}% 剩餘</code>）長條</li>
 <li><em>Available</em> / <em>Busy</em> 標籤，方便挑選目前較空閒的型號</li>
 <li>該節點的 GPU 總數</li>
 </ul>
-<p>送出工作前先看這個網格，可以快速判斷哪些型號還有空、或確認某節點是否還有容量接受 fractional claim。</p>
+<p>送出工作前先看這個網格，可以快速判斷哪些型號還有空、或確認某節點是否還有容量接受 fractional claim。
+Home Dashboard 不會顯示真實 Kubernetes 節點名稱、GPU UUID、namespace、其他使用者名稱、Pod 名稱或 Job ID；管理員可在 Admin 視圖查看完整細節。</p>
 <hr />
 <h2 id="_4">資源使用圖表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>圖表顯示您所屬所有專案的使用量。</p>
