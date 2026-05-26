@@ -1581,7 +1581,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 部署配額檢查會合併 Kubernetes namespace 的即時用量與資料庫中的 active job reservation。<code>submitted</code>、<code>waiting_infra</code>、<code>queued</code> 與 <code>running</code> job 都會視為活躍需求；等待基礎設施重試或 scheduler placement 的 workload 在完成或被清理前，仍會占用其請求的配額。
 Workload submit 只接受平台可管理的 <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資源。<code>CronJob</code>、<code>DaemonSet</code>、<code>StatefulSet</code>、<code>ReplicaSet</code> 這類 autonomous controller 會被拒絕，因為它們的 Pod 數量無法由單次提交時的 quota reservation 精準限制。
 Config workload 資源必須透過平台 executor 執行。Direct-create 僅限 ConfigMap、Service 這類非 workload 資源，避免 workload 繞過 executor-backed quota reservation 與 plan governance。</p>
-<p>容器資源中的 <code>resources.requests.memory</code> 與 <code>resources.limits.memory</code> 至少必須是 <code>128Mi</code>。請一律寫出 <code>Mi</code> 或 <code>Gi</code> 單位；Kubernetes 的裸數字代表 bytes，因此 <code>memory: "1"</code> 會在部署前被拒絕。</p>
+<p>每個 workload 容器都必須明確設定 <code>resources.requests.memory</code> 與 <code>resources.limits.memory</code>，且兩者至少必須是 <code>128Mi</code>。平台不會從 project plan 或專案剩餘 RAM 自動補上缺少的 memory；缺少 request 或 limit 會在 deploy 與 dry-run validation 被拒絕。請一律寫出 <code>Mi</code> 或 <code>Gi</code> 單位；Kubernetes 的裸數字代表 bytes，因此 <code>memory: "1"</code> 會在部署前被拒絕。</p>
 <p>設定檔 YAML 必須把平台管理的 Kubernetes metadata 交給後端產生。請不要設定 <code>metadata.namespace</code>、<code>metadata.generateName</code>、<code>metadata.ownerReferences</code> 或 <code>metadata.finalizers</code>；平台會依專案與部署者決定 namespace、命名、生命週期與清理方式。
 儲存卷請使用 <code>{{userVolume}}</code> 來引用自己的個人 PVC。手寫 literal PVC
 名稱只允許在 group-owned project 中引用擁有群組儲存清單內既有的 PVC；
