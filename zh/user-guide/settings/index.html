@@ -906,17 +906,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#cli-ca-fallback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        進階 CLI CA fallback
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1070,17 +1059,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#cli-ca-fallback" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        進階 CLI CA fallback
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1148,7 +1126,7 @@
 </tr>
 <tr>
 <td><strong>API Key &amp; CLI</strong></td>
-<td>管理個人 API token，並提供進階 CLI CA fallback 下載</td>
+<td>管理個人 API token，並複製 CLI 設定指令</td>
 </tr>
 </tbody>
 </table>
@@ -1252,7 +1230,7 @@
 <p>變更偏好設定後會自動儲存，重新整理頁面後即時生效。</p>
 <hr />
 <h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
-<p>此標籤是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，提供兩件事：</p>
+<p>此標籤是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，可管理 CLI 憑證並複製設定指令。</p>
 <h3 id="api-token">已啟用的 API token<a class="headerlink" href="#api-token" title="Permanent link">&para;</a></h3>
 <p>token 列表會顯示您帳號下每個有效的 API token，以及 prefix、上次使用時間與到期時間。在這裡可以：</p>
 <ul>
@@ -1266,10 +1244,7 @@
 <p class="admonition-title">僅顯示一次</p>
 <p>後端不會儲存 token 明文，只儲存 SHA-256 雜湊。若 token 遺失，請撤銷後重新建立。</p>
 </div>
-<h3 id="cli-ca-fallback">進階 CLI CA fallback<a class="headerlink" href="#cli-ca-fallback" title="Permanent link">&para;</a></h3>
-<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA。只有在自訂 CLI build、緊急
-CA 輪替期間，或 TLS 除錯時才需要使用 <strong>下載 CLI CA</strong>。設定
-<code>CSCC_API_CA_CERT_PATH</code> 會覆寫官方 CLI binary 內建的 CA。</p>
+<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA，正常 CLI 設定不需要從設定頁下載憑證。</p>
 <p>CLI 設定指令會優先使用部署提供的 <code>VITE_PUBLIC_API_URL</code> 或 runtime <code>apiUrl</code>。
 若未設定，頁面會把 <code>dashboard.*</code> 主機名稱推導為 <code>api.*</code>，再加上 <code>/api/v1</code>。</p>
 <hr />

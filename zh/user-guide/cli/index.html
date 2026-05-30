@@ -718,17 +718,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#cli-ca" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        進階：從設定頁下載並信任 CLI CA
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1005,17 +994,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#cli-ca" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        進階：從設定頁下載並信任 CLI CA
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1115,7 +1093,7 @@
 <h3 id="tls-ca">TLS / 內部 CA<a class="headerlink" href="#tls-ca" title="Permanent link">&para;</a></h3>
 <p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA，因此大多數使用者不需要另外下載
 憑證。若平台 root CA 輪替，請先下載新發布的 CLI binary 再重新連線。</p>
-<p>手動 CA 設定仍保留給自訂 CLI build、緊急 CA 輪替期間，以及 TLS 除錯：</p>
+<p>手動 CA 設定屬於非一般使用者路徑，保留給自訂 CLI build、緊急 CA 輪替期間，以及 TLS 除錯：</p>
 <table>
 <thead>
 <tr>
@@ -1154,21 +1132,6 @@
 <div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>/Users/me/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<h3 id="cli-ca">進階：從設定頁下載並信任 CLI CA<a class="headerlink" href="#cli-ca" title="Permanent link">&para;</a></h3>
-<p>開啟 <code>https://dashboard.cscc.nthu.edu.tw/settings</code>，進入 <strong>API Key &amp; CLI</strong>。</p>
-<p>只有在使用自訂 CLI build、測試 CA 輪替或除錯 TLS trust 時才需要這個流程。
-官方 CLI 已內建平台 CA。</p>
-<ol>
-<li>點擊 <strong>Download CLI CA</strong>，儲存 <code>platform-internal-root-ca.pem</code>。</li>
-<li>執行儀表板產生的安裝指令。</li>
-<li>用手動 CA override 驗證 CLI 連線：</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_CA_CERT_PATH</span><span class="o">=</span>~/.config/cscc-cli/platform-internal-root-ca.pem<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>cscc-cli<span class="w"> </span>whoami
-</code></pre></div>
-<p>若不想每次設定環境變數，可將 <code>platform-internal-root-ca.pem</code> 或 <code>ca.crt</code>
-放在 <code>~/.config/cscc-cli/</code>；CLI 會在檢查明確 env 與 saved config path 後自動偵測。</p>
 <hr />
 <h2 id="_3">確認身分<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>whoami
