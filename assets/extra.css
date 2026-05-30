@@ -17,6 +17,6 @@ img + em {
 }
 
 /* Role badge colors */
-.badge-admin   { background: #e53935; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
-.badge-manager { background: #1976d2; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
-.badge-user    { background: #388e3c; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+.badge-admin   { background: #c62828; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+.badge-manager { background: #1565c0; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+.badge-user    { background: #2e7d32; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
