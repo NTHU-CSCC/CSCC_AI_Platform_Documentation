@@ -902,7 +902,9 @@ the selected Sonar submodules (<code>CSCC_AI_Platform_Backend</code>,
 submodule pointer or file changes therefore run only the frontend scanner. Docs,
 workflow, and lightweight CI helper changes run only the Infra/Docs scanner;
 only shared scanner execution or coverage-generation script changes select every
-Sonar project. The self-hosted runner must have SSH access to private sibling
+Sonar project. When a Go project is selected, the workflow provisions Go 1.25.10
+and installs the pinned <code>golangci-lint</code> version required by backend coverage
+preparation. The self-hosted runner must have SSH access to private sibling
 repositories when one of those submodules is selected; the workflow does not
 rely on the top-level repository <code>GITHUB_TOKEN</code> to fetch submodules.</p>
 <p>Required repository configuration:</p>
