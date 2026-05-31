@@ -892,8 +892,19 @@ scripts/ci/sonar-select-projects.sh<span class="w"> </span>/tmp/changed-files.tx
 <p>The root <code>ci.yml</code> workflow runs on self-hosted runners with the
 <code>self-hosted,platform</code> labels. It detects changed files, maps them to Sonar
 project directories, prepares coverage for those projects, and runs only the
-matching Sonar scans. Changes to scanner scripts or <code>.github/workflows/ci.yml</code>
-select all projects because they can affect every analysis.</p>
+matching Sonar scans. Changes to shared scanner execution or coverage scripts
+select all projects because they can affect every analysis; workflow,
+documentation, and lightweight CI helper changes select only the Infra/Docs
+project.</p>
+<p>The Sonar job checks out the top-level repository first, then initializes only
+the selected Sonar submodules (<code>CSCC_AI_Platform_Backend</code>,
+<code>CSCC_AI_Platform_Frontend</code>, and/or <code>CSCC_AI_Platform_Exporter</code>). Frontend-only
+submodule pointer or file changes therefore run only the frontend scanner. Docs,
+workflow, and lightweight CI helper changes run only the Infra/Docs scanner;
+only shared scanner execution or coverage-generation script changes select every
+Sonar project. The self-hosted runner must have SSH access to private sibling
+repositories when one of those submodules is selected; the workflow does not
+rely on the top-level repository <code>GITHUB_TOKEN</code> to fetch submodules.</p>
 <p>Required repository configuration:</p>
 <ul>
 <li>Secret <code>SONAR_TOKEN</code></li>
