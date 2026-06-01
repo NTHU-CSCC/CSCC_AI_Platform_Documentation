@@ -944,6 +944,12 @@ files, and legacy compatibility no-op adapters (<code>tools/**</code>, <code>k8s
 <code>pkg/k8s/container.go</code>, <code>internal/plugin/builtin/preemption_plugin.go</code>). Owner:
 backend maintainers. Review trigger: remove an exclusion when the file becomes a
 runtime behavior surface with meaningful unit-testable branches.</p>
+<p>Frontend Sonar coverage exclusions mirror the Vitest coverage policy in
+<code>CSCC_AI_Platform_Frontend/vite.config.ts</code>: tests, type declarations, app
+bootstrap, routing/layout/context/i18n wrappers, UI components, hooks, and page
+shells are excluded from line coverage while shared utilities and business
+parsers remain covered. Owner: frontend maintainers. Review trigger: update both
+Vitest and Sonar together when the coverage policy changes.</p>
 <h2 id="accepted-risk-rules">Accepted Risk Rules<a class="headerlink" href="#accepted-risk-rules" title="Permanent link">&para;</a></h2>
 <p>The scanner configuration only accepts narrow exceptions:</p>
 <ul>
@@ -968,6 +974,31 @@ runtime behavior surface with meaningful unit-testable branches.</p>
   GPU23 MinIO StatefulSet uses host networking to bind pre-provisioned local disk
   endpoints. Owner: platform infrastructure. Review trigger: replacement with a
   routable ClusterIP or storage-network design that removes host networking.</li>
+<li><code>iac:S5332</code> is accepted only for cluster-internal HTTP endpoints in backend
+  ConfigMaps, dashboard-to-backend in-cluster routing, MinIO in-cluster OIDC
+  discovery, and the JuiceFS GPU23 example manifest. Owner: platform
+  infrastructure. Reason: these values target Kubernetes service DNS or example
+  manifests behind platform ingress/proxy boundaries; user-facing traffic remains
+  HTTPS. Review trigger: any endpoint becomes user-facing, crosses namespaces
+  without network policy, or the backing service gains native TLS.</li>
+<li><code>iac:S6868</code> is accepted only for backend <code>pods/exec</code> RBAC in
+  <code>deploy/base/backend/serviceaccount.yaml</code> and the production-sandbox guardrail
+  role. Owner: backend/platform infrastructure. Reason: backend websocket exec
+  and controlled repair flows require Kubernetes exec. Review trigger: websocket
+  exec is removed, split to a narrower ServiceAccount, or Longhorn repair no
+  longer depends on pod exec.</li>
+<li><code>iac:S6471</code> is accepted only for IDE image Dockerfiles under
+  <code>scripts/images/*/Dockerfile</code>. Owner: platform infrastructure. Reason: their
+  shared entrypoint performs root-only user/home setup and then drops privileges
+  with <code>gosu</code> unless <code>PLATFORM_RUN_AS_ROOT=true</code> is explicitly set. Review
+  trigger: entrypoint logic changes, images stop using <code>platform-init.sh</code>, or
+  IDE pods move to mandatory non-root startup.</li>
+<li><code>python:S4502</code> is accepted only for
+  <code>CSCC_AI_Platform_Backend/tools/harbor_sync/webhook_receiver.py</code>. Owner:
+  backend maintainers. Reason: the endpoint is a Harbor machine-to-machine
+  webhook authenticated by <code>WEBHOOK_SECRET</code>; browser session CSRF controls do
+  not apply. Review trigger: cookie/session authentication is added or the
+  endpoint becomes browser-facing.</li>
 <li>Secret-bearing files, private keys, <code>.env*</code>, generated build output, and
   dependency directories are excluded from source analysis.</li>
 </ul>
