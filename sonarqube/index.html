@@ -914,8 +914,18 @@ rely on the top-level repository <code>GITHUB_TOKEN</code> to fetch submodules.<
 <li>Secret <code>SONAR_TOKEN</code></li>
 <li>Repository variable or secret <code>SONAR_HOST_URL</code></li>
 <li>Optional repository variables <code>SONAR_SCANNER_BIN</code>,
-  <code>SONAR_SCANNER_JAVA_OPTS</code>, and <code>SONAR_QUALITY_GATE_TIMEOUT</code></li>
+  <code>SONAR_SCANNER_VERSION</code>, <code>SONAR_SCANNER_SHA256</code>,
+  <code>SONAR_SCANNER_CACHE_DIR</code>, <code>SONAR_SCANNER_JAVA_OPTS</code>, and
+  <code>SONAR_QUALITY_GATE_TIMEOUT</code></li>
 </ul>
+<p>The scan wrapper first tries <code>SONAR_SCANNER_BIN</code>, then <code>sonar-scanner</code> on
+<code>PATH</code>. If neither exists, it downloads the pinned SonarScanner CLI version into
+the runner cache (<code>$RUNNER_TOOL_CACHE/sonar-scanner</code> when available, otherwise
+<code>$HOME/.cache/sonar-scanner</code>). Downloaded archives are SHA256-verified before
+execution and installed under a cache lock so concurrent self-hosted jobs do not
+share partial archives or directories. The default scanner version has built-in
+checksums for Linux and macOS x64/aarch64 runners. When overriding
+<code>SONAR_SCANNER_VERSION</code>, also set the matching <code>SONAR_SCANNER_SHA256</code>.</p>
 <p>Before pushing, run the local workflow gate from the root repository:</p>
 <div class="highlight"><pre><span></span><code>scripts/ci/act-push.sh
 </code></pre></div>
