@@ -904,7 +904,9 @@ workflow, and lightweight CI helper changes run only the Infra/Docs scanner;
 only shared scanner execution or coverage-generation script changes select every
 Sonar project. When a Go project is selected, the workflow provisions Go 1.25.10
 and installs the pinned <code>golangci-lint</code> version required by backend coverage
-preparation. The self-hosted runner must have SSH access to private sibling
+preparation. Backend coverage preparation runs with <code>GOFLAGS=-buildvcs=false</code>
+because Sonar uses temporary submodule checkouts where VCS stamping metadata can
+be incomplete. The self-hosted runner must have SSH access to private sibling
 repositories when one of those submodules is selected; the workflow does not
 rely on the top-level repository <code>GITHUB_TOKEN</code> to fetch submodules.</p>
 <p>Required repository configuration:</p>
