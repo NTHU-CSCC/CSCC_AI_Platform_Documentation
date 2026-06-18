@@ -1086,9 +1086,9 @@ s112347
 <p>刪除後的影響：</p>
 <ul>
 <li>使用者帳號被移除，立即無法登入。</li>
-<li>該使用者的 <strong>執行中 Workspace 不會自動關閉</strong>，請先停止。</li>
-<li>專案成員資格會一併移除。</li>
-<li>個人 <strong>PVC 資料保留</strong>，需另行至儲存頁面清理。</li>
+<li>專案成員資格、個人專案、quota 與 storage records 會在同一個資料庫 transaction 中移除。</li>
+<li>該使用者的 project namespaces 與 personal storage namespace 會被清理，包含正在執行的 Pods、Jobs、StatefulSets、Deployments、FileBrowser resources 與 PVCs。</li>
+<li>如果 Kubernetes finalizer 或 active workload 讓 namespace 暫時卡在刪除中，使用者刪除仍會成功，背景 cleanup reconciler 會持續重試直到 namespace 移除。</li>
 <li>過往的 Audit Log 仍會保留並引用該使用者 ID。</li>
 </ul>
 <hr />
