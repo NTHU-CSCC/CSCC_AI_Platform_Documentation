@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/sonarqube/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/runbooks/rdma-sriov/">
       
       
       
       
         
-          <link rel="alternate" href="../../sonarqube/" hreflang="en">
+          <link rel="alternate" href="../../../runbooks/rdma-sriov/" hreflang="en">
         
           <link rel="alternate" href="./" hreflang="zh">
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>SonarQube Scanning - GPU Cluster Management Platform — User Guide</title>
+        <title>Runbook: SR-IOV RDMA (GPUDirect) on the 25G Mellanox fabric - GPU Cluster Management Platform — User Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/extra.css">
+      <link rel="stylesheet" href="../../../assets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sonarqube-scanning" class="md-skip">
+        <a href="#runbook-sr-iov-rdma-gpudirect-on-the-25g-mellanox-fabric" class="md-skip">
           跳转至
         </a>
       
@@ -96,7 +96,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../" title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SonarQube Scanning
+              Runbook: SR-IOV RDMA (GPUDirect) on the 25G Mellanox fabric
             
           </span>
         </div>
@@ -163,7 +163,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../sonarqube/" hreflang="en" class="md-select__link">
+            <a href="../../../runbooks/rdma-sriov/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -254,7 +254,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-guide/" class="md-tabs__link">
+        <a href="../../user-guide/" class="md-tabs__link">
           
   
   
@@ -317,7 +317,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../" title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -347,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -419,7 +419,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../user-guide/" class="md-nav__link ">
+            <a href="../../user-guide/" class="md-nav__link ">
               
   
   
@@ -463,7 +463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/getting-started/" class="md-nav__link">
+      <a href="../../user-guide/getting-started/" class="md-nav__link">
         
   
   
@@ -491,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/concepts/" class="md-nav__link">
+      <a href="../../user-guide/concepts/" class="md-nav__link">
         
   
   
@@ -519,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/home-dashboard/" class="md-nav__link">
+      <a href="../../user-guide/home-dashboard/" class="md-nav__link">
         
   
   
@@ -547,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/projects/" class="md-nav__link">
+      <a href="../../user-guide/projects/" class="md-nav__link">
         
   
   
@@ -575,7 +575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/workspaces/" class="md-nav__link">
+      <a href="../../user-guide/workspaces/" class="md-nav__link">
         
   
   
@@ -603,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/cli/" class="md-nav__link">
+      <a href="../../user-guide/cli/" class="md-nav__link">
         
   
   
@@ -631,7 +631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/announcements/" class="md-nav__link">
+      <a href="../../user-guide/announcements/" class="md-nav__link">
         
   
   
@@ -659,7 +659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/groups/" class="md-nav__link">
+      <a href="../../user-guide/groups/" class="md-nav__link">
         
   
   
@@ -687,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/storage/" class="md-nav__link">
+      <a href="../../user-guide/storage/" class="md-nav__link">
         
   
   
@@ -715,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/requests/" class="md-nav__link">
+      <a href="../../user-guide/requests/" class="md-nav__link">
         
   
   
@@ -743,7 +743,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/settings/" class="md-nav__link">
+      <a href="../../user-guide/settings/" class="md-nav__link">
         
   
   
@@ -798,10 +798,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#local-setup" class="md-nav__link">
+  <a href="#the-fabric-the-guardrails" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Local Setup
+        The fabric &amp; the guardrails
       
     </span>
   </a>
@@ -809,10 +809,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#github-actions" class="md-nav__link">
+  <a href="#procedure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GitHub Actions
+        Procedure
       
     </span>
   </a>
@@ -820,10 +820,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#coverage-inputs" class="md-nav__link">
+  <a href="#workload-usage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Coverage Inputs
+        Workload usage
       
     </span>
   </a>
@@ -831,10 +831,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#accepted-risk-rules" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accepted Risk Rules
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rollback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-config-overridable-env-defaults-in-scriptssetuplibcommonsh-this-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key config (overridable env; defaults in scripts/setup/lib/common.sh + this script)
       
     </span>
   </a>
@@ -861,197 +883,137 @@
   
 
 
-<h1 id="sonarqube-scanning">SonarQube Scanning<a class="headerlink" href="#sonarqube-scanning" title="Permanent link">&para;</a></h1>
-<p>This repository is scanned as multiple SonarQube projects so each nested Git
-repository keeps accurate SCM blame and ownership:</p>
+<h1 id="runbook-sr-iov-rdma-gpudirect-on-the-25g-mellanox-fabric">Runbook: SR-IOV RDMA (GPUDirect) on the 25G Mellanox fabric<a class="headerlink" href="#runbook-sr-iov-rdma-gpudirect-on-the-25g-mellanox-fabric" title="Permanent link">&para;</a></h1>
+<p>Add RDMA acceleration for GPU workloads as an <strong>additive Multus secondary network</strong> using SR-IOV VFs
+on the 25G Mellanox PFs, via the NVIDIA + SR-IOV Network Operators. The <strong>Cilium primary CNI</strong> and
+the <strong><code>192.168.109.x</code> access lifeline</strong> are untouched. Driver:
+<code>scripts/setup/16-install-rdma-sriov.sh</code>.</p>
+<blockquote>
+<p>Run only <strong>after</strong> the Cilium migration (<code>15-</code>) is stable and soaked.</p>
+</blockquote>
+<h2 id="the-fabric-the-guardrails">The fabric &amp; the guardrails<a class="headerlink" href="#the-fabric-the-guardrails" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Fabric</th>
+<th>IPs</th>
+<th>NIC</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25G storage</td>
+<td><code>192.168.110.1-3</code>, pool <code>.220-239</code></td>
+<td><code>enp193s0f0np0</code> (gpu1/3), <code>enp194s0f0np0</code> (gpu2)</td>
+<td>Longhorn macvlan <code>lh25g0</code> <strong>+ RDMA VFs added here</strong></td>
+</tr>
+<tr>
+<td>10G cluster</td>
+<td><code>192.168.110.10X</code></td>
+<td>10G PF</td>
+<td>Cilium native routing (do not touch)</td>
+</tr>
+<tr>
+<td>109.x access</td>
+<td><code>192.168.109.x</code></td>
+<td>separate mgmt NIC</td>
+<td>ingress/OpenVPN/SSH — <strong>never island</strong></td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li><code>CSCC_AI_Platform_Backend</code></li>
-<li><code>CSCC_AI_Platform_Frontend</code></li>
-<li><code>CSCC_AI_Platform_Exporter</code></li>
-<li><code>CSCC_AI_Platform_CSCC_CLI</code></li>
-<li><code>CSCC_AI_Platform_OpenVPN_API</code></li>
-<li><code>CSCC_AI_Platform_InfraDocs</code></li>
+<li>SR-IOV VFs <strong>coexist</strong> with the PF IP and the <code>lh25g0</code> macvlan. Only firmware/driver/switchdev
+  transitions bounce the PF link — hence every change is <strong>rolling, per drained node, with a reboot</strong>.</li>
+<li>After each node: <code>lh25g0</code> storage macvlan back + ingress <code>192.168.109.201</code> reachable (the
+  <code>verify-node</code> gate enforces both).</li>
+<li><strong>R0 must prove <code>192.168.109.x</code> lives on a different NIC than the 25G PF</strong> before anything changes.</li>
 </ul>
-<h2 id="local-setup">Local Setup<a class="headerlink" href="#local-setup" title="Permanent link">&para;</a></h2>
-<p>Copy <code>.env.example</code> to <code>.env</code> and set <code>SONAR_TOKEN</code>. The token must stay local;
-<code>.env</code> is ignored by Git.</p>
-<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
-<span class="nv">$EDITOR</span><span class="w"> </span>.env
+<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/user/CSCC_AI_Platform
+
+<span class="c1"># R0 — read-only hardware review. GATES everything. Inspect every node:</span>
+<span class="c1">#   Mellanox NICs, rdma link, firmware (mlxconfig SRIOV_EN/NUM_OF_VFS), current VFs,</span>
+<span class="c1">#   IOMMU cmdline, nvidia-peermem, and CONFIRM 109.x is a separate NIC from the 25G PF.</span>
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>review
+<span class="c1">#   -&gt; Decide RDMA_VF_COUNT (default 8). Do NOT proceed if 109.x shares the 25G NIC.</span>
+
+<span class="c1"># R1 — per-node prereqs: IOMMU kernel args + mlxconfig SRIOV_EN=1 NUM_OF_VFS=N. Reboots the node.</span>
+<span class="nv">RDMA_CONFIRM</span><span class="o">=</span>prereqs-gpu3<span class="w"> </span>scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>prereqs<span class="w"> </span>gpu3
+<span class="nv">RDMA_CONFIRM</span><span class="o">=</span>prereqs-gpu2<span class="w"> </span>scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>prereqs<span class="w"> </span>gpu2
+<span class="nv">RDMA_CONFIRM</span><span class="o">=</span>prereqs-gpu1<span class="w"> </span>scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>prereqs<span class="w"> </span>gpu1
+<span class="c1">#   Each run gates on verify-node (storage macvlan + ingress back).</span>
+
+<span class="c1"># R2 — operators (NVIDIA Network Operator bundles SR-IOV operator, RDMA CNI, device plugin,</span>
+<span class="c1">#       MOFED + nvidia-peermem for GPUDirect).</span>
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>operators
+
+<span class="c1"># R3 — VF policy on the 25G PFs. The SR-IOV operator drains+reconfigures node-by-node;</span>
+<span class="c1">#       gate each node:</span>
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>vf-policy
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>verify-node<span class="w"> </span>gpu3
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>verify-node<span class="w"> </span>gpu2
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>verify-node<span class="w"> </span>gpu1
+
+<span class="c1"># R4 — expose the VF pool as a Multus secondary network (auto-generates a NAD).</span>
+scripts/setup/16-install-rdma-sriov.sh<span class="w"> </span>network
 </code></pre></div>
-<p>Run all scans:</p>
-<div class="highlight"><pre><span></span><code>scripts/ci/sonar-scan.sh
+<h2 id="workload-usage">Workload usage<a class="headerlink" href="#workload-usage" title="Permanent link">&para;</a></h2>
+<p>A GPU pod requests a VF + the secondary network:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">k8s.v1.cni.cncf.io/networks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default/rdma-vf25g</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">rdma_vf25g</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="w">        </span><span class="c1"># advertised as &lt;prefix&gt;/rdma_vf25g by the SR-IOV device plugin</span>
+<span class="w">        </span><span class="nt">nvidia.com/gpu</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
 </code></pre></div>
-<p>Run a subset by passing project directories:</p>
-<div class="highlight"><pre><span></span><code>scripts/ci/sonar-scan.sh<span class="w"> </span>CSCC_AI_Platform_Backend<span class="w"> </span>CSCC_AI_Platform_Frontend
-</code></pre></div>
-<p>Select projects from a changed-file list:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>origin/release...HEAD<span class="w"> </span>&gt;<span class="w"> </span>/tmp/changed-files.txt
-scripts/ci/sonar-select-projects.sh<span class="w"> </span>/tmp/changed-files.txt
-</code></pre></div>
-<h2 id="github-actions">GitHub Actions<a class="headerlink" href="#github-actions" title="Permanent link">&para;</a></h2>
-<p>The root <code>ci.yml</code> workflow runs on self-hosted runners with the
-<code>self-hosted,platform</code> labels. It detects changed files, maps them to Sonar
-project directories, prepares coverage for those projects, and runs only the
-matching Sonar scans. Changes to shared scanner execution or coverage scripts
-select all projects because they can affect every analysis; workflow,
-documentation, and lightweight CI helper changes select only the Infra/Docs
-project.</p>
-<p>The Sonar job checks out the top-level repository first, then initializes only
-the selected Sonar submodules (<code>CSCC_AI_Platform_Backend</code>,
-<code>CSCC_AI_Platform_Frontend</code>, and/or <code>CSCC_AI_Platform_Exporter</code>). Frontend-only
-submodule pointer or file changes therefore run only the frontend scanner. Docs,
-workflow, and lightweight CI helper changes run only the Infra/Docs scanner;
-only shared scanner execution or coverage-generation script changes select every
-Sonar project. When a Go project is selected, the workflow provisions Go 1.25.10
-and installs the pinned <code>golangci-lint</code> version required by backend coverage
-preparation. Backend coverage preparation runs with <code>GOFLAGS=-buildvcs=false</code>
-because Sonar uses temporary submodule checkouts where VCS stamping metadata can
-be incomplete. The self-hosted runner must have SSH access to private sibling
-repositories when one of those submodules is selected; the workflow does not
-rely on the top-level repository <code>GITHUB_TOKEN</code> to fetch submodules.</p>
-<p>Required repository configuration:</p>
+<p>This coexists with the Cilium primary network and the existing <code>cscc-storage</code> storage NAD.</p>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Secret <code>SONAR_TOKEN</code></li>
-<li>Repository variable or secret <code>SONAR_HOST_URL</code></li>
-<li>Optional repository variables <code>SONAR_SCANNER_BIN</code>,
-  <code>SONAR_SCANNER_VERSION</code>, <code>SONAR_SCANNER_SHA256</code>,
-  <code>SONAR_SCANNER_CACHE_DIR</code>, <code>SONAR_SCANNER_JAVA_OPTS</code>, and
-  <code>SONAR_QUALITY_GATE_TIMEOUT</code></li>
+<li><code>rdma/...</code> / VF resources advertised: <code>kubectl describe node gpu1 | grep -i rdma</code>.</li>
+<li><code>ib_write_bw</code> / <code>ib_read_bw</code> between two GPU nodes over the VFs.</li>
+<li>A 2-node NCCL all-reduce shows GPUDirect RDMA bandwidth (not TCP fallback).</li>
+<li>Storage intact on all nodes: <code>lh25g0</code> present, Longhorn RWX volumes mount.</li>
 </ul>
-<p>The scan wrapper first tries <code>SONAR_SCANNER_BIN</code>, then <code>sonar-scanner</code> on
-<code>PATH</code>. If neither exists, it downloads the pinned SonarScanner CLI version into
-the runner cache (<code>$RUNNER_TOOL_CACHE/sonar-scanner</code> when available, otherwise
-<code>$HOME/.cache/sonar-scanner</code>). Downloaded archives are SHA256-verified before
-execution and installed under a cache lock so concurrent self-hosted jobs do not
-share partial archives or directories. The default scanner version has built-in
-checksums for Linux and macOS x64/aarch64 runners. When overriding
-<code>SONAR_SCANNER_VERSION</code>, also set the matching <code>SONAR_SCANNER_SHA256</code>.</p>
-<p>Before pushing, run the local workflow gate from the root repository:</p>
-<div class="highlight"><pre><span></span><code>scripts/ci/act-push.sh
-</code></pre></div>
-<p>Scanner runs wait for the server-side Quality Gate result before returning.
-The default wait timeout is 600 seconds and can be overridden with
-<code>SONAR_QUALITY_GATE_TIMEOUT</code>.</p>
-<p>The wrapper runs <code>act push</code> in a temporary local clone so checkout cleanup never
-touches the real workspace. It tests committed content by default, matching what
-a real push sends to GitHub. To intentionally include uncommitted local changes,
-run <code>ACT_PUSH_INCLUDE_WORKTREE=true scripts/ci/act-push.sh</code>; the overlay excludes
-<code>.git</code>, <code>.env</code>, scanner output, coverage output, virtualenvs, dependency
-directories, and downloaded SonarQube archives. Exported Sonar environment
-variables take precedence over <code>.env</code>, and values are passed to <code>act</code> as a
-temporary secret file. Release secret sync and Pages publishing steps are skipped
-only when the actor is <code>nektos/act</code>; the validation/build portions still run.</p>
-<h2 id="coverage-inputs">Coverage Inputs<a class="headerlink" href="#coverage-inputs" title="Permanent link">&para;</a></h2>
-<p>Generate coverage before scanning when possible:</p>
-<ul>
-<li>Backend: <code>cd CSCC_AI_Platform_Backend &amp;&amp; make test-coverage</code></li>
-<li>Frontend: <code>cd CSCC_AI_Platform_Frontend &amp;&amp; npm run test:coverage</code></li>
-<li>Exporter: <code>cd CSCC_AI_Platform_Exporter/mps-exporter &amp;&amp; python -m pytest --cov=. --cov-report=xml:coverage.xml</code></li>
-<li>CLI: <code>cd cscc-cli &amp;&amp; go test ./... -coverprofile=coverage.out</code></li>
-<li>OpenVPN API: <code>cd openvpn-api &amp;&amp; go test ./... -coverprofile=coverage.out</code></li>
-</ul>
-<p>Backend coverage excludes non-runtime scan helpers, Kubernetes manifests, test
-files, and legacy compatibility no-op adapters (<code>tools/**</code>, <code>k8s/**</code>,
-<code>deploy/**</code>, <code>**/*_test.go</code>, <code>pkg/logger/logger.go</code>, <code>pkg/k8s/init.go</code>,
-<code>pkg/k8s/container.go</code>, <code>internal/plugin/builtin/preemption_plugin.go</code>). Owner:
-backend maintainers. Review trigger: remove an exclusion when the file becomes a
-runtime behavior surface with meaningful unit-testable branches.</p>
-<p>Frontend Sonar coverage exclusions mirror the Vitest coverage policy in
-<code>CSCC_AI_Platform_Frontend/vite.config.ts</code>: tests, type declarations, app
-bootstrap, routing/layout/context/i18n wrappers, UI components, hooks, and page
-shells are excluded from line coverage while shared utilities and business
-parsers remain covered. Owner: frontend maintainers. Review trigger: update both
-Vitest and Sonar together when the coverage policy changes.</p>
-<h2 id="accepted-risk-rules">Accepted Risk Rules<a class="headerlink" href="#accepted-risk-rules" title="Permanent link">&para;</a></h2>
-<p>The scanner configuration only accepts narrow exceptions:</p>
-<ul>
-<li>Generated protobuf Python files are excluded from exporter analysis. Rule:
-  <code>*</code>. Pattern: <code>**/*_pb2.py</code>, <code>**/*_pb2_grpc.py</code>. Owner: exporter
-  maintainers. Reason: generated files must be regenerated from protobuf
-  sources instead of hand-edited. Review trigger: generator output is replaced by
-  checked-in handwritten adapters or the protobuf generation path changes.</li>
-<li>Policy engine fixture manifests under <code>deploy/base/policies/tests/resources/**</code>
-  are excluded from the Infra/Docs project because they intentionally model
-  invalid and pre-mutation workload shapes for admission-policy tests. Owner:
-  platform infrastructure. Review trigger: any fixture is reused as a deployable
-  manifest or moved outside the policy test tree.</li>
-<li>DaemonSet findings for host namespaces, privileged mode, and explicit Linux
-  capabilities are ignored only for operation-specific DaemonSet manifests.
-  Rules: <code>kubernetes:S6428</code>, <code>kubernetes:S6431</code>, <code>kubernetes:S5849</code>. Pattern:
-  <code>**/*daemonset*.yaml</code>. Owner: platform infrastructure. Reason: GPU,
-  networking, and node-agent DaemonSets require host integration. Review trigger:
-  any DaemonSet privilege, host namespace, or capability changes.</li>
-<li><code>kubernetes:S6431</code> is accepted for
-  <code>deploy/overlays/production/juicefs-storage/minio-direct-disk.yaml</code> because the
-  GPU23 MinIO StatefulSet uses host networking to bind pre-provisioned local disk
-  endpoints. Owner: platform infrastructure. Review trigger: replacement with a
-  routable ClusterIP or storage-network design that removes host networking.</li>
-<li><code>iac:S5332</code> is accepted only for cluster-internal HTTP endpoints in backend
-  ConfigMaps, dashboard-to-backend in-cluster routing, MinIO in-cluster OIDC
-  discovery, and the JuiceFS GPU23 example manifest. Owner: platform
-  infrastructure. Reason: these values target Kubernetes service DNS or example
-  manifests behind platform ingress/proxy boundaries; user-facing traffic remains
-  HTTPS. Review trigger: any endpoint becomes user-facing, crosses namespaces
-  without network policy, or the backing service gains native TLS.</li>
-<li><code>iac:S6868</code> is accepted only for backend <code>pods/exec</code> RBAC in
-  <code>deploy/base/backend/serviceaccount.yaml</code>. Owner: backend/platform
-  infrastructure. Reason: backend websocket exec
-  and controlled repair flows require Kubernetes exec. Review trigger: websocket
-  exec is removed, split to a narrower ServiceAccount, or Longhorn repair no
-  longer depends on pod exec.</li>
-<li><code>iac:S6471</code> is accepted only for IDE image Dockerfiles under
-  <code>scripts/images/*/Dockerfile</code>. Owner: platform infrastructure. Reason: their
-  shared entrypoint performs root-only user/home setup and then drops privileges
-  with <code>gosu</code> unless <code>PLATFORM_RUN_AS_ROOT=true</code> is explicitly set. Review
-  trigger: entrypoint logic changes, images stop using <code>platform-init.sh</code>, or
-  IDE pods move to mandatory non-root startup.</li>
-<li><code>python:S4502</code> is accepted only for
-  <code>CSCC_AI_Platform_Backend/tools/harbor_sync/webhook_receiver.py</code>. Owner:
-  backend maintainers. Reason: the endpoint is a Harbor machine-to-machine
-  webhook authenticated by <code>WEBHOOK_SECRET</code>; browser session CSRF controls do
-  not apply. Review trigger: cookie/session authentication is added or the
-  endpoint becomes browser-facing.</li>
-<li>Secret-bearing files, private keys, <code>.env*</code>, generated build output, and
-  dependency directories are excluded from source analysis.</li>
-</ul>
-<p>Temporary maintainability debt exceptions are rule-specific and must not include
-bugs, vulnerabilities, secrets, or Security Hotspots:</p>
-<ul>
-<li>Backend rules <code>go:S3776</code>, <code>go:S1192</code>, and <code>go:S107</code> on <code>**/*.go</code>. Owner:
-  backend maintainers. Reason: legacy service/application/repository code has
-  broad existing complexity, duplicated literals, and long parameter-list debt
-  that is unsafe to rewrite in one scanning bootstrap. Review trigger: remove the
-  exception for any touched package once its local helper/config object refactor
-  lands. Cleanup owner/ticket: backend maintainers,
-  <code>SONAR-DEBT-BACKEND-2026Q3</code>. Deadline: September 30, 2026.</li>
-<li>Frontend rules <code>typescript:S6759</code>, <code>typescript:S3358</code>, <code>typescript:S7764</code>,
-  <code>typescript:S1874</code>, <code>typescript:S7773</code>, <code>typescript:S7735</code>,
-  <code>typescript:S6571</code>, <code>typescript:S3776</code>, <code>typescript:S4325</code>,
-  <code>typescript:S6479</code>, <code>typescript:S7780</code>, <code>typescript:S6853</code>,
-  <code>typescript:S3863</code>, <code>typescript:S6582</code>, <code>typescript:S4165</code>,
-  <code>typescript:S6594</code>, <code>typescript:S7763</code>, <code>typescript:S6772</code>,
-  <code>typescript:S6481</code>, <code>typescript:S6819</code>, <code>typescript:S6606</code>,
-  <code>typescript:S6749</code>, <code>typescript:S6353</code>, <code>typescript:S6848</code>,
-  <code>typescript:S7744</code>, <code>typescript:S6551</code>, <code>typescript:S7723</code>,
-  <code>typescript:S7741</code>, <code>typescript:S7758</code>, <code>typescript:S7776</code>,
-  <code>typescript:S6754</code>, <code>typescript:S7770</code>, <code>typescript:S6478</code>,
-  <code>typescript:S4123</code>, <code>typescript:S7746</code>, <code>typescript:S5843</code>,
-  <code>typescript:S6767</code>, <code>typescript:S2486</code>, <code>javascript:S7772</code>, and
-  <code>javascript:S7764</code> on <code>**/*</code>. Owner: frontend maintainers. Reason: legacy
-  React/TypeScript migration debt is large and non-security-critical after the
-  bug/accessibility fixes in this bootstrap. Review trigger: remove per-rule
-  exceptions as readonly props, nested conditionals, deprecated APIs, assertions,
-  and hook complexity are migrated feature by feature. Cleanup owner/ticket:
-  frontend maintainers, <code>SONAR-DEBT-FRONTEND-2026Q3</code>. Deadline: September 30,
-  2026.</li>
-</ul>
-<p>When a backend package or frontend feature folder is modified for non-trivial
-work, reviewers must check whether the matching rule suppression can be narrowed
-or removed for that touched path. New packages and feature folders must not rely
-on these legacy maintainability suppressions unless this file is updated with a
-specific accepted-risk entry.</p>
-<p>Any new accepted risk must document the Sonar rule, file pattern, owner, reason,
-and review trigger in this file before being added to scanner configuration.</p>
+<h2 id="rollback">Rollback<a class="headerlink" href="#rollback" title="Permanent link">&para;</a></h2>
+<p>SR-IOV is additive. To revert: delete <code>SriovNetwork</code>/<code>SriovNetworkNodePolicy</code>, uninstall the
+operators, then per drained node <code>mlxconfig -d &lt;pci&gt; set SRIOV_EN=0</code> and reboot. The Cilium primary
+network and the <code>lh25g0</code> storage macvlan remain intact throughout.</p>
+<h2 id="key-config-overridable-env-defaults-in-scriptssetuplibcommonsh-this-script">Key config (overridable env; defaults in <code>scripts/setup/lib/common.sh</code> + this script)<a class="headerlink" href="#key-config-overridable-env-defaults-in-scriptssetuplibcommonsh-this-script" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Var</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RDMA_VF_COUNT</code></td>
+<td><code>8</code></td>
+<td>VFs per 25G PF</td>
+</tr>
+<tr>
+<td><code>RDMA_RESOURCE_NAME</code></td>
+<td><code>rdma_vf25g</code></td>
+<td>SR-IOV resource name</td>
+</tr>
+<tr>
+<td><code>RDMA_NODE_IFACES</code></td>
+<td><code>gpu1=enp193s0f0np0 gpu2=enp194s0f0np0 gpu3=enp193s0f0np0</code></td>
+<td>25G PF per node</td>
+</tr>
+<tr>
+<td><code>RDMA_NAD_NAME</code> / <code>RDMA_NAD_NAMESPACE</code></td>
+<td><code>rdma-vf25g</code> / <code>default</code></td>
+<td>generated NAD</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1127,10 +1089,10 @@ and review trigger in this file before being added to scanner configuration.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
