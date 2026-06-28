@@ -743,6 +743,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="建置映像檔">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置參數（build arguments）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置資源上限
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -757,7 +785,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -1019,6 +1047,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="建置映像檔">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置參數（build arguments）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置資源上限
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1033,7 +1089,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -1227,11 +1283,58 @@ cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class
 <td>選用建置 timeout 覆寫</td>
 </tr>
 <tr>
+<td><code>--build-arg</code></td>
+<td>Dockerfile <code>ARG</code> 覆寫，格式 <code>KEY=VALUE</code>；可重複使用</td>
+</tr>
+<tr>
 <td><code>--follow=false</code></td>
 <td>只提交建置，不串流日誌</td>
 </tr>
 </tbody>
 </table>
+<h3 id="build-arguments">建置參數（build arguments）<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
+<p>用 <code>--build-arg KEY=VALUE</code> 在建置時傳入 Dockerfile 的 <code>ARG</code>。此旗標可重複，且
+適用於所有 <code>--source</code>（upload、dockerfile、storage）。Backend 會驗證每一筆
+（<code>KEY</code> 需符合 <code>[A-Za-z_][A-Za-z0-9_]*</code>），並轉成 Kaniko 的 <code>--build-arg</code>。</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>.
+</code></pre></div>
+<p>可用來把密鑰、可調參數留在 Dockerfile 之外（例如 <code>ARG HF_TOKEN</code>），或把編譯
+並行度（<code>MAX_JOBS</code>、<code>FLASH_ATTN_MAX_JOBS</code> …）壓低，讓重型建置塞得進你要求的
+記憶體。</p>
+<blockquote>
+<p>build-arg 會成為 Kaniko job spec 的一部分，能讀 build pod 的人可能看得到。請
+視為低敏感度;用此方式傳入的 token 建議建置後輪換。</p>
+</blockquote>
+<h3 id="_5">建置資源上限<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><code>--cpu-cores</code>、<code>--memory-gb</code>、<code>--timeout-minutes</code> 每次建置都有上限。CPU 與記憶體
+的有效上限為<strong>專案方案上限與平台上限取小者</strong>（<code>min(專案方案, 平台 cap)</code>）：</p>
+<table>
+<thead>
+<tr>
+<th>資源</th>
+<th>平台上限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU cores</td>
+<td><code>16</code></td>
+</tr>
+<tr>
+<td>記憶體</td>
+<td><code>64 GiB</code></td>
+</tr>
+<tr>
+<td>Timeout（分鐘）</td>
+<td><code>240</code></td>
+</tr>
+</tbody>
+</table>
+<p>超過該專案上限的請求會在建立 job 前被拒絕。若不帶這些旗標，建置會使用平台預設
+的 request 大小。</p>
 <p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
 <code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止且印出狀態。</p>
@@ -1256,7 +1359,7 @@ API endpoint；沒有內部 service fallback。Production 請使用 gateway API 
 </code></pre></div>
 <p>登出會先呼叫 <code>DELETE /api/v1/me/api-tokens/current</code> 撤銷目前使用的 token，接著保留 TLS 設定並清除本機 token 欄位，讓手動憑證 override 可以重複使用。</p>
 <hr />
-<h2 id="_5">預設值<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">預設值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
