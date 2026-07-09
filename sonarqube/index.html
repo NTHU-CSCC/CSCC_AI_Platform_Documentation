@@ -831,10 +831,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#accepted-risk-rules" class="md-nav__link">
+  <a href="#issue-policy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accepted Risk Rules
+        Issue Policy
       
     </span>
   </a>
@@ -962,96 +962,24 @@ bootstrap, routing/layout/context/i18n wrappers, UI components, hooks, and page
 shells are excluded from line coverage while shared utilities and business
 parsers remain covered. Owner: frontend maintainers. Review trigger: update both
 Vitest and Sonar together when the coverage policy changes.</p>
-<h2 id="accepted-risk-rules">Accepted Risk Rules<a class="headerlink" href="#accepted-risk-rules" title="Permanent link">&para;</a></h2>
-<p>The scanner configuration only accepts narrow exceptions:</p>
-<ul>
-<li>Generated protobuf Python files are excluded from exporter analysis. Rule:
-  <code>*</code>. Pattern: <code>**/*_pb2.py</code>, <code>**/*_pb2_grpc.py</code>. Owner: exporter
-  maintainers. Reason: generated files must be regenerated from protobuf
-  sources instead of hand-edited. Review trigger: generator output is replaced by
-  checked-in handwritten adapters or the protobuf generation path changes.</li>
-<li>Policy engine fixture manifests under <code>deploy/base/policies/tests/resources/**</code>
-  are excluded from the Infra/Docs project because they intentionally model
-  invalid and pre-mutation workload shapes for admission-policy tests. Owner:
-  platform infrastructure. Review trigger: any fixture is reused as a deployable
-  manifest or moved outside the policy test tree.</li>
-<li>DaemonSet findings for host namespaces, privileged mode, and explicit Linux
-  capabilities are ignored only for operation-specific DaemonSet manifests.
-  Rules: <code>kubernetes:S6428</code>, <code>kubernetes:S6431</code>, <code>kubernetes:S5849</code>. Pattern:
-  <code>**/*daemonset*.yaml</code>. Owner: platform infrastructure. Reason: GPU,
-  networking, and node-agent DaemonSets require host integration. Review trigger:
-  any DaemonSet privilege, host namespace, or capability changes.</li>
-<li><code>kubernetes:S6431</code> is accepted for
-  <code>deploy/overlays/production/juicefs-storage/minio-direct-disk.yaml</code> because the
-  GPU23 MinIO StatefulSet uses host networking to bind pre-provisioned local disk
-  endpoints. Owner: platform infrastructure. Review trigger: replacement with a
-  routable ClusterIP or storage-network design that removes host networking.</li>
-<li><code>iac:S5332</code> is accepted only for cluster-internal HTTP endpoints in backend
-  ConfigMaps, dashboard-to-backend in-cluster routing, MinIO in-cluster OIDC
-  discovery, and the JuiceFS GPU23 example manifest. Owner: platform
-  infrastructure. Reason: these values target Kubernetes service DNS or example
-  manifests behind platform ingress/proxy boundaries; user-facing traffic remains
-  HTTPS. Review trigger: any endpoint becomes user-facing, crosses namespaces
-  without network policy, or the backing service gains native TLS.</li>
-<li><code>iac:S6868</code> is accepted only for backend <code>pods/exec</code> RBAC in
-  <code>deploy/base/backend/serviceaccount.yaml</code>. Owner: backend/platform
-  infrastructure. Reason: backend websocket exec
-  and controlled repair flows require Kubernetes exec. Review trigger: websocket
-  exec is removed, split to a narrower ServiceAccount, or Longhorn repair no
-  longer depends on pod exec.</li>
-<li><code>iac:S6471</code> is accepted only for IDE image Dockerfiles under
-  <code>scripts/images/*/Dockerfile</code>. Owner: platform infrastructure. Reason: their
-  shared entrypoint performs root-only user/home setup and then drops privileges
-  with <code>gosu</code> unless <code>PLATFORM_RUN_AS_ROOT=true</code> is explicitly set. Review
-  trigger: entrypoint logic changes, images stop using <code>platform-init.sh</code>, or
-  IDE pods move to mandatory non-root startup.</li>
-<li><code>python:S4502</code> is accepted only for
-  <code>CSCC_AI_Platform_Backend/tools/harbor_sync/webhook_receiver.py</code>. Owner:
-  backend maintainers. Reason: the endpoint is a Harbor machine-to-machine
-  webhook authenticated by <code>WEBHOOK_SECRET</code>; browser session CSRF controls do
-  not apply. Review trigger: cookie/session authentication is added or the
-  endpoint becomes browser-facing.</li>
-<li>Secret-bearing files, private keys, <code>.env*</code>, generated build output, and
-  dependency directories are excluded from source analysis.</li>
-</ul>
-<p>Temporary maintainability debt exceptions are rule-specific and must not include
-bugs, vulnerabilities, secrets, or Security Hotspots:</p>
-<ul>
-<li>Backend rules <code>go:S3776</code>, <code>go:S1192</code>, and <code>go:S107</code> on <code>**/*.go</code>. Owner:
-  backend maintainers. Reason: legacy service/application/repository code has
-  broad existing complexity, duplicated literals, and long parameter-list debt
-  that is unsafe to rewrite in one scanning bootstrap. Review trigger: remove the
-  exception for any touched package once its local helper/config object refactor
-  lands. Cleanup owner/ticket: backend maintainers,
-  <code>SONAR-DEBT-BACKEND-2026Q3</code>. Deadline: September 30, 2026.</li>
-<li>Frontend rules <code>typescript:S6759</code>, <code>typescript:S3358</code>, <code>typescript:S7764</code>,
-  <code>typescript:S1874</code>, <code>typescript:S7773</code>, <code>typescript:S7735</code>,
-  <code>typescript:S6571</code>, <code>typescript:S3776</code>, <code>typescript:S4325</code>,
-  <code>typescript:S6479</code>, <code>typescript:S7780</code>, <code>typescript:S6853</code>,
-  <code>typescript:S3863</code>, <code>typescript:S6582</code>, <code>typescript:S4165</code>,
-  <code>typescript:S6594</code>, <code>typescript:S7763</code>, <code>typescript:S6772</code>,
-  <code>typescript:S6481</code>, <code>typescript:S6819</code>, <code>typescript:S6606</code>,
-  <code>typescript:S6749</code>, <code>typescript:S6353</code>, <code>typescript:S6848</code>,
-  <code>typescript:S7744</code>, <code>typescript:S6551</code>, <code>typescript:S7723</code>,
-  <code>typescript:S7741</code>, <code>typescript:S7758</code>, <code>typescript:S7776</code>,
-  <code>typescript:S6754</code>, <code>typescript:S7770</code>, <code>typescript:S6478</code>,
-  <code>typescript:S4123</code>, <code>typescript:S7746</code>, <code>typescript:S5843</code>,
-  <code>typescript:S6767</code>, <code>typescript:S2486</code>, <code>javascript:S7772</code>, and
-  <code>javascript:S7764</code> on <code>**/*</code>. Owner: frontend maintainers. Reason: legacy
-  React/TypeScript migration debt is large and non-security-critical after the
-  bug/accessibility fixes in this bootstrap. Review trigger: remove per-rule
-  exceptions as readonly props, nested conditionals, deprecated APIs, assertions,
-  and hook complexity are migrated feature by feature. Cleanup owner/ticket:
-  frontend maintainers, <code>SONAR-DEBT-FRONTEND-2026Q3</code>. Deadline: September 30,
-  2026.</li>
-</ul>
-<p>When a backend package or frontend feature folder is modified for non-trivial
-work, reviewers must check whether the matching rule suppression can be narrowed
-or removed for that touched path. New packages and feature folders must not rely
-on these legacy maintainability suppressions unless this file is updated with a
-specific accepted-risk entry.</p>
-<p>Any new accepted risk must document the Sonar rule, file pattern, owner, reason,
-and review trigger in this file before being added to scanner configuration.</p>
+<h2 id="issue-policy">Issue Policy<a class="headerlink" href="#issue-policy" title="Permanent link">&para;</a></h2>
+<p>The scanner configuration must not hide issues with <code>sonar.issue.ignore.*</code>,
+<code>NOSONAR</code>, source-file exclusions, or rule-specific suppressions. When the local
+scanner reports a bug, vulnerability, Security Hotspot, IaC finding, or
+maintainability issue, fix the code or stop with the exact finding and required
+approval.</p>
+<p>Allowed <code>sonar.exclusions</code> are limited to files that are not intended to be
+uploaded or reviewed as source: <code>.git</code>, <code>.scannerwork</code>, <code>.env*</code>, private keys,
+secret manifests, dependency directories, build outputs, coverage reports,
+virtualenvs, caches, and archives. Keep the matching <code>.gitignore</code> entry in place
+before adding or keeping an exclusion.</p>
+<p>Coverage exclusions are not issue suppressions. They keep coverage metrics
+aligned with the project test policy, but excluded files remain in source
+analysis unless they are also ignored local artifacts.</p>
+<p>Some scanner findings can point at production-impacting manifests such as
+DaemonSets, host networking, RBAC, storage, or network policy. Do not suppress
+those findings to pass the scan. Propose the concrete infrastructure change and
+obtain the required production-impacting approval before mutating those files.</p>
 
 
 
