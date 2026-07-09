@@ -1222,13 +1222,6 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dockerfile<span class="w"> </span>-
 </code></pre></div>
-<p>Storage mode builds from a path in your personal storage and calls
-<code>/api/v1/images/build/from-storage</code>:</p>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
-</code></pre></div>
 <p>Useful options:</p>
 <table>
 <thead>
@@ -1252,15 +1245,11 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </tr>
 <tr>
 <td><code>--source</code></td>
-<td><code>upload</code>, <code>dockerfile</code>, or <code>storage</code></td>
+<td><code>upload</code> or <code>dockerfile</code></td>
 </tr>
 <tr>
 <td><code>--dockerfile</code></td>
 <td>Dockerfile path, or <code>-</code> for stdin, when <code>--source dockerfile</code></td>
-</tr>
-<tr>
-<td><code>--storage-path</code></td>
-<td>Source path inside your personal storage</td>
 </tr>
 <tr>
 <td><code>--build-arg</code></td>
@@ -1274,8 +1263,8 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </table>
 <h3 id="build-arguments">Build arguments<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
 <p>Pass Dockerfile <code>ARG</code> values at build time with <code>--build-arg KEY=VALUE</code>. The flag
-is repeatable and works with every <code>--source</code> (upload, dockerfile, storage). The
-backend validates each entry (<code>KEY</code> must match <code>[A-Za-z_][A-Za-z0-9_]*</code>) and
+is repeatable and works with <code>upload</code> and <code>dockerfile</code> builds. The backend
+validates each entry (<code>KEY</code> must match <code>[A-Za-z_][A-Za-z0-9_]*</code>) and
 forwards them to Kaniko as <code>--build-arg</code>.</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
@@ -1293,8 +1282,7 @@ this way after the build.</p>
 <h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
 <p>Image builds are queued behind one shared build engine. Each running build gets
 16 CPU cores, 32Gi memory, and a 100Gi scratch workspace. CPU, memory, timeout,
-and project storage source selection are not CLI options; storage builds always
-read from your personal storage path.</p>
+and build-source resource overrides are not CLI options.</p>
 <p>After submission, <code>--follow=true</code> polls until build logs are available, streams
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>, and stops with the final
 <code>completed</code>, <code>failed</code>, or <code>deleted</code> status when the backend reports one.</p>

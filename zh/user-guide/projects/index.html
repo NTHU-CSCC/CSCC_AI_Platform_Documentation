@@ -1435,10 +1435,6 @@
 <td>上傳 <code>.tar.gz</code> 或 <code>.zip</code> build context，Dockerfile 需放在根目錄</td>
 </tr>
 <tr>
-<td><strong>從 Storage</strong></td>
-<td>從您的個人儲存路徑建置</td>
-</tr>
-<tr>
 <td><strong>只貼 Dockerfile</strong></td>
 <td>直接貼上 Dockerfile，平台會建立最小 build context</td>
 </tr>
@@ -1463,17 +1459,15 @@
 </tr>
 <tr>
 <td><strong>建置來源</strong></td>
-<td>上傳 archive、個人 storage path，或直接貼 Dockerfile</td>
+<td>上傳 archive，或直接貼 Dockerfile</td>
 </tr>
 </tbody>
 </table>
 <p>映像建置會送進共用佇列，平台同一時間只啟動一個 build。每個執行中的 build 固定
 使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、memory、
-timeout 與 project storage source selection 不再由使用者在表單中指定。</p>
-<p>上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；Storage
-build 的來源路徑會正規化在您的個人 PVC root 底下，parent directory traversal
-無法逃出掛載的來源 volume；DockerHub base image 會透過平台設定的 Harbor
-proxy-cache 路徑拉取。</p>
+timeout 與 build source resource override 不再由使用者在表單中指定。</p>
+<p>上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；
+DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
 <p>提交後，建置歷史會顯示建置狀態、經過整理的 build Pod 狀態、來源類型、固定
 engine 資源、目的映像與即時 log。失敗的建置會直接在表格顯示簡短的叢集錯誤
 摘要，例如 image pull 或 container 設定錯誤。完整 Kaniko/container 輸出仍請用
@@ -1485,10 +1479,6 @@ Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。仍具�
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
 <p>如果建置表單未顯示，代表專案尚未啟用 <strong>Image Build Permission</strong>，或您的專案角色不能啟動建置。建置歷史與 log 仍會保留可見，方便檢查既有工作。請聯繫專案管理者或平台管理員調整專案設定或角色，並確認專案已綁定有效的資源計畫。</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">從個人儲存建置</p>
-<p><strong>從 Storage</strong> 模式會先從平台資料庫解析您的個人 PVC，若資料庫尚未紀錄但叢集裡已有對應的 <code>user-&lt;name&gt;-storage</code> namespace 與 <code>user-&lt;name&gt;-disk</code> PVC，後端會回退使用該命名繼續建置。若仍出現「personal storage is not initialized」，請先開啟一次 <strong>Storage</strong> 頁面觸發初始化，或請管理員重新執行 user storage init。</p>
 </div>
 <hr />
 <h2 id="gpu-claimsdra">GPU Claims（DRA）<a class="headerlink" href="#gpu-claimsdra" title="Permanent link">&para;</a></h2>

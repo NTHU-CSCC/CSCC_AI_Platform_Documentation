@@ -1070,7 +1070,7 @@
 <h2 id="builds">Builds（容器映像建置）<a class="headerlink" href="#builds" title="Permanent link">&para;</a></h2>
 <p>Builds 只有在平台管理員替專案開啟 <strong>Image Build Permission</strong> 並綁定有效資源計畫後才能送出。若按鈕是 disabled，請先確認專案治理設定。</p>
 <h3 id="build">開始一個 Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
-<p>進 <strong>Builds</strong> 頁籤 → <strong>Start Build</strong>。三種來源：</p>
+<p>進 <strong>Builds</strong> 頁籤 → <strong>Start Build</strong>。目前支援兩種來源：</p>
 <table>
 <thead>
 <tr>
@@ -1082,10 +1082,6 @@
 <tr>
 <td><strong>Upload archive</strong></td>
 <td>上傳 <code>.tar.gz</code> 或 <code>.zip</code>（Dockerfile 放在根目錄）</td>
-</tr>
-<tr>
-<td><strong>From Storage</strong></td>
-<td>指定你的個人 storage 子路徑</td>
 </tr>
 <tr>
 <td><strong>Dockerfile only</strong></td>
@@ -1112,7 +1108,7 @@
 </tr>
 <tr>
 <td><strong>Build source</strong></td>
-<td>Upload archive、個人 storage path，或 Dockerfile only</td>
+<td>Upload archive 或 Dockerfile only</td>
 </tr>
 </tbody>
 </table>

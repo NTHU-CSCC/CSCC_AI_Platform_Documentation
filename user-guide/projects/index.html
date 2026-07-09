@@ -1402,7 +1402,7 @@
 </tr>
 <tr>
 <td><strong>Builds</strong></td>
-<td>Project-scoped image builds, archive, personal storage, or Dockerfile source selection, shared queue status, and Kaniko build logs</td>
+<td>Project-scoped image builds, archive or Dockerfile source selection, shared queue status, and Kaniko build logs</td>
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
@@ -1435,10 +1435,6 @@
 <td>Upload a <code>.tar.gz</code> or <code>.zip</code> build context. Put the Dockerfile at the archive root.</td>
 </tr>
 <tr>
-<td><strong>From Storage</strong></td>
-<td>Build from a path in your personal storage.</td>
-</tr>
-<tr>
 <td><strong>Dockerfile only</strong></td>
 <td>Paste a Dockerfile directly. The platform creates a minimal build context.</td>
 </tr>
@@ -1463,20 +1459,18 @@
 </tr>
 <tr>
 <td><strong>Build source</strong></td>
-<td>Upload archive, personal storage path, or pasted Dockerfile.</td>
+<td>Upload archive or pasted Dockerfile.</td>
 </tr>
 </tbody>
 </table>
 <p>Builds are submitted to a shared queue. The platform starts one build at a time
 and assigns fixed resources to the running build: 16 CPU cores, 32Gi memory, and
-a 100Gi scratch workspace. CPU, memory, timeout, and project storage source
-selection are not user-configurable from the form.</p>
+a 100Gi scratch workspace. CPU, memory, timeout, and build-source resource
+overrides are not user-configurable from the form.</p>
 <p>Uploaded archive contexts are checked for unsafe paths and expanded-size limits
 before the builder uses them, and the uploaded filename is normalized before the
-platform stores the temporary build context object. Storage build source paths
-are normalized under your personal PVC root, so parent directory traversal cannot
-escape the mounted source volume. DockerHub base images are pulled through the
-platform Harbor proxy-cache path when it is configured.</p>
+platform stores the temporary build context object. DockerHub base images are
+pulled through the platform Harbor proxy-cache path when it is configured.</p>
 <p>After submission, the build history shows build status, sanitized build Pod
 status, source type, fixed engine resources, destination image, and live logs.
 Failed builds surface a short cluster error summary such as image pull or
@@ -1491,10 +1485,6 @@ references it.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If the start form is hidden, the project either does not have <strong>Image Build Permission</strong> enabled or your project role cannot start builds. Build history and logs remain visible so you can still inspect previous jobs. Ask a project manager or platform admin to adjust the project setting or your role, then confirm that the project has an active resource plan.</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Build from personal storage</p>
-<p>The <strong>From Storage</strong> mode resolves your personal volume from the platform database first, then falls back to the standard <code>user-&lt;name&gt;-storage</code> namespace and <code>user-&lt;name&gt;-disk</code> PVC if the database record is missing but the namespace exists in the cluster. If you still see <em>personal storage is not initialized</em>, open the <strong>Storage</strong> page once to trigger initialization or ask an admin to re-run user storage init.</p>
 </div>
 <hr />
 <h2 id="gpu-claims-dra">GPU Claims (DRA)<a class="headerlink" href="#gpu-claims-dra" title="Permanent link">&para;</a></h2>

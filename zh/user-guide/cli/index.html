@@ -1214,13 +1214,6 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dockerfile<span class="w"> </span>-
 </code></pre></div>
-<p>Storage 模式會從您的個人 storage path 建置，並呼叫
-<code>/api/v1/images/build/from-storage</code>：</p>
-<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
-</code></pre></div>
 <p>常用選項：</p>
 <table>
 <thead>
@@ -1244,15 +1237,11 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </tr>
 <tr>
 <td><code>--source</code></td>
-<td><code>upload</code>、<code>dockerfile</code> 或 <code>storage</code></td>
+<td><code>upload</code> 或 <code>dockerfile</code></td>
 </tr>
 <tr>
 <td><code>--dockerfile</code></td>
 <td><code>--source dockerfile</code> 時的 Dockerfile 路徑，或用 <code>-</code> 讀 stdin</td>
-</tr>
-<tr>
-<td><code>--storage-path</code></td>
-<td>個人 storage 內的來源路徑</td>
 </tr>
 <tr>
 <td><code>--build-arg</code></td>
@@ -1266,7 +1255,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </table>
 <h3 id="build-arguments">建置參數（build arguments）<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
 <p>用 <code>--build-arg KEY=VALUE</code> 在建置時傳入 Dockerfile 的 <code>ARG</code>。此旗標可重複，且
-適用於所有 <code>--source</code>（upload、dockerfile、storage）。Backend 會驗證每一筆
+適用於 <code>upload</code> 與 <code>dockerfile</code> build。Backend 會驗證每一筆
 （<code>KEY</code> 需符合 <code>[A-Za-z_][A-Za-z0-9_]*</code>），並轉成 Kaniko 的 <code>--build-arg</code>。</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
@@ -1283,8 +1272,7 @@ engine。</p>
 <h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>映像建置會排入同一個共用 build engine；同一時間只啟動一個 build。每個執行中的
 build 固定使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、
-memory、timeout 與 project storage source selection 不再是 CLI 選項；storage
-build 一律從您的個人 storage path 讀取。</p>
+memory、timeout 與 build source resource override 不再是 CLI 選項。</p>
 <p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
 <code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止且印出狀態。</p>
