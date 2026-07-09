@@ -1402,7 +1402,7 @@
 </tr>
 <tr>
 <td><strong>Builds</strong></td>
-<td>Project-scoped image builds, archive, storage, or Dockerfile source selection, resource controls, and Kaniko build logs</td>
+<td>Project-scoped image builds, archive, personal storage, or Dockerfile source selection, shared queue status, and Kaniko build logs</td>
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
@@ -1436,7 +1436,7 @@
 </tr>
 <tr>
 <td><strong>From Storage</strong></td>
-<td>Build from a path in your personal storage or a project storage volume you can read.</td>
+<td>Build from a path in your personal storage.</td>
 </tr>
 <tr>
 <td><strong>Dockerfile only</strong></td>
@@ -1462,29 +1462,31 @@
 <td>Optional. Leave empty for the platform default, or set a release tag such as <code>v1.0.1</code>.</td>
 </tr>
 <tr>
-<td><strong>CPU Cores</strong></td>
-<td>Build CPU request. It cannot exceed the remaining project build capacity or the platform maximum of <code>4</code>.</td>
-</tr>
-<tr>
-<td><strong>Memory (GB)</strong></td>
-<td>Build memory request. It cannot exceed the remaining project build capacity or the platform maximum of <code>16</code>.</td>
-</tr>
-<tr>
-<td><strong>Timeout (minutes)</strong></td>
-<td>Positive integer up to the platform maximum (<code>120</code> by default). Kubernetes also stops the job at this deadline.</td>
+<td><strong>Build source</strong></td>
+<td>Upload archive, personal storage path, or pasted Dockerfile.</td>
 </tr>
 </tbody>
 </table>
-<p>Build quota checks count pending and syncing image builds before older completed history, so active build jobs cannot be hidden by a long build history.</p>
-<p>Local disk for Kaniko cache and temporary layers is capped by the platform admin
-per environment; it is not user-selectable from the build form. Uploaded archive
-contexts are checked for unsafe paths and expanded-size limits before the builder
-uses them, and the uploaded filename is normalized before the platform stores the
-temporary build context object. Storage build source paths are normalized under
-the selected PVC root, so parent directory traversal cannot escape the mounted
-source volume. DockerHub base images are pulled through the platform Harbor
-proxy-cache path when it is configured.</p>
-<p>After submission, the build history shows build status, sanitized build Pod status, source type, requested resources, destination image, and live logs. Failed builds surface a short cluster error summary such as image pull or container configuration failures directly in the table. Use the log button for the full Kaniko/container output. Successful builds are pushed to the Harbor namespace selected by the project's group registry policy; GPU23 Harbor groups build in the dedicated GPU23 lane. The current project member who started a completed project-local build, or a project manager, can delete that build artifact from the build history when no other active build or publication references it.</p>
+<p>Builds are submitted to a shared queue. The platform starts one build at a time
+and assigns fixed resources to the running build: 16 CPU cores, 32Gi memory, and
+a 100Gi scratch workspace. CPU, memory, timeout, and project storage source
+selection are not user-configurable from the form.</p>
+<p>Uploaded archive contexts are checked for unsafe paths and expanded-size limits
+before the builder uses them, and the uploaded filename is normalized before the
+platform stores the temporary build context object. Storage build source paths
+are normalized under your personal PVC root, so parent directory traversal cannot
+escape the mounted source volume. DockerHub base images are pulled through the
+platform Harbor proxy-cache path when it is configured.</p>
+<p>After submission, the build history shows build status, sanitized build Pod
+status, source type, fixed engine resources, destination image, and live logs.
+Failed builds surface a short cluster error summary such as image pull or
+container configuration failures directly in the table. Use the log button for
+the full Kaniko/container output. Successful builds are pushed to the Harbor
+namespace selected by the project's group registry policy; GPU23 Harbor groups
+build in the dedicated GPU23 lane. The current project member who started a
+completed project-local build, or a project manager, can delete that build
+artifact from the build history when no other active build or publication
+references it.</p>
 <p>Project Managers can submit project image allowlist requests and remove project image allowlist entries only for projects they currently manage. Project Members can view the project's image request history, but global catalog publications and other projects' image rules remain admin-controlled.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>

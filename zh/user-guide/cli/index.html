@@ -761,7 +761,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置資源上限
+        共用建置佇列
       
     </span>
   </a>
@@ -1065,7 +1065,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置資源上限
+        共用建置佇列
       
     </span>
   </a>
@@ -1214,19 +1214,11 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dockerfile<span class="w"> </span>-
 </code></pre></div>
-<p>Storage 模式會從可讀的平台 storage path 建置，並呼叫
+<p>Storage 模式會從您的個人 storage path 建置，並呼叫
 <code>/api/v1/images/build/from-storage</code>：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-source<span class="w"> </span>personal<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
-
-cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-source<span class="w"> </span>project_storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-id<span class="w"> </span>&lt;storage-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
 </code></pre></div>
 <p>常用選項：</p>
@@ -1259,28 +1251,8 @@ cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class
 <td><code>--source dockerfile</code> 時的 Dockerfile 路徑，或用 <code>-</code> 讀 stdin</td>
 </tr>
 <tr>
-<td><code>--storage-source</code></td>
-<td><code>--source storage</code> 時使用 <code>personal</code> 或 <code>project_storage</code></td>
-</tr>
-<tr>
 <td><code>--storage-path</code></td>
-<td>所選 storage 內的來源路徑</td>
-</tr>
-<tr>
-<td><code>--storage-id</code></td>
-<td><code>project_storage</code> 建置使用的專案 storage ID</td>
-</tr>
-<tr>
-<td><code>--cpu-cores</code></td>
-<td>選用建置 CPU request</td>
-</tr>
-<tr>
-<td><code>--memory-gb</code></td>
-<td>選用建置記憶體 request，單位 GiB</td>
-</tr>
-<tr>
-<td><code>--timeout-minutes</code></td>
-<td>選用建置 timeout 覆寫</td>
+<td>個人 storage 內的來源路徑</td>
 </tr>
 <tr>
 <td><code>--build-arg</code></td>
@@ -1302,39 +1274,17 @@ cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class
 <span class="w">  </span>.
 </code></pre></div>
 <p>可用來把密鑰、可調參數留在 Dockerfile 之外（例如 <code>ARG HF_TOKEN</code>），或把編譯
-並行度（<code>MAX_JOBS</code>、<code>FLASH_ATTN_MAX_JOBS</code> …）壓低，讓重型建置塞得進你要求的
-記憶體。</p>
+並行度（<code>MAX_JOBS</code>、<code>FLASH_ATTN_MAX_JOBS</code> …）壓低，讓重型建置塞得進共用 build
+engine。</p>
 <blockquote>
 <p>build-arg 會成為 Kaniko job spec 的一部分，能讀 build pod 的人可能看得到。請
 視為低敏感度;用此方式傳入的 token 建議建置後輪換。</p>
 </blockquote>
-<h3 id="_5">建置資源上限<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p><code>--cpu-cores</code>、<code>--memory-gb</code>、<code>--timeout-minutes</code> 每次建置都有上限。CPU 與記憶體
-的有效上限為<strong>專案方案上限與平台上限取小者</strong>（<code>min(專案方案, 平台 cap)</code>）：</p>
-<table>
-<thead>
-<tr>
-<th>資源</th>
-<th>平台上限</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CPU cores</td>
-<td><code>16</code></td>
-</tr>
-<tr>
-<td>記憶體</td>
-<td><code>64 GiB</code></td>
-</tr>
-<tr>
-<td>Timeout（分鐘）</td>
-<td><code>240</code></td>
-</tr>
-</tbody>
-</table>
-<p>超過該專案上限的請求會在建立 job 前被拒絕。若不帶這些旗標，建置會使用平台預設
-的 request 大小。</p>
+<h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>映像建置會排入同一個共用 build engine；同一時間只啟動一個 build。每個執行中的
+build 固定使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、
+memory、timeout 與 project storage source selection 不再是 CLI 選項；storage
+build 一律從您的個人 storage path 讀取。</p>
 <p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
 <code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止且印出狀態。</p>

@@ -758,10 +758,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-resource-limits" class="md-nav__link">
+  <a href="#shared-build-queue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build resource limits
+        Shared build queue
       
     </span>
   </a>
@@ -1062,10 +1062,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-resource-limits" class="md-nav__link">
+  <a href="#shared-build-queue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build resource limits
+        Shared build queue
       
     </span>
   </a>
@@ -1222,19 +1222,11 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dockerfile<span class="w"> </span>-
 </code></pre></div>
-<p>Storage mode builds from a readable platform storage path and calls
+<p>Storage mode builds from a path in your personal storage and calls
 <code>/api/v1/images/build/from-storage</code>:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-source<span class="w"> </span>personal<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
-
-cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-source<span class="w"> </span>project_storage<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--storage-id<span class="w"> </span>&lt;storage-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--storage-path<span class="w"> </span>apps/trainer
 </code></pre></div>
 <p>Useful options:</p>
@@ -1267,28 +1259,8 @@ cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class
 <td>Dockerfile path, or <code>-</code> for stdin, when <code>--source dockerfile</code></td>
 </tr>
 <tr>
-<td><code>--storage-source</code></td>
-<td><code>personal</code> or <code>project_storage</code> when <code>--source storage</code></td>
-</tr>
-<tr>
 <td><code>--storage-path</code></td>
-<td>Source path inside the selected storage</td>
-</tr>
-<tr>
-<td><code>--storage-id</code></td>
-<td>Project storage ID for <code>project_storage</code> builds</td>
-</tr>
-<tr>
-<td><code>--cpu-cores</code></td>
-<td>Optional CPU request for the build job</td>
-</tr>
-<tr>
-<td><code>--memory-gb</code></td>
-<td>Optional memory request in GiB</td>
-</tr>
-<tr>
-<td><code>--timeout-minutes</code></td>
-<td>Optional build timeout override</td>
+<td>Source path inside your personal storage</td>
 </tr>
 <tr>
 <td><code>--build-arg</code></td>
@@ -1312,40 +1284,17 @@ forwards them to Kaniko as <code>--build-arg</code>.</p>
 </code></pre></div>
 <p>Use this to keep secrets and tunables out of the committed Dockerfile (for
 example an <code>ARG HF_TOKEN</code>), or to cap compile parallelism (<code>MAX_JOBS</code>,
-<code>FLASH_ATTN_MAX_JOBS</code>, …) so a heavy build fits the memory you requested.</p>
+<code>FLASH_ATTN_MAX_JOBS</code>, …) so a heavy build fits the shared build engine.</p>
 <blockquote>
 <p>Build args become part of the Kaniko job spec and may be visible to anyone who
 can read build pods. Treat them as low-sensitivity; rotate any token passed
 this way after the build.</p>
 </blockquote>
-<h3 id="build-resource-limits">Build resource limits<a class="headerlink" href="#build-resource-limits" title="Permanent link">&para;</a></h3>
-<p><code>--cpu-cores</code>, <code>--memory-gb</code>, and <code>--timeout-minutes</code> are bounded per build. The
-effective maximum for CPU and memory is <strong>the smaller of your project's plan
-limit and the platform ceiling</strong> (<code>min(project plan, platform cap)</code>):</p>
-<table>
-<thead>
-<tr>
-<th>Resource</th>
-<th>Platform ceiling</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CPU cores</td>
-<td><code>16</code></td>
-</tr>
-<tr>
-<td>Memory</td>
-<td><code>64 GiB</code></td>
-</tr>
-<tr>
-<td>Timeout (minutes)</td>
-<td><code>240</code></td>
-</tr>
-</tbody>
-</table>
-<p>A request above the per-project maximum is rejected before the job is created.
-If you omit these flags, the build uses the platform default request size.</p>
+<h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
+<p>Image builds are queued behind one shared build engine. Each running build gets
+16 CPU cores, 32Gi memory, and a 100Gi scratch workspace. CPU, memory, timeout,
+and project storage source selection are not CLI options; storage builds always
+read from your personal storage path.</p>
 <p>After submission, <code>--follow=true</code> polls until build logs are available, streams
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>, and stops with the final
 <code>completed</code>, <code>failed</code>, or <code>deleted</code> status when the backend reports one.</p>

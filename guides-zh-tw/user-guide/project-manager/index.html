@@ -1068,7 +1068,7 @@
 </blockquote>
 <hr />
 <h2 id="builds">Builds（容器映像建置）<a class="headerlink" href="#builds" title="Permanent link">&para;</a></h2>
-<p>Builds 只有在平台管理員替專案開啟 <strong>Image Build Permission</strong> 並綁定有效資源計畫後才能送出。若按鈕是 disabled，請先確認專案治理設定與剩餘 build CPU / memory。</p>
+<p>Builds 只有在平台管理員替專案開啟 <strong>Image Build Permission</strong> 並綁定有效資源計畫後才能送出。若按鈕是 disabled，請先確認專案治理設定。</p>
 <h3 id="build">開始一個 Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
 <p>進 <strong>Builds</strong> 頁籤 → <strong>Start Build</strong>。三種來源：</p>
 <table>
@@ -1085,7 +1085,7 @@
 </tr>
 <tr>
 <td><strong>From Storage</strong></td>
-<td>指定一個你有讀權限的 PVC，並輸入子路徑</td>
+<td>指定你的個人 storage 子路徑</td>
 </tr>
 <tr>
 <td><strong>Dockerfile only</strong></td>
@@ -1111,21 +1111,13 @@
 <td>留空會自動產生時間 + commit；也可以用 <code>v1.0.1</code></td>
 </tr>
 <tr>
-<td><strong>CPU 核心</strong></td>
-<td>不可超過剩餘 build 配額或平台上限 <code>4</code></td>
-</tr>
-<tr>
-<td><strong>Memory（GB）</strong></td>
-<td>不可超過剩餘 build 配額或平台上限 <code>16</code></td>
-</tr>
-<tr>
-<td><strong>Timeout（分鐘）</strong></td>
-<td>上限預設 <code>120</code>；Build job 超過時由 Kubernetes 自動中止</td>
+<td><strong>Build source</strong></td>
+<td>Upload archive、個人 storage path，或 Dockerfile only</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>新版重點：</strong> Build job 已支援 CPU / Memory 設定與 Timeout。Build 期間用的資源也會佔用專案配額；Kaniko cache 與暫存 layer 的本機磁碟由平台環境統一設定上限。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；DockerHub base image 會走平台設定的 Harbor proxy-cache。</p>
+<p><strong>新版重點：</strong> Build job 會排入共用佇列，同一時間只啟動一個 build。執行中的 build 固定使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace；使用者不能自行指定 CPU、memory 或 timeout。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；DockerHub base image 會走平台設定的 Harbor proxy-cache。</p>
 </blockquote>
 <h3 id="_3">監看 / 取消<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1221,7 +1213,7 @@ Harbor tag 刪除後不會立刻釋放底層 registry blob 空間；實際空間
 <h2 id="_4">常見問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>我的 Build 一直 Pending？</summary>
-<p>通常是專案配額不足（其他 Workspace 把 CPU / Memory 用完）或是該群組沒被允許用對應的 Registry Policy。在 Plan 頁籤確認剩餘配額。</p>
+<p>可能是在共用 build queue 中等待前一個 build 完成，或是該群組沒被允許用對應的 Registry Policy。若等待時間異常，請查看該筆 Build 的狀態摘要與 Log。</p>
 </details>
 <details class="question">
 <summary>我看不到 Images / Storage 頁籤？</summary>

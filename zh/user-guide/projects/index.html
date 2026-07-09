@@ -1402,7 +1402,7 @@
 </tr>
 <tr>
 <td><strong>建置</strong></td>
-<td>專案容器映像建置、來源選擇、資源設定與 Kaniko log</td>
+<td>專案容器映像建置、來源選擇、共用佇列狀態與 Kaniko log</td>
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
@@ -1436,7 +1436,7 @@
 </tr>
 <tr>
 <td><strong>從 Storage</strong></td>
-<td>從個人儲存或您有讀取權限的專案儲存路徑建置</td>
+<td>從您的個人儲存路徑建置</td>
 </tr>
 <tr>
 <td><strong>只貼 Dockerfile</strong></td>
@@ -1462,22 +1462,25 @@
 <td>選填；留空使用平台預設，也可填 <code>v1.0.1</code> 等版本</td>
 </tr>
 <tr>
-<td><strong>CPU 核心</strong></td>
-<td>build job 的 CPU request，不可超過專案剩餘 build 容量，也不可超過平台上限 <code>4</code></td>
-</tr>
-<tr>
-<td><strong>Memory（GB）</strong></td>
-<td>build job 的記憶體 request，不可超過專案剩餘 build 容量，也不可超過平台上限 <code>16</code></td>
-</tr>
-<tr>
-<td><strong>Timeout（分鐘）</strong></td>
-<td>正整數，上限預設為 <code>120</code>；Kubernetes 也會在此 deadline 停止 job</td>
+<td><strong>建置來源</strong></td>
+<td>上傳 archive、個人 storage path，或直接貼 Dockerfile</td>
 </tr>
 </tbody>
 </table>
-<p>Build quota 檢查會先計入 pending 與 syncing 的 image build，再看較舊的 completed 歷史，因此活躍中的 build job 不會因為建置歷史過長而被漏算。</p>
-<p>Kaniko cache 與暫存 layer 使用的本機磁碟由平台管理員依環境設定上限，使用者無法在建置表單中自行調整。上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；Storage build 的來源路徑會正規化在所選 PVC root 底下，parent directory traversal 無法逃出掛載的來源 volume；DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
-<p>提交後，建置歷史會顯示建置狀態、經過整理的 build Pod 狀態、來源類型、資源需求、目的映像與即時 log。失敗的建置會直接在表格顯示簡短的叢集錯誤摘要，例如 image pull 或 container 設定錯誤。完整 Kaniko/container 輸出仍請用該列的日誌按鈕查看。成功的映像會推送到該專案群組 registry policy 指定的 Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。仍具備目前專案成員身分的建置者本人，可以在沒有其他活躍建置或 publication 參照時刪除自己完成的專案本地 build artifact；專案管理者也可以刪除該專案的 built artifacts。</p>
+<p>映像建置會送進共用佇列，平台同一時間只啟動一個 build。每個執行中的 build 固定
+使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、memory、
+timeout 與 project storage source selection 不再由使用者在表單中指定。</p>
+<p>上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；Storage
+build 的來源路徑會正規化在您的個人 PVC root 底下，parent directory traversal
+無法逃出掛載的來源 volume；DockerHub base image 會透過平台設定的 Harbor
+proxy-cache 路徑拉取。</p>
+<p>提交後，建置歷史會顯示建置狀態、經過整理的 build Pod 狀態、來源類型、固定
+engine 資源、目的映像與即時 log。失敗的建置會直接在表格顯示簡短的叢集錯誤
+摘要，例如 image pull 或 container 設定錯誤。完整 Kaniko/container 輸出仍請用
+該列的日誌按鈕查看。成功的映像會推送到該專案群組 registry policy 指定的
+Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。仍具備目前專案
+成員身分的建置者本人，可以在沒有其他活躍建置或 publication 參照時刪除自己完成
+的專案本地 build artifact；專案管理者也可以刪除該專案的 built artifacts。</p>
 <p>專案管理者只能為目前管理的專案提交 image allowlist request，並移除屬於目前專案的 image allowlist 項目；專案成員可以查看該專案的 image request 歷史。Global catalog publication 與其他專案的映像規則仍需由具備管理權限的端點處理。</p>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
