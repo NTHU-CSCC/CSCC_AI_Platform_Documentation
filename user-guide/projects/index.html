@@ -1464,7 +1464,7 @@
 </tbody>
 </table>
 <p>Builds are submitted to a shared queue. The platform starts one build at a time
-and assigns fixed resources to the running build: 16 CPU cores, 32Gi memory, and
+and assigns fixed resources to the running build: 16 CPU cores, 64Gi memory, and
 a 100Gi scratch workspace. CPU, memory, timeout, and build-source resource
 overrides are not user-configurable from the form.</p>
 <p>Uploaded archive contexts are checked for unsafe paths and expanded-size limits
@@ -1473,10 +1473,10 @@ platform stores the temporary build context object. DockerHub base images are
 pulled through the platform Harbor proxy-cache path when it is configured.</p>
 <p>After submission, the build history shows build status, sanitized build Pod
 status, source type, fixed engine resources, destination image, and live logs.
-Failed builds surface a short cluster error summary such as image pull or
-container configuration failures directly in the table. Use the log button for
-the full Kaniko/container output; active builds stream output until they reach
-a terminal state. Builders and project managers can clear saved log snapshots
+Failed builds surface a normalized two-line summary in the table. Use the log
+button for full errors, Pod events, and ANSI-colored Kaniko output. Active builds
+use one WebSocket until terminal status; completed and failed builds load one
+saved snapshot. Builders and project managers can clear saved log snapshots
 for one or more completed or failed builds. This leaves build history, images,
 and any still-retained Kubernetes Pod logs unchanged. Successful builds are pushed to the Harbor
 namespace selected by the project's group registry policy; GPU23 Harbor groups

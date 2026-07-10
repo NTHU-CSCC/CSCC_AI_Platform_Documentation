@@ -1464,14 +1464,14 @@
 </tbody>
 </table>
 <p>映像建置會送進共用佇列，平台同一時間只啟動一個 build。每個執行中的 build 固定
-使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、memory、
+使用 16 CPU cores、64Gi memory 與共用 lane 的 100Gi scratch workspace。CPU、memory、
 timeout 與 build source resource override 不再由使用者在表單中指定。</p>
 <p>上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；
 DockerHub base image 會透過平台設定的 Harbor proxy-cache 路徑拉取。</p>
 <p>提交後，建置歷史會顯示建置狀態、經過整理的 build Pod 狀態、來源類型、固定
-engine 資源、目的映像與即時 log。失敗的建置會直接在表格顯示簡短的叢集錯誤
-摘要，例如 image pull 或 container 設定錯誤。完整 Kaniko/container 輸出仍請用
-該列的日誌按鈕查看；活躍建置會持續串流輸出，直到進入終態。建置者與專案管理者
+engine 資源、目的映像與即時 log。失敗列只顯示整理後的兩行摘要；完整錯誤、Pod
+events 與帶 ANSI 顏色的 Kaniko 輸出請用該列日誌按鈕查看。活躍建置透過單一
+WebSocket 持續串流直到終態，完成或失敗紀錄只讀取一次保存快照。建置者與專案管理者
 可一次清除一個或多個已完成或失敗建置的保存日誌快照；此操作不會刪除建置記錄、
 映像或仍保留的 Kubernetes Pod 日誌。成功的映像會推送到該專案群組 registry policy 指定的
 Harbor namespace；GPU23 Harbor 群組會使用專用 GPU23 build lane。仍具備目前專案
