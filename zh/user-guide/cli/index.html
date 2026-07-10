@@ -1256,7 +1256,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <h3 id="build-arguments">建置參數（build arguments）<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
 <p>用 <code>--build-arg KEY=VALUE</code> 在建置時傳入 Dockerfile 的 <code>ARG</code>。此旗標可重複，且
 適用於 <code>upload</code> 與 <code>dockerfile</code> build。Backend 會驗證每一筆
-（<code>KEY</code> 需符合 <code>[A-Za-z_][A-Za-z0-9_]*</code>），並轉成 Kaniko 的 <code>--build-arg</code>。</p>
+（<code>KEY</code> 需符合 <code>[A-Za-z_][A-Za-z0-9_]*</code>），並轉成 BuildKit 的 <code>--build-arg</code>。</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
@@ -1266,12 +1266,12 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 並行度（<code>MAX_JOBS</code>、<code>FLASH_ATTN_MAX_JOBS</code> …）壓低，讓重型建置塞得進共用 build
 engine。</p>
 <blockquote>
-<p>build-arg 會成為 Kaniko job spec 的一部分，能讀 build pod 的人可能看得到。請
+<p>build-arg 會成為 BuildKit job spec 的一部分，能讀 build pod 的人可能看得到。請
 視為低敏感度;用此方式傳入的 token 建議建置後輪換。</p>
 </blockquote>
 <h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>映像建置會排入同一個共用 build engine；同一時間只啟動一個 build。每個執行中的
-build 固定在 <code>gpu1</code> 使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace。CPU、
+中央 build engine 固定在 <code>gpu1</code> 使用 16 CPU cores、40Gi memory 與 100Gi scratch workspace。CPU、
 memory、timeout 與 build source resource override 不再是 CLI 選項。</p>
 <p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報

@@ -1265,7 +1265,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <p>Pass Dockerfile <code>ARG</code> values at build time with <code>--build-arg KEY=VALUE</code>. The flag
 is repeatable and works with <code>upload</code> and <code>dockerfile</code> builds. The backend
 validates each entry (<code>KEY</code> must match <code>[A-Za-z_][A-Za-z0-9_]*</code>) and
-forwards them to Kaniko as <code>--build-arg</code>.</p>
+forwards them to buildctl as <code>--opt build-arg:KEY=VALUE</code>.</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
@@ -1275,13 +1275,13 @@ forwards them to Kaniko as <code>--build-arg</code>.</p>
 example an <code>ARG HF_TOKEN</code>), or to cap compile parallelism (<code>MAX_JOBS</code>,
 <code>FLASH_ATTN_MAX_JOBS</code>, …) so a heavy build fits the shared build engine.</p>
 <blockquote>
-<p>Build args become part of the Kaniko job spec and may be visible to anyone who
+<p>Build args become part of the buildctl Job spec and may be visible to anyone who
 can read build pods. Treat them as low-sensitivity; rotate any token passed
 this way after the build.</p>
 </blockquote>
 <h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
 <p>Image builds are queued behind one shared build engine. Each running build gets
-16 CPU cores, 32Gi memory, and a 100Gi scratch workspace on <code>gpu1</code>. CPU, memory, timeout,
+16 CPU cores, 40Gi memory, and a 100Gi scratch workspace on <code>gpu1</code>. CPU, memory, timeout,
 and build-source resource overrides are not CLI options.</p>
 <p>After submission, <code>--follow=true</code> polls until build logs are available, streams
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>, and stops with the final

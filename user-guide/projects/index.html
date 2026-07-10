@@ -1402,7 +1402,7 @@
 </tr>
 <tr>
 <td><strong>Builds</strong></td>
-<td>Project-scoped image builds, archive or Dockerfile source selection, shared queue status, and Kaniko build logs</td>
+<td>Project-scoped image builds, archive or Dockerfile source selection, shared queue status, and live BuildKit logs</td>
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
@@ -1464,17 +1464,17 @@
 </tbody>
 </table>
 <p>Builds are submitted to a shared queue. The platform starts one build at a time
-on <code>gpu1</code> and assigns fixed resources to the running build: 16 CPU cores, 32Gi
+on <code>gpu1</code> and assigns fixed resources to the central engine: 16 CPU cores, 40Gi
 memory, and a 100Gi scratch workspace. CPU, memory, timeout, and build-source resource
 overrides are not user-configurable from the form.</p>
 <p>Uploaded archive contexts are checked for unsafe paths and expanded-size limits
 before the builder uses them, and the uploaded filename is normalized before the
 platform stores the temporary build context object. DockerHub base images are
-pulled through the platform Harbor proxy-cache path when it is configured.</p>
+pulled on demand through the registry-specific Harbor pull-through project.</p>
 <p>After submission, the build history shows build status, sanitized build Pod
 status, source type, fixed engine resources, destination image, and live logs.
 Failed builds surface a normalized two-line summary in the table. Use the log
-button for full errors, Pod events, and ANSI-colored Kaniko output. Active builds
+button for full errors, Pod events, and ANSI-colored BuildKit output. Active builds
 use one WebSocket until terminal status; completed and failed builds load one
 saved snapshot. Builders and project managers can clear saved log snapshots
 for one or more completed or failed builds. This leaves build history, images,

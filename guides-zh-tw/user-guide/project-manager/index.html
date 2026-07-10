@@ -1113,13 +1113,13 @@
 </tbody>
 </table>
 <blockquote>
-<p><strong>新版重點：</strong> Build job 會排入共用佇列，同一時間只在 <code>gpu1</code> 啟動一個 build。執行中的 build 固定使用 16 CPU cores、32Gi memory 與 100Gi scratch workspace；使用者不能自行指定 CPU、memory 或 timeout。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；DockerHub base image 會走平台設定的 Harbor proxy-cache。</p>
+<p><strong>新版重點：</strong> Build job 會排入共用佇列，同一時間只在 <code>gpu1</code> 啟動一個 build。中央 BuildKit 固定使用 16 CPU cores、40Gi memory 與 100Gi scratch workspace；使用者不能自行指定 CPU、memory 或 timeout。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；Docker Hub、GHCR 與 NVCR base image 會走各自的 Harbor pull-through project。</p>
 </blockquote>
 <h3 id="_3">監看 / 取消<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Build 列表會即時顯示建置狀態與經過整理的 build Pod 狀態（例如 Pending / Running / Failed、ImagePullBackOff、ErrImagePull）。</li>
 <li>Build 失敗時，列表會直接顯示簡短的叢集錯誤摘要；詳細錯誤摘要與 container log 請用該列的 <strong>Log</strong>。</li>
-<li>點該筆 Build 的 <strong>Log</strong> 查看完整 Kaniko/container 輸出。</li>
+<li>點該筆 Build 的 <strong>Log</strong> 查看完整 BuildKit/container 輸出。</li>
 <li>若你仍是該專案成員，你建立且未被其他活躍建置或 publication 參照的 Build image artifact 可以自行刪除；專案 Manager / Admin 也可以刪除該專案的 built artifacts。</li>
 <li>已完成的 Build artifact 會先移除 allow-list metadata 並把相關 build 記錄標成 deleted，再 best-effort 刪除 Harbor tag；仍在 Running 的 Build 會走取消流程，先停止 Kubernetes build job。</li>
 </ul>
