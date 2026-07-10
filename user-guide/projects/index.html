@@ -1475,7 +1475,10 @@ pulled through the platform Harbor proxy-cache path when it is configured.</p>
 status, source type, fixed engine resources, destination image, and live logs.
 Failed builds surface a short cluster error summary such as image pull or
 container configuration failures directly in the table. Use the log button for
-the full Kaniko/container output. Successful builds are pushed to the Harbor
+the full Kaniko/container output; active builds stream output until they reach
+a terminal state. Builders and project managers can clear saved log snapshots
+for one or more completed or failed builds. This leaves build history, images,
+and any still-retained Kubernetes Pod logs unchanged. Successful builds are pushed to the Harbor
 namespace selected by the project's group registry policy; GPU23 Harbor groups
 build in the dedicated GPU23 lane. The current project member who started a
 completed project-local build, or a project manager, can delete that build
