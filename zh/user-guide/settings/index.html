@@ -1156,9 +1156,9 @@
 <li>確認新密碼。</li>
 <li>點擊 <strong>更新密碼</strong>。</li>
 </ol>
-<div class="admonition warning">
-<p class="admonition-title">LDAP 使用者</p>
-<p>如果您的帳號透過 LDAP 驗證，密碼由 LDAP 目錄管理（而非此頁面）。密碼變更表單可能不會顯示或標記為停用。</p>
+<div class="admonition note">
+<p class="admonition-title">LDAP 同步</p>
+<p>透過此頁面變更密碼時，平台會同時更新 Backend DB 與 LDAP。請勿要求管理員直接修改 DB 密碼雜湊；雜湊無法反向同步至 LDAP。</p>
 </div>
 <hr />
 <h2 id="_6">通知<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -1251,7 +1251,7 @@
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>我忘記密碼了。</summary>
-<p>點擊登入頁面的「忘記密碼」連結。如果您的帳號使用 LDAP 驗證，請聯繫 IT 管理員重設 LDAP 密碼。</p>
+<p>點擊登入頁面的「忘記密碼」連結，或請管理員透過平台使用者管理功能重設；平台會同步更新 LDAP。</p>
 </details>
 <details class="question">
 <summary>設定頁面顯示的電子郵件是錯的。</summary>
