@@ -1086,9 +1086,11 @@ s112347
 <p>刪除後的影響：</p>
 <ul>
 <li>使用者帳號被移除，立即無法登入。</li>
-<li>專案成員資格、個人專案、quota 與 storage records 會在同一個資料庫 transaction 中移除。</li>
-<li>該使用者的 project namespaces 與 personal storage namespace 會被清理，包含正在執行的 Pods、Jobs、StatefulSets、Deployments、FileBrowser resources 與 PVCs。</li>
-<li>如果 Kubernetes finalizer 或 active workload 讓 namespace 暫時卡在刪除中，使用者刪除仍會成功，背景 cleanup reconciler 會持續重試直到 namespace 移除。</li>
+<li>專案成員資格、個人專案、quota、storage records 與權限、平台角色指派，以及直接指派給該使用者的 policy 會在同一個資料庫 transaction 中移除。</li>
+<li>在所有背景 Kubernetes 清理目標成功前，原 username 會保留且無法用來重建帳號。</li>
+<li>系統會在 transaction 中記錄清理目標；API 回傳後，再由背景 cleanup reconciler 清理 project namespaces 與 personal storage namespace，包含正在執行的 Pods、Jobs、StatefulSets、Deployments、FileBrowser resources 與 PVCs。</li>
+<li>如果 Kubernetes finalizer 或 active workload 讓 namespace 暫時卡在刪除中，cleanup reconciler 會持續重試直到 namespace 移除。</li>
+<li>JuiceFS 或其他採用 <code>Retain</code> reclaim policy 的儲存類別可能保留 Released PV 與後端資料，供管理員復原；請只透過核准的儲存生命週期移除。</li>
 <li>過往的 Audit Log 仍會保留並引用該使用者 ID。</li>
 </ul>
 <hr />
