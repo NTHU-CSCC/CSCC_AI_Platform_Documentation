@@ -1465,7 +1465,9 @@
 </table>
 <p>映像建置會送進共用佇列，平台同一時間只在 <code>gpu1</code> 啟動一個 build。每個執行中的 build 固定
 使用 16 CPU cores、40Gi memory 與共用 lane 的 100Gi scratch workspace。CPU、memory、
-timeout 與 build source resource override 不再由使用者在表單中指定。</p>
+timeout 與 build source resource override 不再由使用者在表單中指定。
+這些資源由平台共用池提供，不需要專案綁定 active resource plan，也不會占用專案或個人
+的 CPU 與 memory quota。</p>
 <p>上傳 archive build context 時，平台會在建置前檢查不安全路徑與展開大小；
 Docker Hub、GHCR 與 NVCR base image 會依 allow-list，透過各自的 Harbor pull-through project 按需拉取。</p>
 <p>提交後，建置歷史會顯示建置狀態、經過整理的 build Pod 狀態、來源類型、固定
@@ -1480,7 +1482,7 @@ Harbor namespace；GPU23 Harbor 群組同樣在 <code>gpu1</code> 建置，再�
 <p>專案管理者只能為目前管理的專案提交 image allowlist request，並移除屬於目前專案的 image allowlist 項目；專案成員可以查看該專案的 image request 歷史。Global catalog publication 與其他專案的映像規則仍需由具備管理權限的端點處理。</p>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
-<p>如果建置表單未顯示，代表專案尚未啟用 <strong>Image Build Permission</strong>，或您的專案角色不能啟動建置。建置歷史與 log 仍會保留可見，方便檢查既有工作。請聯繫專案管理者或平台管理員調整專案設定或角色，並確認專案已綁定有效的資源計畫。</p>
+<p>如果建置表單未顯示，代表專案尚未啟用 <strong>Image Build Permission</strong>，或您的專案角色不能啟動建置。建置歷史與 log 仍會保留可見，方便檢查既有工作。請聯繫專案管理者或平台管理員調整專案設定或角色。</p>
 </div>
 <hr />
 <h2 id="gpu-claimsdra">GPU Claims（DRA）<a class="headerlink" href="#gpu-claimsdra" title="Permanent link">&para;</a></h2>
