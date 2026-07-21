@@ -892,6 +892,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        每月 GPU 時數額度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1047,6 +1058,11 @@ Plan 綁定會同時驗證 Plan ID 與 Project ID；任一方不存在時會回 
 <td><code>64</code></td>
 </tr>
 <tr>
+<td><strong>每月 GPU 時數額度</strong></td>
+<td>每個日曆月可累計的 GPU 時數（<code>0</code> = 無上限）。詳見 <a href="#每月-gpu-時數額度">每月 GPU 時數額度</a>。</td>
+<td><code>500</code></td>
+</tr>
+<tr>
 <td><strong>Storage 限制 (GiB)</strong></td>
 <td>此計畫允許的 PVC 容量上限</td>
 <td><code>500</code></td>
@@ -1058,6 +1074,7 @@ Plan 綁定會同時驗證 Plan ID 與 Project ID；任一方不存在時會回 
 </tr>
 </tbody>
 </table>
+<p>配額上限必須為 0 或正數；負的 GPU / CPU / Memory / 每月 GPU 時數上限會被拒絕，因為非正值會被視為「無上限」。</p>
 <h3 id="step-3">Step 3 — 綁定平台佇列<a class="headerlink" href="#step-3" title="Permanent link">&para;</a></h3>
 <p>在 <strong>PlanQueueSelector</strong> 中勾選一或多個平台 Queue：</p>
 <ul>
@@ -1118,6 +1135,18 @@ Plan 綁定會同時驗證 Plan ID 與 Project ID；任一方不存在時會回 
 <p><strong>新版重點：</strong> Queue 現在以平台 DB 紀錄為主，DRA 工作負載走 <code>default-scheduler</code>；Volcano Queue CRD 仍用於 policy compatibility。
 設定保留 GPU = 0 代表此佇列為「犧牲佇列」，當資源不足時最早被踢。</p>
 </blockquote>
+<hr />
+<h2 id="gpu">每月 GPU 時數額度<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>上面的 GPU / CPU / Memory 上限都是<strong>同時併發</strong>上限 —— 專案「同一時間」最多能持有多少資源。<strong>每月 GPU 時數額度</strong>不同：它限制專案在一個日曆月內可<strong>累計</strong>消耗的 GPU 時間。</p>
+<p><strong>單位。</strong> 一個 GPU 時數 = <code>已分配 GPU 張數 × 小時數</code>，其中 GPU 張數可為小數（例如 MPS/DRA 切片 <code>0.5</code>）。一個分配到 <code>0.5</code> 張 GPU、執行 4 小時的 pod，消耗 <code>0.5 × 4 = 2</code> GPU 時數，與 GPU 實際使用率無關。</p>
+<ul>
+<li><strong>計量來源。</strong> 消耗量取自平台的 resource-hours 紀錄（<code>job_pod_resource_records</code>）—— 與費用歸屬報表相同、約每分鐘更新一次的近即時資料。跨月的用量會<strong>按比例裁切</strong>，只計入落在當月的部分。</li>
+<li><strong>月界。</strong> 額度於<strong>每月 1 號 00:00 Asia/Taipei（UTC+8）</strong>歸零重置。</li>
+<li><strong>強制執行（硬上限）。</strong> 當專案本月累計的已分配 GPU 時數達到額度時，<strong>新的 GPU job 與 workspace 送出會被拒絕</strong>，回傳 <code>monthly GPU-hour quota exhausted</code> 錯誤。CPU-only（GPU 需求為 0）的送出不受此額度限制；<strong>執行中的工作不會被驅逐</strong> —— 會正常跑到結束，即使因此略微超出額度。到下個月界即自動清零。</li>
+<li><strong><code>0</code> = 無上限。</strong> 每個 plan 預設為 <code>0</code>，此額度需逐一 plan 啟用。</li>
+</ul>
+<p>由於送出前無法得知一個工作會跑多久，因此判準是「已達額度即擋」，不會為新工作預留未來的用量。</p>
+<p><strong>用量顯示位置。</strong> 在專案的 <strong>Overview</strong> 分頁，「GPU 時數 / 月」進度條顯示本月累計的已分配 GPU 時數 vs. plan 額度；其下方另有一行顯示本月<strong>實際</strong> GPU 使用率（DCGM 實測、已完成工作）作為參考 —— 此數值不會用來把關送出。</p>
 <hr />
 <h2 id="_5">編輯計畫<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
