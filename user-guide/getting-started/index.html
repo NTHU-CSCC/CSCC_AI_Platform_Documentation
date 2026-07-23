@@ -611,10 +611,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-manage-your-storage" class="md-nav__link">
+  <a href="#step-7-deploy-a-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 7 — Manage Your Storage
+        Step 7 — Deploy a Container
       
     </span>
   </a>
@@ -622,10 +622,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-join-a-group-optional" class="md-nav__link">
+  <a href="#step-8-manage-your-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 8 — Join a Group (Optional)
+        Step 8 — Manage Your Storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-join-a-group-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9 — Join a Group (Optional)
       
     </span>
   </a>
@@ -1054,10 +1065,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-manage-your-storage" class="md-nav__link">
+  <a href="#step-7-deploy-a-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 7 — Manage Your Storage
+        Step 7 — Deploy a Container
       
     </span>
   </a>
@@ -1065,10 +1076,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-join-a-group-optional" class="md-nav__link">
+  <a href="#step-8-manage-your-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 8 — Join a Group (Optional)
+        Step 8 — Manage Your Storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-join-a-group-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9 — Join a Group (Optional)
       
     </span>
   </a>
@@ -1118,7 +1140,7 @@
 
 
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
-<p>A step-by-step guide to connecting, signing in, and launching your first GPU workspace.</p>
+<p>A step-by-step guide to connecting, signing in, launching your first GPU workspace, and deploying a container.</p>
 <p><strong>Access:</strong> All users with a platform account provisioned by an administrator.</p>
 <hr />
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
@@ -1375,7 +1397,88 @@ connectivity checks.</p>
 </ul>
 </div>
 <hr />
-<h2 id="step-7-manage-your-storage">Step 7 — Manage Your Storage<a class="headerlink" href="#step-7-manage-your-storage" title="Permanent link">&para;</a></h2>
+<h2 id="step-7-deploy-a-container">Step 7 — Deploy a Container<a class="headerlink" href="#step-7-deploy-a-container" title="Permanent link">&para;</a></h2>
+<p>A <strong>workspace</strong> gives you an interactive IDE. When you instead want to run your own
+container image — a long-running service or a batch job — <strong>deploy a container</strong>
+from a project <strong>config file</strong>. The platform accepts standard Kubernetes <code>Pod</code>,
+<code>Deployment</code>, and <code>Job</code> manifests.</p>
+<div class="admonition info">
+<p class="admonition-title">Requires Project Manager role</p>
+<p>Creating and deploying config files needs the <strong>Manager</strong> role or higher. You
+already have this in your <strong>personal project</strong>; for a team project, ask a
+project manager.</p>
+</div>
+<ol>
+<li>Go to <strong>Projects → [your project] → Config</strong> tab.</li>
+<li>Click <strong>+ New Config</strong>. Paste a Kubernetes YAML manifest, or use the built-in
+   <strong>Resource Wizard</strong> to fill in the fields without hand-writing YAML.</li>
+<li>
+<p>Define your container:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What to set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Image</strong></td>
+<td>A container image from the platform allowlist — see <a href="../requests/">Requests</a> to add a new one</td>
+</tr>
+<tr>
+<td><strong>CPU / Memory</strong></td>
+<td>Set <strong>both</strong> requests and limits; memory must be at least <code>128Mi</code> (e.g. <code>512Mi</code>)</td>
+</tr>
+<tr>
+<td><strong>GPU</strong> <em>(optional)</em></td>
+<td>Add a DRA GPU request such as <code>nvidia.com/gpu-0: "1"</code>, or map a reusable GPU claim</td>
+</tr>
+<tr>
+<td><strong>Storage</strong> <em>(optional)</em></td>
+<td>Use <code>{{userVolume}}</code> to mount your personal storage volume</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Save</strong> — each save creates a new, immutable version.</p>
+<div class="admonition note">
+<p class="admonition-title">📷 Screenshot needed</p>
+<p><em>Add a screenshot of the <strong>Config tab with the New Config editor / Resource Wizard</strong>, then replace this note with the image.</em>
+Suggested file: <code>assets/screenshots/deploy-config-new.png</code></p>
+</div>
+</li>
+<li>
+<p>On the version row, click <strong>Deploy</strong>.</p>
+</li>
+<li>In the deploy dialog, choose a <strong>scheduling queue</strong>. If your YAML uses GPU claim
+   slots, map each slot to one of your reserved claims. Optionally click <strong>Dry-run</strong>
+   first to validate without consuming quota.</li>
+<li>
+<p>Click <strong>Deploy</strong>, then watch the instance until its pod reaches <strong>Running</strong>. Open
+   <strong>logs</strong> or <strong>pod status</strong> from the instance view to check on it.</p>
+<div class="admonition note">
+<p class="admonition-title">📷 Screenshot needed</p>
+<p><em>Add a screenshot of the <strong>Deploy dialog</strong> (scheduling queue and GPU claim selection), then replace this note with the image.</em>
+Suggested file: <code>assets/screenshots/deploy-dialog.png</code></p>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Deploy rejected?</p>
+<ul>
+<li>Every container must set <strong>both</strong> <code>resources.requests.memory</code> and
+  <code>resources.limits.memory</code> (≥ <code>128Mi</code>); missing values are rejected.</li>
+<li>The image must be on the platform <strong>allowlist</strong> — submit an image request first if it is not.</li>
+<li>Do not set <code>metadata.namespace</code>; the platform assigns it for you.</li>
+<li>Deploying needs the <strong>Manager</strong> role and enough remaining project <strong>quota</strong>.</li>
+</ul>
+</div>
+<p>For config-file versioning, DRA GPU requests, and reusable GPU claims in depth, see
+<a href="../projects/#config-file-versioning">Projects → Config File Versioning</a>.</p>
+<hr />
+<h2 id="step-8-manage-your-storage">Step 8 — Manage Your Storage<a class="headerlink" href="#step-8-manage-your-storage" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Navigate to <strong>Storage</strong> in the left sidebar (Resources section).</li>
 <li>Click <strong>Start</strong> on your personal storage to launch the file browser.</li>
@@ -1385,7 +1488,7 @@ connectivity checks.</p>
 <p><img alt="Storage browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 5: FileBrowser interface showing personal storage contents.</em></p>
 <hr />
-<h2 id="step-8-join-a-group-optional">Step 8 — Join a Group (Optional)<a class="headerlink" href="#step-8-join-a-group-optional" title="Permanent link">&para;</a></h2>
+<h2 id="step-9-join-a-group-optional">Step 9 — Join a Group (Optional)<a class="headerlink" href="#step-9-join-a-group-optional" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Navigate to <strong>Groups</strong> in the left sidebar.</li>
 <li>Browse available groups or ask your admin to add you.</li>

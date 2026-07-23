@@ -614,7 +614,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 7 — 管理您的儲存
+        步驟 7 — 部署一個容器
       
     </span>
   </a>
@@ -625,7 +625,18 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 加入群組（選用）
+        步驟 8 — 管理您的儲存
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 9 — 加入群組（選用）
       
     </span>
   </a>
@@ -1057,7 +1068,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 7 — 管理您的儲存
+        步驟 7 — 部署一個容器
       
     </span>
   </a>
@@ -1068,7 +1079,18 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 加入群組（選用）
+        步驟 8 — 管理您的儲存
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 9 — 加入群組（選用）
       
     </span>
   </a>
@@ -1118,7 +1140,7 @@
 
 
 <h1 id="_1">快速開始<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>從連線、登入到啟動第一個 GPU 工作區的逐步指南。</p>
+<p>從連線、登入、啟動第一個 GPU 工作區到部署容器的逐步指南。</p>
 <p><strong>適用對象：</strong> 所有由管理員建立帳號的使用者。</p>
 <hr />
 <h2 id="_2">前置需求<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1371,7 +1393,85 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </ul>
 </div>
 <hr />
-<h2 id="7">步驟 7 — 管理您的儲存<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h2 id="7">步驟 7 — 部署一個容器<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p><strong>工作區</strong> 提供互動式 IDE；當您想改為執行自己的容器映像檔——長時間運行的服務或
+批次任務——則從專案的 <strong>設定檔（Config）</strong> 來 <strong>部署容器</strong>。平台接受標準的
+Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資源。</p>
+<div class="admonition info">
+<p class="admonition-title">需要專案管理者（Manager）角色</p>
+<p>建立與部署設定檔需要 <strong>Manager</strong> 或更高的角色。您在 <strong>個人專案</strong> 中本來就具備此
+權限；若是團隊專案，請向專案管理者索取。</p>
+</div>
+<ol>
+<li>前往 <strong>專案 → [您的專案] → Config 分頁</strong>。</li>
+<li>點擊 <strong>+ 新增設定檔</strong>。貼上 Kubernetes YAML，或使用內建的 <strong>資源精靈
+   （Resource Wizard）</strong> 直接填欄位，不必手寫 YAML。</li>
+<li>
+<p>定義您的容器：</p>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>設定內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>映像檔</strong></td>
+<td>平台允許清單中的容器映像檔——如需新增請見 <a href="../requests/">申請</a></td>
+</tr>
+<tr>
+<td><strong>CPU / 記憶體</strong></td>
+<td>requests 與 limits <strong>都要</strong> 設定；記憶體至少 <code>128Mi</code>（例如 <code>512Mi</code>）</td>
+</tr>
+<tr>
+<td><strong>GPU</strong>（選用）</td>
+<td>加入 DRA GPU 請求，例如 <code>nvidia.com/gpu-0: "1"</code>，或對應可重用的 GPU 宣告</td>
+</tr>
+<tr>
+<td><strong>儲存</strong>（選用）</td>
+<td>使用 <code>{{userVolume}}</code> 掛載您的個人儲存磁區</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>點擊 <strong>儲存</strong>——每次儲存都會建立一個不可變的新版本。</p>
+<div class="admonition note">
+<p class="admonition-title">📷 待補截圖</p>
+<p><em>請在此加入 <strong>Config 分頁與新增設定檔（資源精靈）</strong> 的截圖，補上後將此提示改為圖片。</em>
+建議檔名：<code>assets/screenshots/deploy-config-new.png</code></p>
+</div>
+</li>
+<li>
+<p>在版本列上點擊 <strong>Deploy（部署）</strong>。</p>
+</li>
+<li>在部署對話框中選擇 <strong>排程佇列</strong>。若 YAML 使用 GPU 宣告 slot，請將每個 slot 對應到
+   您已保留的宣告。也可先點 <strong>Dry-run（試跑）</strong> 驗證，不會佔用配額。</li>
+<li>
+<p>點擊 <strong>Deploy</strong>，接著觀察實例狀態直到 Pod 變為 <strong>Running</strong>。可從實例檢視開啟
+   <strong>日誌</strong> 或 <strong>Pod 狀態</strong> 追蹤。</p>
+<div class="admonition note">
+<p class="admonition-title">📷 待補截圖</p>
+<p><em>請在此加入 <strong>部署對話框</strong>（排程佇列與 GPU 宣告選擇）的截圖，補上後將此提示改為圖片。</em>
+建議檔名：<code>assets/screenshots/deploy-dialog.png</code></p>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">部署被拒絕？</p>
+<ul>
+<li>每個容器都必須同時設定 <code>resources.requests.memory</code> 與
+  <code>resources.limits.memory</code>（≥ <code>128Mi</code>），缺一即被拒絕。</li>
+<li>映像檔必須在平台 <strong>允許清單</strong> 中——若尚未加入，請先提出映像申請。</li>
+<li>不要設定 <code>metadata.namespace</code>，平台會自動指派。</li>
+<li>部署需要 <strong>Manager</strong> 角色與足夠的專案 <strong>配額</strong>。</li>
+</ul>
+</div>
+<p>若需設定檔版本控制、DRA GPU 請求與可重用 GPU 宣告的完整說明，請見
+<a href="../projects/">專案 → 設定檔版本控制</a>。</p>
+<hr />
+<h2 id="8">步驟 8 — 管理您的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <ol>
 <li>點擊左側選單 <strong>儲存</strong>（資源區塊）。</li>
 <li>在您的個人儲存上點擊 <strong>啟動</strong> 以啟動檔案瀏覽器。</li>
@@ -1381,7 +1481,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <p><img alt="儲存瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 5：FileBrowser 介面，顯示個人儲存內容。</em></p>
 <hr />
-<h2 id="8">步驟 8 — 加入群組（選用）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h2 id="9">步驟 9 — 加入群組（選用）<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
 <ol>
 <li>點擊左側選單 <strong>群組</strong>。</li>
 <li>瀏覽可用的群組或請管理員將您加入。</li>
