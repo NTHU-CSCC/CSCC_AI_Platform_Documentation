@@ -1476,9 +1476,11 @@ pulled on demand through the registry-specific Harbor pull-through project.</p>
 <p>After submission, the build history shows build status, sanitized build Pod
 status, source type, fixed engine resources, destination image, and live logs.
 Failed builds surface a normalized two-line summary in the table. Use the log
-button for full errors, Pod events, and ANSI-colored BuildKit output. Active builds
-use one WebSocket until terminal status; completed and failed builds load one
-saved snapshot. Builders and project managers can clear saved log snapshots
+button for full errors, Pod events, and ANSI-colored BuildKit output. If
+Kubernetes retries a failed build Pod, the log view preserves the previous
+attempt's exact failure reason and exit code before streaming the current
+attempt. Active builds use one WebSocket until terminal status; completed and
+failed builds load one saved snapshot. Builders and project managers can clear saved log snapshots
 for one or more completed or failed builds. This leaves build history, images,
 and any still-retained Kubernetes Pod logs unchanged. Successful builds are pushed to the Harbor
 namespace selected by the project's group registry policy. GPU23 Harbor groups
