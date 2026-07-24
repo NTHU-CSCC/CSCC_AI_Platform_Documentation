@@ -1464,7 +1464,7 @@
 </tbody>
 </table>
 <p>映像建置會送進共用佇列，平台同一時間只在 <code>gpu1</code> 啟動一個 build。每個執行中的 build 固定
-使用 16 CPU cores、40Gi memory 與共用 lane 的 100Gi scratch workspace。CPU、memory、
+使用 16 CPU cores、40Gi memory 與共用 lane 的 150Gi scratch workspace。CPU、memory、
 timeout 與 build source resource override 不再由使用者在表單中指定。
 這些資源由平台共用池提供，不需要專案綁定 active resource plan，也不會占用專案或個人
 的 CPU 與 memory quota。</p>

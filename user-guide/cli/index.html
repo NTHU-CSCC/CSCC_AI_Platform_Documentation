@@ -1281,7 +1281,7 @@ this way after the build.</p>
 </blockquote>
 <h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
 <p>Image builds are queued behind one shared build engine. Each running build gets
-16 CPU cores, 40Gi memory, and a 100Gi scratch workspace on <code>gpu1</code>. CPU, memory, timeout,
+16 CPU cores, 40Gi memory, and a 150Gi scratch workspace on <code>gpu1</code>. CPU, memory, timeout,
 and build-source resource overrides are not CLI options.</p>
 <p>After submission, <code>--follow=true</code> polls until build logs are available, streams
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>, and stops with the final

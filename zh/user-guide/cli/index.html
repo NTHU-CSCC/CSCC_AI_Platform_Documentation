@@ -1271,7 +1271,7 @@ engine。</p>
 </blockquote>
 <h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>映像建置會排入同一個共用 build engine；同一時間只啟動一個 build。每個執行中的
-中央 build engine 固定在 <code>gpu1</code> 使用 16 CPU cores、40Gi memory 與 100Gi scratch workspace。CPU、
+中央 build engine 固定在 <code>gpu1</code> 使用 16 CPU cores、40Gi memory 與 150Gi scratch workspace。CPU、
 memory、timeout 與 build source resource override 不再是 CLI 選項。</p>
 <p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
 <code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
