@@ -1464,8 +1464,8 @@
 </tbody>
 </table>
 <p>Builds are submitted to a shared queue. The platform starts one build at a time
-on <code>gpu1</code> and assigns fixed resources to the central engine: 16 CPU cores, 40Gi
-memory, and a 150Gi scratch workspace. CPU, memory, timeout, and build-source resource
+on <code>gpu3</code> and assigns fixed resources to the central engine: 16 CPU cores, 40Gi
+memory, and a 500Gi scratch workspace backed by <code>/data2</code>. CPU, memory, timeout, and build-source resource
 overrides are not user-configurable from the form.
 This platform-owned capacity does not require an active project plan and does
 not consume project or per-user CPU and memory quota.</p>
@@ -1484,7 +1484,7 @@ failed builds load one saved snapshot. Builders and project managers can clear s
 for one or more completed or failed builds. This leaves build history, images,
 and any still-retained Kubernetes Pod logs unchanged. Successful builds are pushed to the Harbor
 namespace selected by the project's group registry policy. GPU23 Harbor groups
-use the same central builder on <code>gpu1</code>, then push over the network to the GPU23
+use the same central builder on <code>gpu3</code>, then push to the GPU23
 Harbor. The current project member who started a
 completed project-local build, or a project manager, can delete that build
 artifact from the build history when no other active build or publication

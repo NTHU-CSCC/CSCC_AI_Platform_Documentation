@@ -1463,8 +1463,8 @@
 </tr>
 </tbody>
 </table>
-<p>映像建置會送進共用佇列，平台同一時間只在 <code>gpu1</code> 啟動一個 build。每個執行中的 build 固定
-使用 16 CPU cores、40Gi memory 與共用 lane 的 150Gi scratch workspace。CPU、memory、
+<p>映像建置會送進共用佇列，平台同一時間只在 <code>gpu3</code> 啟動一個 build。每個執行中的 build 固定
+使用 16 CPU cores、40Gi memory 與 gpu3 <code>/data2</code> 上的 500Gi scratch workspace。CPU、memory、
 timeout 與 build source resource override 不再由使用者在表單中指定。
 這些資源由平台共用池提供，不需要專案綁定 active resource plan，也不會占用專案或個人
 的 CPU 與 memory quota。</p>
@@ -1476,7 +1476,7 @@ events 與帶 ANSI 顏色的 BuildKit 輸出請用該列日誌按鈕查看。活
 WebSocket 持續串流直到終態，完成或失敗紀錄只讀取一次保存快照。建置者與專案管理者
 可一次清除一個或多個已完成或失敗建置的保存日誌快照；此操作不會刪除建置記錄、
 映像或仍保留的 Kubernetes Pod 日誌。成功的映像會推送到該專案群組 registry policy 指定的
-Harbor namespace；GPU23 Harbor 群組同樣在 <code>gpu1</code> 建置，再透過網路推送到 GPU23 Harbor。仍具備目前專案
+Harbor namespace；GPU23 Harbor 群組同樣在 <code>gpu3</code> 建置，再推送到 GPU23 Harbor。仍具備目前專案
 成員身分的建置者本人，可以在沒有其他活躍建置或 publication 參照時刪除自己完成
 的專案本地 build artifact；專案管理者也可以刪除該專案的 built artifacts。</p>
 <p>專案管理者只能為目前管理的專案提交 image allowlist request，並移除屬於目前專案的 image allowlist 項目；專案成員可以查看該專案的 image request 歷史。Global catalog publication 與其他專案的映像規則仍需由具備管理權限的端點處理。</p>

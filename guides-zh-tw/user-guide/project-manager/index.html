@@ -1113,7 +1113,7 @@
 </tbody>
 </table>
 <blockquote>
-<p><strong>新版重點：</strong> Build job 會排入共用佇列，同一時間只在 <code>gpu1</code> 啟動一個 build。中央 BuildKit 固定使用 16 CPU cores、40Gi memory 與 150Gi scratch workspace；使用者不能自行指定 CPU、memory 或 timeout。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；Docker Hub、GHCR 與 NVCR base image 會走各自的 Harbor pull-through project。</p>
+<p><strong>新版重點：</strong> Build job 會排入共用佇列，同一時間只在 <code>gpu3</code> 啟動一個 build。中央 BuildKit 固定使用 16 CPU cores、40Gi memory 與 gpu3 <code>/data2</code> 上的 500Gi scratch workspace；使用者不能自行指定 CPU、memory 或 timeout。Archive build context 會先檢查不安全路徑與展開大小，避免壓縮檔耗盡後端磁碟；Docker Hub、GHCR 與 NVCR base image 會走各自的 Harbor pull-through project。</p>
 </blockquote>
 <h3 id="_3">監看 / 取消<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
