@@ -1135,7 +1135,7 @@
 <hr />
 <h2 id="settings-tabs">Settings Tabs<a class="headerlink" href="#settings-tabs" title="Permanent link">&para;</a></h2>
 <p><img alt="Settings page tabs" src="../../assets/screenshots/settings-tabs.png" />
-<em>Figure 1: Settings page showing the tabs: Profile, Security, Notifications, Preferences, and API Key &amp; CLI.</em></p>
+<em>Figure 1: Settings page showing the tabs: Profile, Security, Notifications, and Preferences.</em></p>
 <table>
 <thead>
 <tr>
@@ -1150,7 +1150,7 @@
 </tr>
 <tr>
 <td><strong>Security</strong></td>
-<td>Change your password</td>
+<td>Change your password; manage API tokens and CLI access</td>
 </tr>
 <tr>
 <td><strong>Notifications</strong></td>
@@ -1159,10 +1159,6 @@
 <tr>
 <td><strong>Preferences</strong></td>
 <td>Select your display language</td>
-</tr>
-<tr>
-<td><strong>API Key &amp; CLI</strong></td>
-<td>Manage personal API tokens and copy CLI setup commands</td>
 </tr>
 </tbody>
 </table>
@@ -1231,8 +1227,9 @@
 <p>Available languages depend on your platform configuration. Contact your admin if your language is missing.</p>
 <hr />
 <h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
-<p>This tab is the entry point for the <a href="../cli/"><code>cscc-cli</code></a> tool. It helps you
-manage CLI credentials and copy setup commands.</p>
+<p>This panel, under the <strong>Security</strong> tab, is the entry point for the
+<a href="../cli/"><code>cscc-cli</code></a> tool. It helps you manage CLI credentials and copy setup
+commands.</p>
 <h3 id="active-api-tokens">Active API Tokens<a class="headerlink" href="#active-api-tokens" title="Permanent link">&para;</a></h3>
 <p>The token list shows every active API token issued for your account, with prefix, last-used time, and expiry. From here you can:</p>
 <ul>
@@ -1264,7 +1261,7 @@ replacing a <code>dashboard.*</code> hostname with <code>api.*</code>, then appe
 </details>
 <details class="question">
 <summary>I lost my API token. Can I recover it?</summary>
-<p>No — only the hash is stored. Revoke the lost token from the <strong>API Key &amp; CLI</strong> tab and create a new one.</p>
+<p>No — only the hash is stored. Revoke the lost token under the <strong>Security</strong> tab and create a new one.</p>
 </details>
 
 

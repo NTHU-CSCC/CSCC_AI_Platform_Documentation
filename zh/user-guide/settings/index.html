@@ -1114,7 +1114,7 @@
 </tr>
 <tr>
 <td><strong>安全性</strong></td>
-<td>密碼變更、雙因素驗證（2FA）</td>
+<td>密碼變更；管理個人 API token 與 CLI 存取</td>
 </tr>
 <tr>
 <td><strong>通知</strong></td>
@@ -1123,10 +1123,6 @@
 <tr>
 <td><strong>偏好設定</strong></td>
 <td>語言、主題、預設工作區設定</td>
-</tr>
-<tr>
-<td><strong>API Key &amp; CLI</strong></td>
-<td>管理個人 API token，並複製 CLI 設定指令</td>
 </tr>
 </tbody>
 </table>
@@ -1230,7 +1226,7 @@
 <p>變更偏好設定後會自動儲存，重新整理頁面後即時生效。</p>
 <hr />
 <h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
-<p>此標籤是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，可管理 CLI 憑證並複製設定指令。</p>
+<p>此面板位於<strong>安全性</strong>標籤內，是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，可管理 CLI 憑證並複製設定指令。</p>
 <h3 id="api-token">已啟用的 API token<a class="headerlink" href="#api-token" title="Permanent link">&para;</a></h3>
 <p>token 列表會顯示您帳號下每個有效的 API token，以及 prefix、上次使用時間與到期時間。在這裡可以：</p>
 <ul>
@@ -1263,7 +1259,7 @@
 </details>
 <details class="question">
 <summary>我的 API token 不見了，能找回嗎？</summary>
-<p>無法。後端只保留雜湊值。請在 <strong>API Key &amp; CLI</strong> 標籤撤銷遺失的 token，並建立新的。</p>
+<p>無法。後端只保留雜湊值。請在<strong>安全性</strong>標籤撤銷遺失的 token，並建立新的。</p>
 </details>
 
 
