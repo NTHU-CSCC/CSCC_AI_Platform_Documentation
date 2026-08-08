@@ -1525,6 +1525,17 @@ Harbor namespace；GPU23 Harbor 群組同樣在 <code>gpu3</code> 建置，再�
 成員身分的建置者本人，可以在沒有其他活躍建置或 publication 參照時刪除自己完成
 的專案本地 build artifact；專案管理者也可以刪除該專案的 built artifacts。</p>
 <p>專案管理者只能為目前管理的專案提交 image allowlist request，並移除屬於目前專案的 image allowlist 項目；專案成員可以查看該專案的 image request 歷史。Global catalog publication 與其他專案的映像規則仍需由具備管理權限的端點處理。</p>
+<p><strong>映像</strong> 分頁分成 <strong>可使用</strong> 與 <strong>申請紀錄</strong> 兩個子分頁。可使用列出這個專案已經能拉取的
+映像；申請紀錄列出這個專案的所有映像申請（待審核的排在最前面），顯示狀態、送出時間與審核
+備註，分頁標籤上還有待審核件數的徽章。透過 <strong>新增</strong> 送出申請後會自動切到申請紀錄分頁，
+讓你立刻看到剛送出的那一筆。</p>
+<p>自己送出的申請在尚未審核前可以按 <strong>撤回</strong> 收回，之後仍可重新提出。別人送出的申請，
+或是已核准／已拒絕的申請，不會出現撤回按鈕。</p>
+<div class="admonition note">
+<p class="admonition-title">被核准為全域的申請會從清單消失</p>
+<p>管理員核准時若勾選 <strong>設為全域</strong>，該申請就不再屬於這個專案，會從申請紀錄分頁消失；
+映像本身則會出現在 <strong>可使用</strong> 分頁。</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
 <p>如果建置表單未顯示，代表專案尚未啟用 <strong>Image Build Permission</strong>，或您的專案角色不能啟動建置。建置歷史與 log 仍會保留可見，方便檢查既有工作。請聯繫專案管理者或平台管理員調整專案設定或角色。</p>

@@ -1537,6 +1537,21 @@ completed project-local build, or a project manager, can delete that build
 artifact from the build history when no other active build or publication
 references it.</p>
 <p>Project Managers can submit project image allowlist requests and remove project image allowlist entries only for projects they currently manage. Project Members can view the project's image request history, but global catalog publications and other projects' image rules remain admin-controlled.</p>
+<p>The <strong>Images</strong> tab splits into <strong>Available</strong> and <strong>Requests</strong>. Available lists
+the images this project may already pull. Requests lists every image request
+raised for the project -- pending ones first -- with its status, submission time
+and reviewer note; the tab label carries a badge with the pending count.
+Submitting a request through <strong>Add</strong> switches you to that tab so the new request
+is visible immediately.</p>
+<p>A request you filed yourself can be taken back with <strong>Withdraw</strong> while it is
+still pending; you can submit it again afterwards. Requests filed by someone
+else, or already approved or rejected, offer no withdraw action.</p>
+<div class="admonition note">
+<p class="admonition-title">Approved-as-global requests leave the project list</p>
+<p>When an admin approves a request and ticks <strong>Make global</strong>, the request stops
+being project-scoped and disappears from this tab. The image itself then
+appears under <strong>Available</strong>.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If the start form is hidden, the project either does not have <strong>Image Build Permission</strong> enabled or your project role cannot start builds. Build history and logs remain visible so you can still inspect previous jobs. Ask a project manager or platform admin to adjust the project setting or your role.</p>
