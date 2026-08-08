@@ -1188,19 +1188,19 @@
 <td><strong>JuiceFS RWX</strong></td>
 <td>JuiceFS over object storage</td>
 <td><code>shared-rwx</code></td>
-<td>多節點共享的資料集與 checkpoint</td>
+<td>多節點共享的資料集與 checkpoint（唯一的跨 namespace 共享 lane）</td>
 </tr>
 <tr>
-<td><strong>Legacy RWX</strong></td>
-<td>NFS / 既有共享儲存</td>
-<td><code>legacy-rwx</code></td>
-<td>已存在於舊有共享儲存上的資料</td>
+<td><strong>Node-local Scratch</strong></td>
+<td>節點本地目錄（local-path）</td>
+<td><code>local-scratch</code></td>
+<td>單一工作的熱 <code>/scratch</code>——hostPath 等級速度；<strong>ephemeral</strong>：節點故障或刪除 PVC 即消失</td>
 </tr>
 <tr>
 <td><strong>Longhorn (Fast RWO)</strong></td>
-<td>Longhorn 區塊儲存</td>
+<td>Longhorn 區塊儲存（節點本地）</td>
 <td><code>fast-rwo</code></td>
-<td>單一 Pod 的熱 scratch——讀寫最快</td>
+<td>需要撐過 pod 重啟的節點本地 scratch</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -1236,8 +1236,8 @@
 </tr>
 <tr>
 <td><code>/scratch</code></td>
-<td>快速 job-local RWO</td>
-<td>單一工作期間的熱資料</td>
+<td>節點本地 scratch（<code>local-scratch</code>）</td>
+<td>單一工作期間的熱資料——hostPath 速度、ephemeral</td>
 </tr>
 </tbody>
 </table>

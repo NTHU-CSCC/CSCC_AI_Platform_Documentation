@@ -1038,7 +1038,7 @@
 <tr>
 <td><code>juicefs</code></td>
 <td>不限制</td>
-<td>預設 personal、project PVC、訓練資料與 checkpoint，節點快取使用 <code>/data</code></td>
+<td>預設 personal、project PVC、訓練資料與 checkpoint，節點快取使用 <code>/data</code>；也是唯一的跨 namespace 共享 lane</td>
 </tr>
 <tr>
 <td><code>juicefs-gpu23-rwx</code></td>
@@ -1046,18 +1046,14 @@
 <td>既有 JuiceFS 指派的舊 profile 名稱</td>
 </tr>
 <tr>
-<td><code>longhorn-gpu23-group</code></td>
+<td><code>local-scratch</code></td>
 <td>限制</td>
-<td>GPU23 <code>/data2</code> 舊版 Longhorn 群組儲存</td>
-</tr>
-<tr>
-<td><code>longhorn-gpu23-rwx-25g</code></td>
-<td>限制</td>
-<td>舊 RWX/NFS 相容</td>
+<td>節點本地 ephemeral scratch，hostPath 等級速度（無 iSCSI/FUSE/NFS）；節點故障或刪除 PVC 即消失</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
+<p><strong>Longhorn RWX/NFS 已於 2026-08 儲存瘦身時退場</strong>：Longhorn 的 RWX 是靠每個 volume 一個 NFS-Ganesha share-manager pod 實作，是「儲存很慢」的主因。<code>longhorn-gpu23-group</code> 與 <code>longhorn-gpu23-rwx-25g</code> 的 StorageClass 物件仍在，但不再是可選 policy，也沒有任何 PVC 使用。</p>
 <p><strong>群組儲存策略</strong>：在群組設定的「Storage Policy」會限制此群組能用的 Storage Class，這裡的選單也會自動只顯示該群組允許的選項。</p>
 <p><strong>Fast-stage 政策</strong>：<code>longhorn-gpu23-fast-rwo-v2</code> 位於 GPU23 <code>/data2</code> Longhorn lane，只保留給專案內的 fast-stage 快取 PVC，不應直接建立成群組 PVC。fast-stage 的來源必須是共享 RWX 群組儲存，例如 <code>juicefs</code>、<code>juicefs-gpu23-rwx</code> 或明確設定的舊版 RWX fallback。Transfer Job 會 request/limit <code>500m</code> CPU 與 <code>512Mi</code> memory，後端會在建立快取 PVC 或 Job 前檢查有效專案 plan 配額。舊版 <code>longhorn-gpu23-fast-rwo</code> 只作為既有不可變 StorageClass 的相容與回復路徑。</p>
 </blockquote>

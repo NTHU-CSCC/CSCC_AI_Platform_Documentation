@@ -1232,19 +1232,19 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <td><strong>JuiceFS RWX</strong></td>
 <td>JuiceFS over object storage</td>
 <td><code>shared-rwx</code></td>
-<td>Cross-node datasets and checkpoints visible to many pods</td>
+<td>Cross-node datasets and checkpoints visible to many pods (the only cross-namespace shared lane)</td>
 </tr>
 <tr>
-<td><strong>Legacy RWX</strong></td>
-<td>NFS / legacy share</td>
-<td><code>legacy-rwx</code></td>
-<td>Long-standing shared data already on the legacy mount</td>
+<td><strong>Node-local Scratch</strong></td>
+<td>Local directory (local-path)</td>
+<td><code>local-scratch</code></td>
+<td>Hot per-job <code>/scratch</code> at hostPath speed — <strong>ephemeral</strong>: gone on node loss or PVC deletion</td>
 </tr>
 <tr>
 <td><strong>Longhorn (Fast RWO)</strong></td>
-<td>Longhorn replicated block</td>
+<td>Longhorn block, node-local</td>
 <td><code>fast-rwo</code></td>
-<td>Single-pod hot scratch — fastest reads and writes</td>
+<td>Scratch that must survive a pod restart on the same node</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -1280,8 +1280,8 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </tr>
 <tr>
 <td><code>/scratch</code></td>
-<td>Fast job-local RWO</td>
-<td>Temporary hot files during one job</td>
+<td>Node-local scratch (<code>local-scratch</code>)</td>
+<td>Temporary hot files during one job — hostPath speed, ephemeral</td>
 </tr>
 </tbody>
 </table>
