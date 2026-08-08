@@ -763,6 +763,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#containers-you-can-shell-into" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers You Can Shell Into
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1234,6 +1245,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#containers-you-can-shell-into" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers You Can Shell Into
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1629,6 +1651,20 @@ increase, disable, or override it.</p>
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
 <li>In the deploy dialog, pick the scheduling queue. If the YAML contains GPU claim slots, choose one of your reserved GPU claims for each slot for this deploy only.</li>
 </ol>
+<h3 id="containers-you-can-shell-into">Containers You Can Shell Into<a class="headerlink" href="#containers-you-can-shell-into" title="Permanent link">&para;</a></h3>
+<p>To open a <strong>Terminal</strong> into a container, it has to stay running. A shell given
+no arguments — <code>command: ["/bin/sh"]</code> — reads standard input, reaches
+end-of-file immediately, and exits. Kubernetes restarts it, so the pod reports
+<code>Running</code> between restarts while every terminal attempt fails.</p>
+<p>Either give the container real work:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sleep&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;infinity&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>or keep the shell alive by enabling <strong>stdin</strong> and <strong>tty</strong> under <em>Interactive
+shell</em> in the Resource Wizard (<code>stdin: true</code> and <code>tty: true</code> in raw YAML). The
+wizard warns you when a bare shell would exit immediately.</p>
+<p>Once the pod is running, open the project <strong>Resources</strong> tab and click
+<strong>Terminal</strong> on the <strong>Pod</strong> row. Deployment and Job rows have no terminal button
+— expand to the pod they created.</p>
 <p>Deployment, direct-create, dry-run validation, instance deletion, and instance pod status require <strong>Project Manager</strong> or higher access through direct project membership, the owning group role, personal project ownership, or platform admin permissions. Workload submit requires effective project access. Knowing or guessing a config version ID is not enough to operate in a project namespace. Access, plan-window, queue-plan, allowed GPU model, and quota rejections return <code>403 Forbidden</code>.
 For deployment namespace ownership, the backend resolves the deploying username from the platform database by authenticated user ID; stale or altered token username claims do not select a different Kubernetes namespace.
 Deploy requests with malformed JSON options are rejected before any validation or deployment starts, so dry-run, direct-create, queue, and GPU claim choices cannot silently fall back to defaults.

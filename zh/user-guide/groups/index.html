@@ -744,7 +744,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組列表
+        群組列表頁面
       
     </span>
   </a>
@@ -755,7 +755,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組詳情
+        檢視群組
       
     </span>
   </a>
@@ -766,7 +766,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建立群組
+        申請建立群組
       
     </span>
   </a>
@@ -788,7 +788,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        新增成員（擁有者 / 管理員）
+        新增成員
       
     </span>
   </a>
@@ -958,7 +958,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組列表
+        群組列表頁面
       
     </span>
   </a>
@@ -969,7 +969,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組詳情
+        檢視群組
       
     </span>
   </a>
@@ -980,7 +980,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建立群組
+        申請建立群組
       
     </span>
   </a>
@@ -1002,7 +1002,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        新增成員（擁有者 / 管理員）
+        新增成員
       
     </span>
   </a>
@@ -1052,124 +1052,136 @@
 
 
 <h1 id="_1">群組<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>群組是跨專案的協作工具。群組成員可共用群組儲存空間（PVC），並在細粒度權限控制下協同工作。</p>
-<p><strong>適用對象：</strong> 群組擁有者（建立者）及其成員。</p>
+<p>群組代表團隊或課程。群組提供共用的儲存空間，也可以整個群組被加入多個專案。</p>
+<p><strong>適用對象：</strong> 所有使用者都可以屬於群組。<strong>群組由平台管理員建立</strong>；若你需要新的群組，請透過 <a href="../requests/">申請</a> 提出。</p>
 <hr />
 <h2 id="_2">成員模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph TD
-    A[群組擁有者&lt;br&gt;（建立者）] --&gt;|管理成員| B[群組管理員]
-    A --&gt;|管理成員| C[群組成員]
-    B --&gt;|邀請 / 移除| C
-    C --&gt;|唯讀或讀寫存取&lt;br&gt;群組儲存空間| D[(群組 PVC)]</code></pre>
+<pre class="mermaid"><code>graph LR
+    GroupAdmin["群組管理員\n（管理成員與權限）"]
+    GroupMember["群組成員\n（存取群組儲存與專案）"]
+    Group["群組"]
+
+    GroupAdmin --&gt;|管理| Group
+    Group --&gt;|包含| GroupMember
+    Group --&gt;|可成為成員| Project["專案"]
+    Group --&gt;|擁有| GroupStorage["群組儲存 PVC"]</code></pre>
+<p>群組內有三種角色。你在群組中的角色，也會決定你在該群組所擁有專案中的預設權限。</p>
 <table>
 <thead>
 <tr>
 <th>角色</th>
-<th>權限</th>
+<th>新增 / 移除成員</th>
+<th>設定儲存權限</th>
+<th>存取群組儲存</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>擁有者</strong></td>
-<td>完全控制——成員管理、儲存管理、刪除群組</td>
+<td><strong>管理員（Admin）</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
 </tr>
 <tr>
-<td><strong>管理員</strong></td>
-<td>邀請 / 移除成員、設定儲存權限</td>
+<td><strong>管理者（Manager）</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
 </tr>
 <tr>
-<td><strong>成員</strong></td>
-<td>依據管理員設定，唯讀或讀寫存取群組儲存空間</td>
+<td><strong>成員（User）</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">助教通常需要「管理員」</p>
+<p>設定學生的儲存讀寫權限只需要 <strong>管理者</strong>，但新增／移除成員需要 <strong>管理員</strong>。若你負責帶課，請向平台管理員申請 <strong>管理員</strong> 角色。</p>
+</div>
 <hr />
-<h2 id="_3">群組列表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">群組列表頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="群組列表頁面" src="../../../assets/screenshots/groups-list.png" />
-<em>圖 1：群組列表頁面，顯示名稱、成員數和您的角色。</em></p>
-<p>導航至左側選單的 <strong>群組</strong>，即可看到您所屬的所有群組。每張卡片顯示：</p>
+<em>圖 1：群組列表，每張卡片顯示成員數、儲存資訊與政策標籤。</em></p>
+<p>導覽至左側選單的 <strong>群組</strong>，即可看到你所屬的所有群組。每張卡片顯示：</p>
 <ul>
-<li>群組名稱和說明</li>
+<li>群組名稱與說明</li>
 <li>成員數</li>
-<li>您的角色（擁有者 / 管理員 / 成員）</li>
-<li>群組儲存已使用 / 總容量</li>
+<li>關聯的儲存 PVC</li>
 <li><strong>Storage Policy</strong> 與 <strong>Registry Policy</strong> 標籤——由管理員指派，用來控制建立群組 PVC 時可選的 storage class，以及群組映像建置最終推送到的 Harbor namespace</li>
+<li>操作：<strong>檢視</strong>、<strong>編輯</strong>（僅限管理員）、<strong>刪除</strong>（僅限管理員）</li>
 </ul>
 <hr />
-<h2 id="_4">群組詳情<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="群組詳情頁面" src="../../../assets/screenshots/group-add-members.png" />
-<em>圖 2：群組詳情頁面，包含成員表格和儲存標籤。</em></p>
-<p>點擊群組卡片可進入：</p>
-<ul>
-<li><strong>成員</strong> 標籤 — 查看所有成員及其角色；擁有者和管理員可邀請或移除成員</li>
-<li><strong>儲存</strong> 標籤 — 查看群組儲存（PVC）、已使用空間，以及哪些工作區掛載了此空間</li>
-</ul>
-<hr />
-<h2 id="_5">建立群組<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_4">檢視群組<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>點擊任一群組卡片可開啟詳情頁，內含兩個標籤：</p>
 <ol>
-<li>在群組列表頁面點擊 <strong>+ 新增群組</strong>。</li>
-<li>填寫名稱和說明。</li>
-<li>設定初始儲存配額（如果您的專案允許）。</li>
-<li>點擊 <strong>建立</strong>。</li>
+<li><strong>成員</strong> — 所有群組成員及其角色</li>
+<li><strong>存儲</strong> — 此群組擁有的 PVC 及其權限設定</li>
 </ol>
-<p>您自動成為群組的 <strong>擁有者</strong>。</p>
+<hr />
+<h2 id="_5">申請建立群組<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>一般使用者無法自行建立群組，<strong>建立群組</strong> 按鈕僅平台管理員可見。若你需要新的群組：</p>
+<ol>
+<li>前往 <strong>申請</strong> → <strong>新增申請</strong>。</li>
+<li>說明群組用途、預計成員範圍，以及需要多少群組儲存空間。</li>
+<li>平台管理員審核後會建立群組，並將你設為群組管理員。</li>
+</ol>
 <hr />
 <h2 id="_6">加入群組<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>群組為邀請制——擁有者或管理員將您的帳號加入群組。</p>
+<p>群組成員資格由群組管理員或平台管理員管理。若要加入群組：</p>
 <ol>
-<li>提供您的使用者名稱給群組擁有者或管理員。</li>
-<li>對方在群組詳情的成員標籤中點擊 <strong>新增成員</strong>。</li>
-<li>您的群組列表中會出現該群組。</li>
+<li>前往 <strong>申請</strong> 提出申請，類型選擇 <strong>存取申請</strong>。</li>
+<li>說明你需要存取哪個群組以及原因。</li>
+<li>群組管理員或平台管理員審核後會將你加入。</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">沒有公開瀏覽</p>
-<p>目前無法瀏覽或搜尋公共群組。群組發現需透過團隊自行溝通聯繫。</p>
+<p>目前無法瀏覽或搜尋公開群組。群組的探索需要透過團隊自行溝通聯繫。</p>
 </div>
 <hr />
-<h2 id="_7">新增成員（擁有者 / 管理員）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_7">新增成員<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>需要 <strong>群組管理員</strong> 角色。</p>
+</blockquote>
 <ol>
-<li>進入群組詳情 → <strong>成員</strong> 標籤。</li>
-<li>點擊 <strong>新增成員</strong>。</li>
-<li>搜尋使用者名稱。</li>
-<li>選擇角色（管理員 / 成員）。</li>
-<li>點擊 <strong>確認</strong>。</li>
+<li>開啟群組，在 <strong>成員</strong> 標籤右上角點擊 <strong>新增成員</strong>。</li>
+<li>以使用者名稱或電子郵件搜尋使用者。</li>
+<li>從結果清單中勾選使用者。</li>
+<li>點擊 <strong>新增成員</strong> 確認。</li>
 </ol>
-<p>新增成員清單只會顯示尚未加入此群組的使用者；搜尋和分頁會在後端先排除既有成員後再計算，避免翻頁時出現空白結果。</p>
+<p>若要一次加入整班學生，可使用 <strong>貼上使用者名單</strong>：把名單貼進文字框（可用換行、逗號、分號或 Tab 分隔），再點擊 <strong>解析使用者</strong>。</p>
+<p>結果表格只會顯示尚未加入此群組的使用者。搜尋與分頁都是在後端針對「可新增的使用者」計算，因此翻頁時不會出現已加入的成員，也不會因前端過濾而出現空白頁。</p>
+<p><img alt="新增群組成員" src="../../../assets/screenshots/group-add-members.png" />
+<em>圖 2：新增成員對話框，包含使用者搜尋與選取。</em></p>
 <hr />
 <h2 id="_8">儲存權限繼承<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>群組 PVC 在掛載到工作區時遵循 POSIX 權限：</p>
-<table>
-<thead>
-<tr>
-<th>存取層級</th>
-<th>在容器中的結果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>讀寫</strong></td>
-<td>完整的讀取 / 寫入 / 刪除權限</td>
-</tr>
-<tr>
-<td><strong>唯讀</strong></td>
-<td>僅讀取權限；寫入嘗試會失敗</td>
-</tr>
-</tbody>
-</table>
-<p>管理員在 <strong>儲存</strong> 標籤中對群組 PVC 設定每位成員的存取層級。</p>
+<p>群組儲存的權限會以雙路徑模型串接到專案：</p>
+<pre class="mermaid"><code>flowchart TD
+    GroupAdmin["群組管理員\n設定群組 PVC 權限"] --&gt;|批次操作| GroupPVC["群組 PVC 權限\n（唯一真實來源）"]
+    GroupPVC --&gt;|繼承，唯讀列| ProjectStoragePage["專案存儲頁面\n（群組成員列）"]
+    ProjectAdmin["專案管理員\n管理非群組成員"] --&gt;|直接管理| DirectRows["專案 PVC 權限\n（僅限非群組成員）"]
+    DirectRows --&gt; ProjectStoragePage</code></pre>
+<p>權限層級為 <strong>讀取</strong>、<strong>寫入</strong>、<strong>無</strong>。每個群組 PVC 另有一個 <strong>存取策略</strong>，作為未單獨設定權限的群組成員的預設值。</p>
+<p><strong>關鍵規則：</strong> 如果你是群組成員，你在專案綁定 PVC 上的儲存權限<strong>一律由群組決定</strong>，無法在專案層級覆寫。專案層級的儲存授權只適用於不屬於來源群組的直接專案成員。專案存儲頁面會將繼承而來的列顯示為<strong>唯讀</strong>，並附上連往群組權限頁面的資訊標籤。</p>
+<p>群組儲存權限只對群組的<strong>現任成員</strong>生效。當使用者被移出群組後，殘留的權限設定不再授予任何實際存取權——這也是學期結束時最省事的收尾方式：從群組移除即可，不需逐一調整每個專案。</p>
 <hr />
 <h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">
+<summary>我看得到群組，但無法新增成員。</summary>
+<p>新增成員需要 <strong>群組管理員</strong> 角色。若你需要管理群組成員，請聯繫目前的群組管理員或平台管理員提升你的角色。</p>
+</details>
+<details class="question">
+<summary>為什麼專案頁面上我的儲存權限是灰色的？</summary>
+<p>因為你是擁有此儲存的群組的成員，你的權限在群組層級管理。請前往該群組的 <strong>存儲</strong> 標籤查看你的實際權限。</p>
+</details>
+<details class="question">
 <summary>我可以加入多個群組嗎？</summary>
-<p>可以。您的群組成員資格互相獨立，沒有限制。</p>
+<p>可以。你的群組成員資格互相獨立，沒有數量限制。</p>
 </details>
 <details class="question">
-<summary>離開群組後會發生什麼？</summary>
-<p>您將失去群組儲存空間的存取權限。您個人儲存中的資料不受影響。仍在掛載該群組儲存的工作區在下次重啟時可能會遇到掛載失敗。</p>
-</details>
-<details class="question">
-<summary>群組有容量限制嗎？</summary>
-<p>儲存配額由管理員設定。成員數量在技術上沒有固定上限，但管理員可根據政策限制群組大小。</p>
+<summary>我要如何離開群組？</summary>
+<p>請聯繫群組管理員或平台管理員將你移除，目前不支援自行退出。離開後你會失去群組儲存的存取權，個人儲存中的資料不受影響；仍掛載該群組儲存的工作區在下次啟動時可能會掛載失敗。</p>
 </details>
 
 

@@ -763,6 +763,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可以進去操作的容器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dra-gpu-request-gpu-claim" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -779,7 +790,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         管理成員
@@ -807,7 +818,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         刪除專案
@@ -818,7 +829,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         資源標籤
@@ -840,7 +851,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1234,6 +1245,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可以進去操作的容器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dra-gpu-request-gpu-claim" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1250,7 +1272,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         管理成員
@@ -1278,7 +1300,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         刪除專案
@@ -1289,7 +1311,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         資源標籤
@@ -1311,7 +1333,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1596,6 +1618,18 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 <li>在彈出的部署對話框中選擇 <strong>佇列 (Queue)</strong>。若 YAML 包含 GPU claim slot，請為每個 slot 選擇本次部署要使用的已保留 GPU claim。</li>
 <li>如果您使用 <strong>資源嚮導 (Resource Wizard)</strong> 建立設定，可以在容器資源設定中直接選定 GPU 型號，系統會自動在產生的 YAML 中加上對應的標籤。</li>
 </ol>
+<h3 id="_12">可以進去操作的容器<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>要能對容器開啟 <strong>終端</strong>，它必須持續執行。單獨執行 Shell 而不帶參數
+（<code>command: ["/bin/sh"]</code>）會讀取標準輸入、立刻遇到 EOF 然後結束。Kubernetes
+會不斷重啟它，因此 Pod 在兩次重啟之間顯示 <code>Running</code>，但每次開啟終端都會失敗。</p>
+<p>請改成讓容器有事可做：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sleep&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;infinity&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>或在資源精靈的 <strong>互動式 Shell</strong> 區塊勾選 <strong>stdin</strong> 與 <strong>tty</strong>（手寫 YAML 則是
+<code>stdin: true</code> 與 <code>tty: true</code>）讓 Shell 保持存活。當精靈偵測到單獨的 Shell 會立
+刻結束時，會直接跳出警告。</p>
+<p>Pod 啟動後，前往專案的 <strong>資源</strong> 分頁，在 <strong>Pod</strong> 那一列點擊 <strong>終端</strong>。
+Deployment 與 Job 的列上沒有終端按鈕，請展開找到它們建立的 Pod。</p>
 <p>部署、direct-create、dry-run validation、刪除 instance 與查詢 instance Pod 狀態需要 <strong>Project Manager</strong> 以上權限；此權限可來自直接專案成員角色、擁有群組角色、personal project 擁有者，或平台管理員。Workload submit 需要有效的專案存取權。只知道或猜到 config version ID 不足以在專案 namespace 中操作。存取權、plan window、queue-plan 與配額拒絕會回傳 <code>403 Forbidden</code>。
 部署 namespace ownership 會由後端以已驗證的 user ID 到平台資料庫解析使用者名稱；過期或被竄改的 token username claim 不會導向不同的 Kubernetes namespace。
 部署配額檢查會合併 Kubernetes namespace 的即時用量與資料庫中的 active job reservation。<code>submitted</code>、<code>waiting_infra</code>、<code>queued</code> 與 <code>running</code> job 都會視為活躍需求；等待基礎設施重試或 scheduler placement 的 workload 在完成或被清理前，仍會占用其請求的配額。
@@ -1622,7 +1656,7 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 <p>只有專案中擁有 <strong>管理者</strong> 或更高角色的成員才能建立或編輯設定檔。</p>
 </div>
 <hr />
-<h2 id="_12">管理成員<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_13">管理成員<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ol>
 <li>開啟專案並前往 <strong>成員</strong> 標籤。</li>
 <li>點擊 <strong>+ 新增成員</strong>（需要 <strong>專案管理員</strong> 角色）。</li>
@@ -1669,7 +1703,7 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 <p><strong>離職下架技巧</strong>:有人離開實驗室時,請管理員直接把他從對應的 <strong>群組</strong> 移除 — 所有以群組身分加入的專案存取會自動同步消失,不需要逐一專案移除。</p>
 </blockquote>
 <hr />
-<h2 id="_13">刪除專案<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_14">刪除專案<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p>僅 Project Admin 可申請刪除:先停止該專案所有工作區,再於專案總覽 → 編輯 → <strong>Delete</strong>,輸入專案名稱確認。影響:</p>
 <ul>
 <li>設定檔版本歷史與部署紀錄永久消失。</li>
@@ -1677,7 +1711,7 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 <li>群組擁有的專案可能需要平台管理員先撤銷 group binding 才允許刪除。</li>
 </ul>
 <hr />
-<h2 id="_14">資源標籤<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h2 id="_15">資源標籤<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <p><strong>資源</strong> 標籤依專案成員彙整即時使用量：</p>
 <table>
 <thead>
@@ -1737,7 +1771,7 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 </table>
 <p>若 GPU 長條已滿（100%），新的工作區啟動將排入佇列等待資源釋放。</p>
 <hr />
-<h2 id="_15">常見問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h2 id="_16">常見問題<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>看不到 + 新增專案 按鈕。</summary>
 <p>所有已登入使用者都能看到該按鈕。若未顯示，請嘗試強制重新整理（<code>Ctrl+Shift+R</code>）。若問題持續，請聯繫管理員。</p>

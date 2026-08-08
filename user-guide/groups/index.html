@@ -1043,6 +1043,41 @@
     Group --&gt;|includes| GroupMember
     Group --&gt;|can be member of| Project["Projects"]
     Group --&gt;|owns| GroupStorage["Group Storage PVCs"]</code></pre>
+<p>A group has three roles. Your group role also determines your default permissions on projects owned by that group.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Add / remove members</th>
+<th>Set storage permissions</th>
+<th>Access group storage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Admin</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Manager</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>User</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Teaching assistants usually need Admin</p>
+<p>Setting students' storage permissions only needs <strong>Manager</strong>, but adding and removing members needs <strong>Admin</strong>. If you run a course, ask a platform admin for the <strong>Admin</strong> role.</p>
+</div>
 <hr />
 <h2 id="groups-list-page">Groups List Page<a class="headerlink" href="#groups-list-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Groups list page" src="../../assets/screenshots/groups-list.png" />
@@ -1077,8 +1112,11 @@
 <li>Open the group and click <strong>+ Add Members</strong> (top-right of Members tab).</li>
 <li>Search for users by username or email.</li>
 <li>Select users from the results list.</li>
-<li>Click <strong>Add</strong> to confirm.</li>
+<li>Click <strong>Add Members</strong> to confirm.</li>
 </ol>
+<p>To add a whole class at once, use <strong>Paste users</strong>: paste the list into the text
+box (separated by newlines, commas, semicolons, or tabs) and click <strong>Resolve
+Users</strong>.</p>
 <p>The results table only shows users who are not already members of the group.
 Search and pagination are calculated by the backend against that addable-user
 set, so moving between pages will not show already-added members or blank pages
