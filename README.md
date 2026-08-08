@@ -6,15 +6,14 @@ User documentation for the **GPU Cluster Management Platform** operated by NTHU 
 
 ## Languages
 
-The site is published in two languages, with Traditional Chinese as the default:
+The site is published in two languages:
 
-- **繁體中文 (default):** [`guides-zh-tw/`](guides-zh-tw/)
-- **English:** [`user-guide/`](user-guide/)
+- **English (default):** [`user-guide/`](user-guide/)
+- **繁體中文:** [`zh/user-guide/`](zh/user-guide/)
 
 ## Contents
 
 - **User Guide** — Getting Started, Concepts & Roles, Home Dashboard, Workspaces, Projects, Groups, Storage, Requests, Settings, CLI, Announcements
-- **Admin Guide** (Chinese) — User Management, Group Management, Project Management, Storage Management, Resource Plans
 
 ## About this repository
 

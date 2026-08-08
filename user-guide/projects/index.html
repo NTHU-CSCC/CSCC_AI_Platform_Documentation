@@ -807,6 +807,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deleting-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting a Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resources-tab" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1267,6 +1278,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deleting-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deleting a Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#resources-tab" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1326,8 +1348,6 @@
 <h2 id="project-lifecycle">Project Lifecycle<a class="headerlink" href="#project-lifecycle" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; Active : Create Project
-    Active --&gt; Archived : Admin Archives
-    Archived --&gt; Active : Admin Restores
     Active --&gt; [*] : Admin Deletes</code></pre>
 <hr />
 <h2 id="project-page-layout">Project Page Layout<a class="headerlink" href="#project-page-layout" title="Permanent link">&para;</a></h2>
@@ -1341,9 +1361,13 @@
 <p>Toggle between views using the icons in the top-right of the toolbar.</p>
 <hr />
 <h2 id="create-a-project">Create a Project<a class="headerlink" href="#create-a-project" title="Permanent link">&para;</a></h2>
+<p>Creating a project requires the <strong>manage-projects</strong> permission. If you don't have
+it, the <strong>+ New Project</strong> button is hidden (and the create page redirects back to
+your project list) — request a project from an admin instead. A personal project
+is created for you automatically when you register.</p>
 <ol>
 <li>Click <strong>Projects</strong> in the left sidebar.</li>
-<li>Click <strong>+ New Project</strong> (top-right button).</li>
+<li>Click <strong>+ New Project</strong> (top-right button; shown only with the manage-projects permission).</li>
 <li>Fill in the project form:</li>
 </ol>
 <table>
@@ -1359,8 +1383,8 @@
 <td>Short identifier (alphanumeric, hyphens allowed)</td>
 </tr>
 <tr>
-<td><strong>Display Name</strong></td>
-<td>Human-readable title shown in the UI</td>
+<td><strong>Group</strong></td>
+<td>Owning group (required)</td>
 </tr>
 <tr>
 <td><strong>Description</strong></td>
@@ -1418,6 +1442,7 @@
 </tr>
 </tbody>
 </table>
+<p>Role thresholds: the <strong>Storage</strong> and <strong>Images</strong> tabs require Project Manager or above; the <strong>Members</strong> tab is visible to Project Admins only (platform admins must switch to <strong>Admin View</strong> via the avatar menu to be treated as an effective Project Admin). The frontend prevents an Admin from demoting themselves, so a project can never lose its last Admin.</p>
 <hr />
 <h2 id="build-project-images">Build Project Images<a class="headerlink" href="#build-project-images" title="Permanent link">&para;</a></h2>
 <p>Use the <strong>Builds</strong> tab when a project needs a container image that is not already in the allowed image list. Project Managers and Project Admins can start builds when image builds are enabled for the project. Project Members can view build status and logs, but cannot start or delete builds.</p>
@@ -1675,6 +1700,17 @@ inject arbitrary PVC names into deployed YAML.</p>
 <li>Otherwise, the user's <strong>group role</strong> in the owning group is used as the effective project role. A Group Admin therefore acts as a Project Admin on every project owned by that group, even without an explicit <code>project_members</code> row.</li>
 </ol>
 <p>This is why a Group Admin (e.g. <code>u26000007</code> in <code>G260000105</code>) can call <code>PUT /api/v1/projects/{projectId}/members/quotas</code> against a group-owned project (e.g. <code>P26000116</code>) and see the batch selection UI in the Members tab without being added as a direct member.</p>
+<blockquote>
+<p><strong>Offboarding tip:</strong> when someone leaves the lab, ask an admin to remove them from the owning <strong>group</strong> — access to every project joined through that group disappears automatically, with no per-project cleanup.</p>
+</blockquote>
+<hr />
+<h2 id="deleting-a-project">Deleting a Project<a class="headerlink" href="#deleting-a-project" title="Permanent link">&para;</a></h2>
+<p>Only a Project Admin can delete a project: stop all of its workspaces first, then Project Overview → Edit → <strong>Delete</strong> and type the project name to confirm. Effects:</p>
+<ul>
+<li>Config version history and deployment records are permanently removed.</li>
+<li><strong>PVCs are not deleted</strong> (they remain on the Storage page).</li>
+<li>A group-owned project may require a platform admin to revoke the group binding before deletion is allowed.</li>
+</ul>
 <hr />
 <h2 id="resources-tab">Resources Tab<a class="headerlink" href="#resources-tab" title="Permanent link">&para;</a></h2>
 <p>The <strong>Resources</strong> tab summarizes live usage by project member:</p>
@@ -1741,7 +1777,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>I don't see a + New Project button.</summary>
-<p>The button is visible to all authenticated users. If it's missing, try a hard refresh (<code>Ctrl+Shift+R</code>). If the problem persists, contact your admin.</p>
+<p>The button is shown only to users with the <strong>manage-projects</strong> permission. If you don't have it, ask an admin to create a project for you — your personal project is created automatically when you register.</p>
 </details>
 <details class="question">
 <summary>How do I view old config file versions?</summary>

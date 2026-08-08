@@ -810,6 +810,17 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
+        刪除專案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         資源標籤
       
     </span>
@@ -829,7 +840,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1270,6 +1281,17 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
+        刪除專案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         資源標籤
       
     </span>
@@ -1289,7 +1311,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1418,6 +1440,7 @@
 </tr>
 </tbody>
 </table>
+<p>角色門檻:<strong>儲存</strong> 與 <strong>映像</strong> 標籤需要 Project Manager 以上;<strong>成員</strong> 標籤僅 Project Admin 可見(平台管理員需在右上角頭像切換至 <strong>Admin View</strong> 才會被視為 effective Project Admin)。前端會阻止 Admin 將自己降級,避免專案失去最後一位 Admin。</p>
 <hr />
 <h2 id="_6">建置專案映像<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>當專案需要允許清單中沒有的容器映像時，請使用 <strong>建置</strong> 標籤。專案管理者與專案管理員可在專案啟用 image build 後觸發建置；一般專案成員可以查看狀態與 log，但不能啟動或刪除建置。</p>
@@ -1642,8 +1665,19 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 <li>否則,採用該使用者在<strong>擁有群組中的 role</strong> 作為 effective project role。因此 Group Admin 對該群組下的所有專案都等同於 Project Admin,即使沒有 <code>project_members</code> 紀錄。</li>
 </ol>
 <p>這也是為什麼 Group Admin(例如 <code>G260000105</code> 中的 <code>u26000007</code>)可以直接對群組擁有的專案(例如 <code>P26000116</code>)呼叫 <code>PUT /api/v1/projects/{projectId}/members/quotas</code>,並且在 Members 標籤看到批次勾選介面,不需要先被加為該專案的直接成員。</p>
+<blockquote>
+<p><strong>離職下架技巧</strong>:有人離開實驗室時,請管理員直接把他從對應的 <strong>群組</strong> 移除 — 所有以群組身分加入的專案存取會自動同步消失,不需要逐一專案移除。</p>
+</blockquote>
 <hr />
-<h2 id="_13">資源標籤<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_13">刪除專案<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>僅 Project Admin 可申請刪除:先停止該專案所有工作區,再於專案總覽 → 編輯 → <strong>Delete</strong>,輸入專案名稱確認。影響:</p>
+<ul>
+<li>設定檔版本歷史與部署紀錄永久消失。</li>
+<li><strong>PVC 不會被刪除</strong>(保留在儲存頁)。</li>
+<li>群組擁有的專案可能需要平台管理員先撤銷 group binding 才允許刪除。</li>
+</ul>
+<hr />
+<h2 id="_14">資源標籤<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p><strong>資源</strong> 標籤依專案成員彙整即時使用量：</p>
 <table>
 <thead>
@@ -1703,7 +1737,7 @@ personal project 與非平台管理員不能在部署 YAML 中注入任意 PVC �
 </table>
 <p>若 GPU 長條已滿（100%），新的工作區啟動將排入佇列等待資源釋放。</p>
 <hr />
-<h2 id="_14">常見問題<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h2 id="_15">常見問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>看不到 + 新增專案 按鈕。</summary>
 <p>所有已登入使用者都能看到該按鈕。若未顯示，請嘗試強制重新整理（<code>Ctrl+Shift+R</code>）。若問題持續，請聯繫管理員。</p>
