@@ -20,3 +20,16 @@ img + em {
 .badge-admin   { background: #c62828; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
 .badge-manager { background: #1565c0; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
 .badge-user    { background: #2e7d32; color: #fff; border-radius: 3px; padding: 1px 6px; font-size: 0.78em; }
+
+/* Tutorial clips. aspect-ratio reserves the box before metadata loads, so the
+   page does not reflow when the poster arrives. All recordings are 1920x1080. */
+.md-typeset video.tutorial {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 1rem auto 0.4rem;
+  background: #000;
+  border-radius: 0.2rem;
+}
