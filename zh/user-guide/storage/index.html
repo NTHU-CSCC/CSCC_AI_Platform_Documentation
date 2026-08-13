@@ -1312,8 +1312,12 @@
 
 
 <h1 id="_1">儲存空間<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>儲存空間（Persistent Volume Claims，PVC）為您的程式碼、資料集和模型提供持久化的磁碟空間，不受工作區生命週期影響。</p>
-<p><strong>適用對象：</strong> 所有使用者（個人儲存）、群組成員（群組儲存）。</p>
+<p>儲存空間（Persistent Volume Claims，PVC）為您的程式碼、資料集和模型提供持久化的磁碟空間。寫入<em>已掛載磁碟區內</em>的內容不受工作區生命週期影響，工作區停止或刪除後依然保留。</p>
+<div class="admonition warning">
+<p class="admonition-title">沒有掛載任何儲存空間的工作區不會保留檔案</p>
+<p>個人儲存掛載於 <code>/home/&lt;您的帳號&gt;</code>，每個群組磁碟區掛載於 <code>/mnt/shared/&lt;磁碟區名稱&gt;</code>。寫在其他位置的檔案只存在於工作區容器中，工作區停止或刪除、達到執行時間上限、被閒置回收機制移除，以及容器重啟時，這些檔案都會消失。若您既沒有個人儲存也沒有掛載群組磁碟區，所有存檔都不會保留 —— 平台會在啟動這類工作區前提出警告。</p>
+</div>
+<p><strong>適用對象：</strong> 個人儲存由管理員配置，因此並非每個帳號都有 —— 請至「儲存空間 → 個人」分頁確認，若沒有請聯繫管理員初始化。群組儲存則由群組管理員管理存取權限。</p>
 <hr />
 <h2 id="_2">儲存類型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph LR

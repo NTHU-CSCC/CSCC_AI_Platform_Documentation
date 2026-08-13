@@ -1334,8 +1334,12 @@
 
 
 <h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<p>The platform provides two types of persistent storage, both backed by Kubernetes Persistent Volume Claims (PVCs). Storage persists independently of workspaces — your data is safe when a workspace stops or is deleted.</p>
-<p><strong>Access:</strong> All users have personal storage. Group storage access is managed by group admins.
+<p>The platform provides two types of persistent storage, both backed by Kubernetes Persistent Volume Claims (PVCs). Anything you write <em>inside</em> a mounted volume persists independently of workspaces — it survives the workspace being stopped or deleted.</p>
+<div class="admonition warning">
+<p class="admonition-title">A workspace with no storage attached keeps nothing</p>
+<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else live only in the workspace container and are lost when the workspace is stopped or deleted, when it hits its runtime limit or is removed by the idle reaper, and when the container restarts. If you have no personal storage and no group volume mounted, nothing you save will survive — the platform warns you before starting such a workspace.</p>
+</div>
+<p><strong>Access:</strong> Personal storage is provisioned by an admin, so not every account has one — check the Storage → Personal tab and ask an admin to initialize it if it is missing. Group storage access is managed by group admins.
 Group PVC permissions can be granted only to current members of that group;
 removed members do not retain effective access even if an old permission row
 still exists.</p>
