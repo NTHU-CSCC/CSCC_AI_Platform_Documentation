@@ -1508,6 +1508,11 @@ For GPU workspaces, the backend validates the resolved DRA DeviceClass against t
 <p class="admonition-title">Persistent work</p>
 <p>Code and notebooks saved inside a mounted PVC path (e.g., <code>/data</code>) persist when the workspace stops. Files written outside a PVC path are lost when the pod is deleted.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title"><code>~/.config</code> is reserved by the storage layer</p>
+<p>Your home directory is a JuiceFS mount, and JuiceFS publishes read-only control files — <code>.config</code>, <code>.stats</code>, <code>.accesslog</code> — at the root of every mount. <code>~/.config</code> is therefore a file, not a directory, and <code>mkdir ~/.config/&lt;app&gt;</code> fails with <code>ENOTDIR</code>.</p>
+<p>Workspaces ship with <code>XDG_CONFIG_HOME=~/.local/config</code>, so XDG-aware tools (code-server, <code>pip config</code>, <code>gh</code>, …) write there instead and their settings persist across restarts. If you configure a tool by hand, use <code>$XDG_CONFIG_HOME</code> rather than a hardcoded <code>~/.config</code>.</p>
+</div>
 <hr />
 <h2 id="stop-vs-delete">Stop vs. Delete<a class="headerlink" href="#stop-vs-delete" title="Permanent link">&para;</a></h2>
 <table>

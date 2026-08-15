@@ -1508,6 +1508,11 @@ GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model 
 <p class="admonition-title">持久化工作</p>
 <p>儲存在已掛載 PVC 路徑（如 <code>/data</code>）中的程式碼和筆記本，在工作區停止後仍會保留。寫入 PVC 路徑以外的檔案會在 Pod 刪除時遺失。</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title"><code>~/.config</code> 由儲存層保留</p>
+<p>家目錄是 JuiceFS 掛載點，而 JuiceFS 會在每個掛載點的根目錄放置唯讀控制檔——<code>.config</code>、<code>.stats</code>、<code>.accesslog</code>。因此 <code>~/.config</code> 是「檔案」而非目錄，執行 <code>mkdir ~/.config/&lt;app&gt;</code> 會出現 <code>ENOTDIR</code> 錯誤。</p>
+<p>工作區已預設 <code>XDG_CONFIG_HOME=~/.local/config</code>，支援 XDG 的工具（code-server、<code>pip config</code>、<code>gh</code> 等）會改寫到該處，設定在重啟後仍會保留。若您要手動設定工具路徑，請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code>。</p>
+</div>
 <hr />
 <h2 id="vs">停止 vs. 刪除<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
 <table>
