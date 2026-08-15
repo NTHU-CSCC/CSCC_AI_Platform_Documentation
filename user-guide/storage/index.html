@@ -1449,10 +1449,10 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </thead>
 <tbody>
 <tr>
-<td><strong>JuiceFS RWX</strong></td>
-<td>JuiceFS over object storage</td>
+<td><strong>CephFS RWX</strong></td>
+<td>CephFS on the Ceph cluster</td>
 <td><code>shared-rwx</code></td>
-<td>Cross-node datasets and checkpoints visible to many pods (the only cross-namespace shared lane)</td>
+<td>Cross-node home directories, datasets and checkpoints visible to many pods (the only cross-namespace shared lane)</td>
 </tr>
 <tr>
 <td><strong>Node-local Scratch</strong></td>
@@ -1477,7 +1477,7 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <p>The profile picker shows availability and a recommendation per option; unavailable profiles are greyed out with the reason.</p>
 <hr />
 <h2 id="training-storage-pattern">Training Storage Pattern<a class="headerlink" href="#training-storage-pattern" title="Permanent link">&para;</a></h2>
-<p>For model training on gpu1, gpu2, and gpu3, admins can provision group storage on <code>juicefs</code>. This is the preferred shared path for datasets, checkpoints, and final artifacts that need to be visible across nodes.</p>
+<p>For model training on gpu1, gpu2, and gpu3, admins can provision group storage on <code>cephfs</code>. This is the preferred shared path for datasets, checkpoints, and final artifacts that need to be visible across nodes.</p>
 <p>For checkpoint-heavy jobs, use this layout:</p>
 <table>
 <thead>
@@ -1490,12 +1490,12 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <tbody>
 <tr>
 <td><code>/datasets</code></td>
-<td>JuiceFS group RWX</td>
+<td>CephFS group RWX</td>
 <td>Shared read-mostly training data</td>
 </tr>
 <tr>
 <td><code>/checkpoints</code></td>
-<td>JuiceFS group RWX</td>
+<td>CephFS group RWX</td>
 <td>Durable checkpoints and resumable state</td>
 </tr>
 <tr>
@@ -1505,7 +1505,7 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </tr>
 </tbody>
 </table>
-<p>Copy only the final results from scratch back to the shared JuiceFS mount. This keeps repeated reads fast through node-local cache while avoiding unnecessary shared-write pressure.</p>
+<p>Copy only the final results from scratch back to the shared CephFS mount. This keeps repeated reads fast through node-local cache while avoiding unnecessary shared-write pressure.</p>
 <hr />
 <h2 id="fast-stage-cache">Fast-Stage Cache<a class="headerlink" href="#fast-stage-cache" title="Permanent link">&para;</a></h2>
 <p>Fast-stage transfers stage data from a group RWX volume into a project-local <strong>Fast RWO</strong> PVC, so a single training job can read at node-local speed without touching the shared filesystem.</p>
