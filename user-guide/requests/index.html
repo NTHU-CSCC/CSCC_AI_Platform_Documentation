@@ -1287,13 +1287,17 @@
 <hr />
 <h2 id="request-lifecycle">Request Lifecycle<a class="headerlink" href="#request-lifecycle" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>stateDiagram-v2
-    [*] --&gt; Submitted : User submits form
-    Submitted --&gt; UnderReview : Admin opens request
-    UnderReview --&gt; Approved : Admin approves
-    UnderReview --&gt; Rejected : Admin rejects
-    UnderReview --&gt; Submitted : Admin requests more info
-    Approved --&gt; [*]
-    Rejected --&gt; [*]</code></pre>
+    [*] --&gt; Pending : You submit the form
+    Pending --&gt; Processing : Admin picks it up
+    Pending --&gt; Completed : Admin resolves it
+    Pending --&gt; Rejected : Admin rejects it
+    Processing --&gt; Completed : Admin resolves it
+    Processing --&gt; Rejected : Admin rejects it
+    Processing --&gt; Pending : Admin puts it back
+    Rejected --&gt; Pending : Admin reopens it
+    Completed --&gt; [*]</code></pre>
+<p><code>Completed</code> is final: a resolved request cannot be reopened, and its message
+thread is closed. A rejected request can still be reopened by an admin.</p>
 <hr />
 <h2 id="my-requests-page">My Requests Page<a class="headerlink" href="#my-requests-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Requests list page" src="../../assets/screenshots/requests-list.png" />
@@ -1301,7 +1305,7 @@
 <p>The Requests page lists all requests you have submitted, with:</p>
 <ul>
 <li><strong>Type tag</strong> — coloured label (Resource, Access, Feature, Bug, Question, Other)</li>
-<li><strong>Status badge</strong> — Submitted, Under Review, Approved, Rejected</li>
+<li><strong>Status badge</strong> — Pending, Processing, Completed, Rejected</li>
 <li><strong>Title</strong> — your request title</li>
 <li><strong>Created</strong> — submission date</li>
 <li>Click any request to open the detail view with the message thread</li>
@@ -1381,10 +1385,10 @@
 <ol>
 <li>Open your request from the list.</li>
 <li>The detail page shows the full message thread.</li>
-<li>If an admin asks for more information, you'll see their message in the thread — reply using the text box at the bottom.</li>
+<li>If an admin asks for more information, you'll see their message in the thread — reply using the text box at the bottom. The thread closes once the request is resolved.</li>
 </ol>
 <p><img alt="Request detail with message thread" src="../../assets/screenshots/request-detail.png" />
-<em>Figure 3: Request detail page showing status history and message thread between user and admin.</em></p>
+<em>Figure 3: Request detail page showing the message thread between user and admin.</em></p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
@@ -1396,7 +1400,7 @@
 <p>Yes. Create a new request with updated details. Reference the previous request number in your description if helpful.</p>
 </details>
 <details class="question">
-<summary>I don't see a notification when my request is approved.</summary>
+<summary>I don't see a notification when my request is resolved.</summary>
 <p>Check your notification settings under <a href="../settings/">Settings → Notifications</a>. Make sure email notifications for request updates are enabled.</p>
 </details>
 
