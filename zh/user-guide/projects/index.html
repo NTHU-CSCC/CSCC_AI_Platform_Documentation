@@ -1850,7 +1850,7 @@ ResourceClaim。例如 2 張 <code>rtx5090.gpu.nvidia.com</code> claim 仍是一
 （<code>command: ["/bin/sh"]</code>）會讀取標準輸入、立刻遇到 EOF 然後結束。Kubernetes
 會不斷重啟它，因此 Pod 在兩次重啟之間顯示 <code>Running</code>，但每次開啟終端都會失敗。</p>
 <p>請改成讓容器有事可做：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sleep&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;infinity&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"sleep"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"infinity"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>或在資源精靈的 <strong>互動式 Shell</strong> 區塊勾選 <strong>stdin</strong> 與 <strong>tty</strong>（手寫 YAML 則是
 <code>stdin: true</code> 與 <code>tty: true</code>）讓 Shell 保持存活。當精靈偵測到單獨的 Shell 會立

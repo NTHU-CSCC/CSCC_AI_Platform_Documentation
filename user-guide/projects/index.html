@@ -1888,7 +1888,7 @@ no arguments — <code>command: ["/bin/sh"]</code> — reads standard input, rea
 end-of-file immediately, and exits. Kubernetes restarts it, so the pod reports
 <code>Running</code> between restarts while every terminal attempt fails.</p>
 <p>Either give the container real work:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;sleep&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;infinity&quot;</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"sleep"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"infinity"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>or keep the shell alive by enabling <strong>stdin</strong> and <strong>tty</strong> under <em>Interactive
 shell</em> in the Resource Wizard (<code>stdin: true</code> and <code>tty: true</code> in raw YAML). The
