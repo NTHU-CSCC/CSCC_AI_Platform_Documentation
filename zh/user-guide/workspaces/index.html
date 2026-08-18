@@ -967,10 +967,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dra-gpu" class="md-nav__link">
+  <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        透過 DRA 配置 GPU
+        GPU 如何配置
       
     </span>
   </a>
@@ -1304,10 +1304,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#dra-gpu" class="md-nav__link">
+  <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        透過 DRA 配置 GPU
+        GPU 如何配置
       
     </span>
   </a>
@@ -1346,17 +1346,17 @@
 
 
 <h1 id="_1">工作區<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>工作區（又稱 IDE）是互動式雲端開發環境——JupyterLab、VSCode 或自訂映像檔環境——運行於 Kubernetes Pod 中，支援 GPU 資源。</p>
+<p>工作區（又稱 IDE）是互動式雲端開發環境——JupyterLab、VSCode 或自訂映像檔環境——並可搭配 GPU 資源。</p>
 <p><strong>適用對象：</strong> 所有擁有足夠專案配額的專案成員。</p>
 <hr />
 <h2 id="_2">工作區狀態<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; 已停止
     已停止 --&gt; 啟動中 : 點擊啟動
-    啟動中 --&gt; 運行中 : Pod 就緒
-    啟動中 --&gt; 錯誤 : Pod 失敗
+    啟動中 --&gt; 運行中 : 啟動完成
+    啟動中 --&gt; 錯誤 : 啟動失敗
     運行中 --&gt; 停止中 : 點擊停止
-    停止中 --&gt; 已停止 : Pod 已終止
+    停止中 --&gt; 已停止 : 已完全停止
     運行中 --&gt; [*] : 點擊刪除
     錯誤 --&gt; 已停止 : 重設 / 重試
     已停止 --&gt; [*] : 點擊刪除</code></pre>
@@ -1367,27 +1367,17 @@
 <p>列表頁面顯示您所有工作區的：</p>
 <ul>
 <li><strong>狀態標籤</strong> — 運行中（綠色）、啟動中（黃色）、已停止（灰色）、錯誤（紅色）</li>
-<li><strong>GPU 數量</strong> — 透過 DRA 配置的有效 GPU 數</li>
+<li><strong>GPU 數量</strong> — 配置的有效 GPU 數</li>
 <li><strong>專案</strong> — 工作區所屬的專案</li>
 <li><strong>開啟</strong> 按鈕 — 僅在狀態為運行中時顯示</li>
 <li><strong>啟動 / 停止 / 刪除</strong> 操作按鈕</li>
 </ul>
 <hr />
 <h2 id="_4">啟動工作區<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>sequenceDiagram
-    participant 使用者
-    participant 儀表板
-    participant API
-    participant K8s
-
-    使用者-&gt;&gt;儀表板: 填寫啟動表單（映像檔、GPU、儲存）
-    儀表板-&gt;&gt;API: POST /api/v1/ide
-    API-&gt;&gt;K8s: 建立 Pod + Service
-    K8s--&gt;&gt;API: Pod 已排程（啟動中）
-    Note over K8s: Pod 拉取映像檔、啟動執行環境
-    K8s--&gt;&gt;API: Pod 運行中
-    API--&gt;&gt;儀表板: 工作區 URL
-    儀表板--&gt;&gt;使用者: 出現「開啟」按鈕</code></pre>
+<pre class="mermaid"><code>flowchart LR
+    Form["填寫啟動表單\n（映像檔、GPU、儲存）"] --&gt; Starting["啟動中\n（拉取映像檔）"]
+    Starting --&gt; Running["運行中"]
+    Running --&gt; Open["出現「開啟」按鈕"]</code></pre>
 <h3 id="_5">逐步操作<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
 <li>點擊左側選單的 <strong>工作區</strong>。</li>
@@ -1424,7 +1414,7 @@
 </tr>
 <tr>
 <td><strong>GPU 數量</strong></td>
-<td>透過 DRA 請求的實體 GPU 數；SM 百分比會決定有效配額消耗。</td>
+<td>請求的實體 GPU 張數；SM 百分比會決定有效配額消耗。</td>
 </tr>
 <tr>
 <td><strong>GPU 型號</strong></td>
@@ -1432,7 +1422,7 @@
 </tr>
 <tr>
 <td><strong>SM 百分比</strong></td>
-<td>DRA GPU 配置的計算比例——100% 等於完整 GPU，較小值會以 fractional GPU 計入配額。</td>
+<td>每張 GPU 的計算比例——100% 等於完整一張，較小的值會以部分 GPU 計入配額。</td>
 </tr>
 <tr>
 <td><strong>CPU / 記憶體</strong></td>
@@ -1440,30 +1430,30 @@
 </tr>
 <tr>
 <td><strong>儲存</strong></td>
-<td>選擇一個或多個 PVC 掛載到工作區</td>
+<td>選擇一個或多個儲存空間掛載到工作區</td>
 </tr>
 <tr>
 <td><strong>掛載路徑</strong></td>
-<td>各 PVC 在容器中的掛載位置（如：<code>/data</code>）</td>
+<td>各儲存空間在容器中的掛載位置（如：<code>/data</code>）</td>
 </tr>
 </tbody>
 </table>
 <ol>
 <li>點擊 <strong>啟動</strong>。</li>
-<li>工作區以 <strong>啟動中</strong> 狀態出現。等待 30-120 秒讓 Pod 拉取映像檔並啟動。</li>
+<li>工作區以 <strong>啟動中</strong> 狀態出現。等待 30-120 秒讓映像檔下載並完成啟動。</li>
 <li>當狀態變為 <strong>運行中</strong> 時，點擊 <strong>開啟</strong> 在新分頁中開啟 IDE。</li>
 </ol>
 <div class="admonition warning">
-<p class="admonition-title">閒置回收</p>
-<p>閒置超過一定時間的工作區可能會被平台的閒置回收機制自動停止，以釋放 GPU 資源。在此之前，工作區列表頁面會顯示閒置警告橫幅。</p>
+<p class="admonition-title">閒置自動停止</p>
+<p>長時間閒置的工作區會被自動停止，把 GPU 讓給其他人使用。在此之前，工作區列表頁面會先顯示閒置警告橫幅。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p><strong>Root shell</strong> 開關會讓 IDE process 在容器內以 UID 0 執行。這不代表 privileged pod、host namespace、任意 hostPath、Kubernetes RBAC 或額外 Linux capabilities。若開關無法使用，請管理員在該專案啟用 Root 容器；若是群組專案，也需要所屬群組允許 Root 容器。</p>
+<p><strong>Root shell</strong> 只會讓你在自己的容器內成為 <code>root</code>，不會取得叢集或其他人資料的任何額外權限。若開關無法使用，請管理員在該專案啟用 Root 容器；若是群組專案，也需要所屬群組允許。</p>
 </div>
 <hr />
 <h2 id="_6">排程佇列與優先序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>每個工作區會選擇一個 <strong>平台排程佇列</strong>。佇列帶有 <strong>優先序</strong>、可選的 <strong>可被搶佔</strong> 旗標，以及由管理員設定的 <strong>deserved GPU</strong> 上限。DRA GPU 工作區由 Kubernetes <code>default-scheduler</code> 排程；佇列仍由平台用於政策、標籤與搶佔判斷。</p>
+<p>每個工作區會選擇一個 <strong>排程佇列</strong>。佇列帶有 <strong>優先序</strong>、可選的 <strong>可被搶佔</strong> 旗標，以及由管理員設定的 <strong>deserved GPU</strong> 上限。</p>
 <table>
 <thead>
 <tr>
@@ -1474,11 +1464,11 @@
 <tbody>
 <tr>
 <td><strong>較高優先序</strong></td>
-<td>GPU 緊張時，會比低優先序佇列中的 Pod 先被排程。</td>
+<td>GPU 緊張時，會比低優先序佇列中的工作先被排程。</td>
 </tr>
 <tr>
 <td><strong>可被搶佔的佇列</strong></td>
-<td>您的 Pod 可能被驅逐以讓出資源給更高優先序的工作。平台會先送出終止訊號再刪除 Pod。</td>
+<td>您的工作區可能被停止，把資源讓給更高優先序的工作。</td>
 </tr>
 <tr>
 <td><strong>預設佇列</strong></td>
@@ -1486,19 +1476,18 @@
 </tr>
 </tbody>
 </table>
-<p>啟動表單會列出專案有效計畫允許的佇列。若沒有綁定計畫，工作區啟動會被拒絕，直到管理員綁定有效計畫。
-GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model allowlist 與 queue GPU model policy；即使未選 GPU 型號、由平台從佇列或 generic 預設值解析，也不能繞過檢查。若後端無法載入 queue policy，工作區會被拒絕，而不是回退成不限制 GPU 型號。</p>
+<p>啟動表單會列出專案有效計畫允許的佇列。若沒有綁定計畫，工作區啟動會被拒絕，直到管理員綁定有效計畫。GPU 工作區也會檢查所選型號是否在計畫與佇列允許的範圍內——即使你留白讓平台自動決定型號，一樣會檢查。</p>
 <hr />
 <h2 id="_7">計畫窗口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>若專案計畫定義了每週或一次性的 <strong>排程窗口</strong>，使用計畫綁定佇列的工作區只能在窗口開啟期間運行。</p>
 <ul>
 <li>列表頁面會即時倒數——<em>計畫窗口將於 HH:MM:SS 後關閉</em>——窗口生效時顯示。</li>
-<li>窗口關閉後，計畫綁定佇列中的 Pod 可能被平台的 plan-window reaper 驅逐。新的工作區啟動需要有效計畫窗口開啟。</li>
+<li>窗口關閉後，計畫綁定佇列中的工作區可能會被停止。要啟動新的工作區，必須在窗口開啟期間。</li>
 <li>窗口已關閉時，會出現一鍵 <strong>切換為預設佇列</strong> 的橫幅，方便您以較低優先序繼續工作。</li>
 </ul>
 <hr />
 <h2 id="_8">連線到工作區<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>工作區進入 <strong>運行中</strong> 狀態後，點擊 <strong>開啟</strong>。平台會將您的瀏覽器連線代理到 Pod——無需設定 port-forwarding。</p>
+<p>工作區進入 <strong>運行中</strong> 狀態後，點擊 <strong>開啟</strong>。平台會直接把瀏覽器接到工作區，不需要任何額外設定。</p>
 <ul>
 <li><strong>JupyterLab</strong>：開啟於 <code>/lab</code>——標準 Jupyter 介面</li>
 <li><strong>VSCode（code-server）</strong>：開啟於 <code>/</code>——完整的瀏覽器版 VS Code</li>
@@ -1506,12 +1495,12 @@ GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model 
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">持久化工作</p>
-<p>儲存在已掛載 PVC 路徑（如 <code>/data</code>）中的程式碼和筆記本，在工作區停止後仍會保留。寫入 PVC 路徑以外的檔案會在 Pod 刪除時遺失。</p>
+<p>儲存在已掛載路徑（如 <code>/data</code>）中的程式碼和筆記本，在工作區停止後仍會保留。寫在掛載路徑以外的檔案會在工作區刪除時遺失。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code></p>
 <p>工作區已預設 <code>XDG_CONFIG_HOME=~/.local/config</code>，支援 XDG 的工具（code-server、<code>pip config</code>、<code>gh</code> 等）會把設定寫到該處，重啟後仍會保留。</p>
-<p>這個轉向源自先前的家目錄儲存後端：它會在掛載點根目錄放置唯讀的 <code>.config</code> 控制檔，使得 <code>mkdir ~/.config/&lt;app&gt;</code> 出現 <code>ENOTDIR</code> 錯誤。目前的後端沒有這個檔案，但轉向仍然保留，讓既有設定留在工具原本就會尋找的位置。若您要手動設定工具路徑，請使用 <code>$XDG_CONFIG_HOME</code>。</p>
+<p>這個設定是為了相容早期的家目錄儲存，目前仍然保留，讓既有設定留在工具原本就會尋找的位置。若您要手動設定工具路徑，請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code>。</p>
 </div>
 <hr />
 <h2 id="vs">停止 vs. 刪除<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
@@ -1525,11 +1514,11 @@ GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model 
 <tbody>
 <tr>
 <td><strong>停止</strong></td>
-<td>Pod 終止；PVC 資料保留；工作區可重新啟動</td>
+<td>工作區關閉；已掛載儲存中的資料保留；可重新啟動</td>
 </tr>
 <tr>
 <td><strong>刪除</strong></td>
-<td>Pod 永久刪除；PVC 資料保留（PVC 不會被刪除）；工作區無法重新啟動</td>
+<td>工作區永久移除；已掛載儲存中的資料保留；無法重新啟動</td>
 </tr>
 </tbody>
 </table>
@@ -1537,29 +1526,28 @@ GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model 
 <h2 id="ide">批次刪除（管理員 / IDE 管理者）<a class="headerlink" href="#ide" title="Permanent link">&para;</a></h2>
 <p>擁有 <code>IDE_MANAGE</code> 權限的使用者可以勾選多個工作區，使用勾選後出現的 <strong>批次刪除</strong> 工具列進行批次操作。</p>
 <hr />
-<h2 id="dra-gpu">透過 DRA 配置 GPU<a class="headerlink" href="#dra-gpu" title="Permanent link">&para;</a></h2>
-<p>GPU 配置使用 Kubernetes Dynamic Resource Allocation（DRA）。當您選擇 GPU 型號與 SM 百分比時，平台會為工作區建立 ResourceClaim。</p>
+<h2 id="gpu">GPU 如何配置<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>當您選擇 GPU 型號與 SM 百分比時，平台會為工作區保留該比例的 GPU。</p>
 <ul>
-<li><strong>GPU 數量</strong> 是請求的實體 GPU 數。</li>
+<li><strong>GPU 數量</strong> 是請求的實體 GPU 張數。</li>
 <li><strong>SM 百分比</strong> 會影響配額計算與 GPU 共享比例。</li>
-<li>工作區配額檢查會把 <code>submitted</code>、<code>waiting_infra</code>、<code>queued</code> 與 <code>running</code> job 都視為活躍需求。</li>
-<li>在工作區中使用 <code>nvidia-smi</code> 檢查可見裝置與實際執行情況。</li>
-<li>GPU 工作區真正綁到 GPU 時，Pod 必須同時有平台 DRA labels 與 Kubernetes <code>resourceClaims</code>。如果只有 labels 而沒有 <code>resourceClaims</code>，代表平台政策看得到 GPU 需求，但 Pod 尚未實際掛上 GPU。</li>
+<li>配額會把你所有已提出的工作區都算進去，包含還在等待啟動的。</li>
+<li>在工作區中使用 <code>nvidia-smi</code> 確認可見的裝置。</li>
 <li>若需要獨佔或指定型號，請選擇 100% SM 與計畫允許的型號，或請管理員調整計畫。</li>
 </ul>
 <hr />
 <h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>狀態顯示運行中但「開啟」按鈕未出現。</summary>
-<p>代理服務可能需要額外幾秒鐘啟動。等待 10 秒後重新整理頁面。若問題持續，Pod 可能處於異常重啟迴圈——請聯繫管理員。</p>
+<p>連線可能需要額外幾秒鐘才會就緒。等待 10 秒後重新整理頁面。若按鈕仍未出現，工作區可能一直在重啟——請聯繫管理員。</p>
 </details>
 <details class="question">
 <summary>我的工作區自動停止了。</summary>
-<p>閒置回收會停止在設定的閒置時間內沒有核心/行程活動的工作區。從列表頁面重新啟動工作區即可。</p>
+<p>超過設定閒置時間沒有任何活動的工作區會被自動停止。從列表頁面重新啟動即可。</p>
 </details>
 <details class="question">
 <summary>我看到錯誤狀態，該怎麼辦？</summary>
-<p>點擊工作區名稱查看錯誤詳情。常見原因：映像檔拉取失敗（映像檔不在允許清單中）、配額不足、DRA DeviceClass 不可用，或節點排程失敗。如需協助，請提交 <a href="../requests/">申請</a>。</p>
+<p>點擊工作區名稱查看錯誤詳情。常見原因：映像檔下載失敗、配額不足，或所選的 GPU 型號目前無法使用。如需協助，請提交 <a href="../requests/">申請</a>。</p>
 </details>
 <details class="question">
 <summary>可以同時運行多個工作區嗎？</summary>
@@ -1567,7 +1555,7 @@ GPU 工作區會在後端以解析後的 DRA DeviceClass 檢查計畫 GPU model 
 </details>
 <details class="question">
 <summary>工作區被以「Plan window expired」原因驅逐了。</summary>
-<p>plan-window reaper 會在排程窗口關閉時停止計畫綁定佇列中的 Pod。請於下個窗口開啟後重新啟動，或透過列表頁的橫幅將工作區切換到預設佇列。</p>
+<p>排程窗口關閉時，計畫綁定佇列中的工作區會被停止。請於下個窗口開啟後重新啟動，或透過列表頁的橫幅將工作區切換到預設佇列。</p>
 </details>
 <details class="question">
 <summary>為什麼啟動表單裡有些 GPU 型號被灰掉？</summary>

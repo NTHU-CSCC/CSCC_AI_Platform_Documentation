@@ -1404,7 +1404,7 @@
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Password requirements</p>
-<p>Password changes made here update both the backend account and LDAP. SSO-only identities remain managed by their external identity provider.</p>
+<p>A password change here applies everywhere you sign in, including the VPN. Accounts managed by an external identity provider cannot change their password here.</p>
 </div>
 <hr />
 <h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
@@ -1457,26 +1457,24 @@ helps you manage CLI credentials and copy setup commands.</p>
 <p>Tokens default to a 90-day lifetime, and your account is capped at 20 active tokens at a time.</p>
 <div class="admonition warning">
 <p class="admonition-title">One-time reveal</p>
-<p>The cleartext token is never stored on the backend — only its SHA-256 hash. If you lose the value, revoke it and create a new one.</p>
+<p>The token value is shown once and is never stored in a readable form. If you lose it, revoke the token and create a new one.</p>
 </div>
-<p>Official <code>cscc-cli</code> releases already include the platform internal root CA, so
-normal CLI setup does not require downloading a certificate from Settings.</p>
-<p>The CLI setup commands use <code>VITE_PUBLIC_API_URL</code> or runtime <code>apiUrl</code> when the
-dashboard deployment provides one. If not, the page derives the API host by
-replacing a <code>dashboard.*</code> hostname with <code>api.*</code>, then appends <code>/api/v1</code>.</p>
+<p>Official <code>cscc-cli</code> releases already trust the platform's certificate, so normal
+CLI setup needs no extra download from this page. The setup commands shown here
+already point at the correct API address for this deployment.</p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>I can't change my password — the field is greyed out.</summary>
-<p>Your organisation uses an external SSO identity. Platform-managed LDAP passwords can be changed here; OAuth/OIDC passwords remain managed by their identity provider.</p>
+<p>Your account is managed by an external identity provider, so its password is changed there rather than here.</p>
 </details>
 <details class="question">
 <summary>I'm not receiving email notifications even though they're enabled.</summary>
-<p>Check your spam folder. If emails are not arriving, contact your admin to verify the platform's SMTP configuration is set up correctly.</p>
+<p>Check your spam folder first. If nothing arrives, contact your admin — email delivery may not be configured.</p>
 </details>
 <details class="question">
 <summary>I lost my API token. Can I recover it?</summary>
-<p>No — only the hash is stored. Revoke the lost token under the <strong>Security</strong> tab and create a new one.</p>
+<p>No. Token values are shown only once. Revoke the lost token under the <strong>Security</strong> tab and create a new one.</p>
 </details>
 
 

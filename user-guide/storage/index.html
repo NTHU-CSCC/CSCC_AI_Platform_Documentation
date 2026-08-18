@@ -1334,15 +1334,12 @@
 
 
 <h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<p>The platform provides two types of persistent storage, both backed by Kubernetes Persistent Volume Claims (PVCs). Anything you write <em>inside</em> a mounted volume persists independently of workspaces — it survives the workspace being stopped or deleted.</p>
+<p>The platform provides two types of persistent storage volumes. Anything you write <em>inside</em> a mounted volume persists independently of workspaces — it survives the workspace being stopped or deleted.</p>
 <div class="admonition warning">
 <p class="admonition-title">A workspace with no storage attached keeps nothing</p>
-<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else live only in the workspace container and are lost when the workspace is stopped or deleted, when it hits its runtime limit or is removed by the idle reaper, and when the container restarts. If you have no personal storage and no group volume mounted, nothing you save will survive — the platform warns you before starting such a workspace.</p>
+<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Anything written elsewhere is lost as soon as the workspace stops, restarts, or is deleted. If you have no volume mounted at all, nothing you save will survive — the platform warns you before starting such a workspace.</p>
 </div>
-<p><strong>Access:</strong> Personal storage is provisioned by an admin, so not every account has one — check the Storage → Personal tab and ask an admin to initialize it if it is missing. Group storage access is managed by group admins.
-Group PVC permissions can be granted only to current members of that group;
-removed members do not retain effective access even if an old permission row
-still exists.</p>
+<p><strong>Access:</strong> Personal storage is provisioned by an admin, so not every account has one — check the Storage → Personal tab and ask an admin to set one up if it is missing. Group storage access is managed by group admins, and only current members of a group can hold permissions on its volumes.</p>
 <hr />
 <h2 id="storage-types">Storage Types<a class="headerlink" href="#storage-types" title="Permanent link">&para;</a></h2>
 <table>
@@ -1399,10 +1396,10 @@ still exists.</p>
 <hr />
 <h2 id="storage-lifecycle">Storage Lifecycle<a class="headerlink" href="#storage-lifecycle" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart LR
-    Request["User Requests Storage\nvia Requests form"] --&gt;|Admin Approves| Provisioned["PVC Created\nin Kubernetes"]
-    Provisioned --&gt;|Bound to Project| Available["Available in\nWorkspace Mount"]
-    Available --&gt;|Workspace mounts PVC| InUse["Data persists\nacross restarts"]
-    InUse --&gt;|Admin deletes PVC| Released["PVC Released\n(data lost)"]</code></pre>
+    Request["Request storage\nvia the Requests form"] --&gt;|Admin approves| Provisioned["Volume created"]
+    Provisioned --&gt;|Bound to a project| Available["Selectable when\nlaunching a workspace"]
+    Available --&gt;|Workspace mounts it| InUse["Data persists\nacross restarts"]
+    InUse --&gt;|Admin deletes it| Released["Volume removed\n(data lost)"]</code></pre>
 <div class="admonition danger">
 <p class="admonition-title">PVC deletion is permanent</p>
 <p>When an admin deletes a PVC, all data inside it is permanently destroyed. Always back up important data before requesting PVC removal.</p>
@@ -1412,9 +1409,7 @@ still exists.</p>
 <p>Click <strong>Browse</strong> next to any PVC to open the file browser.</p>
 <p><img alt="Storage file browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 2: Storage file browser showing directory listing with upload, download, and delete capabilities.</em></p>
-<p>The platform authenticates the browser session before opening FileBrowser and
-does not forward platform JWT, API key, or cookie credentials to the FileBrowser
-pod. Opening a browser is blocked when your permission for that PVC is <strong>None</strong>.</p>
+<p>Opening the file browser is blocked when your permission on that volume is <strong>None</strong>.</p>
 <p>The file browser supports:
 - Navigate directories
 - Upload files (drag and drop or file picker)
@@ -1450,21 +1445,21 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <tbody>
 <tr>
 <td><strong>CephFS RWX</strong></td>
-<td>CephFS on the Ceph cluster</td>
+<td>Shared cluster filesystem</td>
 <td><code>shared-rwx</code></td>
-<td>Cross-node home directories, datasets and checkpoints visible to many pods (the only cross-namespace shared lane)</td>
+<td>Home directories, datasets, and checkpoints that many workloads need to see at once — the only lane that can be shared across projects</td>
 </tr>
 <tr>
 <td><strong>Node-local Scratch</strong></td>
-<td>Local directory (local-path)</td>
+<td>Disk on the machine running the job</td>
 <td><code>local-scratch</code></td>
-<td>Hot per-job <code>/scratch</code> at hostPath speed — <strong>ephemeral</strong>: gone on node loss or PVC deletion</td>
+<td>Fast per-job <code>/scratch</code> — <strong>ephemeral</strong>: lost if the machine goes away or the volume is deleted</td>
 </tr>
 <tr>
 <td><strong>Longhorn (Fast RWO)</strong></td>
-<td>Longhorn block, node-local</td>
+<td>Fast block storage</td>
 <td><code>fast-rwo</code></td>
-<td>Scratch that must survive a pod restart on the same node</td>
+<td>Scratch that must survive a restart of the workload</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -1501,14 +1496,14 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 <tr>
 <td><code>/scratch</code></td>
 <td>Node-local scratch (<code>local-scratch</code>)</td>
-<td>Temporary hot files during one job — hostPath speed, ephemeral</td>
+<td>Temporary hot files during a single job — fast, but ephemeral</td>
 </tr>
 </tbody>
 </table>
-<p>Copy only the final results from scratch back to the shared CephFS mount. This keeps repeated reads fast through node-local cache while avoiding unnecessary shared-write pressure.</p>
+<p>Copy only the final results from scratch back to the shared CephFS mount. Repeated reads stay fast locally, and the shared filesystem is not hammered with writes.</p>
 <hr />
 <h2 id="fast-stage-cache">Fast-Stage Cache<a class="headerlink" href="#fast-stage-cache" title="Permanent link">&para;</a></h2>
-<p>Fast-stage transfers stage data from a group RWX volume into a project-local <strong>Fast RWO</strong> PVC, so a single training job can read at node-local speed without touching the shared filesystem.</p>
+<p>Fast-stage copies data from a shared group volume into a project-local <strong>Fast RWO</strong> volume, so a single training job reads at local speed instead of over the shared filesystem.</p>
 <ol>
 <li>On the project's <strong>Storage</strong> tab, click <strong>Data Path</strong> next to a bound RWX volume.</li>
 <li>Select <strong>Fast-stage Cache</strong> in the modal.</li>
@@ -1523,16 +1518,16 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </thead>
 <tbody>
 <tr>
-<td><strong>Target Namespace</strong></td>
-<td>Where the fast PVC will be created (your project namespace by default).</td>
+<td><strong>Target Project</strong></td>
+<td>Where the fast volume is created (your current project by default).</td>
 </tr>
 <tr>
-<td><strong>Fast PVC Name</strong></td>
-<td>DNS-safe name, defaults to <code>fast-&lt;source-pvc&gt;</code>.</td>
+<td><strong>Fast Volume Name</strong></td>
+<td>Defaults to <code>fast-&lt;source volume&gt;</code>. Letters, digits, and hyphens only.</td>
 </tr>
 <tr>
 <td><strong>Fast Capacity (Gi)</strong></td>
-<td>Must be at least the source PVC capacity.</td>
+<td>Must be at least as large as the source volume.</td>
 </tr>
 <tr>
 <td><strong>Checksum Mode</strong></td>
@@ -1541,15 +1536,15 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </tbody>
 </table>
 <ol>
-<li>Click <strong>Start Fast Stage</strong>. The platform launches a one-off Job that copies the data and reports status. The transfer requires an active project plan, requests and limits <code>500m</code> CPU plus <code>512Mi</code> memory, and is checked against active project plan quota before creation.</li>
+<li>Click <strong>Start Fast Stage</strong>. The platform runs a one-off copy Job and reports its status. The transfer needs an active project plan and a small amount of free CPU and memory quota.</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Sync results back</p>
-<p>Fast-stage is intended as a hot read cache. When training finishes, copy final artifacts back to the shared RWX mount — the fast PVC is project-local and not visible to peers.</p>
+<p>Fast-stage is a read cache. When training finishes, copy final artifacts back to the shared RWX mount — the fast volume is project-local and your teammates cannot see it.</p>
 </div>
 <hr />
 <h2 id="storage-permissions">Storage Permissions<a class="headerlink" href="#storage-permissions" title="Permanent link">&para;</a></h2>
-<p>Group storage PVCs have per-user permission levels:</p>
+<p>Group storage volumes have per-user permission levels:</p>
 <table>
 <thead>
 <tr>
@@ -1572,10 +1567,9 @@ pod. Opening a browser is blocked when your permission for that PVC is <strong>N
 </tr>
 </tbody>
 </table>
-<p>When a group admin explicitly sets your permission for a PVC to <strong>None</strong>, that
-deny takes priority over project workspace mounts and group default storage
-policy. If the explicit row is revoked later, the normal project/group policy is
-used again.</p>
+<p>When a group admin explicitly sets your permission on a volume to <strong>None</strong>, that
+denial wins over anything the project or group would otherwise grant. Clearing
+it restores your normal permission.</p>
 <p>To view or request permission changes, contact your group admin. Group admins can update permissions in bulk from the group's Storage tab (see <a href="../groups/">Groups</a>).</p>
 <hr />
 <h2 id="request-additional-storage">Request Additional Storage<a class="headerlink" href="#request-additional-storage" title="Permanent link">&para;</a></h2>
@@ -1590,15 +1584,15 @@ used again.</p>
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>My PVC shows as Pending. When will it be available?</summary>
-<p>Pending means the Kubernetes volume is being provisioned. This usually takes under 1 minute. If it stays Pending for more than 5 minutes, contact your admin.</p>
+<p>Pending means the volume is still being created. This usually takes under a minute. If it stays Pending for more than 5 minutes, contact your admin.</p>
 </details>
 <details class="question">
 <summary>I can see a group PVC but can't browse it.</summary>
-<p>You need at least <strong>Read</strong> permission on the PVC. Contact your group admin to check your permissions.</p>
+<p>You need at least <strong>Read</strong> permission on that volume. Contact your group admin to check your permissions.</p>
 </details>
 <details class="question">
 <summary>Files I uploaded via the browser aren't appearing in my workspace.</summary>
-<p>Check that your workspace has the PVC mounted at the correct path. The mount happens at startup — files uploaded after the workspace started will appear in the already-mounted filesystem without a restart.</p>
+<p>Check that your workspace has the volume mounted at the path you expect. Volumes are attached when the workspace starts, but files uploaded afterwards appear immediately — no restart needed.</p>
 </details>
 
 

@@ -1340,13 +1340,12 @@
 <p><strong>存取權限：</strong> 所有已登入使用者。</p>
 <hr />
 <h2 id="_2">登入<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><code>cscc-cli</code> 不再 fallback 到 Kubernetes 內部 service 名稱。新機器首次使用時，
-請用 <code>--api-url</code> 或 <code>CSCC_API_URL</code> 明確指定公開 API URL。URL 可包含
-<code>/api/v1</code>，CLI 會自動正規化。</p>
+<p>新機器首次使用時，請用 <code>--api-url</code> 或 <code>CSCC_API_URL</code> 明確指定 API URL。
+URL 可包含 <code>/api/v1</code>，CLI 會自動正規化。</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<p>CLI 會提示您輸入密碼，並呼叫 <code>/api/v1/cli/login</code>。此流程<strong>不使用 CAPTCHA</strong>，也<strong>不需要 <code>X-API-Key</code></strong>。</p>
-<p>登入成功後，CLI 會把 <code>cscc_...</code> 使用者 API token 存在本機設定檔，權限為 <code>0600</code>。後端只保存 token 的 SHA-256 雜湊，因此明文 token 只會在建立時顯示一次。</p>
+<p>CLI 會提示您輸入密碼。與儀表板不同，此流程<strong>不需要驗證碼</strong>。</p>
+<p>登入成功後，CLI 會把 <code>cscc_...</code> API token 存在本機設定檔中，只有您本人可讀取。token 明文只會在建立時顯示一次。</p>
 <p>可選擇 token 名稱：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
@@ -1355,17 +1354,17 @@
 <code>cscc-cli</code>：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--token<span class="w"> </span>cscc_...
 </code></pre></div>
-<p>CLI 會先用 <code>/api/v1/auth/status</code> 驗證 token，成功後才存入本機設定。這適合
-已經登入瀏覽器、不想在終端機再次輸入密碼的情境。</p>
+<p>CLI 會先驗證 token，成功後才存入本機設定。這適合已經登入瀏覽器、
+不想在終端機再次輸入密碼的情境。</p>
 <h3 id="token_1">無狀態 token 覆寫<a class="headerlink" href="#token_1" title="Permanent link">&para;</a></h3>
 <p>自動化腳本可使用 <code>CSCC_API_TOKEN</code>，不必儲存本機設定：</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="nv">CSCC_API_TOKEN</span><span class="o">=</span>cscc_...<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
 <p><code>CSCC_DEV_TOKEN</code> 仍作為舊版相容 alias，但新的腳本應改用 <code>CSCC_API_TOKEN</code>。</p>
 <h3 id="tls-ca">TLS / 內部 CA<a class="headerlink" href="#tls-ca" title="Permanent link">&para;</a></h3>
-<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA，因此大多數使用者不需要另外下載
-憑證。若平台 root CA 輪替，請先下載新發布的 CLI binary 再重新連線。</p>
-<p>手動 CA 設定屬於非一般使用者路徑，保留給自訂 CLI build、緊急 CA 輪替期間，以及 TLS 除錯：</p>
+<p>官方 <code>cscc-cli</code> release 已內建平台憑證，因此大多數使用者不需要另外設定。
+若平台憑證輪替，請先下載最新版的 CLI 再重新連線。</p>
+<p>以下環境變數僅供自訂 build 與 TLS 除錯使用：</p>
 <table>
 <thead>
 <tr>
@@ -1408,7 +1407,7 @@
 <h2 id="_3">確認身分<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<p>此指令會驗證已儲存的 token，並印出目前使用者與角色資訊。角色變更會立即生效，因為每次請求都會由後端 RBAC/Casbin 狀態重新解析授權。</p>
+<p>此指令會驗證已儲存的 token，並印出目前使用者與角色資訊。角色變更會立即生效。</p>
 <hr />
 <h2 id="_4">建置映像檔<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>Upload 模式為預設，接受目錄、<code>.tar.gz</code> 或 <code>.zip</code>：</p>
@@ -1417,8 +1416,7 @@ cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span clas
 </code></pre></div>
 <p>若來源是目錄，CLI 會打包成 <code>.tar.gz</code> build context；目錄或上傳的 archive
 根目錄必須包含 Dockerfile。</p>
-<p>Dockerfile-only 模式與儀表板貼上 Dockerfile 的流程一致，會呼叫
-<code>/api/v1/images/build/dockerfile</code>：</p>
+<p>Dockerfile-only 模式與儀表板貼上 Dockerfile 的流程一致：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
@@ -1471,8 +1469,8 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </table>
 <h3 id="build-arguments">建置參數（build arguments）<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
 <p>用 <code>--build-arg KEY=VALUE</code> 在建置時傳入 Dockerfile 的 <code>ARG</code>。此旗標可重複，且
-適用於 <code>upload</code> 與 <code>dockerfile</code> build。Backend 會驗證每一筆
-（<code>KEY</code> 需符合 <code>[A-Za-z_][A-Za-z0-9_]*</code>），並轉成 BuildKit 的 <code>--build-arg</code>。</p>
+適用於 <code>upload</code> 與 <code>dockerfile</code> build。每個 <code>KEY</code> 必須以英文字母或底線開頭，
+只能包含英數字與底線。</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
@@ -1482,24 +1480,19 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 並行度（<code>MAX_JOBS</code>、<code>FLASH_ATTN_MAX_JOBS</code> …）壓低，讓重型建置塞得進共用 build
 engine。</p>
 <blockquote>
-<p>build-arg 會成為 BuildKit job spec 的一部分，能讀 build pod 的人可能看得到。請
-視為低敏感度;用此方式傳入的 token 建議建置後輪換。</p>
+<p>能檢視該次建置的人都可能看到 build-arg，請視為低敏感度資訊；
+用此方式傳入的 token 建議建置後輪換。</p>
 </blockquote>
 <h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>映像建置會排入同一個共用 build engine；同一時間只啟動一個 build。每個執行中的
-中央 build engine 固定在 <code>gpu3</code> 使用 16 CPU cores、40Gi memory 與 <code>/data2</code> 上的 500Gi scratch workspace。CPU、
-memory、timeout 與 build source resource override 不再是 CLI 選項。</p>
-<p>提交後，<code>--follow=true</code> 會輪詢直到建置日誌可用，串流
-<code>/api/v1/images/build/:jobName/logs?follow=true</code>，並在 backend 回報
-<code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止且印出狀態。</p>
-<p>CLI 會依序從登入/匯入時的 <code>--api-url</code>、<code>CSCC_API_URL</code>、已儲存 config 取得
-API endpoint；沒有內部 service fallback。Production 請使用 gateway API host：</p>
+<p>映像建置共用同一套建置環境，同一時間只跑一個。每個建置固定分配一份 CPU、
+記憶體與暫存空間，CLI 無法調整。</p>
+<p>提交後，<code>--follow=true</code>（預設值）會等到建置日誌可用後開始串流，
+並在建置回報 <code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止。</p>
+<p>CLI 會依序從登入時的 <code>--api-url</code>、<code>CSCC_API_URL</code>、已儲存設定取得 API 位址：</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
-<p>建置請求與日誌串流會使用 <code>cscc-cli login</code> 建立的使用者 token：</p>
-<div class="highlight"><pre><span></span><code><span class="err">Authorization: Bearer cscc_...</span>
-</code></pre></div>
-<p>CLI 建置不需要 <code>CSCC_API_KEY</code>、<code>PLATFORM_API_KEY</code> 或 <code>X-API-Key</code> header。專案必須啟用 <strong>Image Build Permission</strong>，且您的專案角色必須允許建置。</p>
+<p>建置與日誌串流會使用 <code>cscc-cli login</code> 建立的 token，不需要其他憑證。
+專案必須啟用 <strong>Image Build Permission</strong>，且您的專案角色必須允許建置。</p>
 <hr />
 <h2 id="token_2">Token 管理<a class="headerlink" href="#token_2" title="Permanent link">&para;</a></h2>
 <p>列出有效 API token：</p>
@@ -1511,7 +1504,7 @@ API endpoint；沒有內部 service fallback。Production 請使用 gateway API 
 <p>登出目前機器：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span><span class="nb">logout</span>
 </code></pre></div>
-<p>登出會先呼叫 <code>DELETE /api/v1/me/api-tokens/current</code> 撤銷目前使用的 token，接著保留 TLS 設定並清除本機 token 欄位，讓手動憑證 override 可以重複使用。</p>
+<p>登出會撤銷目前使用的 token 並從本機設定中清除，但保留手動設定的憑證選項，方便下次重新登入。</p>
 <hr />
 <h2 id="_6">預設值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
@@ -1524,27 +1517,28 @@ API endpoint；沒有內部 service fallback。Production 請使用 gateway API 
 </thead>
 <tbody>
 <tr>
-<td><code>USER_API_TOKEN_TTL_HOURS</code></td>
-<td style="text-align: right;"><code>2160</code></td>
-<td>Token 有效時間，以小時計算（90 天）</td>
+<td>Token 有效期</td>
+<td style="text-align: right;">90 天</td>
+<td>到期後請重新建立一個</td>
 </tr>
 <tr>
-<td><code>USER_API_TOKEN_MAX_ACTIVE</code></td>
+<td>每人可持有的有效 token</td>
 <td style="text-align: right;"><code>20</code></td>
-<td>每位使用者最多可同時持有的有效 token 數</td>
+<td>達到上限時，請先撤銷不再使用的 token</td>
 </tr>
 <tr>
-<td><code>CLI_LOGIN_MAX_ATTEMPTS</code></td>
+<td>登入失敗鎖定次數</td>
 <td style="text-align: right;"><code>5</code></td>
-<td>登入失敗幾次後鎖定</td>
+<td>儀表板與 CLI 共用同一組計數</td>
 </tr>
 <tr>
-<td><code>CLI_LOGIN_LOCKOUT_SECONDS</code></td>
-<td style="text-align: right;"><code>900</code></td>
-<td>鎖定時間，單位為秒</td>
+<td>鎖定時間</td>
+<td style="text-align: right;">15 分鐘</td>
+<td>等待解除，或請管理員協助解鎖</td>
 </tr>
 </tbody>
 </table>
+<p>管理員可以為該套部署調整以上數值。</p>
 
 
 

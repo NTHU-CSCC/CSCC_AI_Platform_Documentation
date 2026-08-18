@@ -917,15 +917,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-claims-dra" class="md-nav__link">
+  <a href="#gpu-claims" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Claims (DRA)
+        GPU Claims
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="GPU Claims (DRA)">
+    <nav class="md-nav" aria-label="GPU Claims">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -990,10 +990,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+  <a href="#deploy-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DRA GPU Requests vs. Reusable GPU Claims
+        Deploy Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inline-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inline GPU Requests vs. Reusable GPU Claims
       
     </span>
   </a>
@@ -1399,15 +1410,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-claims-dra" class="md-nav__link">
+  <a href="#gpu-claims" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Claims (DRA)
+        GPU Claims
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="GPU Claims (DRA)">
+    <nav class="md-nav" aria-label="GPU Claims">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1472,10 +1483,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dra-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+  <a href="#deploy-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DRA GPU Requests vs. Reusable GPU Claims
+        Deploy Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inline-gpu-requests-vs-reusable-gpu-claims" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inline GPU Requests vs. Reusable GPU Claims
       
     </span>
   </a>
@@ -1656,7 +1678,7 @@ is created for you automatically when you register.</p>
 </tr>
 <tr>
 <td><strong>Config</strong></td>
-<td>Versioned config files (Kubernetes YAML, scripts)</td>
+<td>Versioned config files describing what you want to run</td>
 </tr>
 <tr>
 <td><strong>Plan</strong></td>
@@ -1664,15 +1686,15 @@ is created for you automatically when you register.</p>
 </tr>
 <tr>
 <td><strong>Builds</strong></td>
-<td>Project-scoped image builds, archive or Dockerfile source selection, shared queue status, and live BuildKit logs</td>
+<td>Project-scoped image builds, archive or Dockerfile source selection, shared queue status, and live build logs</td>
 </tr>
 <tr>
 <td><strong>GPU Claims</strong></td>
-<td>DRA-based ResourceClaims that can be prepared ahead of time, reserve effective GPU quota at creation, and accrue GPU-hours only while bound to live Pods</td>
+<td>Reusable GPU reservations you can prepare in advance and attach to a deployment later</td>
 </tr>
 <tr>
 <td><strong>Resources</strong></td>
-<td>Live per-user GPU/CPU/memory usage and expandable Kubernetes resource views</td>
+<td>Live per-member GPU/CPU/memory usage, expandable to what each member is running</td>
 </tr>
 <tr>
 <td><strong>Images / Members / Storage</strong></td>
@@ -1726,32 +1748,19 @@ is created for you automatically when you register.</p>
 </tr>
 </tbody>
 </table>
-<p>Builds are submitted to a shared queue. The platform starts one build at a time
-on <code>gpu3</code> and assigns fixed resources to the central engine: 16 CPU cores, 40Gi
-memory, and a 500Gi scratch workspace backed by <code>/data2</code>. CPU, memory, timeout, and build-source resource
-overrides are not user-configurable from the form.
-This platform-owned capacity does not require an active project plan and does
-not consume project or per-user CPU and memory quota.</p>
-<p>Uploaded archive contexts are checked for unsafe paths and expanded-size limits
-before the builder uses them, and the uploaded filename is normalized before the
-platform stores the temporary build context object. DockerHub base images are
-pulled on demand through the registry-specific Harbor pull-through project.</p>
-<p>After submission, the build history shows build status, sanitized build Pod
-status, source type, fixed engine resources, destination image, and live logs.
-Failed builds surface a normalized two-line summary in the table. Use the log
-button for full errors, Pod events, and ANSI-colored BuildKit output. If
-Kubernetes retries a failed build Pod, the log view preserves the previous
-attempt's exact failure reason and exit code before streaming the current
-attempt. Active builds use one WebSocket until terminal status; completed and
-failed builds load one saved snapshot. Builders and project managers can clear saved log snapshots
-for one or more completed or failed builds. This leaves build history, images,
-and any still-retained Kubernetes Pod logs unchanged. Successful builds are pushed to the Harbor
-namespace selected by the project's group registry policy. GPU23 Harbor groups
-use the same central builder on <code>gpu3</code>, then push to the GPU23
-Harbor. The current project member who started a
-completed project-local build, or a project manager, can delete that build
-artifact from the build history when no other active build or publication
-references it.</p>
+<p>Builds are submitted to a shared queue and run one at a time. Each build gets a
+fixed amount of CPU, memory, and scratch space that you cannot change from the
+form, and that capacity does not consume your project or personal quota.</p>
+<p>Uploaded archives are checked for unsafe paths and size limits before the build
+starts.</p>
+<p>The build history shows status, source type, destination image, and live logs.
+Failed builds show a short summary in the table — use the log button for the
+full output. If a build is retried, the log view keeps the previous attempt's
+failure reason before streaming the current one.</p>
+<p>Builders and project managers can clear saved logs for completed or failed
+builds; build history and images are left untouched. The member who started a
+completed build, or a project manager, can also delete it from the history once
+nothing else references it.</p>
 <p>Project Managers can submit project image allowlist requests and remove project image allowlist entries only for projects they currently manage. Project Members can view the project's image request history, but global catalog publications and other projects' image rules remain admin-controlled.</p>
 <p>The <strong>Images</strong> tab splits into <strong>Available</strong> and <strong>Requests</strong>. Available lists
 the images this project may already pull. Requests lists every image request
@@ -1773,14 +1782,12 @@ appears under <strong>Available</strong>.</p>
 <p>If the start form is hidden, the project either does not have <strong>Image Build Permission</strong> enabled or your project role cannot start builds. Build history and logs remain visible so you can still inspect previous jobs. Ask a project manager or platform admin to adjust the project setting or your role.</p>
 </div>
 <hr />
-<h2 id="gpu-claims-dra">GPU Claims (DRA)<a class="headerlink" href="#gpu-claims-dra" title="Permanent link">&para;</a></h2>
-<p>The <strong>GPU Claims</strong> tab lists ResourceClaims that can be prepared for a project
-ahead of deployment. A claim is pending while it has no live Pod binding; it
-reserves effective GPU quota as soon as it is created, while GPU-hours start
-only after Kubernetes DRA allocates it and binds it to a running Pod. Each claim
-is created through the Kubernetes Dynamic Resource Allocation API and can be
-selected from the deploy dialog when a Pod or Deployment template uses a
-deploy-time GPU claim slot annotation.</p>
+<h2 id="gpu-claims">GPU Claims<a class="headerlink" href="#gpu-claims" title="Permanent link">&para;</a></h2>
+<p>The <strong>GPU Claims</strong> tab lists GPU reservations you can prepare for a project
+before deploying anything. A claim reserves GPU quota the moment you create it,
+but only starts counting GPU-hours once it is attached to a running Pod. You can
+pick a claim in the deploy dialog whenever a config file declares a GPU claim
+slot.</p>
 <h3 id="create-a-claim">Create a Claim<a class="headerlink" href="#create-a-claim" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1792,43 +1799,41 @@ deploy-time GPU claim slot annotation.</p>
 <tbody>
 <tr>
 <td><strong>Claim Name</strong></td>
-<td>DNS-safe name used by deployments.</td>
+<td>Name used when you attach this claim to a deployment. Letters, digits, and hyphens only.</td>
 </tr>
 <tr>
 <td><strong>GPU Device Class</strong></td>
-<td>The model the scheduler reserves, such as <code>rtx5090.gpu.nvidia.com</code>; the form defaults to the first concrete model and lists <code>gpu.nvidia.com (Any)</code> only as an explicit generic placement choice.</td>
+<td>The GPU model to reserve. The form defaults to a specific model; pick <strong>Any</strong> only when the model does not matter.</td>
 </tr>
 <tr>
 <td><strong>GPU Count</strong></td>
-<td>Physical cards reserved by this claim. Multi-GPU claims remain one claim-scoped allocation.</td>
+<td>How many physical cards this claim reserves. A multi-GPU claim stays a single reservation.</td>
 </tr>
 <tr>
 <td><strong>SM Share</strong></td>
-<td>Compute slice from 1% to 100%. The effective GPU count is shown beside the form.</td>
+<td>Compute slice from 1% to 100%. The resulting effective GPU count is shown beside the form.</td>
 </tr>
 <tr>
 <td><strong>VRAM Mode</strong></td>
-<td><code>Elastic</code> shares VRAM with peers; <code>Hard cap</code> enforces the selected percentage.</td>
+<td><code>Elastic</code> shares GPU memory with other workloads; <code>Hard cap</code> enforces the percentage you pick.</td>
 </tr>
 <tr>
 <td><strong>VRAM Share</strong></td>
-<td>Used only when <strong>Hard cap</strong> is selected; the platform derives the pinned memory from the smallest matching DRA ResourceSlice memory for the selected GPU Device Class.</td>
+<td>Used only with <strong>Hard cap</strong>. The reserved memory is derived from the smallest card of the selected model.</td>
 </tr>
 </tbody>
 </table>
-<p>A Deployment that uses a reusable claim points every replica at the same
-ResourceClaim. For example, a 2-GPU <code>rtx5090.gpu.nvidia.com</code> claim remains one
-shared 2-GPU allocation; platform labels keep <code>dra-gpu-count=2</code>,
-<code>dra-effective-gpu=2</code>, and <code>dra-gpu-model=rtx5090</code>, while quota and GPU-hours
-count it once per claim instead of once per replica.</p>
-<p>A pending claim has <code>0</code> GPU-hours but still counts against project and per-user
-effective GPU quota. The table shows owner, allocation node, current status
-(<code>pending</code>, <code>bound</code>, or <code>terminating</code>), the <code>reservedFor</code> count reported by DRA,
-and a delete action. Delete is allowed for pending claims and rejected while a
-live Pod is using the claim.</p>
+<p>Every replica of a Deployment shares the same claim. A 2-GPU claim stays one
+2-GPU reservation no matter how many replicas run, and quota and GPU-hours are
+counted once per claim rather than once per replica.</p>
+<p>A claim that is not attached to anything uses <code>0</code> GPU-hours but still counts
+against project and per-user GPU quota. The table shows the owner, the node,
+the status (<code>pending</code>, <code>bound</code>, or <code>terminating</code>), how many workloads are using
+the claim, and a delete action. Unused claims can be deleted; a claim in use by
+a running Pod cannot.</p>
 <div class="admonition note">
 <p class="admonition-title">Claim ownership</p>
-<p>Project Members can create claims under their own namespace. Project Managers can also list and delete claims belonging to other members of the project.</p>
+<p>Project Members can create their own claims. Project Managers can also see and delete claims belonging to other members of the project.</p>
 </div>
 <hr />
 <h2 id="plan-window-countdown">Plan Window Countdown<a class="headerlink" href="#plan-window-countdown" title="Permanent link">&para;</a></h2>
@@ -1838,55 +1843,35 @@ live Pod is using the claim.</p>
 <li><em>Window opens in HH:MM:SS</em> when the next window is upcoming.</li>
 <li><em>Always active</em> if no schedule restriction is defined.</li>
 </ul>
-<p>The same countdown surfaces on the workspace launch form and on individual
-deployments. If a plan becomes inactive, is removed, or stops allowing a queue,
-active reservations are evicted even before Kubernetes pods exist, so delayed
-submissions cannot start after plan authorization has changed. Pods running in
-plan-bound queues are subject to the platform's plan-window reaper when the
-window expires. Namespaces for projects without an active plan publish
-restrictive policy data, so direct Kubernetes admission rejects workload pods
-instead of treating the project as always allowed.</p>
-<p>Queues may also define a runtime limit. When your selected queue has a runtime
-limit, the backend applies it to Pod, Deployment, and Job workloads and stops the
-workload after that many seconds from Kubernetes creation time. This value is an
-admin policy; setting <code>platform-go/runtime-limit-seconds</code> in your YAML cannot
-increase, disable, or override it. If the backend cannot load the selected
-queue's runtime policy, deployment and dry-run validation are rejected rather
-than launched without a queue runtime limit.</p>
-<p>Queues may also define a runtime limit. When your selected queue has a runtime
-limit, the backend applies it to Pod, Deployment, and Job workloads and stops the
-workload after that many seconds from Kubernetes creation time. This value is an
-admin policy; setting <code>platform-go/runtime-limit-seconds</code> in your YAML cannot
-increase, disable, or override it.</p>
+<p>The same countdown appears on the workspace launch form and on individual
+deployments. When the window closes, workloads in plan-bound queues are stopped;
+if the plan is removed or stops allowing your queue, anything still waiting to
+start is dropped too. A project with no active plan cannot start workloads at
+all.</p>
+<p>Queues may also carry a runtime limit. When the queue you selected has one, your
+workload is stopped automatically after that many seconds. The limit is set by
+an admin and cannot be raised or disabled from your config file.</p>
 <hr />
 <h2 id="config-file-versioning">Config File Versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
-<p>Config files are stored using Content-Addressable Storage — each version is immutable and identified by a SHA-256 hash.</p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant User
-    participant Dashboard
-    participant API
-    participant CAS as Content Store (SHA-256)
-
-    User-&gt;&gt;Dashboard: Upload new K8s YAML
-    Dashboard-&gt;&gt;API: POST /api/v1/configfiles
-    API-&gt;&gt;CAS: Store blob by SHA-256
-    CAS--&gt;&gt;API: blob_id
-    API--&gt;&gt;Dashboard: config_commit_id (immutable)
-    Dashboard--&gt;&gt;User: Version created ✓</code></pre>
+<p>Every save creates a new, immutable version. Old versions are never overwritten,
+so you can always look back at — or redeploy — an earlier one.</p>
+<pre class="mermaid"><code>flowchart LR
+    Edit["Edit or upload\na config file"] --&gt; Save["Save"]
+    Save --&gt; Version["New immutable\nversion"]
+    Version --&gt; Deploy["Deploy any version"]</code></pre>
 <h3 id="working-with-config-files">Working with Config Files<a class="headerlink" href="#working-with-config-files" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Go to <strong>Projects → [your project] → Config</strong> tab.</li>
 <li>Click <strong>+ New Config</strong> to upload a YAML file or paste content in the editor.</li>
-<li>Each save creates a new, immutable version — old versions are never overwritten.</li>
+<li>Each save creates a new version — old versions are never overwritten.</li>
 <li>Click the <strong>History</strong> icon next to a config to view all versions.</li>
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
 <li>In the deploy dialog, pick the scheduling queue. If the YAML contains GPU claim slots, choose one of your reserved GPU claims for each slot for this deploy only.</li>
 </ol>
 <h3 id="containers-you-can-shell-into">Containers You Can Shell Into<a class="headerlink" href="#containers-you-can-shell-into" title="Permanent link">&para;</a></h3>
 <p>To open a <strong>Terminal</strong> into a container, it has to stay running. A shell given
-no arguments — <code>command: ["/bin/sh"]</code> — reads standard input, reaches
-end-of-file immediately, and exits. Kubernetes restarts it, so the pod reports
-<code>Running</code> between restarts while every terminal attempt fails.</p>
+no arguments — <code>command: ["/bin/sh"]</code> — exits immediately, so the container
+restarts over and over and every terminal attempt fails.</p>
 <p>Either give the container real work:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"sleep"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"infinity"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
@@ -1896,28 +1881,41 @@ wizard warns you when a bare shell would exit immediately.</p>
 <p>Once the pod is running, open the project <strong>Resources</strong> tab and click
 <strong>Terminal</strong> on the <strong>Pod</strong> row. Deployment and Job rows have no terminal button
 — expand to the pod they created.</p>
-<p>Deployment, direct-create, dry-run validation, instance deletion, and instance pod status require <strong>Project Manager</strong> or higher access through direct project membership, the owning group role, personal project ownership, or platform admin permissions. Workload submit requires effective project access. Knowing or guessing a config version ID is not enough to operate in a project namespace. Access, plan-window, queue-plan, allowed GPU model, and quota rejections return <code>403 Forbidden</code>.
-For deployment namespace ownership, the backend resolves the deploying username from the platform database by authenticated user ID; stale or altered token username claims do not select a different Kubernetes namespace.
-Deploy requests with malformed JSON options are rejected before any validation or deployment starts, so dry-run, direct-create, queue, and GPU claim choices cannot silently fall back to defaults.
-Quota checks combine live Kubernetes namespace usage with active job reservations in the database. <code>submitted</code>, <code>waiting_infra</code>, <code>queued</code>, and <code>running</code> jobs count as active demand, so a workload waiting for infrastructure retry or scheduler placement still consumes its requested quota until it finishes or is cleaned up.
-Workload submit accepts platform-managed <code>Pod</code>, <code>Deployment</code>, and <code>Job</code> resources. Autonomous controllers such as <code>CronJob</code>, <code>DaemonSet</code>, <code>StatefulSet</code>, and <code>ReplicaSet</code> are rejected because their pod counts are not bounded by a single submit-time quota reservation.
-Config workload resources must run through the platform executor. Direct-create is limited to non-workload resources such as ConfigMaps and Services, so workload quota and plan governance cannot be bypassed.</p>
-<p>For every workload container, explicitly set both <code>resources.requests.memory</code> and <code>resources.limits.memory</code> to at least <code>128Mi</code>. The platform does not fill missing memory from the project plan or remaining project RAM; missing request or limit fields are rejected during deploy and dry-run validation. Always include <code>Mi</code> or <code>Gi</code>; bare numbers in Kubernetes memory quantities mean bytes, so <code>memory: "1"</code> is rejected before deployment.</p>
-<p>Config YAML must leave platform-owned Kubernetes metadata to the backend. Do not set <code>metadata.namespace</code>, <code>metadata.generateName</code>, <code>metadata.ownerReferences</code>, or <code>metadata.finalizers</code>; the platform derives namespace ownership, naming, lifecycle, and cleanup from the project and deploying user.
-For storage volumes, use <code>{{userVolume}}</code> for your personal PVC. Literal PVC
-names are accepted only for group-owned projects when the PVC exists in the
-owning group's storage inventory; personal projects and non-admin users cannot
-inject arbitrary PVC names into deployed YAML.</p>
-<h3 id="dra-gpu-requests-vs-reusable-gpu-claims">DRA GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#dra-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
+<h3 id="deploy-rules">Deploy Rules<a class="headerlink" href="#deploy-rules" title="Permanent link">&para;</a></h3>
+<p>Deploying, validating, inspecting, and deleting config-file instances needs the
+<strong>Project Manager</strong> role or higher. Quota is checked against everything you
+already have in flight, so a workload still waiting to start keeps holding its
+share until it finishes or is removed. Config files can deploy <code>Pod</code>,
+<code>Deployment</code>, and <code>Job</code> workloads; other kinds are not accepted.</p>
+<p>Every container must set both a memory request and a memory limit of at least
+<code>128Mi</code>; missing values are rejected during deploy and dry-run validation.
+Always include the unit — a bare <code>memory: "1"</code> means one byte and is rejected.</p>
+<p>Leave platform-owned fields out of your YAML: do not set <code>metadata.namespace</code>,
+<code>metadata.generateName</code>, <code>metadata.ownerReferences</code>, or <code>metadata.finalizers</code>.
+For storage, use <code>{{userVolume}}</code> to mount your personal volume; naming a volume
+directly works only in group-owned projects, and only for volumes the owning
+group already has.</p>
+<h3 id="inline-gpu-requests-vs-reusable-gpu-claims">Inline GPU Requests vs. Reusable GPU Claims<a class="headerlink" href="#inline-gpu-requests-vs-reusable-gpu-claims" title="Permanent link">&para;</a></h3>
+<p>There are two ways a config file can ask for a GPU.</p>
 <ul>
-<li><strong>Template GPU requests</strong> use DRA resource keys in container or initContainer resource requests, for example <code>nvidia.com/gpu-0: "1"</code>, <code>nvidia.com/rtx6000: "1"</code>, or another model key such as <code>nvidia.com/h100: "1"</code>, plus optional SM percentage and GPU model metadata. The platform counts all <code>nvidia.com/&lt;model&gt;</code> GPU keys toward quota, checks the resolved DeviceClass against the active plan's allowed GPU models, removes those marker resources during DRA injection, and creates the runtime DRA claim during deployment.</li>
-<li><strong>CPU-only templates</strong> do not need an allowed GPU model list. If the manifest has no GPU marker resource, ResourceClaim, or GPU claim binding, deployment validation and submit policy skip DeviceClass checks even when a client sends the generic <code>gpu.nvidia.com</code> default.</li>
-<li><strong>Reusable GPU claims</strong> are standalone claims created from the <strong>GPU Claims</strong> tab. They reserve effective GPU quota immediately, remain pending until a live Pod uses them, and accrue resource-hours only while bound. In the Resource Wizard, choose <strong>Pick at deploy</strong> and enter a <strong>Deploy slot name</strong> such as <code>train-a</code>; this is a label shown in the deploy dialog, not the claim name itself. In raw YAML, put <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code> in a Pod metadata annotation or a Deployment pod-template annotation. The deploying user maps each slot to one of their own platform-managed claims in the deploy dialog; raw or externally created Kubernetes ResourceClaims are rejected.</li>
-<li><code>{{gpuClaimName}}</code> is still supported as the default slot for older config files. Multiple Pods or Deployments can use the same slot to intentionally share the same claim, while different resources can use different slots and therefore different claims.</li>
-<li>If an API deploy request sends both <code>gpu_claim_name</code> and <code>gpu_claim_bindings.default</code>, they must name the same claim; mismatched defaults are rejected.</li>
-<li>Kubernetes Deployments use one PodTemplate for every replica. If only some replicas should use a claim, split the workload into multiple Deployments, for example one claimed Deployment and one unclaimed Deployment.</li>
-<li>Services, ConfigMaps, and unannotated workloads are not injected with GPU claims.</li>
-<li>Do not put <code>{{gpuClaimName}}</code> in <code>spec.resourceClaims[].resourceClaimName</code> or <code>resourceClaimTemplateName</code>; those fields are reserved for platform injection.</li>
+<li><strong>Inline GPU requests</strong> are written straight into the container's resource
+  requests, for example <code>nvidia.com/rtx6000: "1"</code>. The platform counts them
+  toward quota, checks the model against your plan's allowed models, and sets up
+  the GPU when you deploy.</li>
+<li><strong>Reusable GPU claims</strong> come from the <strong>GPU Claims</strong> tab. In the Resource
+  Wizard, choose <strong>Pick at deploy</strong> and give the slot a name such as <code>train-a</code>;
+  in raw YAML, annotate the Pod or the Deployment's pod template with
+  <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>. The slot name is
+  only a label — you map it to one of your own claims in the deploy dialog.</li>
+</ul>
+<p>A few things worth knowing:</p>
+<ul>
+<li><code>{{gpuClaimName}}</code> with no name still works as the default slot. Two workloads
+  can share a slot deliberately, or use different slots to get different claims.</li>
+<li>Every replica of a Deployment shares one claim. If only some replicas should
+  use a claim, split them into separate Deployments.</li>
+<li>Configs that request no GPU need no allowed-model list, and never receive a
+  GPU claim.</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Config files and deployments require Project Manager role</p>
@@ -1928,7 +1926,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 <ol>
 <li>Open the project and go to the <strong>Members</strong> tab.</li>
 <li>Click <strong>+ Add Members</strong> (requires <strong>Project Admin</strong> role).</li>
-<li>Search for users by username or email. The add-member page loads project context, current members, and a paginated user list in one request.</li>
+<li>Search for users by username or email.</li>
 <li>Select a role for each user:</li>
 </ol>
 <table>
@@ -1956,9 +1954,9 @@ inject arbitrary PVC names into deployed YAML.</p>
 <ol>
 <li>Click <strong>Confirm</strong> to save.</li>
 </ol>
-<p>Project Admins can also select multiple rows in the Members tab and batch-remove users, batch-change roles, or batch-set per-user quotas. Project Managers and Project Admins can view member quotas; Project Users can view only their own quota. A per-user quota of <code>0</code> for GPU, CPU, or memory means that resource is unlimited for that member, still bounded by the project plan. Negative per-user quota values are rejected.</p>
-<p><strong>Group-inherited members in batch actions.</strong> Per-user quota is stored at the project level, so group-inherited members are selectable in the Members table and can be included in a <strong>batch-set quota</strong> action. The <strong>batch-remove</strong> and <strong>batch-role</strong> actions are disabled whenever the selection contains a group-inherited member, because their membership and role come from the owning group and must be changed there. A Group Admin viewing a project owned by their group is treated as an effective Project Admin (see <a href="#group-inheritance-and-effective-project-role">Group Inheritance and Effective Project Role</a> below), so they will see the selection checkboxes and can drive batch quota updates without first being added as a direct project member.</p>
-<p>Removing a direct member also removes that member's project namespace, project storage permission overrides, and per-user quota. Group-inherited members must be removed from the owning group instead.</p>
+<p>Project Admins can select several rows at once to remove members, change roles, or set per-user quotas in bulk. Managers and Admins can see everyone's quota; a Project User sees only their own. A quota of <code>0</code> means that resource is unlimited for that member, still capped by the project plan.</p>
+<p><strong>Group-inherited members.</strong> Members who joined through the owning group can be included in a bulk <strong>quota</strong> change, but not in bulk <strong>remove</strong> or <strong>role</strong> changes — their membership and role are managed in the group instead.</p>
+<p>Removing a direct member also removes their workspace area in the project, any project storage permission overrides, and their per-user quota. Group-inherited members must be removed from the owning group instead.</p>
 <h3 id="group-inheritance-and-effective-project-role">Group Inheritance and Effective Project Role<a class="headerlink" href="#group-inheritance-and-effective-project-role" title="Permanent link">&para;</a></h3>
 <p>When a project is owned by a group, the platform resolves each caller's effective project role as follows:</p>
 <ol>
@@ -1966,7 +1964,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 <li>Otherwise, for personal projects, the <strong>personal owner</strong> is treated as <code>admin</code>.</li>
 <li>Otherwise, the user's <strong>group role</strong> in the owning group is used as the effective project role. A Group Admin therefore acts as a Project Admin on every project owned by that group, even without an explicit <code>project_members</code> row.</li>
 </ol>
-<p>This is why a Group Admin (e.g. <code>u26000007</code> in <code>G260000105</code>) can call <code>PUT /api/v1/projects/{projectId}/members/quotas</code> against a group-owned project (e.g. <code>P26000116</code>) and see the batch selection UI in the Members tab without being added as a direct member.</p>
+<p>This is why a Group Admin can set per-user quotas on a project owned by their group, and see the batch selection controls in the Members tab, without being added as a direct member.</p>
 <blockquote>
 <p><strong>Offboarding tip:</strong> when someone leaves the lab, ask an admin to remove them from the owning <strong>group</strong> — access to every project joined through that group disappears automatically, with no per-project cleanup.</p>
 </blockquote>
@@ -1991,11 +1989,11 @@ inject arbitrary PVC names into deployed YAML.</p>
 <tbody>
 <tr>
 <td>User</td>
-<td>Project member or namespace owner</td>
+<td>Project member</td>
 </tr>
 <tr>
 <td>GPU</td>
-<td>Effective DRA GPU units currently used</td>
+<td>Effective GPU units currently used</td>
 </tr>
 <tr>
 <td>CPU</td>
@@ -2007,13 +2005,12 @@ inject arbitrary PVC names into deployed YAML.</p>
 </tr>
 <tr>
 <td>Pods</td>
-<td>Number of active pods in that member namespace</td>
+<td>Number of active pods that member is running</td>
 </tr>
 </tbody>
 </table>
-<p>Project Admins, Project Managers, and platform Admin/Manager roles see all project members. Regular Project Users see only their own resource row. Expand a row to inspect pods and Kubernetes resources, or terminate resources you are allowed to manage. The platform authorizes your own resources by the verified user ID on the project namespace, so stale display usernames do not block deletion of your own Pods, Deployments, Jobs, Services, ConfigMaps, Ingresses, StatefulSets, or unmanaged ResourceClaims. System namespaces such as <code>kube-system</code> are never deleted from the project Resources tab, and Secret deletion remains limited to project managers and admins.</p>
-<p>When platform-managed workload resources are terminated from this tab, the backend also cancels the matching job reservation so your personal quota usage is released after the Kubernetes resources are removed.</p>
-<p>For Pod rows, hover, focus, or tap the status badge to inspect recent Kubernetes events. This is useful when a Pod appears to be creating but Kubernetes is actually reporting image pull errors such as <code>ImagePullBackOff</code> or <code>ErrImagePull</code>.</p>
+<p>Project Admins, Project Managers, and platform Admin/Manager roles see every project member; regular Project Users see only their own row. Expand a row to inspect what is running, or terminate the resources you are allowed to manage. Terminating a workload here releases the quota it was holding.</p>
+<p>For Pod rows, hover, focus, or tap the status badge to see recent events. This is useful when a Pod looks like it is still starting but is really failing to pull its image.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU Quota Overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>
 <p>The Overview tab shows a quota bar for each resource type:</p>
@@ -2027,7 +2024,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 <tbody>
 <tr>
 <td>GPU</td>
-<td>Effective DRA GPU units consumed vs. plan limit</td>
+<td>Effective GPU units consumed vs. plan limit</td>
 </tr>
 <tr>
 <td>CPU</td>
@@ -2048,7 +2045,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 </details>
 <details class="question">
 <summary>How do I view old config file versions?</summary>
-<p>On the <strong>Config</strong> tab, click the clock icon (History) next to any config file to see all past versions with timestamps and SHA-256 hashes.</p>
+<p>On the <strong>Config</strong> tab, click the clock icon (History) next to any config file to see all past versions with their timestamps.</p>
 </details>
 <details class="question">
 <summary>My project quota is 0 GPUs. How do I get more?</summary>
@@ -2056,7 +2053,7 @@ inject arbitrary PVC names into deployed YAML.</p>
 </details>
 <details class="question">
 <summary>What's the difference between a workspace's GPU and a GPU Claim?</summary>
-<p>A workspace launch creates an inline ResourceClaim that lives with the pod. A <strong>GPU Claim</strong> is a standalone ResourceClaim that survives across deployments — useful when several jobs need the same fractional GPU and you want to avoid rescheduling churn.</p>
+<p>A workspace reserves its GPU only for as long as the workspace exists. A <strong>GPU Claim</strong> is a standalone reservation that survives across deployments — useful when several jobs need the same fractional GPU and you want to avoid rescheduling churn.</p>
 </details>
 <details class="question">
 <summary>Why is the Deploy button disabled?</summary>

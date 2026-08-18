@@ -1423,7 +1423,7 @@
 <li><strong>Linux CLI:</strong> <code>sudo openvpn --config scripts/vpn/Platform-VPN.ovpn</code></li>
 </ul>
 </li>
-<li>When prompted, enter your <strong>LDAP username</strong> and <strong>password</strong> (same credentials you use to sign in).</li>
+<li>When prompted, enter your platform <strong>username</strong> and <strong>password</strong> (the same credentials you use to sign in).</li>
 <li>Wait for the connection to establish — the client shows a green indicator or <code>Initialization Sequence Completed</code>.</li>
 </ol>
 <div class="admonition tip">
@@ -1462,11 +1462,11 @@ connectivity checks.</p>
 <tbody>
 <tr>
 <td><strong>Username</strong></td>
-<td>Your LDAP account username</td>
+<td>Your platform account username</td>
 </tr>
 <tr>
 <td><strong>Password</strong></td>
-<td>Your LDAP account password</td>
+<td>Your platform account password</td>
 </tr>
 <tr>
 <td><strong>CAPTCHA</strong></td>
@@ -1479,20 +1479,6 @@ connectivity checks.</p>
 </ol>
 <p><img alt="Sign-in page" src="../../assets/screenshots/signin-form.png" />
 <em>Figure 1: Login page with username, password, and CAPTCHA fields.</em></p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant User
-    participant Browser
-    participant Gateway
-    participant Backend
-    participant LDAP
-
-    User-&gt;&gt;Browser: Enter credentials + CAPTCHA
-    Browser-&gt;&gt;Gateway: POST /api/v1/login
-    Gateway-&gt;&gt;Backend: Forward request
-    Backend-&gt;&gt;LDAP: Bind with user DN + password
-    LDAP--&gt;&gt;Backend: Bind success
-    Backend--&gt;&gt;Browser: JWT token + user profile
-    Browser--&gt;&gt;User: Redirect to Home Dashboard</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">CAPTCHA tips</p>
 <ul>
@@ -1513,11 +1499,11 @@ connectivity checks.</p>
 <tbody>
 <tr>
 <td><strong>GPU Availability</strong></td>
-<td>Free vs. allocated DRA GPU units across the cluster</td>
+<td>Free vs. allocated GPU units across the cluster</td>
 </tr>
 <tr>
 <td><strong>GPU Cluster Status</strong></td>
-<td>De-identified GPU node cards with MPS allocation totals and per-device SM status</td>
+<td>Anonymised GPU machine cards showing how much of each GPU is in use</td>
 </tr>
 <tr>
 <td><strong>Project Summary</strong></td>
@@ -1616,8 +1602,8 @@ connectivity checks.</p>
 <h2 id="step-7-deploy-a-container">Step 7 — Deploy a Container<a class="headerlink" href="#step-7-deploy-a-container" title="Permanent link">&para;</a></h2>
 <p>A <strong>workspace</strong> gives you an interactive IDE. When you instead want to run your own
 container image — a long-running service or a batch job — <strong>deploy a container</strong>
-from a project <strong>config file</strong>. The platform accepts standard Kubernetes <code>Pod</code>,
-<code>Deployment</code>, and <code>Job</code> manifests.</p>
+from a project <strong>config file</strong>. Config files can define <code>Pod</code>, <code>Deployment</code>, and
+<code>Job</code> workloads.</p>
 <div class="admonition info">
 <p class="admonition-title">Requires Project Manager role</p>
 <p>Creating and deploying config files needs the <strong>Manager</strong> role or higher. You
@@ -1626,7 +1612,7 @@ project manager.</p>
 </div>
 <ol>
 <li>Go to <strong>Projects → [your project] → Config</strong> tab.</li>
-<li>Click <strong>+ New Config</strong>. Paste a Kubernetes YAML manifest, or use the built-in
+<li>Click <strong>+ New Config</strong>. Paste a YAML manifest, or use the built-in
    <strong>Resource Wizard</strong> to fill in the fields without hand-writing YAML.</li>
 <li>
 <p>Define your container:</p>
@@ -1648,7 +1634,7 @@ project manager.</p>
 </tr>
 <tr>
 <td><strong>GPU</strong> <em>(optional)</em></td>
-<td>Add a DRA GPU request such as <code>nvidia.com/gpu-0: "1"</code>, or map a reusable GPU claim</td>
+<td>Add a GPU request such as <code>nvidia.com/rtx6000: "1"</code>, or map a reusable GPU claim</td>
 </tr>
 <tr>
 <td><strong>Storage</strong> <em>(optional)</em></td>
@@ -1681,11 +1667,11 @@ project manager.</p>
 <li>Every container must set <strong>both</strong> <code>resources.requests.memory</code> and
   <code>resources.limits.memory</code> (≥ <code>128Mi</code>); missing values are rejected.</li>
 <li>The image must be on the platform <strong>allowlist</strong> — submit an image request first if it is not.</li>
-<li>Do not set <code>metadata.namespace</code>; the platform assigns it for you.</li>
+<li>Do not set <code>metadata.namespace</code>; the platform fills it in for you.</li>
 <li>Deploying needs the <strong>Manager</strong> role and enough remaining project <strong>quota</strong>.</li>
 </ul>
 </div>
-<p>For config-file versioning, DRA GPU requests, and reusable GPU claims in depth, see
+<p>For config-file versioning, GPU requests, and reusable GPU claims in depth, see
 <a href="../projects/#config-file-versioning">Projects → Config File Versioning</a>.</p>
 <hr />
 <h2 id="step-8-manage-your-storage">Step 8 — Manage Your Storage<a class="headerlink" href="#step-8-manage-your-storage" title="Permanent link">&para;</a></h2>
@@ -1707,7 +1693,7 @@ project manager.</p>
 </ol>
 <hr />
 <h2 id="service-quick-reference">Service Quick Reference<a class="headerlink" href="#service-quick-reference" title="Permanent link">&para;</a></h2>
-<p>Regular users should use only the platform dashboard. The API and service hostnames are routed through the gateway and are reserved for the dashboard, CLI, integrations, or administrators.</p>
+<p>Regular users only need the platform dashboard. Other service hostnames are reserved for the CLI, integrations, and administrators.</p>
 <table>
 <thead>
 <tr>
@@ -1736,7 +1722,7 @@ project manager.</p>
 </details>
 <details class="question">
 <summary>Login fails with 'Invalid credentials'</summary>
-<p>Verify you are using your <strong>LDAP username</strong> (not email). If your password was recently changed in the LDAP directory, the old password is invalidated immediately.</p>
+<p>Verify you are using your <strong>username</strong>, not your email address. If your password was changed recently, the old one stops working immediately.</p>
 </details>
 <details class="question">
 <summary>Workspace stuck in 'Starting' state</summary>
@@ -1744,7 +1730,7 @@ project manager.</p>
 </details>
 <details class="question">
 <summary>Session expired — redirected to login</summary>
-<p>JWT tokens expire after a configurable period. Simply sign in again. Your workspace state is preserved.</p>
+<p>Sessions expire after a while. Simply sign in again — your workspaces keep running in the meantime.</p>
 </details>
 
 

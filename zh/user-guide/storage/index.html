@@ -1312,16 +1312,16 @@
 
 
 <h1 id="_1">儲存空間<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>儲存空間（Persistent Volume Claims，PVC）為您的程式碼、資料集和模型提供持久化的磁碟空間。寫入<em>已掛載磁碟區內</em>的內容不受工作區生命週期影響，工作區停止或刪除後依然保留。</p>
+<p>儲存空間為您的程式碼、資料集和模型提供持久化的磁碟空間。寫入<em>已掛載磁碟區內</em>的內容不受工作區生命週期影響，工作區停止或刪除後依然保留。</p>
 <div class="admonition warning">
 <p class="admonition-title">沒有掛載任何儲存空間的工作區不會保留檔案</p>
-<p>個人儲存掛載於 <code>/home/&lt;您的帳號&gt;</code>，每個群組磁碟區掛載於 <code>/mnt/shared/&lt;磁碟區名稱&gt;</code>。寫在其他位置的檔案只存在於工作區容器中，工作區停止或刪除、達到執行時間上限、被閒置回收機制移除，以及容器重啟時，這些檔案都會消失。若您既沒有個人儲存也沒有掛載群組磁碟區，所有存檔都不會保留 —— 平台會在啟動這類工作區前提出警告。</p>
+<p>個人儲存掛載於 <code>/home/&lt;您的帳號&gt;</code>，每個群組磁碟區掛載於 <code>/mnt/shared/&lt;磁碟區名稱&gt;</code>。寫在其他位置的檔案，只要工作區停止、重啟或刪除就會消失。若您完全沒有掛載任何磁碟區，所有存檔都不會保留 —— 平台會在啟動這類工作區前提出警告。</p>
 </div>
 <p><strong>適用對象：</strong> 個人儲存由管理員配置，因此並非每個帳號都有 —— 請至「儲存空間 → 個人」分頁確認，若沒有請聯繫管理員初始化。群組儲存則由群組管理員管理存取權限。</p>
 <hr />
 <h2 id="_2">儲存類型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph LR
-    A[個人儲存] --&gt;|掛載到| C[工作區 Pod]
+    A[個人儲存] --&gt;|掛載到| C[工作區]
     B[群組儲存] --&gt;|掛載到| C
     A --- D["僅自己可用"]
     B --- E["群組成員共用"]</code></pre>
@@ -1355,12 +1355,12 @@
 <em>圖 1：儲存列表頁面，分別顯示個人儲存和群組儲存及其使用量。</em></p>
 <p>導航至左側選單的 <strong>儲存</strong>，您將看到：</p>
 <ul>
-<li><strong>個人</strong> 標籤 — 您的個人 PVC（通常在帳號建立時自動配置）</li>
-<li><strong>群組</strong> 標籤 — 您所屬群組的共用 PVC</li>
+<li><strong>個人</strong> 標籤 — 您的個人儲存空間</li>
+<li><strong>群組</strong> 標籤 — 您所屬群組的共用儲存空間</li>
 </ul>
 <p>每一列顯示：</p>
 <ul>
-<li>PVC 名稱</li>
+<li>名稱</li>
 <li>已使用 / 總容量（如：12 GiB / 50 GiB）</li>
 <li>狀態（已綁定 / 待處理）</li>
 <li>關聯的群組（群組儲存）或「個人」標記</li>
@@ -1369,36 +1369,36 @@
 <h2 id="_4">瀏覽檔案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><img alt="檔案瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 2：內建檔案瀏覽器，支援上傳、下載和刪除操作。</em></p>
-<p>點擊 PVC 名稱可開啟內建檔案瀏覽器：</p>
+<p>點擊儲存空間名稱可開啟內建檔案瀏覽器：</p>
 <ul>
-<li><strong>上傳</strong> — 從本機上傳檔案到 PVC</li>
+<li><strong>上傳</strong> — 從本機上傳檔案</li>
 <li><strong>下載</strong> — 將檔案下載到本機</li>
 <li><strong>建立資料夾</strong> — 建立新的子目錄</li>
 <li><strong>刪除</strong> — 刪除檔案或資料夾（不可復原）</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">大型上傳</p>
-<p>對於超過 500 MB 的檔案，建議在工作區中使用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 直接下載，而非透過瀏覽器上傳。瀏覽器上傳受到 Nginx 請求體大小限制和瀏覽器超時的限制。</p>
+<p>對於超過 500 MB 的檔案，建議在工作區中使用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 直接下載，而非透過瀏覽器上傳——瀏覽器上傳有大小與逾時限制。</p>
 </div>
 <hr />
 <h2 id="_5">在工作區中掛載儲存<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>啟動工作區時，使用儲存選擇器選取一個或多個 PVC：</p>
+<p>啟動工作區時，使用儲存選擇器選取一個或多個儲存空間：</p>
 <ol>
 <li>在「新增工作區」表單中，展開 <strong>儲存</strong> 區塊。</li>
 <li>點擊 <strong>+ 新增掛載</strong>。</li>
-<li>選擇一個 PVC（個人或群組皆可）。</li>
+<li>選擇一個儲存空間（個人或群組皆可）。</li>
 <li>設定 <strong>掛載路徑</strong>（如 <code>/data</code>、<code>/shared</code>）。</li>
 <li>如有需要，重複步驟新增更多掛載。</li>
 </ol>
 <p>在工作區中，掛載路徑的表現就像一般的目錄。</p>
 <hr />
 <h2 id="profile">儲存 Profile 與通道<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h2>
-<p>群組儲存由<strong>平台管理員</strong>建立 —— <strong>建立存儲</strong> 按鈕需要 <code>storage.manage</code> 權限，群組管理員的角色並不包含它，請透過 <a href="../requests/">申請</a> 提出。建立時管理員會選擇一個 <strong>Storage Profile</strong>，背後對應到具體的 storage class 與 <em>lane</em>。每個 lane 針對不同的工作型態調校。</p>
+<p>群組儲存由<strong>平台管理員</strong>建立，群組管理員本身沒有這個權限，請透過 <a href="../requests/">申請</a> 提出。建立時管理員會選擇一個 <strong>Storage Profile</strong>，每個 profile 對應一種 <em>lane</em>，針對不同的工作型態調校。</p>
 <table>
 <thead>
 <tr>
 <th>Profile</th>
-<th>後端</th>
+<th>儲存類型</th>
 <th>Lane</th>
 <th>適用情境</th>
 </tr>
@@ -1406,21 +1406,21 @@
 <tbody>
 <tr>
 <td><strong>CephFS RWX</strong></td>
-<td>CephFS on the Ceph cluster</td>
+<td>共享叢集檔案系統</td>
 <td><code>shared-rwx</code></td>
-<td>多節點共享的家目錄、資料集與 checkpoint（唯一的跨 namespace 共享 lane）</td>
+<td>多台機器同時要看到的家目錄、資料集與 checkpoint——唯一可跨專案共享的 lane</td>
 </tr>
 <tr>
 <td><strong>Node-local Scratch</strong></td>
-<td>節點本地目錄（local-path）</td>
+<td>執行工作的機器本機磁碟</td>
 <td><code>local-scratch</code></td>
-<td>單一工作的熱 <code>/scratch</code>——hostPath 等級速度；<strong>ephemeral</strong>：節點故障或刪除 PVC 即消失</td>
+<td>單一工作的高速 <code>/scratch</code>；<strong>用完即消失</strong>：機器故障或刪除後資料不保留</td>
 </tr>
 <tr>
 <td><strong>Longhorn (Fast RWO)</strong></td>
-<td>Longhorn 區塊儲存（節點本地）</td>
+<td>高速區塊儲存</td>
 <td><code>fast-rwo</code></td>
-<td>需要撐過 pod 重啟的節點本地 scratch</td>
+<td>需要撐過工作重啟的高速暫存空間</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -1457,14 +1457,14 @@
 <tr>
 <td><code>/scratch</code></td>
 <td>節點本地 scratch（<code>local-scratch</code>）</td>
-<td>單一工作期間的熱資料——hostPath 速度、ephemeral</td>
+<td>單一工作期間的高速暫存資料，用完即消失</td>
 </tr>
 </tbody>
 </table>
-<p>訓練結束後再把 final artifacts 從 scratch 同步回 CephFS。這樣可利用節點本機快取提升重複讀取，同時降低共享寫入壓力。</p>
+<p>訓練結束後再把最終成果從 scratch 同步回 CephFS。這樣重複讀取仍然很快，也不會對共享檔案系統造成大量寫入。</p>
 <hr />
 <h2 id="fast-stage">Fast-Stage 快取<a class="headerlink" href="#fast-stage" title="Permanent link">&para;</a></h2>
-<p>Fast-stage 把資料從群組 RWX 磁區暫存到專案本機的 <strong>Fast RWO</strong> PVC，讓單一訓練 job 能以節點本機速度讀取，不必直接打共享檔案系統。</p>
+<p>Fast-stage 把資料從群組共享磁區複製到專案本機的 <strong>Fast RWO</strong> 磁區，讓單一訓練工作能以本機速度讀取，不必經過共享檔案系統。</p>
 <ol>
 <li>在專案的 <strong>儲存</strong> 標籤中，點擊已綁定 RWX 磁區旁的 <strong>Data Path</strong>。</li>
 <li>在彈出視窗中選 <strong>Fast-stage Cache</strong>。</li>
@@ -1479,16 +1479,16 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>目標 Namespace</strong></td>
-<td>建立 fast PVC 的位置（預設為您的專案 namespace）</td>
+<td><strong>目標專案</strong></td>
+<td>建立高速磁區的位置（預設為您目前的專案）</td>
 </tr>
 <tr>
-<td><strong>Fast PVC 名稱</strong></td>
-<td>DNS-safe 名稱，預設為 <code>fast-&lt;source-pvc&gt;</code></td>
+<td><strong>高速磁區名稱</strong></td>
+<td>預設為 <code>fast-&lt;來源磁區&gt;</code>，僅限英數字與連字號</td>
 </tr>
 <tr>
 <td><strong>Fast 容量（Gi）</strong></td>
-<td>不可小於原始 PVC 容量</td>
+<td>不可小於原始磁區容量</td>
 </tr>
 <tr>
 <td><strong>Checksum 模式</strong></td>
@@ -1497,11 +1497,11 @@
 </tbody>
 </table>
 <ol>
-<li>點擊 <strong>Start Fast Stage</strong>，平台會啟動一次性 Job 完成複製並回報狀態。Transfer 需要有效的專案 plan，會 request/limit <code>500m</code> CPU 與 <code>512Mi</code> memory，且會在建立前檢查有效專案 plan 配額。</li>
+<li>點擊 <strong>Start Fast Stage</strong>，平台會啟動一次性 Job 完成複製並回報狀態。這項作業需要有效的專案計畫，以及少量的 CPU 與記憶體配額。</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">把成果同步回去</p>
-<p>Fast-stage 設計成熱讀快取。訓練結束後請把最終 artifact 寫回共享 RWX 磁區——fast PVC 是專案私有的，群組其他成員看不到。</p>
+<p>Fast-stage 是讀取用的快取。訓練結束後請把最終成果寫回共享 RWX 磁區——高速磁區是專案私有的，群組其他成員看不到。</p>
 </div>
 <hr />
 <h2 id="_7">權限與存取控制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -1514,20 +1514,20 @@
 </thead>
 <tbody>
 <tr>
-<td>個人 PVC 於自己的工作區</td>
+<td>自己的個人儲存</td>
 <td>完整讀寫權限</td>
 </tr>
 <tr>
-<td>群組 PVC——成員擁有讀寫權限</td>
+<td>群組儲存——成員擁有讀寫權限</td>
 <td>完整讀寫權限</td>
 </tr>
 <tr>
-<td>群組 PVC——成員僅有唯讀權限</td>
+<td>群組儲存——成員僅有唯讀權限</td>
 <td>不允許寫入；<code>touch</code> 或 <code>mkdir</code> 命令會失敗</td>
 </tr>
 <tr>
-<td>其他使用者的個人 PVC</td>
-<td><strong>無法掛載</strong>——PVC 僅對擁有者可見</td>
+<td>其他使用者的個人儲存</td>
+<td><strong>無法掛載</strong>——僅擁有者看得到</td>
 </tr>
 </tbody>
 </table>
@@ -1544,16 +1544,16 @@
 <hr />
 <h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>我的 PVC 顯示已滿，但我找不到大檔案。</summary>
+<summary>我的儲存空間顯示已滿，但我找不到大檔案。</summary>
 <p>使用工作區終端機執行 <code>du -sh /data/*</code> 找出佔用空間的項目。常見原因包括隱藏資料夾（<code>.cache</code>、<code>.local</code>）或大型 Jupyter 檢查點檔案。</p>
 </details>
 <details class="question">
 <summary>刪除工作區後我的資料還在嗎？</summary>
-<p>是的。PVC 獨立於工作區之外。只有明確刪除 PVC 或管理員回收配額時，資料才會丟失。</p>
+<p>是的。儲存空間獨立於工作區之外，只有儲存空間本身被刪除時資料才會消失。</p>
 </details>
 <details class="question">
-<summary>我可以在多個工作區同時掛載同一個 PVC 嗎？</summary>
-<p>可以，前提是底層儲存類別支援 <code>ReadWriteMany</code>（RWX）。大多數叢集配置的 NFS 型 PVC 支援此功能。請查看儲存詳情頁面的存取模式。</p>
+<summary>我可以在多個工作區同時掛載同一個儲存空間嗎？</summary>
+<p>可以，前提是該儲存空間支援多重掛載（RWX）。請查看儲存詳情頁面上的存取模式。</p>
 </details>
 
 

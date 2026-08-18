@@ -1246,7 +1246,7 @@
 
 
 <h1 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">&para;</a></h1>
-<p>Groups represent teams or departments. They provide a shared namespace for storage access and can be added as members to multiple projects.</p>
+<p>Groups represent teams or departments. They provide shared storage access and can be added as members to multiple projects.</p>
 <p><strong>Access:</strong> All users can belong to groups. Group creation is typically done by admins; users can request a group via <a href="../requests/">Requests</a>.</p>
 <hr />
 <h2 id="group-membership-model">Group Membership Model<a class="headerlink" href="#group-membership-model" title="Permanent link">&para;</a></h2>
@@ -1301,15 +1301,15 @@
 <p>Each group card shows:
 - Group name and description
 - Number of members
-- Associated storage PVCs
-- <strong>Storage Policy</strong> and <strong>Registry Policy</strong> badges — assigned by an admin to control which storage classes are available when provisioning a new group PVC and which Harbor namespace receives the group's image builds
+- Associated storage volumes
+- <strong>Storage Policy</strong> and <strong>Registry Policy</strong> badges — set by an admin; they control which storage types are available for new group volumes and where the group's image builds are stored
 - Actions: <strong>View</strong>, <strong>Edit</strong> (admin only), <strong>Delete</strong> (admin only)</p>
 <hr />
 <h2 id="view-a-group">View a Group<a class="headerlink" href="#view-a-group" title="Permanent link">&para;</a></h2>
 <p>Click any group card to open its detail page. The detail page shows:</p>
 <ol>
 <li><strong>Members</strong> tab — all group members with their roles</li>
-<li><strong>Storage</strong> tab — PVCs owned by this group and their permission settings</li>
+<li><strong>Storage</strong> tab — volumes owned by this group and their permission settings</li>
 </ol>
 <hr />
 <h2 id="join-a-group">Join a Group<a class="headerlink" href="#join-a-group" title="Permanent link">&para;</a></h2>
@@ -1333,24 +1333,21 @@
 <p>To add a whole class at once, use <strong>Paste users</strong>: paste the list into the text
 box (separated by newlines, commas, semicolons, or tabs) and click <strong>Resolve
 Users</strong>.</p>
-<p>The results table only shows users who are not already members of the group.
-Search and pagination are calculated by the backend against that addable-user
-set, so moving between pages will not show already-added members or blank pages
-caused by client-side filtering.</p>
+<p>The results table lists only users who are not already members, so paging through
+the results never shows existing members or blank pages.</p>
 <p><img alt="Add members to group" src="../../assets/screenshots/group-add-members.png" />
 <em>Figure 2: Add members dialog with user search and selection.</em></p>
 <hr />
 <h2 id="storage-permission-inheritance">Storage Permission Inheritance<a class="headerlink" href="#storage-permission-inheritance" title="Permanent link">&para;</a></h2>
 <p>Group storage permissions cascade to projects in a dual-path model:</p>
 <pre class="mermaid"><code>flowchart TD
-    GroupAdmin["Group Admin\nsets permissions on group PVC"] --&gt;|batch operation| GroupPVC["Group PVC\npermissions (source of truth)"]
-    GroupPVC --&gt;|inherited, read-only rows| ProjectStoragePage["Project Storage Page\n(group member rows)"]
-    ProjectAdmin["Project Admin\nmanages non-group members"] --&gt;|direct management| DirectRows["Project PVC permissions\n(non-group members only)"]
+    GroupAdmin["Group Admin\nsets permissions on group volume"] --&gt;|batch operation| GroupPVC["Group volume\npermissions (source of truth)"]
+    GroupPVC --&gt;|inherited, read-only rows| ProjectStoragePage["Project Storage page\n(group member rows)"]
+    ProjectAdmin["Project Admin\nmanages non-group members"] --&gt;|direct management| DirectRows["Project volume permissions\n(non-group members only)"]
     DirectRows --&gt; ProjectStoragePage</code></pre>
-<p><strong>Key rule:</strong> If you are a group member, your storage permissions on a project-bound PVC are always determined by the group — they cannot be overridden at the project level. Project-level storage grants are only for direct project members who are not in the source group. The project storage page shows inherited rows as <strong>read-only</strong> with an info badge linking to the group permissions page.</p>
-<p>Group storage permissions apply only to current members of the source group.
-When a user is removed from the group, any stale explicit permission row no
-longer grants effective access.</p>
+<p><strong>Key rule:</strong> If you are a group member, your storage permissions on a project-bound volume always come from the group — they cannot be overridden at the project level. Project-level grants exist only for direct project members who are not in the owning group. Inherited rows appear <strong>read-only</strong> on the project storage page, with a badge linking to the group permissions page.</p>
+<p>Permissions only apply to current group members: leaving the group removes your
+access immediately.</p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
@@ -1359,7 +1356,7 @@ longer grants effective access.</p>
 </details>
 <details class="question">
 <summary>Why are my storage permissions greyed out on the project page?</summary>
-<p>You are a group member of the group that owns this storage. Your permissions are managed at the group level. Navigate to the group's Storage tab to see your effective permissions.</p>
+<p>You are a member of the group that owns this storage, so your permissions are managed at the group level. Open the group's Storage tab to see your effective permissions.</p>
 </details>
 <details class="question">
 <summary>How do I leave a group?</summary>

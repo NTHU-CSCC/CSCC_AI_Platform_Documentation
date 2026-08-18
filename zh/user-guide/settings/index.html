@@ -1354,7 +1354,7 @@
 </ol>
 <div class="admonition info">
 <p class="admonition-title">使用者名稱不可更改</p>
-<p>使用者名稱在註冊時設定，且與 LDAP 身份綁定，無法在此頁面修改。如需更改，請聯繫管理員。</p>
+<p>使用者名稱在帳號建立時決定，無法在此頁面修改。如需更改，請聯繫管理員。</p>
 </div>
 <hr />
 <h2 id="_4">安全性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -1369,8 +1369,8 @@
 <li>點擊 <strong>更新密碼</strong>。</li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">LDAP 同步</p>
-<p>透過此頁面變更密碼時，平台會同時更新 Backend DB 與 LDAP。請勿要求管理員直接修改 DB 密碼雜湊；雜湊無法反向同步至 LDAP。</p>
+<p class="admonition-title">密碼會全平台同步</p>
+<p>在此變更密碼後，所有登入方式（包含 VPN）都會使用新密碼。若您的帳號由外部身分提供者管理，密碼則需要在該處變更。</p>
 </div>
 <hr />
 <h2 id="_6">通知<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -1454,20 +1454,19 @@
 <p>token 預設效期 90 天，每個帳號最多同時保留 20 個有效 token。</p>
 <div class="admonition warning">
 <p class="admonition-title">僅顯示一次</p>
-<p>後端不會儲存 token 明文，只儲存 SHA-256 雜湊。若 token 遺失，請撤銷後重新建立。</p>
+<p>token 明文只會顯示這一次，之後無法再取得。若 token 遺失，請撤銷後重新建立。</p>
 </div>
-<p>官方 <code>cscc-cli</code> release 已內建平台內部 root CA，正常 CLI 設定不需要從設定頁下載憑證。</p>
-<p>CLI 設定指令會優先使用部署提供的 <code>VITE_PUBLIC_API_URL</code> 或 runtime <code>apiUrl</code>。
-若未設定，頁面會把 <code>dashboard.*</code> 主機名稱推導為 <code>api.*</code>，再加上 <code>/api/v1</code>。</p>
+<p>官方 <code>cscc-cli</code> release 已內建平台憑證，正常設定不需要另外下載。
+本頁顯示的設定指令已經指向這套部署正確的 API 位址。</p>
 <hr />
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>我忘記密碼了。</summary>
-<p>點擊登入頁面的「忘記密碼」連結，或請管理員透過平台使用者管理功能重設；平台會同步更新 LDAP。</p>
+<p>點擊登入頁面的「忘記密碼」連結，或請管理員重設；重設後所有登入方式都會使用新密碼。</p>
 </details>
 <details class="question">
 <summary>設定頁面顯示的電子郵件是錯的。</summary>
-<p>如果電子郵件來自 LDAP 同步，您可能無法直接修改。請聯繫管理員更新 LDAP 目錄中的電子郵件欄位。</p>
+<p>若您的電子郵件由帳號目錄管理，就無法在此直接修改，請聯繫管理員更新。</p>
 </details>
 <details class="question">
 <summary>我可以刪除帳號嗎？</summary>
@@ -1475,7 +1474,7 @@
 </details>
 <details class="question">
 <summary>我的 API token 不見了，能找回嗎？</summary>
-<p>無法。後端只保留雜湊值。請在<strong>安全性</strong>標籤撤銷遺失的 token，並建立新的。</p>
+<p>無法。token 明文只在建立時顯示一次。請在<strong>安全性</strong>標籤撤銷遺失的 token，並建立新的。</p>
 </details>
 
 

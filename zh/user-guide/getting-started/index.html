@@ -1423,7 +1423,7 @@
 <li><strong>Linux CLI：</strong> <code>sudo openvpn --config scripts/vpn/Platform-VPN.ovpn</code></li>
 </ul>
 </li>
-<li>出現提示時，輸入您的 <strong>LDAP 使用者名稱</strong> 和 <strong>密碼</strong>（與登入平台的帳密相同）。</li>
+<li>出現提示時，輸入您的平台 <strong>使用者名稱</strong> 和 <strong>密碼</strong>（與登入平台的帳密相同）。</li>
 <li>等待連線建立——用戶端顯示綠色指示燈或 <code>Initialization Sequence Completed</code>。</li>
 </ol>
 <div class="admonition tip">
@@ -1462,11 +1462,11 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <tbody>
 <tr>
 <td><strong>使用者名稱</strong></td>
-<td>您的 LDAP 帳號</td>
+<td>您的平台帳號</td>
 </tr>
 <tr>
 <td><strong>密碼</strong></td>
-<td>您的 LDAP 密碼</td>
+<td>您的平台密碼</td>
 </tr>
 <tr>
 <td><strong>驗證碼</strong></td>
@@ -1479,20 +1479,6 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </ol>
 <p><img alt="登入頁面" src="../../../assets/screenshots/signin-form.png" />
 <em>圖 1：包含使用者名稱、密碼和驗證碼欄位的登入頁面。</em></p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant 使用者
-    participant 瀏覽器
-    participant 閘道
-    participant 後端
-    participant LDAP
-
-    使用者-&gt;&gt;瀏覽器: 輸入帳密 + 驗證碼
-    瀏覽器-&gt;&gt;閘道: POST /api/v1/login
-    閘道-&gt;&gt;後端: 轉發請求
-    後端-&gt;&gt;LDAP: 以使用者 DN + 密碼繫結
-    LDAP--&gt;&gt;後端: 繫結成功
-    後端--&gt;&gt;瀏覽器: JWT 權杖 + 使用者資料
-    瀏覽器--&gt;&gt;使用者: 跳轉至首頁儀表板</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">驗證碼提示</p>
 <ul>
@@ -1513,7 +1499,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <tbody>
 <tr>
 <td><strong>GPU 可用性</strong></td>
-<td>叢集中可用與已分配的 DRA GPU 單位</td>
+<td>叢集中可用與已分配的 GPU 單位</td>
 </tr>
 <tr>
 <td><strong>專案摘要</strong></td>
@@ -1612,7 +1598,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <h2 id="7">步驟 7 — 部署一個容器<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <p><strong>工作區</strong> 提供互動式 IDE；當您想改為執行自己的容器映像檔——長時間運行的服務或
 批次任務——則從專案的 <strong>設定檔（Config）</strong> 來 <strong>部署容器</strong>。平台接受標準的
-Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資源。</p>
+<code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 工作負載。</p>
 <div class="admonition info">
 <p class="admonition-title">需要專案管理者（Manager）角色</p>
 <p>建立與部署設定檔需要 <strong>Manager</strong> 或更高的角色。您在 <strong>個人專案</strong> 中本來就具備此
@@ -1620,7 +1606,7 @@ Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資�
 </div>
 <ol>
 <li>前往 <strong>專案 → [您的專案] → Config 分頁</strong>。</li>
-<li>點擊 <strong>+ 新增設定檔</strong>。貼上 Kubernetes YAML，或使用內建的 <strong>資源精靈
+<li>點擊 <strong>+ 新增設定檔</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
    （Resource Wizard）</strong> 直接填欄位，不必手寫 YAML。</li>
 <li>
 <p>定義您的容器：</p>
@@ -1642,7 +1628,7 @@ Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資�
 </tr>
 <tr>
 <td><strong>GPU</strong>（選用）</td>
-<td>加入 DRA GPU 請求，例如 <code>nvidia.com/gpu-0: "1"</code>，或對應可重用的 GPU 宣告</td>
+<td>加入 GPU 請求，例如 <code>nvidia.com/rtx6000: "1"</code>，或對應可重用的 GPU claim</td>
 </tr>
 <tr>
 <td><strong>儲存</strong>（選用）</td>
@@ -1674,11 +1660,11 @@ Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資�
 <li>每個容器都必須同時設定 <code>resources.requests.memory</code> 與
   <code>resources.limits.memory</code>（≥ <code>128Mi</code>），缺一即被拒絕。</li>
 <li>映像檔必須在平台 <strong>允許清單</strong> 中——若尚未加入，請先提出映像申請。</li>
-<li>不要設定 <code>metadata.namespace</code>，平台會自動指派。</li>
+<li>不要設定 <code>metadata.namespace</code>，平台會自動填入。</li>
 <li>部署需要 <strong>Manager</strong> 角色與足夠的專案 <strong>配額</strong>。</li>
 </ul>
 </div>
-<p>若需設定檔版本控制、DRA GPU 請求與可重用 GPU 宣告的完整說明，請見
+<p>若需設定檔版本控制、GPU 請求與可重用 GPU claim 的完整說明，請見
 <a href="../projects/">專案 → 設定檔版本控制</a>。</p>
 <hr />
 <h2 id="8">步驟 8 — 管理您的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
@@ -1729,7 +1715,7 @@ Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資�
 </details>
 <details class="question">
 <summary>登入失敗，顯示「帳密錯誤」</summary>
-<p>確認您使用的是 <strong>LDAP 使用者名稱</strong>（非電子郵件）。若密碼最近在 LDAP 目錄中被變更，舊密碼會立即失效。</p>
+<p>確認您使用的是 <strong>使用者名稱</strong>（非電子郵件）。若密碼最近被變更，舊密碼會立即失效。</p>
 </details>
 <details class="question">
 <summary>工作區停留在「啟動中」狀態</summary>
@@ -1737,7 +1723,7 @@ Kubernetes <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 資�
 </details>
 <details class="question">
 <summary>工作階段過期——被導向登入頁</summary>
-<p>JWT 權杖會在設定的時間後過期。重新登入即可。您的工作區狀態會保留。</p>
+<p>登入狀態會在一段時間後過期，重新登入即可，期間工作區會持續運行。</p>
 </details>
 
 

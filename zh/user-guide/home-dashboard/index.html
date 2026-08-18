@@ -1341,8 +1341,8 @@
 <li>點擊卡片可導覽至管理監控頁面（僅限管理員）查看各節點細節。</li>
 </ol>
 <div class="admonition info">
-<p class="admonition-title">DRA 有效 GPU 單位</p>
-<p>卡片會依 DRA 標籤與 live ResourceClaim binding 顯示有效 GPU 單位。例如 1 張 GPU 搭配 50% SM，只有在 DRA 綁定到 live Pod 時才會在配額與可用性檢視中計為 0.5 GPU。</p>
+<p class="admonition-title">有效 GPU 單位</p>
+<p>卡片顯示的是「有效」GPU 單位，而不是整張卡。例如 1 張 GPU 搭配 50% SM 算 0.5 GPU，而且只有在實際有工作負載掛上去時才會計入。</p>
 </div>
 <hr />
 <h2 id="gpu_1">各節點 GPU 配置狀態<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
@@ -1354,7 +1354,7 @@
 <li>該節點的 GPU 總數</li>
 </ul>
 <p>送出工作前先看這個網格，可以快速判斷哪些型號還有空、或確認某節點是否還有容量接受 fractional claim。
-Home Dashboard 不會顯示真實 Kubernetes 節點名稱、GPU UUID、namespace、其他使用者名稱、Pod 名稱或 Job ID；管理員可在 Admin 視圖查看完整細節。</p>
+為保護隱私，Home Dashboard 不會顯示其他使用者的名稱，也不會顯示他們工作負載的名稱。</p>
 <hr />
 <h2 id="_4">資源使用圖表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>圖表顯示您所屬所有專案的使用量。</p>
@@ -1420,7 +1420,7 @@ Home Dashboard 不會顯示真實 Kubernetes 節點名稱、GPU UUID、namespace
 <h2 id="_6">常見問題<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>為什麼 GPU 可用性卡片顯示為 0？</summary>
-<p>卡片顯示的是 DRA 有效 GPU 可用量。若相容 GPU 或 SM 比例都已分配，會顯示 0。查看活動紀錄——最近完成的工作區可能在一分鐘內釋放容量。</p>
+<p>卡片顯示的是「有效」GPU 可用量。若相容的 GPU 或 SM 比例都已分配完，就會顯示 0。查看活動紀錄——最近完成的工作區可能在一分鐘內釋放容量。</p>
 </details>
 <details class="question">
 <summary>活動紀錄是空的——是否有問題？</summary>

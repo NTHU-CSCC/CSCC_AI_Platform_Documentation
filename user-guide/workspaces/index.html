@@ -967,10 +967,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-allocation-with-dra" class="md-nav__link">
+  <a href="#how-gpus-are-allocated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Allocation with DRA
+        How GPUs Are Allocated
       
     </span>
   </a>
@@ -1304,10 +1304,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-allocation-with-dra" class="md-nav__link">
+  <a href="#how-gpus-are-allocated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Allocation with DRA
+        How GPUs Are Allocated
       
     </span>
   </a>
@@ -1346,7 +1346,7 @@
 
 
 <h1 id="workspaces">Workspaces<a class="headerlink" href="#workspaces" title="Permanent link">&para;</a></h1>
-<p>Workspaces (also called IDEs) are interactive cloud development environments — JupyterLab, VSCode, or custom-image environments — running inside Kubernetes pods backed by GPU resources.</p>
+<p>Workspaces (also called IDEs) are interactive cloud development environments — JupyterLab, VSCode, or custom-image environments — backed by GPU resources.</p>
 <p><strong>Access:</strong> All project members with sufficient project quota.</p>
 <hr />
 <h2 id="workspace-states">Workspace States<a class="headerlink" href="#workspace-states" title="Permanent link">&para;</a></h2>
@@ -1367,27 +1367,17 @@
 <p>The list page shows all your workspaces with:</p>
 <ul>
 <li><strong>Status badge</strong> — Running (green), Starting (yellow), Stopped (grey), Error (red)</li>
-<li><strong>GPU count</strong> — effective GPU units allocated through DRA</li>
+<li><strong>GPU count</strong> — effective GPU units allocated</li>
 <li><strong>Project</strong> — which project the workspace belongs to</li>
 <li><strong>Open</strong> button — appears only when status is Running</li>
 <li><strong>Start / Stop / Delete</strong> action buttons</li>
 </ul>
 <hr />
 <h2 id="launch-a-workspace">Launch a Workspace<a class="headerlink" href="#launch-a-workspace" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>sequenceDiagram
-    participant User
-    participant Dashboard
-    participant API
-    participant K8s
-
-    User-&gt;&gt;Dashboard: Fill launch form (image, GPU, storage)
-    Dashboard-&gt;&gt;API: POST /api/v1/ide
-    API-&gt;&gt;K8s: Create Pod + Service
-    K8s--&gt;&gt;API: Pod scheduled (Starting)
-    Note over K8s: Pod pulls image, starts runtime
-    K8s--&gt;&gt;API: Pod Running
-    API--&gt;&gt;Dashboard: Workspace URL
-    Dashboard--&gt;&gt;User: "Open" button appears</code></pre>
+<pre class="mermaid"><code>flowchart LR
+    Form["Fill the launch form\n(image, GPU, storage)"] --&gt; Starting["Starting\n(image is pulled)"]
+    Starting --&gt; Running["Running"]
+    Running --&gt; Open["Open button appears"]</code></pre>
 <h3 id="step-by-step">Step-by-Step<a class="headerlink" href="#step-by-step" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Click <strong>Workspaces</strong> in the left sidebar.</li>
@@ -1424,7 +1414,7 @@
 </tr>
 <tr>
 <td><strong>GPU Count</strong></td>
-<td>Number of physical GPUs requested through DRA; fractional effective usage comes from SM percentage.</td>
+<td>Number of physical GPUs requested; fractional usage comes from the SM percentage.</td>
 </tr>
 <tr>
 <td><strong>GPU Model</strong></td>
@@ -1432,7 +1422,7 @@
 </tr>
 <tr>
 <td><strong>SM Percentage</strong></td>
-<td>Compute share for DRA GPU allocation — 100% is a full GPU; smaller values count as fractional effective GPU usage.</td>
+<td>Compute share of each GPU — 100% is a full GPU; smaller values count as fractional usage.</td>
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
@@ -1454,16 +1444,16 @@
 <li>When status changes to <strong>Running</strong>, click <strong>Open</strong> to open the IDE in a new browser tab.</li>
 </ol>
 <div class="admonition warning">
-<p class="admonition-title">Idle Reaper</p>
-<p>Workspaces that are idle for an extended period may be automatically stopped by the platform's idle reaper to free GPU resources. You will see an idle warning banner on the workspace list page before this happens.</p>
+<p class="admonition-title">Idle shutdown</p>
+<p>Workspaces left idle for a long time are stopped automatically to free GPUs for others. A warning banner appears on the workspace list page first.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p>The <strong>Root shell</strong> toggle runs the IDE process as UID 0 inside the container. It does not grant privileged pods, host namespaces, unrestricted hostPath access, Kubernetes RBAC, or extra Linux capabilities. If the toggle is disabled, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
+<p>The <strong>Root shell</strong> toggle only makes you <code>root</code> inside your own container — it grants no extra access to the cluster or to other users' data. If the toggle is disabled, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
 </div>
 <hr />
 <h2 id="scheduling-queue-and-priority">Scheduling Queue and Priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>
-<p>Each workspace chooses a <strong>platform scheduling queue</strong>. Queues carry a <strong>priority</strong> value, an optional <strong>preemptible</strong> flag, and an optional <strong>deserved GPU</strong> limit set by an admin. DRA GPU workspaces are scheduled by Kubernetes <code>default-scheduler</code>; the queue is still used by the platform for policy, labels, and preemption decisions.</p>
+<p>Each workspace chooses a <strong>scheduling queue</strong>. Queues carry a <strong>priority</strong> value, an optional <strong>preemptible</strong> flag, and an optional <strong>deserved GPU</strong> limit set by an admin.</p>
 <table>
 <thead>
 <tr>
@@ -1478,7 +1468,7 @@
 </tr>
 <tr>
 <td><strong>Preemptible queue</strong></td>
-<td>Your pod may be evicted to make room for a higher-priority workload. The platform sends a termination signal, then deletes the pod.</td>
+<td>Your workspace may be stopped to make room for a higher-priority workload.</td>
 </tr>
 <tr>
 <td><strong>Default queue</strong></td>
@@ -1486,19 +1476,18 @@
 </tr>
 </tbody>
 </table>
-<p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds an active plan.
-For GPU workspaces, the backend validates the resolved DRA DeviceClass against the plan GPU model allowlist and any queue GPU model policy, including when you leave the model field blank and the platform resolves it from the queue or generic default. If the queue policy cannot be loaded, the workspace is rejected instead of falling back to an unrestricted GPU model.</p>
+<p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds one. GPU workspaces are also checked against the GPU models your plan and queue allow — including when you leave the model field blank and the platform picks one for you.</p>
 <hr />
 <h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>If a project plan defines a weekly or one-off <strong>schedule window</strong>, workspaces in plan-bound queues only run while the window is open.</p>
 <ul>
 <li>The list page shows a live countdown — <em>Plan window closes in HH:MM:SS</em> — when the window is active.</li>
-<li>When the window closes, pods running in plan-bound queues may be evicted by the platform's plan-window reaper. New workspace launches require an open active plan window.</li>
+<li>When the window closes, workspaces running in plan-bound queues may be stopped. Starting a new one requires an open plan window.</li>
 <li>A banner offers a one-click <strong>Switch to Default Queue</strong> action when the window has expired and you want to keep working at lower priority.</li>
 </ul>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to Your Workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
-<p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform proxies your browser session to the pod — no port-forwarding needed.</p>
+<p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform connects your browser straight to the workspace — no extra setup needed.</p>
 <ul>
 <li><strong>JupyterLab</strong>: Opens at <code>/lab</code> — standard Jupyter interface</li>
 <li><strong>VSCode (code-server)</strong>: Opens at <code>/</code> — full VS Code in the browser</li>
@@ -1525,11 +1514,11 @@ For GPU workspaces, the backend validates the resolved DRA DeviceClass against t
 <tbody>
 <tr>
 <td><strong>Stop</strong></td>
-<td>Pod is terminated; PVC data is preserved; workspace can be restarted</td>
+<td>The workspace shuts down; data on mounted storage is preserved; it can be restarted</td>
 </tr>
 <tr>
 <td><strong>Delete</strong></td>
-<td>Pod is permanently deleted; PVC data is preserved (PVC is not deleted); workspace cannot be restarted</td>
+<td>The workspace is removed permanently; data on mounted storage is preserved; it cannot be restarted</td>
 </tr>
 </tbody>
 </table>
@@ -1537,29 +1526,28 @@ For GPU workspaces, the backend validates the resolved DRA DeviceClass against t
 <h2 id="bulk-delete-admin-ide-manager">Bulk Delete (Admin / IDE Manager)<a class="headerlink" href="#bulk-delete-admin-ide-manager" title="Permanent link">&para;</a></h2>
 <p>Users with the <code>IDE_MANAGE</code> permission can select multiple workspaces and delete them in bulk using the <strong>Bulk Delete</strong> toolbar that appears when checkboxes are ticked.</p>
 <hr />
-<h2 id="gpu-allocation-with-dra">GPU Allocation with DRA<a class="headerlink" href="#gpu-allocation-with-dra" title="Permanent link">&para;</a></h2>
-<p>GPU allocation uses Kubernetes Dynamic Resource Allocation (DRA). When you request a GPU model and SM percentage, the platform creates a ResourceClaim for the workspace.</p>
+<h2 id="how-gpus-are-allocated">How GPUs Are Allocated<a class="headerlink" href="#how-gpus-are-allocated" title="Permanent link">&para;</a></h2>
+<p>When you pick a GPU model and SM percentage, the platform reserves that share of a GPU for your workspace.</p>
 <ul>
 <li><strong>GPU Count</strong> is the number of physical GPUs requested.</li>
-<li><strong>SM Percentage</strong> controls the effective share for quota accounting and GPU sharing.</li>
-<li>Workspace quota checks count <code>submitted</code>, <code>waiting_infra</code>, <code>queued</code>, and <code>running</code> jobs as active demand.</li>
-<li>Use <code>nvidia-smi</code> inside your workspace to check visible devices and runtime behavior.</li>
-<li>A running GPU workspace is bound only when the Pod has both platform DRA labels and Kubernetes <code>resourceClaims</code>. Labels alone mean the workspace is visible to platform policy, but no GPU has been attached to the Pod.</li>
+<li><strong>SM Percentage</strong> controls the effective share used for quota accounting and GPU sharing.</li>
+<li>Quota counts every workspace you have asked for, including ones still waiting to start.</li>
+<li>Use <code>nvidia-smi</code> inside your workspace to confirm which devices are visible.</li>
 <li>For exclusive or model-specific access, select 100% SM and a model allowed by your plan, or ask an admin to adjust the plan.</li>
 </ul>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>The Open button doesn't appear even though status is Running.</summary>
-<p>The proxy service may take a few extra seconds to start. Wait 10 seconds and refresh the page. If the issue persists, the pod may be in a crash loop — check with your admin.</p>
+<p>The connection to the workspace may take a few extra seconds to become ready. Wait 10 seconds and refresh the page. If the button still does not appear, the workspace may be restarting repeatedly — check with your admin.</p>
 </details>
 <details class="question">
 <summary>My workspace stopped automatically.</summary>
-<p>The idle reaper stops workspaces that haven't had active kernel/process activity for the configured idle period. Restart the workspace from the list page.</p>
+<p>Workspaces with no activity for the configured idle period are stopped automatically. Restart yours from the list page.</p>
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>
-<p>Click the workspace name to see the error detail. Common causes: image pull failure (image not in allowlist), insufficient quota, unavailable DRA device class, or node scheduling failure. Submit a <a href="../requests/">Request</a> if you need help.</p>
+<p>Click the workspace name to see the error detail. Common causes: the image could not be pulled, not enough quota, or the GPU model you asked for is unavailable. Submit a <a href="../requests/">Request</a> if you need help.</p>
 </details>
 <details class="question">
 <summary>Can I have multiple workspaces running at once?</summary>
@@ -1567,7 +1555,7 @@ For GPU workspaces, the backend validates the resolved DRA DeviceClass against t
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>The plan-window reaper stops pods in plan-bound queues when the schedule closes. Restart it inside the next window, or switch the workspace to the default queue using the banner on the list page.</p>
+<p>Workspaces in plan-bound queues are stopped when the schedule closes. Restart yours inside the next window, or switch it to the default queue using the banner on the list page.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>
