@@ -1583,12 +1583,24 @@ it restores your normal permission.</p>
 <hr />
 <h2 id="common-questions">Common Questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>My PVC shows as Pending. When will it be available?</summary>
+<summary>My storage shows as Pending. When will it be available?</summary>
 <p>Pending means the volume is still being created. This usually takes under a minute. If it stays Pending for more than 5 minutes, contact your admin.</p>
 </details>
 <details class="question">
-<summary>I can see a group PVC but can't browse it.</summary>
+<summary>My storage is full but I can't find any large files.</summary>
+<p>Open a workspace terminal and run <code>du -sh /home/&lt;your username&gt;/*</code>. Hidden folders such as <code>.cache</code> and <code>.local</code>, or large notebook checkpoints, are the usual culprits.</p>
+</details>
+<details class="question">
+<summary>I can see a group volume but can't browse it.</summary>
 <p>You need at least <strong>Read</strong> permission on that volume. Contact your group admin to check your permissions.</p>
+</details>
+<details class="question">
+<summary>Is my data still there after I delete a workspace?</summary>
+<p>Yes. Storage volumes exist independently of workspaces — data is lost only when the volume itself is deleted.</p>
+</details>
+<details class="question">
+<summary>Can I mount the same volume in several workspaces at once?</summary>
+<p>Yes, provided the volume supports multiple mounts (RWX). Check the <strong>Access mode</strong> column on the Storage page.</p>
 </details>
 <details class="question">
 <summary>Files I uploaded via the browser aren't appearing in my workspace.</summary>

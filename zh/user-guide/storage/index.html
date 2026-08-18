@@ -1578,16 +1578,28 @@
 <hr />
 <h2 id="_10">常見問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <details class="question">
+<summary>我的儲存空間顯示 Pending，什麼時候可以用？</summary>
+<p>Pending 代表磁碟空間還在建立中，通常不到一分鐘。若超過 5 分鐘仍是 Pending，請聯繫管理員。</p>
+</details>
+<details class="question">
 <summary>我的儲存空間顯示已滿，但我找不到大檔案。</summary>
-<p>使用工作區終端機執行 <code>du -sh /data/*</code> 找出佔用空間的項目。常見原因包括隱藏資料夾（<code>.cache</code>、<code>.local</code>）或大型 Jupyter 檢查點檔案。</p>
+<p>在工作區終端機執行 <code>du -sh /home/&lt;您的帳號&gt;/*</code>。常見原因是隱藏資料夾（<code>.cache</code>、<code>.local</code>）或大型 notebook 檢查點檔案。</p>
+</details>
+<details class="question">
+<summary>我看得到群組儲存空間，卻無法瀏覽。</summary>
+<p>您至少需要該儲存空間的 <strong>讀取</strong> 權限。請聯繫群組管理員確認您的權限。</p>
 </details>
 <details class="question">
 <summary>刪除工作區後我的資料還在嗎？</summary>
-<p>是的。儲存空間獨立於工作區之外，只有儲存空間本身被刪除時資料才會消失。</p>
+<p>還在。儲存空間獨立於工作區之外，只有儲存空間本身被刪除時資料才會消失。</p>
 </details>
 <details class="question">
 <summary>我可以在多個工作區同時掛載同一個儲存空間嗎？</summary>
-<p>可以，前提是該儲存空間支援多重掛載（RWX）。請查看儲存詳情頁面上的存取模式。</p>
+<p>可以，前提是該儲存空間支援多重掛載（RWX）。請查看儲存頁面上的 <strong>存取模式</strong> 欄位。</p>
+</details>
+<details class="question">
+<summary>我透過瀏覽器上傳的檔案沒有出現在工作區裡。</summary>
+<p>請確認工作區把該儲存空間掛在您預期的路徑上。磁碟空間是在工作區啟動時掛載，但之後上傳的檔案會立即出現，不需要重啟。</p>
 </details>
 
 
