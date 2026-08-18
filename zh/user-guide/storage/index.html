@@ -999,7 +999,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        瀏覽檔案
+        儲存空間的生命週期
       
     </span>
   </a>
@@ -1008,6 +1008,17 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        瀏覽檔案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         在工作區中掛載儲存
@@ -1029,7 +1040,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         模型訓練儲存建議
@@ -1051,7 +1062,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         權限與存取控制
@@ -1062,7 +1073,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         申請額外儲存空間
@@ -1073,7 +1084,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1207,7 +1218,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        瀏覽檔案
+        儲存空間的生命週期
       
     </span>
   </a>
@@ -1216,6 +1227,17 @@
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        瀏覽檔案
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         在工作區中掛載儲存
@@ -1237,7 +1259,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         模型訓練儲存建議
@@ -1259,7 +1281,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         權限與存取控制
@@ -1270,7 +1292,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         申請額外儲存空間
@@ -1281,7 +1303,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1366,7 +1388,18 @@
 <li>關聯的群組（群組儲存）或「個人」標記</li>
 </ul>
 <hr />
-<h2 id="_4">瀏覽檔案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_4">儲存空間的生命週期<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    Request["透過申請表單\n提出儲存需求"] --&gt;|管理員核准| Provisioned["建立儲存空間"]
+    Provisioned --&gt;|綁定到專案| Available["啟動工作區時\n可以選用"]
+    Available --&gt;|工作區掛載| InUse["資料在重啟後\n仍然保留"]
+    InUse --&gt;|管理員刪除| Released["儲存空間移除\n（資料消失）"]</code></pre>
+<div class="admonition danger">
+<p class="admonition-title">刪除儲存空間無法復原</p>
+<p>管理員刪除儲存空間時，裡面的所有資料都會永久消失。在申請移除之前，請務必先備份重要資料。</p>
+</div>
+<hr />
+<h2 id="_5">瀏覽檔案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><img alt="檔案瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 2：內建檔案瀏覽器，支援上傳、下載和刪除操作。</em></p>
 <p>點擊儲存空間名稱可開啟內建檔案瀏覽器：</p>
@@ -1381,7 +1414,7 @@
 <p>對於超過 500 MB 的檔案，建議在工作區中使用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 直接下載，而非透過瀏覽器上傳——瀏覽器上傳有大小與逾時限制。</p>
 </div>
 <hr />
-<h2 id="_5">在工作區中掛載儲存<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">在工作區中掛載儲存<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>啟動工作區時，使用儲存選擇器選取一個或多個儲存空間：</p>
 <ol>
 <li>在「新增工作區」表單中，展開 <strong>儲存</strong> 區塊。</li>
@@ -1432,7 +1465,7 @@
 </table>
 <p>profile 選單會顯示每個選項的可用性與建議用途；不可用的選項會以灰色顯示並列出原因。</p>
 <hr />
-<h2 id="_6">模型訓練儲存建議<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_7">模型訓練儲存建議<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>在 gpu1、gpu2、gpu3 上進行模型訓練時，管理員可為群組配置 <code>cephfs</code>。這是跨節點共享資料集、checkpoint 和最終成果的建議路徑。</p>
 <p>對 checkpoint 密集的訓練，建議使用：</p>
 <table>
@@ -1479,11 +1512,11 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>目標專案</strong></td>
-<td>建立高速磁區的位置（預設為您目前的專案）</td>
+<td><strong>目標 Namespace</strong></td>
+<td>高速磁區要建立在誰的空間下——除非是要幫同事準備，否則選自己</td>
 </tr>
 <tr>
-<td><strong>高速磁區名稱</strong></td>
+<td><strong>Fast PVC 名稱</strong></td>
 <td>預設為 <code>fast-&lt;來源磁區&gt;</code>，僅限英數字與連字號</td>
 </tr>
 <tr>
@@ -1491,8 +1524,8 @@
 <td>不可小於原始磁區容量</td>
 </tr>
 <tr>
-<td><strong>Checksum 模式</strong></td>
-<td>預設 <code>Size + mtime</code>；嚴格驗證可選 <code>SHA-256</code>，或選 <code>None</code> 跳過檢查</td>
+<td><strong>校驗模式</strong></td>
+<td>預設 <code>大小 + 修改時間</code>；嚴格驗證可選 <code>SHA-256</code>，或選 <code>不校驗</code> 跳過檢查</td>
 </tr>
 </tbody>
 </table>
@@ -1504,7 +1537,7 @@
 <p>Fast-stage 是讀取用的快取。訓練結束後請把最終成果寫回共享 RWX 磁區——高速磁區是專案私有的，群組其他成員看不到。</p>
 </div>
 <hr />
-<h2 id="_7">權限與存取控制<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_8">權限與存取控制<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1531,18 +1564,19 @@
 </tr>
 </tbody>
 </table>
-<p>群組管理員在群組詳情的儲存標籤中，為每位成員設定讀寫或唯讀存取權限。</p>
+<p>群組管理員在群組詳情的儲存標籤中，為每位成員設定 <strong>讀取</strong>、<strong>寫入</strong> 或 <strong>無</strong> 權限。</p>
+<p>當群組管理員明確把您在某個儲存空間上的權限設為 <strong>無</strong> 時，這個拒絕會蓋過專案或群組原本會給的權限；把它清除後就會恢復正常權限。</p>
 <hr />
-<h2 id="_8">申請額外儲存空間<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_9">申請額外儲存空間<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>如果您的配額不足：</p>
 <ol>
-<li>前往 <a href="../requests/">申請</a> 頁面。</li>
-<li>選擇 <strong>儲存配額提升</strong> 類型。</li>
-<li>填寫需要的容量和原因。</li>
-<li>提交——管理員將審核您的申請。</li>
+<li>前往 <strong>申請 → + 新增申請</strong>。</li>
+<li>選擇 <strong>Resource</strong> 類型。</li>
+<li>說明您需要的儲存空間（容量、用途、群組名稱）。</li>
+<li>提交——管理員審核後會為您建立。</li>
 </ol>
 <hr />
-<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_10">常見問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>我的儲存空間顯示已滿，但我找不到大檔案。</summary>
 <p>使用工作區終端機執行 <code>du -sh /data/*</code> 找出佔用空間的項目。常見原因包括隱藏資料夾（<code>.cache</code>、<code>.local</code>）或大型 Jupyter 檢查點檔案。</p>

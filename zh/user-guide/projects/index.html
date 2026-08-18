@@ -1608,8 +1608,6 @@
 <h2 id="_2">專案生命週期<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; 活躍 : 建立專案
-    活躍 --&gt; 封存 : 管理員封存
-    封存 --&gt; 活躍 : 管理員恢復
     活躍 --&gt; [*] : 管理員刪除</code></pre>
 <hr />
 <h2 id="_3">專案頁面布局<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -1623,9 +1621,12 @@
 <p>使用工具列右上角的圖示切換檢視模式。</p>
 <hr />
 <h2 id="_4">建立專案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>建立專案需要 <strong>manage-projects</strong> 權限。若您沒有這項權限，<strong>+ 新增專案</strong> 按鈕不會顯示
+（直接開啟建立頁面也會被導回專案列表）——請改為請管理員幫您建立。帳號建立時，
+系統已經自動幫您開好一個個人專案。</p>
 <ol>
 <li>點擊左側選單的 <strong>專案</strong>。</li>
-<li>點擊 <strong>+ 新增專案</strong>（右上角按鈕）。</li>
+<li>點擊 <strong>+ 新增專案</strong>（右上角按鈕；僅在具備 manage-projects 權限時顯示）。</li>
 <li>填寫專案表單：</li>
 </ol>
 <table>
@@ -1641,8 +1642,8 @@
 <td>簡短的英數識別碼（可使用連字號）</td>
 </tr>
 <tr>
-<td><strong>顯示名稱</strong></td>
-<td>介面中顯示的可讀名稱</td>
+<td><strong>群組</strong></td>
+<td>專案所屬的群組（必填）</td>
 </tr>
 <tr>
 <td><strong>描述</strong></td>
@@ -2009,7 +2010,7 @@ Deployment 與 Job 的列上沒有終端按鈕，請展開找到它們建立的 
 <h2 id="_17">常見問題<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>看不到 + 新增專案 按鈕。</summary>
-<p>所有已登入使用者都能看到該按鈕。若未顯示，請嘗試強制重新整理（<code>Ctrl+Shift+R</code>）。若問題持續，請聯繫管理員。</p>
+<p>該按鈕只會顯示給具備 <strong>manage-projects</strong> 權限的使用者。若您沒有這項權限，請請管理員幫您建立專案——您的個人專案在帳號建立時就已自動產生。</p>
 </details>
 <details class="question">
 <summary>如何查看舊版設定檔？</summary>
