@@ -1275,7 +1275,7 @@
 </div>
 <hr />
 <h2 id="l1-1">L1-1 — 部署 Pod<a class="headerlink" href="#l1-1" title="Permanent link">&para;</a></h2>
-<p>最單純的工作負載。Pod 沒有管理者，沒有東西會重建它，名字就是你取的那個。</p>
+<p>最單純的工作負載。Pod 只跑一次，沒有東西會幫你重啟它，名字就是你取的那個。</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../../assets/videos/posters/l1-1-deploy-pod.jpg">
   <source src="../../../assets/videos/l1-1-deploy-pod.mp4" type="video/mp4">
 </video>
@@ -1283,7 +1283,7 @@
 <p><em>0:57．無聲．完整說明見<a href="../../user-guide/projects/">專案</a></em></p>
 <hr />
 <h2 id="l1-2">L1-2 — 部署 Deployment<a class="headerlink" href="#l1-2" title="Permanent link">&para;</a></h2>
-<p><strong>副本數</strong> 決定同時要跑幾個。Pod 名稱會多出兩段亂碼，因為它們是 ReplicaSet 建立的。</p>
+<p><strong>副本數</strong> 決定同時要跑幾個。Pod 名稱會多出兩段亂碼，因為這些副本由平台替你管理。</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../../assets/videos/posters/l1-2-deploy-deployment.jpg">
   <source src="../../../assets/videos/l1-2-deploy-deployment.mp4" type="video/mp4">
 </video>
@@ -1331,7 +1331,7 @@
 <p><em>1:42．無聲．完整說明見<a href="../../user-guide/projects/">專案</a></em></p>
 <hr />
 <h2 id="l5">L5 — 保留 GPU Claim<a class="headerlink" href="#l5" title="Permanent link">&para;</a></h2>
-<p>預先建立 ResourceClaim，部署時再選用。SM % 是切分單張卡的算力，不是要幾張卡。</p>
+<p>預先建立 GPU Claim，部署時再選用。SM % 是切分單張卡的算力，不是要幾張卡。</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../../assets/videos/posters/l5-gpu-claim.jpg">
   <source src="../../../assets/videos/l5-gpu-claim.mp4" type="video/mp4">
 </video>

@@ -803,7 +803,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        排程佇列、優先序與搶佔
+        排程佇列、優先級與搶佔
       
     </span>
   </a>
@@ -814,7 +814,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        計畫窗口
+        計畫時段
       
     </span>
   </a>
@@ -1224,7 +1224,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        排程佇列、優先序與搶佔
+        排程佇列、優先級與搶佔
       
     </span>
   </a>
@@ -1235,7 +1235,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        計畫窗口
+        計畫時段
       
     </span>
   </a>
@@ -1346,17 +1346,10 @@
 
 
 <h1 id="_1">概念與角色<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>瞭解平台的租戶模型和權限系統，有助於您更有效地使用專案、群組和儲存。</p>
+<p>瞭解平台的租戶模型和權限系統，有助於你更有效地使用專案、群組和儲存。</p>
 <hr />
 <h2 id="_2">租戶層級結構<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>平台上的資源以階層方式組織：</p>
-<pre class="mermaid"><code>graph TD
-    Admin[平台管理員] --&gt;|建立| Group[群組\n例如：研究實驗室]
-    Group --&gt;|包含| Project[專案\n例如：LLM 微調]
-    Project --&gt;|啟動| Workspace[工作區 / IDE]
-    Project --&gt;|繫結| ProjStorage[專案儲存空間]
-    Group --&gt;|擁有| GroupStorage[群組儲存空間]
-    GroupStorage --&gt;|繼承至| ProjStorage</code></pre>
+<p>群組包含專案；專案啟動工作區並繫結儲存空間。</p>
 <table>
 <thead>
 <tr>
@@ -1375,7 +1368,7 @@
 </tr>
 <tr>
 <td><strong>工作區</strong></td>
-<td>互動式 IDE（JupyterLab / VSCode），在專案配額內運行。</td>
+<td>互動式 IDE（JupyterLab / VSCode），在專案配額內執行。</td>
 </tr>
 <tr>
 <td><strong>儲存空間</strong></td>
@@ -1385,23 +1378,16 @@
 </table>
 <hr />
 <h2 id="_3">配額生命週期<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    Admin["管理員定義\n資源計畫"] --&gt;|指派給| Project[專案]
-    Project --&gt;|配額強制於| Launch[工作區啟動]
-    Launch --&gt;|保留| Claim["GPU claim"]
-    Launch --&gt;|使用| Queue[排程佇列]
-    Claim --&gt;|配置| GPULimit["GPU / SM 比例"]
-    Queue --&gt;|套用| Priority["優先序 / 搶佔政策"]</code></pre>
-<p>每個專案由管理員指派一個 <strong>資源計畫</strong>。當您啟動工作區時，平台會先檢查專案配額與您的個別配額，再實際保留資源。</p>
+<p>每個專案由管理員指派一個 <strong>資源計畫</strong>。當你啟動工作區時，平台會先檢查專案配額與你的個別配額，再實際保留資源。</p>
 <p>計畫同時帶有：</p>
 <ul>
-<li><strong>允許的 GPU 型號</strong> 清單——啟動表單中只會顯示這些型號。</li>
-<li>選用的 <strong>排程窗口</strong>，限制計畫綁定佇列何時可用（見下方 <em>計畫窗口</em>）。</li>
-<li>一個或多個 <strong>綁定佇列</strong>，附帶優先序、搶佔與 GPU 型號政策。</li>
+<li><strong>允許的 GPU 型號</strong> 清單，啟動表單中只會顯示這些型號。</li>
+<li>選用的 <strong>計畫時段</strong>，限制計畫綁定佇列何時可用（見下方 <em>計畫時段</em>）。</li>
+<li>一個或多個 <strong>綁定佇列</strong>，附帶優先級、搶佔與 GPU 型號政策。</li>
 </ul>
 <hr />
-<h2 id="_4">排程佇列、優先序與搶佔<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>工作負載會選擇一個 <strong>排程佇列</strong>。每個佇列具備優先序、可選的搶佔旗標，以及可選的 <em>deserved GPU</em> 上限：</p>
+<h2 id="_4">排程佇列、優先級與搶佔<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>工作負載會選擇一個 <strong>排程佇列</strong>。每個佇列具備優先級、可選的搶佔旗標，以及可選的 <em>deserved GPU</em> 上限：</p>
 <table>
 <thead>
 <tr>
@@ -1411,12 +1397,12 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>優先序</strong></td>
-<td>當 GPU 緊張時，優先序較高的佇列會先排程。</td>
+<td><strong>優先級</strong></td>
+<td>當 GPU 緊張時，優先級較高的佇列會先排程。</td>
 </tr>
 <tr>
 <td><strong>可被搶佔</strong></td>
-<td>此佇列中的 Pod 可以被驅逐，把 GPU 讓給更高優先序的佇列。</td>
+<td>此佇列中的工作負載可以被停止，把 GPU 讓給更高優先級的佇列。</td>
 </tr>
 <tr>
 <td><strong>Deserved GPU</strong></td>
@@ -1426,23 +1412,23 @@
 </table>
 <p>預設佇列永遠可用；計畫綁定的佇列會與預設佇列並列在工作區及部署表單中。</p>
 <hr />
-<h2 id="_5">計畫窗口<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p><strong>計畫窗口</strong> 是計畫綁定佇列可使用的時間區段。窗口以外，這些佇列不再接受新的工作負載，正在執行的也可能被停止；預設佇列不受影響。</p>
+<h2 id="_5">計畫時段<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><strong>計畫時段</strong> 是計畫綁定佇列可使用的時間區段。窗口以外，這些佇列不再接受新的工作負載，正在執行的也可能被停止；預設佇列不受影響。</p>
 <p>儀表板會顯示距離下個邊界（開啟／關閉）的即時倒數，使用者可以選擇切到預設佇列或等下一個窗口開啟，避免被驅逐。</p>
 <hr />
 <h2 id="gpu-claim">GPU Claim<a class="headerlink" href="#gpu-claim" title="Permanent link">&para;</a></h2>
 <p>平台上的每一份 GPU 都是透過 <strong>claim</strong> 配發的。每個 claim 描述：</p>
 <ul>
 <li><strong>GPU 型號</strong></li>
-<li><strong>SM 比例</strong>——你可以用到該 GPU 多少計算能力</li>
-<li><strong>VRAM 模式</strong>——<code>elastic</code> 與其他工作負載共用顯示記憶體；<code>hard cap</code> 強制使用上限</li>
+<li><strong>SM 比例</strong>，你可以用到該 GPU 多少計算能力</li>
+<li><strong>VRAM 模式</strong>，<code>elastic</code> 與其他工作負載共用顯示記憶體；<code>hard cap</code> 強制使用上限</li>
 </ul>
 <p>claim 有兩種：</p>
 <ul>
-<li><strong>inline claim</strong>——啟動工作區時自動建立，隨該工作區一起消失。</li>
-<li><strong>專案 GPU claim</strong>——從專案的 <em>GPU Claims</em> 標籤建立，可跨多次部署重複使用。它一建立就會保留 GPU 配額，但只有在實際有工作負載掛上去時才累計 GPU-hours。</li>
+<li><strong>inline claim</strong>，啟動工作區時自動建立，隨該工作區一起消失。</li>
+<li><strong>專案 GPU claim</strong>，從專案的 <em>GPU Claims</em> 標籤建立，可跨多次部署重複使用。它一建立就會保留 GPU 配額，但只有在實際有工作負載掛上去時才累計 GPU 時數。</li>
 </ul>
-<p>設定檔會透過具名 slot 參照專案 GPU claim，例如 <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。slot 名稱只是標籤，實際要用哪個 claim 由你在部署對話框指定。Deployment 的所有 replica 共用同一個 claim，也只計算一次；若只有部分 replica 要用 claim，請拆成多個 Deployment。</p>
+<p>專案設定檔會透過具名的 <strong>claim slot</strong>（例如 <code>train-a</code>）參照專案 GPU claim。slot 名稱只是標籤，實際要用哪個 claim 由你在部署對話框指定。Deployment 的所有 replica 共用同一個 claim，也只計算一次；若只有部分 replica 要用 claim，請拆成多個 Deployment。</p>
 <hr />
 <h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -1505,7 +1491,7 @@
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
-<td>RBAC 策略管理</td>
+<td>角色與權限管理</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
@@ -1595,15 +1581,11 @@
 </table>
 <hr />
 <h2 id="_10">儲存權限模型<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<p>儲存權限採用雙路徑繼承模型：</p>
-<pre class="mermaid"><code>flowchart TD
-    GroupAdmin["群組管理員\n設定權限"] --&gt;|批次設定| GroupStorage["群組儲存空間\n（權限來源）"]
-    GroupStorage --&gt;|繼承，唯讀| ProjectView["專案儲存頁面\n群組成員的檢視"]
-    ProjectAdmin["專案管理員"] --&gt;|直接管理| DirectPerms["專案儲存\n非群組成員的權限"]
-    DirectPerms --&gt; ProjectView</code></pre>
+<p>儲存權限有兩條路徑：</p>
 <ul>
-<li><strong>群組成員</strong> 的儲存權限永遠從群組層級繼承，無法在專案層級覆蓋。</li>
-<li><strong>非群組的專案成員</strong> 權限直接在專案層級管理。</li>
+<li>群組儲存權限是權限來源。群組成員永遠繼承群組權限，專案無法覆蓋。</li>
+<li>專案的儲存頁面只會以唯讀方式顯示繼承的權限。</li>
+<li>要變更群組成員的權限，請到群組頁面修改。非群組的專案成員則在專案頁面管理；專案以外的使用者無法取得專案層級的儲存權限。</li>
 </ul>
 <hr />
 <h2 id="_11">關鍵術語<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -1621,19 +1603,19 @@
 </tr>
 <tr>
 <td><strong>排程佇列</strong></td>
-<td>命名的排程政策，控制優先序、搶佔、計畫窗口與選用 GPU 型號親和性</td>
+<td>命名的排程政策，控制優先級、搶佔、計畫時段與選用 GPU 型號親和性</td>
 </tr>
 <tr>
-<td><strong>計畫窗口</strong></td>
+<td><strong>計畫時段</strong></td>
 <td>計畫綁定佇列可使用的時間區段</td>
 </tr>
 <tr>
 <td><strong>搶佔（Preemption）</strong></td>
-<td>停止可被搶佔佇列中的工作，把資源讓給更高優先序的工作</td>
+<td>停止可被搶佔佇列中的工作，把資源讓給更高優先級的工作</td>
 </tr>
 <tr>
 <td><strong>GPU Claim</strong></td>
-<td>GPU 的保留。專案 claim 建立時即保留配額，只有實際有工作負載掛上時才累計 GPU-hours</td>
+<td>GPU 的保留。專案 claim 建立時即保留配額，只有實際有工作負載掛上時才累計 GPU 時數</td>
 </tr>
 <tr>
 <td><strong>設定檔</strong></td>
@@ -1645,11 +1627,7 @@
 </tr>
 <tr>
 <td><strong>資源計畫</strong></td>
-<td>命名範本，定義專案的 GPU、CPU、記憶體上限、允許的 GPU 型號與排程窗口</td>
-</tr>
-<tr>
-<td><strong>儲存通道（Storage Lane）</strong></td>
-<td>決定儲存空間如何建立的 profile（<code>shared-rwx</code>、<code>local-scratch</code>、<code>fast-rwo</code>）</td>
+<td>命名範本，定義專案的 GPU、CPU、記憶體上限、允許的 GPU 型號與計畫時段</td>
 </tr>
 <tr>
 <td><strong>工作區</strong></td>

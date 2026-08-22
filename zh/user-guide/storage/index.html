@@ -988,7 +988,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        儲存列表
+        儲存頁面
       
     </span>
   </a>
@@ -1021,18 +1021,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        在工作區中掛載儲存
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        儲存 Profile 與通道
+        在工作區掛載儲存空間
       
     </span>
   </a>
@@ -1043,18 +1032,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        模型訓練儲存建議
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fast-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fast-Stage 快取
+        權限
       
     </span>
   </a>
@@ -1065,7 +1043,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        權限與存取控制
+        申請更多儲存空間
       
     </span>
   </a>
@@ -1074,17 +1052,6 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        申請額外儲存空間
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1207,7 +1174,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        儲存列表
+        儲存頁面
       
     </span>
   </a>
@@ -1240,18 +1207,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        在工作區中掛載儲存
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#profile" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        儲存 Profile 與通道
+        在工作區掛載儲存空間
       
     </span>
   </a>
@@ -1262,18 +1218,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        模型訓練儲存建議
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fast-stage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fast-Stage 快取
+        權限
       
     </span>
   </a>
@@ -1284,7 +1229,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        權限與存取控制
+        申請更多儲存空間
       
     </span>
   </a>
@@ -1293,17 +1238,6 @@
       
         <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        申請額外儲存空間
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1333,273 +1267,161 @@
   
 
 
-<h1 id="_1">儲存空間<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>儲存空間為您的程式碼、資料集和模型提供持久化的磁碟空間。寫入<em>已掛載磁碟區內</em>的內容不受工作區生命週期影響，工作區停止或刪除後依然保留。</p>
+<h1 id="_1">儲存<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>儲存空間是一個不會跟著工作區消失的資料夾。寫在<em>已掛載儲存空間內</em>的東西，工作區停止或刪除後都還在。</p>
 <div class="admonition warning">
-<p class="admonition-title">沒有掛載任何儲存空間的工作區不會保留檔案</p>
-<p>個人儲存掛載於 <code>/home/&lt;您的帳號&gt;</code>，每個群組磁碟區掛載於 <code>/mnt/shared/&lt;磁碟區名稱&gt;</code>。寫在其他位置的檔案，只要工作區停止、重啟或刪除就會消失。若您完全沒有掛載任何磁碟區，所有存檔都不會保留 —— 平台會在啟動這類工作區前提出警告。</p>
+<p class="admonition-title">沒掛儲存空間的工作區什麼都不會留</p>
+<p>個人儲存掛在 <code>/home/&lt;你的帳號&gt;</code>，每個群組儲存空間掛在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>。寫在其他位置的檔案，工作區停止、重啟或刪除時就沒了。平台在啟動沒有儲存空間的工作區前會警告你。</p>
 </div>
-<p><strong>適用對象：</strong> 個人儲存由管理員配置，因此並非每個帳號都有 —— 請至「儲存空間 → 個人」分頁確認，若沒有請聯繫管理員初始化。群組儲存則由群組管理員管理存取權限。</p>
+<p><strong>適用對象：</strong> 個人儲存由管理員建立，不是每個帳號都有。到 <strong>儲存 → 個人</strong> 確認，沒有就請管理員建立。群組儲存空間的權限由群組管理員管理，只有現任群組成員能擁有權限。</p>
 <hr />
 <h2 id="_2">儲存類型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph LR
-    A[個人儲存] --&gt;|掛載到| C[工作區]
-    B[群組儲存] --&gt;|掛載到| C
-    A --- D["僅自己可用"]
-    B --- E["群組成員共用"]</code></pre>
 <table>
 <thead>
 <tr>
-<th>類型</th>
-<th>擁有者</th>
-<th>存取範圍</th>
-<th>生命週期</th>
+<th></th>
+<th>個人儲存</th>
+<th>群組儲存</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>個人儲存</strong></td>
-<td>您</td>
-<td>僅限您的工作區</td>
-<td>帳號存續期間</td>
+<td><strong>擁有者</strong></td>
+<td>你</td>
+<td>群組</td>
 </tr>
 <tr>
-<td><strong>群組儲存</strong></td>
-<td>群組</td>
-<td>群組所有成員的工作區</td>
-<td>群組存續期間</td>
+<td><strong>由誰建立</strong></td>
+<td>管理員</td>
+<td>管理員，依申請建立</td>
+</tr>
+<tr>
+<td><strong>誰能用</strong></td>
+<td>只有你</td>
+<td>群組成員，依權限</td>
+</tr>
+<tr>
+<td><strong>適合</strong></td>
+<td>你的資料集、notebook、實驗</td>
+<td>共用資料集、團隊協作</td>
+</tr>
+<tr>
+<td><strong>在哪管理</strong></td>
+<td><strong>儲存 → 個人</strong></td>
+<td><strong>儲存 → 群組</strong></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_3">儲存列表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">儲存頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="儲存列表頁面" src="../../../assets/screenshots/storage-list.png" />
-<em>圖 1：儲存列表頁面，分別顯示個人儲存和群組儲存及其使用量。</em></p>
-<p>導航至左側選單的 <strong>儲存</strong>，您將看到：</p>
+<em>圖 1：儲存頁面的個人與群組分頁。</em></p>
 <ul>
-<li><strong>個人</strong> 標籤 — 您的個人儲存空間</li>
-<li><strong>群組</strong> 標籤 — 您所屬群組的共用儲存空間</li>
+<li><strong>個人</strong> — 你自己的儲存空間</li>
+<li><strong>群組</strong> — 你所屬群組的儲存空間</li>
 </ul>
-<p>每一列顯示：</p>
-<ul>
-<li>名稱</li>
-<li>已使用 / 總容量（如：12 GiB / 50 GiB）</li>
-<li>狀態（已綁定 / 待處理）</li>
-<li>關聯的群組（群組儲存）或「個人」標記</li>
-</ul>
+<p>每個儲存空間顯示名稱、容量（例如 <code>50Gi</code>）、狀態（<strong>Available</strong>、<strong>Bound</strong>、<strong>Pending</strong>）和開啟檔案瀏覽器的按鈕。群組管理員另外會看到 <strong>權限</strong>。</p>
 <hr />
 <h2 id="_4">儲存空間的生命週期<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    Request["透過申請表單\n提出儲存需求"] --&gt;|管理員核准| Provisioned["建立儲存空間"]
-    Provisioned --&gt;|綁定到專案| Available["啟動工作區時\n可以選用"]
-    Available --&gt;|工作區掛載| InUse["資料在重啟後\n仍然保留"]
-    InUse --&gt;|管理員刪除| Released["儲存空間移除\n（資料消失）"]</code></pre>
+<ol>
+<li>你在申請頁面提出需求。</li>
+<li>管理員核准並建立儲存空間。</li>
+<li>儲存空間綁定到專案，出現在工作區表單中。</li>
+<li>工作區掛載它，資料在重啟後還在。</li>
+<li>管理員刪除它，儲存空間和資料一起消失。</li>
+</ol>
 <div class="admonition danger">
-<p class="admonition-title">刪除儲存空間無法復原</p>
-<p>管理員刪除儲存空間時，裡面的所有資料都會永久消失。在申請移除之前，請務必先備份重要資料。</p>
+<p class="admonition-title">刪除無法復原</p>
+<p>刪除儲存空間會銷毀裡面所有內容。申請移除前先備份重要資料。</p>
 </div>
 <hr />
 <h2 id="_5">瀏覽檔案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ol>
+<li>在 <strong>儲存 → 個人</strong> 點 <strong>啟動</strong>，等檔案瀏覽器就緒。</li>
+<li>點 <strong>瀏覽</strong>，瀏覽器在新分頁開啟。</li>
+<li>用完點 <strong>停止</strong>。</li>
+</ol>
+<p>群組儲存空間點 <strong>瀏覽檔案</strong>。你在該儲存空間的權限是 <strong>無</strong> 時按鈕不可用。</p>
 <p><img alt="檔案瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
-<em>圖 2：內建檔案瀏覽器，支援上傳、下載和刪除操作。</em></p>
-<p>點擊儲存空間名稱可開啟內建檔案瀏覽器：</p>
-<ul>
-<li><strong>上傳</strong> — 從本機上傳檔案</li>
-<li><strong>下載</strong> — 將檔案下載到本機</li>
-<li><strong>建立資料夾</strong> — 建立新的子目錄</li>
-<li><strong>刪除</strong> — 刪除檔案或資料夾（不可復原）</li>
-</ul>
+<em>圖 2：檔案瀏覽器，可上傳、下載、刪除。</em></p>
+<p>在瀏覽器裡可以切換資料夾、上傳（拖曳或選檔）、下載檔案與資料夾、建立資料夾、刪除。刪除立即生效。</p>
 <div class="admonition warning">
-<p class="admonition-title">大型上傳</p>
-<p>對於超過 500 MB 的檔案，建議在工作區中使用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 直接下載，而非透過瀏覽器上傳——瀏覽器上傳有大小與逾時限制。</p>
+<p class="admonition-title">大檔案</p>
+<p>超過 500 MB 的檔案，請在工作區內用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 下載，不要從瀏覽器上傳；瀏覽器上傳有大小與逾時限制。</p>
 </div>
 <hr />
-<h2 id="_6">在工作區中掛載儲存<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>啟動工作區時，使用儲存選擇器選取一個或多個儲存空間：</p>
+<h2 id="_6">在工作區掛載儲存空間<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
-<li>在「新增工作區」表單中，展開 <strong>儲存</strong> 區塊。</li>
-<li>點擊 <strong>+ 新增掛載</strong>。</li>
-<li>選擇一個儲存空間（個人或群組皆可）。</li>
-<li>設定 <strong>掛載路徑</strong>（如 <code>/data</code>、<code>/shared</code>）。</li>
-<li>如有需要，重複步驟新增更多掛載。</li>
-</ol>
-<p>在工作區中，掛載路徑的表現就像一般的目錄。</p>
-<hr />
-<h2 id="profile">儲存 Profile 與通道<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h2>
-<p>群組儲存由<strong>平台管理員</strong>建立，群組管理員本身沒有這個權限，請透過 <a href="../requests/">申請</a> 提出。建立時管理員會選擇一個 <strong>Storage Profile</strong>，每個 profile 對應一種 <em>lane</em>，針對不同的工作型態調校。</p>
-<table>
-<thead>
-<tr>
-<th>Profile</th>
-<th>儲存類型</th>
-<th>Lane</th>
-<th>適用情境</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>CephFS RWX</strong></td>
-<td>共享叢集檔案系統</td>
-<td><code>shared-rwx</code></td>
-<td>多台機器同時要看到的家目錄、資料集與 checkpoint——唯一可跨專案共享的 lane</td>
-</tr>
-<tr>
-<td><strong>Node-local Scratch</strong></td>
-<td>執行工作的機器本機磁碟</td>
-<td><code>local-scratch</code></td>
-<td>單一工作的高速 <code>/scratch</code>；<strong>用完即消失</strong>：機器故障或刪除後資料不保留</td>
-</tr>
-<tr>
-<td><strong>Longhorn (Fast RWO)</strong></td>
-<td>高速區塊儲存</td>
-<td><code>fast-rwo</code></td>
-<td>需要撐過工作重啟的高速暫存空間</td>
-</tr>
-<tr>
-<td><strong>Default</strong></td>
-<td>叢集預設</td>
-<td>視情況</td>
-<td>由平台依群組策略決定</td>
-</tr>
-</tbody>
-</table>
-<p>profile 選單會顯示每個選項的可用性與建議用途；不可用的選項會以灰色顯示並列出原因。</p>
-<hr />
-<h2 id="_7">模型訓練儲存建議<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>在 gpu1、gpu2、gpu3 上進行模型訓練時，管理員可為群組配置 <code>cephfs</code>。這是跨節點共享資料集、checkpoint 和最終成果的建議路徑。</p>
-<p>對 checkpoint 密集的訓練，建議使用：</p>
-<table>
-<thead>
-<tr>
-<th>路徑</th>
-<th>儲存</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/datasets</code></td>
-<td>CephFS 群組 RWX</td>
-<td>多節點共享的訓練資料</td>
-</tr>
-<tr>
-<td><code>/checkpoints</code></td>
-<td>CephFS 群組 RWX</td>
-<td>可恢復訓練狀態</td>
-</tr>
-<tr>
-<td><code>/scratch</code></td>
-<td>節點本地 scratch（<code>local-scratch</code>）</td>
-<td>單一工作期間的高速暫存資料，用完即消失</td>
-</tr>
-</tbody>
-</table>
-<p>訓練結束後再把最終成果從 scratch 同步回 CephFS。這樣重複讀取仍然很快，也不會對共享檔案系統造成大量寫入。</p>
-<hr />
-<h2 id="fast-stage">Fast-Stage 快取<a class="headerlink" href="#fast-stage" title="Permanent link">&para;</a></h2>
-<p>Fast-stage 把資料從群組共享磁區複製到專案本機的 <strong>Fast RWO</strong> 磁區，讓單一訓練工作能以本機速度讀取，不必經過共享檔案系統。</p>
-<ol>
-<li>在專案的 <strong>儲存</strong> 標籤中，點擊已綁定 RWX 磁區旁的 <strong>Data Path</strong>。</li>
-<li>在彈出視窗中選 <strong>Fast-stage Cache</strong>。</li>
-<li>填寫表單：</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>欄位</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>目標 Namespace</strong></td>
-<td>高速磁區要建立在誰的空間下——除非是要幫同事準備，否則選自己</td>
-</tr>
-<tr>
-<td><strong>Fast PVC 名稱</strong></td>
-<td>預設為 <code>fast-&lt;來源磁區&gt;</code>，僅限英數字與連字號</td>
-</tr>
-<tr>
-<td><strong>Fast 容量（Gi）</strong></td>
-<td>不可小於原始磁區容量</td>
-</tr>
-<tr>
-<td><strong>校驗模式</strong></td>
-<td>預設 <code>大小 + 修改時間</code>；嚴格驗證可選 <code>SHA-256</code>，或選 <code>不校驗</code> 跳過檢查</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>點擊 <strong>Start Fast Stage</strong>，平台會啟動一次性 Job 完成複製並回報狀態。這項作業需要有效的專案計畫，以及少量的 CPU 與記憶體配額。</li>
+<li>在 <strong>新增工作區</strong> 表單展開 <strong>儲存</strong> 區塊。</li>
+<li>點 <strong>+ 新增掛載</strong>。</li>
+<li>選一個儲存空間。</li>
+<li>設定 <strong>掛載路徑</strong>（例如 <code>/data</code>）。</li>
+<li>要掛更多就重複。</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">把成果同步回去</p>
-<p>Fast-stage 是讀取用的快取。訓練結束後請把最終成果寫回共享 RWX 磁區——高速磁區是專案私有的，群組其他成員看不到。</p>
+<p class="admonition-title">掛載路徑固定</p>
+<p>每個工作區都用一樣的掛載路徑，程式才會一直在同一個地方找到資料。</p>
 </div>
 <hr />
-<h2 id="_8">權限與存取控制<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_7">權限<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>群組儲存空間對每位使用者有一個權限：</p>
 <table>
 <thead>
 <tr>
-<th>場景</th>
-<th>行為</th>
+<th>權限</th>
+<th>能做什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>自己的個人儲存</td>
-<td>完整讀寫權限</td>
+<td><strong>讀取</strong></td>
+<td>掛載、讀取</td>
 </tr>
 <tr>
-<td>群組儲存——成員擁有讀寫權限</td>
-<td>完整讀寫權限</td>
+<td><strong>寫入</strong></td>
+<td>掛載、讀取、寫入</td>
 </tr>
 <tr>
-<td>群組儲存——成員僅有唯讀權限</td>
-<td>不允許寫入；<code>touch</code> 或 <code>mkdir</code> 命令會失敗</td>
-</tr>
-<tr>
-<td>其他使用者的個人儲存</td>
-<td><strong>無法掛載</strong>——僅擁有者看得到</td>
+<td><strong>無</strong></td>
+<td>什麼都不能；無法掛載或瀏覽</td>
 </tr>
 </tbody>
 </table>
-<p>群組管理員在群組詳情的儲存標籤中，為每位成員設定 <strong>讀取</strong>、<strong>寫入</strong> 或 <strong>無</strong> 權限。</p>
-<p>當群組管理員明確把您在某個儲存空間上的權限設為 <strong>無</strong> 時，這個拒絕會蓋過專案或群組原本會給的權限；把它清除後就會恢復正常權限。</p>
+<p>群組管理員設的 <strong>無</strong> 會蓋過專案或群組原本給的權限；清除後恢復正常。要改權限找群組管理員。群組管理員可在群組的儲存分頁批次修改（見 <a href="../groups/">群組</a>）。</p>
 <hr />
-<h2 id="_9">申請額外儲存空間<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>如果您的配額不足：</p>
+<h2 id="_8">申請更多儲存空間<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>群組儲存空間由平台管理員建立，群組管理員沒有這個權限。要新的儲存空間或更多容量：</p>
 <ol>
-<li>前往 <strong>申請 → + 新增申請</strong>。</li>
-<li>選擇 <strong>Resource</strong> 類型。</li>
-<li>說明您需要的儲存空間（容量、用途、群組名稱）。</li>
-<li>提交——管理員審核後會為您建立。</li>
+<li>到 <strong>申請 → + 新增申請</strong>。</li>
+<li>類型選 <strong>Resource</strong>。</li>
+<li>寫出需求：容量、用途、群組名稱。</li>
+<li>點 <strong>提交</strong>。管理員審核後建立。</li>
 </ol>
 <hr />
-<h2 id="_10">常見問題<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>我的儲存空間顯示 Pending，什麼時候可以用？</summary>
-<p>Pending 代表磁碟空間還在建立中，通常不到一分鐘。若超過 5 分鐘仍是 Pending，請聯繫管理員。</p>
+<summary>儲存空間顯示 Pending，什麼時候能用？</summary>
+<p>還在建立，通常不到一分鐘。超過 5 分鐘請找管理員。</p>
 </details>
 <details class="question">
-<summary>我的儲存空間顯示已滿，但我找不到大檔案。</summary>
-<p>在工作區終端機執行 <code>du -sh /home/&lt;您的帳號&gt;/*</code>。常見原因是隱藏資料夾（<code>.cache</code>、<code>.local</code>）或大型 notebook 檢查點檔案。</p>
+<summary>儲存空間滿了，但我找不到大檔案。</summary>
+<p>在工作區終端機執行 <code>du -sh /home/&lt;你的帳號&gt;/*</code>。常見原因是隱藏資料夾（<code>.cache</code>、<code>.local</code>）和 notebook 的 checkpoint。</p>
 </details>
 <details class="question">
-<summary>我看得到群組儲存空間，卻無法瀏覽。</summary>
-<p>您至少需要該儲存空間的 <strong>讀取</strong> 權限。請聯繫群組管理員確認您的權限。</p>
+<summary>我看得到群組儲存空間，卻不能瀏覽。</summary>
+<p>你至少需要該儲存空間的 <strong>讀取</strong> 權限。找群組管理員。</p>
 </details>
 <details class="question">
-<summary>刪除工作區後我的資料還在嗎？</summary>
-<p>還在。儲存空間獨立於工作區之外，只有儲存空間本身被刪除時資料才會消失。</p>
+<summary>刪除工作區後資料還在嗎？</summary>
+<p>在。只有儲存空間本身被刪除時資料才會消失。</p>
 </details>
 <details class="question">
-<summary>我可以在多個工作區同時掛載同一個儲存空間嗎？</summary>
-<p>可以，前提是該儲存空間支援多重掛載（RWX）。請查看儲存頁面上的 <strong>存取模式</strong> 欄位。</p>
+<summary>多個工作區可以同時掛同一個儲存空間嗎？</summary>
+<p>可以。個人與群組儲存空間都能同時掛在多個工作區。</p>
 </details>
 <details class="question">
-<summary>我透過瀏覽器上傳的檔案沒有出現在工作區裡。</summary>
-<p>請確認工作區把該儲存空間掛在您預期的路徑上。磁碟空間是在工作區啟動時掛載，但之後上傳的檔案會立即出現，不需要重啟。</p>
+<summary>我在瀏覽器上傳的檔案沒出現在工作區。</summary>
+<p>確認工作區的掛載路徑。儲存空間在啟動時掛載，之後上傳的檔案會立即出現，不用重啟。</p>
 </details>
 
 

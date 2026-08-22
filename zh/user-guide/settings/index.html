@@ -1031,7 +1031,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        標籤頁總覽
+        分頁
       
     </span>
   </a>
@@ -1042,7 +1042,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        個人檔案
+        個人資料
       
     </span>
   </a>
@@ -1066,6 +1066,17 @@
     <span class="md-ellipsis">
       
         變更密碼
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-token-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API token 與 CLI
       
     </span>
   </a>
@@ -1096,34 +1107,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-key-cli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Key &amp; CLI
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="API Key &amp; CLI">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#api-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        已啟用的 API token
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1184,7 +1167,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        標籤頁總覽
+        分頁
       
     </span>
   </a>
@@ -1195,7 +1178,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        個人檔案
+        個人資料
       
     </span>
   </a>
@@ -1219,6 +1202,17 @@
     <span class="md-ellipsis">
       
         變更密碼
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-token-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API token 與 CLI
       
     </span>
   </a>
@@ -1253,34 +1247,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-key-cli" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Key &amp; CLI
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="API Key &amp; CLI">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#api-token" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        已啟用的 API token
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1311,178 +1277,125 @@
   
 
 
-<h1 id="_1">個人設定<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>設定頁面讓您管理個人檔案、安全性和通知偏好。</p>
-<p><strong>適用對象：</strong> 所有使用者。</p>
+<h1 id="_1">設定<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>在設定頁面你可以修改個人資料、變更密碼、管理 CLI 用的 API token、設定通知，以及選擇介面語言。</p>
+<p><strong>適用對象：</strong> 所有已登入的使用者。從左側選單的 <strong>設定</strong>（基礎設施區塊）進入。</p>
 <hr />
-<h2 id="_2">標籤頁總覽<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_2">分頁<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><img alt="設定頁面分頁" src="../../../assets/screenshots/settings-tabs.png" />
+<em>圖 1：設定頁面的個人資料、安全性、通知、偏好設定分頁。</em></p>
 <table>
 <thead>
 <tr>
-<th>標籤頁</th>
-<th>內容</th>
+<th>分頁</th>
+<th>用途</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>個人檔案</strong></td>
-<td>顯示名稱、電子郵件、頭像</td>
+<td><strong>個人資料</strong></td>
+<td>修改全名；查看使用者名稱與電子郵件</td>
 </tr>
 <tr>
 <td><strong>安全性</strong></td>
-<td>密碼變更；管理個人 API token 與 CLI 存取</td>
+<td>變更密碼；建立與撤銷 API token；複製 CLI 設定指令</td>
 </tr>
 <tr>
 <td><strong>通知</strong></td>
-<td>電子郵件和平台內通知開關</td>
+<td>開關通知</td>
 </tr>
 <tr>
 <td><strong>偏好設定</strong></td>
-<td>語言、主題、預設工作區設定</td>
+<td>選擇介面語言</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_3">個人檔案<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="個人檔案頁面" src="../../../assets/screenshots/settings-tabs.png" />
-<em>圖 1：個人檔案標籤頁，可編輯顯示名稱和電子郵件。</em></p>
-<ol>
-<li>前往 <strong>設定 → 個人檔案</strong>。</li>
-<li>編輯您的 <strong>顯示名稱</strong> 或 <strong>電子郵件</strong>。</li>
-<li>點擊頭像區域可上傳新的個人照片（支援 JPG / PNG，最大 2 MB）。</li>
-<li>點擊 <strong>儲存</strong>。</li>
-</ol>
-<div class="admonition info">
-<p class="admonition-title">使用者名稱不可更改</p>
-<p>使用者名稱在帳號建立時決定，無法在此頁面修改。如需更改，請聯繫管理員。</p>
-</div>
+<h2 id="_3">個人資料<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>全名</strong> — 可編輯；顯示在所有出現你名字的地方</li>
+<li><strong>使用者名稱</strong> — 唯讀；你的登入帳號</li>
+<li>
+<p><strong>電子郵件</strong> — 帳號來自帳號目錄時唯讀</p>
+</li>
+<li>
+<p>開啟 <strong>個人資料</strong> 分頁。</p>
+</li>
+<li>修改 <strong>全名</strong>。</li>
+<li>點 <strong>儲存變更</strong>。</li>
+</ul>
 <hr />
 <h2 id="_4">安全性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="安全性頁面" src="../../../assets/screenshots/settings-tabs.png" />
-<em>圖 2：安全性標籤頁，包含密碼變更表單。</em></p>
 <h3 id="_5">變更密碼<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
-<li>前往 <strong>設定 → 安全性</strong>。</li>
+<li>開啟 <strong>安全性</strong> 分頁。</li>
 <li>輸入 <strong>目前密碼</strong>。</li>
-<li>輸入 <strong>新密碼</strong>（至少 8 個字元，包含大小寫字母和數字）。</li>
-<li>確認新密碼。</li>
-<li>點擊 <strong>更新密碼</strong>。</li>
+<li>輸入 <strong>新密碼</strong>（至少 8 個字元）。</li>
+<li>在 <strong>確認密碼</strong> 再輸入一次。</li>
+<li>點 <strong>變更密碼</strong>。</li>
 </ol>
-<div class="admonition note">
-<p class="admonition-title">密碼會全平台同步</p>
-<p>在此變更密碼後，所有登入方式（包含 VPN）都會使用新密碼。若您的帳號由外部身分提供者管理，密碼則需要在該處變更。</p>
+<div class="admonition warning">
+<p class="admonition-title">一組密碼全平台通用</p>
+<p>新密碼適用於所有登入方式，包含 VPN。由外部身分提供者管理的帳號，要到該處變更密碼。</p>
 </div>
+<h3 id="api-token-cli">API token 與 CLI<a class="headerlink" href="#api-token-cli" title="Permanent link">&para;</a></h3>
+<p><strong>安全性</strong> 分頁也是取得 <a href="../cli/"><code>cscc-cli</code></a> 憑證的地方。</p>
+<p>token 表格列出你帳號下每個有效的 token，含 prefix、上次使用時間與到期時間。</p>
+<ul>
+<li><strong>建立 token</strong> — 建立一個 token，可填名稱。完整值只 <strong>顯示一次</strong>，關閉對話框前先複製。對話框同時提供可直接貼上的 <code>cscc-cli login --api-url ... --token cscc_...</code> 指令。</li>
+<li><strong>撤銷</strong> — 讓 token 失效。使用它的 CLI 在下一次呼叫就會失敗。</li>
+</ul>
+<p>token 預設效期 90 天，每個帳號最多 20 個有效 token。</p>
+<div class="admonition warning">
+<p class="admonition-title">只顯示一次</p>
+<p>token 值不會以可讀形式保存。遺失就撤銷並重新建立。</p>
+</div>
+<p>官方 <code>cscc-cli</code> 版本已內建平台憑證，本頁的指令也已指向正確的 API 位址。</p>
 <hr />
 <h2 id="_6">通知<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>這個分頁有兩個開關：</p>
 <table>
 <thead>
 <tr>
-<th>通知類型</th>
-<th>預設</th>
-<th>說明</th>
+<th>開關</th>
+<th>作用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>申請狀態變更</strong></td>
-<td>開啟</td>
-<td>當您的申請被核准、拒絕或有新訊息時通知</td>
+<td><strong>推播通知</strong></td>
+<td>平台內關於你的申請與專案的通知。點 <strong>儲存變更</strong> 後生效。</td>
 </tr>
 <tr>
-<td><strong>工作區狀態</strong></td>
-<td>開啟</td>
-<td>當工作區啟動完成、發生錯誤或被閒置回收時通知</td>
-</tr>
-<tr>
-<td><strong>群組邀請</strong></td>
-<td>開啟</td>
-<td>當您被加入新群組時通知</td>
-</tr>
-<tr>
-<td><strong>系統公告</strong></td>
-<td>開啟</td>
-<td>管理員發布的全平台公告</td>
+<td><strong>電子郵件通知</strong></td>
+<td>目前只顯示、不會儲存；是否寄信取決於平台的郵件設定。</td>
 </tr>
 </tbody>
 </table>
-<p>切換各通知項目的開關以啟用或停用。</p>
 <hr />
 <h2 id="_7">偏好設定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>設定項目</th>
-<th>選項</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>語言</strong></td>
-<td>English / 中文</td>
-<td>介面顯示語言</td>
-</tr>
-<tr>
-<td><strong>主題</strong></td>
-<td>淺色 / 深色 / 跟隨系統</td>
-<td>UI 外觀主題</td>
-</tr>
-<tr>
-<td><strong>預設 GPU 數量</strong></td>
-<td>1-N</td>
-<td>新增工作區時的預設 GPU 數量</td>
-</tr>
-<tr>
-<td><strong>預設映像檔</strong></td>
-<td>下拉選單</td>
-<td>新增工作區時預載的映像檔</td>
-</tr>
-</tbody>
-</table>
-<p>變更偏好設定後會自動儲存，重新整理頁面後即時生效。</p>
-<hr />
-<h2 id="api-key-cli">API Key &amp; CLI<a class="headerlink" href="#api-key-cli" title="Permanent link">&para;</a></h2>
-<p>此面板位於<strong>安全性</strong>標籤內，是 <a href="../cli/"><code>cscc-cli</code></a> 工具的進入點，可管理 CLI 憑證並複製設定指令。</p>
-<h3 id="api-token">已啟用的 API token<a class="headerlink" href="#api-token" title="Permanent link">&para;</a></h3>
-<p>token 列表會顯示您帳號下每個有效的 API token，以及 prefix、上次使用時間與到期時間。在這裡可以：</p>
-<ul>
-<li><strong>建立 token</strong> — 產生新的 token，可填寫名稱。完整 token 值僅 <strong>顯示一次</strong>，請於關閉對話框前複製。</li>
-<li><strong>CLI 匯入</strong> — token 顯示對話框會同時提供可複製的
-  <code>cscc-cli login --api-url ... --token cscc_...</code> 匯入指令。</li>
-<li><strong>撤銷</strong> — 立即作廢任何 token，使用該 token 的 CLI session 在下一次呼叫時就會失效。</li>
-</ul>
-<p>token 預設效期 90 天，每個帳號最多同時保留 20 個有效 token。</p>
-<div class="admonition warning">
-<p class="admonition-title">僅顯示一次</p>
-<p>token 明文只會顯示這一次，之後無法再取得。若 token 遺失，請撤銷後重新建立。</p>
-</div>
-<p>官方 <code>cscc-cli</code> release 已內建平台憑證，正常設定不需要另外下載。
-本頁顯示的設定指令已經指向這套部署正確的 API 位址。</p>
+<p>選擇介面語言（English / 中文）後點 <strong>儲存</strong>，介面立即切換。</p>
 <hr />
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>我無法變更密碼，欄位是灰色的。</summary>
-<p>您的帳號由外部身分提供者管理，密碼需要在該處變更。</p>
+<summary>密碼欄位是灰色的。</summary>
+<p>你的帳號由外部身分提供者管理，請到該處變更密碼。</p>
 </details>
 <details class="question">
 <summary>我忘記密碼了。</summary>
-<p>登入頁沒有自助重設功能，請聯繫平台管理員協助重設；重設後所有登入方式（包含 VPN）都會使用新密碼。</p>
+<p>登入頁沒有自助重設。請管理員協助重設；新密碼適用於所有登入方式，包含 VPN。</p>
 </details>
 <details class="question">
-<summary>設定頁面顯示的電子郵件是錯的。</summary>
-<p>若您的電子郵件由帳號目錄管理，就無法在此直接修改，請聯繫管理員更新。</p>
-</details>
-<details class="question">
-<summary>通知已開啟，但我收不到電子郵件。</summary>
-<p>請先檢查垃圾郵件匣。若仍然沒收到，請聯繫管理員確認郵件寄送是否已設定。</p>
+<summary>電子郵件顯示錯誤。</summary>
+<p>電子郵件來自帳號目錄，請管理員更新。</p>
 </details>
 <details class="question">
 <summary>我可以刪除帳號嗎？</summary>
-<p>帳號刪除需由管理員操作。請提交一筆申請說明您的需求，管理員會先處理資料保留政策再刪除帳號。</p>
+<p>只有管理員可以。送出一筆申請說明你的需求。</p>
 </details>
 <details class="question">
-<summary>我的 API token 不見了，能找回嗎？</summary>
-<p>無法。token 明文只在建立時顯示一次。請在 <strong>安全性</strong> 標籤撤銷遺失的 token，並建立新的。</p>
+<summary>API token 不見了，能找回嗎？</summary>
+<p>不能。到 <strong>安全性</strong> 分頁撤銷它，再建立一個新的。</p>
 </details>
 
 

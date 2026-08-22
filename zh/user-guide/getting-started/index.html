@@ -764,7 +764,7 @@
   <a href="#1-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 1 — 安裝 VPN 用戶端
+        步驟 1 — 安裝 VPN 使用者端
       
     </span>
   </a>
@@ -808,7 +808,7 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 5 — 檢查您的專案
+        步驟 5 — 檢查你的專案
       
     </span>
   </a>
@@ -819,7 +819,7 @@
   <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 6 — 啟動您的第一個工作區
+        步驟 6 — 啟動你的第一個工作區
       
     </span>
   </a>
@@ -841,7 +841,7 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 管理您的儲存
+        步驟 8 — 管理你的儲存
       
     </span>
   </a>
@@ -1218,7 +1218,7 @@
   <a href="#1-vpn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 1 — 安裝 VPN 用戶端
+        步驟 1 — 安裝 VPN 使用者端
       
     </span>
   </a>
@@ -1262,7 +1262,7 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 5 — 檢查您的專案
+        步驟 5 — 檢查你的專案
       
     </span>
   </a>
@@ -1273,7 +1273,7 @@
   <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 6 — 啟動您的第一個工作區
+        步驟 6 — 啟動你的第一個工作區
       
     </span>
   </a>
@@ -1295,7 +1295,7 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 管理您的儲存
+        步驟 8 — 管理你的儲存
       
     </span>
   </a>
@@ -1377,22 +1377,22 @@
 <td>由平台管理員提供的使用者名稱和密碼</td>
 </tr>
 <tr>
-<td><strong>VPN 用戶端</strong></td>
-<td>相容 OpenVPN 的用戶端（參見步驟 1）</td>
+<td><strong>VPN 使用者端</strong></td>
+<td>相容 OpenVPN 的使用者端（參見步驟 1）</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">需要 VPN</p>
-<p>平台運行於私有網路。請先透過 OpenVPN 連線，再使用 <code>cscc.nthu.edu.tw</code> 底下的 DNS 名稱；不要直接瀏覽底層基礎設施網址。</p>
+<p>平台運作於私有網路。請先透過 OpenVPN 連線，再使用 <code>cscc.nthu.edu.tw</code> 底下的 DNS 名稱；不要直接瀏覽底層基礎設施網址。</p>
 </div>
 <hr />
-<h2 id="1-vpn">步驟 1 — 安裝 VPN 用戶端<a class="headerlink" href="#1-vpn" title="Permanent link">&para;</a></h2>
+<h2 id="1-vpn">步驟 1 — 安裝 VPN 使用者端<a class="headerlink" href="#1-vpn" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>作業系統</th>
-<th>建議用戶端</th>
+<th>建議使用者端</th>
 <th>安裝方式</th>
 </tr>
 </thead>
@@ -1417,14 +1417,14 @@
 <hr />
 <h2 id="2-vpn">步驟 2 — 連線 VPN<a class="headerlink" href="#2-vpn" title="Permanent link">&para;</a></h2>
 <ol>
-<li>取得 <strong><code>Platform-VPN.ovpn</code></strong> 設定檔——位於 <code>scripts/vpn/Platform-VPN.ovpn</code>，或向管理員索取。</li>
-<li>將其匯入 VPN 用戶端：<ul>
-<li><strong>Windows / macOS 圖形介面：</strong> 將 <code>.ovpn</code> 檔案拖曳到用戶端視窗，或使用「匯入設定檔」功能。</li>
-<li><strong>Linux CLI：</strong> <code>sudo openvpn --config scripts/vpn/Platform-VPN.ovpn</code></li>
+<li>向管理員取得 VPN 設定檔（<code>Platform-VPN.ovpn</code>）。</li>
+<li>將其匯入 VPN 使用者端：<ul>
+<li><strong>Windows / macOS 圖形介面：</strong> 將 <code>.ovpn</code> 檔案拖曳到使用者端視窗，或使用「匯入設定檔」功能。</li>
+<li><strong>Linux CLI：</strong> <code>sudo openvpn --config Platform-VPN.ovpn</code></li>
 </ul>
 </li>
-<li>出現提示時，輸入您的平台 <strong>使用者名稱</strong> 和 <strong>密碼</strong>（與登入平台的帳密相同）。</li>
-<li>等待連線建立——用戶端顯示綠色指示燈或 <code>Initialization Sequence Completed</code>。</li>
+<li>出現提示時，輸入你的平台 <strong>使用者名稱</strong> 和 <strong>密碼</strong>（與登入平台的帳密相同）。</li>
+<li>等待連線建立。使用者端會顯示綠色指示燈或 <code>Initialization Sequence Completed</code>。</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">驗證連線</p>
@@ -1450,7 +1450,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <li>開啟瀏覽器並前往：
     <div class="highlight"><pre><span></span><code>https://dashboard.cscc.nthu.edu.tw
 </code></pre></div></li>
-<li>您將看到包含三個欄位的登入頁面：</li>
+<li>登入頁面有三個欄位：</li>
 </ol>
 <table>
 <thead>
@@ -1462,11 +1462,11 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <tbody>
 <tr>
 <td><strong>使用者名稱</strong></td>
-<td>您的平台帳號</td>
+<td>你的平台帳號</td>
 </tr>
 <tr>
 <td><strong>密碼</strong></td>
-<td>您的平台密碼</td>
+<td>你的平台密碼</td>
 </tr>
 <tr>
 <td><strong>驗證碼</strong></td>
@@ -1475,20 +1475,20 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tbody>
 </table>
 <ol>
-<li>填寫所有欄位後點擊 <strong>登入</strong>。</li>
+<li>填寫所有欄位後點 <strong>登入</strong>。</li>
 </ol>
 <p><img alt="登入頁面" src="../../../assets/screenshots/signin-form.png" />
 <em>圖 1：包含使用者名稱、密碼和驗證碼欄位的登入頁面。</em></p>
 <div class="admonition tip">
 <p class="admonition-title">驗證碼提示</p>
 <ul>
-<li>驗證碼 <strong>不區分大小寫</strong> —— <code>Ab3K</code> 和 <code>ab3k</code> 都有效。</li>
-<li>點擊驗證碼圖片可 <strong>重新整理</strong> 驗證碼。</li>
+<li>驗證碼 <strong>不區分大小寫</strong>：<code>Ab3K</code> 和 <code>ab3k</code> 都有效。</li>
+<li>點驗證碼圖片可 <strong>重新整理</strong> 驗證碼。</li>
 </ul>
 </div>
 <hr />
 <h2 id="4">步驟 4 — 瀏覽首頁儀表板<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>登入後，您會進入 <strong>首頁儀表板</strong>（路徑：<code>/</code>）。</p>
+<p>登入後，你會進入 <strong>首頁儀表板</strong>（路徑：<code>/</code>）。</p>
 <table>
 <thead>
 <tr>
@@ -1499,46 +1499,50 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <tbody>
 <tr>
 <td><strong>GPU 可用性</strong></td>
-<td>叢集中可用與已分配的 GPU 單位</td>
+<td>平台上可用與已分配的 GPU 單位</td>
+</tr>
+<tr>
+<td><strong>GPU Cluster Status</strong></td>
+<td>匿名化的 GPU 節點卡片，顯示每張 GPU 的使用量</td>
 </tr>
 <tr>
 <td><strong>專案摘要</strong></td>
-<td>您的活躍專案及狀態</td>
+<td>你的活躍專案及狀態</td>
 </tr>
 <tr>
 <td><strong>資源使用量</strong></td>
-<td>CPU / 記憶體 / GPU 趨勢（可切換 7 天或 30 天）</td>
+<td>專案配額的即時使用量</td>
 </tr>
 <tr>
-<td><strong>活動紀錄</strong></td>
-<td>您和團隊的近期操作</td>
+<td><strong>最近活動</strong></td>
+<td>你和團隊的近期操作</td>
 </tr>
 <tr>
 <td><strong>GPU 任務</strong></td>
-<td>使用 GPU 的運行中工作區，含 SM 比例和記憶體資訊</td>
+<td>使用 GPU 的執行中工作區，含 SM 比例和記憶體資訊</td>
 </tr>
 </tbody>
 </table>
 <p><img alt="首頁儀表板概覽" src="../../../assets/screenshots/home-dashboard-overview.png" />
 <em>圖 2：首頁儀表板，顯示 GPU 可用性卡片和活動任務表格。</em></p>
 <hr />
-<h2 id="5">步驟 5 — 檢查您的專案<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h2 id="5">步驟 5 — 檢查你的專案<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <ol>
-<li>點擊左側選單 <strong>專案</strong>（工作空間區塊）。</li>
-<li>您的帳號建立時會自動產生一個 <strong>個人專案</strong>——尋找與您使用者名稱同名的專案。</li>
-<li>點擊專案卡片查看 <strong>配額</strong>（GPU、CPU、記憶體上限）和 <strong>成員</strong>。</li>
+<li>點左側選單 <strong>專案</strong>（工作區區塊）。</li>
+<li>你的帳號建立時會自動產生一個 <strong>個人專案</strong>，尋找與你使用者名稱同名的專案。</li>
+<li>點專案卡片查看 <strong>配額</strong>（GPU、CPU、記憶體上限）和 <strong>成員</strong>。</li>
 </ol>
 <p><img alt="專案列表" src="../../../assets/screenshots/projects-list.png" />
 <em>圖 3：專案頁面，顯示含配額摘要的個人專案卡片。</em></p>
 <div class="admonition info">
 <p class="admonition-title">看不到專案？</p>
-<p>請聯繫管理員將您指派到專案或群組，或確認您的帳號已完成配置。</p>
+<p>請聯繫管理員將你指派到專案或群組，或確認你的帳號已設定完成。</p>
 </div>
 <hr />
-<h2 id="6">步驟 6 — 啟動您的第一個工作區<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h2 id="6">步驟 6 — 啟動你的第一個工作區<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <ol>
-<li>點擊左側選單 <strong>工作區</strong>。</li>
-<li>點擊 <strong>+ 新增工作區</strong>。</li>
+<li>點左側選單 <strong>工作區</strong>。</li>
+<li>點 <strong>+ 新增工作區</strong>。</li>
 <li>填寫啟動表單：</li>
 </ol>
 <table>
@@ -1551,14 +1555,14 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <tbody>
 <tr>
 <td><strong>專案</strong></td>
-<td>選擇您的專案（個人或團隊）</td>
+<td>選擇你的專案（個人或團隊）</td>
 </tr>
 <tr>
 <td><strong>IDE 類型</strong></td>
 <td>JupyterLab 或 VS Code</td>
 </tr>
 <tr>
-<td><strong>映像檔</strong></td>
+<td><strong>映像</strong></td>
 <td>Base、PyTorch、TensorFlow 或自訂</td>
 </tr>
 <tr>
@@ -1575,41 +1579,41 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>儲存</strong></td>
-<td>掛載您的個人或群組儲存磁區</td>
+<td>掛載你的個人或群組儲存空間</td>
 </tr>
 </tbody>
 </table>
 <ol>
-<li>點擊 <strong>建立</strong>。</li>
-<li>等待狀態從 <strong>啟動中</strong>（黃色）變為 <strong>運行中</strong>（綠色）。</li>
-<li>點擊 <strong>開啟</strong>——IDE 將在新分頁中開啟。</li>
+<li>點 <strong>建立</strong>。</li>
+<li>等待狀態從 <strong>啟動中</strong>（黃色）變為 <strong>執行中</strong>（綠色）。</li>
+<li>點 <strong>開啟</strong>，IDE 將在新分頁中開啟。</li>
 </ol>
 <p><img alt="新增工作區表單" src="../../../assets/screenshots/workspace-new-form.png" />
 <em>圖 4：工作區建立表單，包含專案、IDE 類型和資源欄位。</em></p>
 <div class="admonition warning">
 <p class="admonition-title">工作區無法啟動？</p>
 <ul>
-<li>確認您的專案有足夠的 <strong>配額</strong> 剩餘。</li>
+<li>確認你的專案有足夠的 <strong>配額</strong> 剩餘。</li>
 <li>檢查排程 <strong>計畫時段</strong> 是否已開啟（請詢問管理員）。</li>
-<li>若使用自訂映像檔，首次拉取可能需要較長時間。</li>
+<li>自訂映像首次下載需要較長時間。</li>
 </ul>
 </div>
 <hr />
 <h2 id="7">步驟 7 — 部署一個容器<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<p><strong>工作區</strong> 提供互動式 IDE；當您想改為執行自己的容器映像檔——長時間運行的服務或
-批次任務——則從專案的 <strong>設定檔（Config）</strong> 來 <strong>部署容器</strong>。平台接受標準的
+<p><strong>工作區</strong> 提供互動式 IDE。當你想改為執行自己的容器映像（長時間執行的服務或
+批次任務），請從專案的 <strong>設定檔（Config）</strong> <strong>部署容器</strong>。設定檔可定義
 <code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 工作負載。</p>
 <div class="admonition info">
 <p class="admonition-title">需要專案管理者（Manager）角色</p>
-<p>建立與部署設定檔需要 <strong>Manager</strong> 或更高的角色。您在 <strong>個人專案</strong> 中本來就具備此
+<p>建立與部署設定檔需要 <strong>Manager</strong> 或更高的角色。你在 <strong>個人專案</strong> 中本來就具備此
 權限；若是團隊專案，請向專案管理者索取。</p>
 </div>
 <ol>
-<li>前往 <strong>專案 → [您的專案] → Config 分頁</strong>。</li>
-<li>點擊 <strong>+ 新增設定檔</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
+<li>前往 <strong>專案 → [你的專案] → Config 分頁</strong>。</li>
+<li>點 <strong>+ 新增設定檔</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
    （Resource Wizard）</strong> 直接填欄位，不必手寫 YAML。</li>
 <li>
-<p>定義您的容器：</p>
+<p>定義你的容器：</p>
 <table>
 <thead>
 <tr>
@@ -1619,8 +1623,8 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </thead>
 <tbody>
 <tr>
-<td><strong>映像檔</strong></td>
-<td>平台允許清單中的容器映像檔——如需新增請見 <a href="../requests/">申請</a></td>
+<td><strong>映像</strong></td>
+<td>平台允許清單中的容器映像；如需新增請見 <a href="../requests/">申請</a></td>
 </tr>
 <tr>
 <td><strong>CPU / 記憶體</strong></td>
@@ -1632,26 +1636,26 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>儲存</strong>（選用）</td>
-<td>使用 <code>{{userVolume}}</code> 掛載您的個人儲存磁區</td>
+<td>使用 <code>{{userVolume}}</code> 掛載你的個人儲存空間</td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
-<p>點擊 <strong>儲存</strong>——每次儲存都會建立一個不可變的新版本。</p>
+<p>點 <strong>儲存</strong>。每次儲存都會建立一個不可變的新版本。</p>
 <p><img alt="Config 分頁與新增設定檔" src="../../../assets/screenshots/deploy-config-new.png" />
-<em>圖 5：Config 分頁——使用資源精靈建立新設定檔。</em></p>
+<em>圖 5：Config 分頁：使用資源精靈建立新設定檔。</em></p>
 </li>
 <li>
-<p>在版本列上點擊 <strong>Deploy（部署）</strong>。</p>
+<p>在版本列上點 <strong>Deploy（部署）</strong>。</p>
 </li>
-<li>在部署對話框中選擇 <strong>排程佇列</strong>。若 YAML 使用 GPU 宣告 slot，請將每個 slot 對應到
-   您已保留的宣告。也可先點 <strong>Dry-run（試跑）</strong> 驗證，不會佔用配額。</li>
+<li>在部署對話框中選擇 <strong>排程佇列</strong>。若 YAML 使用 GPU claim slot，請將每個 slot 對應到
+   你已保留的 GPU claim。也可先點 <strong>Dry-run（試跑）</strong> 驗證，不會佔用配額。</li>
 <li>
-<p>點擊 <strong>Deploy</strong>，接著觀察實例狀態直到 Pod 變為 <strong>Running</strong>。可從實例檢視開啟
-   <strong>日誌</strong> 或 <strong>Pod 狀態</strong> 追蹤。</p>
+<p>點 <strong>Deploy</strong>，接著觀察實例狀態直到顯示 <strong>執行中</strong>。可從實例檢視開啟
+   <strong>日誌</strong> 或 <strong>狀態</strong> 追蹤。</p>
 <p><img alt="部署對話框" src="../../../assets/screenshots/deploy-dialog.png" />
-<em>圖 6：部署對話框——選擇排程佇列與 GPU 宣告。</em></p>
+<em>圖 6：部署對話框：選擇排程佇列與 GPU claim。</em></p>
 </li>
 </ol>
 <div class="admonition warning">
@@ -1659,19 +1663,19 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <ul>
 <li>每個容器都必須同時設定 <code>resources.requests.memory</code> 與
   <code>resources.limits.memory</code>（≥ <code>128Mi</code>），缺一即被拒絕。</li>
-<li>映像檔必須在平台 <strong>允許清單</strong> 中——若尚未加入，請先提出映像申請。</li>
-<li>不要設定 <code>metadata.namespace</code>，平台會自動填入。</li>
+<li>映像必須在平台 <strong>允許清單</strong> 中；若尚未加入，請先提出映像申請。</li>
+<li>省略 <code>metadata.namespace</code>，平台會自動填入。</li>
 <li>部署需要 <strong>Manager</strong> 角色與足夠的專案 <strong>配額</strong>。</li>
 </ul>
 </div>
 <p>若需設定檔版本控制、GPU 請求與可重用 GPU claim 的完整說明，請見
 <a href="../projects/">專案 → 設定檔版本控制</a>。</p>
 <hr />
-<h2 id="8">步驟 8 — 管理您的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h2 id="8">步驟 8 — 管理你的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <ol>
-<li>點擊左側選單 <strong>儲存</strong>（資源區塊）。</li>
-<li>在您的個人儲存上點擊 <strong>啟動</strong> 以啟動檔案瀏覽器。</li>
-<li>點擊 <strong>瀏覽</strong>——將開啟 FileBrowser 介面，您可以上傳、下載、重新命名和整理檔案。</li>
+<li>點左側選單 <strong>儲存</strong>（資源區塊）。</li>
+<li>在你的個人儲存上點 <strong>啟動</strong> 以啟動檔案瀏覽器。</li>
+<li>點 <strong>瀏覽</strong>，將開啟 FileBrowser 介面，你可以上傳、下載、重新命名和整理檔案。</li>
 <li>此處儲存的檔案在工作區重新啟動後仍會保留。</li>
 </ol>
 <p><img alt="儲存瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
@@ -1679,14 +1683,14 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <hr />
 <h2 id="9">步驟 9 — 加入群組（選用）<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
 <ol>
-<li>點擊左側選單 <strong>群組</strong>。</li>
-<li>瀏覽可用的群組或請管理員將您加入。</li>
-<li>群組成員共享 <strong>群組儲存磁區</strong>——適合存放資料集和共用模型。</li>
+<li>點左側選單 <strong>群組</strong>。</li>
+<li>瀏覽可用的群組或請管理員將你加入。</li>
+<li>群組成員共享 <strong>群組儲存空間</strong>，適合存放資料集和共用模型。</li>
 <li>群組管理者可設定每位使用者的權限（讀取 / 寫入 / 無）。</li>
 </ol>
 <hr />
 <h2 id="_3">服務快速參考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>一般使用者只需要使用平台儀表板。API 與其他服務主機名稱都會經由 Gateway 路由，保留給儀表板、CLI、整合流程或管理員使用。</p>
+<p>一般使用者只需要使用平台儀表板。其他服務主機名稱保留給 CLI、整合流程與管理員使用。</p>
 <table>
 <thead>
 <tr>
@@ -1707,23 +1711,23 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <h2 id="_4">常見問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>VPN 已連線但儀表板 DNS 無法解析</summary>
-<p>確認 VPN 用戶端有套用設定檔中的 DNS 設定。部分用戶端需要啟用 DNS update scripts 或重新匯入設定檔。使用者入口是 <code>https://dashboard.cscc.nthu.edu.tw</code>。</p>
+<p>確認 VPN 使用者端有套用設定檔中的 DNS 設定。部分使用者端需要啟用 DNS update scripts 或重新匯入設定檔。使用者入口是 <code>https://dashboard.cscc.nthu.edu.tw</code>。</p>
 </details>
 <details class="question">
 <summary>驗證碼輸入正確但仍顯示錯誤</summary>
-<p>驗證碼不區分大小寫。若圖片不清楚，<strong>點擊圖片</strong> 取得新驗證碼。避免混淆 <code>0/O</code> 或 <code>1/I</code>——產生器已排除容易混淆的字元。</p>
+<p>驗證碼不區分大小寫。若圖片不清楚，<strong>點圖片</strong> 取得新驗證碼。驗證碼不會使用 <code>0/O</code>、<code>1/I</code> 這類容易混淆的字元。</p>
 </details>
 <details class="question">
 <summary>登入失敗，顯示「帳密錯誤」</summary>
-<p>確認您使用的是 <strong>使用者名稱</strong>（非電子郵件）。若密碼最近被變更，舊密碼會立即失效。</p>
+<p>確認你使用的是 <strong>使用者名稱</strong>（非電子郵件）。若密碼最近被變更，舊密碼會立即失效。</p>
 </details>
 <details class="question">
 <summary>工作區停留在「啟動中」狀態</summary>
-<p>通常表示容器映像檔正在首次拉取（大型 GPU 映像檔可能需要數分鐘）。若超過 10 分鐘仍在啟動中，請聯繫管理員確認排程佇列是否已啟用，以及專案的計畫時段是否已開放。</p>
+<p>通常表示容器映像正在首次下載（大型 GPU 映像可能需要數分鐘）。若超過 10 分鐘仍在啟動中，請聯繫管理員確認排程佇列是否已啟用，以及專案的計畫時段是否已開放。</p>
 </details>
 <details class="question">
-<summary>工作階段過期——被導向登入頁</summary>
-<p>登入狀態會在一段時間後過期，重新登入即可，期間工作區會持續運行。</p>
+<summary>工作階段過期，被導向登入頁</summary>
+<p>登入狀態會在一段時間後過期，重新登入即可，期間工作區會持續執行。</p>
 </details>
 
 

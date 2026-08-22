@@ -1277,7 +1277,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 </div>
 <hr />
 <h2 id="l1-1">L1-1 — Deploy a Pod<a class="headerlink" href="#l1-1" title="Permanent link">&para;</a></h2>
-<p>The simplest workload. A Pod has no controller — nothing recreates it, and its name is exactly what you typed.</p>
+<p>The simplest workload. A Pod runs once; nothing restarts it for you, and its name is exactly what you typed.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-1-deploy-pod.jpg">
   <source src="../../assets/videos/l1-1-deploy-pod.mp4" type="video/mp4">
 </video>
@@ -1285,7 +1285,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>0:57 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-2">L1-2 — Deploy a Deployment<a class="headerlink" href="#l1-2" title="Permanent link">&para;</a></h2>
-<p><strong>Replicas</strong> decides how many run at once. Pod names gain two hash segments, because a ReplicaSet creates them.</p>
+<p><strong>Replicas</strong> decides how many run at once. Pod names gain two hash segments, because the platform manages the copies for you.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-2-deploy-deployment.jpg">
   <source src="../../assets/videos/l1-2-deploy-deployment.mp4" type="video/mp4">
 </video>
@@ -1333,7 +1333,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:42 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l5">L5 — Reserve a GPU claim<a class="headerlink" href="#l5" title="Permanent link">&para;</a></h2>
-<p>Create a ResourceClaim ahead of time and pick it at deploy time. SM % slices one card's compute; it is not a count of cards.</p>
+<p>Create a GPU Claim ahead of time and pick it at deploy time. SM % slices one card's compute; it is not a count of cards.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l5-gpu-claim.jpg">
   <source src="../../assets/videos/l5-gpu-claim.mp4" type="video/mp4">
 </video>

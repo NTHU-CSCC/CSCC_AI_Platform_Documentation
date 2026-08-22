@@ -31,7 +31,7 @@
     
     
       
-        <title>User Guide - GPU Cluster Management Platform — User Guide</title>
+        <title>User guide - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              User Guide
+              User guide
             
           </span>
         </div>
@@ -1028,7 +1028,7 @@
   <a href="#what-you-can-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What You Can Do
+        What you can do
       
     </span>
   </a>
@@ -1036,10 +1036,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#before-you-start" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Before you start
       
     </span>
   </a>
@@ -1047,10 +1047,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-navigation" class="md-nav__link">
+  <a href="#sidebar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform Navigation
+        Sidebar
       
     </span>
   </a>
@@ -1058,10 +1058,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#first-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Getting Started
+        First steps
       
     </span>
   </a>
@@ -1069,10 +1069,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#role-summary" class="md-nav__link">
+  <a href="#roles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Role Summary
+        Roles
       
     </span>
   </a>
@@ -1099,62 +1099,42 @@
   
 
 
-<h1 id="user-guide">User Guide<a class="headerlink" href="#user-guide" title="Permanent link">&para;</a></h1>
-<p>Welcome to the GPU Cluster Management Platform. This guide covers everything you need to use the platform — from signing in to launching GPU-powered workspaces.</p>
+<h1 id="user-guide">User guide<a class="headerlink" href="#user-guide" title="Permanent link">&para;</a></h1>
+<p>This guide shows how to sign in, start a GPU workspace, manage projects and groups, use storage, and ask administrators for more.</p>
 <hr />
-<h2 id="what-you-can-do">What You Can Do<a class="headerlink" href="#what-you-can-do" title="Permanent link">&para;</a></h2>
-<p>The platform lets you:</p>
+<h2 id="what-you-can-do">What you can do<a class="headerlink" href="#what-you-can-do" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Launch GPU workspaces</strong> (JupyterLab, VSCode, custom images) backed by persistent storage</li>
-<li><strong>Manage projects</strong> with defined GPU/CPU/memory quotas, versioned config files, and team members</li>
-<li><strong>Collaborate in groups</strong> with shared storage and role-based access</li>
-<li><strong>Submit requests</strong> for additional resources, storage, or image access</li>
-<li><strong>Read announcements</strong> for maintenance windows, incidents, and policy updates</li>
-<li><strong>Monitor your resource usage</strong> and active GPU jobs from the dashboard</li>
+<li>Launch GPU workspaces (JupyterLab, VSCode, or a custom image) with persistent storage</li>
+<li>Manage projects: GPU/CPU/memory quotas, versioned config files, members</li>
+<li>Work in groups with shared storage and roles</li>
+<li>Submit requests for resources, storage, or image access</li>
+<li>Read announcements about maintenance and policy changes</li>
+<li>Watch your quota usage and running GPU jobs on the Home dashboard</li>
 </ul>
 <hr />
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A modern web browser (Chrome, Firefox, Edge, Safari)</li>
-<li>An account provisioned by a platform administrator</li>
-<li>(Optional) VPN access if the platform is deployed on a private network</li>
+<li>A current browser (Chrome, Firefox, Edge, Safari)</li>
+<li>An account created by a platform administrator</li>
+<li>VPN access if the platform runs on a private network</li>
 </ul>
 <hr />
-<h2 id="platform-navigation">Platform Navigation<a class="headerlink" href="#platform-navigation" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph TD
-    Login[Sign In] --&gt; Home[Home Dashboard]
-
-    subgraph Workspace
-        Home --&gt; Projects[Projects]
-        Home --&gt; Workspaces[Workspaces / IDEs]
-    end
-
-    subgraph Resources
-        Home --&gt; Groups[Groups]
-        Home --&gt; Storage[Storage]
-    end
-
-    subgraph Infrastructure
-        Home --&gt; Announcements[Announcements]
-        Home --&gt; Requests[Requests]
-        Home --&gt; Settings[Settings]
-    end</code></pre>
-<p>The left sidebar organises features into four sections:</p>
+<h2 id="sidebar">Sidebar<a class="headerlink" href="#sidebar" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Section</th>
-<th>Features</th>
+<th>Pages</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Home</strong></td>
-<td>Dashboard overview</td>
+<td>Overview, Announcements</td>
 </tr>
 <tr>
 <td><strong>Workspace</strong></td>
-<td>Projects, Workspaces (IDEs)</td>
+<td>Projects, Workspaces, GPU Desktops</td>
 </tr>
 <tr>
 <td><strong>Resources</strong></td>
@@ -1162,48 +1142,48 @@
 </tr>
 <tr>
 <td><strong>Infrastructure</strong></td>
-<td>Announcements, Requests, Settings</td>
+<td>Requests, Settings</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<p>See the <strong><a href="getting-started/">Getting Started guide</a></strong> for the complete step-by-step walkthrough — from VPN setup to launching your first GPU workspace.</p>
+<h2 id="first-steps">First steps<a class="headerlink" href="#first-steps" title="Permanent link">&para;</a></h2>
+<p>Follow the <strong><a href="getting-started/">Getting started guide</a></strong> from VPN setup to your first workspace.</p>
 <div class="admonition tip">
 <p class="admonition-title">First-time checklist</p>
 <ul>
-<li>[ ] Connect to VPN</li>
+<li>[ ] Connect to the VPN</li>
 <li>[ ] Sign in at <code>https://dashboard.cscc.nthu.edu.tw</code></li>
-<li>[ ] Explore the Home Dashboard</li>
+<li>[ ] Look at the Home dashboard</li>
 <li>[ ] Check your project's GPU quota under <strong>Projects</strong></li>
-<li>[ ] Launch your first workspace</li>
+<li>[ ] Launch a workspace</li>
 </ul>
 </div>
 <hr />
-<h2 id="role-summary">Role Summary<a class="headerlink" href="#role-summary" title="Permanent link">&para;</a></h2>
+<h2 id="roles">Roles<a class="headerlink" href="#roles" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Role</th>
-<th>Description</th>
+<th>What it can do</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>User</strong></td>
-<td>Regular platform user; can use resources within allocated quotas</td>
+<td>Use resources within the project's quota</td>
 </tr>
 <tr>
 <td><strong>Manager</strong></td>
-<td>Can manage projects and groups; elevated admin-panel access</td>
+<td>Manage projects and groups; limited admin pages</td>
 </tr>
 <tr>
 <td><strong>Admin</strong></td>
-<td>Full platform control; access to all admin functions</td>
+<td>Everything, including all admin pages</td>
 </tr>
 </tbody>
 </table>
-<p>See <a href="concepts/">Concepts &amp; Roles</a> for detailed permission tables.</p>
+<p>See <a href="concepts/">Concepts and roles</a> for the full permission tables.</p>
 
 
 

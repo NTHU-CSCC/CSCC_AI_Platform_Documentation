@@ -8,13 +8,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/"/>
     </url>
     <url>
-        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/adr/cephfs-shared-home/</loc>
-        <lastmod>2026-08-22</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/adr/cephfs-shared-home/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/adr/cephfs-shared-home/"/>
-    </url>
-    <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/tutorials/</loc>
         <lastmod>2026-08-22</lastmod>
         <changefreq>daily</changefreq>
@@ -139,13 +132,6 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/"/>
-    </url>
-    <url>
-        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/adr/cephfs-shared-home/</loc>
-        <lastmod>2026-08-22</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/adr/cephfs-shared-home/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/adr/cephfs-shared-home/"/>
     </url>
     <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/tutorials/</loc>

@@ -1349,14 +1349,7 @@
 <p>Understanding the platform's tenancy model and permission system helps you work effectively with projects, groups, and storage.</p>
 <hr />
 <h2 id="tenancy-hierarchy">Tenancy Hierarchy<a class="headerlink" href="#tenancy-hierarchy" title="Permanent link">&para;</a></h2>
-<p>Resources on the platform are organised in a hierarchy:</p>
-<pre class="mermaid"><code>graph TD
-    Admin[Platform Admin] --&gt;|creates| Group[Group\ne.g. Research Lab]
-    Group --&gt;|contains| Project[Project\ne.g. LLM Fine-Tuning]
-    Project --&gt;|launches| Workspace[Workspace / IDE]
-    Project --&gt;|binds| ProjStorage[Project Storage Volume]
-    Group --&gt;|owns| GroupStorage[Group Storage Volume]
-    GroupStorage --&gt;|inherited by| ProjStorage</code></pre>
+<p>A group holds projects; a project launches workspaces and binds storage.</p>
 <table>
 <thead>
 <tr>
@@ -1385,13 +1378,6 @@
 </table>
 <hr />
 <h2 id="quota-lifecycle">Quota Lifecycle<a class="headerlink" href="#quota-lifecycle" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    Admin["Admin defines\nResource Plan"] --&gt;|assigned to| Project
-    Project --&gt;|quota enforced on| Launch[Workspace Launch]
-    Launch --&gt;|reserves| Claim["GPU claim"]
-    Launch --&gt;|uses| Queue["Scheduling queue"]
-    Claim --&gt;|allocates| GPULimit["GPU / SM share"]
-    Queue --&gt;|applies| Priority["Priority / preemption policy"]</code></pre>
 <p>Each project is assigned a <strong>Resource Plan</strong> by an admin. When you launch a workspace, the platform checks the project quota and your per-user quota before reserving anything.</p>
 <p>A plan also carries:</p>
 <ul>
@@ -1442,7 +1428,7 @@
 <li><strong>Inline claim</strong> — created automatically when you launch a workspace. It lives and dies with that workspace.</li>
 <li><strong>Project GPU claim</strong> — created from a project's <em>GPU Claims</em> tab and reused across deployments. It reserves GPU quota as soon as you create it, but only accrues GPU-hours while a workload is actually attached.</li>
 </ul>
-<p>Config files point at a project GPU claim through a named slot, for example <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>. The slot name is only a label — you map it to one of your own claims in the deploy dialog. Every replica of a Deployment shares the same claim and is counted once, so split the workload into separate Deployments if only some replicas should use one.</p>
+<p>A project config file refers to a project GPU claim through a named <strong>claim slot</strong> (for example <code>train-a</code>). The slot name is only a label — you map it to one of your own claims in the deploy dialog. Every replica of a Deployment shares the same claim and is counted once, so split the workload into separate Deployments if only some replicas should use one.</p>
 <hr />
 <h2 id="role-based-permissions">Role-Based Permissions<a class="headerlink" href="#role-based-permissions" title="Permanent link">&para;</a></h2>
 <h3 id="system-roles">System Roles<a class="headerlink" href="#system-roles" title="Permanent link">&para;</a></h3>
@@ -1505,7 +1491,7 @@
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
-<td>RBAC policy management</td>
+<td>Role and permission management</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
@@ -1595,15 +1581,11 @@
 </table>
 <hr />
 <h2 id="storage-permission-model">Storage Permission Model<a class="headerlink" href="#storage-permission-model" title="Permanent link">&para;</a></h2>
-<p>Storage permissions follow a dual-path inheritance model:</p>
-<pre class="mermaid"><code>flowchart TD
-    GroupAdmin["Group Admin\nsets permissions"] --&gt;|batch set| GroupStorage["Group volume\n(source of truth)"]
-    GroupStorage --&gt;|inherited, read-only| ProjectView["Project Storage View\nfor Group Members"]
-    ProjectAdmin["Project Admin"] --&gt;|direct management| DirectPerms["Project Storage\nfor Non-Group Members"]
-    DirectPerms --&gt; ProjectView</code></pre>
+<p>Storage permissions follow two paths:</p>
 <ul>
-<li><strong>Group members</strong> always inherit storage permissions from the group level. Their permissions cannot be overridden at the project level.</li>
-<li><strong>Direct project members who are not in the source group</strong> have permissions managed directly at the project level. Users outside the project cannot receive project-level storage grants.</li>
+<li>Group storage permissions are the source of truth. Group members always inherit them; the project cannot override them.</li>
+<li>The project Storage page shows inherited permissions read-only.</li>
+<li>To change a group member's access, edit it on the group page. Project members who are not in the group are managed on the project page; users outside the project cannot receive project-level storage grants.</li>
 </ul>
 <hr />
 <h2 id="key-terms">Key Terms<a class="headerlink" href="#key-terms" title="Permanent link">&para;</a></h2>
@@ -1616,7 +1598,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Storage volume (PVC)</strong></td>
+<td><strong>Storage volume</strong></td>
 <td>Persistent storage that survives workspace restarts</td>
 </tr>
 <tr>
@@ -1646,10 +1628,6 @@
 <tr>
 <td><strong>Resource Plan</strong></td>
 <td>A named template defining GPU, CPU, memory limits, allowed GPU models, and schedule windows for a project</td>
-</tr>
-<tr>
-<td><strong>Storage Lane</strong></td>
-<td>A profile (<code>shared-rwx</code>, <code>local-scratch</code>, <code>fast-rwo</code>) that selects how a volume is provisioned. See <a href="../storage/">Storage</a>.</td>
 </tr>
 <tr>
 <td><strong>Workspace</strong></td>

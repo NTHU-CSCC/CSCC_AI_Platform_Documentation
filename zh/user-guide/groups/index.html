@@ -1272,15 +1272,6 @@
 <p><strong>適用對象：</strong> 所有使用者都可以屬於群組。<strong>群組由平台管理員建立</strong>；若你需要新的群組，請透過 <a href="../requests/">申請</a> 提出。</p>
 <hr />
 <h2 id="_2">成員模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph LR
-    GroupAdmin["群組管理員\n（管理成員與權限）"]
-    GroupMember["群組成員\n（存取群組儲存與專案）"]
-    Group["群組"]
-
-    GroupAdmin --&gt;|管理| Group
-    Group --&gt;|包含| GroupMember
-    Group --&gt;|可成為成員| Project["專案"]
-    Group --&gt;|擁有| GroupStorage["群組儲存空間"]</code></pre>
 <p>群組內有三種角色。你在群組中的角色，也會決定你在該群組所擁有專案中的預設權限。</p>
 <table>
 <thead>
@@ -1325,12 +1316,12 @@
 <li>群組名稱與說明</li>
 <li>成員數</li>
 <li>關聯的儲存空間</li>
-<li><strong>Storage Policy</strong> 與 <strong>Registry Policy</strong> 標籤——由管理員指派，用來決定建立群組儲存空間時可選的類型，以及群組映像建置存放的位置</li>
+<li><strong>Storage Policy</strong> 與 <strong>Registry Policy</strong> 標籤：由管理員指派，用來決定建立群組儲存空間時可選的類型，以及群組映像建置存放的位置</li>
 <li>操作：<strong>檢視</strong>、<strong>編輯</strong>（僅限管理員）、<strong>刪除</strong>（僅限管理員）</li>
 </ul>
 <hr />
 <h2 id="_4">檢視群組<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>點擊任一群組卡片可開啟詳情頁，內含兩個標籤：</p>
+<p>點任一群組卡片可開啟詳情頁，內含兩個標籤：</p>
 <ol>
 <li><strong>成員</strong> — 所有群組成員及其角色</li>
 <li><strong>存儲</strong> — 此群組擁有的儲存空間及其權限設定</li>
@@ -1353,7 +1344,7 @@
 </ol>
 <div class="admonition info">
 <p class="admonition-title">沒有公開瀏覽</p>
-<p>目前無法瀏覽或搜尋公開群組。群組的探索需要透過團隊自行溝通聯繫。</p>
+<p>目前無法瀏覽或搜尋公開群組。請向你的團隊確認要加入哪個群組。</p>
 </div>
 <hr />
 <h2 id="_7">新增成員<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -1361,26 +1352,21 @@
 <p>需要 <strong>群組管理員</strong> 角色。</p>
 </blockquote>
 <ol>
-<li>開啟群組，在 <strong>成員</strong> 標籤右上角點擊 <strong>新增成員</strong>。</li>
+<li>開啟群組，在 <strong>成員</strong> 標籤右上角點 <strong>新增成員</strong>。</li>
 <li>以使用者名稱或電子郵件搜尋使用者。</li>
 <li>從結果清單中勾選使用者。</li>
-<li>點擊 <strong>新增成員</strong> 確認。</li>
+<li>點 <strong>新增成員</strong> 確認。</li>
 </ol>
-<p>若要一次加入整班學生，可使用 <strong>貼上使用者名單</strong>：把名單貼進文字框（可用換行、逗號、分號或 Tab 分隔），再點擊 <strong>解析使用者</strong>。</p>
+<p>若要一次加入整班學生，可使用 <strong>貼上使用者名單</strong>：把名單貼進文字框（可用換行、逗號、分號或 Tab 分隔），再點 <strong>解析使用者</strong>。</p>
 <p>結果表格只會顯示尚未加入此群組的使用者，因此翻頁時不會出現已加入的成員，也不會出現空白頁。</p>
 <p><img alt="新增群組成員" src="../../../assets/screenshots/group-add-members.png" />
 <em>圖 2：新增成員對話框，包含使用者搜尋與選取。</em></p>
 <hr />
 <h2 id="_8">儲存權限繼承<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>群組儲存的權限會以雙路徑模型串接到專案：</p>
-<pre class="mermaid"><code>flowchart TD
-    GroupAdmin["群組管理員\n設定群組儲存權限"] --&gt;|批次操作| GroupPVC["群組儲存權限\n（唯一真實來源）"]
-    GroupPVC --&gt;|繼承，唯讀列| ProjectStoragePage["專案存儲頁面\n（群組成員列）"]
-    ProjectAdmin["專案管理員\n管理非群組成員"] --&gt;|直接管理| DirectRows["專案儲存權限\n（僅限非群組成員）"]
-    DirectRows --&gt; ProjectStoragePage</code></pre>
+<p>群組權限在群組頁面設定，並在每個專案內以唯讀方式顯示。</p>
 <p>權限層級為 <strong>讀取</strong>、<strong>寫入</strong>、<strong>無</strong>。每個群組儲存空間另有一個 <strong>存取策略</strong>，作為未單獨設定權限的群組成員的預設值。</p>
 <p><strong>關鍵規則：</strong> 如果你是群組成員，你在專案綁定儲存空間上的權限<strong>一律由群組決定</strong>，無法在專案層級覆寫。專案層級的儲存授權只適用於不屬於來源群組的直接專案成員。專案存儲頁面會將繼承而來的列顯示為<strong>唯讀</strong>，並附上連往群組權限頁面的資訊標籤。</p>
-<p>群組儲存權限只對群組的<strong>現任成員</strong>生效。當使用者被移出群組後，殘留的權限設定不再授予任何實際存取權——這也是學期結束時最省事的收尾方式：從群組移除即可，不需逐一調整每個專案。</p>
+<p>群組儲存權限只對群組的<strong>現任成員</strong>生效。當使用者被移出群組後，殘留的權限設定不再授予任何實際存取權。這也是學期結束時最省事的收尾方式：從群組移除即可，不需逐一調整每個專案。</p>
 <hr />
 <h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <details class="question">

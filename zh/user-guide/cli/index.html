@@ -1344,13 +1344,13 @@
 URL 可包含 <code>/api/v1</code>，CLI 會自動正規化。</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<p>CLI 會提示您輸入密碼。與儀表板不同，此流程<strong>不需要驗證碼</strong>。</p>
-<p>登入成功後，CLI 會把 <code>cscc_...</code> API token 存在本機設定檔中，只有您本人可讀取。token 明文只會在建立時顯示一次。</p>
+<p>CLI 會提示你輸入密碼。與儀表板不同，此流程<strong>不需要驗證碼</strong>。</p>
+<p>登入成功後，CLI 會把 <code>cscc_...</code> API token 存在本機設定檔中，只有你本人可讀取。token 明文只會在建立時顯示一次。</p>
 <p>可選擇 token 名稱：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
 <h3 id="token">匯入由儀表板建立的 token<a class="headerlink" href="#token" title="Permanent link">&para;</a></h3>
-<p>您也可以在儀表板的 <strong>設定 → API Key &amp; CLI</strong> 建立 API token，然後匯入
+<p>你也可以在儀表板的 <strong>設定 → API Key &amp; CLI</strong> 建立 API token，然後匯入
 <code>cscc-cli</code>：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--token<span class="w"> </span>cscc_...
 </code></pre></div>
@@ -1492,7 +1492,7 @@ engine。</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
 <p>建置與日誌串流會使用 <code>cscc-cli login</code> 建立的 token，不需要其他憑證。
-專案必須啟用 <strong>Image Build Permission</strong>，且您的專案角色必須允許建置。</p>
+專案必須啟用 <strong>Image Build Permission</strong>，且你的專案角色必須允許建置。</p>
 <hr />
 <h2 id="token_2">Token 管理<a class="headerlink" href="#token_2" title="Permanent link">&para;</a></h2>
 <p>列出有效 API token：</p>

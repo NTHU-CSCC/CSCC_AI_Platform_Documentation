@@ -1028,7 +1028,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        功能概覽
+        你可以做什麼
       
     </span>
   </a>
@@ -1039,7 +1039,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        前置需求
+        開始前
       
     </span>
   </a>
@@ -1050,7 +1050,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        平台導覽
+        左側選單
       
     </span>
   </a>
@@ -1061,7 +1061,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        快速開始
+        第一步
       
     </span>
   </a>
@@ -1072,7 +1072,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        角色摘要
+        角色
       
     </span>
   </a>
@@ -1100,61 +1100,41 @@
 
 
 <h1 id="_1">使用指南<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>歡迎使用 GPU 叢集管理平台。本指南涵蓋您使用平台所需的一切——從登入到啟動 GPU 工作區。</p>
+<p>本指南說明如何登入、啟動 GPU 工作區、管理專案與群組、使用儲存空間，以及向管理員提出申請。</p>
 <hr />
-<h2 id="_2">功能概覽<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>平台讓您可以：</p>
+<h2 id="_2">你可以做什麼<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>啟動 GPU 工作區</strong>（JupyterLab、VSCode、自訂映像檔），搭配持久化儲存</li>
-<li><strong>管理專案</strong>，包含 GPU/CPU/記憶體配額、版本化設定檔及團隊成員</li>
-<li><strong>群組協作</strong>，共享儲存空間與角色權限控制</li>
-<li><strong>提交申請</strong>，申請額外資源、儲存空間或映像檔存取權限</li>
-<li><strong>閱讀公告</strong>，掌握維護時段、事件通知與政策更新</li>
-<li><strong>監控資源使用量</strong>及運行中的 GPU 任務</li>
+<li>啟動 GPU 工作區（JupyterLab、VSCode 或自訂映像），搭配持久儲存空間</li>
+<li>管理專案：GPU/CPU/記憶體配額、版本化設定檔、成員</li>
+<li>在群組內協作，共用儲存空間與角色</li>
+<li>送出申請：資源、儲存空間或映像存取權</li>
+<li>閱讀公告，掌握維護時段與政策變更</li>
+<li>在首頁儀表板看配額使用量與執行中的 GPU 任務</li>
 </ul>
 <hr />
-<h2 id="_3">前置需求<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_3">開始前<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>現代瀏覽器（Chrome、Firefox、Edge、Safari）</li>
+<li>現行瀏覽器（Chrome、Firefox、Edge、Safari）</li>
 <li>由平台管理員建立的帳號</li>
-<li>（選用）若平台部署於私有網路，需 VPN 存取</li>
+<li>平台部署在私有網路時需要 VPN</li>
 </ul>
 <hr />
-<h2 id="_4">平台導覽<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>graph TD
-    Login[登入] --&gt; Home[首頁儀表板]
-
-    subgraph 工作空間
-        Home --&gt; Projects[專案]
-        Home --&gt; Workspaces[工作區 / IDE]
-    end
-
-    subgraph 資源
-        Home --&gt; Groups[群組]
-        Home --&gt; Storage[儲存]
-    end
-
-    subgraph 基礎設施
-        Home --&gt; Announcements[公告]
-        Home --&gt; Requests[申請]
-        Home --&gt; Settings[設定]
-    end</code></pre>
-<p>左側選單將功能分為四個區塊：</p>
+<h2 id="_4">左側選單<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>區塊</th>
-<th>功能</th>
+<th>頁面</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>首頁</strong></td>
-<td>儀表板總覽</td>
+<td>總覽、公告</td>
 </tr>
 <tr>
-<td><strong>工作空間</strong></td>
-<td>專案、工作區（IDE）</td>
+<td><strong>工作區</strong></td>
+<td>專案、工作區、GPU 桌面</td>
 </tr>
 <tr>
 <td><strong>資源</strong></td>
@@ -1162,48 +1142,48 @@
 </tr>
 <tr>
 <td><strong>基礎設施</strong></td>
-<td>公告、申請、設定</td>
+<td>申請、設定</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_5">快速開始<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>請參閱 <strong><a href="getting-started/">快速開始指南</a></strong>，了解從 VPN 設定到啟動第一個 GPU 工作區的完整步驟。</p>
+<h2 id="_5">第一步<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>照 <strong><a href="getting-started/">快速開始</a></strong> 從 VPN 設定做到啟動第一個工作區。</p>
 <div class="admonition tip">
 <p class="admonition-title">首次使用清單</p>
 <ul>
-<li>[ ] 連線 VPN</li>
+<li>[ ] 連上 VPN</li>
 <li>[ ] 登入 <code>https://dashboard.cscc.nthu.edu.tw</code></li>
-<li>[ ] 瀏覽首頁儀表板</li>
-<li>[ ] 在 <strong>專案</strong> 中檢查 GPU 配額</li>
-<li>[ ] 啟動您的第一個工作區</li>
+<li>[ ] 看一下首頁儀表板</li>
+<li>[ ] 在 <strong>專案</strong> 檢查 GPU 配額</li>
+<li>[ ] 啟動一個工作區</li>
 </ul>
 </div>
 <hr />
-<h2 id="_6">角色摘要<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_6">角色<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>角色</th>
-<th>說明</th>
+<th>能做什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>使用者</strong></td>
-<td>一般平台使用者；可在配額範圍內使用資源</td>
+<td>在專案配額內使用資源</td>
 </tr>
 <tr>
 <td><strong>管理者</strong></td>
-<td>可管理專案和群組；有進階管理面板存取權</td>
+<td>管理專案與群組；部分管理頁面</td>
 </tr>
 <tr>
 <td><strong>管理員</strong></td>
-<td>完整平台控制權；可存取所有管理功能</td>
+<td>全部，包含所有管理頁面</td>
 </tr>
 </tbody>
 </table>
-<p>詳見 <a href="concepts/">概念與角色</a> 的完整權限表。</p>
+<p>完整權限表見 <a href="concepts/">概念與角色</a>。</p>
 
 
 

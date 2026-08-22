@@ -1016,7 +1016,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        申請生命週期
+        申請狀態
       
     </span>
   </a>
@@ -1027,7 +1027,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        提交申請
+        送出申請
       
     </span>
   </a>
@@ -1038,27 +1038,16 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        映像檔申請
+        我的申請
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        追蹤申請
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="追蹤申請">
+    <nav class="md-nav" aria-label="我的申請">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         訊息串
@@ -1070,6 +1059,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        映像申請
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1169,7 +1169,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        申請生命週期
+        申請狀態
       
     </span>
   </a>
@@ -1180,7 +1180,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        提交申請
+        送出申請
       
     </span>
   </a>
@@ -1191,27 +1191,16 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        映像檔申請
+        我的申請
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        追蹤申請
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="追蹤申請">
+    <nav class="md-nav" aria-label="我的申請">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         訊息串
@@ -1223,6 +1212,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        映像申請
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1258,11 +1258,11 @@
 
 
 <h1 id="_1">申請<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>申請功能提供了一個結構化的方式，讓您向平台管理員提交工作流程——如配額提升、專案存取權限或自訂映像檔審批。</p>
-<p><strong>適用對象：</strong> 所有使用者皆可提交申請；管理員負責審核。</p>
+<p>有事要找平台管理員時，送一筆申請：加 GPU 配額、要新的儲存空間、加入群組或取得映像存取權、建議功能、回報問題。</p>
+<p><strong>適用對象：</strong> 所有已登入的使用者；管理員負責審核。</p>
 <hr />
 <h2 id="_2">申請類型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>申請表單上的類型標籤以英文顯示：</p>
+<p>表單上的類型標籤是英文：</p>
 <table>
 <thead>
 <tr>
@@ -1273,11 +1273,11 @@
 <tbody>
 <tr>
 <td><strong>Resource</strong></td>
-<td>需要更多 GPU/CPU 配額、更大的儲存容量，或新的資源配置</td>
+<td>要更多 GPU/CPU 配額、更多儲存空間，或新的資源配置</td>
 </tr>
 <tr>
 <td><strong>Access</strong></td>
-<td>需要加入群組、存取共用儲存空間，或取得更高的權限</td>
+<td>加入群組、存取共用儲存空間，或取得更高的角色</td>
 </tr>
 <tr>
 <td><strong>Feature</strong></td>
@@ -1289,60 +1289,57 @@
 </tr>
 <tr>
 <td><strong>Question</strong></td>
-<td>向平台管理員提出一般問題</td>
+<td>向管理員提問</td>
 </tr>
 <tr>
 <td><strong>Other</strong></td>
-<td>不屬於上述類別的其他需求</td>
+<td>其他</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_3">申請生命週期<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>stateDiagram-v2
-    [*] --&gt; Pending : 使用者提交
-    Pending --&gt; Processing : 管理員開始處理
-    Pending --&gt; Completed : 管理員直接解決
-    Pending --&gt; Rejected : 管理員拒絕
-    Processing --&gt; Completed : 管理員解決
-    Processing --&gt; Rejected : 管理員拒絕
-    Processing --&gt; Pending : 管理員退回
-    Rejected --&gt; Pending : 管理員重新開啟
-    Completed --&gt; [*]</code></pre>
+<h2 id="_3">申請狀態<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>狀態</th>
 <th>含義</th>
+<th>你可以做什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Pending</strong></td>
-<td>已提交，等待管理員處理（建立時的預設狀態）</td>
+<td>已送出，等待管理員</td>
+<td>在訊息串補充細節</td>
 </tr>
 <tr>
 <td><strong>Processing</strong></td>
-<td>管理員已開始處理</td>
+<td>管理員處理中</td>
+<td>在訊息串回答管理員的提問</td>
 </tr>
 <tr>
 <td><strong>Completed</strong></td>
-<td>已解決——這是終態，無法重新開啟，訊息串也會關閉</td>
+<td>已解決，訊息串關閉</td>
+<td>還有需要就另外送一筆</td>
 </tr>
 <tr>
 <td><strong>Rejected</strong></td>
-<td>申請被拒——管理員仍可將它退回 Pending 重新開啟</td>
+<td>被退回</td>
+<td>看退回原因後另外送一筆；管理員也可以重新開啟</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_4">提交申請<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><img alt="提交申請表單" src="../../../assets/screenshots/request-new-form.png" />
-<em>圖 1：申請提交表單，包含類型選擇和詳細說明欄位。</em></p>
+<h2 id="_4">送出申請<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
-<li>前往左側選單的 <strong>申請</strong>。</li>
-<li>點擊 <strong>+ 新增申請</strong>（右上角）。</li>
-<li>填寫表單：</li>
+<li>點左側選單的 <strong>申請</strong>。</li>
+<li>點右上角 <strong>+ 新增申請</strong>。</li>
+</ol>
+<p><img alt="新增申請表單" src="../../../assets/screenshots/request-new-form.png" />
+   <em>圖 1：新增申請表單，含類型、標題與說明。</em></p>
+<ol>
+<li>填表單：</li>
 </ol>
 <table>
 <thead>
@@ -1354,32 +1351,45 @@
 <tbody>
 <tr>
 <td><strong>專案</strong></td>
-<td>選填——把申請關聯到某個專案，讓管理員直接看到該專案目前的 GPU 配額。選擇後旁邊會顯示該專案的 GPU 進度條。</td>
+<td>選填。把申請連到你的某個專案，管理員會直接看到該專案目前的 GPU 配額；選擇後旁邊會出現該專案的 GPU 進度條。</td>
 </tr>
 <tr>
 <td><strong>類型</strong></td>
-<td>從標籤格中選擇申請類別（Resource、Access、Feature、Bug、Question、Other）。</td>
+<td>選一個標籤：Resource、Access、Feature、Bug、Question、Other。</td>
 </tr>
 <tr>
 <td><strong>標題</strong></td>
-<td>簡要描述需求（如「為 LLM-Training 專案申請 4 個 GPU 單位」）。</td>
+<td>一句話，例如「為 LLM-Training 專案申請 4 個 GPU 單位」。</td>
 </tr>
 <tr>
 <td><strong>說明</strong></td>
-<td>富文字編輯器——支援格式、程式碼區塊與內嵌圖片上傳。可直接拖曳截圖作為佐證。</td>
+<td>富文字，支援格式、程式碼區塊與內嵌圖片。可直接拖曳截圖。內嵌圖片接受 JPEG、PNG、GIF、WebP，每張最大 10 MiB。</td>
 </tr>
 </tbody>
 </table>
 <ol>
-<li>點擊 <strong>提交</strong>。申請送出後狀態為 <strong>Pending</strong>，沒有草稿功能。</li>
+<li>點 <strong>提交</strong>。申請以 <strong>Pending</strong> 開始，沒有草稿功能。</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">增加審核通過率</p>
-<p>在說明中清楚描述 <strong>為什麼</strong> 需要此資源、<strong>需要多少</strong>，以及 <strong>預計使用多久</strong>。管理員會依據這些資訊做出判斷。</p>
+<p class="admonition-title">寫清楚為什麼、要多少、用多久</p>
+<p>資源申請請寫出專案、GPU 數量、使用期間與研究目的，管理員依這些判斷。</p>
 </div>
 <hr />
-<h2 id="_5">映像檔申請<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>當您需要的 base image 不在平台允許清單中，請使用 <strong>Request Image</strong> 表單（可從專案 Images 標籤或儀表板的 image catalog 進入）。它是結構化的申請類型，管理員可以直接處理而不必往返釐清。</p>
+<h2 id="_5">我的申請<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><img alt="申請列表" src="../../../assets/screenshots/requests-list.png" />
+<em>圖 2：申請列表，顯示類型標籤、狀態與建立日期。</em></p>
+<p>申請頁面列出你送出過的所有申請：類型標籤、狀態、標題、建立日期。點一筆進入訊息串。</p>
+<h3 id="_6">訊息串<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ol>
+<li>點申請卡片。</li>
+<li>在底部輸入框打字。</li>
+<li>點 <strong>傳送</strong>。管理員的回覆會出現在同一個訊息串。</li>
+</ol>
+<p><img alt="申請詳情與訊息串" src="../../../assets/screenshots/request-detail.png" />
+<em>圖 3：申請詳情頁面與訊息串。</em></p>
+<hr />
+<h2 id="_7">映像申請<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>需要的 base image 不在平台允許清單時，用 <strong>Request Image</strong> 表單（從專案 Images 分頁或映像目錄進入）。</p>
 <table>
 <thead>
 <tr>
@@ -1390,53 +1400,36 @@
 <tbody>
 <tr>
 <td><strong>Registry</strong></td>
-<td>選填，留空時預設為 <code>docker.io</code>。</td>
+<td>選填，預設 <code>docker.io</code>。</td>
 </tr>
 <tr>
 <td><strong>Repository</strong></td>
-<td>不含 tag 的映像路徑，例如 <code>pytorch/pytorch</code> 或 <code>nvidia/*</code>（萬用字元申請可用 <code>*</code>）。</td>
+<td>不含 tag 的映像路徑，例如 <code>pytorch/pytorch</code>，或 <code>nvidia/*</code> 申請整個系列。</td>
 </tr>
 <tr>
 <td><strong>Tag</strong></td>
-<td>選填，預設為 <code>latest</code>；當 Repository 是萬用字元時，預設為 <code>*</code>。</td>
+<td>選填，預設 <code>latest</code>；Repository 是萬用字元時預設 <code>*</code>。</td>
 </tr>
 </tbody>
 </table>
-<p>下方會即時預覽管理員實際看到的映像參考。一旦核准，該映像就會加入平台允許清單，使用者可在工作區與部署表單中選用。</p>
-<hr />
-<h2 id="_6">追蹤申請<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p><img alt="申請列表" src="../../../assets/screenshots/requests-list.png" />
-<em>圖 2：申請列表頁面，顯示所有已提交的申請及其狀態。</em></p>
-<p>在 <strong>申請</strong> 列表頁面可追蹤所有申請：</p>
-<ul>
-<li><strong>狀態標籤</strong> — 每筆申請都顯示目前狀態（Pending / Processing / Completed / Rejected）</li>
-<li><strong>訊息串</strong> — 點擊申請可查看管理員回覆的訊息，支援往返討論</li>
-</ul>
-<h3 id="_7">訊息串<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>每筆申請內建訊息串功能，讓您和管理員可以溝通細節：</p>
-<ol>
-<li>點擊申請卡片進入詳情頁面。</li>
-<li>在底部的訊息輸入框中輸入訊息。</li>
-<li>點擊 <strong>傳送</strong>。</li>
-<li>管理員的回覆會即時顯示在同一個訊息串中。</li>
-</ol>
+<p>下方會即時預覽管理員看到的映像參考。核准後，該映像就能在工作區與部署表單中選用。</p>
 <hr />
 <h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>審核通常需要多久？</summary>
-<p>視管理員的工作量而定。大多數申請會在 1–2 個工作天內處理；若超過三天仍未回應，可以在訊息串中追問。</p>
+<summary>審核要多久？</summary>
+<p>多數申請 1–2 個工作天內處理。超過三天沒回應，在訊息串追問。</p>
 </details>
 <details class="question">
-<summary>提交後可以修改或取消申請嗎？</summary>
-<p>不行。請改用訊息串補充或更正內容。申請被標記為 Completed 之後訊息串會關閉，此時只能另外送出一筆新申請。</p>
+<summary>送出後可以修改或取消嗎？</summary>
+<p>不行。在訊息串補充或更正。變成 <strong>Completed</strong> 後訊息串關閉，要另外送一筆。</p>
 </details>
 <details class="question">
-<summary>申請被拒絕了，可以重新提交嗎？</summary>
-<p>可以。先看管理員的拒絕原因，依照回饋調整後另外送出一筆新申請；在說明中提到前一筆的編號會更好處理。</p>
+<summary>申請被退回了，可以再送嗎？</summary>
+<p>可以。看退回原因、調整後再送一筆，說明裡提一下前一筆的編號。</p>
 </details>
 <details class="question">
 <summary>申請解決了但我沒收到通知。</summary>
-<p>請到 <a href="../settings/">設定 → 通知</a> 確認「申請更新」的通知已開啟。</p>
+<p>到 <a href="../settings/">設定 → 通知</a> 打開 <strong>推播通知</strong>。</p>
 </details>
 
 

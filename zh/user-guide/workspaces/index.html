@@ -892,22 +892,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="啟動工作區">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        逐步操作
+        排程佇列與優先級
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -915,7 +909,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        排程佇列與優先序
+        計畫時段
       
     </span>
   </a>
@@ -924,17 +918,6 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        計畫窗口
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         連線到工作區
@@ -970,7 +953,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU 如何配置
+        GPU 如何分配
       
     </span>
   </a>
@@ -978,7 +961,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1229,22 +1212,16 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="啟動工作區">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        逐步操作
+        排程佇列與優先級
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1252,7 +1229,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        排程佇列與優先序
+        計畫時段
       
     </span>
   </a>
@@ -1261,17 +1238,6 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        計畫窗口
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         連線到工作區
@@ -1307,7 +1273,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU 如何配置
+        GPU 如何分配
       
     </span>
   </a>
@@ -1315,7 +1281,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -1346,45 +1312,66 @@
 
 
 <h1 id="_1">工作區<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>工作區（又稱 IDE）是互動式雲端開發環境——JupyterLab、VSCode 或自訂映像檔環境——並可搭配 GPU 資源。</p>
+<p>工作區（又稱 IDE）是互動式雲端開發環境（JupyterLab、VSCode 或自訂映像），並搭配 GPU 資源。</p>
 <p><strong>適用對象：</strong> 所有擁有足夠專案配額的專案成員。</p>
 <hr />
 <h2 id="_2">工作區狀態<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>stateDiagram-v2
-    [*] --&gt; 已停止
-    已停止 --&gt; 啟動中 : 點擊啟動
-    啟動中 --&gt; 運行中 : 啟動完成
-    啟動中 --&gt; 錯誤 : 啟動失敗
-    運行中 --&gt; 停止中 : 點擊停止
-    停止中 --&gt; 已停止 : 已完全停止
-    運行中 --&gt; [*] : 點擊刪除
-    錯誤 --&gt; 已停止 : 重設 / 重試
-    已停止 --&gt; [*] : 點擊刪除</code></pre>
+<table>
+<thead>
+<tr>
+<th>狀態</th>
+<th>意義</th>
+<th>你可以做什麼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>已停止</strong></td>
+<td>工作區未執行，已掛載儲存空間中的資料保留。</td>
+<td><strong>啟動</strong> 或 <strong>刪除</strong></td>
+</tr>
+<tr>
+<td><strong>啟動中</strong></td>
+<td>工作區正在下載映像並啟動。</td>
+<td>等待 30–120 秒</td>
+</tr>
+<tr>
+<td><strong>執行中</strong></td>
+<td>工作區已就緒。</td>
+<td><strong>開啟</strong>、<strong>停止</strong> 或 <strong>刪除</strong></td>
+</tr>
+<tr>
+<td><strong>停止中</strong></td>
+<td>工作區正在關閉。</td>
+<td>等待狀態變為「已停止」</td>
+</tr>
+<tr>
+<td><strong>錯誤</strong></td>
+<td>工作區啟動失敗。</td>
+<td>點名稱查看錯誤詳情，然後重新 <strong>啟動</strong> 或 <strong>刪除</strong></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="_3">工作區列表頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="工作區列表頁面" src="../../../assets/screenshots/workspaces-list.png" />
-<em>圖 1：工作區列表，顯示運行中和已停止的工作區及狀態標籤。</em></p>
-<p>列表頁面顯示您所有工作區的：</p>
+<em>圖 1：工作區列表，顯示執行中和已停止的工作區及狀態標籤。</em></p>
+<p>列表頁面顯示你所有工作區的：</p>
 <ul>
-<li><strong>狀態標籤</strong> — 運行中（綠色）、啟動中（黃色）、已停止（灰色）、錯誤（紅色）</li>
-<li><strong>GPU 數量</strong> — 配置的有效 GPU 數</li>
+<li><strong>狀態標籤</strong> — 執行中（綠色）、啟動中（黃色）、已停止（灰色）、錯誤（紅色）</li>
+<li><strong>GPU 數量</strong> — 分配到的有效 GPU 數</li>
 <li><strong>專案</strong> — 工作區所屬的專案</li>
-<li><strong>開啟</strong> 按鈕 — 僅在狀態為運行中時顯示</li>
+<li><strong>開啟</strong> 按鈕 — 僅在狀態為執行中時顯示</li>
 <li><strong>啟動 / 停止 / 刪除</strong> 操作按鈕</li>
 </ul>
 <hr />
 <h2 id="_4">啟動工作區<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    Form["填寫啟動表單\n（映像檔、GPU、儲存）"] --&gt; Starting["啟動中\n（拉取映像檔）"]
-    Starting --&gt; Running["運行中"]
-    Running --&gt; Open["出現「開啟」按鈕"]</code></pre>
-<h3 id="_5">逐步操作<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ol>
-<li>點擊左側選單的 <strong>工作區</strong>。</li>
-<li>點擊 <strong>+ 新增工作區</strong>（右上角）。</li>
+<li>點左側選單的 <strong>工作區</strong>。</li>
+<li>點 <strong>+ 新增工作區</strong>（右上角）。</li>
 </ol>
 <p><img alt="新增工作區表單" src="../../../assets/screenshots/workspace-new-form.png" />
-   <em>圖 2：新增工作區表單，包含專案、映像檔、GPU 和儲存欄位。</em></p>
+   <em>圖 2：新增工作區表單，包含專案、映像、GPU 和儲存欄位。</em></p>
 <ol>
 <li>填寫表單：</li>
 </ol>
@@ -1405,24 +1392,24 @@
 <td>此工作區的唯一名稱</td>
 </tr>
 <tr>
-<td><strong>映像檔</strong></td>
-<td>容器映像檔——從平台維護的 IDE 映像清單中選擇（JupyterLab 與 VS Code 環境），<strong>不是</strong>專案的映像允許清單。兩者是獨立的：你為專案申請或自行建置的映像可用於<strong>部署工作負載</strong>，但不會出現在工作區的映像選單中。personal project 只要專案允許 Root 容器即可啟用 <strong>Root shell</strong>；群組專案則需要專案與所屬群組都允許。</td>
+<td><strong>映像</strong></td>
+<td>容器映像，從平台維護的 IDE 映像清單中選擇（JupyterLab 與 VS Code 環境），<strong>不是</strong>專案的映像允許清單。你為專案申請或自行建置的映像可用於部署，不會出現在工作區的映像選單中。personal project 只要專案允許 Root 容器即可啟用 <strong>Root shell</strong>；群組專案則需要專案與所屬群組都允許。</td>
 </tr>
 <tr>
 <td><strong>排程佇列</strong></td>
-<td>用於優先序與搶佔政策的平台佇列。已綁定佇列來自專案計畫；<strong>預設</strong>佇列永遠可用。</td>
+<td>用於優先級與搶佔政策的平台佇列。已綁定佇列來自專案計畫；<strong>預設</strong>佇列永遠可用。</td>
 </tr>
 <tr>
 <td><strong>GPU 數量</strong></td>
-<td>請求的實體 GPU 張數；SM 百分比會決定有效配額消耗。</td>
+<td>請求的實體 GPU 張數；SM 比例會決定有效配額消耗。</td>
 </tr>
 <tr>
 <td><strong>GPU 型號</strong></td>
 <td>計畫允許的其中一種 GPU 型號（如 RTX 5090、RTX 6000 Pro）。不在允許清單中的型號不會顯示。</td>
 </tr>
 <tr>
-<td><strong>SM 百分比</strong></td>
-<td>每張 GPU 的計算比例——100% 等於完整一張，較小的值會以部分 GPU 計入配額。</td>
+<td><strong>SM 比例</strong></td>
+<td>每張 GPU 的計算比例。100% 等於完整一張，較小的值會以部分 GPU 計入配額。</td>
 </tr>
 <tr>
 <td><strong>CPU / 記憶體</strong></td>
@@ -1439,9 +1426,9 @@
 </tbody>
 </table>
 <ol>
-<li>點擊 <strong>啟動</strong>。</li>
-<li>工作區以 <strong>啟動中</strong> 狀態出現。等待 30-120 秒讓映像檔下載並完成啟動。</li>
-<li>當狀態變為 <strong>運行中</strong> 時，點擊 <strong>開啟</strong> 在新分頁中開啟 IDE。</li>
+<li>點 <strong>啟動</strong>。</li>
+<li>工作區以 <strong>啟動中</strong> 狀態出現。等待 30–120 秒讓工作區下載映像並啟動。</li>
+<li>當狀態變為 <strong>執行中</strong> 時，點 <strong>開啟</strong> 在新分頁中開啟 IDE。</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">閒置自動停止</p>
@@ -1449,11 +1436,11 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p><strong>Root shell</strong> 只會讓你在自己的容器內成為 <code>root</code>，不會取得叢集或其他人資料的任何額外權限。若開關無法使用，請管理員在該專案啟用 Root 容器；若是群組專案，也需要所屬群組允許。</p>
+<p><strong>Root shell</strong> 只會讓你在自己的容器內成為 <code>root</code>，無法存取平台或其他使用者的資料。若開關無法使用，請管理員在該專案啟用 Root 容器；若是群組專案，也需要所屬群組允許。</p>
 </div>
 <hr />
-<h2 id="_6">排程佇列與優先序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>每個工作區會選擇一個 <strong>排程佇列</strong>。佇列帶有 <strong>優先序</strong>、可選的 <strong>可被搶佔</strong> 旗標，以及由管理員設定的 <strong>deserved GPU</strong> 上限。</p>
+<h2 id="_5">排程佇列與優先級<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>每個工作區會選擇一個 <strong>排程佇列</strong>。佇列帶有 <strong>優先級</strong>、可選的 <strong>可被搶佔</strong> 旗標，以及由管理員設定的 <strong>deserved GPU</strong> 上限。</p>
 <table>
 <thead>
 <tr>
@@ -1463,35 +1450,35 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>較高優先序</strong></td>
-<td>GPU 緊張時，會比低優先序佇列中的工作先被排程。</td>
+<td><strong>較高優先級</strong></td>
+<td>GPU 緊張時，會比低優先級佇列中的工作區先被排程。</td>
 </tr>
 <tr>
 <td><strong>可被搶佔的佇列</strong></td>
-<td>您的工作區可能被停止，把資源讓給更高優先序的工作。</td>
+<td>你的工作區會被停止，把資源讓給更高優先級的工作。</td>
 </tr>
 <tr>
 <td><strong>預設佇列</strong></td>
-<td>最低優先序的 fallback 佇列；仍需要有效的專案計畫，且必須被該計畫允許。</td>
+<td>最低優先級的 fallback 佇列；仍需要有效的專案計畫，且必須被該計畫允許。</td>
 </tr>
 </tbody>
 </table>
-<p>啟動表單會列出專案有效計畫允許的佇列。若沒有綁定計畫，工作區啟動會被拒絕，直到管理員綁定有效計畫。GPU 工作區也會檢查所選型號是否在計畫與佇列允許的範圍內——即使你留白讓平台自動決定型號，一樣會檢查。</p>
+<p>啟動表單會列出專案有效計畫允許的佇列。若沒有綁定計畫，工作區啟動會被拒絕，直到管理員綁定有效計畫。GPU 工作區也會檢查所選型號是否在計畫與佇列允許的範圍內，即使你留白讓平台自動決定型號也一樣。</p>
 <hr />
-<h2 id="_7">計畫窗口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>若專案計畫定義了每週或一次性的 <strong>排程窗口</strong>，使用計畫綁定佇列的工作區只能在窗口開啟期間運行。</p>
+<h2 id="_6">計畫時段<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>若專案計畫定義了每週或一次性的 <strong>排程時段</strong>，使用計畫綁定佇列的工作區只能在時段開啟期間執行。</p>
 <ul>
-<li>列表頁面會即時倒數——<em>計畫窗口將於 HH:MM:SS 後關閉</em>——窗口生效時顯示。</li>
-<li>窗口關閉後，計畫綁定佇列中的工作區可能會被停止。要啟動新的工作區，必須在窗口開啟期間。</li>
-<li>窗口已關閉時，會出現一鍵 <strong>切換為預設佇列</strong> 的橫幅，方便您以較低優先序繼續工作。</li>
+<li>時段生效時，列表頁面會顯示即時倒數：<em>計畫時段將於 HH:MM:SS 後關閉</em>。</li>
+<li>時段關閉後，計畫綁定佇列中的工作區會被停止。要啟動新的工作區，必須在時段開啟期間。</li>
+<li>時段已關閉時，會出現 <strong>切換為預設佇列</strong> 的橫幅，方便你以較低優先級繼續工作。</li>
 </ul>
 <hr />
-<h2 id="_8">連線到工作區<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>工作區進入 <strong>運行中</strong> 狀態後，點擊 <strong>開啟</strong>。平台會直接把瀏覽器接到工作區，不需要任何額外設定。</p>
+<h2 id="_7">連線到工作區<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>工作區進入 <strong>執行中</strong> 狀態後，點 <strong>開啟</strong>。平台會直接把瀏覽器接到工作區，不需要任何額外設定。</p>
 <ul>
-<li><strong>JupyterLab</strong>：開啟於 <code>/lab</code>——標準 Jupyter 介面</li>
-<li><strong>VSCode（code-server）</strong>：開啟於 <code>/</code>——完整的瀏覽器版 VS Code</li>
-<li><strong>自訂映像檔</strong>：開啟於設定的代理路徑</li>
+<li><strong>JupyterLab</strong>：開啟於 <code>/lab</code>，標準 Jupyter 介面</li>
+<li><strong>VSCode（code-server）</strong>：開啟於 <code>/</code>，完整的瀏覽器版 VS Code</li>
+<li><strong>自訂映像</strong>：開啟於設定的代理路徑</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">持久化工作</p>
@@ -1500,7 +1487,7 @@
 <div class="admonition warning">
 <p class="admonition-title">請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code></p>
 <p>工作區已預設 <code>XDG_CONFIG_HOME=~/.local/config</code>，支援 XDG 的工具（code-server、<code>pip config</code>、<code>gh</code> 等）會把設定寫到該處，重啟後仍會保留。</p>
-<p>這個設定是為了相容早期的家目錄儲存，目前仍然保留，讓既有設定留在工具原本就會尋找的位置。若您要手動設定工具路徑，請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code>。</p>
+<p>若你要手動設定工具路徑，請使用 <code>$XDG_CONFIG_HOME</code>，不要寫死 <code>~/.config</code>。</p>
 </div>
 <hr />
 <h2 id="vs">停止 vs. 刪除<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
@@ -1526,20 +1513,20 @@
 <h2 id="ide">批次刪除（管理員 / IDE 管理者）<a class="headerlink" href="#ide" title="Permanent link">&para;</a></h2>
 <p>擁有 <code>IDE_MANAGE</code> 權限的使用者可以勾選多個工作區，使用勾選後出現的 <strong>批次刪除</strong> 工具列進行批次操作。</p>
 <hr />
-<h2 id="gpu">GPU 如何配置<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
-<p>當您選擇 GPU 型號與 SM 百分比時，平台會為工作區保留該比例的 GPU。</p>
+<h2 id="gpu">GPU 如何分配<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>當你選擇 GPU 型號與 SM 比例時，平台會為工作區保留該比例的 GPU。</p>
 <ul>
 <li><strong>GPU 數量</strong> 是請求的實體 GPU 張數。</li>
-<li><strong>SM 百分比</strong> 會影響配額計算與 GPU 共享比例。</li>
+<li><strong>SM 比例</strong> 會影響配額計算與 GPU 共享比例。</li>
 <li>配額會把你所有已提出的工作區都算進去，包含還在等待啟動的。</li>
 <li>在工作區中使用 <code>nvidia-smi</code> 確認可見的裝置。</li>
 <li>若需要獨佔或指定型號，請選擇 100% SM 與計畫允許的型號，或請管理員調整計畫。</li>
 </ul>
 <hr />
-<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_8">常見問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>狀態顯示運行中但「開啟」按鈕未出現。</summary>
-<p>連線可能需要額外幾秒鐘才會就緒。等待 10 秒後重新整理頁面。若按鈕仍未出現，工作區可能一直在重啟——請聯繫管理員。</p>
+<summary>狀態顯示執行中但「開啟」按鈕未出現。</summary>
+<p>連線需要額外幾秒鐘才會就緒。等待 10 秒後重新整理頁面。若按鈕仍未出現，表示工作區正在反覆重啟，請聯繫管理員。</p>
 </details>
 <details class="question">
 <summary>我的工作區自動停止了。</summary>
@@ -1547,19 +1534,19 @@
 </details>
 <details class="question">
 <summary>我看到錯誤狀態，該怎麼辦？</summary>
-<p>點擊工作區名稱查看錯誤詳情。常見原因：映像檔下載失敗、配額不足，或所選的 GPU 型號目前無法使用。如需協助，請提交 <a href="../requests/">申請</a>。</p>
+<p>點工作區名稱查看錯誤詳情。常見原因：映像下載失敗、配額不足，或所選的 GPU 型號目前無法使用。如需協助，請提交 <a href="../requests/">申請</a>。</p>
 </details>
 <details class="question">
-<summary>可以同時運行多個工作區嗎？</summary>
+<summary>可以同時執行多個工作區嗎？</summary>
 <p>可以，只要它們的 GPU 消耗總量不超過專案配額。</p>
 </details>
 <details class="question">
 <summary>工作區被以「Plan window expired」原因驅逐了。</summary>
-<p>排程窗口關閉時，計畫綁定佇列中的工作區會被停止。請於下個窗口開啟後重新啟動，或透過列表頁的橫幅將工作區切換到預設佇列。</p>
+<p>排程時段關閉時，計畫綁定佇列中的工作區會被停止。請於下個時段開啟後重新啟動，或透過列表頁的橫幅將工作區切換到預設佇列。</p>
 </details>
 <details class="question">
 <summary>為什麼啟動表單裡有些 GPU 型號被灰掉？</summary>
-<p>專案綁定的計畫指定了允許的 GPU 型號清單，清單外的型號不會顯示。請專案管理者改綁包含您所需型號的計畫。</p>
+<p>專案綁定的計畫指定了允許的 GPU 型號清單，清單外的型號不會顯示。請專案管理者改綁包含你所需型號的計畫。</p>
 </details>
 
 
