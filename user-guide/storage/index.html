@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -810,6 +812,34 @@
     
   
     Workspaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Desktops
   
 
     
@@ -1273,7 +1303,7 @@
 <p class="admonition-title">A workspace with no volume keeps nothing</p>
 <p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else are lost when the workspace stops, restarts, or is deleted. The platform warns you before it starts a workspace with no volume.</p>
 </div>
-<p><strong>Access:</strong> an admin creates personal storage, so not every account has one. Check <strong>Storage → Personal</strong> and ask an admin if it is missing. Group admins manage access to group volumes; only current group members can hold permissions on them.</p>
+<p><strong>Access:</strong> an admin creates personal storage, so not every account has one. Check the <strong>My Storage</strong> tab on the Storage page and ask an admin if it is missing. Group admins manage access to group volumes; only current group members can hold permissions on them.</p>
 <hr />
 <h2 id="storage-types">Storage types<a class="headerlink" href="#storage-types" title="Permanent link">&para;</a></h2>
 <table>
@@ -1307,20 +1337,20 @@
 </tr>
 <tr>
 <td><strong>Managed from</strong></td>
-<td><strong>Storage → Personal</strong></td>
-<td><strong>Storage → Group</strong></td>
+<td><strong>My Storage</strong> tab</td>
+<td><strong>Group Storage</strong> tab</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="storage-page">Storage page<a class="headerlink" href="#storage-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Storage list page" src="../../assets/screenshots/storage-list.png" />
-<em>Figure 1: Storage page with the Personal and Group tabs.</em></p>
+<em>Figure 1: Storage page with the My Storage and Group Storage tabs.</em></p>
 <ul>
-<li><strong>Personal</strong> — your own volume</li>
-<li><strong>Group</strong> — volumes of the groups you belong to</li>
+<li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>) and the file browser buttons. The card shows no capacity.</li>
+<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong>, <strong>Available</strong>, or <strong>Lost</strong>), file browser status, capacity (for example <code>50Gi</code>), access mode, your permission, group, created date, and the action icons.</li>
 </ul>
-<p>Each volume shows its name, capacity (for example <code>50Gi</code>), status (<strong>Available</strong>, <strong>Bound</strong>, <strong>Pending</strong>), and buttons to open the file browser. Group admins also see <strong>Permissions</strong>.</p>
+<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page; anyone else is sent back to the Storage page.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1337,11 +1367,11 @@
 <hr />
 <h2 id="browse-files">Browse files<a class="headerlink" href="#browse-files" title="Permanent link">&para;</a></h2>
 <ol>
-<li>On <strong>Storage → Personal</strong>, click <strong>Start</strong> to start the file browser; wait until it shows ready.</li>
-<li>Click <strong>Browse</strong>. The browser opens in a new tab.</li>
-<li>When you are done, click <strong>Stop</strong>.</li>
+<li>On the <strong>My Storage</strong> tab, click <strong>Start FileBrowser</strong>; wait until the badge shows <strong>Running</strong>.</li>
+<li>Click <strong>Open FileBrowser</strong>. The browser opens in a new tab.</li>
+<li>When you are done, click <strong>Stop FileBrowser</strong>.</li>
 </ol>
-<p>On a group volume, click <strong>Browse Files</strong>. The button is disabled when your permission on that volume is <strong>None</strong>.</p>
+<p>On a group volume, use the icons in the <strong>Actions</strong> column: <strong>Start FileBrowser</strong>, then <strong>Browse</strong>, then <strong>Stop FileBrowser</strong>. When your permission on that volume is <strong>None</strong>, these icons are hidden.</p>
 <p><img alt="Storage file browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 2: File browser with upload, download, and delete.</em></p>
 <p>In the browser you can navigate folders, upload (drag and drop or file picker), download files and folders, create folders, and delete. Deletions are immediate.</p>
@@ -1352,16 +1382,11 @@
 <hr />
 <h2 id="mount-storage-in-a-workspace">Mount storage in a workspace<a class="headerlink" href="#mount-storage-in-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
-<li>In the <strong>New Workspace</strong> form, open the <strong>Storage</strong> section.</li>
-<li>Click <strong>+ Add Storage</strong>.</li>
-<li>Pick a volume.</li>
-<li>Set the <strong>Mount Path</strong> (for example <code>/data</code>).</li>
-<li>Repeat for more volumes.</li>
+<li>In the <strong>New Workspace</strong> form, find the <strong>Storage Volumes</strong> section. It lists your personal storage and the group volumes bound to the selected project.</li>
+<li>Tick the volumes you want.</li>
+<li>Click <strong>Start</strong>.</li>
 </ol>
-<div class="admonition tip">
-<p class="admonition-title">Keep mount paths stable</p>
-<p>Use the same mount paths in every workspace so your code always finds data at the same place.</p>
-</div>
+<p>Mount paths are fixed: personal storage at <code>/home/&lt;your username&gt;</code>, each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</p>
 <hr />
 <h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
 <p>Group volumes have a per-user permission:</p>
@@ -1421,7 +1446,7 @@
 </details>
 <details class="question">
 <summary>Files I uploaded in the browser do not show in my workspace.</summary>
-<p>Check the mount path in the workspace. Volumes attach at start, but files uploaded later appear immediately; no restart needed.</p>
+<p>Look under <code>/home/&lt;your username&gt;</code> (personal) or <code>/mnt/shared/&lt;volume name&gt;</code> (group). Volumes attach at start, but files uploaded later appear immediately; no restart needed.</p>
 </details>
 
 

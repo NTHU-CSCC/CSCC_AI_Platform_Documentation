@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -989,6 +991,34 @@
     
   
     工作區
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
   
 
     
@@ -1439,8 +1469,8 @@
 執行 <code>route print | findstr 192.168.109</code>。輸出應該要有一條經過
 OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新匯入最新版
 <code>Platform-VPN.ovpn</code>。</p>
-<p>VPN 設定檔會接受 <code>cscc.nthu.edu.tw</code> 所需的平台 DNS，但不啟用
-<code>block-outside-dns</code>。可用
+<p>VPN 設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器，並啟用
+<code>block-outside-dns</code>，所以連線期間 Windows 只會用這台 DNS。可用
 <code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 確認平台 DNS，或用
 <code>http://192.168.109.1:30080</code> 做低階連線檢查。</p>
 </div>
@@ -1470,7 +1500,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>驗證碼</strong></td>
-<td>輸入圖片中顯示的 4 位字元（不區分大小寫）</td>
+<td>輸入圖片中顯示的 4 位數字</td>
 </tr>
 </tbody>
 </table>
@@ -1480,11 +1510,8 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <p><img alt="登入頁面" src="../../../assets/screenshots/signin-form.png" />
 <em>圖 1：包含使用者名稱、密碼和驗證碼欄位的登入頁面。</em></p>
 <div class="admonition tip">
-<p class="admonition-title">驗證碼提示</p>
-<ul>
-<li>驗證碼 <strong>不區分大小寫</strong>：<code>Ab3K</code> 和 <code>ab3k</code> 都有效。</li>
-<li>點驗證碼圖片可 <strong>重新整理</strong> 驗證碼。</li>
-</ul>
+<p class="admonition-title">驗證碼</p>
+<p>看不清楚時，點驗證碼圖片可 <strong>重新整理</strong> 驗證碼。</p>
 </div>
 <hr />
 <h2 id="4">步驟 4 — 瀏覽首頁儀表板<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
@@ -1498,7 +1525,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </thead>
 <tbody>
 <tr>
-<td><strong>GPU 可用性</strong></td>
+<td><strong>平台剩餘 GPU</strong></td>
 <td>平台上可用與已分配的 GPU 單位</td>
 </tr>
 <tr>
@@ -1506,25 +1533,25 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <td>匿名化的 GPU 節點卡片，顯示每張 GPU 的使用量</td>
 </tr>
 <tr>
-<td><strong>專案摘要</strong></td>
-<td>你的活躍專案及狀態</td>
+<td>專案數（標題列）</td>
+<td>你所屬的專案數，以及其中有計畫的專案數</td>
 </tr>
 <tr>
-<td><strong>資源使用量</strong></td>
-<td>專案配額的即時使用量</td>
+<td><strong>資源使用歷史</strong></td>
+<td>每個有計畫的專案的配額即時使用量</td>
 </tr>
 <tr>
 <td><strong>最近活動</strong></td>
-<td>你和團隊的近期操作</td>
+<td>你最近送出的申請</td>
 </tr>
 <tr>
-<td><strong>GPU 任務</strong></td>
-<td>使用 GPU 的執行中工作區，含 SM 比例和記憶體資訊</td>
+<td><strong>我的 GPU 任務</strong></td>
+<td>你執行中的 GPU 任務，含 GPU 比例、記憶體與執行時間</td>
 </tr>
 </tbody>
 </table>
 <p><img alt="首頁儀表板概覽" src="../../../assets/screenshots/home-dashboard-overview.png" />
-<em>圖 2：首頁儀表板，顯示 GPU 可用性卡片和活動任務表格。</em></p>
+<em>圖 2：首頁儀表板，顯示 GPU 可用量、GPU Cluster Status 與我的 GPU 任務。</em></p>
 <hr />
 <h2 id="5">步驟 5 — 檢查你的專案<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1542,7 +1569,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <h2 id="6">步驟 6 — 啟動你的第一個工作區<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <ol>
 <li>點左側選單 <strong>工作區</strong>。</li>
-<li>點 <strong>+ 新增工作區</strong>。</li>
+<li>點 <strong>新工作區</strong>。</li>
 <li>填寫啟動表單：</li>
 </ol>
 <table>
@@ -1558,12 +1585,12 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <td>選擇你的專案（個人或團隊）</td>
 </tr>
 <tr>
-<td><strong>IDE 類型</strong></td>
+<td><strong>環境</strong></td>
 <td>JupyterLab 或 VS Code</td>
 </tr>
 <tr>
 <td><strong>映像</strong></td>
-<td>Base、PyTorch、TensorFlow 或自訂</td>
+<td>平台提供的映像之一：Base Notebook、PyTorch、TensorFlow、CUDA Dev，或「(Root)」版本</td>
 </tr>
 <tr>
 <td><strong>CPU</strong></td>
@@ -1575,16 +1602,24 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>GPU</strong></td>
-<td>GPU 數量與選用 SM 比例（例如 1 張 GPU、100% SM）</td>
+<td>GPU 數量</td>
 </tr>
 <tr>
-<td><strong>儲存</strong></td>
-<td>掛載你的個人或群組儲存空間</td>
+<td><strong>算力額度 (%)</strong></td>
+<td>每張 GPU 的算力比例；100% 是一整張</td>
+</tr>
+<tr>
+<td><strong>GPU 記憶體額度 (%)</strong></td>
+<td>每張 GPU 的記憶體比例；保持 <strong>跟隨算力</strong> 就和算力額度相同</td>
+</tr>
+<tr>
+<td><strong>存儲磁碟區</strong></td>
+<td>勾選要掛載的儲存空間。個人儲存掛在 <code>/home/&lt;你的帳號&gt;</code>，群組儲存空間掛在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code></td>
 </tr>
 </tbody>
 </table>
 <ol>
-<li>點 <strong>建立</strong>。</li>
+<li>點 <strong>啟動</strong>。</li>
 <li>等待狀態從 <strong>啟動中</strong>（黃色）變為 <strong>執行中</strong>（綠色）。</li>
 <li>點 <strong>開啟</strong>，IDE 將在新分頁中開啟。</li>
 </ol>
@@ -1595,7 +1630,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <ul>
 <li>確認你的專案有足夠的 <strong>配額</strong> 剩餘。</li>
 <li>檢查排程 <strong>計畫時段</strong> 是否已開啟（請詢問管理員）。</li>
-<li>自訂映像首次下載需要較長時間。</li>
+<li>GPU 映像首次下載需要較長時間。</li>
 </ul>
 </div>
 <hr />
@@ -1610,7 +1645,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </div>
 <ol>
 <li>前往 <strong>專案 → [你的專案] → Config 分頁</strong>。</li>
-<li>點 <strong>+ 新增設定檔</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
+<li>點 <strong>新增檔案</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
    （Resource Wizard）</strong> 直接填欄位，不必手寫 YAML。</li>
 <li>
 <p>定義你的容器：</p>
@@ -1673,10 +1708,10 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <hr />
 <h2 id="8">步驟 8 — 管理你的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <ol>
-<li>點左側選單 <strong>儲存</strong>（資源區塊）。</li>
-<li>在你的個人儲存上點 <strong>啟動</strong> 以啟動檔案瀏覽器。</li>
-<li>點 <strong>瀏覽</strong>，將開啟 FileBrowser 介面，你可以上傳、下載、重新命名和整理檔案。</li>
-<li>此處儲存的檔案在工作區重新啟動後仍會保留。</li>
+<li>點左側選單 <strong>儲存</strong>（資源區塊），會開在 <strong>個人存儲</strong> 分頁。</li>
+<li>點 <strong>啟動 FileBrowser</strong>。</li>
+<li>點 <strong>開啟 FileBrowser</strong>，將開啟 FileBrowser 介面，你可以上傳、下載、重新命名和整理檔案。</li>
+<li>此處的檔案不會跟著工作區消失。用完點 <strong>停止 FileBrowser</strong>。</li>
 </ol>
 <p><img alt="儲存瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 7：FileBrowser 介面，顯示個人儲存內容。</em></p>
@@ -1715,7 +1750,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </details>
 <details class="question">
 <summary>驗證碼輸入正確但仍顯示錯誤</summary>
-<p>驗證碼不區分大小寫。若圖片不清楚，<strong>點圖片</strong> 取得新驗證碼。驗證碼不會使用 <code>0/O</code>、<code>1/I</code> 這類容易混淆的字元。</p>
+<p>驗證碼是 4 位數字。若圖片不清楚，<strong>點圖片</strong> 取得新驗證碼。</p>
 </details>
 <details class="question">
 <summary>登入失敗，顯示「帳密錯誤」</summary>

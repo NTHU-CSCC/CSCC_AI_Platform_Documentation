@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -810,6 +812,34 @@
     
   
     工作區
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
   
 
     
@@ -1273,7 +1303,7 @@
 <p class="admonition-title">沒掛儲存空間的工作區什麼都不會留</p>
 <p>個人儲存掛在 <code>/home/&lt;你的帳號&gt;</code>，每個群組儲存空間掛在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>。寫在其他位置的檔案，工作區停止、重啟或刪除時就沒了。平台在啟動沒有儲存空間的工作區前會警告你。</p>
 </div>
-<p><strong>適用對象：</strong> 個人儲存由管理員建立，不是每個帳號都有。到 <strong>儲存 → 個人</strong> 確認，沒有就請管理員建立。群組儲存空間的權限由群組管理員管理，只有現任群組成員能擁有權限。</p>
+<p><strong>適用對象：</strong> 個人儲存由管理員建立，不是每個帳號都有。到儲存頁的 <strong>個人存儲</strong> 分頁確認，沒有就請管理員建立。群組儲存空間的權限由群組管理員管理，只有現任群組成員能擁有權限。</p>
 <hr />
 <h2 id="_2">儲存類型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
@@ -1307,20 +1337,20 @@
 </tr>
 <tr>
 <td><strong>在哪管理</strong></td>
-<td><strong>儲存 → 個人</strong></td>
-<td><strong>儲存 → 群組</strong></td>
+<td><strong>個人存儲</strong> 分頁</td>
+<td><strong>群組存儲</strong> 分頁</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_3">儲存頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="儲存列表頁面" src="../../../assets/screenshots/storage-list.png" />
-<em>圖 1：儲存頁面的個人與群組分頁。</em></p>
+<em>圖 1：儲存頁面的個人存儲與群組存儲分頁。</em></p>
 <ul>
-<li><strong>個人</strong> — 你自己的儲存空間</li>
-<li><strong>群組</strong> — 你所屬群組的儲存空間</li>
+<li><strong>個人存儲</strong> — 你自己的儲存空間：一張卡片，顯示檔案瀏覽器狀態（<strong>Stopped</strong>、<strong>Starting</strong>、<strong>Running</strong>、<strong>Stopping</strong>、<strong>Error</strong>）和檔案瀏覽器按鈕。卡片不顯示容量。</li>
+<li><strong>群組存儲</strong> — 你所屬群組的儲存空間，以表格列出：名稱、狀態（<strong>Active</strong>、<strong>Available</strong> 或 <strong>Lost</strong>）、檔案瀏覽器狀態、容量（例如 <code>50Gi</code>）、存取模式、你的權限、群組、建立時間和操作圖示。</li>
 </ul>
-<p>每個儲存空間顯示名稱、容量（例如 <code>50Gi</code>）、狀態（<strong>Available</strong>、<strong>Bound</strong>、<strong>Pending</strong>）和開啟檔案瀏覽器的按鈕。群組管理員另外會看到 <strong>權限</strong>。</p>
+<p>每位群組成員都看得到群組儲存空間的 <strong>權限</strong> 圖示，但只有群組管理者與管理員打得開權限頁；其他人會被送回儲存頁。</p>
 <hr />
 <h2 id="_4">儲存空間的生命週期<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1337,11 +1367,11 @@
 <hr />
 <h2 id="_5">瀏覽檔案<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
-<li>在 <strong>儲存 → 個人</strong> 點 <strong>啟動</strong>，等檔案瀏覽器就緒。</li>
-<li>點 <strong>瀏覽</strong>，瀏覽器在新分頁開啟。</li>
-<li>用完點 <strong>停止</strong>。</li>
+<li>在 <strong>個人存儲</strong> 分頁點 <strong>啟動 FileBrowser</strong>，等狀態變成 <strong>Running</strong>。</li>
+<li>點 <strong>開啟 FileBrowser</strong>，瀏覽器在新分頁開啟。</li>
+<li>用完點 <strong>停止 FileBrowser</strong>。</li>
 </ol>
-<p>群組儲存空間點 <strong>瀏覽檔案</strong>。你在該儲存空間的權限是 <strong>無</strong> 時按鈕不可用。</p>
+<p>群組儲存空間用 <strong>操作</strong> 欄的圖示：先 <strong>啟動 FileBrowser</strong>，再 <strong>瀏覽</strong>，用完 <strong>停止 FileBrowser</strong>。你在該儲存空間的權限是 <strong>無權限</strong> 時，這些圖示不會出現。</p>
 <p><img alt="檔案瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
 <em>圖 2：檔案瀏覽器，可上傳、下載、刪除。</em></p>
 <p>在瀏覽器裡可以切換資料夾、上傳（拖曳或選檔）、下載檔案與資料夾、建立資料夾、刪除。刪除立即生效。</p>
@@ -1352,16 +1382,11 @@
 <hr />
 <h2 id="_6">在工作區掛載儲存空間<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ol>
-<li>在 <strong>新增工作區</strong> 表單展開 <strong>儲存</strong> 區塊。</li>
-<li>點 <strong>+ 新增掛載</strong>。</li>
-<li>選一個儲存空間。</li>
-<li>設定 <strong>掛載路徑</strong>（例如 <code>/data</code>）。</li>
-<li>要掛更多就重複。</li>
+<li>在 <strong>新工作區</strong> 表單找到 <strong>存儲磁碟區</strong> 區塊，裡面列出你的個人儲存和綁定到所選專案的群組儲存空間。</li>
+<li>勾選要掛的儲存空間。</li>
+<li>點 <strong>啟動</strong>。</li>
 </ol>
-<div class="admonition tip">
-<p class="admonition-title">掛載路徑固定</p>
-<p>每個工作區都用一樣的掛載路徑，程式才會一直在同一個地方找到資料。</p>
-</div>
+<p>掛載路徑是固定的：個人儲存在 <code>/home/&lt;你的帳號&gt;</code>，每個群組儲存空間在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>。</p>
 <hr />
 <h2 id="_7">權限<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>群組儲存空間對每位使用者有一個權限：</p>
@@ -1421,7 +1446,7 @@
 </details>
 <details class="question">
 <summary>我在瀏覽器上傳的檔案沒出現在工作區。</summary>
-<p>確認工作區的掛載路徑。儲存空間在啟動時掛載，之後上傳的檔案會立即出現，不用重啟。</p>
+<p>到 <code>/home/&lt;你的帳號&gt;</code>（個人）或 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>（群組）底下找。儲存空間在啟動時掛載，之後上傳的檔案會立即出現，不用重啟。</p>
 </details>
 
 

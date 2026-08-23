@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -984,6 +986,34 @@
     
   
     Workspaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Desktops
   
 
     
@@ -1414,7 +1444,7 @@
 <hr />
 <h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>A <strong>plan window</strong> is the time interval during which a project's plan-bound queues are usable. Outside the window, those queues stop accepting new workloads and may stop the ones already running. Workloads on the default queue are not affected.</p>
-<p>The dashboard shows live countdowns for the next boundary (open/close), so users can avoid eviction by switching to the default queue or waiting for the next window.</p>
+<p>The dashboard shows live countdowns for the next boundary (open/close). When a window has closed, the deploy dialog offers <strong>Switch to Default Queue</strong>; this applies to deployments only. A workspace cannot change queue; create a new one inside the next window.</p>
 <hr />
 <h2 id="gpu-claims">GPU Claims<a class="headerlink" href="#gpu-claims" title="Permanent link">&para;</a></h2>
 <p>Every GPU on the platform is handed out through a <strong>claim</strong>. A claim describes:</p>
@@ -1539,12 +1569,6 @@
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 </tr>
-<tr>
-<td>Delete project</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✓</td>
-</tr>
 </tbody>
 </table>
 <h3 id="group-roles">Group Roles<a class="headerlink" href="#group-roles" title="Permanent link">&para;</a></h3>
@@ -1552,7 +1576,8 @@
 <thead>
 <tr>
 <th>Permission</th>
-<th style="text-align: center;">Member</th>
+<th style="text-align: center;">User</th>
+<th style="text-align: center;">Manager</th>
 <th style="text-align: center;">Admin</th>
 </tr>
 </thead>
@@ -1561,19 +1586,23 @@
 <td>Access group storage</td>
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
 </tr>
 <tr>
 <td>View group members</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td>Set storage permissions</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
 <td>Add/remove members</td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td>Set storage permissions</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 </tr>

@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -984,6 +986,34 @@
     
   
     工作區
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
   
 
     
@@ -1414,7 +1444,7 @@
 <hr />
 <h2 id="_5">計畫時段<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><strong>計畫時段</strong> 是計畫綁定佇列可使用的時間區段。窗口以外，這些佇列不再接受新的工作負載，正在執行的也可能被停止；預設佇列不受影響。</p>
-<p>儀表板會顯示距離下個邊界（開啟／關閉）的即時倒數，使用者可以選擇切到預設佇列或等下一個窗口開啟，避免被驅逐。</p>
+<p>儀表板會顯示距離下個邊界（開啟／關閉）的即時倒數。時段關閉後，部署對話框會提供 <strong>切換至預設佇列</strong>，這只適用於部署。工作區不能換佇列，請在下個時段重新建立。</p>
 <hr />
 <h2 id="gpu-claim">GPU Claim<a class="headerlink" href="#gpu-claim" title="Permanent link">&para;</a></h2>
 <p>平台上的每一份 GPU 都是透過 <strong>claim</strong> 配發的。每個 claim 描述：</p>
@@ -1539,12 +1569,6 @@
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 </tr>
-<tr>
-<td>刪除專案</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">✓</td>
-</tr>
 </tbody>
 </table>
 <h3 id="_9">群組角色<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
@@ -1552,7 +1576,8 @@
 <thead>
 <tr>
 <th>權限</th>
-<th style="text-align: center;">成員</th>
+<th style="text-align: center;">使用者</th>
+<th style="text-align: center;">管理者</th>
 <th style="text-align: center;">管理員</th>
 </tr>
 </thead>
@@ -1561,19 +1586,23 @@
 <td>存取群組儲存</td>
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
 </tr>
 <tr>
 <td>查看群組成員</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td>設定儲存權限</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">✓</td>
 </tr>
 <tr>
 <td>新增/移除成員</td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">✓</td>
-</tr>
-<tr>
-<td>設定儲存權限</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✓</td>
 </tr>

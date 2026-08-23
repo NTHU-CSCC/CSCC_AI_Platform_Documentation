@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -989,6 +991,34 @@
     
   
     Workspaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Desktops
   
 
     
@@ -1439,10 +1469,11 @@ If the name resolves and the dashboard opens, you are connected. If not, check t
 PowerShell and run <code>route print | findstr 192.168.109</code>. The output should
 include a <code>192.168.109.0</code> route through the OpenVPN adapter. If it is
 missing, re-import the latest <code>Platform-VPN.ovpn</code>.</p>
-<p>The VPN profile accepts platform DNS for <code>cscc.nthu.edu.tw</code>, but does not
-enable <code>block-outside-dns</code>. Use <code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code>
-to confirm platform DNS and <code>http://192.168.109.1:30080</code> for low-level
-connectivity checks.</p>
+<p>The VPN profile pushes the platform DNS server for <code>cscc.nthu.edu.tw</code> and
+turns on <code>block-outside-dns</code>, so Windows uses only that DNS server while
+connected. Use <code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> to confirm
+platform DNS and <code>http://192.168.109.1:30080</code> for low-level connectivity
+checks.</p>
 </div>
 <hr />
 <h2 id="step-3-sign-in-to-the-platform">Step 3 — Sign in to the platform<a class="headerlink" href="#step-3-sign-in-to-the-platform" title="Permanent link">&para;</a></h2>
@@ -1470,7 +1501,7 @@ connectivity checks.</p>
 </tr>
 <tr>
 <td><strong>CAPTCHA</strong></td>
-<td>Type the 4-character code shown in the image (case-insensitive)</td>
+<td>Type the 4-digit number shown in the image</td>
 </tr>
 </tbody>
 </table>
@@ -1480,11 +1511,8 @@ connectivity checks.</p>
 <p><img alt="Sign-in page" src="../../assets/screenshots/signin-form.png" />
 <em>Figure 1: Login page with username, password, and CAPTCHA fields.</em></p>
 <div class="admonition tip">
-<p class="admonition-title">CAPTCHA tips</p>
-<ul>
-<li>The code is <strong>case-insensitive</strong>: <code>Ab3K</code> and <code>ab3k</code> both work.</li>
-<li>Click the CAPTCHA image to <strong>refresh</strong> it if it is hard to read.</li>
-</ul>
+<p class="admonition-title">CAPTCHA</p>
+<p>Click the CAPTCHA image to <strong>refresh</strong> it if it is hard to read.</p>
 </div>
 <hr />
 <h2 id="step-4-explore-the-home-dashboard">Step 4 — Explore the Home Dashboard<a class="headerlink" href="#step-4-explore-the-home-dashboard" title="Permanent link">&para;</a></h2>
@@ -1498,7 +1526,7 @@ connectivity checks.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>GPU Availability</strong></td>
+<td><strong>Platform GPU Available</strong></td>
 <td>Free vs. allocated GPU units across the platform</td>
 </tr>
 <tr>
@@ -1506,25 +1534,25 @@ connectivity checks.</p>
 <td>Anonymised GPU node cards showing how much of each GPU is in use</td>
 </tr>
 <tr>
-<td><strong>Project Summary</strong></td>
-<td>Your active projects and their status</td>
+<td>Project count (header line)</td>
+<td>How many projects you belong to, and how many of them have a plan</td>
 </tr>
 <tr>
-<td><strong>Resource Usage</strong></td>
-<td>Live project quota usage</td>
+<td><strong>Resource Usage History</strong></td>
+<td>Live quota usage for each project that has a plan</td>
 </tr>
 <tr>
 <td><strong>Recent Activity</strong></td>
-<td>Recent actions by you and your team</td>
+<td>Your recent requests</td>
 </tr>
 <tr>
-<td><strong>Active GPU Jobs</strong></td>
-<td>Running workspaces with GPU, SM share, and memory</td>
+<td><strong>My GPU Jobs</strong></td>
+<td>Your running GPU jobs with GPU share, memory, and running time</td>
 </tr>
 </tbody>
 </table>
 <p><img alt="Home dashboard overview" src="../../assets/screenshots/home-dashboard-overview.png" />
-<em>Figure 2: Home dashboard showing GPU availability, GPU cluster status, and active jobs.</em></p>
+<em>Figure 2: Home dashboard showing GPU availability, GPU cluster status, and My GPU Jobs.</em></p>
 <hr />
 <h2 id="step-5-check-your-project">Step 5 — Check your project<a class="headerlink" href="#step-5-check-your-project" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1542,7 +1570,7 @@ connectivity checks.</p>
 <h2 id="step-6-launch-your-first-workspace">Step 6 — Launch your first workspace<a class="headerlink" href="#step-6-launch-your-first-workspace" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Navigate to <strong>Workspaces</strong> in the left sidebar.</li>
-<li>Click <strong>+ New Workspace</strong>.</li>
+<li>Click <strong>New Workspace</strong>.</li>
 <li>Fill in the launch form:</li>
 </ol>
 <table>
@@ -1558,12 +1586,12 @@ connectivity checks.</p>
 <td>Select your project (personal or team)</td>
 </tr>
 <tr>
-<td><strong>IDE Type</strong></td>
+<td><strong>Environment</strong></td>
 <td>JupyterLab or VS Code</td>
 </tr>
 <tr>
 <td><strong>Image</strong></td>
-<td>Base, PyTorch, TensorFlow, or custom</td>
+<td>One of the platform's images: Base Notebook, PyTorch, TensorFlow, CUDA Dev, or a "(Root)" variant</td>
 </tr>
 <tr>
 <td><strong>CPU</strong></td>
@@ -1575,16 +1603,24 @@ connectivity checks.</p>
 </tr>
 <tr>
 <td><strong>GPU</strong></td>
-<td>Number of GPUs and optional SM share (e.g., 1 GPU at 100% SM)</td>
+<td>Number of GPUs</td>
 </tr>
 <tr>
-<td><strong>Storage</strong></td>
-<td>Mount your personal or group storage volume</td>
+<td><strong>Compute quota (%)</strong></td>
+<td>Share of each GPU's compute; 100% is a full GPU</td>
+</tr>
+<tr>
+<td><strong>GPU memory quota (%)</strong></td>
+<td>Share of each GPU's memory; leave <strong>Follow compute</strong> on to match the compute quota</td>
+</tr>
+<tr>
+<td><strong>Storage Volumes</strong></td>
+<td>Tick the volumes to mount. Personal storage mounts at <code>/home/&lt;your username&gt;</code>, group volumes at <code>/mnt/shared/&lt;volume name&gt;</code></td>
 </tr>
 </tbody>
 </table>
 <ol>
-<li>Click <strong>Create</strong>.</li>
+<li>Click <strong>Start</strong>.</li>
 <li>Wait for the status badge to change from <strong>Starting</strong> (yellow) → <strong>Running</strong> (green).</li>
 <li>Click <strong>Open</strong>. Your IDE opens in a new browser tab.</li>
 </ol>
@@ -1595,7 +1631,7 @@ connectivity checks.</p>
 <ul>
 <li>Verify your project has sufficient <strong>quota</strong> remaining.</li>
 <li>Check if the scheduling <strong>plan window</strong> is currently active (ask your admin).</li>
-<li>A custom image takes longer to download on first launch.</li>
+<li>GPU images take longer to download on first launch.</li>
 </ul>
 </div>
 <hr />
@@ -1612,7 +1648,7 @@ project manager.</p>
 </div>
 <ol>
 <li>Go to <strong>Projects → [your project] → Config</strong> tab.</li>
-<li>Click <strong>+ New Config</strong>. Paste a YAML manifest, or use the built-in
+<li>Click <strong>New File</strong>. Paste a YAML manifest, or use the built-in
    <strong>Resource Wizard</strong> to fill in the fields without hand-writing YAML.</li>
 <li>
 <p>Define your container:</p>
@@ -1676,10 +1712,10 @@ project manager.</p>
 <hr />
 <h2 id="step-8-manage-your-storage">Step 8 — Manage your storage<a class="headerlink" href="#step-8-manage-your-storage" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Navigate to <strong>Storage</strong> in the left sidebar (Resources section).</li>
-<li>Click <strong>Start</strong> on your personal storage to launch the file browser.</li>
-<li>Click <strong>Browse</strong>. A FileBrowser window opens where you can upload, download, rename, and organise files.</li>
-<li>Files stored here persist across workspace restarts.</li>
+<li>Navigate to <strong>Storage</strong> in the left sidebar (Resources section). The <strong>My Storage</strong> tab opens.</li>
+<li>Click <strong>Start FileBrowser</strong>.</li>
+<li>Click <strong>Open FileBrowser</strong>. A FileBrowser window opens where you can upload, download, rename, and organise files.</li>
+<li>Files stored here persist across workspaces. Click <strong>Stop FileBrowser</strong> when you are done.</li>
 </ol>
 <p><img alt="Storage browser" src="../../assets/screenshots/storage-browser.png" />
 <em>Figure 7: FileBrowser interface showing personal storage contents.</em></p>
@@ -1718,7 +1754,7 @@ project manager.</p>
 </details>
 <details class="question">
 <summary>CAPTCHA is wrong but I typed it correctly</summary>
-<p>CAPTCHA is case-insensitive. If the image is unclear, <strong>click it</strong> to get a new code. The code never uses ambiguous characters such as <code>0/O</code> or <code>1/I</code>.</p>
+<p>The code is 4 digits. If the image is unclear, <strong>click it</strong> to get a new code.</p>
 </details>
 <details class="question">
 <summary>Login fails with 'Invalid credentials'</summary>

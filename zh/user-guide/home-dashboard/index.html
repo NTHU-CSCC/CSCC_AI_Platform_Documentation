@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -842,7 +844,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        資源使用圖表
+        資源使用歷史
       
     </span>
   </a>
@@ -934,6 +936,34 @@
     
   
     工作區
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
   
 
     
@@ -1185,7 +1215,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        資源使用圖表
+        資源使用歷史
       
     </span>
   </a>
@@ -1270,13 +1300,13 @@
 <td>頁面載入時，之後每 10 秒</td>
 </tr>
 <tr>
-<td><strong>專案摘要</strong></td>
-<td>你所屬的專案數</td>
+<td>專案數（標題列）</td>
+<td>你所屬的專案數，以及其中有計畫的專案數</td>
 <td>頁面載入時，之後每 10 秒</td>
 </tr>
 <tr>
-<td><strong>資源使用圖表</strong></td>
-<td>各專案 GPU/CPU/記憶體配額的已用量與總量，以及計畫時段狀態</td>
+<td><strong>資源使用歷史</strong></td>
+<td>每個有計畫的專案的 GPU/CPU/記憶體配額已用量與總量，以及計畫時段狀態</td>
 <td>頁面載入時，之後每 10 秒；倒數每秒更新</td>
 </tr>
 <tr>
@@ -1286,7 +1316,7 @@
 </tr>
 <tr>
 <td><strong>我的 GPU 任務</strong></td>
-<td>你執行中的工作區與批次任務，含 GPU、SM 比例與記憶體</td>
+<td>你執行中的 GPU 任務，含 GPU 比例、記憶體與執行時間</td>
 <td>頁面載入時，之後每 15 秒</td>
 </tr>
 </tbody>
@@ -1317,8 +1347,8 @@
 </ul>
 <p>送出工作前先看這個網格，可以知道哪些型號還有空，或確認某個節點還能接受 fractional claim。儀表板不會顯示其他使用者的名稱或工作負載名稱。</p>
 <hr />
-<h2 id="_3">資源使用圖表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>圖表顯示你所屬所有專案的使用量。</p>
+<h2 id="_3">資源使用歷史<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>圖表顯示你每個有計畫的專案的使用量。沒有計畫的專案不會列出；如果你的專案都沒有計畫，圖表會改顯示提示。</p>
 <ul>
 <li>每個長條代表一個專案。</li>
 <li>填充量是已用配額（GPU 時數、CPU 時數或記憶體）。</li>
@@ -1330,7 +1360,7 @@
 <p><strong>最近活動</strong> 列出你最近送出的 8 筆申請，包含類型標籤與送出時間。點 <strong>查看全部</strong> 開啟申請頁面。</p>
 <hr />
 <h2 id="gpu_2">我的 GPU 任務<a class="headerlink" href="#gpu_2" title="Permanent link">&para;</a></h2>
-<p><strong>我的 GPU 任務</strong> 表格列出你執行中的工作區與批次任務：</p>
+<p><strong>我的 GPU 任務</strong> 表格列出你目前執行中的 GPU 任務（工作區與部署）。一列是一個任務；跨多張卡的任務仍是一列。</p>
 <table>
 <thead>
 <tr>
@@ -1340,36 +1370,32 @@
 </thead>
 <tbody>
 <tr>
-<td>名稱</td>
-<td>任務或工作區名稱</td>
+<td><strong>Status</strong></td>
+<td>一律是 <strong>Running</strong>；已結束的任務不會列出</td>
 </tr>
 <tr>
-<td>專案</td>
+<td><strong>任務</strong></td>
+<td>任務 ID 的最後 8 個字元</td>
+</tr>
+<tr>
+<td><strong>專案</strong></td>
 <td>所屬專案</td>
 </tr>
 <tr>
-<td>GPU</td>
-<td>消耗的有效 GPU 單位</td>
+<td><strong>GPU</strong></td>
+<td>持有的有效 GPU 比例，以及碰到幾張卡</td>
 </tr>
 <tr>
-<td>狀態</td>
-<td>執行中、待處理、已停止、錯誤</td>
+<td><strong>記憶體</strong></td>
+<td>持有的 GPU 記憶體（GiB）</td>
 </tr>
 <tr>
-<td>開始時間</td>
-<td>啟動時間</td>
-</tr>
-<tr>
-<td>操作</td>
-<td><strong>停止</strong> / <strong>開啟</strong></td>
+<td><strong>Running</strong></td>
+<td>已執行多久</td>
 </tr>
 </tbody>
 </table>
-<p>點執行中工作區旁的 <strong>開啟</strong>，在新分頁開啟 IDE。</p>
-<div class="admonition tip">
-<p class="admonition-title">從任務跳到專案</p>
-<p>點表格中的專案名稱，會開啟該專案頁面，可查看配額與設定檔。</p>
-</div>
+<p>表格只能看，不能操作。要開啟或刪除工作區請到<a href="../workspaces/">工作區</a>頁；部署請到專案的 <strong>資源</strong> 分頁管理。</p>
 <hr />
 <h2 id="_5">常見問題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <details class="question">

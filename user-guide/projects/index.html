@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -860,6 +862,17 @@
     <span class="md-ellipsis">
       
         Project detail tabs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project settings
       
     </span>
   </a>
@@ -1121,6 +1134,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Desktops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cli/" class="md-nav__link">
         
   
@@ -1342,6 +1383,17 @@
     <span class="md-ellipsis">
       
         Project detail tabs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project settings
       
     </span>
   </a>
@@ -1585,22 +1637,22 @@
 <hr />
 <h2 id="project-page-layout">Project page layout<a class="headerlink" href="#project-page-layout" title="Permanent link">&para;</a></h2>
 <p><img alt="Projects list view" src="../../assets/screenshots/projects-list.png" />
-<em>Figure 1: Projects list showing grid view with GPU usage bars per project.</em></p>
+<em>Figure 1: Projects list in list view, the default.</em></p>
 <p>The Projects page supports two view modes:</p>
 <ul>
+<li><strong>List view</strong> (default) — compact table with sortable columns</li>
 <li><strong>Grid view</strong> — cards with project name, description, member count, GPU usage bar</li>
-<li><strong>List view</strong> — compact table with sortable columns</li>
 </ul>
 <p>Toggle between views using the icons in the top-right of the toolbar.</p>
 <hr />
 <h2 id="create-a-project">Create a project<a class="headerlink" href="#create-a-project" title="Permanent link">&para;</a></h2>
 <p>Creating a project requires the <strong>manage-projects</strong> permission. If you don't have
-it, the <strong>+ New Project</strong> button is hidden and the create page redirects back to
+it, the <strong>New Project</strong> button is hidden and the create page redirects back to
 your project list. Ask an admin to create a project for you instead. A personal
 project is created for you automatically when you register.</p>
 <ol>
 <li>Click <strong>Projects</strong> in the left sidebar.</li>
-<li>Click <strong>+ New Project</strong> (top-right button; shown only with the manage-projects permission).</li>
+<li>Click <strong>New Project</strong> (top-right button; shown only with the manage-projects permission).</li>
 <li>Fill in the project form:</li>
 </ol>
 <table>
@@ -1634,7 +1686,7 @@ project is created for you automatically when you register.</p>
 </div>
 <hr />
 <h2 id="project-detail-tabs">Project detail tabs<a class="headerlink" href="#project-detail-tabs" title="Permanent link">&para;</a></h2>
-<p>Click a project card to open its detail page. The detail page includes core tabs for Overview, Config, Plan, Builds, GPU Claims, and Resources, plus role-dependent tabs such as Images, Members, and Storage.</p>
+<p>Click a project to open its detail page. The detail page includes core tabs for Overview, Config, Plan, Builds, GPU Claims, and Resources, plus role-dependent tabs such as Images, Members, Storage, and Settings.</p>
 <p><img alt="Project detail tabs" src="../../assets/screenshots/project-detail-tabs.png" />
 <em>Figure 2: Project detail page with Overview, Config, Plan, Builds, GPU Claims, Resources, and role-dependent tabs.</em></p>
 <table>
@@ -1647,7 +1699,7 @@ project is created for you automatically when you register.</p>
 <tbody>
 <tr>
 <td><strong>Overview</strong></td>
-<td>Description, quota usage chart, current plan, member list summary</td>
+<td>Description, quota usage chart, monthly GPU-hour budget, current plan, member list summary</td>
 </tr>
 <tr>
 <td><strong>Config</strong></td>
@@ -1673,9 +1725,31 @@ project is created for you automatically when you register.</p>
 <td><strong>Images / Members / Storage</strong></td>
 <td>Additional tabs shown when your role allows image management, membership management, quota controls, or storage access</td>
 </tr>
+<tr>
+<td><strong>Settings</strong></td>
+<td>Project-wide workspace controls; see <em>Project settings</em> below</td>
+</tr>
 </tbody>
 </table>
-<p>Role thresholds: the <strong>Storage</strong> and <strong>Images</strong> tabs require Project Manager or above; the <strong>Members</strong> tab is visible to Project Admins only (platform admins must switch to <strong>Admin View</strong> via the avatar menu to be treated as an effective Project Admin). The platform prevents an Admin from demoting themselves, so a project can never lose its last Admin.</p>
+<p>Role thresholds: the <strong>Storage</strong>, <strong>Images</strong>, and <strong>Settings</strong> tabs require Project Manager or above; the <strong>Members</strong> tab is visible to Project Admins only (platform admins must switch to <strong>Admin View</strong> via the avatar menu to be treated as an effective Project Admin). The platform prevents an Admin from demoting themselves, so a project can never lose its last Admin.</p>
+<hr />
+<h2 id="project-settings">Project settings<a class="headerlink" href="#project-settings" title="Permanent link">&para;</a></h2>
+<p>The <strong>Settings</strong> tab (Project Manager or above) holds controls that apply to every workspace in the project:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Max workspace continuous runtime</strong></td>
+<td>In seconds. A workspace that has run longer than this is stopped automatically. <code>0</code> means unlimited (the default).</td>
+</tr>
+</tbody>
+</table>
+<p>Click <strong>Save Changes</strong> to apply. The limit also caps the lifetime of <a href="../desktops/">GPU desktops</a> started from this project.</p>
 <hr />
 <h2 id="build-project-images">Build project images<a class="headerlink" href="#build-project-images" title="Permanent link">&para;</a></h2>
 <p>Use the <strong>Builds</strong> tab when a project needs a container image that is not already in the allowed image list. Project Managers and Project Admins can start builds when image builds are enabled for the project. Project Members can view build status and logs, but cannot start or delete builds.</p>
@@ -1730,10 +1804,12 @@ starts.</p>
 Failed builds show a short summary in the table. Use the log button for the
 full output. If a build is retried, the log view keeps the previous attempt's
 failure reason before streaming the current one.</p>
-<p>Builders and project managers can clear saved logs for completed or failed
-builds; build history and images are left untouched. The member who started a
-completed build, or a project manager, can also delete it from the history once
-nothing else references it.</p>
+<p>Each build row has icon actions: <strong>Cancel build</strong> while it is running (or
+<strong>Delete image artifact</strong> once it has produced an image), <strong>Clear saved logs</strong>,
+and <strong>Delete history record</strong>. Builders and project managers can clear saved
+logs for completed or failed builds; build history and images are left
+untouched. The member who started a completed build, or a project manager, can
+also delete its history record once nothing else references it.</p>
 <p>Project Managers can submit project image allowlist requests and remove project image allowlist entries only for projects they currently manage. Project Members can view the project's image request history, but global catalog publications and other projects' image rules remain admin-controlled.</p>
 <p>The <strong>Images</strong> tab splits into <strong>Available</strong> and <strong>Requests</strong>. Available lists
 the images this project may already pull. Requests lists every image request
@@ -1762,6 +1838,7 @@ but only starts counting GPU-hours once it is attached to a running workload. Yo
 pick a claim in the deploy dialog whenever a config file declares a GPU claim
 slot.</p>
 <h3 id="create-a-claim">Create a claim<a class="headerlink" href="#create-a-claim" title="Permanent link">&para;</a></h3>
+<p>Fill in the <strong>Create GPU ResourceClaim</strong> form and click <strong>Create</strong>:</p>
 <table>
 <thead>
 <tr>
@@ -1771,27 +1848,27 @@ slot.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>Claim Name</strong></td>
+<td><strong>Claim name</strong></td>
 <td>Name used when you attach this claim to a deployment. Letters, digits, and hyphens only.</td>
 </tr>
 <tr>
-<td><strong>GPU Device Class</strong></td>
+<td><strong>GPU device class</strong></td>
 <td>The GPU model to reserve. The form defaults to a specific model; pick <strong>Any</strong> only when the model does not matter.</td>
 </tr>
 <tr>
-<td><strong>GPU Count</strong></td>
+<td><strong>GPU count</strong></td>
 <td>How many physical cards this claim reserves. A multi-GPU claim stays a single reservation.</td>
 </tr>
 <tr>
-<td><strong>SM Share</strong></td>
+<td><strong>SM share</strong></td>
 <td>Compute slice from 1% to 100%. The resulting effective GPU count is shown beside the form.</td>
 </tr>
 <tr>
-<td><strong>VRAM Mode</strong></td>
+<td><strong>VRAM mode</strong></td>
 <td><code>Elastic</code> shares GPU memory with other workloads; <code>Hard cap</code> enforces the percentage you pick.</td>
 </tr>
 <tr>
-<td><strong>VRAM Share</strong></td>
+<td><strong>VRAM share</strong></td>
 <td>Used only with <strong>Hard cap</strong>. The reserved memory is derived from the smallest card of the selected model.</td>
 </tr>
 </tbody>
@@ -1800,10 +1877,11 @@ slot.</p>
 2-GPU reservation no matter how many replicas run, and quota and GPU-hours are
 counted once per claim rather than once per replica.</p>
 <p>A claim that is not attached to anything uses <code>0</code> GPU-hours but still counts
-against project and per-user GPU quota. The table shows the owner, the node,
-the status (<code>pending</code>, <code>bound</code>, or <code>terminating</code>), how many workloads are using
-the claim, and a delete action. Unused claims can be deleted; a claim in use by
-a running workload cannot.</p>
+against project and per-user GPU quota. The table columns are <strong>Name</strong>,
+<strong>Owner</strong>, <strong>GPU</strong>, <strong>SM</strong>, <strong>VRAM</strong>, <strong>Status</strong>, and <strong>Allocation</strong>, plus a
+delete icon. <strong>Status</strong> is <strong>Reserved</strong> (created, nothing attached),
+<strong>Allocated</strong> (a GPU is assigned), or <strong>In use by <deployment></strong>. Unused claims
+can be deleted; a claim in use by a running workload cannot.</p>
 <div class="admonition note">
 <p class="admonition-title">Claim ownership</p>
 <p>Project Members can create their own claims. Project Managers can also see and delete claims belonging to other members of the project.</p>
@@ -1816,14 +1894,23 @@ a running workload cannot.</p>
 <li><em>Window opens in HH:MM:SS</em> when the next window is upcoming.</li>
 <li><em>Always active</em> if no schedule restriction is defined.</li>
 </ul>
-<p>The same countdown appears on the workspace launch form and on individual
-deployments. When the window closes, workloads in plan-bound queues are stopped;
+<p>The deploy dialog shows the same countdown (<strong>Plan window closes in HH:MM:SS</strong>)
+with a warning that the workload may be evicted when the window closes. Once it
+has closed, the dialog shows <strong>Plan window has expired</strong> with a <strong>Switch to
+Default Queue</strong> link that moves the deploy to the default queue; this banner is
+for deployments only, workspaces cannot switch queue. When the window closes,
+workloads in plan-bound queues are stopped;
 if the plan is removed or stops allowing your queue, anything still waiting to
 start is dropped too. A project with no active plan cannot start workloads at
 all.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds. The limit is set by
 an admin and cannot be raised or disabled from your config file.</p>
+<p>The <strong>Overview</strong> tab also shows the plan's <strong>GPU-hours / month</strong> bar when the
+plan has a monthly GPU-hour budget: allocated GPU-hours this month against the
+budget, and when it resets (the 1st of each month, UTC+8). Once the budget is
+used up, new GPU jobs and workspaces are blocked until the reset; running jobs
+are unaffected.</p>
 <hr />
 <h2 id="config-file-versioning">Config file versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
 <p>Every save creates a new, immutable version. Old versions are never overwritten,
@@ -1832,12 +1919,16 @@ config file, save it, and a new version appears; you can deploy any version.</p>
 <h3 id="working-with-config-files">Working with config files<a class="headerlink" href="#working-with-config-files" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Go to <strong>Projects → [your project] → Config</strong> tab.</li>
-<li>Click <strong>+ New Config</strong> to upload a YAML file or paste content in the editor.</li>
+<li>Click <strong>New File</strong> to upload a YAML file or paste content in the editor.</li>
 <li>Each save creates a new version.</li>
 <li>Click the <strong>History</strong> icon next to a config to view all versions.</li>
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
 <li>In the deploy dialog, pick the scheduling queue. If the YAML contains GPU claim slots, choose one of your reserved GPU claims for each slot for this deploy only.</li>
 </ol>
+<p>Running instances appear in the project's <strong>Resources</strong> tab. A separate
+<strong>Deployments</strong> page at <code>/projects/&lt;project id&gt;/deployments</code> lists deployments
+with <strong>Personal</strong> and <strong>Members</strong> tabs; it has no sidebar link, so open it by
+URL.</p>
 <h3 id="containers-you-can-shell-into">Containers you can shell into<a class="headerlink" href="#containers-you-can-shell-into" title="Permanent link">&para;</a></h3>
 <p>To open a <strong>Terminal</strong> into a container, it has to stay running. A shell with
 no arguments, such as <code>command: ["/bin/sh"]</code>, exits immediately, so the
@@ -1920,7 +2011,7 @@ owning group already has.</p>
 </tr>
 <tr>
 <td><strong>Admin</strong></td>
-<td>Add/remove members, set member quotas, delete project</td>
+<td>Add/remove members, set member quotas</td>
 </tr>
 </tbody>
 </table>
@@ -1943,11 +2034,10 @@ owning group already has.</p>
 </blockquote>
 <hr />
 <h2 id="deleting-a-project">Deleting a project<a class="headerlink" href="#deleting-a-project" title="Permanent link">&para;</a></h2>
-<p>Only a Project Admin can delete a project: stop all of its workspaces first, then Project Overview → Edit → <strong>Delete</strong> and type the project name to confirm. Effects:</p>
+<p>Only a platform admin can delete a project, from <strong>Admin → Projects</strong>. There is no delete action on the project page. Ask an admin, or submit a <a href="../requests/">Request</a>; delete the project's workspaces first. Effects:</p>
 <ul>
 <li>Config version history and deployment records are permanently removed.</li>
 <li><strong>Storage volumes are not deleted</strong> (they remain on the Storage page).</li>
-<li>A group-owned project may require a platform admin to revoke the group binding before deletion is allowed.</li>
 </ul>
 <hr />
 <h2 id="resources-tab">Resources tab<a class="headerlink" href="#resources-tab" title="Permanent link">&para;</a></h2>
@@ -2013,7 +2103,7 @@ owning group already has.</p>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>I don't see a + New Project button.</summary>
+<summary>I don't see a New Project button.</summary>
 <p>The button is shown only to users with the <strong>manage-projects</strong> permission. If you don't have it, ask an admin to create a project for you. Your personal project is created automatically when you register.</p>
 </details>
 <details class="question">

@@ -16,7 +16,7 @@
         <link rel="prev" href="../projects/">
       
       
-        <link rel="next" href="../cli/">
+        <link rel="next" href="../desktops/">
       
       
         
@@ -626,6 +626,8 @@
       
         
       
+        
+      
     
     
     
@@ -928,10 +930,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stop-vs-delete" class="md-nav__link">
+  <a href="#stopping-a-workspace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stop vs. delete
+        Stopping a workspace
       
     </span>
   </a>
@@ -939,10 +941,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bulk-delete-admin-ide-manager" class="md-nav__link">
+  <a href="#bulk-delete-admins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bulk delete (admin / IDE manager)
+        Bulk delete (admins)
       
     </span>
   </a>
@@ -975,6 +977,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Desktops
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1248,10 +1278,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stop-vs-delete" class="md-nav__link">
+  <a href="#stopping-a-workspace" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stop vs. delete
+        Stopping a workspace
       
     </span>
   </a>
@@ -1259,10 +1289,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#bulk-delete-admin-ide-manager" class="md-nav__link">
+  <a href="#bulk-delete-admins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bulk delete (admin / IDE manager)
+        Bulk delete (admins)
       
     </span>
   </a>
@@ -1312,7 +1342,7 @@
 
 
 <h1 id="workspaces">Workspaces<a class="headerlink" href="#workspaces" title="Permanent link">&para;</a></h1>
-<p>Workspaces (also called IDEs) are interactive cloud development environments (JupyterLab, VSCode, or a custom image) backed by GPU resources.</p>
+<p>A workspace is a JupyterLab or VS Code environment with GPU access, started from one of the platform's images.</p>
 <p><strong>Access:</strong> All project members with sufficient project quota.</p>
 <hr />
 <h2 id="workspace-states">Workspace states<a class="headerlink" href="#workspace-states" title="Permanent link">&para;</a></h2>
@@ -1326,11 +1356,6 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Stopped</strong></td>
-<td>The workspace is not running. Data on mounted storage is kept.</td>
-<td><strong>Start</strong> or <strong>Delete</strong></td>
-</tr>
-<tr>
 <td><strong>Starting</strong></td>
 <td>The workspace is downloading its image and starting up.</td>
 <td>Wait 30–120 seconds</td>
@@ -1338,40 +1363,43 @@
 <tr>
 <td><strong>Running</strong></td>
 <td>The workspace is ready to use.</td>
-<td><strong>Open</strong>, <strong>Stop</strong>, or <strong>Delete</strong></td>
+<td><strong>Open</strong> or <strong>Delete</strong></td>
 </tr>
 <tr>
-<td><strong>Stopping</strong></td>
-<td>The workspace is shutting down.</td>
-<td>Wait until it shows <strong>Stopped</strong></td>
+<td><strong>Stopped</strong></td>
+<td>The workspace is not running (for example after the idle limit or the runtime limit). Files in mounted storage are kept.</td>
+<td><strong>Delete</strong>, then create a new one</td>
 </tr>
 <tr>
 <td><strong>Error</strong></td>
 <td>The workspace failed to start.</td>
-<td>Click the name to see the error, then <strong>Start</strong> again or <strong>Delete</strong></td>
+<td><strong>Delete</strong>, then create a new one</td>
 </tr>
 </tbody>
 </table>
+<p>There is no start or stop button. A workspace runs until you delete it or the platform removes it.</p>
 <hr />
 <h2 id="workspace-list-page">Workspace list page<a class="headerlink" href="#workspace-list-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Workspace list page" src="../../assets/screenshots/workspaces-list.png" />
-<em>Figure 1: Workspace list showing running and stopped workspaces with status badges.</em></p>
-<p>The list page shows all your workspaces with:</p>
+<em>Figure 1: Workspace list with status badges.</em></p>
+<p>Each row shows:</p>
 <ul>
-<li><strong>Status badge</strong> — Running (green), Starting (yellow), Stopped (grey), Error (red)</li>
-<li><strong>GPU count</strong> — effective GPU units allocated</li>
-<li><strong>Project</strong> — which project the workspace belongs to</li>
-<li><strong>Open</strong> button — appears only when status is Running</li>
-<li><strong>Start / Stop / Delete</strong> action buttons</li>
+<li><strong>Workspaces</strong> — the workspace name, with the environment type and project below it</li>
+<li><strong>Status</strong> — Running (green), Starting (yellow), Stopped (grey), Error</li>
+<li><strong>Image</strong> — the image it runs</li>
+<li><strong>Resources</strong> — the GPU count, or <code>CPU</code> for a CPU-only workspace</li>
+<li>The last activity time</li>
+<li><strong>Open</strong> (only while Running) and <strong>Delete</strong></li>
 </ul>
+<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real IDE activity (opening pages, terminal input, notebook execution) counts as activity.</p>
 <hr />
 <h2 id="launch-a-workspace">Launch a workspace<a class="headerlink" href="#launch-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Click <strong>Workspaces</strong> in the left sidebar.</li>
-<li>Click <strong>+ New Workspace</strong> (top-right).</li>
+<li>Click <strong>New Workspace</strong> (top-right).</li>
 </ol>
 <p><img alt="New workspace form" src="../../assets/screenshots/workspace-new-form.png" />
-   <em>Figure 2: New workspace creation form with project, image, GPU, and storage fields.</em></p>
+   <em>Figure 2: New workspace form with project, environment, image, GPU, and storage fields.</em></p>
 <ol>
 <li>Fill in the form:</li>
 </ol>
@@ -1385,58 +1413,71 @@
 <tbody>
 <tr>
 <td><strong>Project</strong></td>
-<td>Select which project this workspace belongs to (determines quota). The form defaults to your personal project when one is available.</td>
+<td>The project this workspace belongs to (determines quota). Projects without a plan are marked <strong>(No Plan)</strong> and cannot start a workspace.</td>
 </tr>
 <tr>
-<td><strong>Name</strong></td>
-<td>Unique name for this workspace</td>
+<td><strong>Internet Access</strong></td>
+<td>Read-only. A banner under the project shows whether workspaces in this project can reach the Internet (<strong>Enabled</strong> / <strong>Disabled</strong>). When disabled, the workspace still reaches platform services but cannot download from outside.</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>JupyterLab or VS Code</td>
 </tr>
 <tr>
 <td><strong>Image</strong></td>
-<td>Container image, chosen from the platform's IDE catalog (JupyterLab and VS Code profiles), <strong>not</strong> the project image allowlist. Images you request or build for a project are available to deployments, not to workspaces. The <strong>Root shell</strong> toggle is available for personal projects when the project allows root containers; group-owned projects need both the project and the owning group to allow root containers.</td>
+<td>One of the platform's images for that environment: Base Notebook, PyTorch, TensorFlow, CUDA Dev, and their "(Root)" variants. Images you request or build for a project are for deployments, not workspaces.</td>
 </tr>
 <tr>
-<td><strong>Scheduling Queue</strong></td>
-<td>Platform queue used for priority and preemption policy. Bound queues come from the project plan; the <strong>default</strong> queue is always available.</td>
+<td><strong>Root shell</strong></td>
+<td>Makes you <code>root</code> inside your own container. Shown only when the project (and, for group-owned projects, the owning group) allows root containers.</td>
 </tr>
 <tr>
-<td><strong>GPU Count</strong></td>
-<td>Number of physical GPUs requested; fractional usage comes from the SM share.</td>
+<td>Scheduling queue</td>
+<td>A radio list of the queues the project plan allows. See <em>Scheduling queue and priority</em> below.</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>Number of GPUs; pick <strong>No</strong> for a CPU-only workspace.</td>
 </tr>
 <tr>
 <td><strong>GPU Model</strong></td>
-<td>One of the GPU models allowed by your plan (e.g., RTX 5090, RTX 6000 Pro). Models outside the plan allowlist are hidden.</td>
+<td>One of the models your plan allows. Models outside the plan are hidden.</td>
 </tr>
 <tr>
-<td><strong>SM Percentage</strong></td>
-<td>Compute share of each GPU. 100% is a full GPU; smaller values count as fractional usage.</td>
+<td><strong>Compute quota (%)</strong></td>
+<td>Share of each GPU's compute. 100% is a full GPU; smaller values count as fractional usage. When you pick a fractional GPU, this is set for you.</td>
+</tr>
+<tr>
+<td><strong>GPU memory quota (%)</strong></td>
+<td>Share of each GPU's memory. Leave <strong>Follow compute</strong> on to match the compute quota, or turn it off and set a separate value. Everything on one card adds up to at most 100%.</td>
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
 <td>Optional override; defaults to plan limits</td>
 </tr>
 <tr>
-<td><strong>Storage</strong></td>
-<td>Select one or more storage volumes to mount into the workspace</td>
-</tr>
-<tr>
-<td><strong>Mount Path</strong></td>
-<td>Where each volume is mounted inside the container (e.g., <code>/data</code>)</td>
+<td><strong>Storage Volumes</strong></td>
+<td>Tick the volumes to mount. Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</td>
 </tr>
 </tbody>
 </table>
+<p>The name is generated; there is no name field.</p>
 <ol>
 <li>Click <strong>Start</strong>.</li>
 <li>The workspace appears in <strong>Starting</strong> state. Wait 30–120 seconds for the workspace to download its image and start.</li>
 <li>When status changes to <strong>Running</strong>, click <strong>Open</strong> to open the IDE in a new browser tab.</li>
 </ol>
 <div class="admonition warning">
+<p class="admonition-title">No storage selected</p>
+<p>If you have no personal storage and tick no group volume, the platform shows <strong>This workspace will not keep your files</strong> before it starts. Everything you write lives only inside the container and is lost when the workspace stops, restarts, or is deleted. Click <strong>Cancel</strong> and tick a volume, or <strong>I understand, start anyway</strong>.</p>
+</div>
+<div class="admonition warning">
 <p class="admonition-title">Idle shutdown</p>
-<p>Workspaces left idle for a long time are stopped automatically to free GPUs for others. A warning banner appears on the workspace list page first.</p>
+<p>Workspaces with no activity for the idle limit shown under the list are stopped automatically to free GPUs for others. Delete the stopped workspace and create a new one; files in mounted storage are kept.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p>The <strong>Root shell</strong> toggle only makes you <code>root</code> inside your own container. It grants no access to the platform or other users' data. If the toggle is disabled, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
+<p><strong>Root shell</strong> only makes you <code>root</code> inside your own container. It grants no access to the platform or other users' data. If the toggle is missing, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
 </div>
 <hr />
 <h2 id="scheduling-queue-and-priority">Scheduling queue and priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>
@@ -1468,59 +1509,43 @@
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>If a project plan defines a weekly or one-off <strong>schedule window</strong>, workspaces in plan-bound queues only run while the window is open.</p>
 <ul>
-<li>While the window is active, the list page shows a live countdown: <em>Plan window closes in HH:MM:SS</em>.</li>
-<li>When the window closes, workspaces running in plan-bound queues are stopped. Starting a new one requires an open plan window.</li>
-<li>A banner offers a one-click <strong>Switch to Default Queue</strong> action when the window has expired and you want to keep working at lower priority.</li>
+<li>Outside the window, <strong>Start</strong> is rejected with <em>The project's plan is not within its active time window</em>.</li>
+<li>When the window closes, workspaces running in plan-bound queues are stopped. Create a new one inside the next window.</li>
+<li>A workspace cannot switch queue. The <strong>Switch to Default Queue</strong> banner exists only in the deploy dialog for deployments; see <a href="../projects/#plan-window-countdown">Projects</a>.</li>
 </ul>
+<p>The Home dashboard and the project's <strong>Plan</strong> tab show the window countdown.</p>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to your workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
 <p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform connects your browser straight to the workspace; no extra setup is needed.</p>
 <ul>
 <li><strong>JupyterLab</strong> opens at <code>/lab</code>, the standard Jupyter interface.</li>
-<li><strong>VSCode (code-server)</strong> opens at <code>/</code>, full VS Code in the browser.</li>
-<li><strong>Custom images</strong> open at the configured proxy path.</li>
+<li><strong>VS Code (code-server)</strong> opens at <code>/</code>, full VS Code in the browser.</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Persistent work</p>
-<p>Code and notebooks saved inside a mounted storage path (e.g., <code>/data</code>) persist when the workspace stops. Files written outside a mounted volume are lost when the workspace is deleted.</p>
+<p>Code and notebooks saved under <code>/home/&lt;your username&gt;</code> (personal storage) or <code>/mnt/shared/&lt;volume name&gt;</code> (group volume) survive the workspace. Files written anywhere else are lost when the workspace is deleted.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Use <code>$XDG_CONFIG_HOME</code>, not a hardcoded <code>~/.config</code></p>
-<p>Workspaces ship with <code>XDG_CONFIG_HOME=~/.local/config</code>, so XDG-aware tools (code-server, <code>pip config</code>, <code>gh</code>, …) write their settings there and those settings persist across restarts.</p>
+<p>Workspaces ship with <code>XDG_CONFIG_HOME=~/.local/config</code>, so XDG-aware tools (code-server, <code>pip config</code>, <code>gh</code>, …) write their settings there and those settings persist across workspaces.</p>
 <p>If you configure a tool by hand, use <code>$XDG_CONFIG_HOME</code> rather than a hardcoded <code>~/.config</code>.</p>
 </div>
 <hr />
-<h2 id="stop-vs-delete">Stop vs. delete<a class="headerlink" href="#stop-vs-delete" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>What Happens</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Stop</strong></td>
-<td>The workspace shuts down; data on mounted storage is preserved; it can be restarted</td>
-</tr>
-<tr>
-<td><strong>Delete</strong></td>
-<td>The workspace is removed permanently; data on mounted storage is preserved; it cannot be restarted</td>
-</tr>
-</tbody>
-</table>
+<h2 id="stopping-a-workspace">Stopping a workspace<a class="headerlink" href="#stopping-a-workspace" title="Permanent link">&para;</a></h2>
+<p>Stopping is not available. To free the GPU, click <strong>Delete</strong>; the workspace is removed, and files in mounted storage volumes are kept. Create a new workspace when you need one again.</p>
 <hr />
-<h2 id="bulk-delete-admin-ide-manager">Bulk delete (admin / IDE manager)<a class="headerlink" href="#bulk-delete-admin-ide-manager" title="Permanent link">&para;</a></h2>
-<p>Users with the <code>IDE_MANAGE</code> permission can select multiple workspaces and delete them in bulk using the <strong>Bulk Delete</strong> toolbar that appears when checkboxes are ticked.</p>
+<h2 id="bulk-delete-admins">Bulk delete (admins)<a class="headerlink" href="#bulk-delete-admins" title="Permanent link">&para;</a></h2>
+<p>Admins with workspace-management rights can tick several workspaces and delete them in bulk using the toolbar that appears when checkboxes are ticked.</p>
 <hr />
 <h2 id="how-gpus-are-allocated">How GPUs are allocated<a class="headerlink" href="#how-gpus-are-allocated" title="Permanent link">&para;</a></h2>
-<p>When you pick a GPU model and SM share, the platform reserves that share of a GPU for your workspace.</p>
+<p>When you pick a GPU model and compute quota, the platform reserves that share of a GPU for your workspace.</p>
 <ul>
-<li><strong>GPU Count</strong> is the number of physical GPUs requested.</li>
-<li><strong>SM Percentage</strong> controls the effective share used for quota accounting and GPU sharing.</li>
+<li><strong>GPU</strong> is the number of physical GPUs requested.</li>
+<li><strong>Compute quota (%)</strong> controls the effective share used for quota accounting and GPU sharing. The form shows <strong>Effective GPU</strong> so you can see what counts against your quota.</li>
+<li><strong>GPU memory quota (%)</strong> follows the compute quota unless you set it separately.</li>
 <li>Quota counts every workspace you have asked for, including ones still waiting to start.</li>
 <li>Use <code>nvidia-smi</code> inside your workspace to confirm which devices are visible.</li>
-<li>For exclusive or model-specific access, select 100% SM and a model allowed by your plan, or ask an admin to adjust the plan.</li>
+<li>For exclusive or model-specific access, select 100% and a model allowed by your plan, or ask an admin to adjust the plan.</li>
 </ul>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
@@ -1530,11 +1555,11 @@
 </details>
 <details class="question">
 <summary>My workspace stopped automatically.</summary>
-<p>Workspaces with no activity for the configured idle period are stopped automatically. Restart yours from the list page.</p>
+<p>Workspaces with no activity for the idle limit, or past the project's runtime limit, are stopped automatically. Delete it and create a new one; files in mounted storage are kept.</p>
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>
-<p>Click the workspace name to see the error detail. Common causes: the image could not be downloaded, not enough quota, or the GPU model you asked for is unavailable. Submit a <a href="../requests/">Request</a> if you need help.</p>
+<p>Delete the workspace and create it again. Common causes: the image could not be downloaded, not enough quota, or the GPU model you asked for is unavailable. If it repeats, submit a <a href="../requests/">Request</a>.</p>
 </details>
 <details class="question">
 <summary>Can I have multiple workspaces running at once?</summary>
@@ -1542,7 +1567,7 @@
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>Workspaces in plan-bound queues are stopped when the schedule closes. Restart yours inside the next window, or switch it to the default queue using the banner on the list page.</p>
+<p>Workspaces in plan-bound queues are stopped when the schedule closes. Create a new one inside the next window.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>
@@ -1602,13 +1627,13 @@
         
         
           
-          <a href="../cli/" class="md-footer__link md-footer__link--next" aria-label="Next: CLI">
+          <a href="../desktops/" class="md-footer__link md-footer__link--next" aria-label="Next: GPU Desktops">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                CLI
+                GPU Desktops
               </div>
             </div>
             <div class="md-footer__button md-icon">
