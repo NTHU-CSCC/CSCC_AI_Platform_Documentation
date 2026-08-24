@@ -1259,7 +1259,7 @@
 <hr />
 <h2 id="where-to-find-it">Where to find it<a class="headerlink" href="#where-to-find-it" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Sidebar → Workspace → GPU Desktops</strong> lists the desktops you can connect to, across all your projects.</li>
+<li><strong>Sidebar → Workspace → GPU Desktops</strong> lists every desktop session across your projects, in any state, not only the ones you can connect to.</li>
 <li>A desktop is not created on this page. It comes from a project config file, the same way as a deployment; see <em>Start a desktop</em> below.</li>
 </ul>
 <hr />
@@ -1343,7 +1343,7 @@
 <tr>
 <td><strong>Failed</strong></td>
 <td>Could not start</td>
-<td>Delete the instance from the project <strong>Resources</strong> tab and deploy again</td>
+<td><strong>Delete</strong>, then deploy again</td>
 </tr>
 <tr>
 <td><strong>Stopping</strong></td>
@@ -1353,11 +1353,11 @@
 <tr>
 <td><strong>Expired</strong></td>
 <td>Its lifetime ran out</td>
-<td>Deploy again when you need it</td>
+<td><strong>Delete</strong>, then deploy again when you need it</td>
 </tr>
 </tbody>
 </table>
-<p>Each row shows the desktop name, project, GPU model, encoder, image, and the expiry time. A desktop whose image has no graphical libraries cannot be opened; the row has no <strong>Connect</strong> button.</p>
+<p>Each row shows the desktop name, project, GPU model, encoder, image, and the expiry time, with a status badge for its current state. Any row that isn't <strong>Ready</strong> shows a reason when one is available (red for <strong>Failed</strong>, amber otherwise). A desktop whose image has no graphical libraries cannot be opened; the row has no <strong>Connect</strong> button. <strong>Failed</strong> and <strong>Expired</strong> rows have a <strong>Delete</strong> button.</p>
 <hr />
 <h2 id="connect">Connect<a class="headerlink" href="#connect" title="Permanent link">&para;</a></h2>
 <ul>

@@ -1699,7 +1699,7 @@ project is created for you automatically when you register.</p>
 <tbody>
 <tr>
 <td><strong>Overview</strong></td>
-<td>Description, quota usage chart, monthly GPU-hour budget, current plan, member list summary</td>
+<td>Description, quota usage chart, GPU-hour budget, current plan, member list summary</td>
 </tr>
 <tr>
 <td><strong>Config</strong></td>
@@ -1906,11 +1906,12 @@ all.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds. The limit is set by
 an admin and cannot be raised or disabled from your config file.</p>
-<p>The <strong>Overview</strong> tab also shows the plan's <strong>GPU-hours / month</strong> bar when the
-plan has a monthly GPU-hour budget: allocated GPU-hours this month against the
-budget, and when it resets (the 1st of each month, UTC+8). Once the budget is
-used up, new GPU jobs and workspaces are blocked until the reset; running jobs
-are unaffected.</p>
+<p>The <strong>Overview</strong> tab also shows the plan's <strong>GPU-hours</strong> bar when the plan has
+a GPU-hour budget: allocated GPU-hours in the current period against the
+budget, the reset period (monthly, weekly, or every N hours, set by an
+administrator), and when it next resets (UTC+8). Once the budget is used up,
+new GPU jobs and workspaces are blocked until the reset; running jobs are
+unaffected.</p>
 <hr />
 <h2 id="config-file-versioning">Config file versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
 <p>Every save creates a new, immutable version. Old versions are never overwritten,

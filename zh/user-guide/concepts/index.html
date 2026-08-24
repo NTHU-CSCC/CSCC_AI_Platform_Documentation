@@ -835,6 +835,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU 時數額度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1284,6 +1295,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU 時數額度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1459,6 +1481,10 @@
 <li><strong>專案 GPU claim</strong>，從專案的 <em>GPU Claims</em> 標籤建立，可跨多次部署重複使用。它一建立就會保留 GPU 配額，但只有在實際有工作負載掛上去時才累計 GPU 時數。</li>
 </ul>
 <p>專案設定檔會透過具名的 <strong>claim slot</strong>（例如 <code>train-a</code>）參照專案 GPU claim。slot 名稱只是標籤，實際要用哪個 claim 由你在部署對話框指定。Deployment 的所有 replica 共用同一個 claim，也只計算一次；若只有部分 replica 要用 claim，請拆成多個 Deployment。</p>
+<hr />
+<h2 id="gpu">GPU 時數額度<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>資源計畫除了上述並行的 GPU/CPU/記憶體上限，還可以限制專案累積消耗的 GPU 時間。一個 GPU 時數等於一張 GPU 執行一小時；配到部分張數的 GPU 就按比例計算。</p>
+<p>額度會在管理員為專案設定的週期重設，預設每月，也可以設為每週或每固定小時數。專案的 <strong>總覽</strong> 標籤會顯示本期已用額度與下次重設時間。額度用完後，新的 GPU 任務與工作區會被擋下，直到重設；執行中的工作不受影響。</p>
 <hr />
 <h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -1645,6 +1671,10 @@
 <tr>
 <td><strong>GPU Claim</strong></td>
 <td>GPU 的保留。專案 claim 建立時即保留配額，只有實際有工作負載掛上時才累計 GPU 時數</td>
+</tr>
+<tr>
+<td><strong>GPU 時數</strong></td>
+<td>一張 GPU 執行一小時。計畫的 GPU 時數額度限制專案在重設週期內（預設每月，可依專案設定）能累積消耗的總量</td>
 </tr>
 <tr>
 <td><strong>設定檔</strong></td>

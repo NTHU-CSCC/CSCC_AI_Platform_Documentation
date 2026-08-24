@@ -1259,7 +1259,7 @@
 <hr />
 <h2 id="_1">在哪裡<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>左側選單 → 工作區 → GPU 桌面</strong> 列出你所有專案中可連線的桌面。</li>
+<li><strong>左側選單 → 工作區 → GPU 桌面</strong> 列出你所有專案中的桌面工作階段，不論狀態，不是只列可連線的。</li>
 <li>桌面不是在這頁建立的。它和部署一樣，從專案的設定檔來；見下方「啟動桌面」。</li>
 </ul>
 <hr />
@@ -1343,7 +1343,7 @@
 <tr>
 <td><strong>失敗</strong></td>
 <td>啟動失敗</td>
-<td>到專案的 <strong>資源</strong> 分頁刪掉實例，重新部署</td>
+<td><strong>刪除</strong>，再重新部署</td>
 </tr>
 <tr>
 <td><strong>停止中</strong></td>
@@ -1353,11 +1353,11 @@
 <tr>
 <td><strong>已到期</strong></td>
 <td>存活時間用完</td>
-<td>需要時重新部署</td>
+<td><strong>刪除</strong>，需要時重新部署</td>
 </tr>
 </tbody>
 </table>
-<p>每一列顯示桌面名稱、專案、GPU 型號、編碼器、映像與到期時間。映像裡沒有圖形函式庫的桌面打不開，該列不會有 <strong>連線</strong> 按鈕。</p>
+<p>每一列顯示桌面名稱、專案、GPU 型號、編碼器、映像、到期時間，以及目前狀態的徽章。只要不是 <strong>可連線</strong>，有原因時該列就會顯示（<strong>失敗</strong> 用紅色，其餘用琥珀色）。映像裡沒有圖形函式庫的桌面打不開，該列不會有 <strong>連線</strong> 按鈕。<strong>失敗</strong> 與 <strong>已到期</strong> 的列有 <strong>刪除</strong> 按鈕。</p>
 <hr />
 <h2 id="_4">連線<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>

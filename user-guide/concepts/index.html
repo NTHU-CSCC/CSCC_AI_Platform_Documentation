@@ -835,6 +835,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu-hour-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU-Hour Budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#role-based-permissions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1284,6 +1295,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#gpu-hour-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GPU-Hour Budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#role-based-permissions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1459,6 +1481,10 @@
 <li><strong>Project GPU claim</strong> — created from a project's <em>GPU Claims</em> tab and reused across deployments. It reserves GPU quota as soon as you create it, but only accrues GPU-hours while a workload is actually attached.</li>
 </ul>
 <p>A project config file refers to a project GPU claim through a named <strong>claim slot</strong> (for example <code>train-a</code>). The slot name is only a label — you map it to one of your own claims in the deploy dialog. Every replica of a Deployment shares the same claim and is counted once, so split the workload into separate Deployments if only some replicas should use one.</p>
+<hr />
+<h2 id="gpu-hour-budget">GPU-Hour Budget<a class="headerlink" href="#gpu-hour-budget" title="Permanent link">&para;</a></h2>
+<p>A resource plan can also cap the <strong>cumulative</strong> GPU time a project consumes, on top of the concurrent GPU/CPU/memory limits above. One GPU-hour is one allocated GPU running for one hour; a fractional GPU counts the same fraction.</p>
+<p>The budget resets on a window an administrator sets per project — monthly by default, or weekly, or every fixed number of hours. Your project's <strong>Overview</strong> tab shows usage against the budget for the current window and when it next resets. Once the budget is used up, new GPU jobs and workspaces are blocked until the reset; jobs already running keep going.</p>
 <hr />
 <h2 id="role-based-permissions">Role-Based Permissions<a class="headerlink" href="#role-based-permissions" title="Permanent link">&para;</a></h2>
 <h3 id="system-roles">System Roles<a class="headerlink" href="#system-roles" title="Permanent link">&para;</a></h3>
@@ -1645,6 +1671,10 @@
 <tr>
 <td><strong>GPU Claim</strong></td>
 <td>A GPU reservation. Project claims reserve quota when created and accrue GPU-hours only while a workload is attached</td>
+</tr>
+<tr>
+<td><strong>GPU-hour</strong></td>
+<td>One allocated GPU running for one hour. A plan's GPU-hour budget caps the cumulative total a project may consume in its reset window (monthly by default, set per project)</td>
 </tr>
 <tr>
 <td><strong>Config File</strong></td>
