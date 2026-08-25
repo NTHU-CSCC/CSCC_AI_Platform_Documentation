@@ -1752,7 +1752,7 @@ project is created for you automatically when you register.</p>
 <p>Click <strong>Save Changes</strong> to apply. The limit also caps the lifetime of <a href="../desktops/">GPU desktops</a> started from this project.</p>
 <hr />
 <h2 id="build-project-images">Build project images<a class="headerlink" href="#build-project-images" title="Permanent link">&para;</a></h2>
-<p>Use the <strong>Builds</strong> tab when a project needs a container image that is not already in the allowed image list. Project Managers and Project Admins can start builds when image builds are enabled for the project. Project Members can view build status and logs, but cannot start or delete builds.</p>
+<p>Use the <strong>Builds</strong> tab when a project needs a container image that is not already in the allowed image list. Project Managers and Project Admins can start builds when image builds are enabled for the project. Project Members can view build status and logs. A member cannot start a build, but can delete an image artifact from a completed build that they started.</p>
 <h3 id="source-options">Source options<a class="headerlink" href="#source-options" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1809,7 +1809,13 @@ failure reason before streaming the current one.</p>
 and <strong>Delete history record</strong>. Builders and project managers can clear saved
 logs for completed or failed builds; build history and images are left
 untouched. The member who started a completed build, or a project manager, can
-also delete its history record once nothing else references it.</p>
+delete its image artifact. <strong>Clear my completed build images</strong> deletes every
+completed image artifact you created in the current project, while keeping the
+build history and saved logs. Repeated tag IDs are deleted once.</p>
+<p><strong>Delete history record</strong> removes only the history and saved logs. It does not
+delete the image artifact. Harbor reclaims registry storage during daily
+garbage collection. A recently uploaded image may need two garbage collection
+runs before its blobs are eligible for removal.</p>
 <p>Project Managers can submit project image allowlist requests and remove project image allowlist entries only for projects they currently manage. Project Members can view the project's image request history, but global catalog publications and other projects' image rules remain admin-controlled.</p>
 <p>The <strong>Images</strong> tab splits into <strong>Available</strong> and <strong>Requests</strong>. Available lists
 the images this project may already pull. Requests lists every image request
