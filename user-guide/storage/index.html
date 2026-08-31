@@ -1023,6 +1023,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Storage page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage bar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1209,6 +1226,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Storage page">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-bar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage bar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1347,9 +1381,16 @@
 <p><img alt="Storage list page" src="../../assets/screenshots/storage-list.png" />
 <em>Figure 1: Storage page with the My Storage and Group Storage tabs.</em></p>
 <ul>
-<li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>) and the file browser buttons. The card shows no capacity.</li>
-<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong>, <strong>Available</strong>, or <strong>Lost</strong>), file browser status, capacity (for example <code>50Gi</code>), access mode, your permission, group, created date, and the action icons.</li>
+<li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar, and the file browser buttons.</li>
+<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong>, <strong>Available</strong>, or <strong>Lost</strong>), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date, and the action icons.</li>
 </ul>
+<h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
+<p>The bar reads <code>used / total Gi</code> with a percentage, and turns amber at 70% and
+red at 90%.</p>
+<p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is what you have written.
+A dash (<code>—</code>) means the platform has not measured that volume yet; it does not
+mean the volume is empty. Measurements refresh every few minutes, so a large
+copy shows up with a short delay.</p>
 <p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page; anyone else is sent back to the Storage page.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
@@ -1431,6 +1472,14 @@
 <details class="question">
 <summary>My volume is full but I see no large files.</summary>
 <p>In a workspace terminal run <code>du -sh /home/&lt;your username&gt;/*</code>. Hidden folders such as <code>.cache</code> and <code>.local</code>, and notebook checkpoints, are the usual cause.</p>
+</details>
+<details class="question">
+<summary>The usage bar shows a dash.</summary>
+<p>The platform has not measured that volume yet. Check again in a few minutes. If it stays blank for an hour, contact an admin.</p>
+</details>
+<details class="question">
+<summary>I deleted files but the usage bar has not moved.</summary>
+<p>Measurements refresh every few minutes. Reload the page after that.</p>
 </details>
 <details class="question">
 <summary>I see a group volume but cannot browse it.</summary>
