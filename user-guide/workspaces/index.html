@@ -1421,7 +1421,7 @@
 <li>The last activity time</li>
 <li><strong>Open</strong> (only while Running) and <strong>Delete</strong></li>
 </ul>
-<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real IDE activity (opening pages, terminal input, notebook execution) counts as activity.</p>
+<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real IDE activity counts: opening pages, terminal input, notebook execution. Leaving the tab open does not. A workspace whose GPU is still working is never stopped, even with nobody at the keyboard.</p>
 <hr />
 <h2 id="launch-a-workspace">Launch a workspace<a class="headerlink" href="#launch-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1503,7 +1503,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Idle shutdown</p>
-<p>Workspaces with no activity for the idle limit shown under the list are stopped automatically to free GPUs for others. Delete the stopped workspace and create a new one; files in mounted storage are kept.</p>
+<p>Workspaces with no activity for the idle limit shown under the list are stopped automatically to free GPUs for others. A workspace whose GPU is still working keeps running. Delete the stopped workspace and create a new one; files in mounted storage are kept.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
@@ -1585,7 +1585,7 @@
 </details>
 <details class="question">
 <summary>My workspace stopped automatically.</summary>
-<p>Workspaces with no activity for the idle limit, or past the project's runtime limit, are stopped automatically. Delete it and create a new one; files in mounted storage are kept.</p>
+<p>Workspaces with no activity for the idle limit, or past the project's runtime limit, are stopped automatically. An open browser tab is not activity, so a workspace you left open but did not touch can still be stopped. Delete it and create a new one; files in mounted storage are kept.</p>
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>
