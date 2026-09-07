@@ -832,7 +832,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 7 — 部署一個容器
+        步驟 7 — 管理你的儲存
       
     </span>
   </a>
@@ -843,18 +843,7 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 管理你的儲存
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        步驟 9 — 加入群組（選用）
+        步驟 8 — 加入群組（選用）
       
     </span>
   </a>
@@ -865,7 +854,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        服務快速參考
+        執行自己的容器
       
     </span>
   </a>
@@ -1314,7 +1303,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 7 — 部署一個容器
+        步驟 7 — 管理你的儲存
       
     </span>
   </a>
@@ -1325,18 +1314,7 @@
   <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        步驟 8 — 管理你的儲存
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        步驟 9 — 加入群組（選用）
+        步驟 8 — 加入群組（選用）
       
     </span>
   </a>
@@ -1347,7 +1325,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        服務快速參考
+        執行自己的容器
       
     </span>
   </a>
@@ -1386,7 +1364,7 @@
 
 
 <h1 id="_1">快速開始<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>從連線、登入、啟動第一個 GPU 工作區到部署容器的逐步指南。</p>
+<p>連線、登入、啟動第一個 GPU 工作區，然後找到你的檔案。</p>
 <p><strong>適用對象：</strong> 所有由管理員建立帳號的使用者。</p>
 <hr />
 <h2 id="_2">前置需求<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1414,7 +1392,7 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">需要 VPN</p>
-<p>平台運作於私有網路。請先透過 OpenVPN 連線，再使用 <code>cscc.nthu.edu.tw</code> 底下的 DNS 名稱；不要直接瀏覽底層基礎設施網址。</p>
+<p>平台在私有網路上。先連 VPN，沒連的話儀表板網址打不開。</p>
 </div>
 <hr />
 <h2 id="1-vpn">步驟 1 — 安裝 VPN 使用者端<a class="headerlink" href="#1-vpn" title="Permanent link">&para;</a></h2>
@@ -1456,24 +1434,6 @@
 <li>出現提示時，輸入你的平台 <strong>使用者名稱</strong> 和 <strong>密碼</strong>（與登入平台的帳密相同）。</li>
 <li>等待連線建立。使用者端會顯示綠色指示燈或 <code>Initialization Sequence Completed</code>。</li>
 </ol>
-<div class="admonition tip">
-<p class="admonition-title">驗證連線</p>
-<p>開啟終端機並執行：
-<div class="highlight"><pre><span></span><code>nslookup dashboard.cscc.nthu.edu.tw
-</code></pre></div>
-如果名稱可以解析且儀表板可以開啟，表示已連線。若未成功，請檢查 UDP 連接埠 <strong>31194</strong> 是否被防火牆封鎖。</p>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Windows 路由檢查</p>
-<p>如果 OpenVPN 顯示已連線但連不到 <code>192.168.109.1</code>，請開啟 PowerShell
-執行 <code>route print | findstr 192.168.109</code>。輸出應該要有一條經過
-OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新匯入最新版
-<code>Platform-VPN.ovpn</code>。</p>
-<p>VPN 設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器，並啟用
-<code>block-outside-dns</code>，所以連線期間 Windows 只會用這台 DNS。可用
-<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 確認平台 DNS，或用
-<code>http://192.168.109.1:30080</code> 做低階連線檢查。</p>
-</div>
 <hr />
 <h2 id="3">步驟 3 — 登入平台<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1515,7 +1475,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </div>
 <hr />
 <h2 id="4">步驟 4 — 瀏覽首頁儀表板<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>登入後，你會進入 <strong>首頁儀表板</strong>（路徑：<code>/</code>）。</p>
+<p>登入後，你會進入 <strong>首頁儀表板</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -1530,7 +1490,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>GPU Cluster Status</strong></td>
-<td>匿名化的 GPU 節點卡片，顯示每張 GPU 的使用量</td>
+<td>每張 GPU 現在用了多少；機器以匿名標籤顯示</td>
 </tr>
 <tr>
 <td>專案數（標題列）</td>
@@ -1606,11 +1566,11 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </tr>
 <tr>
 <td><strong>算力額度 (%)</strong></td>
-<td>每張 GPU 的算力比例；100% 是一整張</td>
+<td>每張 GPU 切多少給你：25% 是四分之一張，100% 是一整張</td>
 </tr>
 <tr>
 <td><strong>GPU 記憶體額度 (%)</strong></td>
-<td>每張 GPU 的記憶體比例；保持 <strong>跟隨算力</strong> 就和算力額度相同</td>
+<td>GPU 記憶體切多少給你；保持 <strong>跟隨算力</strong> 就和算力額度相同</td>
 </tr>
 <tr>
 <td><strong>存儲磁碟區</strong></td>
@@ -1629,84 +1589,12 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <p class="admonition-title">工作區無法啟動？</p>
 <ul>
 <li>確認你的專案有足夠的 <strong>配額</strong> 剩餘。</li>
-<li>檢查排程 <strong>計畫時段</strong> 是否已開啟（請詢問管理員）。</li>
+<li>問管理員專案的 <strong>計畫時段</strong> 現在是否開放。</li>
 <li>GPU 映像首次下載需要較長時間。</li>
 </ul>
 </div>
 <hr />
-<h2 id="7">步驟 7 — 部署一個容器<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<p><strong>工作區</strong> 提供互動式 IDE。當你想改為執行自己的容器映像（長時間執行的服務或
-批次任務），請從專案的 <strong>設定檔（Config）</strong> <strong>部署容器</strong>。設定檔可定義
-<code>Pod</code>、<code>Deployment</code> 與 <code>Job</code> 工作負載。</p>
-<div class="admonition info">
-<p class="admonition-title">需要專案管理者（Manager）角色</p>
-<p>建立與部署設定檔需要 <strong>Manager</strong> 或更高的角色。你在 <strong>個人專案</strong> 中本來就具備此
-權限；若是團隊專案，請向專案管理者索取。</p>
-</div>
-<ol>
-<li>前往 <strong>專案 → [你的專案] → Config 分頁</strong>。</li>
-<li>點 <strong>新增檔案</strong>。貼上 YAML，或使用內建的 <strong>資源精靈
-   （Resource Wizard）</strong> 直接填欄位，不必手寫 YAML。</li>
-<li>
-<p>定義你的容器：</p>
-<table>
-<thead>
-<tr>
-<th>欄位</th>
-<th>設定內容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>映像</strong></td>
-<td>平台允許清單中的容器映像；如需新增請見 <a href="../requests/">申請</a></td>
-</tr>
-<tr>
-<td><strong>CPU / 記憶體</strong></td>
-<td>requests 與 limits <strong>都要</strong> 設定；記憶體至少 <code>128Mi</code>（例如 <code>512Mi</code>）</td>
-</tr>
-<tr>
-<td><strong>GPU</strong>（選用）</td>
-<td>加入 GPU 請求，例如 <code>nvidia.com/rtx6000: "1"</code>，或對應可重用的 GPU claim</td>
-</tr>
-<tr>
-<td><strong>儲存</strong>（選用）</td>
-<td>使用 <code>{{userVolume}}</code> 掛載你的個人儲存空間</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>點 <strong>儲存</strong>。每次儲存都會建立一個不可變的新版本。</p>
-<p><img alt="Config 分頁與新增設定檔" src="../../../assets/screenshots/deploy-config-new.png" />
-<em>圖 5：Config 分頁：使用資源精靈建立新設定檔。</em></p>
-</li>
-<li>
-<p>在版本列上點 <strong>Deploy（部署）</strong>。</p>
-</li>
-<li>在部署對話框中選擇 <strong>排程佇列</strong>。若 YAML 使用 GPU claim slot，請將每個 slot 對應到
-   你已保留的 GPU claim。也可先點 <strong>Dry-run（試跑）</strong> 驗證，不會佔用配額。</li>
-<li>
-<p>點 <strong>Deploy</strong>，接著觀察實例狀態直到顯示 <strong>執行中</strong>。可從實例檢視開啟
-   <strong>日誌</strong> 或 <strong>狀態</strong> 追蹤。</p>
-<p><img alt="部署對話框" src="../../../assets/screenshots/deploy-dialog.png" />
-<em>圖 6：部署對話框：選擇排程佇列與 GPU claim。</em></p>
-</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">部署被拒絕？</p>
-<ul>
-<li>每個容器都必須同時設定 <code>resources.requests.memory</code> 與
-  <code>resources.limits.memory</code>（≥ <code>128Mi</code>），缺一即被拒絕。</li>
-<li>映像必須在平台 <strong>允許清單</strong> 中；若尚未加入，請先提出映像申請。</li>
-<li>省略 <code>metadata.namespace</code>，平台會自動填入。</li>
-<li>部署需要 <strong>Manager</strong> 角色與足夠的專案 <strong>配額</strong>。</li>
-</ul>
-</div>
-<p>若需設定檔版本控制、GPU 請求與可重用 GPU claim 的完整說明，請見
-<a href="../projects/">專案 → 設定檔版本控制</a>。</p>
-<hr />
-<h2 id="8">步驟 8 — 管理你的儲存<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h2 id="7">步驟 7 — 管理你的儲存<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <ol>
 <li>點左側選單 <strong>儲存</strong>（資源區塊），會開在 <strong>個人存儲</strong> 分頁。</li>
 <li>點 <strong>啟動 FileBrowser</strong>。</li>
@@ -1714,9 +1602,9 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <li>此處的檔案不會跟著工作區消失。用完點 <strong>停止 FileBrowser</strong>。</li>
 </ol>
 <p><img alt="儲存瀏覽器" src="../../../assets/screenshots/storage-browser.png" />
-<em>圖 7：FileBrowser 介面，顯示個人儲存內容。</em></p>
+<em>圖 5：FileBrowser 介面，顯示個人儲存內容。</em></p>
 <hr />
-<h2 id="9">步驟 9 — 加入群組（選用）<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<h2 id="8">步驟 8 — 加入群組（選用）<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
 <ol>
 <li>點左側選單 <strong>群組</strong>。</li>
 <li>瀏覽可用的群組或請管理員將你加入。</li>
@@ -1724,29 +1612,18 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 <li>群組管理者可設定每位使用者的權限（讀取 / 寫入 / 無）。</li>
 </ol>
 <hr />
-<h2 id="_3">服務快速參考<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>一般使用者只需要使用平台儀表板。其他服務主機名稱保留給 CLI、整合流程與管理員使用。</p>
-<table>
-<thead>
-<tr>
-<th>服務</th>
-<th>網址</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>儀表板</strong></td>
-<td><code>https://dashboard.cscc.nthu.edu.tw</code></td>
-<td>使用者的平台主介面</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_3">執行自己的容器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>工作區是互動用的。要執行長時間的訓練或常駐的服務，改從專案的 <strong>設定檔（Config）</strong> 分頁部署容器。這需要專案的 <strong>Manager</strong> 角色；個人專案本來就有。見<a href="../projects/">專案</a>的「設定檔版本控制」一節。</p>
 <hr />
 <h2 id="_4">常見問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>VPN 已連線但儀表板 DNS 無法解析</summary>
-<p>確認 VPN 使用者端有套用設定檔中的 DNS 設定。部分使用者端需要啟用 DNS update scripts 或重新匯入設定檔。使用者入口是 <code>https://dashboard.cscc.nthu.edu.tw</code>。</p>
+<summary>VPN 顯示已連線，但儀表板打不開</summary>
+<p>重新匯入設定檔再連一次；部分使用者端還要啟用 DNS update scripts。還是不行的話，確認防火牆沒有擋 UDP 連接埠 <strong>31194</strong>，然後問管理員。</p>
+</details>
+<details class="question">
+<summary>進階：手動檢查 VPN 連線</summary>
+<p>開啟終端機執行 <code>nslookup dashboard.cscc.nthu.edu.tw</code>。名稱解析得出來、儀表板打得開，就是連上了。</p>
+<p>在 Windows 上，如果 OpenVPN 顯示已連線但連不到 <code>192.168.109.1</code>，開啟 PowerShell 執行 <code>route print | findstr 192.168.109</code>。輸出應該要有一條經過 OpenVPN 介面的 <code>192.168.109.0</code> 路由；沒有的話重新匯入最新版 <code>Platform-VPN.ovpn</code>。設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器並啟用 <code>block-outside-dns</code>，所以連線期間 Windows 只會用這台 DNS。<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 可確認平台 DNS，<code>http://192.168.109.1:30080</code> 是低階連線檢查。</p>
 </details>
 <details class="question">
 <summary>驗證碼輸入正確但仍顯示錯誤</summary>
@@ -1758,7 +1635,7 @@ OpenVPN 介面的 <code>192.168.109.0</code> 路由；如果沒有，請重新�
 </details>
 <details class="question">
 <summary>工作區停留在「啟動中」狀態</summary>
-<p>通常表示容器映像正在首次下載（大型 GPU 映像可能需要數分鐘）。若超過 10 分鐘仍在啟動中，請聯繫管理員確認排程佇列是否已啟用，以及專案的計畫時段是否已開放。</p>
+<p>通常表示容器映像正在首次下載（大型 GPU 映像可能需要數分鐘）。若超過 10 分鐘仍在啟動中，問管理員專案的 <strong>計畫時段</strong> 現在是否開放。</p>
 </details>
 <details class="question">
 <summary>工作階段過期，被導向登入頁</summary>
