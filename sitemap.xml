@@ -99,6 +99,13 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/home-dashboard/"/>
     </url>
     <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/policy/</loc>
+        <lastmod>2026-09-07</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/policy/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/policy/"/>
+    </url>
+    <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/projects/</loc>
         <lastmod>2026-09-07</lastmod>
         <changefreq>daily</changefreq>
@@ -230,6 +237,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/home-dashboard/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/home-dashboard/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/policy/</loc>
+        <lastmod>2026-09-07</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/policy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/policy/"/>
     </url>
     <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/projects/</loc>

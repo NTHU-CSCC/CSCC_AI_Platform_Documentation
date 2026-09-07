@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="zh" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -10,35 +10,35 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/storage/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/policy/">
       
       
-        <link rel="prev" href="../groups/">
+        <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../requests/">
+        <link rel="next" href="../concepts/">
       
       
         
-          <link rel="alternate" href="./" hreflang="en">
+          <link rel="alternate" href="../../../user-guide/policy/" hreflang="en">
         
-          <link rel="alternate" href="../../zh/user-guide/storage/" hreflang="zh">
+          <link rel="alternate" href="./" hreflang="zh">
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Storage - GPU Cluster Management Platform — User Guide</title>
+        <title>使用規範 - GPU Cluster Management Platform — User Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -57,9 +57,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/extra.css">
+      <link rel="stylesheet" href="../../../assets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#storage" class="md-skip">
-          Skip to content
+        <a href="#_1" class="md-skip">
+          跳转至
         </a>
       
     </div>
@@ -99,8 +99,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Storage
+              使用規範
             
           </span>
         </div>
@@ -160,20 +160,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="./" hreflang="en" class="md-select__link">
+            <a href="../../../user-guide/policy/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../zh/user-guide/storage/" hreflang="zh" class="md-select__link">
+            <a href="./" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -194,21 +194,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="查找">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -221,7 +221,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            正在初始化搜索引擎
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -233,7 +233,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
@@ -248,7 +248,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -258,13 +258,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
     
   
-  Home
+  首頁
 
       </a>
     </li>
@@ -285,7 +285,7 @@
   
     
   
-  Tutorials
+  教學影片
 
         </a>
       </li>
@@ -309,7 +309,7 @@
   
     
   
-  User Guide
+  使用指南
 
         </a>
       </li>
@@ -343,9 +343,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -355,7 +355,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
@@ -375,14 +375,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    首頁
   
 
     
@@ -440,7 +440,7 @@
   <span class="md-ellipsis">
     
   
-    Tutorials
+    教學影片
   
 
     
@@ -462,7 +462,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tutorials
+    教學影片
   
 
           </label>
@@ -484,7 +484,7 @@
   <span class="md-ellipsis">
     
   
-    Start Here
+    從這裡開始
   
 
     
@@ -512,7 +512,7 @@
   <span class="md-ellipsis">
     
   
-    Course Students
+    修課學生
   
 
     
@@ -540,7 +540,7 @@
   <span class="md-ellipsis">
     
   
-    Lab Students
+    實驗室學生
   
 
     
@@ -568,7 +568,7 @@
   <span class="md-ellipsis">
     
   
-    Teaching Assistants
+    助教
   
 
     
@@ -657,7 +657,7 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    使用指南
   
 
     
@@ -679,7 +679,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    User Guide
+    使用指南
   
 
           </label>
@@ -701,259 +701,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../policy/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Acceptable Use
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../concepts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Concepts & Roles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../home-dashboard/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Home Dashboard
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../projects/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Projects
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../workspaces/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Workspaces
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../desktops/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GPU Desktops
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CLI
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../announcements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Announcements
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../groups/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Groups
+    快速開始
   
 
     
@@ -990,7 +738,7 @@
   <span class="md-ellipsis">
     
   
-    Storage
+    使用規範
   
 
     
@@ -1008,7 +756,7 @@
   <span class="md-ellipsis">
     
   
-    Storage
+    使用規範
   
 
     
@@ -1020,7 +768,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
   
@@ -1029,15 +777,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      目录
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#storage-types" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Storage types
+        帳號與存取安全
       
     </span>
   </a>
@@ -1045,38 +793,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#storage-page" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Storage page
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Storage page">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage-bar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage bar
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#volume-lifecycle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Volume lifecycle
+        運算資源使用
       
     </span>
   </a>
@@ -1084,10 +804,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#browse-files" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Browse files
+        儲存與資料
       
     </span>
   </a>
@@ -1095,10 +815,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mount-storage-in-a-workspace" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mount storage in a workspace
+        映像、軟體授權與對外服務
       
     </span>
   </a>
@@ -1106,32 +826,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permissions
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ask-for-more-storage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ask for more storage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common questions
+        有疑問時
       
     </span>
   </a>
@@ -1154,6 +852,258 @@
   
   
     <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概念與角色
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首頁儀表板
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    專案
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工作區
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desktops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    命令列工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    公告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../groups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    群組
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    儲存
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../requests/" class="md-nav__link">
         
   
@@ -1161,7 +1111,7 @@
   <span class="md-ellipsis">
     
   
-    Requests
+    申請
   
 
     
@@ -1189,7 +1139,7 @@
   <span class="md-ellipsis">
     
   
-    Settings
+    設定
   
 
     
@@ -1223,7 +1173,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
   
@@ -1232,15 +1182,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      目录
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#storage-types" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Storage types
+        帳號與存取安全
       
     </span>
   </a>
@@ -1248,38 +1198,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#storage-page" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Storage page
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Storage page">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage-bar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage bar
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#volume-lifecycle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Volume lifecycle
+        運算資源使用
       
     </span>
   </a>
@@ -1287,10 +1209,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#browse-files" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Browse files
+        儲存與資料
       
     </span>
   </a>
@@ -1298,10 +1220,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mount-storage-in-a-workspace" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mount storage in a workspace
+        映像、軟體授權與對外服務
       
     </span>
   </a>
@@ -1309,32 +1231,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#permissions" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permissions
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ask-for-more-storage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ask for more storage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common questions
+        有疑問時
       
     </span>
   </a>
@@ -1361,172 +1261,61 @@
   
 
 
-<h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<p>A storage volume is a folder that survives your workspaces. Anything you write <em>inside</em> a mounted volume stays when the workspace stops or is deleted.</p>
-<div class="admonition warning">
-<p class="admonition-title">A workspace with no volume keeps nothing</p>
-<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else are lost when the workspace stops, restarts, or is deleted. The platform warns you before it starts a workspace with no volume.</p>
-</div>
-<p><strong>Access:</strong> an admin creates personal storage, so not every account has one. Check the <strong>My Storage</strong> tab on the Storage page and ask an admin if it is missing. Group admins manage access to group volumes; only current group members can hold permissions on them.</p>
+<h1 id="_1">使用規範<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>平台的運算與儲存資源供教學與研究使用。以下規範適用於每一位有帳號的人；平台保留操作與存取日誌。各角色能做什麼，見<a href="../concepts/">概念與角色</a>。</p>
 <hr />
-<h2 id="storage-types">Storage types<a class="headerlink" href="#storage-types" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Personal storage</th>
-<th>Group storage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Owner</strong></td>
-<td>You</td>
-<td>A group</td>
-</tr>
-<tr>
-<td><strong>Created by</strong></td>
-<td>Admin</td>
-<td>Admin, on request</td>
-</tr>
-<tr>
-<td><strong>Who can use it</strong></td>
-<td>You only</td>
-<td>Group members, by permission</td>
-</tr>
-<tr>
-<td><strong>Best for</strong></td>
-<td>Your datasets, notebooks, experiments</td>
-<td>Shared datasets, team work</td>
-</tr>
-<tr>
-<td><strong>Managed from</strong></td>
-<td><strong>My Storage</strong> tab</td>
-<td><strong>Group Storage</strong> tab</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="storage-page">Storage page<a class="headerlink" href="#storage-page" title="Permanent link">&para;</a></h2>
-<p><img alt="Storage list page" src="../../assets/screenshots/storage-list.png" />
-<em>Figure 1: Storage page with the My Storage and Group Storage tabs.</em></p>
-<ul>
-<li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar, and the file browser buttons.</li>
-<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong>, <strong>Available</strong>, or <strong>Lost</strong>), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date, and the action icons.</li>
-</ul>
-<h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
-<p>The bar reads <code>used / total Gi</code> with a percentage, and turns amber at 70% and
-red at 90%.</p>
-<p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is what you have written.
-A dash (<code>—</code>) means the platform has not measured that volume yet; it does not
-mean the volume is empty. Measurements refresh every few minutes, so a large
-copy shows up with a short delay.</p>
-<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page; anyone else is sent back to the Storage page.</p>
-<hr />
-<h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
+<h2 id="_2">帳號與存取安全<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ol>
-<li>You ask for storage on the Requests page.</li>
-<li>An admin approves and creates the volume.</li>
-<li>The volume is bound to a project and appears in the workspace form.</li>
-<li>Your workspace mounts it. Data survives restarts.</li>
-<li>An admin deletes it. The volume and its data are gone.</li>
-</ol>
-<div class="admonition danger">
-<p class="admonition-title">Deletion is permanent</p>
-<p>Deleting a volume destroys everything in it. Back up what matters before you ask for removal.</p>
-</div>
-<hr />
-<h2 id="browse-files">Browse files<a class="headerlink" href="#browse-files" title="Permanent link">&para;</a></h2>
-<ol>
-<li>On the <strong>My Storage</strong> tab, click <strong>Start FileBrowser</strong>; wait until the badge shows <strong>Running</strong>.</li>
-<li>Click <strong>Open FileBrowser</strong>. The browser opens in a new tab.</li>
-<li>When you are done, click <strong>Stop FileBrowser</strong>.</li>
-</ol>
-<p>On a group volume, use the icons in the <strong>Actions</strong> column: <strong>Start FileBrowser</strong>, then <strong>Browse</strong>, then <strong>Stop FileBrowser</strong>. When your permission on that volume is <strong>None</strong>, these icons are hidden.</p>
-<p><img alt="Storage file browser" src="../../assets/screenshots/storage-browser.png" />
-<em>Figure 2: File browser with upload, download, and delete.</em></p>
-<p>In the browser you can navigate folders, upload (drag and drop or file picker), download files and folders, create folders, and delete. Deletions are immediate.</p>
-<div class="admonition warning">
-<p class="admonition-title">Large uploads</p>
-<p>For files over 500 MB, download them inside a workspace with <code>wget</code>, <code>curl</code>, or <code>rclone</code> instead of uploading through the browser, which has size and timeout limits.</p>
-</div>
-<hr />
-<h2 id="mount-storage-in-a-workspace">Mount storage in a workspace<a class="headerlink" href="#mount-storage-in-a-workspace" title="Permanent link">&para;</a></h2>
-<ol>
-<li>In the <strong>New Workspace</strong> form, find the <strong>Storage Volumes</strong> section. It lists your personal storage and the group volumes bound to the selected project.</li>
-<li>Tick the volumes you want.</li>
-<li>Click <strong>Start</strong>.</li>
-</ol>
-<p>Mount paths are fixed: personal storage at <code>/home/&lt;your username&gt;</code>, each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</p>
-<hr />
-<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
-<p>Group volumes have a per-user permission:</p>
-<table>
-<thead>
-<tr>
-<th>Permission</th>
-<th>What you can do</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Read</strong></td>
-<td>Mount and read</td>
-</tr>
-<tr>
-<td><strong>Write</strong></td>
-<td>Mount, read, and write</td>
-</tr>
-<tr>
-<td><strong>None</strong></td>
-<td>Nothing; you cannot mount or browse it</td>
-</tr>
-</tbody>
-</table>
-<p>A <strong>None</strong> set by a group admin wins over anything the project or group would otherwise grant; clearing it restores your normal permission. Ask your group admin for changes. Group admins edit permissions in bulk on the group's Storage tab (see <a href="../groups/">Groups</a>).</p>
-<hr />
-<h2 id="ask-for-more-storage">Ask for more storage<a class="headerlink" href="#ask-for-more-storage" title="Permanent link">&para;</a></h2>
-<p>Platform admins create group volumes; a group admin role cannot. To get one, or more capacity:</p>
-<ol>
-<li>Go to <strong>Requests → + New Request</strong>.</li>
-<li>Pick type <strong>Resource</strong>.</li>
-<li>Describe what you need: size, purpose, group name.</li>
-<li>Click <strong>Submit</strong>. An admin reviews it and creates the volume.</li>
+<li>帳號限本人使用。不要把帳號、密碼、API token、VPN 設定或金鑰給任何其他人，包含同實驗室成員、同組同學與助教。</li>
+<li>別人也要用資源時，請管理員替對方開帳號，或把對方加進你的專案或群組，不要共用登入。</li>
+<li>密碼至少 8 個字元，不要和校外服務用同一組。平台沒有自助重設，忘記密碼請找管理員；新密碼一併套用到 VPN。</li>
+<li>API token 等同密碼，不要寫進程式碼、Notebook、映像檔或任何 Git 儲存庫。不再用的到 <strong>設定</strong> 撤銷。</li>
+<li>登入失敗 5 次會鎖 15 分鐘。不要用腳本反覆嘗試登入。</li>
+<li>只透過 VPN 和 <code>cscc.nthu.edu.tw</code> 的網址使用平台，不要繞過 VPN，也不要直接連其他內部網址或 IP。</li>
+<li>不要用別人的身分送申請，也不要更動與你無關的專案或群組設定。</li>
+<li>密碼可能外洩、看到不屬於你的資料，或收到不是你操作的登入通知時，立刻改密碼並通知管理員。</li>
+<li>課程結束、離開實驗室或畢業離校時，主動通知管理員停用帳號。</li>
 </ol>
 <hr />
-<h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>My volume shows Pending. When can I use it?</summary>
-<p>It is still being created, usually under a minute. After 5 minutes, contact an admin.</p>
-</details>
-<details class="question">
-<summary>My volume is full but I see no large files.</summary>
-<p>In a workspace terminal run <code>du -sh /home/&lt;your username&gt;/*</code>. Hidden folders such as <code>.cache</code> and <code>.local</code>, and notebook checkpoints, are the usual cause.</p>
-</details>
-<details class="question">
-<summary>The usage bar shows a dash.</summary>
-<p>The platform has not measured that volume yet. Check again in a few minutes. If it stays blank for an hour, contact an admin.</p>
-</details>
-<details class="question">
-<summary>I deleted files but the usage bar has not moved.</summary>
-<p>Measurements refresh every few minutes. Reload the page after that.</p>
-</details>
-<details class="question">
-<summary>I see a group volume but cannot browse it.</summary>
-<p>You need at least <strong>Read</strong> on that volume. Ask your group admin.</p>
-</details>
-<details class="question">
-<summary>Is my data still there after I delete a workspace?</summary>
-<p>Yes. Data is lost only when the volume itself is deleted.</p>
-</details>
-<details class="question">
-<summary>Can several workspaces mount the same volume?</summary>
-<p>Yes. Personal and group volumes can be mounted by several workspaces at the same time.</p>
-</details>
-<details class="question">
-<summary>Files I uploaded in the browser do not show in my workspace.</summary>
-<p>Look under <code>/home/&lt;your username&gt;</code> (personal) or <code>/mnt/shared/&lt;volume name&gt;</code> (group). Volumes attach at start, but files uploaded later appear immediately; no restart needed.</p>
-</details>
+<h2 id="_3">運算資源使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>資源供教學與研究使用。不要拿來挖礦、破解密碼、當跳板或代理、提供商業服務。</li>
+<li>工作區用完就停。不要為了先佔位子讓 GPU 空轉；閒置超過列表下方標示的上限會被自動停止。</li>
+<li>一個 GPU 桌面最多活 8 小時，30 分鐘沒有人使用會被回收。到期後只有已掛載儲存空間裡的檔案留著。</li>
+<li>一個 GPU 時數等於一張 GPU 執行一小時，配到部分張數按比例計算。額度用完後新的 GPU 任務與工作區會被擋下，執行中的工作不受影響。</li>
+<li>GPU claim 一建立就佔用配額，即使還沒接上工作負載。不用了請刪掉。</li>
+<li>只申請實際需要的 GPU 數量與型號。</li>
+<li>用可搶佔的佇列時，工作區可能被優先級較高的工作停掉。把進度寫進已掛載的儲存空間，並讓訓練可以續跑。</li>
+<li>不要規避配額、時間上限或排程規則，包含自動重啟腳本，以及偽造活動訊號來躲過閒置停止。</li>
+<li>需要超出配額的資源，到 <strong>申請</strong> 送一筆資源申請。</li>
+</ol>
+<hr />
+<h2 id="_4">儲存與資料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ol>
+<li>只有已掛載的儲存空間會留下來：個人儲存在 <code>/home/&lt;你的帳號&gt;</code>，群組儲存空間在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>。寫在其他位置的檔案，工作區停止或刪除後就沒了。</li>
+<li>平台儲存空間沒有備份。重要資料與研究成果自己另外留一份。</li>
+<li>在配額內使用。用量長條轉琥珀色（70%）或紅色（90%）時，先清掉暫存、資料集快取和舊的 checkpoint，再考慮申請擴充。</li>
+<li>不要存與教學研究無關的檔案，例如私人影音、個人備份、盜版軟體或來路不明的資料集。</li>
+<li>群組儲存空間是共用的：只動自己的資料夾，不要刪改別人的檔案。離開群組就失去該空間的權限。</li>
+<li>放個資、未公開資料集或有保密義務的資料之前，先確認來源授權與相關規定，並取得指導老師同意；這類資料不要放進群組儲存空間或映像檔。</li>
+<li>超過 500 MB 的檔案，請在工作區內用 <code>wget</code>、<code>curl</code> 或 <code>rclone</code> 下載，不要從瀏覽器上傳。</li>
+<li>儲存空間一旦刪除就無法復原。離開平台前自己把資料搬走。</li>
+</ol>
+<hr />
+<h2 id="_5">映像、軟體授權與對外服務<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ol>
+<li>使用平台允許清單內的映像。需要其他映像時，到 <strong>申請</strong> 送一筆映像申請；部分專案已獲准使用任何映像。</li>
+<li>使用任何軟體、模型權重與資料集，都要遵守它的授權條款。不要安裝或散布盜版與破解軟體。</li>
+<li>自己建的映像檔裡不要放帳號、密碼、token、金鑰或未授權的資料。</li>
+<li>專案建的映像只給該專案用；要跨專案共用，送一筆申請。</li>
+<li>不要在平台上對外提供未經核准的服務，包含公開網站、檔案分享和代理節點。</li>
+<li>不要掃描、探測或攻擊平台內外的任何主機與服務，包含其他使用者的工作區。</li>
+<li>不要規避或關閉平台的安全機制與日誌。</li>
+<li>研究成果對外發表時，依單位規定標註使用本平台的運算資源。</li>
+</ol>
+<hr />
+<h2 id="_6">有疑問時<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>規範沒寫到的狀況，到 <strong>申請</strong> 送一筆問題回報，或直接問平台管理員。</p>
 
 
 
@@ -1552,7 +1341,7 @@ copy shows up with a short delay.</p>
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  回到页面顶部
 </button>
         
       </main>
@@ -1561,33 +1350,33 @@ copy shows up with a short delay.</p>
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../groups/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Groups">
+          <a href="../getting-started/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 快速開始">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                上一页
               </span>
               <div class="md-ellipsis">
-                Groups
+                快速開始
               </div>
             </div>
           </a>
         
         
           
-          <a href="../requests/" class="md-footer__link md-footer__link--next" aria-label="Next: Requests">
+          <a href="../concepts/" class="md-footer__link md-footer__link--next" aria-label="下一页: 概念與角色">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                下一页
               </span>
               <div class="md-ellipsis">
-                Requests
+                概念與角色
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1640,10 +1429,10 @@ copy shows up with a short delay.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
