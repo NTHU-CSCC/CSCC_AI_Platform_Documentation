@@ -1412,8 +1412,11 @@
 <em>Figure 1: Storage page with the My Storage and Group Storage tabs.</em></p>
 <ul>
 <li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar, and the file browser buttons.</li>
-<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong>, <strong>Available</strong>, or <strong>Lost</strong>), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date, and the action icons.</li>
+<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong> when the volume is ready to mount, <strong>Terminating</strong> while it is being removed, <strong>Missing</strong> when the platform cannot find it in the cluster), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date, and the action icons.</li>
 </ul>
+<p>A group volume stays mounted for the project even when you stop a workspace. It
+is released only when an administrator unbinds it from the project or deletes
+it.</p>
 <h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
 <p>The bar reads <code>used / total Gi</code> with a percentage, and turns amber at 70% and
 red at 90%.</p>

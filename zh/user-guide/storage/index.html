@@ -1412,8 +1412,9 @@
 <em>圖 1：儲存頁面的個人存儲與群組存儲分頁。</em></p>
 <ul>
 <li><strong>個人存儲</strong> — 你自己的儲存空間：一張卡片，顯示檔案瀏覽器狀態（<strong>Stopped</strong>、<strong>Starting</strong>、<strong>Running</strong>、<strong>Stopping</strong>、<strong>Error</strong>）、使用量長條和檔案瀏覽器按鈕。</li>
-<li><strong>群組存儲</strong> — 你所屬群組的儲存空間，以表格列出：名稱、狀態（<strong>Active</strong>、<strong>Available</strong> 或 <strong>Lost</strong>）、檔案瀏覽器狀態、容量（例如 <code>50Gi</code>）、使用量、存取模式、你的權限、群組、建立時間和操作圖示。</li>
+<li><strong>群組存儲</strong> — 你所屬群組的儲存空間，以表格列出：名稱、狀態（<strong>Active</strong> 表示可以掛載，<strong>Terminating</strong> 表示正在移除，<strong>Missing</strong> 表示平台在叢集中找不到）、檔案瀏覽器狀態、容量（例如 <code>50Gi</code>）、使用量、存取模式、你的權限、群組、建立時間和操作圖示。</li>
 </ul>
+<p>停止工作區不會取消群組儲存空間的掛載。只有管理者把它從專案解除綁定或刪除時才會釋放。</p>
 <h3 id="_4">使用量長條<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>長條顯示 <code>已用 / 總共 Gi</code> 和百分比，到 70% 轉成琥珀色，到 90% 轉成紅色。</p>
 <p><strong>容量</strong> 是配給你的空間，<strong>使用量</strong> 是你已經寫進去的量。顯示破折號（<code>—</code>）表示平台還沒量到這個儲存空間，不代表裡面是空的。數字每幾分鐘更新一次，所以大量複製後會延遲一下才反映。</p>
