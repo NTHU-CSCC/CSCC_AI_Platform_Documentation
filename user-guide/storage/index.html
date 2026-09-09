@@ -1425,13 +1425,17 @@ A dash (<code>—</code>) means the platform has not measured that volume yet; i
 mean the volume is empty. Measurements refresh every few minutes, so a large
 copy shows up with a short delay.</p>
 <p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page; anyone else is sent back to the Storage page.</p>
+<p>Your permission applies to everything you run, not just workspaces. A volume you
+have no permission on is not attached to a job or deployment either, even if you
+name its claim yourself in the YAML, and a volume that is not bound to the
+project cannot be mounted from that project at all.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
 <li>You ask for storage on the Requests page.</li>
 <li>An admin approves and creates the volume.</li>
 <li>The volume is bound to a project and appears in the workspace form.</li>
-<li>Your workspace mounts it. Data survives restarts.</li>
+<li>Your workspaces, jobs and deployments mount it. Data survives restarts.</li>
 <li>An admin deletes it. The volume and its data are gone.</li>
 </ol>
 <div class="admonition danger">
