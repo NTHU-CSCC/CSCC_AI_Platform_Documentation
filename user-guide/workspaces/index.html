@@ -1537,13 +1537,16 @@
 <p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds one. GPU workspaces are also checked against the GPU models your plan and queue allow, even when you leave the model field blank and the platform picks one for you.</p>
 <hr />
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
-<p>If a project plan defines a weekly or one-off <strong>schedule window</strong>, workspaces in plan-bound queues only run while the window is open.</p>
+<p>A project plan carries a weekly <strong>schedule window</strong> in Taiwan time (UTC+8). It works one of two ways, set by your administrator.</p>
+<p>If the window is an <strong>access window</strong>, workspaces in plan-bound queues only run while it is open.</p>
 <ul>
 <li>Outside the window, <strong>Start</strong> is rejected with <em>The project's plan is not within its active time window</em>.</li>
 <li>When the window closes, workspaces running in plan-bound queues are stopped. Create a new one inside the next window.</li>
 <li>A workspace cannot switch queue. The <strong>Switch to Default Queue</strong> banner exists only in the deploy dialog for deployments; see <a href="../projects/#plan-window-countdown">Projects</a>.</li>
 </ul>
-<p>The Home dashboard and the project's <strong>Plan</strong> tab show the window countdown.</p>
+<p>If the window is a <strong>priority window</strong> for class hours, nothing is blocked and nothing is stopped. A workspace you start during the window runs on the class's high-priority queue and keeps running after the window closes. Starting one outside the window works normally, at ordinary priority.</p>
+<p>The Home dashboard and the project's <strong>Plan</strong> tab show the window countdown,
+worded for whichever kind of window the plan has.</p>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to your workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
 <p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform connects your browser straight to the workspace; no extra setup is needed.</p>
@@ -1597,7 +1600,7 @@
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>Workspaces in plan-bound queues are stopped when the schedule closes. Create a new one inside the next window.</p>
+<p>Workspaces in plan-bound queues are stopped when an access window closes. Create a new one inside the next window. A class priority window never evicts, so this reason does not appear for those plans.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>

@@ -1924,7 +1924,9 @@ can be deleted; a claim in use by a running workload cannot.</p>
 </div>
 <hr />
 <h2 id="plan-window-countdown">Plan window countdown<a class="headerlink" href="#plan-window-countdown" title="Permanent link">&para;</a></h2>
-<p>When a project's resource plan defines a schedule window, the <strong>Plan</strong> tab shows a live countdown to the next boundary:</p>
+<p>A resource plan's schedule window is expressed in Taiwan time (UTC+8), and the
+<strong>Plan</strong> tab shows a live countdown to its next boundary.</p>
+<p>For an <strong>access window</strong>, which controls when the plan's queues are usable:</p>
 <ul>
 <li><em>Window closes in HH:MM:SS</em> while the window is open.</li>
 <li><em>Window opens in HH:MM:SS</em> when the next window is upcoming.</li>
@@ -1939,6 +1941,12 @@ workloads in plan-bound queues are stopped;
 if the plan is removed or stops allowing your queue, anything still waiting to
 start is dropped too. A project with no active plan cannot start workloads at
 all.</p>
+<p>For a <strong>priority window</strong>, used for class hours, the countdown reads <em>Priority
+ends in HH:MM:SS</em> or <em>Priority starts in HH:MM:SS</em>. Everything you submit inside
+the window runs on the class's high-priority queue whatever queue you picked,
+and outside it your project works normally on its usual queues. No eviction
+warning and no <strong>Switch to Default Queue</strong> banner appears, because nothing is
+stopped when the window closes.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds. The limit is set by
 an admin and cannot be raised or disabled from your config file.</p>
