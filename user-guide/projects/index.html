@@ -1941,12 +1941,12 @@ workloads in plan-bound queues are stopped;
 if the plan is removed or stops allowing your queue, anything still waiting to
 start is dropped too. A project with no active plan cannot start workloads at
 all.</p>
-<p>For a <strong>priority window</strong>, used for class hours, the countdown reads <em>Priority
-ends in HH:MM:SS</em> or <em>Priority starts in HH:MM:SS</em>. Everything you submit inside
-the window runs on the class's high-priority queue whatever queue you picked,
-and outside it your project works normally on its usual queues. No eviction
-warning and no <strong>Switch to Default Queue</strong> banner appears, because nothing is
-stopped when the window closes.</p>
+<p>For a <strong>priority window</strong>, the countdown reads <em>Priority ends in HH:MM:SS</em> or
+<em>Priority starts in HH:MM:SS</em>. While it is open the deploy dialog lists the
+plan's priority queues above the ordinary ones, and anything you run on them is
+served first; outside it they are gone and your project works normally on its
+usual queues. No eviction warning and no <strong>Switch to Default Queue</strong> banner
+appears, because nothing is stopped when the window closes.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds. The limit is set by
 an admin and cannot be raised or disabled from your config file.</p>

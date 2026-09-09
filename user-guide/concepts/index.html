@@ -1464,7 +1464,7 @@
 <p>A plan also carries:</p>
 <ul>
 <li>An <strong>allowed GPU model</strong> list — only these models are selectable from the launch form.</li>
-<li>A <strong>schedule window</strong> that either restricts when plan-bound queues are usable or grants class priority during it (see <em>Plan Window</em> below).</li>
+<li>A <strong>schedule window</strong> that either restricts when plan-bound queues are usable or gives its workloads a higher-priority queue to pick from during it (see <em>Plan Window</em> below).</li>
 <li>One or more <strong>bound queues</strong> with their priority, preemption, and GPU-model policy.</li>
 </ul>
 <hr />
@@ -1497,11 +1497,11 @@
 <h2 id="plan-window">Plan Window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>A <strong>plan window</strong> is a weekly time interval on your project's resource plan, expressed in Taiwan time (UTC+8). It does one of two things, and which one is set by your administrator.</p>
 <p><strong>Access window.</strong> The plan's queues are usable only inside the window. Outside it, those queues stop accepting new workloads and may stop the ones already running. Workloads on the default queue are not affected. When a window has closed, the deploy dialog offers <strong>Switch to Default Queue</strong>; this applies to deployments only. A workspace cannot change queue; create a new one inside the next window.</p>
-<p><strong>Priority window.</strong> Used for scheduled class hours. Inside the window every workload your project submits goes to a high-priority queue automatically, so the class is served ahead of ordinary work. Outside the window nothing is blocked and nothing is stopped, and your workloads use the plan's normal queues again. A job that started during class keeps running after the window closes.</p>
-<p>The dashboard shows live countdowns for the next boundary either way: <em>Plan closes in</em> for an access window, <em>Class priority ends in</em> for a priority window.</p>
+<p><strong>Priority window.</strong> Inside the window your project's queue list grows: one or more <strong>priority queues</strong> appear alongside the usual ones, and anything you run on them is served ahead of ordinary work. If you submit without choosing, you get a priority queue automatically. Outside the window they disappear from the list and nothing else changes — nothing is blocked and nothing is stopped. A workload you started inside the window keeps running after it closes.</p>
+<p>The dashboard shows live countdowns for the next boundary either way: <em>Plan closes in</em> for an access window, <em>Priority ends in</em> for a priority window.</p>
 <div class="admonition note">
 <p class="admonition-title">Priority is not a reservation</p>
-<p>A priority window puts your class at the front of the queue. It does not stop long research jobs that are already running, so on a full cluster you may still wait for a card.</p>
+<p>A priority queue puts you at the front of the queue. It does not stop long jobs that are already running, so on a full cluster you may still wait for a card.</p>
 </div>
 <hr />
 <h2 id="gpu-claims">GPU Claims<a class="headerlink" href="#gpu-claims" title="Permanent link">&para;</a></h2>
@@ -1698,7 +1698,7 @@
 </tr>
 <tr>
 <td><strong>Plan Window</strong></td>
-<td>A weekly time interval (UTC+8) on a plan: either when its queues are usable, or when its workloads get class priority</td>
+<td>A weekly time interval (UTC+8) on a plan: either when its queues are usable, or when extra higher-priority queues are on offer</td>
 </tr>
 <tr>
 <td><strong>Preemption</strong></td>
