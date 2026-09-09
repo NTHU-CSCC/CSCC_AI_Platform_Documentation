@@ -1429,6 +1429,12 @@ copy shows up with a short delay.</p>
 have no permission on is not attached to a job or deployment either, even if you
 name its claim yourself in the YAML, and a volume that is not bound to the
 project cannot be mounted from that project at all.</p>
+<p><strong>Read-only means read-only.</strong> If your permission on a volume is <strong>Read</strong>, it is
+mounted read-only in every workspace, job and deployment. Writing
+<code>readOnly: false</code> in your own YAML does not change that — the platform sets it
+back. Being a project or group manager does not change it either; the manager
+role only exempts you from the separate rule that holds group volumes read-only
+for ordinary members.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
