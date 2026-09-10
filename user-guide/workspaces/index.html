@@ -1537,16 +1537,17 @@
 <p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds one. GPU workspaces are also checked against the GPU models your plan and queue allow, even when you leave the model field blank and the platform picks one for you.</p>
 <hr />
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
-<p>A project plan carries a weekly <strong>schedule window</strong> in Taiwan time (UTC+8). It works one of two ways, set by your administrator.</p>
-<p>If the window is an <strong>access window</strong>, workspaces in plan-bound queues only run while it is open.</p>
-<ul>
-<li>Outside the window, <strong>Start</strong> is rejected with <em>The project's plan is not within its active time window</em>.</li>
-<li>When the window closes, workspaces running in plan-bound queues are stopped. Create a new one inside the next window.</li>
-<li>A workspace cannot switch queue. The <strong>Switch to Default Queue</strong> banner exists only in the deploy dialog for deployments; see <a href="../projects/#plan-window-countdown">Projects</a>.</li>
-</ul>
-<p>If the window is a <strong>priority window</strong>, nothing is blocked and nothing is stopped. While it is open the start form offers one or more priority queues alongside the usual ones; a workspace started on one keeps running after the window closes. Starting one outside the window works normally, on the ordinary queues.</p>
-<p>The Home dashboard and the project's <strong>Plan</strong> tab show the window countdown,
-worded for whichever kind of window the plan has.</p>
+<p>A plan has two independent weekly settings in Taiwan time (UTC+8).</p>
+<p><strong>Schedule Window</strong> controls when you can start work. Outside it, new
+submissions are blocked, including those using priority queues. Existing work
+follows the plan's stop policy. The default queue does not bypass this rule.</p>
+<p><strong>Burst Windows</strong> provide extra <strong>priority queues</strong> only while the schedule is
+also open. Empty Burst Windows means no priority hours. Closing burst alone
+does not stop existing work; the scheduling limits still apply.</p>
+<p>For example, with a 09:00–18:00 schedule and 13:00–15:00 burst, ordinary queues
+are usable from 09:00 to 18:00 and priority queues from 13:00 to 15:00.
+The dashboard shows the scheduling and priority countdowns separately.</p>
+<p>Outside the schedule, <strong>Start</strong> is rejected. Wait for the next window or ask an administrator to update the plan. The project's <strong>Plan</strong> tab also shows both countdowns.</p>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to your workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
 <p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform connects your browser straight to the workspace; no extra setup is needed.</p>
@@ -1600,7 +1601,7 @@ worded for whichever kind of window the plan has.</p>
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>Workspaces in plan-bound queues are stopped when an access window closes. Create a new one inside the next window. A priority window never evicts, so this reason does not appear for those plans.</p>
+<p>The scheduling window closed. Create a new workspace inside the next window. Burst does not bypass scheduling; closing only the burst window does not stop workspaces.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>
