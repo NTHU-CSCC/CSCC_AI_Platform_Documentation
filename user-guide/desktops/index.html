@@ -1335,7 +1335,7 @@
 <p class="admonition-title">Rules for a remote-desktop workload</p>
 <ul>
 <li>One container, one replica, and no GPU request or GPU claim of its own; the desktop fields above replace them.</li>
-<li><strong>Isaac Sim WebRTC</strong> needs the platform's Isaac Sim image, one exclusive GPU, and the VPN. Mount exactly one storage volume, read-write and at <code>/workspace</code>, and nothing else. Set CPU and memory yourself within the project quota; one session measured about 10 cores and 19 GB.</li>
+<li><strong>Isaac Sim WebRTC</strong> needs the platform's Isaac Sim image and the VPN. <strong>GPU reservation</strong> works the same as for a Linux desktop. Mount exactly one storage volume, read-write and at <code>/workspace</code>, and nothing else. Set CPU and memory yourself within the project quota; one session measured about 10 cores and 19 GB.</li>
 <li>Mounted volumes must be storage volumes (personal or group); other volume types are rejected.</li>
 </ul>
 </div>

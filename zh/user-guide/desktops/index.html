@@ -1335,7 +1335,7 @@
 <p class="admonition-title">遠端桌面工作負載的規則</p>
 <ul>
 <li>一個容器、一個 replica，而且本身不能有 GPU 請求或 GPU claim；上面的桌面欄位會取代它們。</li>
-<li><strong>Isaac Sim WebRTC</strong> 需要平台的 Isaac Sim 映像、一張獨佔 GPU 和 VPN。只能掛一個儲存空間，可讀寫、掛在 <code>/workspace</code>，不能再掛別的。CPU 與記憶體請在專案配額內自行設定；實測一個工作階段約需 10 核心與 19 GB。</li>
+<li><strong>Isaac Sim WebRTC</strong> 需要平台的 Isaac Sim 映像和 VPN。<strong>GPU 保留比例</strong> 的規則和 Linux 桌面相同。只能掛一個儲存空間，可讀寫、掛在 <code>/workspace</code>，不能再掛別的。CPU 與記憶體請在專案配額內自行設定；實測一個工作階段約需 10 核心與 19 GB。</li>
 <li>掛載的必須是儲存空間（個人或群組）；其他類型會被拒絕。</li>
 </ul>
 </div>
