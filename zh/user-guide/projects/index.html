@@ -1931,6 +1931,7 @@
 <li>在彈出的部署對話框中選擇排程佇列。若 YAML 包含 GPU claim slot，請為每個 slot 選擇本次部署要使用的已保留 GPU claim。</li>
 </ol>
 <p>執行中的實例會出現在專案的 <strong>資源</strong> 分頁。另外有一個 <strong>部署</strong> 頁面在 <code>/projects/&lt;專案 ID&gt;/deployments</code>，分 <strong>個人</strong> 與 <strong>成員</strong> 兩個分頁列出部署；側欄沒有連結，要用網址開。</p>
+<p>已結束的 Pod 最多在結束三天後就會從叢集移除，它在 <strong>部署</strong> 頁面上的項目與日誌也會跟著消失；日誌也可能更早不見，例如節點重新開機時。Job 已結束的 Pod 會一直保留到你刪除該 Job 為止。要留下的結果或其他資料，請在執行過程中寫進掛載的儲存空間。</p>
 <h3 id="_12">可以進去操作的容器<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>要能對容器開啟 <strong>終端</strong>，它必須持續執行。單獨執行 Shell 而不帶參數
 （例如 <code>command: ["/bin/sh"]</code>）會立刻結束，容器因此不斷重啟，每次開啟終端都會失敗。</p>

@@ -1967,6 +1967,11 @@ config file, save it, and a new version appears; you can deploy any version.</p>
 <strong>Deployments</strong> page at <code>/projects/&lt;project id&gt;/deployments</code> lists deployments
 with <strong>Personal</strong> and <strong>Members</strong> tabs; it has no sidebar link, so open it by
 URL.</p>
+<p>A finished Pod is removed from the cluster at most three days after it ends,
+and its entry and logs on the <strong>Deployments</strong> page go with it. The logs can
+disappear sooner, for example when a node restarts. A Job keeps its finished
+pods until you delete the Job. Write results and anything else you want to
+keep to a mounted storage volume while the run is going.</p>
 <h3 id="containers-you-can-shell-into">Containers you can shell into<a class="headerlink" href="#containers-you-can-shell-into" title="Permanent link">&para;</a></h3>
 <p>To open a <strong>Terminal</strong> into a container, it has to stay running. A shell with
 no arguments, such as <code>command: ["/bin/sh"]</code>, exits immediately, so the
