@@ -2015,6 +2015,10 @@ For storage, use <code>{{userVolume}}</code> to mount your personal volume; nami
 volume directly works only in group-owned projects, and only for volumes the
 owning group already has.</p>
 <ul>
+<li>Each pod gets one memory-backed <code>/dev/shm</code>, shared by its regular
+  containers (not init containers), of up to 8 GiB or the pod's memory
+  limit if that is smaller. It is skipped when any container in the pod
+  already mounts something under <code>/dev/shm</code>.</li>
 <li>An inline GPU request goes straight into the container's resource
   requests, for example <code>nvidia.com/rtx6000: "1"</code>.</li>
 <li>A GPU claim slot is an annotation on the Pod, or on the Deployment's

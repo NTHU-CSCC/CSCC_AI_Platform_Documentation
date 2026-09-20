@@ -1966,6 +1966,7 @@ Deployment 與 Job 的列上沒有終端按鈕，請展開找到它們建立的�
 儲存請用 <code>{{userVolume}}</code> 掛載自己的個人儲存空間；直接寫出儲存空間名稱只有在群組專案、
 且該群組本來就擁有那個儲存空間時才有效。</p>
 <ul>
+<li>每個 Pod 會得到一個由記憶體支援的 <code>/dev/shm</code>，由一般容器共用（不含 init 容器），最大 8 GiB；Pod 的記憶體上限比這小時就以上限為準。只要有任何容器已經在 <code>/dev/shm</code> 底下掛了東西，就不會加。</li>
 <li>直接寫的 GPU 需求放在容器的資源需求裡，例如 <code>nvidia.com/rtx6000: "1"</code>。</li>
 <li>GPU claim slot 是加在 Pod 或 Deployment 範本上的註記：
   <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。

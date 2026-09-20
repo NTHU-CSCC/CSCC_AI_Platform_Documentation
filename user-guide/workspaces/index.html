@@ -1486,6 +1486,10 @@
 <td>Optional override; defaults to plan limits</td>
 </tr>
 <tr>
+<td><strong>Shared memory</strong> (<code>/dev/shm</code>)</td>
+<td>Not a form field. The workspace gets one memory-backed <code>/dev/shm</code> of up to 8 GiB, or the memory limit if that is smaller. What it holds counts toward the memory limit. This is enough for PyTorch data loaders, NCCL and vLLM.</td>
+</tr>
+<tr>
 <td><strong>Storage Volumes</strong></td>
 <td>Tick the volumes to mount. Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</td>
 </tr>

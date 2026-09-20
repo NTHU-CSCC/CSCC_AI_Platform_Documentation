@@ -1486,6 +1486,10 @@
 <td>選填覆蓋；預設為計畫上限</td>
 </tr>
 <tr>
+<td><strong>共享記憶體</strong>（<code>/dev/shm</code>）</td>
+<td>不是表單欄位。工作區會得到一個由記憶體支援的 <code>/dev/shm</code>，最大 8 GiB；記憶體上限比這小時就以上限為準。裡面的內容算在記憶體上限內。這足夠 PyTorch 資料載入、NCCL 與 vLLM 使用。</td>
+</tr>
+<tr>
 <td><strong>存儲磁碟區</strong></td>
 <td>勾選要掛的儲存空間。個人儲存掛在 <code>/home/&lt;你的帳號&gt;</code>，每個群組儲存空間掛在 <code>/mnt/shared/&lt;儲存空間名稱&gt;</code>。</td>
 </tr>
