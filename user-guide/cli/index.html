@@ -1551,6 +1551,8 @@ low-sensitivity, and rotate any token passed this way once the build is done.</p
 <h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
 <p>Image builds share one build engine and run one at a time. Each build gets a
 fixed amount of CPU, memory, and scratch space that you cannot override.</p>
+<p>The build engine shuts down when no one has built anything for a while, so the
+first build after that waits about a minute for it to start.</p>
 <p>After submission, <code>--follow=true</code> (the default) waits for logs to become
 available, streams them, and exits once the build reports <code>completed</code>, <code>failed</code>,
 or <code>deleted</code>.</p>

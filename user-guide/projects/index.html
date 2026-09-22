@@ -1828,6 +1828,9 @@ project is created for you automatically when you register.</p>
 <p>Builds are submitted to a shared queue and run one at a time. Each build gets a
 fixed amount of CPU, memory, and scratch space that you cannot change from the
 form, and that capacity does not consume your project or personal quota.</p>
+<p>The build engine shuts down when no one has built anything for a while. The
+first build after that stays queued for about a minute while the engine starts,
+then runs as usual. Its message says it is waiting for the build engine.</p>
 <p>Uploaded archives are checked for unsafe paths and size limits before the build
 starts.</p>
 <p>The build history shows status, source type, destination image, and live logs.

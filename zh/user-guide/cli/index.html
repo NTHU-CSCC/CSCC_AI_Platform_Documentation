@@ -1547,6 +1547,7 @@ engine。</p>
 <h3 id="_5">共用建置佇列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>映像建置共用同一套建置環境，同一時間只跑一個。每個建置固定分配一份 CPU、
 記憶體與暫存空間，CLI 無法調整。</p>
+<p>一段時間沒有人建置時，建置環境會自動關閉，之後的第一個建置要多等約一分鐘讓它啟動。</p>
 <p>提交後，<code>--follow=true</code>（預設值）會等到建置日誌可用後開始串流，
 並在建置回報 <code>completed</code>、<code>failed</code> 或 <code>deleted</code> 時停止。</p>
 <p>CLI 會依序從登入時的 <code>--api-url</code>、<code>CSCC_API_URL</code>、已儲存設定取得 API 位址：</p>
