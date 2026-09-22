@@ -1941,8 +1941,9 @@ Closing burst alone does not stop existing work or close scheduling access.
 An open deploy dialog refreshes queue choices at a window transition, preserves
 a still-available selection, and clears outdated validation results.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
-workload is stopped automatically after that many seconds. The limit is set by
-an admin and cannot be raised or disabled from your config file.</p>
+workload is stopped automatically after that many seconds and you get a
+<strong>Runtime limit reached</strong> notification in the bell. The limit is set by an
+admin and cannot be raised or disabled from your config file.</p>
 <p>The <strong>Overview</strong> tab also shows the plan's <strong>GPU-hours</strong> bar when the plan has
 a GPU-hour budget: allocated GPU-hours in the current period against the
 budget, the reset period (monthly, weekly, or every N hours, set by an
