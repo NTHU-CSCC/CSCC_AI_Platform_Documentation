@@ -1946,7 +1946,9 @@ unaffected. About 5–6 minutes after burst closes, a deployment still running
 on a priority queue moves to the plan's normal queue for the same GPU model
 and takes on that queue's priority — it can be preempted only if that queue
 is itself marked <strong>Preemptible</strong>; you get a bell notification when this
-happens. An open deploy dialog refreshes queue choices at a window transition,
+happens. If the plan has no normal queue for that GPU model, the deployment is
+stopped instead, with its own notification. An open deploy dialog refreshes
+queue choices at a window transition,
 preserves a still-available selection, and clears outdated validation results.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds and you get a

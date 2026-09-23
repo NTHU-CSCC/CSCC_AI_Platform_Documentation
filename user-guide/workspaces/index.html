@@ -1552,7 +1552,9 @@ finished. About 5–6 minutes after a burst window closes, a workspace still
 running on a priority queue is not restarted, but moves to the plan's normal
 queue for the same GPU model and takes on that queue's priority — it can be
 preempted only if that queue is itself marked <strong>Preemptible</strong>. You get a bell
-notification when this happens. The scheduling limits still apply.</p>
+notification when this happens. If the plan has no normal queue for that GPU
+model, the workspace is stopped instead, with its own notification. The
+scheduling limits still apply.</p>
 <p>For example, with a 09:00–18:00 schedule and 13:00–15:00 burst, ordinary queues
 are usable from 09:00 to 18:00 and priority queues from 13:00 to 15:00.
 The dashboard shows the scheduling and priority countdowns separately.</p>
