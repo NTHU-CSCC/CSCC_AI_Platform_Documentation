@@ -1651,6 +1651,10 @@
 <p>重新匯入設定檔再連一次；部分使用者端還要啟用 DNS update scripts。還是不行的話，確認防火牆沒有擋 UDP 連接埠 <strong>31194</strong>，然後問管理員。</p>
 </details>
 <details class="question">
+<summary>可以在多台裝置同時連 VPN 嗎？</summary>
+<p>可以。同一個帳號可以在筆電和手機上同時連線，每台裝置各自一條連線。VPN 軟體每天會要你重新輸入一次密碼，輸入後連線照常。</p>
+</details>
+<details class="question">
 <summary>進階：手動檢查 VPN 連線</summary>
 <p>開啟終端機執行 <code>nslookup dashboard.cscc.nthu.edu.tw</code>。名稱解析得出來、儀表板打得開，就是連上了。</p>
 <p>在 Windows 上，如果 OpenVPN 顯示已連線但連不到 <code>192.168.109.1</code>，開啟 PowerShell 執行 <code>route print | findstr 192.168.109</code>。輸出應該要有一條經過 OpenVPN 介面的 <code>192.168.109.0</code> 路由；沒有的話重新匯入最新版 <code>Platform-VPN.ovpn</code>。設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器並啟用 <code>block-outside-dns</code>，所以連線期間 Windows 只會用這台 DNS。<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 可確認平台 DNS，<code>http://192.168.109.1:30080</code> 是低階連線檢查。</p>

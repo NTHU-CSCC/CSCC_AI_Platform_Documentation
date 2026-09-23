@@ -1651,6 +1651,10 @@
 <p>Import the profile again and reconnect; some clients also need DNS update scripts enabled. If it still fails, check that your firewall allows UDP port <strong>31194</strong>, then ask your admin.</p>
 </details>
 <details class="question">
+<summary>Can I connect to the VPN from more than one device?</summary>
+<p>Yes. You can stay connected from your laptop and your phone at the same time with the same account. Each device gets its own connection. Once a day the VPN client asks for your password again; enter it and the connection continues.</p>
+</details>
+<details class="question">
 <summary>Advanced: checking the VPN connection by hand</summary>
 <p>Open a terminal and run <code>nslookup dashboard.cscc.nthu.edu.tw</code>. If the name resolves and the dashboard opens, you are connected.</p>
 <p>On Windows, if OpenVPN shows connected but <code>192.168.109.1</code> is unreachable, open PowerShell and run <code>route print | findstr 192.168.109</code>. The output should include a <code>192.168.109.0</code> route through the OpenVPN adapter; if it is missing, re-import the latest <code>Platform-VPN.ovpn</code>. The profile pushes the platform DNS server for <code>cscc.nthu.edu.tw</code> and turns on <code>block-outside-dns</code>, so Windows uses only that DNS server while connected. <code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> confirms platform DNS; <code>http://192.168.109.1:30080</code> is a low-level connectivity check.</p>
