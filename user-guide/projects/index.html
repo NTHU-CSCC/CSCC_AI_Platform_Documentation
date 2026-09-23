@@ -1940,9 +1940,14 @@ follow the plan's stop policy.</p>
 <p>Configured <strong>Burst Windows</strong> show <em>Priority ends in HH:MM:SS</em> or
 <em>Priority starts in HH:MM:SS</em>, based on their overlap with scheduling hours.
 Priority queues appear alongside ordinary queues only during that overlap.
-Closing burst alone does not stop existing work or close scheduling access.
-An open deploy dialog refreshes queue choices at a window transition, preserves
-a still-available selection, and clears outdated validation results.</p>
+Closing burst does not stop existing work or close scheduling access. A
+deployment still running inside the burst window, or already finished, is
+unaffected. About 5–6 minutes after burst closes, a deployment still running
+on a priority queue moves to the plan's normal queue for the same GPU model
+and takes on that queue's priority — it can be preempted only if that queue
+is itself marked <strong>Preemptible</strong>; you get a bell notification when this
+happens. An open deploy dialog refreshes queue choices at a window transition,
+preserves a still-available selection, and clears outdated validation results.</p>
 <p>Queues may also carry a runtime limit. When the queue you selected has one, your
 workload is stopped automatically after that many seconds and you get a
 <strong>Runtime limit reached</strong> notification in the bell. The limit is set by an

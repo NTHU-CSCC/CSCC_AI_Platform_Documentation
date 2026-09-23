@@ -1546,8 +1546,13 @@
 submissions are blocked, including those using priority queues. Existing work
 follows the plan's stop policy. The default queue does not bypass this rule.</p>
 <p><strong>Burst Windows</strong> provide extra <strong>priority queues</strong> only while the schedule is
-also open. Empty Burst Windows means no priority hours. Closing burst alone
-does not stop existing work; the scheduling limits still apply.</p>
+also open. Empty Burst Windows means no priority hours. A workspace still
+running inside a burst window is unaffected, and so is one that has already
+finished. About 5–6 minutes after a burst window closes, a workspace still
+running on a priority queue is not restarted, but moves to the plan's normal
+queue for the same GPU model and takes on that queue's priority — it can be
+preempted only if that queue is itself marked <strong>Preemptible</strong>. You get a bell
+notification when this happens. The scheduling limits still apply.</p>
 <p>For example, with a 09:00–18:00 schedule and 13:00–15:00 burst, ordinary queues
 are usable from 09:00 to 18:00 and priority queues from 13:00 to 15:00.
 The dashboard shows the scheduling and priority countdowns separately.</p>
@@ -1605,7 +1610,7 @@ The dashboard shows the scheduling and priority countdowns separately.</p>
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>The scheduling window closed. Create a new workspace inside the next window. Burst does not bypass scheduling; closing only the burst window does not stop workspaces.</p>
+<p>The scheduling window closed. Create a new workspace inside the next window. Burst does not bypass scheduling — but closing only the burst window does not evict a workspace either; it keeps running, moved to the plan's normal queue for its GPU model.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>
