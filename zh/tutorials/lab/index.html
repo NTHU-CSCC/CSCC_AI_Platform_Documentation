@@ -1351,7 +1351,7 @@
 <p><em>1:41．無聲．完整說明見<a href="../../user-guide/projects/">專案</a></em></p>
 <hr />
 <h2 id="l1-3">L1-3 — 部署 Job<a class="headerlink" href="#l1-3" title="Permanent link">&para;</a></h2>
-<p><strong>完成數</strong> 是總共要跑幾次，<strong>平行數</strong> 是同時幾個在跑。Job 跑完就結束，Pod 和 Deployment 不會。</p>
+<p><strong>完成數</strong> 是總共要跑幾次，<strong>平行數</strong> 是同時幾個在跑。Job 跑完就結束，Pod 和 Deployment 不會。<strong>完成數</strong> 不能超過 <strong>平行數</strong>：平台只會啟動一次 Job 的 Pod，不會重跑來補足次數，完成數高於平行數會被拒絕。</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../../assets/videos/posters/l1-3-deploy-job.jpg">
   <source src="../../../assets/videos/l1-3-deploy-job.mp4" type="video/mp4">
 </video>

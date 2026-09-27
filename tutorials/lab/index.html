@@ -1353,7 +1353,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:41 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-3">L1-3 — Deploy a Job<a class="headerlink" href="#l1-3" title="Permanent link">&para;</a></h2>
-<p><strong>Completions</strong> is how many runs in total, <strong>Parallelism</strong> how many at once. A Job ends when it finishes; a Pod and a Deployment do not.</p>
+<p><strong>Completions</strong> is how many runs in total, <strong>Parallelism</strong> how many at once. A Job ends when it finishes; a Pod and a Deployment do not. <strong>Completions</strong> cannot exceed <strong>Parallelism</strong>: the platform starts a Job's pods once and never reruns one to catch up, so a higher Completions than Parallelism is rejected.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-3-deploy-job.jpg">
   <source src="../../assets/videos/l1-3-deploy-job.mp4" type="video/mp4">
 </video>
