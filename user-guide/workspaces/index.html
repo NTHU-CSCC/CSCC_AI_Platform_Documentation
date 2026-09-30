@@ -1415,7 +1415,7 @@
 <li>The last activity time</li>
 <li><strong>Open</strong> (only while Running) and <strong>Delete</strong></li>
 </ul>
-<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real activity in the IDE counts: opening pages, typing in the terminal, running a notebook. Leaving the tab open doesn't count. It applies to every workspace, with or without a GPU. A workspace that is still computing keeps running, even if nobody is at the keyboard. A workspace that is just idling uses a fraction of a core, and that doesn't count as computing.</p>
+<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. See <em>Idle shutdown</em> below for what counts as activity.</p>
 <hr />
 <h2 id="launch-a-workspace">Launch a workspace<a class="headerlink" href="#launch-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1501,7 +1501,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Idle shutdown</p>
-<p>A workspace with no activity for the idle limit shown under the list is stopped automatically, so the GPU goes back to other people. CPU-only workspaces are stopped the same way. A workspace that is still doing real work keeps running. Delete the stopped one and create a new one. Files in mounted storage are kept.</p>
+<p>A workspace with no activity for the idle limit shown under the list is stopped automatically, so the GPU goes back to other people. It applies to every workspace, with or without a GPU. Only real activity in the IDE counts: opening pages, typing in the terminal, running a notebook. An open tab doesn't. A workspace that is still computing keeps running, even if nobody is at the keyboard, but one that is just idling (a background process using a fraction of a core) isn't computing. Delete the stopped one and create a new one. Files in mounted storage are kept.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
@@ -1581,7 +1581,7 @@
 </details>
 <details class="question">
 <summary>My workspace stopped automatically.</summary>
-<p>The platform stops a workspace automatically when it has no activity for the idle limit, or when it passes the project's runtime limit. An open browser tab isn't activity, so a workspace you left open but didn't touch can still be stopped. So can one that is only idling, because a background process using a fraction of a core doesn't count as work. Delete it and create a new one. Files in mounted storage are kept.</p>
+<p>The platform stops a workspace when it has no activity for the idle limit (see <em>Idle shutdown</em> above) or when it passes the project's runtime limit. Delete it and create a new one. Files in mounted storage are kept.</p>
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>

@@ -1412,9 +1412,6 @@
 <h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
 <p>The bar reads <code>used / total Gi</code> with a percentage. It turns amber at 70% and red at 90%.</p>
 <p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is how much you have written. A dash (<code>—</code>) means the platform hasn't measured that volume yet. It doesn't mean the volume is empty. The numbers refresh every few minutes, so a big copy shows up a little late.</p>
-<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page. Everyone else goes back to the Storage page.</p>
-<p>Your permission applies to everything you run, not just workspaces. If you have no permission on a volume, a job or deployment can't mount it either, even if you write its name in your own YAML. A volume that isn't attached to the project can't be mounted from that project at all.</p>
-<p><strong>Read-only means read-only.</strong> If your permission on a volume is <strong>Read</strong>, it is mounted read-only in every workspace, job and deployment. Writing <code>readOnly: false</code> in your own YAML changes nothing, because the platform sets it back. Being a project or group manager doesn't change it either. The manager role only skips the separate rule that keeps group volumes read-only for ordinary members.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1450,7 +1447,6 @@
 <li>Tick the volumes you want.</li>
 <li>Click <strong>Start</strong>.</li>
 </ol>
-<p>Mount paths are fixed: personal storage at <code>/home/&lt;your username&gt;</code>, each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</p>
 <hr />
 <h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
 <p>Each group volume has a permission for each user:</p>
@@ -1477,6 +1473,9 @@
 </tbody>
 </table>
 <p>If a group admin sets <strong>None</strong>, it beats anything the project or group would otherwise give you. Clear it and your normal permission comes back. Ask your group admin to change permissions. Group admins can edit them in bulk on the group's Storage tab (see <a href="../groups/">Groups</a>).</p>
+<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page. Everyone else goes back to the Storage page.</p>
+<p>Your permission applies to everything you run, not just workspaces. If you have no permission on a volume, a job or deployment can't mount it either, even if you write its name in your own YAML. A volume that isn't attached to the project can't be mounted from that project at all.</p>
+<p><strong>Read-only means read-only.</strong> If your permission on a volume is <strong>Read</strong>, it is mounted read-only in every workspace, job and deployment. Writing <code>readOnly: false</code> in your own YAML changes nothing, because the platform sets it back. Being a project or group manager doesn't change it either. The manager role only skips the separate rule that keeps group volumes read-only for ordinary members.</p>
 <hr />
 <h2 id="ask-for-more-storage">Ask for more storage<a class="headerlink" href="#ask-for-more-storage" title="Permanent link">&para;</a></h2>
 <p>Only platform admins can create group volumes. Group admins can't. To get one, or more space:</p>

@@ -1914,7 +1914,7 @@ shows up under <strong>Available</strong>.</p>
 <p>or keep the shell alive by turning on <strong>stdin</strong> and <strong>tty</strong> under <em>Interactive shell</em> in the Resource Wizard (<code>stdin: true</code> and <code>tty: true</code> in raw YAML). The wizard warns you when a bare shell would exit right away.</p>
 <p>Once the container is running, open the project's <strong>Resources</strong> tab and click <strong>Terminal</strong> on the <strong>Pod</strong> row. Deployment and Job rows have no terminal button. Expand them to find the running instance they created.</p>
 <h3 id="deploy-rules">Deploy rules<a class="headerlink" href="#deploy-rules" title="Permanent link">&para;</a></h3>
-<p>You need the <strong>Project Manager</strong> role or higher to deploy, validate, inspect and delete config-file instances. Quota is checked against everything you already have going, so a workload still waiting to start keeps its share until it finishes or is removed. Config files can deploy <code>Pod</code>, <code>Deployment</code> and <code>Job</code>. Other kinds are rejected.</p>
+<p>Quota is checked against everything you already have going, so a workload still waiting to start keeps its share until it finishes or is removed. Config files can deploy <code>Pod</code>, <code>Deployment</code> and <code>Job</code>. Other kinds are rejected.</p>
 <p>Every container must set both a memory request and a memory limit of at least <code>128Mi</code>. Deploy and dry-run validation reject missing values. Always write the unit: a bare <code>memory: "1"</code> means one byte and is rejected.</p>
 <h3 id="asking-for-a-gpu">Asking for a GPU<a class="headerlink" href="#asking-for-a-gpu" title="Permanent link">&para;</a></h3>
 <p>A config file can ask for a GPU in two ways.</p>
@@ -1922,7 +1922,7 @@ shows up under <strong>Available</strong>.</p>
 <li><strong>Inline GPU request.</strong> In the Resource Wizard, pick a GPU model in the container's resource settings. The platform counts it toward your quota, checks the model against your plan's allowed models, and sets up the GPU when you deploy.</li>
 <li><strong>Reusable GPU claim.</strong> In the Resource Wizard, choose <strong>Pick at deploy</strong> and give the slot a name such as <code>train-a</code>. The slot name is only a label. In the deploy dialog, you pick which of your own claims from the <strong>GPU Claims</strong> tab goes with it.</li>
 </ul>
-<p>Every replica of a Deployment shares one claim. If only some replicas should use a claim, split them into separate Deployments. A config that asks for no GPU needs no allowed-model list and never gets a GPU claim.</p>
+<p>To give a claim to only some replicas, split them into separate Deployments. A config that asks for no GPU needs no allowed-model list and never gets a GPU claim.</p>
 <details class="note">
 <summary>Advanced: writing the YAML yourself</summary>
 <p>Leave the fields the platform manages out of your YAML: don't set <code>metadata.namespace</code>,

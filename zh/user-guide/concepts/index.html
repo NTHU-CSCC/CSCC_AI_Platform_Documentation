@@ -1495,7 +1495,7 @@
 <p>Burst 時段結束時：</p>
 <ul>
 <li>已經結束的工作不受影響。</li>
-<li>約 5–6 分鐘後，還在優先佇列上跑的工作不會重新啟動，而是移到計畫中相同 GPU 型號的一般佇列，改用那個佇列的優先級。只有該佇列是 <strong>可被搶佔</strong> 時，才可能被搶佔。你會收到通知鈴鐺提示。</li>
+<li>約 5–6 分鐘後，還在優先佇列上跑的工作不會重新啟動，而是移到計畫中相同 GPU 型號的一般佇列，改用那個佇列的優先級。只有該佇列是 <strong>可被搶佔</strong> 時，才可能被搶佔。你會收到鈴鐺通知。</li>
 <li>計畫裡沒有相同 GPU 型號的一般佇列時，工作會改為停止，你會收到另一則通知。</li>
 </ul>
 <p>排程限制照常適用。</p>
@@ -1515,13 +1515,13 @@
 <p>claim 有兩種：</p>
 <ul>
 <li><strong>inline claim</strong>：啟動工作區時自動建立，隨工作區一起消失。</li>
-<li><strong>專案 GPU claim</strong>：在專案的 <em>GPU Claims</em> 標籤建立，可以在多次部署重複使用。建立當下就會佔用 GPU 配額，但只有工作在用它的時候才累計 GPU 時數。</li>
+<li><strong>專案 GPU claim</strong>：在專案的 <em>GPU Claims</em> 分頁建立，可以在多次部署重複使用。建立當下就會佔用 GPU 配額，但只有工作在用它的時候才累計 GPU 時數。</li>
 </ul>
 <p>專案設定檔用 <strong>claim slot</strong>（例如 <code>train-a</code>）指向專案 GPU claim。slot 名稱只是標籤，要用你的哪個 claim，在部署對話框裡選。Deployment 的所有 replica 共用同一個 claim，只算一次。只有部分 replica 需要 GPU 的話，請拆成多個 Deployment。</p>
 <hr />
 <h2 id="gpu">GPU 時數額度<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
 <p>資源計畫除了上面的 GPU/CPU/記憶體上限，還能限制專案用掉的 GPU 總時間。一個 GPU 時數是一張 GPU 跑一小時，只用到部分張數就按比例算。</p>
-<p>管理員會為每個專案設定額度多久重設一次：預設每月，也可以每週，或每隔固定小時數。專案的 <strong>總覽</strong> 標籤會顯示你這期用了多少、什麼時候重設。額度用完後，新的 GPU 任務和工作區會被擋下，到重設為止。已經在跑的工作不受影響。</p>
+<p>管理員會為每個專案設定額度多久重設一次：預設每月，也可以每週，或每隔固定小時數。專案的 <strong>總覽</strong> 分頁會顯示你這期用了多少、什麼時候重設。額度用完後，新的 GPU 任務和工作區會被擋下，到重設為止。已經在跑的工作不受影響。</p>
 <hr />
 <h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>

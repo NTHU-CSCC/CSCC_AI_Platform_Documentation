@@ -1290,7 +1290,7 @@
 <h2 id="_2">啟動桌面<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>你要有專案的 <strong>Manager</strong> 角色，和部署設定檔一樣。</p>
 <ol>
-<li>開啟 <strong>專案 → [你的專案] → 設定</strong> 標籤，點 <strong>新增檔案</strong>。</li>
+<li>開啟 <strong>專案 → [你的專案] → 設定</strong> 分頁，點 <strong>新增檔案</strong>。</li>
 <li>在 <strong>資源精靈</strong> 加一個 <code>Pod</code>（或只有一個 replica 的 <code>Deployment</code>），裡面一個容器，填映像、CPU 和記憶體。</li>
 <li>打開容器下方的 <strong>遠端桌面</strong> 開關。平台會把你的工作改成在瀏覽器裡的獨立桌面來跑，你的映像不會重建。</li>
 <li>填桌面欄位：</li>
@@ -1392,7 +1392,7 @@
 <hr />
 <h2 id="_5">存活時間<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
-<li>一個桌面最多用 <strong>8 小時</strong>；若專案的 <strong>Workspace 最長連續使用時間</strong>（設定標籤）或佇列的執行時間上限更短，就以較短的為準。該列會顯示到期時間。</li>
+<li>一個桌面最多用 <strong>8 小時</strong>；若專案的 <strong>Workspace 最長連續使用時間</strong>（設定分頁）或佇列的執行時間上限更短，就以較短的為準。該列會顯示到期時間。</li>
 <li><strong>30 分鐘</strong> 沒人在看的桌面會被回收，把 GPU 讓出來。</li>
 <li>到期後，掛載的儲存空間裡的檔案還在，桌面裡其他東西都沒了。重新部署設定檔，就有新的桌面。</li>
 </ul>
