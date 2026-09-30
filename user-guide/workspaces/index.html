@@ -1366,8 +1366,8 @@
 
 
 <h1 id="workspaces">Workspaces<a class="headerlink" href="#workspaces" title="Permanent link">&para;</a></h1>
-<p>A workspace is a JupyterLab or VS Code environment with GPU access, started from one of the platform's images.</p>
-<p><strong>Access:</strong> All project members with sufficient project quota.</p>
+<p>A workspace is a JupyterLab or VS Code environment with GPU access. It starts from one of the platform's images.</p>
+<p><strong>Who can use it:</strong> project members whose project has enough quota.</p>
 <hr />
 <h2 id="workspace-states">Workspace states<a class="headerlink" href="#workspace-states" title="Permanent link">&para;</a></h2>
 <table>
@@ -1381,7 +1381,7 @@
 <tbody>
 <tr>
 <td><strong>Starting</strong></td>
-<td>The workspace is downloading its image and starting up.</td>
+<td>The workspace is downloading its image and starting.</td>
 <td>Wait 30–120 seconds</td>
 </tr>
 <tr>
@@ -1391,7 +1391,7 @@
 </tr>
 <tr>
 <td><strong>Stopped</strong></td>
-<td>The workspace is not running (for example after the idle limit or the runtime limit). Files in mounted storage are kept.</td>
+<td>The workspace isn't running (for example, it hit the idle limit or the runtime limit). Files in mounted storage are kept.</td>
 <td><strong>Delete</strong>, then create a new one</td>
 </tr>
 <tr>
@@ -1401,21 +1401,21 @@
 </tr>
 </tbody>
 </table>
-<p>There is no start or stop button. A workspace runs until you delete it or the platform removes it.</p>
+<p>There's no start or stop button. A workspace runs until you delete it or the platform removes it.</p>
 <hr />
 <h2 id="workspace-list-page">Workspace list page<a class="headerlink" href="#workspace-list-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Workspace list page" src="../../assets/screenshots/workspaces-list.png" />
-<em>Figure 1: Workspace list with status badges.</em></p>
+<em>Figure 1: The workspace list with status badges.</em></p>
 <p>Each row shows:</p>
 <ul>
-<li><strong>Workspaces</strong> — the workspace name, with the environment type and project below it</li>
+<li><strong>Workspaces</strong> — the workspace name, with the environment and project below it</li>
 <li><strong>Status</strong> — Running (green), Starting (yellow), Stopped (grey), Error</li>
 <li><strong>Image</strong> — the image it runs</li>
 <li><strong>Resources</strong> — the GPU count, or <code>CPU</code> for a CPU-only workspace</li>
 <li>The last activity time</li>
 <li><strong>Open</strong> (only while Running) and <strong>Delete</strong></li>
 </ul>
-<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real IDE activity counts: opening pages, terminal input, notebook execution. Leaving the tab open does not. This applies to every workspace, whether or not it has a GPU. A workspace that is still computing keeps running, even with nobody at the keyboard — but a workspace only idling uses a fraction of a core, and that does not count as computing.</p>
+<p>Below the table, a notice shows the idle limit: <strong>Auto-stop after N minutes of inactivity</strong>. Only real activity in the IDE counts: opening pages, typing in the terminal, running a notebook. Leaving the tab open doesn't count. It applies to every workspace, with or without a GPU. A workspace that is still computing keeps running, even if nobody is at the keyboard. A workspace that is just idling uses a fraction of a core, and that doesn't count as computing.</p>
 <hr />
 <h2 id="launch-a-workspace">Launch a workspace<a class="headerlink" href="#launch-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1423,7 +1423,7 @@
 <li>Click <strong>New Workspace</strong> (top-right).</li>
 </ol>
 <p><img alt="New workspace form" src="../../assets/screenshots/workspace-new-form.png" />
-   <em>Figure 2: New workspace form with project, environment, image, GPU, and storage fields.</em></p>
+   <em>Figure 2: The new workspace form, with project, environment, image, GPU and storage fields.</em></p>
 <ol>
 <li>Fill in the form:</li>
 </ol>
@@ -1437,11 +1437,11 @@
 <tbody>
 <tr>
 <td><strong>Project</strong></td>
-<td>The project this workspace belongs to (determines quota). Projects without a plan are marked <strong>(No Plan)</strong> and cannot start a workspace.</td>
+<td>The project this workspace belongs to. It decides which quota you use. Projects without a plan are marked <strong>(No Plan)</strong> and can't start a workspace.</td>
 </tr>
 <tr>
 <td><strong>Internet Access</strong></td>
-<td>Read-only. A banner under the project shows whether workspaces in this project can reach the Internet (<strong>Enabled</strong> / <strong>Disabled</strong>). When disabled, the workspace still reaches platform services but cannot download from outside.</td>
+<td>Read-only. A banner under the project says whether workspaces in this project can reach the Internet (<strong>Enabled</strong> / <strong>Disabled</strong>). When it's disabled, the workspace can still reach platform services but can't download from outside.</td>
 </tr>
 <tr>
 <td><strong>Environment</strong></td>
@@ -1449,67 +1449,67 @@
 </tr>
 <tr>
 <td><strong>Image</strong></td>
-<td>One of the platform's images for that environment: Base Notebook, PyTorch, TensorFlow, CUDA Dev, and their "(Root)" variants. Images you request or build for a project are for deployments, not workspaces.</td>
+<td>One of the platform's images for that environment: Base Notebook, PyTorch, TensorFlow, CUDA Dev, and their "(Root)" versions. Images you request or build for a project are for deployments, not workspaces.</td>
 </tr>
 <tr>
 <td><strong>Root shell</strong></td>
-<td>Makes you <code>root</code> inside your own container. Shown only when the project (and, for group-owned projects, the owning group) allows root containers.</td>
+<td>Makes you <code>root</code> inside your own container. You only see it when the project allows root containers (and, for a group's project, the group does too).</td>
 </tr>
 <tr>
 <td><strong>Scheduling queue</strong></td>
-<td>A radio list of the queues the project plan allows. See <em>Scheduling queue and priority</em> below.</td>
+<td>Pick one of the queues the project plan allows. See <em>Scheduling queue and priority</em> below.</td>
 </tr>
 <tr>
 <td><strong>GPU</strong></td>
-<td>Number of GPUs; pick <strong>No</strong> for a CPU-only workspace.</td>
+<td>How many GPUs. Pick <strong>No</strong> for a CPU-only workspace.</td>
 </tr>
 <tr>
 <td><strong>GPU Model</strong></td>
-<td>One of the models your plan allows. Models outside the plan are hidden.</td>
+<td>One of the models your plan allows. Other models are hidden.</td>
 </tr>
 <tr>
 <td><strong>Compute quota (%)</strong></td>
-<td>Share of each GPU's compute. 100% is a full GPU; smaller values count as fractional usage. When you pick a fractional GPU, this is set for you.</td>
+<td>How much of each GPU's compute you get. 100% is a full GPU. Smaller values count as part of a GPU. If you pick a fractional GPU, it's filled in for you.</td>
 </tr>
 <tr>
 <td><strong>GPU memory quota (%)</strong></td>
-<td>Share of each GPU's memory. Leave <strong>Follow compute</strong> on to match the compute quota, or turn it off and set a separate value. Everything on one card adds up to at most 100%.</td>
+<td>How much of each GPU's memory you get. Leave <strong>Follow compute</strong> on to match the compute quota, or turn it off and set your own value. All workloads on one card add up to at most 100%.</td>
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
-<td>Optional override; defaults to plan limits</td>
+<td>Optional. Defaults to the plan's limits</td>
 </tr>
 <tr>
 <td><strong>Shared memory</strong> (<code>/dev/shm</code>)</td>
-<td>Not a form field. The workspace gets one memory-backed <code>/dev/shm</code> of up to 8 GiB, or the memory limit if that is smaller. What it holds counts toward the memory limit. This is enough for PyTorch data loaders, NCCL and vLLM.</td>
+<td>Not a form field. Every workspace gets a <code>/dev/shm</code> of up to 8 GiB, or the memory limit if that is smaller. It lives in memory, so what you put there counts toward the memory limit. That's enough for PyTorch data loaders, NCCL and vLLM.</td>
 </tr>
 <tr>
 <td><strong>Storage Volumes</strong></td>
-<td>Tick the volumes to mount. Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</td>
+<td>Tick the volumes to mount. Personal storage is at <code>/home/&lt;your username&gt;</code>; each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>The name is generated; there is no name field.</p>
+<p>The platform picks the name. There's no name field.</p>
 <ol>
 <li>Click <strong>Start</strong>.</li>
-<li>The workspace appears in <strong>Starting</strong> state. Wait 30–120 seconds for the workspace to download its image and start.</li>
-<li>When status changes to <strong>Running</strong>, click <strong>Open</strong> to open the IDE in a new browser tab.</li>
+<li>The workspace shows as <strong>Starting</strong>. Wait 30–120 seconds while it downloads its image and starts.</li>
+<li>When the status changes to <strong>Running</strong>, click <strong>Open</strong>. The IDE opens in a new browser tab.</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">No storage selected</p>
-<p>If you have no personal storage and tick no group volume, the platform shows <strong>This workspace will not keep your files</strong> before it starts. Everything you write lives only inside the container and is lost when the workspace stops, restarts, or is deleted. Click <strong>Cancel</strong> and tick a volume, or <strong>I understand, start anyway</strong>.</p>
+<p>If you have no personal storage and tick no group volume, the platform shows <strong>This workspace will not keep your files</strong> before it starts. Everything you write is lost when the workspace stops, restarts or is deleted. Click <strong>Cancel</strong> and tick a volume, or click <strong>I understand, start anyway</strong>.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Idle shutdown</p>
-<p>Workspaces with no activity for the idle limit shown under the list are stopped automatically, so the hardware goes back to other people. CPU-only workspaces are stopped the same way. A workspace that is still doing real work keeps running. Delete the stopped workspace and create a new one; files in mounted storage are kept.</p>
+<p>A workspace with no activity for the idle limit shown under the list is stopped automatically, so the GPU goes back to other people. CPU-only workspaces are stopped the same way. A workspace that is still doing real work keeps running. Delete the stopped one and create a new one. Files in mounted storage are kept.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
-<p><strong>Root shell</strong> only makes you <code>root</code> inside your own container. It grants no access to the platform or other users' data. If the toggle is missing, ask an admin to enable root containers on the project and, for group-owned projects, the owning group.</p>
+<p><strong>Root shell</strong> only makes you <code>root</code> inside your own container. It gives you no access to the platform or to other people's data. If you don't see the toggle, ask an admin to allow root containers on the project (and on the group, for a group's project).</p>
 </div>
 <hr />
 <h2 id="scheduling-queue-and-priority">Scheduling queue and priority<a class="headerlink" href="#scheduling-queue-and-priority" title="Permanent link">&para;</a></h2>
-<p>Each workspace chooses a <strong>scheduling queue</strong>. Queues carry a <strong>priority</strong> value, an optional <strong>preemptible</strong> flag, and an optional <strong>deserved GPU</strong> limit set by an admin.</p>
+<p>Each workspace uses one <strong>scheduling queue</strong>. A queue has a <strong>priority</strong>, and it may be <strong>preemptible</strong> or have a <strong>deserved GPU</strong> limit. Admins set these.</p>
 <table>
 <thead>
 <tr>
@@ -1520,97 +1520,84 @@
 <tbody>
 <tr>
 <td><strong>Higher priority</strong></td>
-<td>Scheduled before workspaces in lower-priority queues when GPUs are scarce.</td>
+<td>When GPUs are scarce, it's scheduled before workspaces in lower-priority queues.</td>
 </tr>
 <tr>
 <td><strong>Preemptible queue</strong></td>
-<td>Your workspace can be stopped to make room for a higher-priority workload.</td>
+<td>The platform can stop your workspace to make room for a higher-priority workload.</td>
 </tr>
 <tr>
 <td><strong>Default queue</strong></td>
-<td>Lowest-priority fallback queue. It still requires an active project plan and must be allowed by that plan.</td>
+<td>The lowest-priority queue, used as a fallback. It still needs an active project plan, and the plan must allow it.</td>
 </tr>
 </tbody>
 </table>
-<p>The launch form lists queues allowed by the project's active plan. If no plan is bound, workspace launch is rejected until an admin binds one. GPU workspaces are also checked against the GPU models your plan and queue allow, even when you leave the model field blank and the platform picks one for you.</p>
+<p>The launch form lists the queues the project's active plan allows. If the project has no plan, you can't start a workspace until an admin adds one. GPU workspaces are also checked against the GPU models your plan and queue allow, even if you leave the model blank and let the platform pick.</p>
 <hr />
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
-<p>A plan has two independent weekly settings in Taiwan time (UTC+8).</p>
-<p><strong>Schedule Window</strong> controls when you can start work. Outside it, new
-submissions are blocked, including those using priority queues. Existing work
-follows the plan's stop policy. The default queue does not bypass this rule.</p>
-<p><strong>Burst Windows</strong> provide extra <strong>priority queues</strong> only while the schedule is
-also open. Empty Burst Windows means no priority hours. A workspace still
-running inside a burst window is unaffected, and so is one that has already
-finished. About 5–6 minutes after a burst window closes, a workspace still
-running on a priority queue is not restarted, but moves to the plan's normal
-queue for the same GPU model and takes on that queue's priority — it can be
-preempted only if that queue is itself marked <strong>Preemptible</strong>. You get a bell
-notification when this happens. If the plan has no normal queue for that GPU
-model, the workspace is stopped instead, with its own notification. The
-scheduling limits still apply.</p>
-<p>For example, with a 09:00–18:00 schedule and 13:00–15:00 burst, ordinary queues
-are usable from 09:00 to 18:00 and priority queues from 13:00 to 15:00.
-The dashboard shows the scheduling and priority countdowns separately.</p>
-<p>Outside the schedule, <strong>Start</strong> is rejected. Wait for the next window or ask an administrator to update the plan. The project's <strong>Plan</strong> tab also shows both countdowns.</p>
+<p>A plan has two separate weekly time settings, both in Taiwan time (UTC+8).</p>
+<p><strong>Schedule Window</strong> is when you can start work. Outside it, you can't submit new work, including on priority queues. Work that is already running follows the plan's stop policy. The default queue doesn't get around this rule.</p>
+<p><strong>Burst Windows</strong> give you extra <strong>priority queues</strong>, but only while the schedule window is also open. If Burst Windows is empty, there are no priority hours. A workspace that is still running inside a burst window is not affected, and neither is one that already finished. About 5–6 minutes after a burst window closes, a workspace still on a priority queue is not restarted. It moves to the plan's normal queue for the same GPU model and takes that queue's priority. It can be preempted only if that queue is marked <strong>Preemptible</strong>. You get a bell notification when this happens. If the plan has no normal queue for that GPU model, the workspace is stopped instead, and you get a separate notification. The scheduling limits still apply.</p>
+<p>For example, say the schedule is 09:00–18:00 and the burst is 13:00–15:00. You can use ordinary queues from 09:00 to 18:00 and priority queues from 13:00 to 15:00. The dashboard shows the two countdowns separately.</p>
+<p>Outside the schedule, <strong>Start</strong> is rejected. Wait for the next window, or ask an admin to update the plan. The project's <strong>Plan</strong> tab also shows both countdowns.</p>
 <hr />
 <h2 id="connect-to-your-workspace">Connect to your workspace<a class="headerlink" href="#connect-to-your-workspace" title="Permanent link">&para;</a></h2>
-<p>Once a workspace is <strong>Running</strong>, click <strong>Open</strong>. The platform connects your browser straight to the workspace; no extra setup is needed.</p>
+<p>When the workspace is <strong>Running</strong>, click <strong>Open</strong>. Your browser connects straight to it. You don't need any setup.</p>
 <ul>
-<li><strong>JupyterLab</strong> opens at <code>/lab</code>, the standard Jupyter interface.</li>
-<li><strong>VS Code (code-server)</strong> opens at <code>/</code>, full VS Code in the browser.</li>
+<li><strong>JupyterLab</strong> opens at <code>/lab</code>. It's the standard Jupyter interface.</li>
+<li><strong>VS Code (code-server)</strong> opens at <code>/</code>. It's full VS Code in the browser.</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">Persistent work</p>
-<p>Code and notebooks saved under <code>/home/&lt;your username&gt;</code> (personal storage) or <code>/mnt/shared/&lt;volume name&gt;</code> (group volume) survive the workspace. Files written anywhere else are lost when the workspace is deleted.</p>
+<p class="admonition-title">Where to save your work</p>
+<p>Code and notebooks saved under <code>/home/&lt;your username&gt;</code> (personal storage) or <code>/mnt/shared/&lt;volume name&gt;</code> (group volume) are still there after the workspace is gone. Files saved anywhere else are lost when the workspace is deleted.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Use <code>$XDG_CONFIG_HOME</code>, not a hardcoded <code>~/.config</code></p>
-<p>Workspaces ship with <code>XDG_CONFIG_HOME=~/.local/config</code>, so XDG-aware tools (code-server, <code>pip config</code>, <code>gh</code>, …) write their settings there and those settings persist across workspaces.</p>
-<p>If you configure a tool by hand, use <code>$XDG_CONFIG_HOME</code> rather than a hardcoded <code>~/.config</code>.</p>
+<p>Workspaces come with <code>XDG_CONFIG_HOME=~/.local/config</code>. Tools that follow it (code-server, <code>pip config</code>, <code>gh</code>, …) save their settings there, and the settings stay when you switch workspaces.</p>
+<p>If you set up a tool by hand, use <code>$XDG_CONFIG_HOME</code> instead of a hardcoded <code>~/.config</code>.</p>
 </div>
 <hr />
 <h2 id="stopping-a-workspace">Stopping a workspace<a class="headerlink" href="#stopping-a-workspace" title="Permanent link">&para;</a></h2>
-<p>Stopping is not available. To free the GPU, click <strong>Delete</strong>; the workspace is removed, and files in mounted storage volumes are kept. Create a new workspace when you need one again.</p>
+<p>You can't stop a workspace. To free the GPU, click <strong>Delete</strong>. The workspace is removed, and files in mounted storage volumes are kept. Create a new workspace when you need one again.</p>
 <hr />
 <h2 id="bulk-delete-admins">Bulk delete (admins)<a class="headerlink" href="#bulk-delete-admins" title="Permanent link">&para;</a></h2>
-<p>Admins with workspace-management rights can tick several workspaces and delete them in bulk using the toolbar that appears when checkboxes are ticked.</p>
+<p>Admins who manage workspaces can tick several workspaces and delete them together with the toolbar that appears.</p>
 <hr />
 <h2 id="how-gpus-are-allocated">How GPUs are allocated<a class="headerlink" href="#how-gpus-are-allocated" title="Permanent link">&para;</a></h2>
 <p>When you pick a GPU model and compute quota, the platform reserves that share of a GPU for your workspace.</p>
 <ul>
-<li><strong>GPU</strong> is the number of physical GPUs requested.</li>
-<li><strong>Compute quota (%)</strong> controls the effective share used for quota accounting and GPU sharing. The form shows <strong>Effective GPU</strong> so you can see what counts against your quota.</li>
-<li><strong>GPU memory quota (%)</strong> follows the compute quota unless you set it separately.</li>
-<li>Quota counts every workspace you have asked for, including ones still waiting to start.</li>
-<li>Use <code>nvidia-smi</code> inside your workspace to confirm which devices are visible.</li>
-<li>For exclusive or model-specific access, select 100% and a model allowed by your plan, or ask an admin to adjust the plan.</li>
+<li><strong>GPU</strong> is how many physical GPUs you ask for.</li>
+<li><strong>Compute quota (%)</strong> sets the share that counts toward your quota and GPU sharing. The form shows <strong>Effective GPU</strong>, so you can see what counts against your quota.</li>
+<li><strong>GPU memory quota (%)</strong> follows the compute quota unless you set it yourself.</li>
+<li>Quota counts every workspace you asked for, including ones still waiting to start.</li>
+<li>Run <code>nvidia-smi</code> in your workspace to see which GPUs you can use.</li>
+<li>To get a whole GPU or a specific model, pick 100% and a model your plan allows, or ask an admin to change the plan.</li>
 </ul>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>The Open button doesn't appear even though status is Running.</summary>
-<p>The connection can take a few extra seconds to become ready. Wait 10 seconds and refresh the page. If the button still does not appear, the workspace is probably restarting repeatedly. Check with your admin.</p>
+<p>The connection can take a few more seconds to be ready. Wait 10 seconds and refresh the page. If the button still doesn't show, the workspace is probably restarting again and again. Ask your admin.</p>
 </details>
 <details class="question">
 <summary>My workspace stopped automatically.</summary>
-<p>Workspaces with no activity for the idle limit, or past the project's runtime limit, are stopped automatically. An open browser tab is not activity, so a workspace you left open but did not touch can still be stopped — and so can one that is only idling, since a background process using a fraction of a core does not count as work. Delete it and create a new one; files in mounted storage are kept.</p>
+<p>The platform stops a workspace automatically when it has no activity for the idle limit, or when it passes the project's runtime limit. An open browser tab isn't activity, so a workspace you left open but didn't touch can still be stopped. So can one that is only idling, because a background process using a fraction of a core doesn't count as work. Delete it and create a new one. Files in mounted storage are kept.</p>
 </details>
 <details class="question">
 <summary>I see an error status. What do I do?</summary>
-<p>Delete the workspace and create it again. Common causes: the image could not be downloaded, not enough quota, or the GPU model you asked for is unavailable. If it repeats, submit a <a href="../requests/">Request</a>.</p>
+<p>Delete the workspace and create it again. Usual causes: the image couldn't be downloaded, you don't have enough quota, or the GPU model you asked for isn't available. If it keeps happening, send a <a href="../requests/">Request</a>.</p>
 </details>
 <details class="question">
 <summary>Can I have multiple workspaces running at once?</summary>
-<p>Yes, as long as their total GPU consumption stays within your project's quota.</p>
+<p>Yes, as long as their total GPU use stays within your project's quota.</p>
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
-<p>The scheduling window closed. Create a new workspace inside the next window. Burst does not bypass scheduling — but closing only the burst window does not evict a workspace either; it keeps running, moved to the plan's normal queue for its GPU model.</p>
+<p>The schedule window closed. Create a new workspace in the next window. Burst doesn't get around the schedule. But when only the burst window closes, the workspace isn't evicted. It keeps running, moved to the plan's normal queue for its GPU model.</p>
 </details>
 <details class="question">
 <summary>Why are some GPU models greyed out in the launch form?</summary>
-<p>The plan attached to your project specifies an allowed GPU model list. Models outside that list are hidden. Ask a project manager to bind a plan that includes the model you need.</p>
+<p>Your project's plan lists which GPU models are allowed, and other models are hidden. Ask a project manager to attach a plan that includes the model you need.</p>
 </details>
 
 

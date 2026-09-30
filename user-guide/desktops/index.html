@@ -1278,21 +1278,21 @@
 
 
 <h1 id="gpu-desktops">GPU desktops<a class="headerlink" href="#gpu-desktops" title="Permanent link">&para;</a></h1>
-<p>A GPU desktop is a remote desktop that runs on a platform GPU and opens in your browser: a Linux desktop for GUI tools, or an Isaac Sim session streamed live. You get a window, keyboard, and mouse; the GPU stays in the cluster.</p>
-<p><strong>Access:</strong> members of a project where an admin has turned on <strong>Remote Desktop Permission</strong>. If none of your projects has it, the page says <em>Remote Desktop is not enabled for any of your projects</em> and you ask an administrator.</p>
+<p>A GPU desktop is a remote desktop that runs on a platform GPU and opens in your browser: a Linux desktop for GUI tools, or an Isaac Sim session streamed live. You see the screen and use your own keyboard and mouse. The GPU stays on the platform.</p>
+<p><strong>Who can use it:</strong> members of a project where an admin has turned on <strong>Remote Desktop Permission</strong>. If none of your projects has it, the page says <em>Remote Desktop is not enabled for any of your projects</em>. Ask an admin.</p>
 <hr />
 <h2 id="where-to-find-it">Where to find it<a class="headerlink" href="#where-to-find-it" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Sidebar → Workspace → GPU Desktops</strong> lists every desktop session across your projects, in any state, not only the ones you can connect to.</li>
-<li>A desktop is not created on this page. It comes from a project config file, the same way as a deployment; see <em>Start a desktop</em> below.</li>
+<li><strong>Sidebar → Workspace → GPU Desktops</strong> lists every desktop in your projects, in any state, not only the ones you can connect to.</li>
+<li>You cannot create a desktop on this page. You start it from a project config file, like a deployment. See <em>Start a desktop</em> below.</li>
 </ul>
 <hr />
 <h2 id="start-a-desktop">Start a desktop<a class="headerlink" href="#start-a-desktop" title="Permanent link">&para;</a></h2>
-<p>Starting a desktop needs the <strong>Manager</strong> role in the project (the same as deploying a config file).</p>
+<p>You need the <strong>Manager</strong> role in the project, the same as for deploying a config file.</p>
 <ol>
 <li>Open <strong>Projects → [your project] → Config</strong> and click <strong>New File</strong>.</li>
 <li>In the <strong>Resource Wizard</strong>, add a <code>Pod</code> (or <code>Deployment</code> with one replica) with one container and its image, CPU, and memory.</li>
-<li>Turn on the <strong>Remote desktop</strong> switch under the container. The platform replaces this workload with an isolated browser desktop; the image itself is not rebuilt.</li>
+<li>Turn on the <strong>Remote desktop</strong> switch under the container. The platform runs your workload as a separate desktop in your browser. Your image is not rebuilt.</li>
 <li>Fill in the desktop fields:</li>
 </ol>
 <table>
@@ -1305,7 +1305,7 @@
 <tbody>
 <tr>
 <td><strong>Desktop type</strong></td>
-<td><strong>Linux desktop</strong> (your image, with a desktop drawn around it) or <strong>Isaac Sim WebRTC</strong> (the platform's Isaac Sim image, streamed)</td>
+<td><strong>Linux desktop</strong> (your image, shown inside a desktop) or <strong>Isaac Sim WebRTC</strong> (the platform's Isaac Sim image, streamed)</td>
 </tr>
 <tr>
 <td><strong>GPU device class</strong></td>
@@ -1313,24 +1313,24 @@
 </tr>
 <tr>
 <td><strong>GPU reservation</strong></td>
-<td><strong>25% GPU</strong>, <strong>50% GPU</strong>, <strong>75% GPU</strong>, or <strong>100% GPU</strong>. Below 100% the card is shared with others; 100% is exclusive</td>
+<td><strong>25% GPU</strong>, <strong>50% GPU</strong>, <strong>75% GPU</strong>, or <strong>100% GPU</strong>. Below 100% you share the card with others. 100% is all yours</td>
 </tr>
 <tr>
 <td><strong>Bitrate profile</strong></td>
-<td><strong>Economy</strong>, <strong>Default</strong>, or <strong>High motion</strong>. Economy is the right choice off campus</td>
+<td><strong>Economy</strong>, <strong>Default</strong>, or <strong>High motion</strong>. Pick Economy when you are off campus</td>
 </tr>
 </tbody>
 </table>
 <ol>
-<li>Click <strong>Save</strong>, then <strong>Deploy</strong> the version as usual (pick a queue; the plan window applies).</li>
-<li>Go to <strong>GPU Desktops</strong>. The row appears with its status; when it shows <strong>Ready</strong>, click <strong>Connect</strong>.</li>
+<li>Click <strong>Save</strong>, then <strong>Deploy</strong> the version as usual. Pick a queue; the plan window applies.</li>
+<li>Go to <strong>GPU Desktops</strong>. Your desktop shows up as a row. When it says <strong>Ready</strong>, click <strong>Connect</strong>.</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Rules for a remote-desktop workload</p>
 <ul>
-<li>One container, one replica, and no GPU request or GPU claim of its own; the desktop fields above replace them.</li>
-<li><strong>Isaac Sim WebRTC</strong> needs the platform's Isaac Sim image and the VPN. <strong>GPU reservation</strong> works the same as for a Linux desktop. Mount exactly one storage volume, read-write and at <code>/workspace</code>, and nothing else. Set CPU and memory yourself within the project quota; one session measured about 10 cores and 19 GB.</li>
-<li>Mounted volumes must be storage volumes (personal or group); other volume types are rejected.</li>
+<li>Use one container, one replica, and no GPU request or GPU claim of your own. The desktop fields above cover the GPU.</li>
+<li><strong>Isaac Sim WebRTC</strong> needs the platform's Isaac Sim image and the VPN. <strong>GPU reservation</strong> works the same as for a Linux desktop. Mount one storage volume, read-write, at <code>/workspace</code>, and nothing else. Set CPU and memory yourself, within the project quota. One session used about 10 cores and 19 GB.</li>
+<li>Only storage volumes (personal or group) can be mounted. Other volume types are rejected.</li>
 </ul>
 </div>
 <hr />
@@ -1351,17 +1351,17 @@
 </tr>
 <tr>
 <td><strong>Starting</strong></td>
-<td>The desktop is being set up</td>
+<td>Getting ready</td>
 <td>Wait</td>
 </tr>
 <tr>
 <td><strong>Ready</strong></td>
-<td>Running and reachable</td>
+<td>Running, ready to connect</td>
 <td><strong>Connect</strong></td>
 </tr>
 <tr>
 <td><strong>Degraded</strong></td>
-<td>Running, with a caveat shown in the row (for example software encoding, slower and heavier on CPU)</td>
+<td>Running, with a warning in the row (for example software encoding: slower and heavier on CPU)</td>
 <td><strong>Connect</strong> still works</td>
 </tr>
 <tr>
@@ -1371,52 +1371,52 @@
 </tr>
 <tr>
 <td><strong>Stopping</strong></td>
-<td>Being removed</td>
+<td>Shutting down</td>
 <td>Wait</td>
 </tr>
 <tr>
 <td><strong>Expired</strong></td>
-<td>Its lifetime ran out</td>
+<td>Its time ran out</td>
 <td><strong>Delete</strong>, then deploy again when you need it</td>
 </tr>
 </tbody>
 </table>
-<p>Each row shows the desktop name, project, GPU model, encoder, image, and the expiry time, with a status badge for its current state. Any row that isn't <strong>Ready</strong> shows a reason when one is available (red for <strong>Failed</strong>, amber otherwise). A desktop whose image has no graphical libraries cannot be opened; the row has no <strong>Connect</strong> button. <strong>Failed</strong> and <strong>Expired</strong> rows have a <strong>Delete</strong> button.</p>
+<p>Each row shows the desktop name, project, GPU model, encoder, image, and the expiry time, with a status badge. A row that is not <strong>Ready</strong> shows the reason when there is one (red for <strong>Failed</strong>, amber for the rest). If the image has no graphics libraries, the desktop cannot open and the row has no <strong>Connect</strong> button. <strong>Failed</strong> and <strong>Expired</strong> rows have a <strong>Delete</strong> button.</p>
 <hr />
 <h2 id="connect">Connect<a class="headerlink" href="#connect" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Linux desktop</strong>: <strong>Connect</strong> opens the desktop in a new browser window.</li>
-<li><strong>Isaac Sim WebRTC</strong>: <strong>Connect</strong> opens the viewer at <strong>GPU Desktops → [desktop]</strong>. Click the stream to take keyboard and mouse control; <strong>Leave control</strong> gives them back to the browser, <strong>Full screen</strong> fills the screen. Stay on the VPN: if the viewer says <em>VPN media authorization expired</em>, reconnect the VPN and reload the page.</li>
+<li><strong>Isaac Sim WebRTC</strong>: <strong>Connect</strong> opens the viewer at <strong>GPU Desktops → [desktop]</strong>. Click the stream to control it with your keyboard and mouse. <strong>Leave control</strong> gives them back to the browser, and <strong>Full screen</strong> fills the screen. Stay on the VPN. If the viewer says <em>VPN media authorization expired</em>, reconnect the VPN and reload the page.</li>
 </ul>
-<p>The viewer renews its connection every 2 minutes while open. Closing the tab does not stop the desktop.</p>
+<p>While the viewer is open, it renews its connection every 2 minutes. Closing the tab does not stop the desktop.</p>
 <hr />
 <h2 id="lifetime">Lifetime<a class="headerlink" href="#lifetime" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A desktop lives at most <strong>8 hours</strong>, or less if the project's <strong>Max workspace continuous runtime</strong> (Settings tab) or the queue's runtime limit is shorter. The row shows the expiry time.</li>
-<li>A desktop nobody is watching for <strong>30 minutes</strong> is reclaimed to free the GPU.</li>
-<li>When it expires, files in the mounted storage volume stay; everything else in the desktop is gone. Deploy the config file again to get a fresh desktop.</li>
+<li>A desktop lasts at most <strong>8 hours</strong>, or less if the project's <strong>Max workspace continuous runtime</strong> (Settings tab) or the queue's runtime limit is shorter. The row shows the expiry time.</li>
+<li>A desktop nobody watches for <strong>30 minutes</strong> is reclaimed to free the GPU.</li>
+<li>When it ends, files in the mounted storage volume stay. Everything else in the desktop is gone. Deploy the config file again for a fresh desktop.</li>
 </ul>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>The GPU Desktops page is empty.</summary>
-<p>No desktop is running in your projects. Deploy a config file with <strong>Remote desktop</strong> turned on (see <em>Start a desktop</em>). If the page says Remote Desktop is not enabled, ask an admin to turn it on for the project.</p>
+<p>No desktop is running in your projects. Deploy a config file with <strong>Remote desktop</strong> turned on (see <em>Start a desktop</em>). If the page says Remote Desktop is not enabled, ask an admin to turn it on for your project.</p>
 </details>
 <details class="question">
 <summary>The status stays Pending.</summary>
-<p>The desktop is waiting for a free GPU slice or video encoder. It starts when one frees up; 100% reservations wait for a whole free card.</p>
+<p>It is waiting for a free GPU slice or video encoder, and starts when one frees up. A 100% reservation waits for a whole free card.</p>
 </details>
 <details class="question">
 <summary>The row says Degraded. Is it broken?</summary>
-<p>No. It runs, but with the caveat shown in the row, usually software encoding on a node without a hardware encoder. Connect works; expect more latency.</p>
+<p>No. It runs, with the warning shown in the row. Usually that means software encoding because the machine has no hardware encoder. <strong>Connect</strong> works, but expect more lag.</p>
 </details>
 <details class="question">
 <summary>Where are my files?</summary>
-<p>Only the mounted storage volume survives the desktop. For Isaac Sim that is <code>/workspace</code>. Save there.</p>
+<p>Only the mounted storage volume stays after the desktop ends. For Isaac Sim that is <code>/workspace</code>. Save your files there.</p>
 </details>
 <details class="question">
 <summary>Can I keep the desktop for more than 8 hours?</summary>
-<p>No. Deploy again after it expires; the mounted volume is the same, so your work is still there.</p>
+<p>No. Deploy again after it ends. You get the same mounted volume, so your files are still there.</p>
 </details>
 
 

@@ -1356,12 +1356,12 @@
 
 
 <h1 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h1>
-<p>A storage volume is a folder that survives your workspaces. Anything you write <em>inside</em> a mounted volume stays when the workspace stops or is deleted.</p>
+<p>A storage volume is a folder that outlives your workspaces. Files you save <em>inside</em> a mounted volume are still there after the workspace stops or is deleted.</p>
 <div class="admonition warning">
 <p class="admonition-title">A workspace with no volume keeps nothing</p>
-<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else are lost when the workspace stops, restarts, or is deleted. The platform warns you before it starts a workspace with no volume.</p>
+<p>Personal storage mounts at <code>/home/&lt;your username&gt;</code>; each group volume mounts at <code>/mnt/shared/&lt;volume name&gt;</code>. Files saved anywhere else are lost when the workspace stops, restarts or is deleted. The platform warns you before it starts a workspace with no volume.</p>
 </div>
-<p><strong>Access:</strong> an admin creates personal storage, so not every account has one. Check the <strong>My Storage</strong> tab on the Storage page and ask an admin if it is missing. Group admins manage access to group volumes; only current group members can hold permissions on them.</p>
+<p><strong>Who can use it:</strong> an admin creates personal storage, so not every account has it. Look at the <strong>My Storage</strong> tab on the Storage page. If it's missing, ask an admin. Group admins manage who can use group volumes, and only current group members can have permissions on them.</p>
 <hr />
 <h2 id="storage-types">Storage types<a class="headerlink" href="#storage-types" title="Permanent link">&para;</a></h2>
 <table>
@@ -1403,71 +1403,57 @@
 <hr />
 <h2 id="storage-page">Storage page<a class="headerlink" href="#storage-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Storage list page" src="../../assets/screenshots/storage-list.png" />
-<em>Figure 1: Storage page with the My Storage and Group Storage tabs.</em></p>
+<em>Figure 1: The Storage page with the My Storage and Group Storage tabs.</em></p>
 <ul>
-<li><strong>My Storage</strong> — your own volume: a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar, and the file browser buttons.</li>
-<li><strong>Group Storage</strong> — volumes of the groups you belong to, as a table: name, status (<strong>Active</strong> when the volume is ready to mount, <strong>Terminating</strong> while it is being removed, <strong>Missing</strong> when the platform cannot find it in the cluster), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date, and the action icons.</li>
+<li><strong>My Storage</strong> — your own volume, shown as a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar and the file browser buttons.</li>
+<li><strong>Group Storage</strong> — volumes of the groups you belong to, in a table with these columns: name, status (<strong>Active</strong> means ready to mount, <strong>Terminating</strong> means it is being removed, <strong>Missing</strong> means the platform can't find it), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date and action icons.</li>
 </ul>
-<p>A group volume stays mounted for the project even when you stop a workspace. It
-is released only when an administrator unbinds it from the project or deletes
-it.</p>
+<p>A group volume stays mounted for the project even when you stop a workspace. It is released only when an admin removes it from the project or deletes it.</p>
 <h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
-<p>The bar reads <code>used / total Gi</code> with a percentage, and turns amber at 70% and
-red at 90%.</p>
-<p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is what you have written.
-A dash (<code>—</code>) means the platform has not measured that volume yet; it does not
-mean the volume is empty. Measurements refresh every few minutes, so a large
-copy shows up with a short delay.</p>
-<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page; anyone else is sent back to the Storage page.</p>
-<p>Your permission applies to everything you run, not just workspaces. A volume you
-have no permission on is not attached to a job or deployment either, even if you
-name its claim yourself in the YAML, and a volume that is not bound to the
-project cannot be mounted from that project at all.</p>
-<p><strong>Read-only means read-only.</strong> If your permission on a volume is <strong>Read</strong>, it is
-mounted read-only in every workspace, job and deployment. Writing
-<code>readOnly: false</code> in your own YAML does not change that — the platform sets it
-back. Being a project or group manager does not change it either; the manager
-role only exempts you from the separate rule that holds group volumes read-only
-for ordinary members.</p>
+<p>The bar reads <code>used / total Gi</code> with a percentage. It turns amber at 70% and red at 90%.</p>
+<p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is how much you have written. A dash (<code>—</code>) means the platform hasn't measured that volume yet. It doesn't mean the volume is empty. The numbers refresh every few minutes, so a big copy shows up a little late.</p>
+<p>Every group member sees the <strong>Permissions</strong> icon on a group volume, but only group managers and admins can open the permissions page. Everyone else goes back to the Storage page.</p>
+<p>Your permission applies to everything you run, not just workspaces. If you have no permission on a volume, a job or deployment can't mount it either, even if you write its name in your own YAML. A volume that isn't attached to the project can't be mounted from that project at all.</p>
+<p><strong>Read-only means read-only.</strong> If your permission on a volume is <strong>Read</strong>, it is mounted read-only in every workspace, job and deployment. Writing <code>readOnly: false</code> in your own YAML changes nothing, because the platform sets it back. Being a project or group manager doesn't change it either. The manager role only skips the separate rule that keeps group volumes read-only for ordinary members.</p>
 <hr />
 <h2 id="volume-lifecycle">Volume lifecycle<a class="headerlink" href="#volume-lifecycle" title="Permanent link">&para;</a></h2>
 <ol>
 <li>You ask for storage on the Requests page.</li>
 <li>An admin approves and creates the volume.</li>
-<li>The volume is bound to a project and appears in the workspace form.</li>
-<li>Your workspaces, jobs and deployments mount it. Data survives restarts.</li>
+<li>The volume is attached to a project and appears in the workspace form.</li>
+<li>Your workspaces, jobs and deployments mount it. Your data is still there after a restart.</li>
 <li>An admin deletes it. The volume and its data are gone.</li>
 </ol>
 <div class="admonition danger">
 <p class="admonition-title">Deletion is permanent</p>
-<p>Deleting a volume destroys everything in it. Back up what matters before you ask for removal.</p>
+<p>Deleting a volume erases everything in it. Back up what matters before you ask for removal.</p>
 </div>
 <hr />
 <h2 id="browse-files">Browse files<a class="headerlink" href="#browse-files" title="Permanent link">&para;</a></h2>
 <ol>
-<li>On the <strong>My Storage</strong> tab, click <strong>Start FileBrowser</strong>; wait until the badge shows <strong>Running</strong>.</li>
-<li>Click <strong>Open FileBrowser</strong>. The browser opens in a new tab.</li>
-<li>When you are done, click <strong>Stop FileBrowser</strong>.</li>
+<li>On the <strong>My Storage</strong> tab, click <strong>Start FileBrowser</strong> and wait until the badge shows <strong>Running</strong>.</li>
+<li>Click <strong>Open FileBrowser</strong>. It opens in a new tab.</li>
+<li>When you're done, click <strong>Stop FileBrowser</strong>.</li>
 </ol>
-<p>On a group volume, use the icons in the <strong>Actions</strong> column: <strong>Start FileBrowser</strong>, then <strong>Browse</strong>, then <strong>Stop FileBrowser</strong>. When your permission on that volume is <strong>None</strong>, these icons are hidden.</p>
+<p>For a group volume, use the icons in the <strong>Actions</strong> column: <strong>Start FileBrowser</strong>, then <strong>Browse</strong>, then <strong>Stop FileBrowser</strong>. If your permission on that volume is <strong>None</strong>, you won't see these icons.</p>
 <p><img alt="Storage file browser" src="../../assets/screenshots/storage-browser.png" />
-<em>Figure 2: File browser with upload, download, and delete.</em></p>
-<p>In the browser you can navigate folders, upload (drag and drop or file picker), download files and folders, create folders, and delete. Deletions are immediate.</p>
+<em>Figure 2: The file browser, with upload, download and delete.</em></p>
+<p>In the file browser you can open folders, upload (drag and drop, or pick files), download files and folders, create folders and delete. Deleting is immediate.</p>
 <div class="admonition warning">
 <p class="admonition-title">Large uploads</p>
-<p>For files over 500 MB, download them inside a workspace with <code>wget</code>, <code>curl</code>, or <code>rclone</code> instead of uploading through the browser, which has size and timeout limits.</p>
+<p>For files over 500 MB, don't upload through the browser. It has size and timeout limits. Download them inside a workspace with <code>wget</code>, <code>curl</code> or <code>rclone</code>.</p>
 </div>
 <hr />
 <h2 id="mount-storage-in-a-workspace">Mount storage in a workspace<a class="headerlink" href="#mount-storage-in-a-workspace" title="Permanent link">&para;</a></h2>
 <ol>
-<li>In the <strong>New Workspace</strong> form, find the <strong>Storage Volumes</strong> section. It lists your personal storage and the group volumes bound to the selected project.</li>
+<li>In the <strong>New Workspace</strong> form, find the <strong>Storage Volumes</strong> section. It lists your personal storage and the group volumes attached to the project you picked.</li>
 <li>Tick the volumes you want.</li>
 <li>Click <strong>Start</strong>.</li>
 </ol>
 <p>Mount paths are fixed: personal storage at <code>/home/&lt;your username&gt;</code>, each group volume at <code>/mnt/shared/&lt;volume name&gt;</code>.</p>
 <hr />
 <h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
-<p>Group volumes have a per-user permission:</p>
+<p>Each group volume has a permission for each user:</p>
 <table>
 <thead>
 <tr>
@@ -1486,53 +1472,53 @@ for ordinary members.</p>
 </tr>
 <tr>
 <td><strong>None</strong></td>
-<td>Nothing; you cannot mount or browse it</td>
+<td>Nothing. You can't mount or browse it</td>
 </tr>
 </tbody>
 </table>
-<p>A <strong>None</strong> set by a group admin wins over anything the project or group would otherwise grant; clearing it restores your normal permission. Ask your group admin for changes. Group admins edit permissions in bulk on the group's Storage tab (see <a href="../groups/">Groups</a>).</p>
+<p>If a group admin sets <strong>None</strong>, it beats anything the project or group would otherwise give you. Clear it and your normal permission comes back. Ask your group admin to change permissions. Group admins can edit them in bulk on the group's Storage tab (see <a href="../groups/">Groups</a>).</p>
 <hr />
 <h2 id="ask-for-more-storage">Ask for more storage<a class="headerlink" href="#ask-for-more-storage" title="Permanent link">&para;</a></h2>
-<p>Platform admins create group volumes; a group admin role cannot. To get one, or more capacity:</p>
+<p>Only platform admins can create group volumes. Group admins can't. To get one, or more space:</p>
 <ol>
 <li>Go to <strong>Requests → + New Request</strong>.</li>
 <li>Pick type <strong>Resource</strong>.</li>
-<li>Describe what you need: size, purpose, group name.</li>
+<li>Say what you need: size, purpose and group name.</li>
 <li>Click <strong>Submit</strong>. An admin reviews it and creates the volume.</li>
 </ol>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>My volume shows Pending. When can I use it?</summary>
-<p>It is still being created, usually under a minute. After 5 minutes, contact an admin.</p>
+<p>It's still being created, which usually takes under a minute. After 5 minutes, contact an admin.</p>
 </details>
 <details class="question">
 <summary>My volume is full but I see no large files.</summary>
-<p>In a workspace terminal run <code>du -sh /home/&lt;your username&gt;/*</code>. Hidden folders such as <code>.cache</code> and <code>.local</code>, and notebook checkpoints, are the usual cause.</p>
+<p>In a workspace terminal, run <code>du -sh /home/&lt;your username&gt;/*</code>. The usual culprits are hidden folders such as <code>.cache</code> and <code>.local</code>, and notebook checkpoints.</p>
 </details>
 <details class="question">
 <summary>The usage bar shows a dash.</summary>
-<p>The platform has not measured that volume yet. Check again in a few minutes. If it stays blank for an hour, contact an admin.</p>
+<p>The platform hasn't measured it yet. Check again in a few minutes. If it's still blank after an hour, contact an admin.</p>
 </details>
 <details class="question">
 <summary>I deleted files but the usage bar has not moved.</summary>
-<p>Measurements refresh every few minutes. Reload the page after that.</p>
+<p>The numbers refresh every few minutes. Wait a bit, then reload the page.</p>
 </details>
 <details class="question">
 <summary>I see a group volume but cannot browse it.</summary>
-<p>You need at least <strong>Read</strong> on that volume. Ask your group admin.</p>
+<p>You need at least <strong>Read</strong> on it. Ask your group admin.</p>
 </details>
 <details class="question">
 <summary>Is my data still there after I delete a workspace?</summary>
-<p>Yes. Data is lost only when the volume itself is deleted.</p>
+<p>Yes. Your data is only lost if the volume itself is deleted.</p>
 </details>
 <details class="question">
 <summary>Can several workspaces mount the same volume?</summary>
-<p>Yes. Personal and group volumes can be mounted by several workspaces at the same time.</p>
+<p>Yes. Several workspaces can mount the same personal or group volume at the same time.</p>
 </details>
 <details class="question">
 <summary>Files I uploaded in the browser do not show in my workspace.</summary>
-<p>Look under <code>/home/&lt;your username&gt;</code> (personal) or <code>/mnt/shared/&lt;volume name&gt;</code> (group). Volumes attach at start, but files uploaded later appear immediately; no restart needed.</p>
+<p>Look under <code>/home/&lt;your username&gt;</code> (personal) or <code>/mnt/shared/&lt;volume name&gt;</code> (group). A volume is mounted when the workspace starts, but files you upload later show up right away. You don't need to restart.</p>
 </details>
 
 

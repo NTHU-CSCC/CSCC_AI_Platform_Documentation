@@ -1322,11 +1322,11 @@
 
 
 <h1 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">&para;</a></h1>
-<p>Groups represent teams or departments. They provide shared storage access and can be added as members to multiple projects.</p>
-<p><strong>Access:</strong> All users can belong to groups. <strong>Groups are created by platform admins</strong>; if you need a new group, submit a <a href="../requests/">Request</a>.</p>
+<p>A group is a team or a course. Members share group storage, and you can add a whole group to several projects.</p>
+<p><strong>Who can use it:</strong> everyone can belong to a group. <strong>Only platform admins create groups.</strong> Need a new one? Send a <a href="../requests/">Request</a>.</p>
 <hr />
 <h2 id="group-membership-model">Group membership model<a class="headerlink" href="#group-membership-model" title="Permanent link">&para;</a></h2>
-<p>A group has three roles. Your group role also determines your default permissions on projects owned by that group.</p>
+<p>A group has three roles. Your role also sets your default permissions on projects the group owns.</p>
 <table>
 <thead>
 <tr>
@@ -1359,40 +1359,40 @@
 </table>
 <div class="admonition note">
 <p class="admonition-title">Teaching assistants usually need Admin</p>
-<p>Setting students' storage permissions only needs <strong>Manager</strong>, but adding and removing members needs <strong>Admin</strong>. If you run a course, ask a platform admin for the <strong>Admin</strong> role.</p>
+<p><strong>Manager</strong> is enough to set students' storage permissions, but adding and removing members needs <strong>Admin</strong>. If you run a course, ask a platform admin for <strong>Admin</strong>.</p>
 </div>
 <hr />
 <h2 id="groups-list-page">Groups list page<a class="headerlink" href="#groups-list-page" title="Permanent link">&para;</a></h2>
 <p><img alt="Groups list page" src="../../assets/screenshots/groups-list.png" />
-<em>Figure 1: Groups list showing group cards.</em></p>
-<p>Each group card shows a group icon, the group name, its description, its ID, and the created date. Click the card to open the group. Platform admins also see two icon buttons on the card, <strong>Edit group</strong> and <strong>Delete group</strong>.</p>
-<p>Group policies (<strong>Storage Policy</strong>, <strong>Build Registry Lane</strong>, <strong>Root Containers</strong>, <strong>Allowed host paths</strong>) are set by platform admins under <strong>Admin → Groups</strong> and do not appear on the card.</p>
+<em>Figure 1: The groups list, one card per group.</em></p>
+<p>Each card shows the group's icon, name, description, ID and created date. Click a card to open the group. Platform admins also see <strong>Edit group</strong> and <strong>Delete group</strong> buttons on the card.</p>
+<p>Platform admins set group policies (<strong>Storage Policy</strong>, <strong>Build Registry Lane</strong>, <strong>Root Containers</strong>, <strong>Allowed host paths</strong>) under <strong>Admin → Groups</strong>. They don't show on the card.</p>
 <hr />
 <h2 id="view-a-group">View a group<a class="headerlink" href="#view-a-group" title="Permanent link">&para;</a></h2>
-<p>Click any group card to open its detail page. The detail page shows:</p>
+<p>Click a group card to open its page. It has two tabs:</p>
 <ol>
-<li><strong>Members</strong> tab — all group members with their roles</li>
-<li><strong>Storage</strong> tab — volumes owned by this group and their permission settings</li>
+<li><strong>Members</strong>: everyone in the group and their roles</li>
+<li><strong>Storage</strong>: the storage volumes the group owns and their permissions</li>
 </ol>
 <hr />
 <h2 id="requesting-a-new-group">Requesting a new group<a class="headerlink" href="#requesting-a-new-group" title="Permanent link">&para;</a></h2>
-<p>Regular users cannot create groups; the <strong>Create Group</strong> button is visible to platform admins only. If you need a new group:</p>
+<p>Only platform admins see the <strong>Create Group</strong> button. To get a new group:</p>
 <ol>
 <li>Go to <strong>Requests</strong> → <strong>New Request</strong>.</li>
-<li>Describe what the group is for, who will be in it, and how much group storage you need.</li>
-<li>A platform admin reviews the request, creates the group, and makes you its group admin.</li>
+<li>Say what the group is for, who will be in it, and how much group storage you need.</li>
+<li>A platform admin reviews the request, creates the group and makes you its group admin.</li>
 </ol>
 <hr />
 <h2 id="join-a-group">Join a group<a class="headerlink" href="#join-a-group" title="Permanent link">&para;</a></h2>
-<p>Group membership is managed by group admins or platform admins. To join a group:</p>
+<p>Only group admins and platform admins can add members. To join a group:</p>
 <ol>
 <li>Submit a request via <a href="../requests/">Requests</a> and select the type <strong>Access Request</strong>.</li>
-<li>Describe which group you need access to and why.</li>
-<li>A group admin or platform admin reviews the request and adds you.</li>
+<li>Say which group you need and why.</li>
+<li>A group admin or platform admin reviews it and adds you.</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">No public browsing</p>
-<p>You cannot browse or search public groups. Ask your team which group to join.</p>
+<p>You can't browse or search for groups. Ask your team which one to join.</p>
 </div>
 <hr />
 <h2 id="add-members-to-a-group">Add members to a group<a class="headerlink" href="#add-members-to-a-group" title="Permanent link">&para;</a></h2>
@@ -1400,41 +1400,38 @@
 <p>Requires <strong>Group Admin</strong> role.</p>
 </blockquote>
 <ol>
-<li>Open the group and click <strong>+ Add Members</strong> (top-right of Members tab).</li>
-<li>Search for users by username or email.</li>
-<li>Select users from the results list.</li>
-<li>Click <strong>Add Members</strong> to confirm.</li>
+<li>Open the group and click <strong>+ Add Members</strong> (top right of the <strong>Members</strong> tab).</li>
+<li>Search by username or email.</li>
+<li>Pick users from the results.</li>
+<li>Click <strong>Add Members</strong>.</li>
 </ol>
-<p>To add a whole class at once, use <strong>Paste users</strong>: paste the list into the text
-box (separated by newlines, commas, semicolons, or tabs) and click <strong>Resolve
-Users</strong>.</p>
-<p>The results table lists only users who are not already members, so paging through
-the results never shows existing members or blank pages.</p>
+<p>To add a whole class at once, use <strong>Paste users</strong>. Paste the list into the box (separate names with new lines, commas, semicolons or tabs) and click <strong>Resolve Users</strong>.</p>
+<p>The results only list people who aren't members yet, so you won't see existing members or blank pages as you flip through.</p>
 <p><img alt="Add members to group" src="../../assets/screenshots/group-add-members.png" />
-<em>Figure 2: Add members dialog with user search and selection.</em></p>
+<em>Figure 2: The Add members dialog.</em></p>
 <hr />
 <h2 id="storage-permission-inheritance">Storage permission inheritance<a class="headerlink" href="#storage-permission-inheritance" title="Permanent link">&para;</a></h2>
-<p>Group permissions are set on the group page and shown read-only inside each project.</p>
-<p><strong>Key rule:</strong> If you are a group member, your storage permissions on a project-bound volume always come from the group; they cannot be overridden at the project level. Project-level grants exist only for direct project members who are not in the owning group. Inherited rows appear <strong>read-only</strong> on the project storage page, with a badge linking to the group permissions page.</p>
-<p>Permissions only apply to current group members: leaving the group removes your
-access immediately.</p>
+<p>You set group permissions on the group page. Projects show them read-only.</p>
+<p>The permission levels are <strong>Read</strong>, <strong>Write</strong> and <strong>None</strong>. Each group storage volume also has an <strong>Access Policy</strong>, which is the default for members you haven't set individually.</p>
+<p><strong>Key rule:</strong> if you are in the group, your permissions on a storage volume attached to a project always come from the group. A project can't override them. Project-level grants only apply to project members who are not in the owning group. On the project's storage page, permissions that come from the group show as <strong>read-only</strong>, with a badge that links to the group's permissions page.</p>
+<p>Permissions only count for current members. When you leave a group, you lose access right away. At the end of a term, just remove people from the group. You don't need to touch each project.</p>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>I can see a group but can't add members.</summary>
-<p>Adding members requires the <strong>Group Admin</strong> role. Ask your current group admin or a platform admin to raise your role.</p>
+<p>You need the <strong>Group Admin</strong> role to add members. Ask your group admin or a platform admin to raise your role.</p>
 </details>
 <details class="question">
 <summary>Why are my storage permissions greyed out on the project page?</summary>
-<p>You are a member of the group that owns this storage, so your permissions are managed at the group level. Open the group's Storage tab to see your effective permissions.</p>
+<p>You're in the group that owns this storage, so the group sets your permissions. Open the group's <strong>Storage</strong> tab to see them.</p>
 </details>
 <details class="question">
 <summary>Can I belong to more than one group?</summary>
-<p>Yes. Group memberships are independent of one another, and there is no limit on how many you can join.</p>
+<p>Yes, as many as you need. Each membership is separate.</p>
 </details>
 <details class="question">
 <summary>How do I leave a group?</summary>
-<p>Ask a group admin or platform admin to remove you; self-removal is not supported. You lose access to that group's storage immediately; anything in your personal storage is unaffected.</p>
+<p>Ask a group admin or platform admin to remove you. You can't leave on your own. You lose access to the group's storage right away. Your personal storage isn't affected.</p>
 </details>
 
 

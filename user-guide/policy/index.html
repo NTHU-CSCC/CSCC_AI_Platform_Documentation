@@ -1256,60 +1256,60 @@
 
 
 <h1 id="acceptable-use">Acceptable use<a class="headerlink" href="#acceptable-use" title="Permanent link">&para;</a></h1>
-<p>Compute and storage on the platform are for teaching and research. These rules apply to everyone with an account, and the platform keeps logs of activity and access. For what each role can do, see <a href="../concepts/">Concepts &amp; Roles</a>.</p>
+<p>Compute and storage on the platform are for teaching and research. These rules apply to everyone with an account. The platform logs activity and access. For what each role can do, see <a href="../concepts/">Concepts &amp; Roles</a>.</p>
 <hr />
 <h2 id="accounts-and-access">Accounts and access<a class="headerlink" href="#accounts-and-access" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Your account is yours alone. Do not give your account, password, API token, VPN configuration, or keys to anyone else, including lab mates, project partners, and teaching assistants.</li>
+<li>Your account is yours alone. Do not give your account, password, API token, VPN profile, or keys to anyone, including lab mates, project partners, and TAs.</li>
 <li>When someone else needs resources, ask an admin to create an account for them, or add them to your project or group. Never share a login.</li>
-<li>Use a password of at least 8 characters, and not one you use on outside services. There is no self-service reset: ask an admin, and the new password applies to VPN too.</li>
-<li>Treat an API token like a password. Keep tokens out of code, notebooks, images, and every Git repository, and revoke the ones you no longer use under <strong>Settings</strong>.</li>
-<li>Five failed sign-ins lock you out for 15 minutes. Do not script repeated sign-in attempts.</li>
-<li>Reach the platform over VPN through <code>cscc.nthu.edu.tw</code> addresses. Do not bypass the VPN or connect to other internal addresses or IPs directly.</li>
-<li>Do not submit requests as someone else, and do not change projects or groups you have no part in.</li>
-<li>If your password may have leaked, you see data that is not yours, or you get a sign-in notice for something you did not do, change your password and tell an admin.</li>
-<li>Ask an admin to disable your account when your course ends or you leave the lab or the university.</li>
+<li>Use a password of at least 8 characters, and not one you use elsewhere. You cannot reset it yourself. Ask an admin, and the new password works for the VPN too.</li>
+<li>Treat an API token like a password. Keep tokens out of code, notebooks, images, and Git repositories. Revoke tokens you no longer use under <strong>Settings</strong>.</li>
+<li>Five failed sign-ins lock you out for 15 minutes. Do not script sign-in attempts.</li>
+<li>Use the platform through the VPN and <code>cscc.nthu.edu.tw</code> addresses. Do not bypass the VPN or connect straight to other internal addresses or IPs.</li>
+<li>Do not send requests as someone else, and do not change projects or groups you are not part of.</li>
+<li>If your password may have leaked, you see data that is not yours, or you get a sign-in notice you did not cause, change your password and tell an admin.</li>
+<li>When your course ends or you leave the lab or the university, ask an admin to disable your account.</li>
 </ol>
 <hr />
 <h2 id="compute-resources">Compute resources<a class="headerlink" href="#compute-resources" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Resources are for teaching and research. Do not use them for mining, password cracking, proxying or tunnelling, or commercial services.</li>
-<li>Stop a workspace when you are done. Do not hold a GPU idle to reserve it; a workspace stops on its own past the idle limit shown under the list.</li>
-<li>A GPU desktop lives at most 8 hours, and one nobody is watching for 30 minutes is reclaimed. When it ends, only files in mounted storage stay.</li>
-<li>One GPU-hour is one GPU running for one hour, counted proportionally for a fraction of a card. Once the budget runs out, new GPU jobs and workspaces are blocked; running work is unaffected.</li>
-<li>A GPU claim holds quota from the moment you create it, even before it is attached to a workload. Delete the claims you are not using.</li>
-<li>Ask for the number and model of GPUs you actually need.</li>
-<li>On a preemptible queue, higher-priority work can stop your workspace. Write progress to mounted storage and make your training resumable.</li>
-<li>Do not work around quotas, runtime limits, or scheduling rules, including auto-restart scripts and faked activity that defeats the idle stop.</li>
+<li>Resources are for teaching and research. Do not use them for mining, password cracking, proxies or tunnels, or commercial services.</li>
+<li>Delete a workspace when you are done. Do not leave a GPU idle to hold your spot. A workspace stops on its own after the idle limit shown under the list.</li>
+<li>A GPU desktop lasts at most 8 hours, and one nobody watches for 30 minutes is reclaimed. When it ends, only files in mounted storage stay.</li>
+<li>One GPU-hour is one GPU running for one hour, with part of a card counted in proportion. When the budget runs out, new GPU jobs and workspaces are blocked. Running work is not affected.</li>
+<li>A GPU claim takes quota as soon as you create it, even before a workload uses it. Delete claims you are not using.</li>
+<li>Ask only for the GPUs you need, in the number and model you need.</li>
+<li>On a preemptible queue, higher-priority work can stop your workspace. Save progress to mounted storage and make your training resumable.</li>
+<li>Do not get around quotas, runtime limits, or scheduling rules. That includes auto-restart scripts and fake activity that stops the idle timeout.</li>
 <li>For resources beyond your quota, file a resource request under <strong>Requests</strong>.</li>
 </ol>
 <hr />
 <h2 id="storage-and-data">Storage and data<a class="headerlink" href="#storage-and-data" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Only mounted storage survives: personal storage at <code>/home/&lt;your username&gt;</code>, group storage at <code>/mnt/shared/&lt;volume name&gt;</code>. Files written anywhere else are gone once the workspace stops or is deleted.</li>
+<li>Only mounted storage stays: personal storage at <code>/home/&lt;your username&gt;</code>, group storage at <code>/mnt/shared/&lt;volume name&gt;</code>. Files saved anywhere else are gone when the workspace stops or is deleted.</li>
 <li>Platform storage is not backed up. Keep your own copy of anything you cannot lose.</li>
-<li>Stay inside your quota. When the usage bar turns amber (70%) or red (90%), clear caches, dataset copies, and old checkpoints before asking for more.</li>
+<li>Stay within your quota. When the usage bar turns amber (70%) or red (90%), clear caches, dataset copies, and old checkpoints before you ask for more.</li>
 <li>Do not store files unrelated to teaching or research, such as personal media, personal backups, pirated software, or datasets of unclear origin.</li>
-<li>Group storage is shared. Work in your own folders, and do not change or delete other people's files. Leaving the group ends your access to that volume.</li>
-<li>Before you store personal data, an unpublished dataset, or anything under a confidentiality obligation, check its licence and the rules that apply, and get your advisor's agreement. Keep such data out of group storage and out of images.</li>
-<li>For files over 500 MB, download them inside a workspace with <code>wget</code>, <code>curl</code>, or <code>rclone</code> instead of uploading through the browser.</li>
-<li>Deleting a storage volume destroys its contents for good. Move your data out before you leave the platform.</li>
+<li>Group storage is shared. Work in your own folders, and do not change or delete other people's files. When you leave the group, you lose access to that volume.</li>
+<li>Before you store personal data, an unpublished dataset, or anything you must keep confidential, check its licence and the rules, and get your advisor's OK. Keep such data out of group storage and images.</li>
+<li>For files over 500 MB, download them inside a workspace with <code>wget</code>, <code>curl</code>, or <code>rclone</code>. Do not upload them through the browser.</li>
+<li>Deleting a storage volume erases its contents for good. Copy your data out before you leave the platform.</li>
 </ol>
 <hr />
 <h2 id="images-licensing-and-external-services">Images, licensing, and external services<a class="headerlink" href="#images-licensing-and-external-services" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Use images from the platform allowlist. For anything else, file an image request under <strong>Requests</strong>; some projects are cleared to use any image.</li>
+<li>Use images from the platform allowlist. For anything else, send an image request under <strong>Requests</strong>. Some projects may use any image.</li>
 <li>Follow the licence of every piece of software, model weight, and dataset you use. Do not install or share pirated or cracked software.</li>
-<li>Keep accounts, passwords, tokens, keys, and unlicensed data out of the images you build.</li>
-<li>An image built by a project is for that project. File a request to share it with another project.</li>
-<li>Do not run unapproved services for outside users, including public websites, file sharing, and proxy nodes.</li>
-<li>Do not scan, probe, or attack any host or service inside or outside the platform, including other people's workspaces.</li>
-<li>Do not disable or work around the platform's security controls or logs.</li>
-<li>When you publish results, credit the platform's compute as your institution requires.</li>
+<li>Do not put accounts, passwords, tokens, keys, or unlicensed data in the images you build.</li>
+<li>An image a project builds is for that project. To share it with another project, send a request.</li>
+<li>Do not run unapproved services for outside users, such as public websites, file sharing, and proxy nodes.</li>
+<li>Do not scan, probe, or attack any machine or service, on or off the platform, including other people's workspaces.</li>
+<li>Do not turn off or get around the platform's security controls or logs.</li>
+<li>When you publish results, credit the platform's compute the way your institution requires.</li>
 </ol>
 <hr />
 <h2 id="questions">Questions<a class="headerlink" href="#questions" title="Permanent link">&para;</a></h2>
-<p>For anything these rules do not cover, file a problem report under <strong>Requests</strong> or ask a platform admin.</p>
+<p>If these rules do not cover your case, send a problem report under <strong>Requests</strong> or ask a platform admin.</p>
 
 
 

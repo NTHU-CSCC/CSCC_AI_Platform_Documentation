@@ -1300,8 +1300,8 @@
 
 
 <h1 id="home-dashboard">Home dashboard<a class="headerlink" href="#home-dashboard" title="Permanent link">&para;</a></h1>
-<p>The Home dashboard shows GPU availability, your quota usage, your running jobs, and your recent requests.</p>
-<p><strong>Access:</strong> all signed-in users.</p>
+<p>The Home dashboard shows free GPUs, your quota use, your running jobs, and your recent requests.</p>
+<p><strong>Who can use it:</strong> all signed-in users.</p>
 <hr />
 <h2 id="widget-reference">Widget reference<a class="headerlink" href="#widget-reference" title="Permanent link">&para;</a></h2>
 <table>
@@ -1315,12 +1315,12 @@
 <tbody>
 <tr>
 <td><strong>GPU Availability Card</strong></td>
-<td>Free vs. allocated GPU units across the platform, plus a preemptible-queue count</td>
+<td>Free and used GPU units across the platform, plus a preemptible-queue count</td>
 <td>On page load and every 10 seconds</td>
 </tr>
 <tr>
 <td><strong>GPU Cluster Status</strong></td>
-<td>Anonymised GPU machine cards showing how much of each GPU is in use</td>
+<td>Anonymous GPU machine cards showing how much of each GPU is in use</td>
 <td>On page load and every 10 seconds</td>
 </tr>
 <tr>
@@ -1347,41 +1347,41 @@
 </table>
 <hr />
 <h2 id="reading-gpu-availability">Reading GPU availability<a class="headerlink" href="#reading-gpu-availability" title="Permanent link">&para;</a></h2>
-<p>The <strong>GPU Availability Card</strong> shows the current state of the GPU pool.</p>
+<p>The <strong>GPU Availability Card</strong> shows how many GPUs are free right now.</p>
 <p><img alt="Home dashboard GPU availability card" src="../../assets/screenshots/home-dashboard-overview.png" />
 <em>Figure 1: Home dashboard showing GPU availability, resource usage, and active jobs.</em></p>
 <ol>
 <li>Read the <strong>allocated / total</strong> fraction, for example <code>6 / 8 GPUs</code>.</li>
-<li>Free GPUs = total − allocated. At 0 free, a new workspace waits in the queue.</li>
-<li>The card also shows a <strong>Preemptible queues</strong> count. When every GPU is busy, a higher-priority workload can still start by stopping a lower-priority workspace in a preemptible queue.</li>
+<li>Free GPUs = total − allocated. At 0 free, a new workspace waits in line.</li>
+<li>The card also shows a <strong>Preemptible queues</strong> count. When every GPU is busy, higher-priority work can still start by stopping a lower-priority workspace in a preemptible queue.</li>
 <li>Admins also see a <strong>View Reports</strong> button that opens the Audit page.</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Effective GPU units</p>
-<p>The card counts <em>effective</em> GPU units, not whole cards. A 1-GPU claim at 50% SM share counts as 0.5 GPU, and only while a workload is attached to it.</p>
+<p>The card counts <em>effective</em> GPU units, not whole cards. One GPU at 50% SM share counts as 0.5 GPU, and only while a workload is using it.</p>
 </div>
 <hr />
 <h2 id="gpu-cluster-status">GPU cluster status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
-<p>Below the availability card, the <strong>GPU Cluster Status</strong> grid shows anonymised GPU machines:</p>
+<p>Below the availability card, the <strong>GPU Cluster Status</strong> grid shows each GPU machine under an anonymous label:</p>
 <ul>
 <li>A display label such as <code>GPU node 1</code> and the GPU model</li>
 <li>Each physical GPU, with its index and model</li>
 <li>How many shares of that machine's GPUs are taken, such as <code>3 / 8</code></li>
-<li>A status bar and utilisation percentage per GPU</li>
+<li>A status bar and usage percentage for each GPU</li>
 </ul>
-<p>Use the grid to find idle models before you submit a workload, or to confirm a machine has room for a fractional claim. The dashboard never shows other users' names or workload names.</p>
+<p>Check the grid before you submit to see which models are idle, or whether a machine has room for a part-GPU claim. The dashboard never shows other users' names or workload names.</p>
 <hr />
 <h2 id="resource-usage-history">Resource usage history<a class="headerlink" href="#resource-usage-history" title="Permanent link">&para;</a></h2>
-<p>The chart shows your usage in every project that has a plan. Projects without a plan are not listed; if none of your projects has one, the chart shows a notice instead.</p>
+<p>The chart shows your usage in every project that has a plan. Projects without a plan are not listed. If none of yours has a plan, the chart shows a notice.</p>
 <ul>
 <li>Each bar is one project.</li>
-<li>The fill shows consumed quota (GPU hours, CPU hours, or memory).</li>
+<li>The fill shows how much quota you have used (GPU hours, CPU hours, or memory).</li>
 <li>Each project row shows whether its resource plan is always active, closing, opening, or expired.</li>
-<li>Plan-window countdowns tick every second without a page refresh.</li>
+<li>Plan-window countdowns update every second. You do not need to refresh.</li>
 </ul>
 <hr />
 <h2 id="recent-activity">Recent activity<a class="headerlink" href="#recent-activity" title="Permanent link">&para;</a></h2>
-<p>The <strong>Recent Activity</strong> panel lists your 8 most recent requests with their tag and when you submitted them. Click <strong>View All</strong> to open the Requests page.</p>
+<p>The <strong>Recent Activity</strong> panel lists your 8 most recent requests, with their tag and submit time. Click <strong>View All</strong> to open the Requests page.</p>
 <hr />
 <h2 id="my-gpu-jobs">My GPU jobs<a class="headerlink" href="#my-gpu-jobs" title="Permanent link">&para;</a></h2>
 <p>The <strong>My GPU Jobs</strong> table lists the GPU jobs (workspaces and deployments) you have running right now. One row is one job; a job that spans several cards is one row.</p>
@@ -1419,16 +1419,16 @@
 </tr>
 </tbody>
 </table>
-<p>The table is read-only. Open or delete a workspace on the <a href="../workspaces/">Workspaces</a> page; manage deployments from the project's <strong>Resources</strong> tab.</p>
+<p>You cannot change anything in this table. Open or delete a workspace on the <a href="../workspaces/">Workspaces</a> page; manage deployments from the project's <strong>Resources</strong> tab.</p>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>Why does the availability card show 0 GPUs?</summary>
-<p>The card shows <em>effective</em> availability. If every compatible GPU or SM share is allocated, it shows 0. A workspace that stopped recently frees capacity within about a minute.</p>
+<p>The card shows <em>effective</em> availability. If every matching GPU or SM share is taken, it shows 0. When a workspace stops, its GPU is free again within about a minute.</p>
 </details>
 <details class="question">
 <summary>Recent Activity is empty. Is something wrong?</summary>
-<p>No. It only lists requests you have submitted. Submit one on the Requests page and it appears here.</p>
+<p>No. It only lists requests you sent. Send one on the Requests page and it shows up here.</p>
 </details>
 <details class="question">
 <summary>My running workspace is not in the jobs table.</summary>

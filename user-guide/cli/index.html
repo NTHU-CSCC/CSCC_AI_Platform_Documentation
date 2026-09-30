@@ -1390,39 +1390,32 @@
 
 
 <h1 id="command-line-interface">Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h1>
-<p>Use <code>cscc-cli</code> to authenticate, submit image builds, stream build logs, and manage your own API tokens.</p>
-<p><strong>Access:</strong> All authenticated users.</p>
+<p>Use <code>cscc-cli</code> to sign in, build images, follow build logs and manage your API tokens from a terminal.</p>
+<p><strong>Who can use it:</strong> everyone who is signed in.</p>
 <hr />
 <h2 id="login">Login<a class="headerlink" href="#login" title="Permanent link">&para;</a></h2>
-<p>On a new machine, give the CLI the API URL explicitly with <code>--api-url</code> or
-<code>CSCC_API_URL</code>. The value may include <code>/api/v1</code>; the CLI normalizes it for you.</p>
+<p>On a new machine, tell the CLI the API URL with <code>--api-url</code> or <code>CSCC_API_URL</code>. It's fine to include <code>/api/v1</code>. The CLI cleans it up.</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice
 </code></pre></div>
-<p>The CLI prompts for your password. Unlike the dashboard, this flow needs no CAPTCHA.</p>
-<p>On success, the CLI saves a <code>cscc_...</code> API token in its local config file, readable only by you. The token value itself is shown only once when it is created.</p>
-<p>Optional token name:</p>
+<p>The CLI asks for your password. Unlike the dashboard, it needs no CAPTCHA.</p>
+<p>After you sign in, the CLI saves a <code>cscc_...</code> API token in a config file on your machine that only you can read. The token itself shows only once, when it is created.</p>
+<p>To name the token:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--username<span class="w"> </span>alice<span class="w"> </span>--name<span class="w"> </span>workstation
 </code></pre></div>
-<p>Token names are limited to 100 characters. Leave the flag off to use the default
-name, <code>cscc-cli</code>.</p>
+<p>A token name can be up to 100 characters. Without <code>--name</code>, the name is <code>cscc-cli</code>.</p>
 <h3 id="import-a-dashboard-created-token">Import a dashboard-created token<a class="headerlink" href="#import-a-dashboard-created-token" title="Permanent link">&para;</a></h3>
-<p>You can also create an API token from <strong>Settings → API Key &amp; CLI</strong> in the
-dashboard and import it into <code>cscc-cli</code>:</p>
+<p>You can also create a token in the dashboard under <strong>Settings → API Key &amp; CLI</strong> and import it into <code>cscc-cli</code>:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--api-url<span class="w"> </span>https://api.cscc.nthu.edu.tw<span class="w"> </span>--token<span class="w"> </span>cscc_...
 </code></pre></div>
-<p>The CLI verifies the token before saving it. This is handy when you are already
-signed in to the dashboard and would rather not type your password in a terminal.</p>
+<p>The CLI checks the token before it saves it. Use this when you're already signed in to the dashboard and don't want to type your password in a terminal.</p>
 <h3 id="stateless-token-override">Stateless token override<a class="headerlink" href="#stateless-token-override" title="Permanent link">&para;</a></h3>
-<p>For automation, set <code>CSCC_API_TOKEN</code> instead of saving local config:</p>
+<p>For scripts, set <code>CSCC_API_TOKEN</code> instead of saving a config file:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw<span class="w"> </span><span class="nv">CSCC_API_TOKEN</span><span class="o">=</span>cscc_...<span class="w"> </span>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<p><code>CSCC_DEV_TOKEN</code> is still accepted as a deprecated compatibility alias, but new
-scripts should use <code>CSCC_API_TOKEN</code>.</p>
+<p><code>CSCC_DEV_TOKEN</code> still works but is deprecated. Use <code>CSCC_API_TOKEN</code> in new scripts.</p>
 <h3 id="tls-internal-ca">TLS / Internal CA<a class="headerlink" href="#tls-internal-ca" title="Permanent link">&para;</a></h3>
-<p>Official <code>cscc-cli</code> releases already trust the platform's certificate, so most
-users never need to configure one. If the platform certificate is rotated,
-download the latest CLI release before reconnecting.</p>
-<p>The variables below are only for custom builds and TLS troubleshooting:</p>
+<p>Official <code>cscc-cli</code> releases already trust the platform's certificate, so you usually don't need to set anything. If the platform certificate changes, download the latest CLI before you reconnect.</p>
+<p>Use the variables below only for custom builds and TLS troubleshooting:</p>
 <table>
 <thead>
 <tr>
@@ -1465,17 +1458,15 @@ download the latest CLI release before reconnecting.</p>
 <h2 id="check-identity">Check Identity<a class="headerlink" href="#check-identity" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>whoami
 </code></pre></div>
-<p>This verifies the saved token and prints your current user and role. Role changes take effect immediately.</p>
+<p>This checks your saved token and prints your user and role. Role changes apply right away.</p>
 <hr />
 <h2 id="build-images">Build Images<a class="headerlink" href="#build-images" title="Permanent link">&para;</a></h2>
-<p>Upload mode is the default and accepts a directory, a <code>.tar.gz</code>, or a <code>.zip</code>
-archive:</p>
+<p>Upload mode is the default. Give it a folder, a <code>.tar.gz</code> or a <code>.zip</code>:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1.0.1<span class="w"> </span>.
 cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>./context.tar.gz
 </code></pre></div>
-<p>For directories, the CLI packs the target directory into a <code>.tar.gz</code> build
-context. The context or uploaded archive must contain a root-level Dockerfile.</p>
-<p>Dockerfile-only mode matches the dashboard's pasted-Dockerfile flow:</p>
+<p>If you give it a folder, the CLI packs it into a <code>.tar.gz</code> for you. Either way, the Dockerfile must sit at the top level.</p>
+<p>Dockerfile-only mode works like pasting a Dockerfile in the dashboard:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--source<span class="w"> </span>dockerfile<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
@@ -1487,7 +1478,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <span class="w">  </span>--name<span class="w"> </span>trainer<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dockerfile<span class="w"> </span>-
 </code></pre></div>
-<p>Useful options:</p>
+<p>Options:</p>
 <table>
 <thead>
 <tr>
@@ -1498,7 +1489,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <tbody>
 <tr>
 <td><code>--project</code></td>
-<td>Project ID that owns the image build</td>
+<td>Project ID the image build belongs to</td>
 </tr>
 <tr>
 <td><code>--name</code></td>
@@ -1527,49 +1518,36 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </tbody>
 </table>
 <h3 id="build-arguments">Build arguments<a class="headerlink" href="#build-arguments" title="Permanent link">&para;</a></h3>
-<p>Pass Dockerfile <code>ARG</code> values at build time with <code>--build-arg KEY=VALUE</code>. The flag
-is repeatable and works with <code>upload</code> and <code>dockerfile</code> builds. Each <code>KEY</code> must start with a letter or underscore and contain only letters,
-digits, and underscores.</p>
+<p>Pass Dockerfile <code>ARG</code> values at build time with <code>--build-arg KEY=VALUE</code>. Repeat the flag for more than one. It works with <code>upload</code> and <code>dockerfile</code> builds. A <code>KEY</code> starts with a letter or underscore and contains only letters, digits and underscores.</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project-id&gt;<span class="w"> </span>--name<span class="w"> </span>trainer<span class="w"> </span>--tag<span class="w"> </span>v1<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span>hf_xxx<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--build-arg<span class="w"> </span><span class="nv">MAX_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>.
 </code></pre></div>
-<p>Use this to keep secrets and tunables out of the committed Dockerfile (for
-example an <code>ARG HF_TOKEN</code>), or to cap compile parallelism (<code>MAX_JOBS</code>,
-<code>FLASH_ATTN_MAX_JOBS</code>, …) so a heavy build fits the shared build engine.</p>
+<p>Use it to keep secrets and settings out of the Dockerfile you commit (for example <code>ARG HF_TOKEN</code>), or to limit compile parallelism (<code>MAX_JOBS</code>, <code>FLASH_ATTN_MAX_JOBS</code>, …) so a heavy build fits the shared build engine.</p>
 <blockquote>
-<p>Build args are visible to anyone who can inspect the build. Treat them as
-low-sensitivity, and rotate any token passed this way once the build is done.</p>
+<p>Anyone who can inspect the build can see build args. Don't put anything very sensitive in them, and replace any token you pass this way once the build is done.</p>
 </blockquote>
 <h3 id="shared-build-queue">Shared build queue<a class="headerlink" href="#shared-build-queue" title="Permanent link">&para;</a></h3>
-<p>Image builds share one build engine and run one at a time. Each build gets a
-fixed amount of CPU, memory, and scratch space that you cannot override.</p>
-<p>The build engine shuts down when no one has built anything for a while, so the
-first build after that waits about a minute for it to start.</p>
-<p>After submission, <code>--follow=true</code> (the default) waits for logs to become
-available, streams them, and exits once the build reports <code>completed</code>, <code>failed</code>,
-or <code>deleted</code>.</p>
-<p>The CLI takes the API endpoint from <code>--api-url</code> at login, then <code>CSCC_API_URL</code>,
-then its saved config:</p>
+<p>Everyone shares one build engine, and it runs one build at a time. Each build gets a fixed amount of CPU, memory and scratch space. You can't change it.</p>
+<p>The build engine shuts down when nobody has built for a while. The first build after that waits about a minute for it to start.</p>
+<p>After you submit, <code>--follow=true</code> (the default) waits for the logs, shows them, and stops when the build reports <code>completed</code>, <code>failed</code> or <code>deleted</code>.</p>
+<p>The CLI gets the API address from <code>--api-url</code> at login, then <code>CSCC_API_URL</code>, then its saved config:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
-<p>Builds and log streams use the token created by <code>cscc-cli login</code> — no other
-credential is needed. The project must have <strong>Image Build Permission</strong> enabled,
-and your project role must allow builds.</p>
+<p>Builds and logs use the token from <code>cscc-cli login</code>. You need nothing else. The project must have <strong>Image Build Permission</strong> turned on, and your project role must allow builds.</p>
 <hr />
 <h2 id="token-management">Token Management<a class="headerlink" href="#token-management" title="Permanent link">&para;</a></h2>
-<p>List active API tokens:</p>
+<p>List your active API tokens:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>tokens<span class="w"> </span>list
 </code></pre></div>
 <p>Revoke a token by ID:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>tokens<span class="w"> </span>revoke<span class="w"> </span>&lt;token-id&gt;
 </code></pre></div>
-<p>Log out from the current machine:</p>
+<p>Sign out on this machine:</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span><span class="nb">logout</span>
 </code></pre></div>
-<p>Logout revokes the token in use and clears it from local config. Any manual
-certificate settings are kept so you can log in again without redoing them.</p>
+<p>Logging out revokes the token you're using and removes it from the config file. Certificate settings you added by hand stay, so you can sign in again without redoing them.</p>
 <hr />
 <h2 id="defaults">Defaults<a class="headerlink" href="#defaults" title="Permanent link">&para;</a></h2>
 <table>
@@ -1584,7 +1562,7 @@ certificate settings are kept so you can log in again without redoing them.</p>
 <tr>
 <td>Token lifetime</td>
 <td style="text-align: right;">90 days</td>
-<td>Create a new token when the old one expires</td>
+<td>Make a new token when the old one expires</td>
 </tr>
 <tr>
 <td>Active tokens per user</td>
@@ -1599,11 +1577,11 @@ certificate settings are kept so you can log in again without redoing them.</p>
 <tr>
 <td>Lockout duration</td>
 <td style="text-align: right;">15 min</td>
-<td>Wait it out, or ask an admin to unlock the account</td>
+<td>Wait, or ask an admin to unlock your account</td>
 </tr>
 </tbody>
 </table>
-<p>Your administrator can adjust these values for the deployment.</p>
+<p>Admins can change these values.</p>
 
 
 

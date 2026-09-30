@@ -1366,8 +1366,8 @@
 
 
 <h1 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h1>
-<p>On the Settings page you update your profile, change your password, manage API tokens for the CLI, set notifications, and pick the display language.</p>
-<p><strong>Access:</strong> all signed-in users. Open <strong>Settings</strong> in the left sidebar (Infrastructure section).</p>
+<p>On the Settings page you edit your profile, change your password, manage CLI API tokens, set notifications and pick a language.</p>
+<p><strong>Who can use it:</strong> everyone who is signed in. Open <strong>Settings</strong> in the left sidebar (Infrastructure section).</p>
 <hr />
 <h2 id="tabs">Tabs<a class="headerlink" href="#tabs" title="Permanent link">&para;</a></h2>
 <p><img alt="Settings page tabs" src="../../assets/screenshots/settings-tabs.png" />
@@ -1401,10 +1401,10 @@
 <hr />
 <h2 id="profile">Profile<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Full Name</strong> — editable; shown wherever your name appears</li>
+<li><strong>Full Name</strong> — you can edit it; it shows wherever your name appears</li>
 <li><strong>Username</strong> — read-only; your sign-in name</li>
 <li>
-<p><strong>Email</strong> — read-only when your account comes from the account directory</p>
+<p><strong>Email</strong> — read-only if your account comes from the school's account directory</p>
 </li>
 <li>
 <p>Open the <strong>Profile</strong> tab.</p>
@@ -1417,31 +1417,31 @@
 <h3 id="change-password">Change password<a class="headerlink" href="#change-password" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Open the <strong>Security</strong> tab.</li>
-<li>Enter your <strong>Current Password</strong>.</li>
-<li>Enter a <strong>New Password</strong> (at least 8 characters).</li>
-<li>Repeat it in <strong>Confirm Password</strong>.</li>
+<li>Type your <strong>Current Password</strong>.</li>
+<li>Type a <strong>New Password</strong> (at least 8 characters).</li>
+<li>Type it again in <strong>Confirm Password</strong>.</li>
 <li>Click <strong>Change Password</strong>.</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">One password everywhere</p>
-<p>The new password applies to every sign-in, including the VPN. Accounts managed by an external identity provider change their password there, not here.</p>
+<p>Your new password works for every sign-in, including the VPN. If your account is managed by an external identity provider, change the password there instead.</p>
 </div>
 <h3 id="api-tokens-and-cli">API tokens and CLI<a class="headerlink" href="#api-tokens-and-cli" title="Permanent link">&para;</a></h3>
-<p>The <strong>Security</strong> tab is also where you get credentials for <a href="../cli/"><code>cscc-cli</code></a>.</p>
-<p>The token table lists every active token on your account with its prefix, last-used time, and expiry.</p>
+<p>The <strong>Security</strong> tab is also where you get a token for <a href="../cli/"><code>cscc-cli</code></a>.</p>
+<p>The token table lists your active tokens with their prefix, last-used time and expiry.</p>
 <ul>
-<li><strong>Create token</strong> — creates a token with an optional name. The full value is shown <strong>once</strong>; copy it before you close the dialog. The dialog also shows a ready-to-paste <code>cscc-cli login --api-url ... --token cscc_...</code> command.</li>
-<li><strong>Revoke</strong> — invalidates a token. CLI sessions using it fail on their next call.</li>
+<li><strong>Create token</strong> — makes a new token. You can give it a name. The full token shows <strong>once</strong>, so copy it before you close the dialog. The dialog also gives you a <code>cscc-cli login --api-url ... --token cscc_...</code> command to paste.</li>
+<li><strong>Revoke</strong> — kills a token. Any CLI using it fails on its next call.</li>
 </ul>
-<p>Tokens last 90 days by default. You can hold at most 20 active tokens.</p>
+<p>A token lasts 90 days by default. You can have at most 20 active tokens.</p>
 <div class="admonition warning">
 <p class="admonition-title">Shown once</p>
-<p>The token value is never stored in readable form. If you lose it, revoke it and create a new one.</p>
+<p>The platform doesn't keep the token in readable form. If you lose it, revoke it and create a new one.</p>
 </div>
-<p>Official <code>cscc-cli</code> releases already trust the platform certificate, and the commands on this page already point at the right API address.</p>
+<p>Official <code>cscc-cli</code> releases already trust the platform certificate, and the commands here already use the right API address.</p>
 <hr />
 <h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
-<p>The tab has two checkboxes:</p>
+<p>There are two checkboxes:</p>
 <table>
 <thead>
 <tr>
@@ -1452,60 +1452,45 @@
 <tbody>
 <tr>
 <td><strong>Push Notifications</strong></td>
-<td>In-app notifications about your requests and projects. Saved when you click <strong>Save Changes</strong>.</td>
+<td>Notifications in the dashboard about your requests and projects. Click <strong>Save Changes</strong> to save.</td>
 </tr>
 <tr>
 <td><strong>Email Notifications</strong></td>
-<td>Shown, but not saved yet; email delivery depends on your platform's mail setup.</td>
+<td>Shown, but not saved yet. Whether email is sent depends on the platform's mail setup.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="discord-direct-messages">Discord direct messages<a class="headerlink" href="#discord-direct-messages" title="Permanent link">&para;</a></h3>
-<p>When your platform has the Discord bot turned on, the tab also shows a
-<strong>Discord direct messages</strong> panel. Click <strong>Link Discord</strong>, approve the request
-on Discord, and you come back to this page with a welcome message already in
-your Discord inbox. From then on the bot messages you directly, even when the
-dashboard is closed, for every bell notification, for example:</p>
+<p>If the platform has the Discord bot turned on, this tab also has a <strong>Discord direct messages</strong> panel. Click <strong>Link Discord</strong> and approve on Discord. You come back to this page, and a welcome message is already in your Discord inbox. From then on the bot sends you a direct message for every bell notification, even when the dashboard is closed. For example:</p>
 <ul>
-<li>preemption warnings and preemptions of your workloads</li>
-<li>a job of yours finishing or failing</li>
-<li>workloads stopped by a runtime limit</li>
-<li>a burst-window workload moving to normal priority, or stopping because none
-  is available</li>
+<li>your workload is about to be preempted, or was preempted</li>
+<li>one of your jobs finishes or fails</li>
+<li>a workload is stopped by a runtime limit</li>
+<li>a burst-window workload moves to normal priority, or stops because none is available</li>
 <li>new announcements</li>
 </ul>
-<p>In the bot chat, <code>/jobs</code> shows 10 jobs per page. Use <strong>Previous</strong> and <strong>Next</strong>
-to browse your history. Enter <code>keyword</code> to search job IDs, statuses, and queue
-names across your history. The search ignores letter case and stays in place
-as you turn pages. The <code>active</code> filter shows jobs still in progress; the
-<code>recent</code> filter starts with your latest finished jobs and lets you browse older
-ones. <code>/clear</code> deletes regular messages sent by the bot. Private command replies
-marked "Only you can see" stay visible until you dismiss them in Discord.</p>
-<p>Linking also adds you to the platform's Discord server; the bot can only
-message people who share a server with it. If Discord refuses the first
-message, allow direct messages from server members in your Discord privacy
-settings and link again. <strong>Unlink</strong> stops the messages; the in-app bell keeps
-working either way.</p>
+<p>In the bot chat, <code>/jobs</code> shows 10 jobs per page. Use <strong>Previous</strong> and <strong>Next</strong> to page through your history. Enter <code>keyword</code> to search job IDs, statuses and queue names. The search ignores upper and lower case, and it stays on as you turn pages. The <code>active</code> filter shows jobs still running. The <code>recent</code> filter starts with your latest finished jobs, and you can page back to older ones. <code>/clear</code> deletes the bot's regular messages. Replies marked "Only you can see" stay until you dismiss them in Discord.</p>
+<p>Linking also adds you to the platform's Discord server. The bot can only message people who share a server with it. If Discord blocks the first message, allow direct messages from server members in your Discord privacy settings, then link again. <strong>Unlink</strong> stops the messages. The bell in the dashboard keeps working either way.</p>
 <hr />
 <h2 id="preferences">Preferences<a class="headerlink" href="#preferences" title="Permanent link">&para;</a></h2>
-<p>Under <strong>Language</strong>, pick <strong>English</strong> or <strong>Traditional Chinese</strong> and click <strong>Save</strong>. The interface switches immediately.</p>
+<p>Under <strong>Language</strong>, pick <strong>English</strong> or <strong>Traditional Chinese</strong> and click <strong>Save</strong>. The page switches language right away.</p>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>The password fields are greyed out.</summary>
-<p>Your account is managed by an external identity provider. Change the password there.</p>
+<p>An external identity provider manages your account. Change the password there.</p>
 </details>
 <details class="question">
 <summary>I forgot my password.</summary>
-<p>There is no self-service reset on the sign-in page. Ask a platform admin to reset it; the new password applies everywhere, including the VPN.</p>
+<p>The sign-in page can't reset it for you. Ask a platform admin to reset it. The new password works everywhere, including the VPN.</p>
 </details>
 <details class="question">
 <summary>My email is wrong.</summary>
-<p>Email comes from the account directory. Ask an admin to update it.</p>
+<p>Your email comes from the account directory. Ask an admin to update it.</p>
 </details>
 <details class="question">
 <summary>Can I delete my account?</summary>
-<p>Only an admin can. Submit a request describing what you need.</p>
+<p>Only an admin can. Send a request and say what you need.</p>
 </details>
 <details class="question">
 <summary>I lost my API token. Can I recover it?</summary>

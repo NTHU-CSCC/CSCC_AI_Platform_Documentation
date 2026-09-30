@@ -1322,16 +1322,14 @@
 
 
 <h1 id="lab-students">Lab Students<a class="headerlink" href="#lab-students" title="Permanent link">&para;</a></h1>
-<p>Deploying real workloads, getting the images you need, and reserving GPUs. Assumes you have watched <a href="../basics/">Start Here</a>.</p>
+<p>Deploy real jobs, get the images you need, and reserve GPUs. Watch <a href="../basics/">Start Here</a> first.</p>
 <div class="admonition info">
 <p class="admonition-title">About these clips</p>
-<p>Short screen recordings without narration — the text above each one is the
-explanation. The interface shown is set to Chinese; switch your own with
-<strong>EN ⇄ 中</strong> in the top-right.</p>
+<p>The clips have no narration. Read the text above each one. The clips show the Chinese interface. To switch yours, use <strong>EN ⇄ 中</strong> in the top-right.</p>
 </div>
 <hr />
 <h2 id="l1-1">L1-1 — Deploy a Pod<a class="headerlink" href="#l1-1" title="Permanent link">&para;</a></h2>
-<p>The simplest workload. A Pod runs once; nothing restarts it for you, and its name is exactly what you typed.</p>
+<p>The simplest option. A Pod runs once and nothing restarts it. Its name is exactly what you typed.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-1-deploy-pod.jpg">
   <source src="../../assets/videos/l1-1-deploy-pod.mp4" type="video/mp4">
 </video>
@@ -1339,7 +1337,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>0:57 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-2">L1-2 — Deploy a Deployment<a class="headerlink" href="#l1-2" title="Permanent link">&para;</a></h2>
-<p><strong>Replicas</strong> decides how many run at once. Pod names gain two hash segments, because the platform manages the copies for you.</p>
+<p><strong>Replicas</strong> is how many run at once. Pod names get two random suffixes, because the platform manages the copies for you.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-2-deploy-deployment.jpg">
   <source src="../../assets/videos/l1-2-deploy-deployment.mp4" type="video/mp4">
 </video>
@@ -1347,7 +1345,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:41 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-3">L1-3 — Deploy a Job<a class="headerlink" href="#l1-3" title="Permanent link">&para;</a></h2>
-<p><strong>Completions</strong> is how many runs in total, <strong>Parallelism</strong> how many at once. A Job ends when it finishes; a Pod and a Deployment do not. <strong>Completions</strong> cannot exceed <strong>Parallelism</strong>: the platform starts a Job's pods once and never reruns one to catch up, so a higher Completions than Parallelism is rejected.</p>
+<p><strong>Completions</strong> is how many runs in total, <strong>Parallelism</strong> how many at once. A Job ends when it finishes. A Pod and a Deployment do not. <strong>Completions</strong> cannot be higher than <strong>Parallelism</strong>, or the deploy is rejected. The platform starts a Job's pods once and never reruns one to catch up.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-3-deploy-job.jpg">
   <source src="../../assets/videos/l1-3-deploy-job.mp4" type="video/mp4">
 </video>
@@ -1355,7 +1353,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:52 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-4">L1-4 — Deleting one Pod, part 1<a class="headerlink" href="#l1-4" title="Permanent link">&para;</a></h2>
-<p>One config file is one disposable unit. Deleting any Pod in it starts a cleanup of everything that deploy created.</p>
+<p>One config file is deployed and removed as one set. Delete any Pod in it and everything that deploy created is removed.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-4-delete-cascade-1.jpg">
   <source src="../../assets/videos/l1-4-delete-cascade-1.mp4" type="video/mp4">
 </video>
@@ -1363,7 +1361,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>0:13 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l1-5">L1-5 — Deleting one Pod, part 2<a class="headerlink" href="#l1-5" title="Permanent link">&para;</a></h2>
-<p>The Pod, the Deployment and the Job all disappear together. To control them separately, deploy them from separate config files.</p>
+<p>The Pod, the Deployment and the Job all disappear together. To manage them separately, deploy them from separate config files.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l1-5-delete-cascade-2.jpg">
   <source src="../../assets/videos/l1-5-delete-cascade-2.mp4" type="video/mp4">
 </video>
@@ -1371,7 +1369,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>0:26 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l2">L2 — Request an image<a class="headerlink" href="#l2" title="Permanent link">&para;</a></h2>
-<p>Project → <strong>Images</strong> tab → <strong>Add</strong> → fill Registry / Repository / Tag → <strong>Submit Request</strong>. The view switches to <strong>Requests</strong> so you can see it was filed.</p>
+<p>Project → <strong>Images</strong> tab → <strong>Add</strong> → fill Registry / Repository / Tag → <strong>Submit Request</strong>. The page switches to <strong>Requests</strong>, so you can see it was sent.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l2-request-image.jpg">
   <source src="../../assets/videos/l2-request-image.mp4" type="video/mp4">
 </video>
@@ -1379,7 +1377,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:12 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l3">L3 — Build your own image<a class="headerlink" href="#l3" title="Permanent link">&para;</a></h2>
-<p>Project → <strong>Builds</strong> tab → upload an archive or paste a Dockerfile → <strong>Start build</strong>, then watch the live log. One shared queue builds one image at a time.</p>
+<p>Project → <strong>Builds</strong> tab → upload an archive or paste a Dockerfile → <strong>Start build</strong>, then watch the live log. All projects share one build queue, and it builds one image at a time.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l3-build-image.jpg">
   <source src="../../assets/videos/l3-build-image.mp4" type="video/mp4">
 </video>
@@ -1387,7 +1385,7 @@ explanation. The interface shown is set to Chinese; switch your own with
 <p><em>1:42 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
 <hr />
 <h2 id="l5">L5 — Reserve a GPU claim<a class="headerlink" href="#l5" title="Permanent link">&para;</a></h2>
-<p>Create a GPU Claim ahead of time and pick it at deploy time. SM % slices one card's compute; it is not a count of cards.</p>
+<p>Create a GPU Claim ahead of time, then pick it when you deploy. SM % is the share of one card's compute you get. It is not a number of cards.</p>
 <video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/l5-gpu-claim.jpg">
   <source src="../../assets/videos/l5-gpu-claim.mp4" type="video/mp4">
 </video>
