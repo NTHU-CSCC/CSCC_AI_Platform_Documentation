@@ -834,10 +834,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="排程佇列、優先級與搶佔">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暫停而不是停止
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         計畫時段
@@ -870,7 +887,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         角色權限
@@ -882,7 +899,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         系統角色
@@ -893,7 +910,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         專案角色
@@ -904,7 +921,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         群組角色
@@ -920,7 +937,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         儲存權限
@@ -931,7 +948,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         關鍵術語
@@ -1294,10 +1311,27 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="排程佇列、優先級與搶佔">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暫停而不是停止
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         計畫時段
@@ -1330,7 +1364,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         角色權限
@@ -1342,7 +1376,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         系統角色
@@ -1353,7 +1387,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         專案角色
@@ -1364,7 +1398,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         群組角色
@@ -1380,7 +1414,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         儲存權限
@@ -1391,7 +1425,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         關鍵術語
@@ -1487,8 +1521,18 @@
 </tbody>
 </table>
 <p>工作區與部署表單會列出專案計畫允許的佇列。預設佇列也要有生效的計畫，而且計畫要允許它。</p>
+<h3 id="_5">暫停而不是停止<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>可被搶佔的工作負載若只用一張 GPU、且只有一個程序，平台會把它暫停而不是停止：記憶體與 GPU 狀態會先存起來，GPU 讓給更高優先級的工作，等那張 GPU 再次空出來，工作就在同一個節點從原本的進度繼續。等待期間狀態會顯示 <strong>已暫停</strong>，暫停與恢復時你都會收到通知鈴鐺提示。暫停最多等 7 天，超過就會停止並記為已被搶佔。</p>
+<p>你需要知道的限制：</p>
+<ul>
+<li>只有單 GPU、單程序的工作負載會被暫停。多 GPU 的工作、程序之間共用 GPU 記憶體的工作，以及使用 CUDA unified memory 的工作，仍會像以前一樣被停止。</li>
+<li>暫停時已開啟的網路連線會被關閉。恢復後請重新開啟 Notebook 或 SSH；把結果串流到外部服務的訓練程式要自己重連。</li>
+<li>暫停前最後幾分鐘內做的事，恢復後可能重做一次。這段時間寫入資料庫或物件儲存的動作可能發生兩次。</li>
+<li>絕對不能被暫停的工作，請在部署或工作區表單取消勾選 <strong>被搶佔時允許暫停（保存進度）</strong>，它會改為直接停止。在部署 YAML 加上標籤 <code>platform-go/checkpoint: "false"</code> 效果相同。</li>
+<li>暫停中的工作在 <strong>部署</strong> 與 <strong>工作區</strong> 顯示為 <strong>已暫停</strong>，並附上暫停時間；恢復後會自己回到 <strong>執行中</strong>。暫停中的工作區要等恢復後才能開啟或重新啟動。對暫停中的工作區按 <strong>刪除</strong> 會直接結束它，之後就能啟動新的工作區。</li>
+</ul>
 <hr />
-<h2 id="_5">計畫時段<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">計畫時段<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>計畫有兩組每週時段，都是台灣時間（UTC+8）。</p>
 <p><strong>排程時段</strong> 是你能開始工作的時間。時段之外不能送出新工作，優先佇列也一樣，預設佇列也不例外。已經在跑的工作依計畫的停止政策處理。</p>
 <p><strong>Burst 時段</strong> 會開放額外的 <strong>優先佇列</strong>，但排程時段也要開著才有效。Burst 時段留空，就沒有優先時段。</p>
@@ -1523,8 +1567,8 @@
 <p>資源計畫除了上面的 GPU/CPU/記憶體上限，還能限制專案用掉的 GPU 總時間。一個 GPU 時數是一張 GPU 跑一小時，只用到部分張數就按比例算。</p>
 <p>管理員會為每個專案設定額度多久重設一次：預設每月，也可以每週，或每隔固定小時數。專案的 <strong>總覽</strong> 分頁會顯示你這期用了多少、什麼時候重設。額度用完後，新的 GPU 任務和工作區會被擋下，到重設為止。已經在跑的工作不受影響。</p>
 <hr />
-<h2 id="_6">角色權限<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="_7">系統角色<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h2 id="_7">角色權限<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">系統角色<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1591,7 +1635,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_8">專案角色<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h3 id="_9">專案角色<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1634,7 +1678,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_9">群組角色<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h3 id="_10">群組角色<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1672,14 +1716,14 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_10">儲存權限<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_11">儲存權限<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
 <li>群組儲存空間的權限由群組決定。群組成員一定會拿到這些權限，專案不能改。</li>
 <li>專案的儲存頁面會顯示這些權限，但不能在那裡改。</li>
 <li>要改群組成員的權限，到群組頁面。不在群組裡的專案成員，到專案頁面設定。專案以外的人不能從專案取得儲存權限。</li>
 </ul>
 <hr />
-<h2 id="_11">關鍵術語<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h2 id="_12">關鍵術語<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

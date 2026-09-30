@@ -834,6 +834,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Scheduling queues, priority, and preemption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paused-instead-of-stopped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paused instead of stopped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1294,6 +1311,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Scheduling queues, priority, and preemption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paused-instead-of-stopped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paused instead of stopped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1487,6 +1521,16 @@
 </tbody>
 </table>
 <p>The workspace and deploy forms list the queues your project plan allows. The default queue also needs an active plan that allows it.</p>
+<h3 id="paused-instead-of-stopped">Paused instead of stopped<a class="headerlink" href="#paused-instead-of-stopped" title="Permanent link">&para;</a></h3>
+<p>When a preemptible workload uses one GPU and runs as a single process, the platform pauses it instead of stopping it: its memory and GPU state are saved, the GPU is handed to the higher-priority job, and the workload continues from the same point once that GPU is free again, on the same node. The status shows <strong>Paused</strong> while it waits, and you get a bell notification when it pauses and again when it resumes. A pause can wait up to 7 days; after that the workload is stopped and reported as preempted.</p>
+<p>Limits you should know:</p>
+<ul>
+<li>Only single-GPU, single-process workloads are paused. Multi-GPU jobs, jobs that share GPU memory between processes, and jobs using CUDA unified memory are stopped as before.</li>
+<li>Open network connections are closed at the pause. Reopen the notebook or SSH session after the resume; a training script that streams to an external service must reconnect on its own.</li>
+<li>Work done in the last few minutes before the pause may be repeated after the resume. Writes to databases or object storage in that window can happen twice.</li>
+<li>Untick <strong>Allow pausing when preempted</strong> in the deploy or workspace form for a workload that must never be paused; it is then stopped instead. The same effect comes from the label <code>platform-go/checkpoint: "false"</code> in a deploy YAML.</li>
+<li>A paused job shows <strong>Paused</strong> in <strong>Deployments</strong> and <strong>Workspaces</strong> with the time it was paused; the row comes back to <strong>Running</strong> on its own. A paused workspace cannot be opened, or started again, until it resumes. <strong>Delete</strong> on a paused workspace ends it for good; you can then start a new one.</li>
+</ul>
 <hr />
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>
 <p>A plan has two weekly time settings, both in Taiwan time (UTC+8).</p>
