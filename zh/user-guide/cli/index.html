@@ -2085,6 +2085,10 @@ docker<span class="w"> </span>images
 <td>容器被強制結束。可能是記憶體不足（<code>docker inspect NAME</code> 會顯示 <code>"OOMKilled": true</code>，請調高 <code>-m</code>）、它 10 秒內都沒理會 SIGTERM，或它的工作區停止了。</td>
 </tr>
 <tr>
+<td>容器一啟動就出現 <code>Permission denied</code> 或 <code>Operation not permitted</code>，例如 <code>nginx</code> 這類映像</td>
+<td>映像的主程序需要 root，而容器預設以使用者 1000 執行。在允許 root 容器的專案加上 <code>-u 0</code>，或改用不需要 root 的映像版本，例如 <code>nginxinc/nginx-unprivileged</code>。</td>
+</tr>
+<tr>
 <td><code>port is already allocated</code></td>
 <td>工作區的這個連接埠已被其他程式或容器佔用。換一個主機連接埠，並檢查 <code>docker ps</code>。</td>
 </tr>

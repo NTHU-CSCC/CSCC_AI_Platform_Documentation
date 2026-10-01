@@ -2085,6 +2085,10 @@ docker<span class="w"> </span>images
 <td>The container was killed. It ran out of memory (<code>docker inspect NAME</code> shows <code>"OOMKilled": true</code>, so raise <code>-m</code>), it ignored SIGTERM for 10 seconds, or its workspace stopped.</td>
 </tr>
 <tr>
+<td><code>Permission denied</code> or <code>Operation not permitted</code> right after start, for an image such as <code>nginx</code></td>
+<td>The image's main process needs root, and containers run as user 1000 by default. Add <code>-u 0</code> in a project that allows root containers, or use an unprivileged variant of the image, for example <code>nginxinc/nginx-unprivileged</code>.</td>
+</tr>
+<tr>
 <td><code>port is already allocated</code></td>
 <td>A program or another container already uses that port of the workspace. Pick another host port, and check <code>docker ps</code>.</td>
 </tr>
