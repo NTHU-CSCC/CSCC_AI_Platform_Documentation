@@ -1409,6 +1409,7 @@
 <li><strong>Group Storage</strong> — volumes of the groups you belong to, in a table with these columns: name, status (<strong>Active</strong> means ready to mount, <strong>Terminating</strong> means it is being removed, <strong>Missing</strong> means the platform can't find it), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date and action icons.</li>
 </ul>
 <p>A group volume stays mounted for the project even when you stop a workspace. It is released only when an admin removes it from the project or deletes it.</p>
+<p>If the file browser status shows <strong>Error</strong>, the file browser stopped unexpectedly. Click <strong>Start FileBrowser</strong> (for a group volume, the icon in the <strong>Actions</strong> column) to restart it. Your files are not affected.</p>
 <h3 id="usage-bar">Usage bar<a class="headerlink" href="#usage-bar" title="Permanent link">&para;</a></h3>
 <p>The bar reads <code>used / total Gi</code> with a percentage. It turns amber at 70% and red at 90%.</p>
 <p><strong>Capacity</strong> is the space you were given. <strong>Usage</strong> is how much you have written. A dash (<code>—</code>) means the platform hasn't measured that volume yet. It doesn't mean the volume is empty. The numbers refresh every few minutes, so a big copy shows up a little late.</p>
