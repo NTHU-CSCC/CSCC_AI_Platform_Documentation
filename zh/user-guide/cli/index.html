@@ -1044,6 +1044,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ide-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在 IDE 裡使用 docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="在 IDE 裡使用 docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        和 Docker 的差異
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        疑難排解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#token_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1055,7 +1094,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -1348,6 +1387,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ide-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在 IDE 裡使用 docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="在 IDE 裡使用 docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        和 Docker 的差異
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        疑難排解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#token_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1359,7 +1437,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         預設值
@@ -1390,7 +1468,7 @@
 
 
 <h1 id="_1">命令列工具<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>用 <code>cscc-cli</code> 在終端機登入平台、建置映像檔、看建置日誌，以及管理你的 API token。</p>
+<p>用 <code>cscc-cli</code> 在終端機登入平台、建置映像檔、看建置日誌、在 IDE 裡使用 docker 指令，以及管理你的 API token。</p>
 <p><strong>適用對象：</strong> 所有登入的使用者。</p>
 <hr />
 <h2 id="_2">登入<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1537,6 +1615,120 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </code></pre></div>
 <p>建置和日誌都用 <code>cscc-cli login</code> 建立的 token，不需要其他憑證。專案必須開啟 <strong>Image Build Permission</strong>，你的專案角色也要允許建置。</p>
 <hr />
+<h2 id="ide-docker">在 IDE 裡使用 docker<a class="headerlink" href="#ide-docker" title="Permanent link">&para;</a></h2>
+<p>你的 Jupyter 和 code-server 工作區有 <code>docker</code> 指令。用法和 Docker 很像，但每個容器都是叢集上的任務，並掛載你的檔案。工作區裡不會執行任何容器。</p>
+<p>只要登入一次。工作區已經知道 API URL 和你的專案：</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+</code></pre></div>
+<p>接著照 Docker 的用法：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>pytorch/pytorch:latest<span class="w"> </span>python<span class="w"> </span>train.py
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>16g<span class="w"> </span>-w<span class="w"> </span>/home/alice/exp<span class="w"> </span>pytorch/pytorch:latest<span class="w"> </span>python<span class="w"> </span>train.py
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>sweep<span class="w"> </span>python:3.12<span class="w"> </span>python<span class="w"> </span>sweep.py
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>&lt;job-id&gt;
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myimg<span class="w"> </span>.
+</code></pre></div>
+<p>輸出會即時顯示在終端機。任務成功時指令回傳 0，失敗時回傳 1。按 Ctrl-C 只是停止觀看，任務會繼續跑；要停止任務，用 <code>docker rm &lt;job-id&gt;</code>。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker run [選項] IMAGE [COMMAND]</code></td>
+<td>啟動任務。加 <code>-d</code> 會印出任務 ID 並立刻返回</td>
+</tr>
+<tr>
+<td><code>docker ps [-a]</code></td>
+<td>列出執行中的任務；<code>-a</code> 連已結束的一起列出</td>
+</tr>
+<tr>
+<td><code>docker logs [-f] [--tail N] &lt;job-id&gt;</code></td>
+<td>顯示任務輸出</td>
+</tr>
+<tr>
+<td><code>docker rm</code>、<code>stop</code>、<code>kill &lt;job-id&gt;</code></td>
+<td>停止任務</td>
+</tr>
+<tr>
+<td><code>docker build -t NAME[:TAG] [CONTEXT]</code></td>
+<td>用資料夾最上層的 <code>Dockerfile</code> 建置映像</td>
+</tr>
+</tbody>
+</table>
+<p><code>docker run</code> 選項：</p>
+<table>
+<thead>
+<tr>
+<th>選項</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d</code></td>
+<td>不等待，印出任務 ID</td>
+</tr>
+<tr>
+<td><code>-e KEY=VALUE</code></td>
+<td>設定環境變數；可重複使用。不要用它傳密鑰</td>
+</tr>
+<tr>
+<td><code>-w DIR</code></td>
+<td>工作目錄。預設是目前所在、位於 <code>/home</code> 或 <code>/mnt/shared</code> 下的資料夾</td>
+</tr>
+<tr>
+<td><code>--cpus N</code></td>
+<td>CPU 核心數</td>
+</tr>
+<tr>
+<td><code>-m</code>、<code>--memory</code></td>
+<td>記憶體，例如 <code>512m</code> 或 <code>4g</code></td>
+</tr>
+<tr>
+<td><code>--gpus N</code></td>
+<td>GPU 數量。不能用 <code>--gpus all</code>，請給數字</td>
+</tr>
+<tr>
+<td><code>--name</code>、<code>--queue</code></td>
+<td>任務名稱和排程佇列</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td>專案。預設是你工作區所屬的專案</td>
+</tr>
+<tr>
+<td><code>-u UID</code></td>
+<td>數字使用者 ID。<code>-u 0</code> 以 root 執行，專案要允許 root</td>
+</tr>
+<tr>
+<td><code>--rm</code></td>
+<td>接受但不處理，結束的任務由平台清理</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>專案裡的其他成員看得到你用 <code>-e</code> 傳入的值。不要傳 token、密碼或金鑰，把它們放在家目錄的檔案裡，再在指令中讀取。</p>
+</blockquote>
+<h3 id="docker">和 Docker 的差異<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>任務以和工作區相同的使用者執行，所以它寫在家目錄的檔案，仍然可以在 IDE 裡編輯。只有在需要 root 而且專案允許時，才用 <code>-u 0</code>。</li>
+<li>任務在叢集上執行，不在你的工作區。CPU、記憶體和 GPU 由你傳入的選項和專案配額決定。</li>
+<li>你的家目錄和群組儲存空間掛載在和工作區相同的路徑，所以 <code>python /home/alice/exp/train.py</code> 會讀到同一個檔案。沒有 <code>-v</code>。</li>
+<li>任務啟動前，平台會檢查每個映像的安全性。第一次使用新映像時要等這項檢查。</li>
+<li>沒有連接埠、沒有互動式終端機（<code>-i</code>、<code>-t</code>），也沒有 <code>--privileged</code> 和 <code>--network</code>。需要互動操作時，請用工作區的終端機。</li>
+<li>沒有 <code>docker pull</code>、<code>push</code>、<code>images</code>、<code>exec</code> 和 <code>compose</code>。平台會在任務啟動時取得映像，<code>docker build</code> 會替你發佈映像。它和 <code>cscc-cli build</code> 一樣，需要專案開啟 <strong>Image Build Permission</strong>。</li>
+</ul>
+<h3 id="_6">疑難排解<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>指令印出 <code>waiting: image security check / scheduling</code>。</strong> 任務還沒開始。新映像要等安全檢查，佇列忙碌時則要等資源。任務開始後才會有輸出，指令可以一直開著。</li>
+<li><strong>任務顯示 <code>failed</code> 而且沒有輸出。</strong> 映像可能沒通過安全檢查。用 <code>docker ps -a</code> 看狀態，並詢問你的專案管理者。</li>
+<li><strong><code>no project</code>。</strong> 請在工作區裡執行，或加上 <code>--project &lt;project-id&gt;</code>。</li>
+<li><strong><code>API URL is required</code> 或驗證錯誤。</strong> 重新執行 <code>cscc-cli login</code>。</li>
+</ul>
+<hr />
 <h2 id="token_2">Token 管理<a class="headerlink" href="#token_2" title="Permanent link">&para;</a></h2>
 <p>列出你有效的 API token：</p>
 <div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>tokens<span class="w"> </span>list
@@ -1549,7 +1741,7 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 </code></pre></div>
 <p>登出會撤銷你正在用的 token，並從設定檔移除。你手動設定的憑證選項會保留，下次登入不用重設。</p>
 <hr />
-<h2 id="_6">預設值<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_7">預設值<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

@@ -1044,6 +1044,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-docker-in-the-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using docker in the IDE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using docker in the IDE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-differs-from-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it differs from Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#token-management" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1348,6 +1387,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#using-docker-in-the-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using docker in the IDE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using docker in the IDE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-differs-from-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it differs from Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#token-management" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1390,7 +1468,7 @@
 
 
 <h1 id="command-line-interface">Command Line Interface<a class="headerlink" href="#command-line-interface" title="Permanent link">&para;</a></h1>
-<p>Use <code>cscc-cli</code> to sign in, build images, follow build logs and manage your API tokens from a terminal.</p>
+<p>Use <code>cscc-cli</code> to sign in, build images, follow build logs, run <code>docker</code> commands in the IDE and manage your API tokens from a terminal.</p>
 <p><strong>Who can use it:</strong> everyone who is signed in.</p>
 <hr />
 <h2 id="login">Login<a class="headerlink" href="#login" title="Permanent link">&para;</a></h2>
@@ -1536,6 +1614,120 @@ cat<span class="w"> </span>Dockerfile<span class="w"> </span><span class="p">|</
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CSCC_API_URL</span><span class="o">=</span>https://api.cscc.nthu.edu.tw
 </code></pre></div>
 <p>Builds and logs use the token from <code>cscc-cli login</code>. You need nothing else. The project must have <strong>Image Build Permission</strong> turned on, and your project role must allow builds.</p>
+<hr />
+<h2 id="using-docker-in-the-ide">Using docker in the IDE<a class="headerlink" href="#using-docker-in-the-ide" title="Permanent link">&para;</a></h2>
+<p>Your Jupyter and code-server workspaces have a <code>docker</code> command. It looks like Docker, but it starts every container as a job on the cluster, with your files mounted. Nothing runs inside your workspace.</p>
+<p>Sign in once. The workspace already knows the API URL and your project:</p>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>alice
+</code></pre></div>
+<p>Then use it as you would Docker:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>pytorch/pytorch:latest<span class="w"> </span>python<span class="w"> </span>train.py
+docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>16g<span class="w"> </span>-w<span class="w"> </span>/home/alice/exp<span class="w"> </span>pytorch/pytorch:latest<span class="w"> </span>python<span class="w"> </span>train.py
+docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>sweep<span class="w"> </span>python:3.12<span class="w"> </span>python<span class="w"> </span>sweep.py
+docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>&lt;job-id&gt;
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myimg<span class="w"> </span>.
+</code></pre></div>
+<p>Output streams to your terminal, and the command exits with 0 when the job succeeds and 1 when it fails. Press Ctrl-C to stop watching. The job keeps running; stop it with <code>docker rm &lt;job-id&gt;</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker run [options] IMAGE [COMMAND]</code></td>
+<td>Start a job. With <code>-d</code>, print the job ID and return</td>
+</tr>
+<tr>
+<td><code>docker ps [-a]</code></td>
+<td>List your running jobs. <code>-a</code> includes finished ones</td>
+</tr>
+<tr>
+<td><code>docker logs [-f] [--tail N] &lt;job-id&gt;</code></td>
+<td>Show a job's output</td>
+</tr>
+<tr>
+<td><code>docker rm</code>, <code>stop</code>, <code>kill &lt;job-id&gt;</code></td>
+<td>Stop a job</td>
+</tr>
+<tr>
+<td><code>docker build -t NAME[:TAG] [CONTEXT]</code></td>
+<td>Build an image from the folder's top-level <code>Dockerfile</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>docker run</code> options:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-d</code></td>
+<td>Don't wait. Print the job ID</td>
+</tr>
+<tr>
+<td><code>-e KEY=VALUE</code></td>
+<td>Set an environment variable; repeatable. Never pass secrets this way</td>
+</tr>
+<tr>
+<td><code>-w DIR</code></td>
+<td>Working directory. Defaults to the current folder under <code>/home</code> or <code>/mnt/shared</code></td>
+</tr>
+<tr>
+<td><code>--cpus N</code></td>
+<td>CPU cores</td>
+</tr>
+<tr>
+<td><code>-m</code>, <code>--memory</code></td>
+<td>Memory, for example <code>512m</code> or <code>4g</code></td>
+</tr>
+<tr>
+<td><code>--gpus N</code></td>
+<td>Number of GPUs. <code>--gpus all</code> doesn't work; give a number</td>
+</tr>
+<tr>
+<td><code>--name</code>, <code>--queue</code></td>
+<td>Job name and scheduling queue</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td>Project. Defaults to the project of your workspace</td>
+</tr>
+<tr>
+<td><code>-u UID</code></td>
+<td>Numeric user ID. <code>-u 0</code> runs as root and needs a project that allows root</td>
+</tr>
+<tr>
+<td><code>--rm</code></td>
+<td>Accepted and ignored. The platform cleans up finished jobs</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Other project members can read the values you pass with <code>-e</code>. Don't pass tokens, passwords or keys. Keep them in a file in your home directory and read the file in your command.</p>
+</blockquote>
+<h3 id="how-it-differs-from-docker">How it differs from Docker<a class="headerlink" href="#how-it-differs-from-docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The job runs as the same user as your workspace, so files it writes in your home folder stay editable from the IDE. Use <code>-u 0</code> only when you need root and your project allows it.</li>
+<li>The job runs on the cluster, not in your workspace. Its CPU, memory and GPU come from the options you pass and your project's quota.</li>
+<li>Your home folder and group storage are mounted at the same paths as in the workspace, so <code>python /home/alice/exp/train.py</code> finds the same file. There is no <code>-v</code>.</li>
+<li>The platform checks every image's security before the job starts. The first run of a new image waits for that check.</li>
+<li>There are no ports, no interactive terminal (<code>-i</code>, <code>-t</code>) and no <code>--privileged</code> or <code>--network</code>. For interactive work, use the workspace terminal.</li>
+<li><code>docker pull</code>, <code>push</code>, <code>images</code>, <code>exec</code> and <code>compose</code> don't exist. The platform fetches images when a job starts, and <code>docker build</code> publishes the image for you. It needs <strong>Image Build Permission</strong> on the project, like <code>cscc-cli build</code>.</li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>The command prints <code>waiting: image security check / scheduling</code>.</strong> The job hasn't started yet. A new image waits for its security check, and a busy queue waits for resources. Output appears when the job starts, and you can leave the command running.</li>
+<li><strong>A job shows <code>failed</code> and no output.</strong> The image may have failed the security check. Use <code>docker ps -a</code> for the status and ask your project manager.</li>
+<li><strong><code>no project</code>.</strong> Run the command in a workspace, or pass <code>--project &lt;project-id&gt;</code>.</li>
+<li><strong><code>API URL is required</code> or an authentication error.</strong> Run <code>cscc-cli login</code> again.</li>
+</ul>
 <hr />
 <h2 id="token-management">Token Management<a class="headerlink" href="#token-management" title="Permanent link">&para;</a></h2>
 <p>List your active API tokens:</p>
