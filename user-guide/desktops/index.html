@@ -1317,7 +1317,7 @@
 </tr>
 <tr>
 <td><strong>Bitrate profile</strong></td>
-<td><strong>Economy</strong>, <strong>Default</strong>, or <strong>High motion</strong>. Pick Economy when you are off campus</td>
+<td><strong>Economy</strong> (1600×900, 30 fps), <strong>Default</strong> (1920×1080, 30 fps), or <strong>High motion</strong> (1920×1080, 60 fps). Pick Economy when you are off campus</td>
 </tr>
 </tbody>
 </table>
@@ -1386,14 +1386,14 @@
 <h2 id="connect">Connect<a class="headerlink" href="#connect" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Linux desktop</strong>: <strong>Connect</strong> opens the desktop in a new browser window.</li>
-<li><strong>Isaac Sim WebRTC</strong>: <strong>Connect</strong> opens the viewer at <strong>GPU Desktops → [desktop]</strong>. Click the stream to control it with your keyboard and mouse. <strong>Leave control</strong> gives them back to the browser, and <strong>Full screen</strong> fills the screen. Stay on the VPN. If the viewer says <em>VPN media authorization expired</em>, reconnect the VPN and reload the page.</li>
+<li><strong>Isaac Sim WebRTC</strong>: <strong>Connect</strong> opens the viewer at <strong>GPU Desktops → [desktop]</strong>. Click the stream to control it with your keyboard and mouse. <strong>Leave control</strong> gives them back to the browser, and <strong>Full screen</strong> fills the screen. Stay on the VPN. If the viewer says <em>VPN media authorization expired</em>, reconnect the VPN and reload the page. If it says <em>The video stream did not start</em> or <em>The stream stopped</em>, click <strong>Retry</strong>; if that keeps failing, delete the desktop and create a new one.</li>
 </ul>
 <p>While the viewer is open, it renews its connection every 2 minutes. Closing the tab does not stop the desktop.</p>
 <hr />
 <h2 id="lifetime">Lifetime<a class="headerlink" href="#lifetime" title="Permanent link">&para;</a></h2>
 <ul>
 <li>A desktop lasts at most <strong>8 hours</strong>, or less if the project's <strong>Max workspace continuous runtime</strong> (Settings tab) or the queue's runtime limit is shorter. The row shows the expiry time.</li>
-<li>A desktop nobody watches for <strong>30 minutes</strong> is reclaimed to free the GPU.</li>
+<li>A desktop nobody watches for <strong>30 minutes</strong> is reclaimed to free the GPU. An open viewer tab counts as watching.</li>
 <li>When it ends, files in the mounted storage volume stay. Everything else in the desktop is gone. Deploy the config file again for a fresh desktop.</li>
 </ul>
 <hr />
