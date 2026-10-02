@@ -979,6 +979,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Plan window countdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-security-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image security checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1500,6 +1517,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Plan window countdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-security-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Image security checks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1883,6 +1917,41 @@
 <p>If the plan has <strong>Burst Windows</strong>, you see <em>Priority ends in HH:MM:SS</em> or <em>Priority starts in HH:MM:SS</em>, based on where they overlap the schedule hours. Priority queues show up next to the ordinary queues only during that overlap. When burst closes, existing work keeps running and scheduling stays open. A deployment that is still running inside the burst window, or already finished, is not affected. About 5–6 minutes after burst closes, a deployment still on a priority queue moves to the plan's normal queue for the same GPU model and takes that queue's priority. It can be preempted only if that queue is marked <strong>Preemptible</strong>. You get a bell notification when this happens. If the plan has no normal queue for that GPU model, the deployment is stopped instead, and you get a separate notification. If a window changes while the deploy dialog is open, the dialog refreshes the queue choices, keeps your selection if it's still available, and clears old validation results.</p>
 <p>A queue can also have a runtime limit. If the queue you picked has one, your workload is stopped automatically after that many seconds, and the bell shows a <strong>Runtime limit reached</strong> notification. An admin sets the limit. You can't raise or turn it off in your config file.</p>
 <p>If the plan has a GPU-hour budget, the <strong>Overview</strong> tab also shows a <strong>GPU-hours</strong> bar. It shows the GPU-hours used this period against the budget, the reset period (monthly, weekly, or every N hours, set by an admin) and when it next resets (UTC+8). When the budget runs out, you can't start new GPU jobs or workspaces until the reset. Jobs already running are not affected.</p>
+<h3 id="image-security-checks">Image security checks<a class="headerlink" href="#image-security-checks" title="Permanent link">&para;</a></h3>
+<p>The <strong>Overview</strong> tab has an <strong>Image security checks</strong> card. It lists the last 10 images your project's jobs and workspaces started, with a status for each:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Checking</td>
+<td>The platform is still checking the image. The card refreshes by itself.</td>
+</tr>
+<tr>
+<td>Passed</td>
+<td>The image passed the check.</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>The image has a serious known vulnerability that has a fix.</td>
+</tr>
+<tr>
+<td>Error</td>
+<td>The check could not finish, for example the image or tag does not exist, or the check timed out.</td>
+</tr>
+<tr>
+<td>Unsupported</td>
+<td>The image comes from a registry the platform cannot check.</td>
+</tr>
+</tbody>
+</table>
+<p>Each row also shows a one-line reason and when the image was last used. A <strong>Failed</strong> row says either <em>would be blocked once enforcement is on</em> or <em>blocked</em>. While enforcement is off, the job still runs; once it is on, the job does not start. When the platform has image checks turned off, the card says <em>Image security checks are turned off.</em></p>
+<p>Click a <strong>Passed</strong> or <strong>Failed</strong> row to see the details: first the findings that caused the failure (the CVE, the package, your installed version and the fixed version), then every Critical and High finding. The other statuses have no details to open. To fix a failure, rebuild the image on a newer base or upgrade the listed package, then run the job again.</p>
+<p>The card shows the latest result per image, not a history. When an 11th image is used, the oldest row is removed.</p>
 <hr />
 <h2 id="config-file-versioning">Config file versioning<a class="headerlink" href="#config-file-versioning" title="Permanent link">&para;</a></h2>
 <p>Every save creates a new version. Old versions are never overwritten, so you can always look at an earlier one or deploy it again. Edit or upload a config file, save it, and a new version appears. You can deploy any version.</p>
