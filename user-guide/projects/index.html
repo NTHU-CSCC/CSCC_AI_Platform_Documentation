@@ -983,6 +983,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#which-images-a-project-can-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which images a project can run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image-security-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1521,6 +1532,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#which-images-a-project-can-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which images a project can run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image-security-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1917,6 +1939,15 @@
 <p>If the plan has <strong>Burst Windows</strong>, you see <em>Priority ends in HH:MM:SS</em> or <em>Priority starts in HH:MM:SS</em>, based on where they overlap the schedule hours. Priority queues show up next to the ordinary queues only during that overlap. When burst closes, existing work keeps running and scheduling stays open. A deployment that is still running inside the burst window, or already finished, is not affected. About 5–6 minutes after burst closes, a deployment still on a priority queue moves to the plan's normal queue for the same GPU model and takes that queue's priority. It can be preempted only if that queue is marked <strong>Preemptible</strong>. You get a bell notification when this happens. If the plan has no normal queue for that GPU model, the deployment is stopped instead, and you get a separate notification. If a window changes while the deploy dialog is open, the dialog refreshes the queue choices, keeps your selection if it's still available, and clears old validation results.</p>
 <p>A queue can also have a runtime limit. If the queue you picked has one, your workload is stopped automatically after that many seconds, and the bell shows a <strong>Runtime limit reached</strong> notification. An admin sets the limit. You can't raise or turn it off in your config file.</p>
 <p>If the plan has a GPU-hour budget, the <strong>Overview</strong> tab also shows a <strong>GPU-hours</strong> bar. It shows the GPU-hours used this period against the budget, the reset period (monthly, weekly, or every N hours, set by an admin) and when it next resets (UTC+8). When the budget runs out, you can't start new GPU jobs or workspaces until the reset. Jobs already running are not affected.</p>
+<h3 id="which-images-a-project-can-run">Which images a project can run<a class="headerlink" href="#which-images-a-project-can-run" title="Permanent link">&para;</a></h3>
+<p>Images you build in a project are private to that project's members. Another project can't run them, and you can't run theirs. A project can run:</p>
+<ul>
+<li>images it built itself;</li>
+<li>images of the platform, such as the ready-made IDE and desktop images;</li>
+<li>public images from Docker Hub, GHCR and NVIDIA NGC, through the platform mirrors;</li>
+<li>older images built before builds became private to each project: an image you built yourself works only in your personal project, and an image a group built works only in projects that group owns.</li>
+</ul>
+<p>When a job or workspace uses an image another project built, the <strong>Image security checks</strong> card shows an <strong>Error</strong> row with the reason <code>Image security check refused: &lt;ref&gt;: built by another project; use this project's images, platform images or public mirrors</code>. Rebuild the image in your own project, or ask the project that owns it to share the Dockerfile. The same rule applies to the <code>FROM</code> line of your Dockerfile: a build is rejected when its base image belongs to another project.</p>
 <h3 id="image-security-checks">Image security checks<a class="headerlink" href="#image-security-checks" title="Permanent link">&para;</a></h3>
 <p>The <strong>Overview</strong> tab has an <strong>Image security checks</strong> card. It lists the last 10 images your project's jobs and workspaces started, with a status for each:</p>
 <table>
