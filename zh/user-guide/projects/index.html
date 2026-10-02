@@ -1707,7 +1707,7 @@
 </div>
 <hr />
 <h2 id="_4">專案詳情分頁<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>點專案就會打開專案頁。每個人都看得到總覽、設定、計畫、建置、GPU Claims 和資源分頁；映像、成員、儲存、設定分頁則看你的專案角色。</p>
+<p>點專案就會打開專案頁。每個人都看得到總覽、設定、計畫、建置、GPU Claims 和資源分頁；成員、儲存、設定分頁則看你的專案角色。</p>
 <p><img alt="專案詳情分頁" src="../../../assets/screenshots/project-detail-tabs.png" />
 <em>圖 2：專案頁，有總覽、設定、計畫、建置、GPU Claims、資源，以及依角色顯示的分頁。</em></p>
 <table>
@@ -1743,8 +1743,8 @@
 <td>每位成員的即時 GPU、CPU、記憶體用量，展開就能看他們正在跑什麼</td>
 </tr>
 <tr>
-<td><strong>映像 / 成員 / 儲存</strong></td>
-<td>依角色顯示：管理映像、成員、個別配額或儲存權限</td>
+<td><strong>成員 / 儲存</strong></td>
+<td>依角色顯示：管理成員、個別配額或儲存權限</td>
 </tr>
 <tr>
 <td><strong>設定</strong></td>
@@ -1752,7 +1752,7 @@
 </tr>
 </tbody>
 </table>
-<p>誰看得到什麼：<strong>儲存</strong>、<strong>映像</strong>、<strong>設定</strong> 分頁要 Project Manager 以上；<strong>成員</strong> 分頁只有 Project Admin 看得到（平台管理員要在右上角頭像切到 <strong>Admin View</strong>，才算 Project Admin）。Admin 不能把自己降級，所以專案至少會留一位 Admin。</p>
+<p>誰看得到什麼：<strong>儲存</strong>、<strong>設定</strong> 分頁要 Project Manager 以上；<strong>成員</strong> 分頁只有 Project Admin 看得到（平台管理員要在右上角頭像切到 <strong>Admin View</strong>，才算 Project Admin）。Admin 不能把自己降級，所以專案至少會留一位 Admin。</p>
 <hr />
 <h2 id="_5">專案設定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><strong>設定</strong> 分頁（Project Manager 以上）放的是專案內所有工作區共用的限制：</p>
@@ -1773,7 +1773,7 @@
 <p>點 <strong>儲存變更</strong> 才會生效。這個上限也適用於從此專案啟動的 <a href="../desktops/">GPU 桌面</a>。</p>
 <hr />
 <h2 id="_6">建置專案映像<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>專案需要一個不在允許清單裡的映像時，用 <strong>建置</strong> 分頁。專案開啟映像建置後，專案管理者和專案管理員可以啟動建置。一般專案成員可以看狀態和日誌，也能刪除自己啟動且已完成的建置映像，但不能啟動建置。</p>
+<p>專案需要自己的映像時，用 <strong>建置</strong> 分頁。Dockerfile 的 <code>FROM</code> base image 可以來自任何 registry，平台會自動掃描 base image 的安全問題，不需要核准。專案開啟映像建置後，專案管理者和專案管理員可以啟動建置。一般專案成員可以看狀態和日誌，也能刪除自己啟動且已完成的建置映像，但不能啟動建置。</p>
 <h3 id="_7">來源模式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1822,14 +1822,6 @@
 <p>建置歷史會顯示狀態、來源類型、目的映像和即時日誌。建置失敗時，表格只顯示簡短摘要，完整錯誤請點該列的日誌按鈕。建置重試的話，日誌畫面會保留前一次的失敗原因。</p>
 <p>每筆建置有幾個圖示按鈕：執行中可以 <strong>取消建置</strong>（已經產出映像的則是 <strong>刪除映像 artifact</strong>）、<strong>清除保存日誌</strong>、<strong>刪除歷史紀錄</strong>。建置者和專案管理者可以清除已完成或失敗建置的保存日誌，建置歷史和映像不會動到。啟動該次建置的成員本人或專案管理者可以刪除映像 artifact。<strong>清空我的已完成建置映像</strong> 會刪除你在這個專案建的所有已完成映像，建置歷史和保存日誌會留著。重複的 tag ID 只會刪一次。</p>
 <p><strong>刪除歷史紀錄</strong> 只會移除歷史和保存日誌，不會刪除映像 artifact。Harbor 每天做一次 garbage collection，才會釋放映像倉庫的空間。剛上傳的映像可能要等兩次 garbage collection 才清得掉。</p>
-<p>專案管理者只能為自己管理的專案送出映像申請或移除映像項目。專案成員可以看該專案的映像申請歷史。</p>
-<p><strong>映像</strong> 分頁分成 <strong>可使用</strong> 和 <strong>申請紀錄</strong> 兩個子分頁。<strong>可使用</strong> 列出這個專案已經能用的映像。<strong>申請紀錄</strong> 列出這個專案所有的映像申請（待審核的排最前面），有狀態、送出時間和審核備註，分頁標籤上有待審核件數的徽章。用 <strong>新增</strong> 送出申請後，會自動切到 <strong>申請紀錄</strong>，讓你馬上看到剛送出的那一筆。</p>
-<p>自己送出的申請，在審核前可以按 <strong>撤回</strong> 收回，之後還能重新送出。別人送的申請，或已核准、已拒絕的申請，沒有撤回按鈕。</p>
-<div class="admonition note">
-<p class="admonition-title">被核准為全域的申請會從清單消失</p>
-<p>管理員核准時如果勾選 <strong>設為全域</strong>，這筆申請就不再屬於這個專案，會從申請紀錄分頁消失，
-映像本身則會出現在 <strong>可使用</strong> 分頁。</p>
-</div>
 <div class="admonition note">
 <p class="admonition-title">建置權限由專案治理控制</p>
 <p>看不到建置表單的話，是專案沒開 <strong>Image Build Permission</strong>，或你的專案角色不能啟動建置。建置歷史和日誌還是看得到。請找專案管理者或平台管理員調整專案設定或你的角色。</p>

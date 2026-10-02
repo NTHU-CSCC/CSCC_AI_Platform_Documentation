@@ -1856,7 +1856,7 @@ docker<span class="w"> </span>stop<span class="w"> </span>web
 <li>容器裡只看得到你掛載的路徑。用 <code>-v SRC:DST[:ro]</code> 或 <code>--mount type=bind,source=SRC,target=DST</code> 掛載資料夾。相對路徑的 <code>SRC</code> 要寫成 <code>./data</code> 或 <code>../data</code>：只寫 <code>data</code> 代表具名 volume，而這裡沒有具名 volume。<code>SRC</code> 不存在時，<code>-v</code> 會建立它，<code>--mount</code> 會失敗。</li>
 <li><code>SRC</code> 必須在你的家目錄或群組儲存空間底下。唯讀的儲存空間在容器裡也是唯讀。沒有具名 volume。</li>
 <li>映像自己的 <code>WORKDIR</code>、<code>ENTRYPOINT</code> 和 <code>CMD</code> 都會生效。映像名稱後面的指令取代 <code>CMD</code>，<code>--entrypoint</code> 取代 entrypoint。</li>
-<li>容器以使用者 1000 執行，和你的工作區相同，所以它寫進儲存空間的檔案仍然可以在 IDE 裡編輯。只有專案允許 root 容器時（群組的專案要連群組也允許），<code>-u 0</code> 才能用。</li>
+<li>沒有指定 <code>-u</code> 時，容器以映像宣告的數字 <code>USER</code>（例如 <code>USER 101</code>）執行。映像沒有宣告 <code>USER</code>，或只宣告名稱（例如 <code>USER app</code>）時，以使用者 1000 執行，和你的工作區相同，所以它寫進儲存空間的檔案仍然可以在 IDE 裡編輯。<code>-u 0</code> 和宣告 <code>USER 0</code> 的映像，只有專案允許 root 容器時（群組的專案要連群組也允許）才會以 root 執行，否則容器以使用者 1000 執行。</li>
 <li>沒指定 <code>--cpus</code> 和 <code>-m</code> 時，每個容器是 1 個 CPU、4 GiB 記憶體。<code>--shm-size</code> 設定 <code>/dev/shm</code> 的大小。</li>
 <li><code>-e KEY=VALUE</code>、<code>-e KEY</code>（複製你目前的值）、<code>--env-file</code>、<code>-w</code>、<code>--rm</code> 和 <code>-d</code> 的用法都和 Docker 相同。</li>
 <li><code>--name</code> 是 2 到 63 個字元，可用英文字母、數字、<code>_</code>、<code>.</code> 和 <code>-</code>，開頭和結尾都必須是英文字母或數字。</li>
@@ -1927,7 +1927,7 @@ docker<span class="w"> </span>cp<span class="w"> </span>web:/var/log/app.log<spa
 docker<span class="w"> </span>run<span class="w"> </span>myimg
 docker<span class="w"> </span>images
 </code></pre></div>
-<p><code>docker build</code> 會上傳資料夾，在平台上建置，再把映像存進你的專案。<code>-f</code> 可以指定任何路徑的 Dockerfile，<code>--build-arg KEY=VALUE</code> 的用法和 Docker 相同。建置完成後，單純的名稱如 <code>myimg</code> 或 <code>myimg:v2</code>（沒有映像倉庫、沒有 <code>/</code>）會啟動你建置的映像，而不是同名的公開映像。<code>docker images</code> 列出專案的建置結果。資料夾裡的 <code>.dockerignore</code> 用法和 Docker 相同，Dockerfile 一律會送出。</p>
+<p><code>docker build</code> 會上傳資料夾，在平台上建置，再把映像存進你的專案。每個專案都能用，<code>FROM</code> 的映像可以來自任何映像倉庫。平台會自動掃描 base image 的安全問題，不需要先核准。<code>-f</code> 可以指定任何路徑的 Dockerfile，<code>--build-arg KEY=VALUE</code> 的用法和 Docker 相同。建置完成後，單純的名稱如 <code>myimg</code> 或 <code>myimg:v2</code>（沒有映像倉庫、沒有 <code>/</code>）會啟動你建置的映像，而不是同名的公開映像。<code>docker images</code> 列出專案的建置結果。資料夾裡的 <code>.dockerignore</code> 用法和 Docker 相同，Dockerfile 一律會送出。</p>
 <p>建置需要專案管理者（Project Manager）以上的角色，專案也要開啟映像建置（<strong>Image Build Permission</strong>），和 <code>cscc-cli build</code> 相同。</p>
 <p>容器啟動前，平台會檢查每個映像的安全性。檢查期間 <code>docker run</code> 會顯示 <code>Waiting: image security check…</code>。平日上班時段，平台會限制從網際網路下載的速度，所以大型映像第一次啟動可能慢很多。<code>docker pull</code> 只會印出提醒，因為平台會在容器啟動時取得映像。</p>
 <h3 id="_12">限制<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
@@ -2070,7 +2070,7 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td>結束碼 125</td>
-<td>容器根本沒啟動：取不到映像（例如 <code>pull access denied</code>）、映像被拒絕，或選項無效。原因會印在結束碼上方，容器會自動移除。</td>
+<td>容器根本沒啟動：取不到映像（例如 <code>pull access denied</code>）、映像沒通過安全檢查（原因開頭是 <code>Image security check failed</code>），或選項無效。原因會印在結束碼上方，容器會自動移除。</td>
 </tr>
 <tr>
 <td>結束碼 126 或 127</td>
@@ -2086,7 +2086,7 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td>容器一啟動就出現 <code>Permission denied</code> 或 <code>Operation not permitted</code>，例如 <code>nginx</code> 這類映像</td>
-<td>映像的主程序需要 root，而容器預設以使用者 1000 執行。在允許 root 容器的專案加上 <code>-u 0</code>，或改用不需要 root 的映像版本，例如 <code>nginxinc/nginx-unprivileged</code>。</td>
+<td>映像的主程序需要 root，而映像沒有宣告數字 <code>USER</code>，所以容器以使用者 1000 執行。在允許 root 容器的專案加上 <code>-u 0</code>，或改用不需要 root 的映像版本，例如 <code>nginxinc/nginx-unprivileged</code>。</td>
 </tr>
 <tr>
 <td><code>port is already allocated</code></td>

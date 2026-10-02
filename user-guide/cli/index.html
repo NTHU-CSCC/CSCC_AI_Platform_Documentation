@@ -1856,7 +1856,7 @@ docker<span class="w"> </span>stop<span class="w"> </span>web
 <li>Only the paths you mount are visible inside the container. Mount a folder with <code>-v SRC:DST[:ro]</code> or <code>--mount type=bind,source=SRC,target=DST</code>. Write a relative <code>SRC</code> as <code>./data</code> or <code>../data</code>: a bare <code>data</code> means a named volume, which doesn't exist. <code>-v</code> creates <code>SRC</code> if it doesn't exist; <code>--mount</code> fails.</li>
 <li><code>SRC</code> must be under your home folder or a group storage folder. Read-only storage stays read-only inside the container. Named volumes don't exist.</li>
 <li>The image's own <code>WORKDIR</code>, <code>ENTRYPOINT</code> and <code>CMD</code> apply. Your command after the image name replaces <code>CMD</code>, and <code>--entrypoint</code> replaces the entrypoint.</li>
-<li>Containers run as user 1000, the same user as your workspace, so files they write in your storage stay editable in the IDE. <code>-u 0</code> works only when the project allows root containers (and, for a group's project, the group does too).</li>
+<li>Without <code>-u</code>, a container runs as the numeric <code>USER</code> the image declares (for example <code>USER 101</code>). If the image declares no <code>USER</code>, or only a name such as <code>USER app</code>, it runs as user 1000, the same user as your workspace, so files it writes in your storage stay editable in the IDE. <code>-u 0</code>, and an image that declares <code>USER 0</code>, run as root only when the project allows root containers (and, for a group's project, the group does too). Otherwise the container runs as user 1000.</li>
 <li>A container gets 1 CPU and 4 GiB of memory unless you set <code>--cpus</code> and <code>-m</code>. <code>--shm-size</code> sets the size of <code>/dev/shm</code>.</li>
 <li><code>-e KEY=VALUE</code>, <code>-e KEY</code> (copies your value), <code>--env-file</code>, <code>-w</code>, <code>--rm</code> and <code>-d</code> work as in Docker.</li>
 <li><code>--name</code> takes 2 to 63 letters, digits, <code>_</code>, <code>.</code> and <code>-</code>, and must start and end with a letter or digit.</li>
@@ -1927,7 +1927,7 @@ docker<span class="w"> </span>cp<span class="w"> </span>web:/var/log/app.log<spa
 docker<span class="w"> </span>run<span class="w"> </span>myimg
 docker<span class="w"> </span>images
 </code></pre></div>
-<p><code>docker build</code> uploads the folder, builds it on the platform and stores the image in your project. <code>-f</code> takes a Dockerfile from any path, and <code>--build-arg KEY=VALUE</code> works as in Docker. After the build, a bare name such as <code>myimg</code> or <code>myimg:v2</code> (no registry, no <code>/</code>) starts your build instead of a public image of the same name. <code>docker images</code> lists your project's builds. A <code>.dockerignore</code> in the folder works as in Docker, and the Dockerfile is always sent.</p>
+<p><code>docker build</code> uploads the folder, builds it on the platform and stores the image in your project. It works in every project, and the <code>FROM</code> image can come from any registry. The platform scans base images for security problems automatically, so nothing needs approval first. <code>-f</code> takes a Dockerfile from any path, and <code>--build-arg KEY=VALUE</code> works as in Docker. After the build, a bare name such as <code>myimg</code> or <code>myimg:v2</code> (no registry, no <code>/</code>) starts your build instead of a public image of the same name. <code>docker images</code> lists your project's builds. A <code>.dockerignore</code> in the folder works as in Docker, and the Dockerfile is always sent.</p>
 <p>Building needs the Project Manager role or above, and image builds must be turned on for the project (<strong>Image Build Permission</strong>), like <code>cscc-cli build</code>.</p>
 <p>The platform checks every image's security before the container starts. While it runs, <code>docker run</code> shows <code>Waiting: image security check…</code>. During weekday working hours the platform limits how fast it downloads from the internet, so the first start of a large image can take much longer then. <code>docker pull</code> only prints a reminder, because the platform fetches images when a container starts.</p>
 <h3 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h3>
@@ -2070,7 +2070,7 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td>Exit code 125</td>
-<td>The container never started: the image couldn't be fetched (for example <code>pull access denied</code>), was rejected, or an option was invalid. The reason prints above the exit, and the container is removed for you.</td>
+<td>The container never started: the image couldn't be fetched (for example <code>pull access denied</code>), was rejected by the security check (the reason starts with <code>Image security check failed</code>), or an option was invalid. The reason prints above the exit, and the container is removed for you.</td>
 </tr>
 <tr>
 <td>Exit code 126 or 127</td>
@@ -2086,7 +2086,7 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td><code>Permission denied</code> or <code>Operation not permitted</code> right after start, for an image such as <code>nginx</code></td>
-<td>The image's main process needs root, and containers run as user 1000 by default. Add <code>-u 0</code> in a project that allows root containers, or use an unprivileged variant of the image, for example <code>nginxinc/nginx-unprivileged</code>.</td>
+<td>The image's main process needs root, and the image declares no numeric <code>USER</code>, so the container runs as user 1000. Add <code>-u 0</code> in a project that allows root containers, or use an unprivileged variant of the image, for example <code>nginxinc/nginx-unprivileged</code>.</td>
 </tr>
 <tr>
 <td><code>port is already allocated</code></td>

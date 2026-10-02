@@ -1707,7 +1707,7 @@
 </div>
 <hr />
 <h2 id="project-detail-tabs">Project detail tabs<a class="headerlink" href="#project-detail-tabs" title="Permanent link">&para;</a></h2>
-<p>Click a project to open it. Everyone sees the Overview, Config, Plan, Builds, GPU Claims and Resources tabs. Images, Members, Storage and Settings show up depending on your role.</p>
+<p>Click a project to open it. Everyone sees the Overview, Config, Plan, Builds, GPU Claims and Resources tabs. Members, Storage and Settings show up depending on your role.</p>
 <p><img alt="Project detail tabs" src="../../assets/screenshots/project-detail-tabs.png" />
 <em>Figure 2: The project page, with the Overview, Config, Plan, Builds, GPU Claims and Resources tabs, plus tabs that depend on your role.</em></p>
 <table>
@@ -1743,8 +1743,8 @@
 <td>Live GPU, CPU and memory use for each member. Expand a row to see what they are running</td>
 </tr>
 <tr>
-<td><strong>Images / Members / Storage</strong></td>
-<td>Extra tabs, shown when your role lets you manage images, members, quotas or storage</td>
+<td><strong>Members / Storage</strong></td>
+<td>Extra tabs, shown when your role lets you manage members, quotas or storage</td>
 </tr>
 <tr>
 <td><strong>Settings</strong></td>
@@ -1752,7 +1752,7 @@
 </tr>
 </tbody>
 </table>
-<p>Who sees what: the <strong>Storage</strong>, <strong>Images</strong> and <strong>Settings</strong> tabs need Project Manager or above. Only Project Admins see the <strong>Members</strong> tab. (Platform admins must switch to <strong>Admin View</strong> in the avatar menu to count as a Project Admin.) An Admin can't demote themselves, so a project always keeps at least one Admin.</p>
+<p>Who sees what: the <strong>Storage</strong> and <strong>Settings</strong> tabs need Project Manager or above. Only Project Admins see the <strong>Members</strong> tab. (Platform admins must switch to <strong>Admin View</strong> in the avatar menu to count as a Project Admin.) An Admin can't demote themselves, so a project always keeps at least one Admin.</p>
 <hr />
 <h2 id="project-settings">Project settings<a class="headerlink" href="#project-settings" title="Permanent link">&para;</a></h2>
 <p>The <strong>Settings</strong> tab (Project Manager or above) has limits that apply to every workspace in the project:</p>
@@ -1773,7 +1773,7 @@
 <p>Click <strong>Save Changes</strong> to apply it. The limit also applies to <a href="../desktops/">GPU desktops</a> started from this project.</p>
 <hr />
 <h2 id="build-project-images">Build project images<a class="headerlink" href="#build-project-images" title="Permanent link">&para;</a></h2>
-<p>Use the <strong>Builds</strong> tab when the project needs an image that isn't in the allowed image list. Project Managers and Project Admins can start builds if image builds are turned on for the project. Project Members can see build status and logs. A member can't start a build, but can delete the image from a finished build they started.</p>
+<p>Use the <strong>Builds</strong> tab when the project needs an image of its own. The base image in your Dockerfile <code>FROM</code> line can come from any registry. The platform scans base images for security problems automatically, so there is no approval step. Project Managers and Project Admins can start builds if image builds are turned on for the project. Project Members can see build status and logs. A member can't start a build, but can delete the image from a finished build they started.</p>
 <h3 id="source-options">Source options<a class="headerlink" href="#source-options" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1822,15 +1822,6 @@
 <p>The build history shows status, source type, destination image and live logs. Failed builds show a short summary in the table. Click the log button for the full output. If a build is retried, the log view keeps the previous attempt's failure reason above the current one.</p>
 <p>Each build row has icon buttons: <strong>Cancel build</strong> while it runs (or <strong>Delete image artifact</strong> once it has produced an image), <strong>Clear saved logs</strong> and <strong>Delete history record</strong>. Builders and project managers can clear saved logs for finished or failed builds. Build history and images are not touched. The member who started a finished build, or a project manager, can delete its image artifact. <strong>Clear my completed build images</strong> deletes every finished image you built in this project, and keeps the build history and saved logs. A tag ID that appears more than once is deleted once.</p>
 <p><strong>Delete history record</strong> removes only the history and saved logs. It doesn't delete the image artifact. Harbor frees the registry space in its daily garbage collection. A recently uploaded image may need two garbage collection runs before it can be removed.</p>
-<p>Project Managers can send image requests for, and remove images from, only the projects they manage. Project Members can see the project's image request history. Only admins publish images to the global catalog or change other projects' image rules.</p>
-<p>The <strong>Images</strong> tab has two parts, <strong>Available</strong> and <strong>Requests</strong>. <strong>Available</strong> lists the images this project can already use. <strong>Requests</strong> lists every image request for the project, pending ones first, with its status, submission time and reviewer note. The tab label has a badge with the number of pending requests. When you send a request with <strong>Add</strong>, you switch to <strong>Requests</strong> so you can see it right away.</p>
-<p>While your own request is still pending, you can take it back with <strong>Withdraw</strong>, and you can send it again later. Requests from someone else, and requests already approved or rejected, have no withdraw button.</p>
-<div class="admonition note">
-<p class="admonition-title">Approved-as-global requests leave the project list</p>
-<p>When an admin approves a request and ticks <strong>Make global</strong>, the request no
-longer belongs to this project and disappears from this tab. The image itself
-shows up under <strong>Available</strong>.</p>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>If you don't see the start form, either the project doesn't have <strong>Image Build Permission</strong> turned on, or your project role can't start builds. You can still see build history and logs. Ask a project manager or platform admin to change the project setting or your role.</p>
