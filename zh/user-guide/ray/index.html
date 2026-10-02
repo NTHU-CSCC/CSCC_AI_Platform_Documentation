@@ -1347,7 +1347,9 @@
 <li>
 <p>下載平台的<a href="../../../assets/cscc-root-ca.pem">根憑證</a>，並讓 Ray 使用它。平台的 HTTPS 憑證由平台自己簽發，沒有這一步，<code>ray</code> 指令會停在 <em>certificate verify failed</em>：</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
 </code></pre></div>
+<p><code>ray</code> 提交工作時用第一個，持續顯示工作輸出時用第二個，兩個都要設定。</p>
 </li>
 <li>
 <p>把 token 和需求告訴 Ray：</p>

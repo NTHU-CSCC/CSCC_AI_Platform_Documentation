@@ -1347,7 +1347,9 @@
 <li>
 <p>Download the platform's <a href="../../assets/cscc-root-ca.pem">root certificate</a> and point Ray at it. The platform's HTTPS certificate is issued by the platform itself, so without this the <code>ray</code> command stops with <em>certificate verify failed</em>:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
 </code></pre></div>
+<p><code>ray</code> uses the first for submitting and the second for following the job's output; set both.</p>
 </li>
 <li>
 <p>Tell Ray your token and what you need:</p>
