@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="zh-TW" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -10,35 +10,35 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/groups/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/ray/">
       
       
-        <link rel="prev" href="../announcements/">
+        <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../storage/">
+        <link rel="next" href="../announcements/">
       
       
         
-          <link rel="alternate" href="../../../user-guide/groups/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="zh">
+          <link rel="alternate" href="../../zh/user-guide/ray/" hreflang="zh">
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>群組 - GPU Cluster Management Platform — User Guide</title>
+        <title>Ray Jobs - GPU Cluster Management Platform — User Guide</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/extra.css">
+      <link rel="stylesheet" href="../../assets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,8 +78,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
-          跳轉到
+        <a href="#ray-jobs" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -93,8 +93,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="頁首">
-    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="GPU Cluster Management Platform — User Guide" class="md-header__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              群組
+              Ray Jobs
             
           </span>
         </div>
@@ -154,20 +154,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="選擇語言">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../user-guide/groups/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="zh" class="md-select__link">
+            <a href="../../zh/user-guide/ray/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -188,21 +188,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="搜尋" placeholder="搜尋" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="搜尋">
+      <nav class="md-search__options" aria-label="Search">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="清除" aria-label="清除" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -215,7 +215,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            正在初始化搜尋引擎
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -227,7 +227,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="前往倉庫" class="md-source" data-md-component="source">
+        <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
@@ -242,7 +242,7 @@
   
     
       
-<nav class="md-tabs" aria-label="標籤" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -252,13 +252,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../" class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
     
   
-  首頁
+  Home
 
       </a>
     </li>
@@ -279,7 +279,7 @@
   
     
   
-  教學影片
+  Tutorials
 
         </a>
       </li>
@@ -303,7 +303,7 @@
   
     
   
-  使用指南
+  User Guide
 
         </a>
       </li>
@@ -337,9 +337,9 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="導覽列" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
+    <a href="../.." title="GPU Cluster Management Platform — User Guide" class="md-nav__button md-logo" aria-label="GPU Cluster Management Platform — User Guide" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -349,7 +349,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="前往倉庫" class="md-source" data-md-component="source">
+      <a href="https://github.com/NTHU-CSCC/CSCC_AI_Platform" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
@@ -369,14 +369,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    首頁
+    Home
   
 
     
@@ -434,7 +434,7 @@
   <span class="md-ellipsis">
     
   
-    教學影片
+    Tutorials
   
 
     
@@ -456,7 +456,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    教學影片
+    Tutorials
   
 
           </label>
@@ -478,7 +478,7 @@
   <span class="md-ellipsis">
     
   
-    從這裡開始
+    Start Here
   
 
     
@@ -506,7 +506,7 @@
   <span class="md-ellipsis">
     
   
-    修課學生
+    Course Students
   
 
     
@@ -534,7 +534,7 @@
   <span class="md-ellipsis">
     
   
-    實驗室學生
+    Lab Students
   
 
     
@@ -562,7 +562,7 @@
   <span class="md-ellipsis">
     
   
-    助教
+    Teaching Assistants
   
 
     
@@ -653,7 +653,7 @@
   <span class="md-ellipsis">
     
   
-    使用指南
+    User Guide
   
 
     
@@ -675,7 +675,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    使用指南
+    User Guide
   
 
           </label>
@@ -697,7 +697,7 @@
   <span class="md-ellipsis">
     
   
-    快速開始
+    Getting Started
   
 
     
@@ -725,7 +725,7 @@
   <span class="md-ellipsis">
     
   
-    使用規範
+    Acceptable Use
   
 
     
@@ -753,7 +753,7 @@
   <span class="md-ellipsis">
     
   
-    概念與角色
+    Concepts & Roles
   
 
     
@@ -781,7 +781,7 @@
   <span class="md-ellipsis">
     
   
-    首頁儀表板
+    Home Dashboard
   
 
     
@@ -809,7 +809,7 @@
   <span class="md-ellipsis">
     
   
-    專案
+    Projects
   
 
     
@@ -837,7 +837,7 @@
   <span class="md-ellipsis">
     
   
-    工作區
+    Workspaces
   
 
     
@@ -865,7 +865,7 @@
   <span class="md-ellipsis">
     
   
-    GPU 桌面
+    GPU Desktops
   
 
     
@@ -893,63 +893,7 @@
   <span class="md-ellipsis">
     
   
-    命令列工具
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ray/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ray 工作
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../announcements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    公告
+    CLI
   
 
     
@@ -986,7 +930,7 @@
   <span class="md-ellipsis">
     
   
-    群組
+    Ray Jobs
   
 
     
@@ -1004,7 +948,7 @@
   <span class="md-ellipsis">
     
   
-    群組
+    Ray Jobs
   
 
     
@@ -1016,7 +960,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1025,15 +969,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      目錄
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#submit-a-job" class="md-nav__link">
     <span class="md-ellipsis">
       
-        成員模型
+        Submit a job
       
     </span>
   </a>
@@ -1041,10 +985,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#choose-gpus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組列表頁面
+        Choose GPUs
       
     </span>
   </a>
@@ -1052,10 +996,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#what-counts-against-your-quota" class="md-nav__link">
     <span class="md-ellipsis">
       
-        檢視群組
+        What counts against your quota
       
     </span>
   </a>
@@ -1063,10 +1007,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#first-submit-and-when-the-cluster-ends" class="md-nav__link">
     <span class="md-ellipsis">
       
-        申請建立群組
+        First submit and when the cluster ends
       
     </span>
   </a>
@@ -1074,10 +1018,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#keep-your-data-in-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        加入群組
+        Keep your data in storage
       
     </span>
   </a>
@@ -1085,10 +1029,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#what-goes-in-the-upload-and-what-goes-in-the-image" class="md-nav__link">
     <span class="md-ellipsis">
       
-        新增成員
+        What goes in the upload and what goes in the image
       
     </span>
   </a>
@@ -1096,21 +1040,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        儲存權限繼承
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
+        Errors
       
     </span>
   </a>
@@ -1133,6 +1066,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../announcements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Announcements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../groups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Groups
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../storage/" class="md-nav__link">
         
   
@@ -1140,7 +1129,7 @@
   <span class="md-ellipsis">
     
   
-    儲存
+    Storage
   
 
     
@@ -1168,7 +1157,7 @@
   <span class="md-ellipsis">
     
   
-    申請
+    Requests
   
 
     
@@ -1196,7 +1185,7 @@
   <span class="md-ellipsis">
     
   
-    設定
+    Settings
   
 
     
@@ -1230,7 +1219,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -1239,15 +1228,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      目錄
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#submit-a-job" class="md-nav__link">
     <span class="md-ellipsis">
       
-        成員模型
+        Submit a job
       
     </span>
   </a>
@@ -1255,10 +1244,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#choose-gpus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組列表頁面
+        Choose GPUs
       
     </span>
   </a>
@@ -1266,10 +1255,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#what-counts-against-your-quota" class="md-nav__link">
     <span class="md-ellipsis">
       
-        檢視群組
+        What counts against your quota
       
     </span>
   </a>
@@ -1277,10 +1266,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#first-submit-and-when-the-cluster-ends" class="md-nav__link">
     <span class="md-ellipsis">
       
-        申請建立群組
+        First submit and when the cluster ends
       
     </span>
   </a>
@@ -1288,10 +1277,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#keep-your-data-in-storage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        加入群組
+        Keep your data in storage
       
     </span>
   </a>
@@ -1299,10 +1288,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#what-goes-in-the-upload-and-what-goes-in-the-image" class="md-nav__link">
     <span class="md-ellipsis">
       
-        新增成員
+        What goes in the upload and what goes in the image
       
     </span>
   </a>
@@ -1310,21 +1299,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        儲存權限繼承
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
+        Errors
       
     </span>
   </a>
@@ -1351,118 +1329,150 @@
   
 
 
-<h1 id="_1">群組<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>群組就是一個團隊或一門課。成員共用群組的儲存空間，也可以把整個群組加進多個專案。</p>
-<p><strong>適用對象：</strong> 所有使用者都可以加入群組。<strong>只有平台管理員能建立群組</strong>，需要新群組請送 <a href="../requests/">申請</a>。</p>
-<hr />
-<h2 id="_2">成員模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>群組有三種角色。你的角色也決定你在該群組專案中的預設權限。</p>
+<h1 id="ray-jobs">Ray jobs<a class="headerlink" href="#ray-jobs" title="Permanent link">&para;</a></h1>
+<p>Submit a Ray job from your laptop and run it on the platform's GPUs. You work with the <code>ray</code> command on your own machine; the platform starts a Ray cluster for you, runs the job, and removes the cluster when you stop using it. No image rebuild is needed when your code changes.</p>
+<div class="admonition note">
+<p class="admonition-title">Availability</p>
+<p>Ray jobs work only after an admin turns them on. If the platform refuses the commands below for every project, ask an admin.</p>
+</div>
+<h2 id="submit-a-job">Submit a job<a class="headerlink" href="#submit-a-job" title="Permanent link">&para;</a></h2>
+<p>You need VPN access, a project you belong to, and an API token.</p>
+<ol>
+<li>Create an API token under <strong>Settings → Security</strong>, or with <code>cscc-cli</code> (see <a href="../cli/">CLI</a> and <a href="../settings/#api-tokens-and-cli">Settings</a>). Copy it when it is shown; it appears only once.</li>
+<li>
+<p>Install Ray on your laptop. The version must match the platform's, <code>2.58.0</code>:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+</code></pre></div>
+</li>
+<li>
+<p>Download the platform's <a href="../../assets/cscc-root-ca.pem">root certificate</a> and point Ray at it. The platform's HTTPS certificate is issued by the platform itself, so without this the <code>ray</code> command stops with <em>certificate verify failed</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+</code></pre></div>
+</li>
+<li>
+<p>Tell Ray your token and what you need:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"default-batch"}'</span>
+</code></pre></div>
+</li>
+<li>
+<p>Submit from your code folder. Replace <code>&lt;project id&gt;</code> with the number in your project's address, <code>/projects/&lt;project id&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--address<span class="w"> </span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>train.py
+</code></pre></div>
+</li>
+</ol>
+<p>The command uploads your folder, follows the job's output in your terminal, and prints the job ID. Use <code>ray job status &lt;job id&gt;</code>, <code>ray job logs &lt;job id&gt;</code> and <code>ray job stop &lt;job id&gt;</code> with the same <code>--address</code>.</p>
+<h2 id="choose-gpus">Choose GPUs<a class="headerlink" href="#choose-gpus" title="Permanent link">&para;</a></h2>
+<p>Put these in <code>RAY_JOB_HEADERS</code>. They are read only when the platform creates your cluster. On a running cluster they are ignored and your job uses the cluster as it is; wait for the cluster to end to change them.</p>
+<p>Each worker has one GPU, so <code>X-CSCC-GPUs</code> is also the most workers your cluster can have. Workers start when a job needs them and stop after about a minute without work.</p>
 <table>
 <thead>
 <tr>
-<th>角色</th>
-<th>新增 / 移除成員</th>
-<th>設定儲存權限</th>
-<th>存取群組儲存</th>
+<th>Header</th>
+<th>Meaning</th>
+<th>If you leave it out</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>管理員（Admin）</strong></td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
+<td><code>X-CSCC-GPUs</code></td>
+<td>The most GPUs, and so workers, the cluster may use</td>
+<td><code>1</code></td>
 </tr>
 <tr>
-<td><strong>管理者（Manager）</strong></td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
+<td><code>X-CSCC-Queue</code></td>
+<td>The scheduling queue the workers run in. Burst queues are not allowed</td>
+<td>The platform's default</td>
 </tr>
 <tr>
-<td><strong>成員（User）</strong></td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
+<td><code>X-CSCC-GPU-Model</code></td>
+<td>Which GPU model to use</td>
+<td>The only model your plan and queue allow. If they allow several, the submit fails and you must set it</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">助教通常需要「管理員」</p>
-<p>設定學生的儲存讀寫權限，<strong>管理者</strong> 就夠了；新增或移除成員則要 <strong>管理員</strong>。如果你負責帶課，請向平台管理員申請 <strong>管理員</strong> 角色。</p>
-</div>
-<hr />
-<h2 id="_3">群組列表頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="群組列表頁面" src="../../../assets/screenshots/groups-list.png" />
-<em>圖 1：群組列表與群組卡片。</em></p>
-<p>點左側選單的 <strong>群組</strong>，就能看到你所屬的所有群組。每張卡片有群組圖示、名稱、說明、ID 和建立日期。點卡片開啟群組。平台管理員在卡片上還會看到 <strong>Edit group</strong> 和 <strong>Delete group</strong> 兩個按鈕。</p>
-<p>群組政策（<strong>儲存策略</strong>、<strong>建置 Registry 路線</strong>、<strong>Root 容器</strong>、<strong>允許掛載的 HostPath</strong>）由平台管理員在 <strong>管理 → 群組</strong> 設定，卡片上看不到。</p>
-<hr />
-<h2 id="_4">檢視群組<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>點群組卡片開啟群組頁，裡面有兩個分頁：</p>
-<ol>
-<li><strong>成員</strong>：群組裡的所有人和角色</li>
-<li><strong>儲存</strong>：群組擁有的儲存空間和權限</li>
-</ol>
-<hr />
-<h2 id="_5">申請建立群組<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>只有平台管理員看得到 <strong>建立群組</strong> 按鈕。需要新群組時：</p>
-<ol>
-<li>前往 <strong>申請</strong> → <strong>新增申請</strong>。</li>
-<li>寫下群組用途、預計有哪些成員，以及需要多少群組儲存空間。</li>
-<li>平台管理員審核後會建立群組，並把你設為群組管理員。</li>
-</ol>
-<hr />
-<h2 id="_6">加入群組<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>只有群組管理員和平台管理員能加人。要加入群組：</p>
-<ol>
-<li>前往 <strong>申請</strong> 提出申請，類型選擇 <strong>存取申請</strong>。</li>
-<li>寫下你要加入哪個群組，以及原因。</li>
-<li>群組管理員或平台管理員審核後會加你進去。</li>
-</ol>
-<div class="admonition info">
-<p class="admonition-title">沒有公開瀏覽</p>
-<p>無法瀏覽或搜尋群組。請問你的團隊該加入哪一個。</p>
-</div>
-<hr />
-<h2 id="_7">新增成員<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>需要 <strong>群組管理員</strong> 角色。</p>
-</blockquote>
-<ol>
-<li>開啟群組，在 <strong>成員</strong> 分頁右上角點 <strong>新增成員</strong>。</li>
-<li>用使用者名稱或電子郵件搜尋。</li>
-<li>在結果中勾選要加的人。</li>
-<li>點 <strong>新增成員</strong>。</li>
-</ol>
-<p>要一次加整班學生，用 <strong>貼上使用者名單</strong>：把名單貼進文字框（用換行、逗號、分號或 Tab 分隔都可以），再點 <strong>解析使用者</strong>。</p>
-<p>結果只會列出還不是成員的人，翻頁時不會看到已加入的成員，也不會遇到空白頁。</p>
-<p><img alt="新增群組成員" src="../../../assets/screenshots/group-add-members.png" />
-<em>圖 2：新增成員對話框。</em></p>
-<hr />
-<h2 id="_8">儲存權限繼承<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>群組權限在群組頁面設定，專案裡只能看、不能改。</p>
-<p>權限有 <strong>讀取</strong>、<strong>寫入</strong>、<strong>無</strong> 三種。每個群組儲存空間還有一個 <strong>存取策略</strong>，是沒有單獨設定權限的成員的預設值。</p>
-<p><strong>重點：</strong> 你是群組成員的話，你在專案所掛儲存空間上的權限<strong>一律由群組決定</strong>，專案不能改。專案層級的儲存授權只給不在該群組裡的專案成員。專案的儲存頁面會把來自群組的權限顯示為<strong>唯讀</strong>，並附一個標籤連到群組的權限頁面。</p>
-<p>權限只對<strong>現任成員</strong>有效。被移出群組後，你馬上失去存取權。學期結束時，直接把人從群組移除就好，不用一個個專案去改。</p>
-<hr />
-<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>我看得到群組，但無法新增成員。</summary>
-<p>新增成員需要 <strong>群組管理員</strong> 角色。請找群組管理員或平台管理員提升你的角色。</p>
-</details>
-<details class="question">
-<summary>為什麼專案頁面上我的儲存權限是灰色的？</summary>
-<p>因為你是擁有這個儲存空間的群組的成員，權限由群組決定。到該群組的 <strong>儲存</strong> 分頁就能看到你的權限。</p>
-</details>
-<details class="question">
-<summary>我可以加入多個群組嗎？</summary>
-<p>可以，數量不限。每個群組各自獨立。</p>
-</details>
-<details class="question">
-<summary>我要如何離開群組？</summary>
-<p>請群組管理員或平台管理員把你移除，無法自己退出。移除後你馬上失去該群組儲存空間的存取權，個人儲存空間不受影響。</p>
-</details>
+<h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>While the cluster is open</strong>, the platform holds the GPUs you asked for against the project's GPU quota and your per-user GPU limit. Other people cannot use them.</li>
+<li><strong>GPU hours</strong> are counted only for workers that are running. The GPUs are released when the cluster ends.</li>
+<li>In one project you can hold at most 10 GPU claims at once, so a cluster cannot have more than 10 GPU workers.</li>
+</ul>
+<p>If the request does not fit, the submit fails at once and nothing is created. Ask for fewer GPUs or pick another queue.</p>
+<h2 id="first-submit-and-when-the-cluster-ends">First submit and when the cluster ends<a class="headerlink" href="#first-submit-and-when-the-cluster-ends" title="Permanent link">&para;</a></h2>
+<p>The first submit starts a new cluster, which takes about 30–60 seconds. The command waits for it, up to 2 minutes. If the cluster is still not ready, the platform answers <code>503</code>; run the command again. Later jobs in the same cluster start at once.</p>
+<p>The platform removes the cluster in either of these cases:</p>
+<ul>
+<li>30 minutes with no running Ray job.</li>
+<li>A maximum lifetime of 24 hours, or your queue's runtime limit if that is shorter. A job still running at that point stops.</li>
+</ul>
+<p>The next submit starts a new cluster. Anything written inside the cluster's own disk is gone then; keep results in storage (below).</p>
+<h2 id="keep-your-data-in-storage">Keep your data in storage<a class="headerlink" href="#keep-your-data-in-storage" title="Permanent link">&para;</a></h2>
+<p>Your files are mounted in every cluster, the same as in a <a href="../workspaces/">workspace</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Storage</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Personal</td>
+<td><code>/home/&lt;your username&gt;</code></td>
+</tr>
+<tr>
+<td>Group</td>
+<td><code>/mnt/shared/&lt;volume name&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Read datasets from these paths and write checkpoints and results to them. Your permission on a volume applies here too (see <a href="../storage/">Storage</a>).</p>
+<h2 id="what-goes-in-the-upload-and-what-goes-in-the-image">What goes in the upload and what goes in the image<a class="headerlink" href="#what-goes-in-the-upload-and-what-goes-in-the-image" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The upload is your working folder as a zip of at most 500 MiB. Files matched by <code>.gitignore</code> are left out, so put datasets, model weights and virtual environments there, or keep them in storage.</li>
+<li>The workers run the platform's Ray image. Packages that are large or slow to build are not installed per job. Ask for them in a <strong>Request</strong> for an image.</li>
+</ul>
+<h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Cause and fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td><code>X-CSCC-Queue</code> names a queue that does not exist. Check the name.</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td>The token is missing, expired or revoked. Create a new one and update <code>RAY_JOB_HEADERS</code>.</td>
+</tr>
+<tr>
+<td><code>403</code></td>
+<td>You are not a member of this project. Check the project number or ask a project manager.</td>
+</tr>
+<tr>
+<td><code>409</code> or <code>422</code></td>
+<td>The request breaks a quota or rule: too many GPUs, a queue or GPU model your plan does not allow, a burst queue, or the 10 GPU claim limit. If your plan and queue allow more than one GPU model, add <code>X-CSCC-GPU-Model</code>. The message says which.</td>
+</tr>
+<tr>
+<td><code>422</code> with a reason</td>
+<td>The cluster could not start. The reason is in the message.</td>
+</tr>
+<tr>
+<td><code>503</code> with <code>Retry-After</code></td>
+<td>The cluster is still starting. Run the command again. If it keeps happening for more than a few minutes, ask an admin.</td>
+</tr>
+<tr>
+<td>Upload fails</td>
+<td>The folder is over 500 MiB after <code>.gitignore</code>, or the upload took too long. Remove large files.</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1488,7 +1498,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  回到頂端
+  Back to top
 </button>
         
       </main>
@@ -1497,33 +1507,33 @@
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="頁腳" >
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../announcements/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 公告">
+          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CLI">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                上一頁
+                Previous
               </span>
               <div class="md-ellipsis">
-                公告
+                CLI
               </div>
             </div>
           </a>
         
         
           
-          <a href="../storage/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 儲存">
+          <a href="../announcements/" class="md-footer__link md-footer__link--next" aria-label="Next: Announcements">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                下一頁
+                Next
               </span>
               <div class="md-ellipsis">
-                儲存
+                Announcements
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1576,10 +1586,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

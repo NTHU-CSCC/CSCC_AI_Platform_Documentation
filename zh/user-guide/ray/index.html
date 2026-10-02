@@ -10,17 +10,17 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/groups/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/ray/">
       
       
-        <link rel="prev" href="../announcements/">
+        <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../storage/">
+        <link rel="next" href="../announcements/">
       
       
         
-          <link rel="alternate" href="../../../user-guide/groups/" hreflang="en">
+          <link rel="alternate" href="../../../user-guide/ray/" hreflang="en">
         
           <link rel="alternate" href="./" hreflang="zh">
         
@@ -31,7 +31,7 @@
     
     
       
-        <title>群組 - GPU Cluster Management Platform — User Guide</title>
+        <title>Ray 工作 - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#ray" class="md-skip">
           跳轉到
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              群組
+              Ray 工作
             
           </span>
         </div>
@@ -161,7 +161,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../user-guide/groups/" hreflang="en" class="md-select__link">
+            <a href="../../../user-guide/ray/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -911,10 +911,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../ray/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ray 工作
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -930,6 +957,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        提交工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什麼會計入配額
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一次提交與叢集結束
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        把資料放在儲存空間
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上傳的內容與映像的內容
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        錯誤
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -967,37 +1091,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    群組
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../groups/" class="md-nav__link">
         
   
   
@@ -1013,114 +1110,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目錄
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        成員模型
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        群組列表頁面
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        檢視群組
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        申請建立群組
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        加入群組
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        新增成員
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        儲存權限繼承
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1244,10 +1233,32 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        提交工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        成員模型
+        什麼會計入配額
       
     </span>
   </a>
@@ -1258,7 +1269,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        群組列表頁面
+        第一次提交與叢集結束
       
     </span>
   </a>
@@ -1269,7 +1280,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        檢視群組
+        把資料放在儲存空間
       
     </span>
   </a>
@@ -1280,7 +1291,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        申請建立群組
+        上傳的內容與映像的內容
       
     </span>
   </a>
@@ -1291,40 +1302,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        加入群組
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        新增成員
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        儲存權限繼承
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
+        錯誤
       
     </span>
   </a>
@@ -1351,118 +1329,150 @@
   
 
 
-<h1 id="_1">群組<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>群組就是一個團隊或一門課。成員共用群組的儲存空間，也可以把整個群組加進多個專案。</p>
-<p><strong>適用對象：</strong> 所有使用者都可以加入群組。<strong>只有平台管理員能建立群組</strong>，需要新群組請送 <a href="../requests/">申請</a>。</p>
-<hr />
-<h2 id="_2">成員模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>群組有三種角色。你的角色也決定你在該群組專案中的預設權限。</p>
+<h1 id="ray">Ray 工作<a class="headerlink" href="#ray" title="Permanent link">&para;</a></h1>
+<p>在你的筆電上提交 Ray 工作，在平台的 GPU 上執行。你只在自己的機器上使用 <code>ray</code> 指令；平台會替你啟動 Ray 叢集、執行工作，你不再使用時再移除叢集。改程式不需要重建映像。</p>
+<div class="admonition note">
+<p class="admonition-title">可用性</p>
+<p>管理員開啟之後才能使用 Ray 工作。如果下面的指令在每個專案都被平台拒絕，請聯絡管理員。</p>
+</div>
+<h2 id="_1">提交工作<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>你需要 VPN 連線、你所屬的專案，以及一個 API token。</p>
+<ol>
+<li>在 <strong>設定 → 安全性</strong> 建立 API token，或用 <code>cscc-cli</code>（見<a href="../cli/">命令列工具</a>與<a href="../settings/">設定</a>）。token 只會顯示一次，顯示時請先複製。</li>
+<li>
+<p>在筆電上安裝 Ray。版本必須和平台一致，<code>2.58.0</code>：</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+</code></pre></div>
+</li>
+<li>
+<p>下載平台的<a href="../../../assets/cscc-root-ca.pem">根憑證</a>，並讓 Ray 使用它。平台的 HTTPS 憑證由平台自己簽發，沒有這一步，<code>ray</code> 指令會停在 <em>certificate verify failed</em>：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+</code></pre></div>
+</li>
+<li>
+<p>把 token 和需求告訴 Ray：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"default-batch"}'</span>
+</code></pre></div>
+</li>
+<li>
+<p>在你的程式碼資料夾提交。把 <code>&lt;project id&gt;</code> 換成專案網址中的數字，<code>/projects/&lt;project id&gt;</code>：</p>
+<div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--address<span class="w"> </span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>train.py
+</code></pre></div>
+</li>
+</ol>
+<p>指令會上傳你的資料夾，在終端機持續顯示工作輸出，並印出工作 ID。用同一個 <code>--address</code> 執行 <code>ray job status &lt;job id&gt;</code>、<code>ray job logs &lt;job id&gt;</code>、<code>ray job stop &lt;job id&gt;</code>。</p>
+<h2 id="gpu">選擇 GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>把這些放進 <code>RAY_JOB_HEADERS</code>。平台只在建立叢集時讀取它們。對執行中的叢集，這些標頭會被忽略，你的工作直接使用現有叢集；要改的話，等叢集結束再提交。</p>
+<p>每個 worker 有一張 GPU，所以 <code>X-CSCC-GPUs</code> 也是叢集最多能有的 worker 數量。worker 在工作需要時啟動，閒置約一分鐘後停止。</p>
 <table>
 <thead>
 <tr>
-<th>角色</th>
-<th>新增 / 移除成員</th>
-<th>設定儲存權限</th>
-<th>存取群組儲存</th>
+<th>標頭</th>
+<th>意義</th>
+<th>省略時</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>管理員（Admin）</strong></td>
-<td>✅</td>
-<td>✅</td>
-<td>✅</td>
+<td><code>X-CSCC-GPUs</code></td>
+<td>叢集最多可以使用幾張 GPU，也就是幾個 worker</td>
+<td><code>1</code></td>
 </tr>
 <tr>
-<td><strong>管理者（Manager）</strong></td>
-<td>❌</td>
-<td>✅</td>
-<td>✅</td>
+<td><code>X-CSCC-Queue</code></td>
+<td>worker 執行所在的排程佇列。不可使用 burst 佇列</td>
+<td>平台預設值</td>
 </tr>
 <tr>
-<td><strong>成員（User）</strong></td>
-<td>❌</td>
-<td>❌</td>
-<td>✅</td>
+<td><code>X-CSCC-GPU-Model</code></td>
+<td>使用哪一種 GPU 型號</td>
+<td>方案與佇列只允許的那一種。如果允許多種，提交會失敗，你必須指定</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">助教通常需要「管理員」</p>
-<p>設定學生的儲存讀寫權限，<strong>管理者</strong> 就夠了；新增或移除成員則要 <strong>管理員</strong>。如果你負責帶課，請向平台管理員申請 <strong>管理員</strong> 角色。</p>
-</div>
-<hr />
-<h2 id="_3">群組列表頁面<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><img alt="群組列表頁面" src="../../../assets/screenshots/groups-list.png" />
-<em>圖 1：群組列表與群組卡片。</em></p>
-<p>點左側選單的 <strong>群組</strong>，就能看到你所屬的所有群組。每張卡片有群組圖示、名稱、說明、ID 和建立日期。點卡片開啟群組。平台管理員在卡片上還會看到 <strong>Edit group</strong> 和 <strong>Delete group</strong> 兩個按鈕。</p>
-<p>群組政策（<strong>儲存策略</strong>、<strong>建置 Registry 路線</strong>、<strong>Root 容器</strong>、<strong>允許掛載的 HostPath</strong>）由平台管理員在 <strong>管理 → 群組</strong> 設定，卡片上看不到。</p>
-<hr />
-<h2 id="_4">檢視群組<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>點群組卡片開啟群組頁，裡面有兩個分頁：</p>
-<ol>
-<li><strong>成員</strong>：群組裡的所有人和角色</li>
-<li><strong>儲存</strong>：群組擁有的儲存空間和權限</li>
-</ol>
-<hr />
-<h2 id="_5">申請建立群組<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>只有平台管理員看得到 <strong>建立群組</strong> 按鈕。需要新群組時：</p>
-<ol>
-<li>前往 <strong>申請</strong> → <strong>新增申請</strong>。</li>
-<li>寫下群組用途、預計有哪些成員，以及需要多少群組儲存空間。</li>
-<li>平台管理員審核後會建立群組，並把你設為群組管理員。</li>
-</ol>
-<hr />
-<h2 id="_6">加入群組<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>只有群組管理員和平台管理員能加人。要加入群組：</p>
-<ol>
-<li>前往 <strong>申請</strong> 提出申請，類型選擇 <strong>存取申請</strong>。</li>
-<li>寫下你要加入哪個群組，以及原因。</li>
-<li>群組管理員或平台管理員審核後會加你進去。</li>
-</ol>
-<div class="admonition info">
-<p class="admonition-title">沒有公開瀏覽</p>
-<p>無法瀏覽或搜尋群組。請問你的團隊該加入哪一個。</p>
-</div>
-<hr />
-<h2 id="_7">新增成員<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>需要 <strong>群組管理員</strong> 角色。</p>
-</blockquote>
-<ol>
-<li>開啟群組，在 <strong>成員</strong> 分頁右上角點 <strong>新增成員</strong>。</li>
-<li>用使用者名稱或電子郵件搜尋。</li>
-<li>在結果中勾選要加的人。</li>
-<li>點 <strong>新增成員</strong>。</li>
-</ol>
-<p>要一次加整班學生，用 <strong>貼上使用者名單</strong>：把名單貼進文字框（用換行、逗號、分號或 Tab 分隔都可以），再點 <strong>解析使用者</strong>。</p>
-<p>結果只會列出還不是成員的人，翻頁時不會看到已加入的成員，也不會遇到空白頁。</p>
-<p><img alt="新增群組成員" src="../../../assets/screenshots/group-add-members.png" />
-<em>圖 2：新增成員對話框。</em></p>
-<hr />
-<h2 id="_8">儲存權限繼承<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>群組權限在群組頁面設定，專案裡只能看、不能改。</p>
-<p>權限有 <strong>讀取</strong>、<strong>寫入</strong>、<strong>無</strong> 三種。每個群組儲存空間還有一個 <strong>存取策略</strong>，是沒有單獨設定權限的成員的預設值。</p>
-<p><strong>重點：</strong> 你是群組成員的話，你在專案所掛儲存空間上的權限<strong>一律由群組決定</strong>，專案不能改。專案層級的儲存授權只給不在該群組裡的專案成員。專案的儲存頁面會把來自群組的權限顯示為<strong>唯讀</strong>，並附一個標籤連到群組的權限頁面。</p>
-<p>權限只對<strong>現任成員</strong>有效。被移出群組後，你馬上失去存取權。學期結束時，直接把人從群組移除就好，不用一個個專案去改。</p>
-<hr />
-<h2 id="_9">常見問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>我看得到群組，但無法新增成員。</summary>
-<p>新增成員需要 <strong>群組管理員</strong> 角色。請找群組管理員或平台管理員提升你的角色。</p>
-</details>
-<details class="question">
-<summary>為什麼專案頁面上我的儲存權限是灰色的？</summary>
-<p>因為你是擁有這個儲存空間的群組的成員，權限由群組決定。到該群組的 <strong>儲存</strong> 分頁就能看到你的權限。</p>
-</details>
-<details class="question">
-<summary>我可以加入多個群組嗎？</summary>
-<p>可以，數量不限。每個群組各自獨立。</p>
-</details>
-<details class="question">
-<summary>我要如何離開群組？</summary>
-<p>請群組管理員或平台管理員把你移除，無法自己退出。移除後你馬上失去該群組儲存空間的存取權，個人儲存空間不受影響。</p>
-</details>
+<h2 id="_2">什麼會計入配額<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>叢集開著的期間</strong>，平台會從專案的 GPU 配額與你個人的 GPU 上限中，保留你要求的 GPU。其他人不能使用這些 GPU。</li>
+<li><strong>GPU 時數</strong> 只計算實際執行中的 worker。叢集結束時 GPU 會釋放。</li>
+<li>在一個專案裡，你同時最多只能持有 10 個 GPU claim，所以一個叢集最多只能有 10 個 GPU worker。</li>
+</ul>
+<p>要求放不下時，提交會立刻失敗，也不會建立任何東西。請減少 GPU 數量，或換一個佇列。</p>
+<h2 id="_3">第一次提交與叢集結束<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>第一次提交會啟動新叢集，約需 30–60 秒。指令會等它，最多 2 分鐘。叢集仍未就緒時，平台會回 <code>503</code>；再執行一次指令。同一個叢集裡之後的工作會立刻開始。</p>
+<p>以下任一情況發生時，平台會移除叢集：</p>
+<ul>
+<li>沒有執行中的 Ray 工作滿 30 分鐘。</li>
+<li>到達最長存活時間 24 小時；你的佇列執行時間上限較短時，以佇列為準。到時仍在執行的工作會停止。</li>
+</ul>
+<p>下一次提交會啟動新的叢集。寫在叢集自己磁碟上的東西到時就沒了，請把結果存到儲存空間（見下）。</p>
+<h2 id="_4">把資料放在儲存空間<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>每個叢集都會掛載你的檔案，和<a href="../workspaces/">工作區</a>相同：</p>
+<table>
+<thead>
+<tr>
+<th>儲存空間</th>
+<th>路徑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>個人</td>
+<td><code>/home/&lt;你的使用者名稱&gt;</code></td>
+</tr>
+<tr>
+<td>群組</td>
+<td><code>/mnt/shared/&lt;儲存空間名稱&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>從這些路徑讀資料集，把檢查點和結果寫到這些路徑。你在儲存空間上的權限在這裡一樣適用（見<a href="../storage/">儲存</a>）。</p>
+<h2 id="_5">上傳的內容與映像的內容<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>上傳的是你的工作資料夾，壓縮成最大 500 MiB 的 zip。<code>.gitignore</code> 比對到的檔案不會上傳，所以資料集、模型權重和虛擬環境請放在 <code>.gitignore</code>，或放在儲存空間。</li>
+<li>worker 執行的是平台的 Ray 映像。大型或編譯很久的套件不會在每次工作時安裝。請在 <strong>申請</strong> 頁申請加進映像。</li>
+</ul>
+<h2 id="_6">錯誤<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>訊息</th>
+<th>原因與處理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>400</code></td>
+<td><code>X-CSCC-Queue</code> 指到不存在的佇列。檢查名稱。</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td>token 缺少、過期或已撤銷。建立新的 token，更新 <code>RAY_JOB_HEADERS</code>。</td>
+</tr>
+<tr>
+<td><code>403</code></td>
+<td>你不是這個專案的成員。檢查專案編號，或詢問專案管理者。</td>
+</tr>
+<tr>
+<td><code>409</code> 或 <code>422</code></td>
+<td>要求違反配額或規則：GPU 太多、方案不允許的佇列或 GPU 型號、burst 佇列，或超過 10 個 GPU claim 的上限。如果方案與佇列允許多種 GPU 型號，加上 <code>X-CSCC-GPU-Model</code>。訊息會說明是哪一項。</td>
+</tr>
+<tr>
+<td><code>422</code> 加原因</td>
+<td>叢集無法啟動。原因在訊息裡。</td>
+</tr>
+<tr>
+<td><code>503</code> 加 <code>Retry-After</code></td>
+<td>叢集還在啟動。再執行一次指令。如果持續超過幾分鐘，請聯絡管理員。</td>
+</tr>
+<tr>
+<td>上傳失敗</td>
+<td>套用 <code>.gitignore</code> 之後資料夾仍超過 500 MiB，或上傳太久。移除大型檔案。</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1500,7 +1510,7 @@
       <nav class="md-footer__inner md-grid" aria-label="頁腳" >
         
           
-          <a href="../announcements/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 公告">
+          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 命令列工具">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1510,20 +1520,20 @@
                 上一頁
               </span>
               <div class="md-ellipsis">
-                公告
+                命令列工具
               </div>
             </div>
           </a>
         
         
           
-          <a href="../storage/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 儲存">
+          <a href="../announcements/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 公告">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一頁
               </span>
               <div class="md-ellipsis">
-                儲存
+                公告
               </div>
             </div>
             <div class="md-footer__button md-icon">
