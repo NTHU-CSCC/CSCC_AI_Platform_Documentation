@@ -1407,7 +1407,7 @@
 <p>The platform removes the cluster in either of these cases:</p>
 <ul>
 <li>30 minutes with no running Ray job.</li>
-<li>A maximum lifetime of 24 hours, or your queue's runtime limit if that is shorter. A job still running at that point stops.</li>
+<li>A maximum lifetime: your project's maximum job runtime, your queue's runtime limit, or 24 hours, whichever is shortest. A job still running at that point stops.</li>
 </ul>
 <p>The next submit starts a new cluster. Anything written inside the cluster's own disk is gone then; keep results in storage (below).</p>
 <h2 id="keep-your-data-in-storage">Keep your data in storage<a class="headerlink" href="#keep-your-data-in-storage" title="Permanent link">&para;</a></h2>
@@ -1463,7 +1463,7 @@
 </tr>
 <tr>
 <td><code>422</code> with a reason</td>
-<td>The cluster could not start. The reason is in the message.</td>
+<td>The cluster could not start, or the platform's cluster settings were rejected. The reason is in the message and no cluster is left running.</td>
 </tr>
 <tr>
 <td><code>503</code> with <code>Retry-After</code></td>
