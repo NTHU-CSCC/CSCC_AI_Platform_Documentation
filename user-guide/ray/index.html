@@ -1461,6 +1461,7 @@
 <ul>
 <li>The upload is your working folder as a zip of at most 500 MiB. Files matched by <code>.gitignore</code> are left out, so put datasets, model weights and virtual environments there, or keep them in storage.</li>
 <li>The workers run the platform's Ray image. Packages that are large or slow to build are not installed per job. Ask for them in a <strong>Request</strong> for an image.</li>
+<li><code>runtime_env</code> downloads (pip, conda, git) need the project's external network access. If your project does not have it, put the packages in the image or install them from your storage.</li>
 </ul>
 <h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
 <table>

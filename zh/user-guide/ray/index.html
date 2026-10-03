@@ -1461,6 +1461,7 @@
 <ul>
 <li>上傳的是你的工作資料夾，壓縮成最大 500 MiB 的 zip。<code>.gitignore</code> 比對到的檔案不會上傳，所以資料集、模型權重和虛擬環境請放在 <code>.gitignore</code>，或放在儲存空間。</li>
 <li>worker 執行的是平台的 Ray 映像。大型或編譯很久的套件不會在每次工作時安裝。請在 <strong>申請</strong> 頁申請加進映像。</li>
+<li><code>runtime_env</code> 的下載（pip、conda、git）需要專案開啟對外網路。專案沒開對外網路的話，就把套件裝進映像，或從自己的儲存空間安裝。</li>
 </ul>
 <h2 id="_7">錯誤<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
