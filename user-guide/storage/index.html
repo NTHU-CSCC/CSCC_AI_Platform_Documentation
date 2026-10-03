@@ -1832,7 +1832,7 @@
 <em>Figure 1: The Storage page with the My Storage and Group Storage tabs.</em></p>
 <ul>
 <li><strong>My Storage</strong> — your volume as a card with the file browser status (<strong>Stopped</strong>, <strong>Starting</strong>, <strong>Running</strong>, <strong>Stopping</strong>, <strong>Error</strong>), a usage bar and the file browser buttons.</li>
-<li><strong>Group Storage</strong> — your groups' volumes in a table: name, status (<strong>Active</strong> is ready to mount, <strong>Terminating</strong> is being removed, <strong>Missing</strong> means the platform can't find it), file browser status, capacity (for example <code>50Gi</code>), usage, access mode, your permission, group, created date and action icons.</li>
+<li><strong>Group Storage</strong> — your groups' volumes in a table: name (with its group underneath; hover for the created date), status (<strong>Active</strong> is ready to mount, <strong>Terminating</strong> is being removed, <strong>Missing</strong> means the platform can't find it; the file browser's state shows below unless it is stopped), usage against capacity (for example <code>12 / 50 Gi</code>; just the size until usage is measured), your permission, and action icons. The action icons stay at the right edge even when a narrow screen makes the table scroll.</li>
 </ul>
 <p>Stopping a workspace doesn't unmount a group volume; it is released only when an admin removes it from the project or deletes it.</p>
 <p>If the file browser shows <strong>Error</strong>, click <strong>Start FileBrowser</strong> (for a group volume, the icon in <strong>Actions</strong>) to restart it. Your files are not affected.</p>
