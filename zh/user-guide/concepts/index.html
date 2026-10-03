@@ -1559,7 +1559,7 @@
 <li>暫停時已開啟的網路連線會被關閉。恢復後請重新開啟 Notebook 或 SSH；把結果串流到外部服務的訓練程式要自己重連。</li>
 <li>暫停前最後幾分鐘內做的事，恢復後可能重做一次。這段時間寫入資料庫或物件儲存的動作可能發生兩次。</li>
 <li>絕對不能被暫停的工作，請在部署或工作區表單取消勾選 <strong>被搶佔時允許暫停（保存進度）</strong>，它會改為直接停止。在部署 YAML 加上標籤 <code>platform-go/checkpoint: "false"</code> 效果相同。</li>
-<li>暫停中的工作在專案的 <strong>資源</strong> 分頁與 <strong>工作區</strong> 顯示為 <strong>已暫停</strong>，並附上暫停時間；恢復後會自己回到 <strong>執行中</strong>。暫停中的工作區要等恢復後才能開啟或重新啟動。對暫停中的工作區按 <strong>刪除</strong> 會直接結束它，之後就能啟動新的工作區。</li>
+<li>暫停中的工作在專案 <strong>資源</strong> 分頁的 <strong>Pods</strong> 最上方，以及 <strong>工作區</strong>，顯示為 <strong>已暫停</strong>，並附上暫停時間；恢復後會自己回到 <strong>執行中</strong>。暫停中的工作區要等恢復後才能開啟或重新啟動。對暫停中的工作區按 <strong>刪除</strong> 會直接結束它，之後就能啟動新的工作區。</li>
 </ul>
 <hr />
 <h2 id="_6">計畫時段<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>

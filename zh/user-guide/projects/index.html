@@ -1793,7 +1793,7 @@
 </div>
 <hr />
 <h2 id="_4">專案詳情分頁<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>點專案就會打開專案頁。每個人都看得到總覽、設定、計畫、建置、GPU Claims 和資源分頁；成員、儲存、設定分頁則看你的專案角色。</p>
+<p>點專案就會打開專案頁。每個人都看得到總覽、設定、計畫、建置、GPU Claims 和資源分頁；平台有開 Ray 工作階段時會多一個 Ray 分頁；成員、儲存、設定分頁則看你的專案角色。</p>
 <p><img alt="專案詳情分頁" src="../../../assets/screenshots/project-detail-tabs.png" />
 <em>圖 2：專案頁，有總覽、設定、計畫、建置、GPU Claims、資源，以及依角色顯示的分頁。</em></p>
 <table>
@@ -1826,7 +1826,11 @@
 </tr>
 <tr>
 <td><strong>資源</strong></td>
-<td>每位成員的即時 GPU、CPU、記憶體用量，展開就能看他們正在跑什麼</td>
+<td>你在跑的東西，依類別分頁（Pods、Services…），以及即時 GPU、CPU、記憶體用量；管理者還看得到每位成員的</td>
+</tr>
+<tr>
+<td><strong>Ray</strong></td>
+<td>你的 Ray 工作階段，或提交 Ray 工作要用的位址；平台有開 Ray 工作階段才會出現</td>
 </tr>
 <tr>
 <td><strong>成員 / 儲存</strong></td>
@@ -2034,7 +2038,7 @@
 <div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"sleep"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"infinity"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>或在資源精靈的 <strong>互動式 Shell</strong> 區塊勾選 <strong>stdin</strong> 和 <strong>tty</strong>（手寫 YAML 則是 <code>stdin: true</code> 和 <code>tty: true</code>），讓 Shell 保持執行。精靈發現單獨的 Shell 會馬上結束時，會跳出警告。</p>
-<p>容器啟動後，到專案的 <strong>資源</strong> 分頁，在 <strong>Pod</strong> 那一列點 <strong>終端</strong>。Deployment 和 Job 的列沒有終端按鈕，請展開它們，找到它們建立的項目。</p>
+<p>容器啟動後，到專案的 <strong>資源</strong> 分頁，留在 <strong>Pods</strong>，在那一列點 <strong>終端</strong>。Deployment 和 Job 沒有終端按鈕，它們建立的執行中項目在 <strong>Pods</strong> 裡。</p>
 <h3 id="_15">部署規則<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>配額會把你所有還沒結束的工作一起算，所以還在排隊等啟動的工作負載，在結束或被移除前也佔著配額。設定檔可以部署 <code>Pod</code>、<code>Deployment</code> 和 <code>Job</code>，其他類型不接受。</p>
 <p>每個容器都要同時設定記憶體的 request 和 limit，而且至少 <code>128Mi</code>。少了任何一項，部署和 dry-run 驗證都會被拒絕。單位一定要寫：只寫 <code>memory: "1"</code> 是 1 byte，會被拒絕。</p>
@@ -2120,7 +2124,9 @@
 </ul>
 <hr />
 <h2 id="_19">資源分頁<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
-<p><strong>資源</strong> 分頁依專案成員顯示即時用量：</p>
+<p><strong>資源</strong> 分頁顯示專案裡在跑什麼、用了多少。</p>
+<p><strong>你自己的資源。</strong> 上方的卡片是你的 GPU、CPU、記憶體用量。下面依類別分頁：<strong>Pods</strong>、<strong>Services</strong>、<strong>Deployments</strong>、<strong>StatefulSets</strong>、<strong>Jobs</strong>、<strong>ConfigMaps</strong>、<strong>Secrets</strong>、<strong>Ingresses</strong>、<strong>ResourceClaims</strong>、<strong>RemoteDesktopSessions</strong>，每個分頁標著數量，預設開在 <strong>Pods</strong>。暫停中的工作列在 <strong>Pods</strong> 最上方，因為恢復前它沒有 Pod。按 <strong>全部刪除</strong> 會刪掉你在這個專案的所有資源，佔用的配額也會釋放。</p>
+<p><strong>所有人的資源。</strong> Project Admin、Project Manager 和平台 Admin/Manager 會在分頁上方看到 <strong>個人</strong> 和 <strong>成員</strong>。<strong>成員</strong> 列出其他所有成員：</p>
 <table>
 <thead>
 <tr>
@@ -2151,8 +2157,7 @@
 </tr>
 </tbody>
 </table>
-<p>Project Admin、Project Manager 和平台 Admin/Manager 看得到所有成員，一般 Project User 只看得到自己那一列。展開該列可以看正在跑的東西，也能終止你有權管理的項目。終止工作負載後，它佔用的配額就釋放了。</p>
-<p>看得到所有成員的人，可以在分頁上方切換 <strong>個人</strong>（只有你自己那一列）和 <strong>成員</strong>（其他所有人）。你自己那一列下方還會列出你暫停中的工作（恢復前沒有執行中的 Pod），以及你的 Ray 工作階段。</p>
+<p>可以用名字搜尋，展開成員就能用同樣的類別分頁看他在跑什麼。在成員那一列按 <strong>刪除</strong>，會刪掉他所有的資源並釋放配額。一般 Project User 只看得到自己的資源。</p>
 <p>在 <strong>Pod</strong> 那一列，把游標移到狀態徽章上（或點一下）就能看到最近的事件。工作負載看起來一直在啟動、其實是拉不到映像時，可以從這裡看出原因。</p>
 <hr />
 <h2 id="gpu_1">GPU 配額概覽<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>

@@ -1793,7 +1793,7 @@
 </div>
 <hr />
 <h2 id="project-detail-tabs">Project detail tabs<a class="headerlink" href="#project-detail-tabs" title="Permanent link">&para;</a></h2>
-<p>Click a project to open it. Everyone sees the Overview, Config, Plan, Builds, GPU Claims and Resources tabs. Members, Storage and Settings show up depending on your role.</p>
+<p>Click a project to open it. Everyone sees the Overview, Config, Plan, Builds, GPU Claims and Resources tabs. Ray shows up when the platform has Ray sessions turned on. Members, Storage and Settings show up depending on your role.</p>
 <p><img alt="Project detail tabs" src="../../assets/screenshots/project-detail-tabs.png" />
 <em>Figure 2: The project page, with the Overview, Config, Plan, Builds, GPU Claims and Resources tabs, plus tabs that depend on your role.</em></p>
 <table>
@@ -1826,7 +1826,11 @@
 </tr>
 <tr>
 <td><strong>Resources</strong></td>
-<td>Live GPU, CPU and memory use for each member. Expand a row to see what they are running</td>
+<td>What you run, in one tab per kind (Pods, Services, …), and live GPU, CPU and memory use. Managers also see every member's</td>
+</tr>
+<tr>
+<td><strong>Ray</strong></td>
+<td>Your Ray sessions, or the address to submit Ray jobs to. Shown only when Ray sessions are turned on</td>
 </tr>
 <tr>
 <td><strong>Members / Storage</strong></td>
@@ -2034,7 +2038,7 @@
 <div class="highlight"><pre><span></span><code><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"sleep"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"infinity"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>or keep the shell alive by turning on <strong>stdin</strong> and <strong>tty</strong> under <em>Interactive shell</em> in the Resource Wizard (<code>stdin: true</code> and <code>tty: true</code> in raw YAML). The wizard warns you when a bare shell would exit right away.</p>
-<p>Once the container is running, open the project's <strong>Resources</strong> tab and click <strong>Terminal</strong> on the <strong>Pod</strong> row. Deployment and Job rows have no terminal button. Expand them to find the running instance they created.</p>
+<p>Once the container is running, open the project's <strong>Resources</strong> tab, stay on <strong>Pods</strong>, and click <strong>Terminal</strong> on the row. Deployments and Jobs have no terminal button; the running instance they created is under <strong>Pods</strong>.</p>
 <h3 id="deploy-rules">Deploy rules<a class="headerlink" href="#deploy-rules" title="Permanent link">&para;</a></h3>
 <p>Quota is checked against everything you already have going, so a workload still waiting to start keeps its share until it finishes or is removed. Config files can deploy <code>Pod</code>, <code>Deployment</code> and <code>Job</code>. Other kinds are rejected.</p>
 <p>Every container must set both a memory request and a memory limit of at least <code>128Mi</code>. Deploy and dry-run validation reject missing values. Always write the unit: a bare <code>memory: "1"</code> means one byte and is rejected.</p>
@@ -2126,7 +2130,9 @@ group already has.</p>
 </ul>
 <hr />
 <h2 id="resources-tab">Resources tab<a class="headerlink" href="#resources-tab" title="Permanent link">&para;</a></h2>
-<p>The <strong>Resources</strong> tab shows live usage for each project member:</p>
+<p>The <strong>Resources</strong> tab shows what is running in the project and how much it uses.</p>
+<p><strong>Your own resources.</strong> The cards at the top show your GPU, CPU and memory use. Below them is one tab per kind: <strong>Pods</strong>, <strong>Services</strong>, <strong>Deployments</strong>, <strong>StatefulSets</strong>, <strong>Jobs</strong>, <strong>ConfigMaps</strong>, <strong>Secrets</strong>, <strong>Ingresses</strong>, <strong>ResourceClaims</strong> and <strong>RemoteDesktopSessions</strong>, each with a count. <strong>Pods</strong> opens first. Paused jobs sit at the top of <strong>Pods</strong>, because their Pod is gone until they resume. <strong>Delete all</strong> removes everything you have in the project and frees the quota it held.</p>
+<p><strong>Everyone's resources.</strong> Project Admins, Project Managers and platform Admin/Manager roles get <strong>Personal</strong> and <strong>Members</strong> at the top of the tab. <strong>Members</strong> lists every other member:</p>
 <table>
 <thead>
 <tr>
@@ -2157,8 +2163,7 @@ group already has.</p>
 </tr>
 </tbody>
 </table>
-<p>Project Admins, Project Managers and platform Admin/Manager roles see every member. Regular Project Users see only their own row. Expand a row to see what is running, or to terminate what you're allowed to manage. Terminating a workload here frees the quota it was using.</p>
-<p>If you can see every member, switch between <strong>Personal</strong> (your own row) and <strong>Members</strong> (everyone else) at the top of the tab. Below your own row you also find your paused jobs, which have no running Pod until they resume, and your Ray sessions.</p>
+<p>Search by name, or expand a member to see what they run in the same kind tabs. <strong>Delete</strong> on a member's row removes all of that member's resources and frees their quota. Regular Project Users see only their own resources.</p>
 <p>On <strong>Pod</strong> rows, hover, focus, or tap the status badge to see recent events. This helps when a workload looks like it's still starting but is really failing to pull its image.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU quota overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>
