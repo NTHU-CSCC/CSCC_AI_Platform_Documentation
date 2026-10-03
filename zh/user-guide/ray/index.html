@@ -1021,7 +1021,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        把資料放在儲存空間
+        查看與結束工作階段
       
     </span>
   </a>
@@ -1032,7 +1032,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        上傳的內容與映像的內容
+        把資料放在儲存空間
       
     </span>
   </a>
@@ -1041,6 +1041,17 @@
       
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上傳的內容與映像的內容
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         錯誤
@@ -1280,7 +1291,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        把資料放在儲存空間
+        查看與結束工作階段
       
     </span>
   </a>
@@ -1291,7 +1302,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        上傳的內容與映像的內容
+        把資料放在儲存空間
       
     </span>
   </a>
@@ -1300,6 +1311,17 @@
       
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        上傳的內容與映像的內容
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         錯誤
@@ -1410,7 +1432,11 @@
 <li>到達最長存活時間：專案的最長工作執行時間、佇列的執行時間上限、24 小時，取最短者。到時仍在執行的工作會停止。</li>
 </ul>
 <p>下一次提交會啟動新的叢集。寫在叢集自己磁碟上的東西到時就沒了，請把結果存到儲存空間（見下）。</p>
-<h2 id="_4">把資料放在儲存空間<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_4">查看與結束工作階段<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>打開你的專案，切到 <strong>Pod</strong> 分頁。<strong>Ray 工作階段</strong>會列出你開著的工作階段：狀態、佔用的 GPU、佇列、開始時間，以及<strong>最晚結束</strong>，也就是它最晚能跑到的時間。閒置超過<strong>最晚結束</strong>下方顯示的時間，會提早結束。</p>
+<p>選 <strong>結束工作階段</strong> 可以立刻停止它。仍在執行的 Ray 工作會停止，工作階段佔用的 GPU 會立刻釋放。下次執行 <code>ray job submit</code> 會開新的工作階段。</p>
+<p>沒有開著的工作階段時，這一區會顯示這個專案的 <code>--address</code>，旁邊有複製按鈕。</p>
+<h2 id="_5">把資料放在儲存空間<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>每個叢集都會掛載你的檔案，和<a href="../workspaces/">工作區</a>相同：</p>
 <table>
 <thead>
@@ -1431,12 +1457,12 @@
 </tbody>
 </table>
 <p>從這些路徑讀資料集，把檢查點和結果寫到這些路徑。你在儲存空間上的權限在這裡一樣適用（見<a href="../storage/">儲存</a>）。</p>
-<h2 id="_5">上傳的內容與映像的內容<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">上傳的內容與映像的內容<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li>上傳的是你的工作資料夾，壓縮成最大 500 MiB 的 zip。<code>.gitignore</code> 比對到的檔案不會上傳，所以資料集、模型權重和虛擬環境請放在 <code>.gitignore</code>，或放在儲存空間。</li>
 <li>worker 執行的是平台的 Ray 映像。大型或編譯很久的套件不會在每次工作時安裝。請在 <strong>申請</strong> 頁申請加進映像。</li>
 </ul>
-<h2 id="_6">錯誤<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_7">錯誤<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
