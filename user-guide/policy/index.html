@@ -1328,7 +1328,7 @@
 <hr />
 <h2 id="images-licensing-and-external-services">Images, licensing, and external services<a class="headerlink" href="#images-licensing-and-external-services" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Use images from trusted sources. The platform scans images for security problems automatically. An image with a fixable critical vulnerability can be refused, and its job then fails with the reason "Image security check failed".</li>
+<li>Use images from trusted sources. The platform scans images for security problems automatically. The platform refuses an image only when it holds a package that is unsafe to run here, and the job then fails with the reason "blocked by the platform". Known vulnerabilities in your own container do not block it.</li>
 <li>Follow the licence of every piece of software, model weight, and dataset you use. Do not install or share pirated or cracked software.</li>
 <li>Do not put accounts, passwords, tokens, keys, or unlicensed data in the images you build.</li>
 <li>An image a project builds is for that project.</li>

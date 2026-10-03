@@ -1328,7 +1328,7 @@
 <hr />
 <h2 id="_5">映像、軟體授權與對外服務<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
-<li>只用可信來源的映像。平台會自動掃描映像的安全問題。有可修補嚴重漏洞的映像可能被拒絕，工作會以「Image security check failed」失敗。</li>
+<li>只用可信來源的映像。平台會自動掃描映像的安全問題。只有映像裡的套件不適合在這裡執行時才會被拒絕，工作會以「blocked by the platform」失敗。你自己 container 內的已知弱點不會擋。</li>
 <li>用到的軟體、模型權重和資料集，都要遵守它們的授權。不要安裝或散布盜版與破解軟體。</li>
 <li>你自己建的映像檔裡，不要放帳號、密碼、token、金鑰或沒有授權的資料。</li>
 <li>專案建的映像只給該專案用。</li>

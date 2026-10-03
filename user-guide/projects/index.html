@@ -996,6 +996,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#use-private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use private Docker Hub images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image-security-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1573,6 +1584,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#use-private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use private Docker Hub images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image-security-checks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1845,7 +1867,7 @@
 <p>Who sees what: the <strong>Storage</strong> and <strong>Settings</strong> tabs need Project Manager or above. Only Project Admins see the <strong>Members</strong> tab. (Platform admins must switch to <strong>Admin View</strong> in the avatar menu to count as a Project Admin.) An Admin can't demote themselves, so a project always keeps at least one Admin.</p>
 <hr />
 <h2 id="project-settings">Project settings<a class="headerlink" href="#project-settings" title="Permanent link">&para;</a></h2>
-<p>The <strong>Settings</strong> tab (Project Manager or above) has limits that apply to every workspace in the project:</p>
+<p>The <strong>Settings</strong> tab (Project Manager or above) has limits that apply to every workspace in the project, and the project's Docker Hub connection:</p>
 <table>
 <thead>
 <tr>
@@ -1857,6 +1879,10 @@
 <tr>
 <td><strong>Max workspace continuous runtime</strong></td>
 <td>In seconds. A workspace that has run longer than this is stopped automatically. <code>0</code> means no limit (the default).</td>
+</tr>
+<tr>
+<td><strong>Docker Hub</strong></td>
+<td>Username and access token for private Docker Hub images. See <em>Use private Docker Hub images</em> below.</td>
 </tr>
 </tbody>
 </table>
@@ -1982,6 +2008,15 @@
 <li>older images built before builds became private to each project: an image you built yourself works only in your personal project, and an image a group built works only in projects that group owns.</li>
 </ul>
 <p>When a job or workspace uses an image another project built, the <strong>Image security checks</strong> card shows an <strong>Error</strong> row with the reason <code>Image security check refused: &lt;ref&gt;: built by another project; use this project's images, platform images or public mirrors</code>. Rebuild the image in your own project, or ask the project that owns it to share the Dockerfile. The same rule applies to the <code>FROM</code> line of your Dockerfile: a build is rejected when its base image belongs to another project.</p>
+<h3 id="use-private-docker-hub-images">Use private Docker Hub images<a class="headerlink" href="#use-private-docker-hub-images" title="Permanent link">&para;</a></h3>
+<p>A Project Manager connects a Docker Hub account once for the whole project:</p>
+<ol>
+<li>On Docker Hub, go to <strong>Account settings → Personal access tokens</strong> and create a token with <strong>Read-only</strong> access.</li>
+<li>In the project, open <strong>Settings → Docker Hub account</strong>, enter the <strong>Username</strong> and <strong>Access token</strong>, and click <strong>Save</strong>. The platform checks them with Docker Hub first and rejects a wrong pair with <em>Docker Hub could not be reached with this username and token</em>.</li>
+<li>Use the image as usual: <code>image: &lt;user&gt;/&lt;repo&gt;:&lt;tag&gt;</code> in a job, deployment or workspace, or <code>docker run</code> in the project's IDE.</li>
+</ol>
+<p>The section then reads <em>Connected as <code>&lt;username&gt;</code>, updated <code>&lt;time&gt;</code></em>. The token is never shown again; to change it, save a new one. <strong>Remove</strong> asks for confirmation, disconnects the account and deletes the project's cached private images. Public Docker Hub images keep working either way. A Dockerfile <code>FROM</code> line can't use a private Docker Hub image; build from a public or platform base instead.</p>
+<p>Private images get the same security check, and only this project can use them. Every member's workloads can pull any private image of that account, so connect an account and token meant for the project.</p>
 <h3 id="image-security-checks">Image security checks<a class="headerlink" href="#image-security-checks" title="Permanent link">&para;</a></h3>
 <p>The <strong>Overview</strong> tab has an <strong>Image security checks</strong> card. It lists the last 10 images your project's jobs and workspaces started, with a status for each:</p>
 <table>
@@ -1998,11 +2033,11 @@
 </tr>
 <tr>
 <td>Passed</td>
-<td>The image passed the check.</td>
+<td>The image can run.</td>
 </tr>
 <tr>
 <td>Failed</td>
-<td>The image has a serious known vulnerability that has a fix.</td>
+<td>The platform blocked the image because a package in it is unsafe to run here.</td>
 </tr>
 <tr>
 <td>Error</td>
@@ -2014,8 +2049,9 @@
 </tr>
 </tbody>
 </table>
-<p>Each row also shows a one-line reason and when the image was last used. A <strong>Failed</strong> row says either <em>would be blocked once enforcement is on</em> or <em>blocked</em>. While enforcement is off, the job still runs; once it is on, the job does not start. When the platform has image checks turned off, the card says <em>Image security checks are turned off.</em></p>
-<p>Click a <strong>Failed</strong> row to see <strong>How to unblock</strong>: each package to upgrade, from your installed version to the fixed version, with the packages that cause the failure first and the other recommended upgrades folded below. A <strong>Passed</strong> row shows <strong>Recommended upgrades</strong>, or says that no upgrade is needed. Vulnerability IDs are not shown; only administrators see them. Issues that have no fix yet are only counted, because they do not block. The other statuses have no details to open.</p>
+<p>The platform blocks an image only when it holds a package that endangers the platform. Known vulnerabilities in your own container do not block it. Each row also shows a one-line reason and when the image was last used. A <strong>Passed</strong> row says how many findings affect only your container and how many to upgrade first, for example <em>3 findings affect only this container (1 to upgrade first)</em>. When the platform has image checks turned off, the card says <em>Image security checks are turned off.</em></p>
+<p>Click a row to see the upgrade list: each package, your installed version and the version to upgrade to, with the packages to upgrade first on top. A <strong>Failed</strong> row shows <strong>How to unblock</strong> with the packages that cause the block. Vulnerability IDs are not shown; only administrators see them. The other statuses have no details to open.</p>
+<p>A <strong>Failed</strong> row reads: <em><code>&lt;image&gt;</code>: blocked by the platform because <code>&lt;package&gt; &lt;version&gt;</code> is unsafe to run here. Upgrade it to <code>&lt;fix version&gt;</code> or later (rebuild on a newer base, or pick a newer tag).</em> An <strong>Error</strong> row can also say the image was not found on Docker Hub, or that its registry is not supported; use Docker Hub, GHCR, NGC or this project's images.</p>
 <p>To fix a failure, rebuild your image on a newer base image tag, or upgrade the listed packages in the Dockerfile with the image's package manager (for example apt, apk, dnf or pip) to at least the fixed version, then run the job again. For a public image, such as one from Docker Hub, pick a newer tag. For a platform image, choose another version or contact the administrators.</p>
 <p>The card shows the latest result per image, not a history. When an 11th image is used, the oldest row is removed.</p>
 <hr />

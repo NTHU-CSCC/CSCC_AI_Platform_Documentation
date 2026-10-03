@@ -996,6 +996,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用私有 Docker Hub 映像
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1573,6 +1584,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用私有 Docker Hub 映像
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1845,7 +1867,7 @@
 <p>誰看得到什麼：<strong>儲存</strong>、<strong>設定</strong> 分頁要 Project Manager 以上；<strong>成員</strong> 分頁只有 Project Admin 看得到（平台管理員要在右上角頭像切到 <strong>Admin View</strong>，才算 Project Admin）。Admin 不能把自己降級，所以專案至少會留一位 Admin。</p>
 <hr />
 <h2 id="_5">專案設定<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p><strong>設定</strong> 分頁（Project Manager 以上）放的是專案內所有工作區共用的限制：</p>
+<p><strong>設定</strong> 分頁（Project Manager 以上）放專案內所有工作區共用的限制，以及專案的 Docker Hub 連線：</p>
 <table>
 <thead>
 <tr>
@@ -1857,6 +1879,10 @@
 <tr>
 <td><strong>Workspace 最長連續使用時間</strong></td>
 <td>單位是秒。工作區執行超過這個時間就會自動停止。<code>0</code> 是不限制（預設）。</td>
+</tr>
+<tr>
+<td><strong>Docker Hub</strong></td>
+<td>私有 Docker Hub 映像用的 username 和 access token。見下方「使用私有 Docker Hub 映像」。</td>
 </tr>
 </tbody>
 </table>
@@ -1982,6 +2008,15 @@
 <li>建置改為各專案私有之前建置的舊映像：你自己建置的只能在你的個人專案使用，群組建置的只能在該群組擁有的專案使用。</li>
 </ul>
 <p>任務或工作區使用了其他專案建置的映像時，<strong>映像安全檢查</strong> 卡片會顯示 <strong>錯誤</strong> 的一列，原因是 <code>Image security check refused: &lt;ref&gt;: built by another project; use this project's images, platform images or public mirrors</code>。請在自己的專案重新建置，或請擁有該映像的專案分享 Dockerfile。Dockerfile 的 <code>FROM</code> 也適用同一條規則：base image 屬於其他專案時，建置會被拒絕。</p>
+<h3 id="docker-hub">使用私有 Docker Hub 映像<a class="headerlink" href="#docker-hub" title="Permanent link">&para;</a></h3>
+<p>由 Project Manager 替整個專案連一次 Docker Hub 帳號：</p>
+<ol>
+<li>在 Docker Hub 開啟 <strong>Account settings → Personal access tokens</strong>，建立權限為 <strong>Read-only</strong> 的 token。</li>
+<li>在專案開啟 <strong>設定 → Docker Hub 帳號</strong>，填入 <strong>使用者名稱</strong> 和 <strong>Access token</strong>，按 <strong>儲存</strong>。平台會先向 Docker Hub 驗證，不對就拒絕並顯示 <em>Docker Hub could not be reached with this username and token</em>。</li>
+<li>照一般方式使用：在任務、部署或工作區寫 <code>image: &lt;user&gt;/&lt;repo&gt;:&lt;tag&gt;</code>，或在專案的 IDE 裡 <code>docker run</code>。</li>
+</ol>
+<p>連線後，這一區會顯示 <em>已連結帳號 <code>&lt;username&gt;</code>，於 <code>&lt;time&gt;</code> 更新</em>。token 不會再顯示；要更換就重新儲存一個。<strong>移除</strong> 會先確認，再中斷連線並刪除專案已快取的私有映像。公開的 Docker Hub 映像不受影響。Dockerfile 的 <code>FROM</code> 不能用私有 Docker Hub 映像，請改用公開或平台的基底映像。</p>
+<p>私有映像一樣會做安全檢查，而且只有這個專案能用。專案內任何成員的工作負載都能拉取該帳號的所有私有映像，請連專為專案準備的帳號和 token。</p>
 <h3 id="_11">映像安全檢查<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p><strong>總覽</strong> 分頁有一張 <strong>映像安全檢查</strong> 卡片，列出專案的任務與工作區最近啟動的 10 個映像，以及各自的狀態：</p>
 <table>
@@ -1998,11 +2033,11 @@
 </tr>
 <tr>
 <td>通過</td>
-<td>映像通過檢查。</td>
+<td>映像可以執行。</td>
 </tr>
 <tr>
 <td>未通過</td>
-<td>映像有已知、已有修補版本的嚴重弱點。</td>
+<td>映像裡有套件不適合在這裡執行，平台已擋下。</td>
 </tr>
 <tr>
 <td>錯誤</td>
@@ -2014,8 +2049,9 @@
 </tr>
 </tbody>
 </table>
-<p>每一列還有一行原因和最後使用時間。<strong>未通過</strong> 的列會標示「啟用強制檢查後將被擋下」或「已被擋下」。強制檢查還沒啟用時，任務仍會執行；啟用後，任務就不會啟動。平台關閉映像檢查時，卡片會顯示「映像安全檢查已關閉。」</p>
-<p>點 <strong>未通過</strong> 的列可看 <strong>如何避免被擋下</strong>：列出每個要升級的套件，從你目前的版本到修補版本；造成未通過的套件排在前面，其他建議升級收合在下方。<strong>通過</strong> 的列顯示 <strong>建議升級</strong>，或說明不需要升級。畫面不顯示弱點編號，只有管理員看得到。目前沒有修補版本的問題只顯示數量，因為它們不會造成封鎖。其他狀態沒有可展開的詳細內容。</p>
+<p>只有映像裡的套件危及平台時，平台才會擋下。你自己 container 內的已知弱點不會擋。每一列還有一行原因和最後使用時間。<strong>通過</strong> 的列會寫有幾項發現只影響你的 container、幾項建議優先升級，例如「3 項發現只影響這個 container（1 項建議優先升級）」。平台關閉映像檢查時，卡片會顯示「映像安全檢查已關閉。」</p>
+<p>點任一列可看升級清單：每個套件、你目前的版本與要升級到的版本，建議優先升級的排在最上面。<strong>未通過</strong> 的列顯示 <strong>如何避免被擋下</strong>，列出造成封鎖的套件。畫面不顯示弱點編號，只有管理員看得到。其他狀態沒有可展開的詳細內容。</p>
+<p><strong>未通過</strong> 的訊息是：<code>&lt;image&gt;</code>: blocked by the platform because <code>&lt;package&gt; &lt;version&gt;</code> is unsafe to run here. Upgrade it to <code>&lt;fix version&gt;</code> or later (rebuild on a newer base, or pick a newer tag)。<strong>錯誤</strong> 的列也可能寫映像在 Docker Hub 找不到，或該 registry 不支援，請改用 Docker Hub、GHCR、NGC 或這個專案的映像。</p>
 <p>要修正未通過的映像，請用較新的基底映像標籤重新建置，或在 Dockerfile 用映像的套件管理工具（例如 apt、apk、dnf 或 pip）把列出的套件升級到修補版本以上，再重新執行任務。公開映像（例如來自 Docker Hub）請改用較新的標籤。平台映像請改選其他版本，或聯絡管理員。</p>
 <p>卡片顯示每個映像的最新結果，不是歷史紀錄。使用第 11 個映像時，最舊的一列會被移除。</p>
 <hr />
