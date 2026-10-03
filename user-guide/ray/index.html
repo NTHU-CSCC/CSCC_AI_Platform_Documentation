@@ -1433,7 +1433,7 @@
 </ul>
 <p>The next submit starts a new cluster. Anything written inside the cluster's own disk is gone then; keep results in storage (below).</p>
 <h2 id="see-and-end-your-session">See and end your session<a class="headerlink" href="#see-and-end-your-session" title="Permanent link">&para;</a></h2>
-<p>Open your project and go to the <strong>Pod</strong> tab. <strong>Ray sessions</strong> lists your open session: its status, the GPUs it holds, the queue, when it started, and <strong>Ends by</strong>, the latest time it can run. It ends sooner once it has been idle for the time shown under <strong>Ends by</strong>.</p>
+<p>Open your project and go to the <strong>Resources</strong> tab. <strong>Ray sessions</strong>, below your own row, lists your open session: its status, the GPUs it holds, the queue, when it started, and <strong>Ends by</strong>, the latest time it can run. It ends sooner once it has been idle for the time shown under <strong>Ends by</strong>.</p>
 <p>Select <strong>End session</strong> to stop it now. Ray jobs still running stop, and the GPUs the session held are released at once. Your next <code>ray job submit</code> starts a new session.</p>
 <p>With no session open, the section shows the <code>--address</code> for this project with a copy button.</p>
 <h2 id="keep-your-data-in-storage">Keep your data in storage<a class="headerlink" href="#keep-your-data-in-storage" title="Permanent link">&para;</a></h2>

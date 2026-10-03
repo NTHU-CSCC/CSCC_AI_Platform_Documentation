@@ -2026,8 +2026,8 @@
 <li>要部署特定版本，點版本列的 <strong>部署</strong> 按鈕。</li>
 <li>在部署對話框選排程佇列。YAML 有 GPU claim slot 的話，替每個 slot 選一個你已保留的 GPU claim，只對這次部署有效。</li>
 </ol>
-<p>執行中的項目會出現在專案的 <strong>資源</strong> 分頁。另外有個 <strong>部署</strong> 頁面，網址是 <code>/projects/&lt;專案 ID&gt;/deployments</code>，用 <strong>個人</strong> 和 <strong>成員</strong> 兩個分頁列出部署。側邊選單沒有連結，要用網址開。</p>
-<p>已結束的 Pod 最多在結束三天後就會被移除，它在 <strong>部署</strong> 頁面的項目和日誌也會一起消失。日誌也可能更早不見，例如節點重新開機時。Job 結束後的 Pod 會留著，直到你刪除該 Job。要留下的結果和其他資料，請在執行時就寫進掛載的儲存空間。</p>
+<p>執行中的項目會出現在專案的 <strong>資源</strong> 分頁，說明在下方。</p>
+<p>已結束的 Pod 最多在結束三天後就會被移除，它在 <strong>資源</strong> 分頁的項目和日誌也會一起消失。日誌也可能更早不見，例如節點重新開機時。Job 結束後的 Pod 會留著，直到你刪除該 Job。要留下的結果和其他資料，請在執行時就寫進掛載的儲存空間。</p>
 <h3 id="_14">可以進去操作的容器<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>要對容器開 <strong>終端</strong>，容器必須一直在執行。只跑 Shell、不帶參數（例如 <code>command: ["/bin/sh"]</code>）會馬上結束，容器就會一直重啟，每次開終端都會失敗。</p>
 <p>請讓容器有事可做：</p>
@@ -2152,6 +2152,7 @@
 </tbody>
 </table>
 <p>Project Admin、Project Manager 和平台 Admin/Manager 看得到所有成員，一般 Project User 只看得到自己那一列。展開該列可以看正在跑的東西，也能終止你有權管理的項目。終止工作負載後，它佔用的配額就釋放了。</p>
+<p>看得到所有成員的人，可以在分頁上方切換 <strong>個人</strong>（只有你自己那一列）和 <strong>成員</strong>（其他所有人）。你自己那一列下方還會列出你暫停中的工作（恢復前沒有執行中的 Pod），以及你的 Ray 工作階段。</p>
 <p>在 <strong>Pod</strong> 那一列，把游標移到狀態徽章上（或點一下）就能看到最近的事件。工作負載看起來一直在啟動、其實是拉不到映像時，可以從這裡看出原因。</p>
 <hr />
 <h2 id="gpu_1">GPU 配額概覽<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>

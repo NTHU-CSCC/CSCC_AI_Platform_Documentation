@@ -1433,7 +1433,7 @@
 </ul>
 <p>下一次提交會啟動新的叢集。寫在叢集自己磁碟上的東西到時就沒了，請把結果存到儲存空間（見下）。</p>
 <h2 id="_4">查看與結束工作階段<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>打開你的專案，切到 <strong>Pod</strong> 分頁。<strong>Ray 工作階段</strong>會列出你開著的工作階段：狀態、佔用的 GPU、佇列、開始時間，以及<strong>最晚結束</strong>，也就是它最晚能跑到的時間。閒置超過<strong>最晚結束</strong>下方顯示的時間，會提早結束。</p>
+<p>打開你的專案，切到 <strong>資源</strong> 分頁。你自己那一列下方的 <strong>Ray 工作階段</strong> 會列出你開著的工作階段：狀態、佔用的 GPU、佇列、開始時間，以及<strong>最晚結束</strong>，也就是它最晚能跑到的時間。閒置超過<strong>最晚結束</strong>下方顯示的時間，會提早結束。</p>
 <p>選 <strong>結束工作階段</strong> 可以立刻停止它。仍在執行的 Ray 工作會停止，工作階段佔用的 GPU 會立刻釋放。下次執行 <code>ray job submit</code> 會開新的工作階段。</p>
 <p>沒有開著的工作階段時，這一區會顯示這個專案的 <code>--address</code>，旁邊有複製按鈕。</p>
 <h2 id="_5">把資料放在儲存空間<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>

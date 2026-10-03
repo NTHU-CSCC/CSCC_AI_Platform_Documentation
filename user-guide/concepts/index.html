@@ -1559,7 +1559,7 @@
 <li>Open network connections are closed at the pause. Reopen the notebook or SSH session after the resume; a training script that streams to an external service must reconnect on its own.</li>
 <li>Work done in the last few minutes before the pause may be repeated after the resume. Writes to databases or object storage in that window can happen twice.</li>
 <li>Untick <strong>Allow pausing when preempted</strong> in the deploy or workspace form for a workload that must never be paused; it is then stopped instead. The same effect comes from the label <code>platform-go/checkpoint: "false"</code> in a deploy YAML.</li>
-<li>A paused job shows <strong>Paused</strong> in <strong>Deployments</strong> and <strong>Workspaces</strong> with the time it was paused; the row comes back to <strong>Running</strong> on its own. A paused workspace cannot be opened, or started again, until it resumes. <strong>Delete</strong> on a paused workspace ends it for good; you can then start a new one.</li>
+<li>A paused job shows <strong>Paused</strong> in the project's <strong>Resources</strong> tab and in <strong>Workspaces</strong> with the time it was paused; the row comes back to <strong>Running</strong> on its own. A paused workspace cannot be opened, or started again, until it resumes. <strong>Delete</strong> on a paused workspace ends it for good; you can then start a new one.</li>
 </ul>
 <hr />
 <h2 id="plan-window">Plan window<a class="headerlink" href="#plan-window" title="Permanent link">&para;</a></h2>

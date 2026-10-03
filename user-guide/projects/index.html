@@ -2026,8 +2026,8 @@
 <li>To deploy a specific version, click <strong>Deploy</strong> on the version row.</li>
 <li>In the deploy dialog, pick the scheduling queue. If the YAML has GPU claim slots, pick one of your reserved GPU claims for each slot. This applies to this deploy only.</li>
 </ol>
-<p>Running instances show up in the project's <strong>Resources</strong> tab. A separate <strong>Deployments</strong> page at <code>/projects/&lt;project id&gt;/deployments</code> lists deployments in <strong>Personal</strong> and <strong>Members</strong> tabs. It has no sidebar link, so open it by URL.</p>
-<p>A finished Pod is removed at most three days after it ends, and its entry and logs on the <strong>Deployments</strong> page go with it. The logs can disappear sooner, for example when a node restarts. A Job keeps its finished pods until you delete the Job. Save results, and anything else you want to keep, to a mounted storage volume while the run is going.</p>
+<p>Running instances show up in the project's <strong>Resources</strong> tab, described below.</p>
+<p>A finished Pod is removed at most three days after it ends, and its entry and logs in the <strong>Resources</strong> tab go with it. The logs can disappear sooner, for example when a node restarts. A Job keeps its finished pods until you delete the Job. Save results, and anything else you want to keep, to a mounted storage volume while the run is going.</p>
 <h3 id="containers-you-can-shell-into">Containers you can shell into<a class="headerlink" href="#containers-you-can-shell-into" title="Permanent link">&para;</a></h3>
 <p>To open a <strong>Terminal</strong> in a container, the container has to keep running. A shell with no arguments, such as <code>command: ["/bin/sh"]</code>, exits right away. The container then restarts again and again, and every terminal attempt fails.</p>
 <p>Give the container real work:</p>
@@ -2158,6 +2158,7 @@ group already has.</p>
 </tbody>
 </table>
 <p>Project Admins, Project Managers and platform Admin/Manager roles see every member. Regular Project Users see only their own row. Expand a row to see what is running, or to terminate what you're allowed to manage. Terminating a workload here frees the quota it was using.</p>
+<p>If you can see every member, switch between <strong>Personal</strong> (your own row) and <strong>Members</strong> (everyone else) at the top of the tab. Below your own row you also find your paused jobs, which have no running Pod until they resume, and your Ray sessions.</p>
 <p>On <strong>Pod</strong> rows, hover, focus, or tap the status badge to see recent events. This helps when a workload looks like it's still starting but is really failing to pull its image.</p>
 <hr />
 <h2 id="gpu-quota-overview">GPU quota overview<a class="headerlink" href="#gpu-quota-overview" title="Permanent link">&para;</a></h2>
