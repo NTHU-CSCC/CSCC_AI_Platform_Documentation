@@ -10,19 +10,19 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/tutorials/students/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-gpu-sweep/">
       
       
-        <link rel="prev" href="../basics/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../lab/">
+        <link rel="next" href="../../user-guide/">
       
       
         
           <link rel="alternate" href="./" hreflang="en">
         
-          <link rel="alternate" href="../../zh/tutorials/students/" hreflang="zh">
+          <link rel="alternate" href="../../zh/use-cases/ray-gpu-sweep/" hreflang="zh">
         
       
       
@@ -31,7 +31,7 @@
     
     
       
-        <title>Course Students - GPU Cluster Management Platform — User Guide</title>
+        <title>Sweep Hyperparameters with Ray - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#course-students" class="md-skip">
+        <a href="#sweep-hyperparameters-across-gpus-with-ray" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Course Students
+              Sweep Hyperparameters with Ray
             
           </span>
         </div>
@@ -167,7 +167,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../zh/tutorials/students/" hreflang="zh" class="md-select__link">
+            <a href="../../zh/use-cases/ray-gpu-sweep/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -269,13 +269,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
           
   
   
@@ -293,11 +291,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../use-cases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -415,8 +415,6 @@
       
   
   
-    
-  
   
   
     
@@ -438,23 +436,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../tutorials/" class="md-nav__link ">
               
   
   
@@ -472,13 +467,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -498,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../basics/" class="md-nav__link">
+      <a href="../../tutorials/basics/" class="md-nav__link">
         
   
   
@@ -523,37 +518,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Course Students
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../tutorials/students/" class="md-nav__link">
         
   
   
@@ -569,48 +537,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#s4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        S4 — Delete a workspace when you are done
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#s5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        S5 — Deploy a Pod
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -623,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab/" class="md-nav__link">
+      <a href="../../tutorials/lab/" class="md-nav__link">
         
   
   
@@ -651,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ta/" class="md-nav__link">
+      <a href="../../tutorials/ta/" class="md-nav__link">
         
   
   
@@ -683,6 +609,8 @@
       
   
   
+    
+  
   
   
     
@@ -698,20 +626,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../use-cases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -729,13 +660,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -752,10 +683,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../use-cases/ray-gpu-sweep/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sweep Hyperparameters with Ray
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -771,6 +729,125 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-youll-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you'll build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-set-up-your-laptop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Set up your laptop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-write-the-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Write the sweep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-submit-the-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Submit the job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-read-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Read the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-end-the-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: End the session
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you built
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1560,10 +1637,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#s4" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        S4 — Delete a workspace when you are done
+        Prerequisites
       
     </span>
   </a>
@@ -1571,10 +1648,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#s5" class="md-nav__link">
+  <a href="#what-youll-build" class="md-nav__link">
     <span class="md-ellipsis">
       
-        S5 — Deploy a Pod
+        What you'll build
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-set-up-your-laptop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Set up your laptop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-write-the-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Write the sweep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-submit-the-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Submit the job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-read-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Read the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-end-the-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: End the session
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you built
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resources
       
     </span>
   </a>
@@ -1601,28 +1755,182 @@
   
 
 
-<h1 id="course-students">Course Students<a class="headerlink" href="#course-students" title="Permanent link">&para;</a></h1>
-<p>Watch after <a href="../basics/">Start Here</a>.</p>
-<div class="admonition info">
-<p class="admonition-title">About these clips</p>
-<p>No narration; read the text above each clip. The clips show the Chinese interface. To switch yours, use <strong>EN ⇄ 中</strong> in the top-right.</p>
-</div>
-<hr />
-<h2 id="s4">S4 — Delete a workspace when you are done<a class="headerlink" href="#s4" title="Permanent link">&para;</a></h2>
-<p>There is no stop button: click <strong>Delete</strong>. Files in personal or group storage stay; next time, create a new workspace.</p>
-<video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/s4-stop-workspace.jpg">
-  <source src="../../assets/videos/s4-stop-workspace.mp4" type="video/mp4">
-</video>
+<h1 id="sweep-hyperparameters-across-gpus-with-ray">Sweep hyperparameters across GPUs with Ray<a class="headerlink" href="#sweep-hyperparameters-across-gpus-with-ray" title="Permanent link">&para;</a></h1>
+<p>Trying eight hyperparameter combinations one after another in a workspace holds a GPU for hours. With a Ray job, you send the whole sweep from your laptop and the platform runs one combination per GPU at the same time.</p>
+<p>In this tutorial you run a learning-rate and L2 sweep on two GPUs. By the end you have:</p>
+<ul>
+<li>A Ray Tune script that gives each trial its own GPU</li>
+<li>The sweep running on the platform, sent from your laptop</li>
+<li>Every trial's results in your storage, and the best setting printed</li>
+</ul>
+<p>The commands and output below come from a run on the platform on 2026-10-03.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>VPN access, a project you belong to, and an API token (<a href="../../user-guide/settings/#api-tokens-and-cli">Settings</a>)</li>
+<li>Python 3.10 or later on your laptop</li>
+<li>A queue that allows 2 GPUs in your project</li>
+<li>About 10 minutes</li>
+</ul>
+<h2 id="what-youll-build">What you'll build<a class="headerlink" href="#what-youll-build" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Where it runs</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ray</code> command</td>
+<td>Your laptop</td>
+<td>Uploads the folder, sends the job, shows the output</td>
+</tr>
+<tr>
+<td>Ray session</td>
+<td>The platform</td>
+<td>Starts on the first submit, ends after 30 idle minutes or at its maximum lifetime</td>
+</tr>
+<tr>
+<td>GPU workers</td>
+<td>The platform</td>
+<td>One per running trial, up to <code>X-CSCC-GPUs</code></td>
+</tr>
+<tr>
+<td><code>ray-results/</code></td>
+<td>Your storage</td>
+<td>Each trial's settings and per-epoch metrics</td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-1-set-up-your-laptop">Step 1: Set up your laptop<a class="headerlink" href="#step-1-set-up-your-laptop" title="Permanent link">&para;</a></h2>
+<p>Install Ray, trust the platform's <a href="../../assets/cscc-root-ca.pem">root certificate</a>, and say what you need. <a href="../../user-guide/ray/#submit-a-job">Submit a job</a> explains each line.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_ADDRESS</span><span class="o">=</span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray
+</code></pre></div>
+<p>With <code>RAY_ADDRESS</code> set, <code>ray job</code> commands need no <code>--address</code>. If your plan and queue allow more than one GPU model, also add <code>"X-CSCC-GPU-Model":"&lt;model&gt;"</code> to the headers.</p>
+<h2 id="step-2-write-the-sweep">Step 2: Write the sweep<a class="headerlink" href="#step-2-write-the-sweep" title="Permanent link">&para;</a></h2>
+<p>The platform's Ray image has NumPy, CuPy, pandas, Ray Tune and Ray Data, but no PyTorch, so the model is a logistic regression in CuPy. Save this as <code>sweep.py</code> in an empty folder:</p>
+<div class="highlight"><pre><span></span><code><span class="sd">"""Sweep learning rate and L2 strength for a logistic-regression model on GPU.</span>
 
-<p><em>0:15 · silent · full details in <a href="../../user-guide/workspaces/">Workspaces</a></em></p>
-<hr />
-<h2 id="s5">S5 — Deploy a Pod<a class="headerlink" href="#s5" title="Permanent link">&para;</a></h2>
-<p>Project → <strong>Config</strong> tab → <strong>New File</strong> → <strong>Resource Wizard</strong> → <code>+ Pod</code> → fill image and resources → <strong>Create</strong>, then <strong>Deploy</strong>.</p>
-<video class="tutorial" controls preload="metadata" playsinline poster="../../assets/videos/posters/s5-deploy-pod.jpg">
-  <source src="../../assets/videos/s5-deploy-pod.mp4" type="video/mp4">
-</video>
+<span class="sd">Each trial trains on one GPU with CuPy; Ray Tune runs one trial per GPU worker.</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 
-<p><em>1:16 · silent · full details in <a href="../../user-guide/projects/">Projects</a></em></p>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cupy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray</span><span class="w"> </span><span class="kn">import</span> <span class="n">tune</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_data</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200_000</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">w_true</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">w_true</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">split</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">()</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"epochs"</span><span class="p">]):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">w</span><span class="p">)))</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s2">"l2"</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span>
+        <span class="n">w</span> <span class="o">-=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"lr"</span><span class="p">]</span> <span class="o">*</span> <span class="n">grad</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(((</span><span class="n">xv</span> <span class="o">@</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">yv</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="n">tune</span><span class="o">.</span><span class="n">report</span><span class="p">({</span><span class="s2">"val_acc"</span><span class="p">:</span> <span class="n">acc</span><span class="p">,</span> <span class="s2">"epoch"</span><span class="p">:</span> <span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="s2">"gpu"</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">getDeviceProperties</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()})</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--out"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"results folder in your storage"</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">tune</span><span class="o">.</span><span class="n">Tuner</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">.</span><span class="n">with_resources</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="p">{</span><span class="s2">"gpu"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+        <span class="n">param_space</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"lr"</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">grid_search</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]),</span>
+            <span class="s2">"l2"</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">grid_search</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]),</span>
+            <span class="s2">"epochs"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">tune_config</span><span class="o">=</span><span class="n">tune</span><span class="o">.</span><span class="n">TuneConfig</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">"val_acc"</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"max"</span><span class="p">),</span>
+        <span class="n">run_config</span><span class="o">=</span><span class="n">tune</span><span class="o">.</span><span class="n">RunConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"lr-l2-sweep"</span><span class="p">,</span> <span class="n">storage_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_dataframe</span><span class="p">()[[</span><span class="s2">"config/lr"</span><span class="p">,</span> <span class="s2">"config/l2"</span><span class="p">,</span> <span class="s2">"val_acc"</span><span class="p">,</span> <span class="s2">"gpu"</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"val_acc"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"best:"</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get_best_result</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
+<p>① <code>tune.with_resources(train, {"gpu": 1})</code>: one GPU per trial, so Ray starts one worker per running trial.
+② <code>storage_path=args.out</code>: results go to your storage, because the cluster's own disk is gone when it ends.</p>
+<h2 id="step-3-submit-the-job">Step 3: Submit the job<a class="headerlink" href="#step-3-submit-the-job" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>sweep.py<span class="w"> </span>--out<span class="w"> </span>/home/&lt;your<span class="w"> </span>username&gt;/ray-results
+</code></pre></div>
+<p>In this run the session was ready 17 s after the first submit; it can take up to a minute. The command then follows the output until the job ends.</p>
+<h2 id="step-4-read-the-results">Step 4: Read the results<a class="headerlink" href="#step-4-read-the-results" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Trial status: 8 TERMINATED
+Current time: 2026-10-03 00:51:44. Total running time: 17s
+Logical resource usage: 0/8 CPUs, 1.0/2 GPUs (0.0/2.0 accelerator_type:GeForce-RTX-5090)
+Current best trial: 3cb72_00006 with val_acc=0.99035 and params={'lr': 5.0, 'l2': 0.0, 'epochs': 50}
+╭────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name          status         lr     l2     iter     total time (s)     val_acc     epoch │
+├────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_3cb72_00000   TERMINATED   0.01   0          50           7.50886     0.977925        50 │
+│ train_3cb72_00001   TERMINATED   0.01   0.01       50           7.31719     0.977925        50 │
+│ train_3cb72_00002   TERMINATED   0.1    0          50           0.682991    0.982475        50 │
+│ train_3cb72_00003   TERMINATED   0.1    0.01       50           0.588859    0.9824          50 │
+│ train_3cb72_00004   TERMINATED   1      0          50           0.585411    0.9883          50 │
+│ train_3cb72_00005   TERMINATED   1      0.01       50           0.596441    0.987875        50 │
+│ train_3cb72_00006   TERMINATED   5      0          50           0.584307    0.99035         50 │
+│ train_3cb72_00007   TERMINATED   5      0.01       50           0.574677    0.988325        50 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────╯
+ config/lr  config/l2  val_acc                     gpu
+      5.00       0.00 0.990350 NVIDIA GeForce RTX 5090
+      5.00       0.01 0.988325 NVIDIA GeForce RTX 5090
+      1.00       0.00 0.988300 NVIDIA GeForce RTX 5090
+      1.00       0.01 0.987875 NVIDIA GeForce RTX 5090
+      0.10       0.00 0.982475 NVIDIA GeForce RTX 5090
+      0.10       0.01 0.982400 NVIDIA GeForce RTX 5090
+      0.01       0.00 0.977925 NVIDIA GeForce RTX 5090
+      0.01       0.01 0.977925 NVIDIA GeForce RTX 5090
+best: {'lr': 5.0, 'l2': 0.0, 'epochs': 50}
+------------------------------------------
+Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
+------------------------------------------
+</code></pre></div>
+<ul>
+<li>The first trial on each GPU took about 7.5 s to compile CuPy's GPU code; the rest took under 0.7 s.</li>
+<li><code>lr=5.0</code> with no L2 won at 99.0% validation accuracy.</li>
+</ul>
+<p>Each trial has a folder under <code>/home/&lt;your username&gt;/ray-results/lr-l2-sweep/</code>:</p>
+<div class="highlight"><pre><span></span><code>train_3cb72_00006_6_l2=0.0000,lr=5.0000_2026-10-03_00-51-27/
+├── params.json      the settings of this trial
+├── progress.csv     one row per epoch
+├── result.json      the same rows as JSON
+└── events.out.tfevents.*   for TensorBoard
+</code></pre></div>
+<h2 id="step-5-end-the-session">Step 5: End the session<a class="headerlink" href="#step-5-end-the-session" title="Permanent link">&para;</a></h2>
+<p>The session closes after 30 minutes with no job. To release the GPUs now, select <strong>End session</strong> under <strong>Ray sessions</strong> on the project's <strong>Pod</strong> tab. The files in your storage stay.</p>
+<h2 id="what-you-built">What you built<a class="headerlink" href="#what-you-built" title="Permanent link">&para;</a></h2>
+<p>A sweep you edit on your laptop and run on the platform's GPUs, two trials at a time, with results kept in your storage. To use it for your own work:</p>
+<ul>
+<li>Replace <code>make_data</code> and the loop in <code>train</code> with your model; keep <code>tune.report</code>.</li>
+<li>Run more trials at once: raise <code>X-CSCC-GPUs</code> (at most 10), then end the session so the next submit starts a new cluster.</li>
+<li>Read data from your storage and leave it out of the upload with <code>.gitignore</code> (limit 500 MiB).</li>
+<li>Need PyTorch? Ask for it under <strong>Requests</strong> (<a href="../../user-guide/ray/#what-goes-in-the-upload-and-what-goes-in-the-image">details</a>).</li>
+</ul>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../user-guide/ray/">Ray jobs</a>: headers, quotas, errors</li>
+<li><a href="https://docs.ray.io/en/latest/tune/key-concepts.html">Ray Tune key concepts</a></li>
+<li><a href="https://docs.cupy.dev/en/stable/reference/environment.html">CuPy environment variables</a></li>
+</ul>
 
 
 
@@ -1660,7 +1968,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../basics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Start Here">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Use cases">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1670,20 +1978,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Start Here
+                Use cases
               </div>
             </div>
           </a>
         
         
           
-          <a href="../lab/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab Students">
+          <a href="../../user-guide/" class="md-footer__link md-footer__link--next" aria-label="Next: User guide">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Lab Students
+                User guide
               </div>
             </div>
             <div class="md-footer__button md-icon">

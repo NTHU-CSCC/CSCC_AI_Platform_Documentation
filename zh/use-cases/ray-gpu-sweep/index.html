@@ -10,17 +10,17 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/announcements/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/">
       
       
-        <link rel="prev" href="../requests/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../settings/">
+        <link rel="next" href="../../user-guide/">
       
       
         
-          <link rel="alternate" href="../../../user-guide/announcements/" hreflang="en">
+          <link rel="alternate" href="../../../use-cases/ray-gpu-sweep/" hreflang="en">
         
           <link rel="alternate" href="./" hreflang="zh">
         
@@ -31,7 +31,7 @@
     
     
       
-        <title>公告 - GPU Cluster Management Platform — User Guide</title>
+        <title>用 Ray 在多張 GPU 上搜尋參數 - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#ray-gpu" class="md-skip">
           跳轉到
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              公告
+              用 Ray 在多張 GPU 上搜尋參數
             
           </span>
         </div>
@@ -161,7 +161,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../user-guide/announcements/" hreflang="en" class="md-select__link">
+            <a href="../../../use-cases/ray-gpu-sweep/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -291,11 +291,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../use-cases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -313,13 +315,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../user-guide/" class="md-tabs__link">
           
   
   
@@ -609,110 +609,6 @@
       
   
   
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../use-cases/" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    使用案例
-  
-
-    
-  </span>
-  
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    使用案例
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../use-cases/ray-gpu-sweep/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    用 Ray 在多張 GPU 上搜尋參數
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -722,12 +618,6 @@
       
         
           
-        
-      
-        
-      
-        
-      
         
       
         
@@ -748,11 +638,267 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
             <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    使用案例
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    使用案例
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用 Ray 在多張 GPU 上搜尋參數
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用 Ray 在多張 GPU 上搜尋參數
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        會用到什麼
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 1：設定筆電
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 2：寫參數搜尋程式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 3：送出工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 4：看結果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 5：結束工作階段
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        成果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        延伸閱讀
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../user-guide/" class="md-nav__link ">
               
   
   
@@ -770,13 +916,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -812,20 +958,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -861,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../user-guide/getting-started/" class="md-nav__link">
         
   
   
@@ -889,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../policy/" class="md-nav__link">
+      <a href="../../user-guide/policy/" class="md-nav__link">
         
   
   
@@ -917,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/" class="md-nav__link">
+      <a href="../../user-guide/concepts/" class="md-nav__link">
         
   
   
@@ -945,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../home-dashboard/" class="md-nav__link">
+      <a href="../../user-guide/home-dashboard/" class="md-nav__link">
         
   
   
@@ -999,20 +1142,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   
@@ -1048,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../workspaces/" class="md-nav__link">
+      <a href="../../user-guide/workspaces/" class="md-nav__link">
         
   
   
@@ -1076,7 +1216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../desktops/" class="md-nav__link">
+      <a href="../../user-guide/desktops/" class="md-nav__link">
         
   
   
@@ -1104,7 +1244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../projects/" class="md-nav__link">
+      <a href="../../user-guide/projects/" class="md-nav__link">
         
   
   
@@ -1132,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ray/" class="md-nav__link">
+      <a href="../../user-guide/ray/" class="md-nav__link">
         
   
   
@@ -1160,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
+      <a href="../../user-guide/cli/" class="md-nav__link">
         
   
   
@@ -1208,20 +1348,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
             
   
   
@@ -1257,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../storage/" class="md-nav__link">
+      <a href="../../user-guide/storage/" class="md-nav__link">
         
   
   
@@ -1285,7 +1422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../groups/" class="md-nav__link">
+      <a href="../../user-guide/groups/" class="md-nav__link">
         
   
   
@@ -1318,10 +1455,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1336,21 +1471,18 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
             
   
   
@@ -1368,7 +1500,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1386,7 +1518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../requests/" class="md-nav__link">
+      <a href="../../user-guide/requests/" class="md-nav__link">
         
   
   
@@ -1411,37 +1543,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    公告
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../user-guide/announcements/" class="md-nav__link">
         
   
   
@@ -1457,59 +1562,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目錄
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        公告出現的位置
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        閱讀與標記
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1522,7 +1574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../settings/" class="md-nav__link">
+      <a href="../../user-guide/settings/" class="md-nav__link">
         
   
   
@@ -1585,10 +1637,76 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        公告出現的位置
+        會用到什麼
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 1：設定筆電
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 2：寫參數搜尋程式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 3：送出工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 4：看結果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 5：結束工作階段
       
     </span>
   </a>
@@ -1599,7 +1717,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        閱讀與標記
+        成果
       
     </span>
   </a>
@@ -1610,7 +1728,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        常見問題
+        延伸閱讀
       
     </span>
   </a>
@@ -1637,63 +1755,182 @@
   
 
 
-<h1 id="_1">公告<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>公告是管理員發給所有人的訊息，顯示在首頁儀表板，過期前都看得到。排程公告到發布時間才會出現。</p>
-<p><strong>適用對象：</strong> 所有已登入使用者。</p>
-<hr />
-<h2 id="_2">公告出現的位置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="ray-gpu">用 Ray 在多張 GPU 上搜尋參數<a class="headerlink" href="#ray-gpu" title="Permanent link">&para;</a></h1>
+<p>八組超參數在工作區一組一組試，GPU 一佔就是好幾個小時。改用 Ray 工作，從筆電把整批參數送出去，平台讓每張 GPU 各跑一組，一起跑。</p>
+<p>這篇用兩張 GPU 搜尋學習率和 L2。做完你會有：</p>
+<ul>
+<li>一支讓每組參數各用一張 GPU 的 Ray Tune 程式</li>
+<li>從筆電送出、在平台上跑的參數搜尋</li>
+<li>每組的結果存在你的儲存空間，並印出最佳組合</li>
+</ul>
+<p>下面的指令和輸出都來自 2026-10-03 在平台上實際跑的一次。</p>
+<h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>能連上 VPN、是某個專案的成員、有一個 API token（<a href="../../user-guide/settings/#api-tokens-and-cli">設定</a>）</li>
+<li>筆電上有 Python 3.10 以上</li>
+<li>專案裡有一個允許 2 張 GPU 的佇列</li>
+<li>大約 10 分鐘</li>
+</ul>
+<h2 id="_2">會用到什麼<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>位置</th>
-<th>顯示內容</th>
+<th>元件</th>
+<th>在哪裡跑</th>
+<th>做什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>首頁儀表板</strong></td>
-<td>置頂或未讀的公告，在頁面上方。</td>
+<td><code>ray</code> 指令</td>
+<td>你的筆電</td>
+<td>上傳資料夾、送出工作、顯示輸出</td>
 </tr>
 <tr>
-<td><strong>側邊欄 → 公告</strong></td>
-<td>所有還沒過期的公告，可切換全部 / 未讀。</td>
+<td>Ray 工作階段</td>
+<td>平台</td>
+<td>第一次送出時啟動，閒置 30 分鐘或到最長時限就結束</td>
 </tr>
 <tr>
-<td><strong>公告彈窗</strong></td>
-<td>完整標題、內容、優先級、發布時間和到期時間。</td>
+<td>GPU worker</td>
+<td>平台</td>
+<td>有幾組在跑就開幾個，最多 <code>X-CSCC-GPUs</code> 個</td>
 </tr>
 <tr>
-<td><strong>總覽彈窗</strong></td>
-<td>開啟或重新整理總覽時，未讀公告會一則一則彈出。順序是置頂、重要、警告、一般，同級的新到舊。其他頁面不會彈出。</td>
-</tr>
-<tr>
-<td><strong>通知鈴鐺</strong></td>
-<td>頁首鈴鐺的未讀數包含未讀公告，通知上方會列出最新三則。</td>
+<td><code>ray-results/</code></td>
+<td>你的儲存空間</td>
+<td>每組的設定和每個 epoch 的指標</td>
 </tr>
 </tbody>
 </table>
-<p>優先級分 <code>info</code>、<code>warning</code>、<code>critical</code>。Critical 通常是維護、服務異常，或你一定要處理的事。</p>
-<hr />
-<h2 id="_3">閱讀與標記<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ol>
-<li>從側邊欄開啟 <strong>公告</strong>，或點首頁公告列上的 <strong>查看全部</strong>。</li>
-<li>點公告，開啟詳細內容。</li>
-<li>按 <strong>我已閱讀</strong>。要按了才算已讀，只是打開不算。</li>
-</ol>
-<p>按 ✕、Escape、點視窗外面，或收起橫幅，都只是暫時收起來，下次進總覽還會再出現。</p>
-<p>儲存失敗時公告不會關，再按一次即可。已讀狀態會跨分頁、跨裝置同步。管理員看得到誰讀了、何時第一次讀。</p>
-<p>新公告會馬上更新鈴鐺，在總覽還會彈出。即時連線斷掉時，頁面約每分鐘檢查一次，切回視窗也會檢查。日期是台北時間。</p>
-<p>置頂公告讀過之後可能還是會顯示，直到管理員取消置頂或公告過期。</p>
-<hr />
-<h2 id="_4">常見問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>為什麼某則公告消失了？</summary>
-<p>可能過期了，或管理員把它移除了。</p>
-</details>
-<details class="question">
-<summary>可以回覆公告嗎？</summary>
-<p>不行。想問公告內容或需要協助，請送一筆<a href="../requests/">申請</a>。</p>
-</details>
+<h2 id="1">步驟 1：設定筆電<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>裝 Ray、讓它信任平台的<a href="../../../assets/cscc-root-ca.pem">根憑證</a>，再填你要的資源。每一行的意思見<a href="../../user-guide/ray/#submit-a-job">提交工作</a>。</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_ADDRESS</span><span class="o">=</span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray
+</code></pre></div>
+<p>設了 <code>RAY_ADDRESS</code>，<code>ray job</code> 指令就不用再加 <code>--address</code>。方案和佇列允許多種 GPU 型號時，標頭再加上 <code>"X-CSCC-GPU-Model":"&lt;型號&gt;"</code>。</p>
+<h2 id="2">步驟 2：寫參數搜尋程式<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>平台的 Ray 映像有 NumPy、CuPy、pandas、Ray Tune 和 Ray Data，沒有 PyTorch，所以模型用 CuPy 寫邏輯斯迴歸（logistic regression）。在空資料夾存成 <code>sweep.py</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="sd">"""Sweep learning rate and L2 strength for a logistic-regression model on GPU.</span>
+
+<span class="sd">Each trial trains on one GPU with CuPy; Ray Tune runs one trial per GPU worker.</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">cupy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ray</span><span class="w"> </span><span class="kn">import</span> <span class="n">tune</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_data</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">200_000</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">w_true</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">w_true</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">split</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">()</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"epochs"</span><span class="p">]):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">w</span><span class="p">)))</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s2">"l2"</span><span class="p">]</span> <span class="o">*</span> <span class="n">w</span>
+        <span class="n">w</span> <span class="o">-=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"lr"</span><span class="p">]</span> <span class="o">*</span> <span class="n">grad</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(((</span><span class="n">xv</span> <span class="o">@</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">yv</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="n">tune</span><span class="o">.</span><span class="n">report</span><span class="p">({</span><span class="s2">"val_acc"</span><span class="p">:</span> <span class="n">acc</span><span class="p">,</span> <span class="s2">"epoch"</span><span class="p">:</span> <span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="s2">"gpu"</span><span class="p">:</span> <span class="n">cp</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">runtime</span><span class="o">.</span><span class="n">getDeviceProperties</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">()})</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--out"</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"results folder in your storage"</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">tune</span><span class="o">.</span><span class="n">Tuner</span><span class="p">(</span>
+        <span class="n">tune</span><span class="o">.</span><span class="n">with_resources</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="p">{</span><span class="s2">"gpu"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}),</span>
+        <span class="n">param_space</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"lr"</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">grid_search</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]),</span>
+            <span class="s2">"l2"</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">grid_search</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]),</span>
+            <span class="s2">"epochs"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="n">tune_config</span><span class="o">=</span><span class="n">tune</span><span class="o">.</span><span class="n">TuneConfig</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s2">"val_acc"</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"max"</span><span class="p">),</span>
+        <span class="n">run_config</span><span class="o">=</span><span class="n">tune</span><span class="o">.</span><span class="n">RunConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"lr-l2-sweep"</span><span class="p">,</span> <span class="n">storage_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get_dataframe</span><span class="p">()[[</span><span class="s2">"config/lr"</span><span class="p">,</span> <span class="s2">"config/l2"</span><span class="p">,</span> <span class="s2">"val_acc"</span><span class="p">,</span> <span class="s2">"gpu"</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"val_acc"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"best:"</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get_best_result</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+</code></pre></div>
+<p>① <code>tune.with_resources(train, {"gpu": 1})</code>：每組用一張 GPU，有幾組在跑就開幾個 worker。
+② <code>storage_path=args.out</code>：結果寫到儲存空間。叢集一關，它自己的磁碟就清掉了。</p>
+<h2 id="3">步驟 3：送出工作<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>sweep.py<span class="w"> </span>--out<span class="w"> </span>/home/&lt;你的使用者名稱&gt;/ray-results
+</code></pre></div>
+<p>這次第一次送出後 17 秒工作階段就好了，最久可能要一分鐘。接著指令會一路顯示輸出到工作結束。</p>
+<h2 id="4">步驟 4：看結果<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Trial status: 8 TERMINATED
+Current time: 2026-10-03 00:51:44. Total running time: 17s
+Logical resource usage: 0/8 CPUs, 1.0/2 GPUs (0.0/2.0 accelerator_type:GeForce-RTX-5090)
+Current best trial: 3cb72_00006 with val_acc=0.99035 and params={'lr': 5.0, 'l2': 0.0, 'epochs': 50}
+╭────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name          status         lr     l2     iter     total time (s)     val_acc     epoch │
+├────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ train_3cb72_00000   TERMINATED   0.01   0          50           7.50886     0.977925        50 │
+│ train_3cb72_00001   TERMINATED   0.01   0.01       50           7.31719     0.977925        50 │
+│ train_3cb72_00002   TERMINATED   0.1    0          50           0.682991    0.982475        50 │
+│ train_3cb72_00003   TERMINATED   0.1    0.01       50           0.588859    0.9824          50 │
+│ train_3cb72_00004   TERMINATED   1      0          50           0.585411    0.9883          50 │
+│ train_3cb72_00005   TERMINATED   1      0.01       50           0.596441    0.987875        50 │
+│ train_3cb72_00006   TERMINATED   5      0          50           0.584307    0.99035         50 │
+│ train_3cb72_00007   TERMINATED   5      0.01       50           0.574677    0.988325        50 │
+╰────────────────────────────────────────────────────────────────────────────────────────────────╯
+ config/lr  config/l2  val_acc                     gpu
+      5.00       0.00 0.990350 NVIDIA GeForce RTX 5090
+      5.00       0.01 0.988325 NVIDIA GeForce RTX 5090
+      1.00       0.00 0.988300 NVIDIA GeForce RTX 5090
+      1.00       0.01 0.987875 NVIDIA GeForce RTX 5090
+      0.10       0.00 0.982475 NVIDIA GeForce RTX 5090
+      0.10       0.01 0.982400 NVIDIA GeForce RTX 5090
+      0.01       0.00 0.977925 NVIDIA GeForce RTX 5090
+      0.01       0.01 0.977925 NVIDIA GeForce RTX 5090
+best: {'lr': 5.0, 'l2': 0.0, 'epochs': 50}
+------------------------------------------
+Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
+------------------------------------------
+</code></pre></div>
+<ul>
+<li>每張 GPU 的第一組要先編譯 CuPy 的 GPU 程式，花了約 7.5 秒；其他都不到 0.7 秒。</li>
+<li><code>lr=5.0</code>、不加 L2 最好，驗證準確率 99.0%。</li>
+</ul>
+<p>每組在 <code>/home/&lt;你的使用者名稱&gt;/ray-results/lr-l2-sweep/</code> 底下有自己的資料夾：</p>
+<div class="highlight"><pre><span></span><code>train_3cb72_00006_6_l2=0.0000,lr=5.0000_2026-10-03_00-51-27/
+├── params.json      這組參數
+├── progress.csv     每個 epoch 一列
+├── result.json      同樣的紀錄，JSON 格式
+└── events.out.tfevents.*   TensorBoard 可以直接讀
+</code></pre></div>
+<h2 id="5">步驟 5：結束工作階段<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>連續 30 分鐘沒有工作，工作階段會自己關。想馬上釋放 GPU，到專案的 <strong>Pod</strong> 分頁，在 <strong>Ray 工作階段</strong> 按 <strong>結束工作階段</strong>。儲存空間裡的檔案不受影響。</p>
+<h2 id="_3">成果<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>現在你可以在筆電上改程式，丟到平台的 GPU 一次跑兩組，結果留在儲存空間。換成你自己的工作：</p>
+<ul>
+<li>把 <code>make_data</code> 和 <code>train</code> 裡的迴圈換成你的模型，<code>tune.report</code> 留著。</li>
+<li>想同時跑更多組：調高 <code>X-CSCC-GPUs</code>（最多 10），再結束工作階段，下次送出才會用新設定。</li>
+<li>資料放在儲存空間直接讀；資料夾寫進 <code>.gitignore</code>，才不會跟著上傳（上限 500 MiB）。</li>
+<li>要 PyTorch：到 <strong>申請</strong> 頁申請（<a href="../../user-guide/ray/#what-goes-in-the-upload-and-what-goes-in-the-image">細節</a>）。</li>
+</ul>
+<h2 id="_4">延伸閱讀<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../user-guide/ray/">Ray 工作</a>：標頭、配額、錯誤訊息</li>
+<li><a href="https://docs.ray.io/en/latest/tune/key-concepts.html">Ray Tune 核心概念（英文）</a></li>
+<li><a href="https://docs.cupy.dev/en/stable/reference/environment.html">CuPy 環境變數（英文）</a></li>
+</ul>
 
 
 
@@ -1731,7 +1968,7 @@
       <nav class="md-footer__inner md-grid" aria-label="頁腳" >
         
           
-          <a href="../requests/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 申請">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 使用案例">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1741,20 +1978,20 @@
                 上一頁
               </span>
               <div class="md-ellipsis">
-                申請
+                使用案例
               </div>
             </div>
           </a>
         
         
           
-          <a href="../settings/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 設定">
+          <a href="../../user-guide/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 使用指南">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一頁
               </span>
               <div class="md-ellipsis">
-                設定
+                使用指南
               </div>
             </div>
             <div class="md-footer__button md-icon">
