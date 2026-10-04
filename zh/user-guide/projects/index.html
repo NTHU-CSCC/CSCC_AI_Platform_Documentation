@@ -2449,8 +2449,8 @@
 </tr>
 </tbody>
 </table>
-<p>只有映像裡的套件危及平台時，平台才會擋下。你自己 container 內的已知弱點不會擋。每一列還有一行原因和最後使用時間。<strong>通過</strong> 的列會寫有幾項發現只影響你的 container、幾項建議優先升級，例如「3 項發現只影響這個 container（1 項建議優先升級）」。平台關閉映像檢查時，卡片會顯示「映像安全檢查已關閉。」</p>
-<p>點任一列可看升級清單：每個套件、你目前的版本與要升級到的版本，建議優先升級的排在最上面。<strong>未通過</strong> 的列顯示 <strong>如何避免被擋下</strong>，列出造成封鎖的套件。畫面不顯示弱點編號，只有管理員看得到。其他狀態沒有可展開的詳細內容。</p>
+<p>只有映像裡的套件危及平台時，平台才會擋下。你自己 container 內的已知弱點不會擋。每一列還有一行原因和最後使用時間。平台關閉映像檢查時，卡片會顯示「映像安全檢查已關閉。」</p>
+<p>點 <strong>未通過</strong> 的列可看要升級什麼：每個造成封鎖的套件、你目前的版本與要升級到的版本。畫面不顯示弱點編號，只有管理員看得到。其他狀態沒有可展開的詳細內容。</p>
 <p><strong>未通過</strong> 的訊息是：<code>&lt;image&gt;</code>: blocked by the platform because <code>&lt;package&gt; &lt;version&gt;</code> is unsafe to run here. Upgrade it to <code>&lt;fix version&gt;</code> or later (rebuild on a newer base, or pick a newer tag)。<strong>錯誤</strong> 的列也可能寫映像在 Docker Hub 找不到，或該 registry 不支援，請改用 Docker Hub、GHCR、NGC 或這個專案的映像。</p>
 <p>要修正，就換較新的基底映像標籤重建，或在 Dockerfile 用 apt、apk、dnf、pip 把列出的套件升到修補版本以上，再重跑任務。公開映像（例如 Docker Hub 的）改用較新的標籤。平台映像改選其他版本，或找管理員。</p>
 <p>卡片只顯示每個映像的最新結果，不是歷史紀錄。用到第 11 個映像時，最舊的一列會被擠掉。</p>
