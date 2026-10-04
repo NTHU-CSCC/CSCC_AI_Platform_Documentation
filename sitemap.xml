@@ -50,11 +50,46 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/"/>
     </url>
     <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/cli-build-image/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/cli-build-image/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/cli-build-image/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/config-file-ddp/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/config-file-ddp/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/config-file-ddp/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/llm-vllm-multi-gpu/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/llm-vllm-multi-gpu/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/llm-vllm-multi-gpu/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-batch-inference/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-batch-inference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-batch-inference/"/>
+    </url>
+    <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-gpu-sweep/</loc>
         <lastmod>2026-10-04</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-gpu-sweep/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/remote-desktop-tensorboard/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/remote-desktop-tensorboard/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/remote-desktop-tensorboard/"/>
     </url>
     <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/user-guide/</loc>
@@ -211,11 +246,46 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/"/>
     </url>
     <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/cli-build-image/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/cli-build-image/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/cli-build-image/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/config-file-ddp/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/config-file-ddp/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/config-file-ddp/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/llm-vllm-multi-gpu/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/llm-vllm-multi-gpu/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/llm-vllm-multi-gpu/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-batch-inference/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-batch-inference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-batch-inference/"/>
+    </url>
+    <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/</loc>
         <lastmod>2026-10-04</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-gpu-sweep/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/remote-desktop-tensorboard/</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/remote-desktop-tensorboard/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/remote-desktop-tensorboard/"/>
     </url>
     <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/</loc>

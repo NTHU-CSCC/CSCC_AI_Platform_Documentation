@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../llm-vllm-multi-gpu/">
       
       
-        <link rel="next" href="../../user-guide/">
+        <link rel="next" href="../ray-batch-inference/">
       
       
         
@@ -622,6 +622,14 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -678,6 +686,164 @@
           <ul class="md-nav__list" data-md-scrollfix>
             
               
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大型語言模型推論
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    大型語言模型推論
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm-vllm-multi-gpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用兩張 GPU 跑 14B 模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ray
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ray
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -768,7 +934,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#step-1-set-up-your-laptop" class="md-nav__link">
     <span class="md-ellipsis">
       
         步驟 1：設定筆電
@@ -847,6 +1013,327 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ray-batch-inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用 Ray Data 批次推論
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config file
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Config file
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../config-file-ddp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用 config file 在兩張 GPU 上訓練
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    映像與 CLI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    映像與 CLI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli-build-image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    從筆電建置映像
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU 桌面
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GPU 桌面
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote-desktop-tensorboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    在 GPU 桌面看訓練結果
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1659,7 +2146,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#step-1-set-up-your-laptop" class="md-nav__link">
     <span class="md-ellipsis">
       
         步驟 1：設定筆電
@@ -1756,19 +2243,19 @@
 
 
 <h1 id="ray-gpu">用 Ray 在多張 GPU 上搜尋參數<a class="headerlink" href="#ray-gpu" title="Permanent link">&para;</a></h1>
-<p>八組超參數在工作區一組一組試，GPU 一佔就是好幾個小時。改用 Ray 工作，從筆電把整批參數送出去，平台讓每張 GPU 各跑一組，一起跑。</p>
-<p>這篇用兩張 GPU 搜尋學習率和 L2。做完你會有：</p>
+<p>在工作區裡一組一組試超參數，八組試完，一張 GPU 就被佔掉好幾個小時。改用 Ray 工作，在筆電上一次送出八組，平台會讓每張 GPU 各跑一組。下面這次實測用兩張 RTX 5090，八組 17 秒就跑完。</p>
+<p>這篇用兩張 GPU 搜尋學習率和 L2 正則化強度。跟著做完，你會有：</p>
 <ul>
-<li>一支讓每組參數各用一張 GPU 的 Ray Tune 程式</li>
-<li>從筆電送出、在平台上跑的參數搜尋</li>
-<li>每組的結果存在你的儲存空間，並印出最佳組合</li>
+<li>一支 Ray Tune 程式，每組參數各用一張 GPU</li>
+<li>在筆電送出、在平台上執行的參數搜尋</li>
+<li>每組結果都存進你的儲存空間，最後印出最好的組合</li>
 </ul>
-<p>下面的指令和輸出都來自 2026-10-03 在平台上實際跑的一次。</p>
+<p>文中的指令和輸出，都是 2026-10-03 在平台上實際跑出來的。</p>
 <h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>能連上 VPN、是某個專案的成員、有一個 API token（<a href="../../user-guide/settings/#api-tokens-and-cli">設定</a>）</li>
-<li>筆電上有 Python 3.10 以上</li>
-<li>專案裡有一個允許 2 張 GPU 的佇列</li>
+<li>連得上 VPN，是某個專案的成員，也已經有 API token（在<a href="../../user-guide/settings/#api-tokens-and-cli">設定</a>建立）</li>
+<li>筆電裝了 Python 3.10 以上</li>
+<li>專案裡有一個能用 2 張 GPU 的佇列</li>
 <li>大約 10 分鐘</li>
 </ul>
 <h2 id="_2">會用到什麼<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1784,36 +2271,36 @@
 <tr>
 <td><code>ray</code> 指令</td>
 <td>你的筆電</td>
-<td>上傳資料夾、送出工作、顯示輸出</td>
+<td>上傳資料夾、送出工作、把輸出印回來</td>
 </tr>
 <tr>
 <td>Ray 工作階段</td>
 <td>平台</td>
-<td>第一次送出時啟動，閒置 30 分鐘或到最長時限就結束</td>
+<td>第一次送出時開起來，閒置 30 分鐘或到最長時限就關掉</td>
 </tr>
 <tr>
 <td>GPU worker</td>
 <td>平台</td>
-<td>有幾組在跑就開幾個，最多 <code>X-CSCC-GPUs</code> 個</td>
+<td>跑幾組就開幾個，上限是 <code>X-CSCC-GPUs</code></td>
 </tr>
 <tr>
 <td><code>ray-results/</code></td>
 <td>你的儲存空間</td>
-<td>每組的設定和每個 epoch 的指標</td>
+<td>每組的參數和每個 epoch 的指標</td>
 </tr>
 </tbody>
 </table>
-<h2 id="1">步驟 1：設定筆電<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>裝 Ray、讓它信任平台的<a href="../../../assets/cscc-root-ca.pem">根憑證</a>，再填你要的資源。每一行的意思見<a href="../../user-guide/ray/#submit-a-job">提交工作</a>。</p>
+<h2 id="step-1-set-up-your-laptop">步驟 1：設定筆電<a class="headerlink" href="#step-1-set-up-your-laptop" title="Permanent link">&para;</a></h2>
+<p>先裝 Ray。到<a href="../../user-guide/settings/#downloads">設定 → 安全性 → 下載</a>下載 <strong>根憑證</strong>，讓 Ray 信任平台，再用環境變數寫好要用多少資源。每一行在做什麼，<a href="../../user-guide/ray/#submit-a-job">提交工作</a>有說明。</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
 <span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
 <span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">RAY_ADDRESS</span><span class="o">=</span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray
 </code></pre></div>
-<p>設了 <code>RAY_ADDRESS</code>，<code>ray job</code> 指令就不用再加 <code>--address</code>。方案和佇列允許多種 GPU 型號時，標頭再加上 <code>"X-CSCC-GPU-Model":"&lt;型號&gt;"</code>。</p>
+<p>設好 <code>RAY_ADDRESS</code> 之後，<code>ray job</code> 就不用每次加 <code>--address</code>。如果你的方案和佇列有不只一種 GPU 型號，標頭要再加 <code>"X-CSCC-GPU-Model":"&lt;型號&gt;"</code> 指定。</p>
 <h2 id="2">步驟 2：寫參數搜尋程式<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>平台的 Ray 映像有 NumPy、CuPy、pandas、Ray Tune 和 Ray Data，沒有 PyTorch，所以模型用 CuPy 寫邏輯斯迴歸（logistic regression）。在空資料夾存成 <code>sweep.py</code>：</p>
+<p>平台的 Ray 映像有 NumPy、CuPy、pandas、Ray Tune 和 Ray Data，但沒有 PyTorch，所以這裡用 CuPy 寫一個邏輯斯迴歸（logistic regression）。開一個空資料夾，把下面的程式存成 <code>sweep.py</code>：</p>
 <div class="highlight"><pre><span></span><code><span class="sd">"""Sweep learning rate and L2 strength for a logistic-regression model on GPU.</span>
 
 <span class="sd">Each trial trains on one GPU with CuPy; Ray Tune runs one trial per GPU worker.</span>
@@ -1865,14 +2352,14 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"val_acc"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"best:"</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get_best_result</span><span class="p">()</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
 </code></pre></div>
-<p>① <code>tune.with_resources(train, {"gpu": 1})</code>：每組用一張 GPU，有幾組在跑就開幾個 worker。
-② <code>storage_path=args.out</code>：結果寫到儲存空間。叢集一關，它自己的磁碟就清掉了。</p>
+<p>① <code>tune.with_resources(train, {"gpu": 1})</code>：每組佔一張 GPU，所以有幾組在跑，Ray 就開幾個 worker。
+② <code>storage_path=args.out</code>：結果一定要寫進儲存空間。叢集關掉時，它自己的磁碟會一起清掉。</p>
 <h2 id="3">步驟 3：送出工作<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>sweep.py<span class="w"> </span>--out<span class="w"> </span>/home/&lt;你的使用者名稱&gt;/ray-results
 </code></pre></div>
-<p>這次第一次送出後 17 秒工作階段就好了，最久可能要一分鐘。接著指令會一路顯示輸出到工作結束。</p>
+<p>這次送出後 17 秒，工作階段就開好了，慢的時候要等到一分鐘左右。之後指令會持續印出輸出，直到工作結束。</p>
 <h2 id="4">步驟 4：看結果<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>Trial status: 8 TERMINATED
 Current time: 2026-10-03 00:51:44. Total running time: 17s
@@ -1905,10 +2392,10 @@ Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
 ------------------------------------------
 </code></pre></div>
 <ul>
-<li>每張 GPU 的第一組要先編譯 CuPy 的 GPU 程式，花了約 7.5 秒；其他都不到 0.7 秒。</li>
-<li><code>lr=5.0</code>、不加 L2 最好，驗證準確率 99.0%。</li>
+<li>每張 GPU 跑的第一組要先編譯 CuPy 的 GPU 程式，所以花了 7.5 秒左右，之後每組都不到 0.7 秒。</li>
+<li>最好的是 <code>lr=5.0</code>、不加 L2，驗證準確率 99.0%。</li>
 </ul>
-<p>每組在 <code>/home/&lt;你的使用者名稱&gt;/ray-results/lr-l2-sweep/</code> 底下有自己的資料夾：</p>
+<p>每一組在 <code>/home/&lt;你的使用者名稱&gt;/ray-results/lr-l2-sweep/</code> 底下都有自己的資料夾：</p>
 <div class="highlight"><pre><span></span><code>train_3cb72_00006_6_l2=0.0000,lr=5.0000_2026-10-03_00-51-27/
 ├── params.json      這組參數
 ├── progress.csv     每個 epoch 一列
@@ -1916,14 +2403,14 @@ Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
 └── events.out.tfevents.*   TensorBoard 可以直接讀
 </code></pre></div>
 <h2 id="5">步驟 5：結束工作階段<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<p>連續 30 分鐘沒有工作，工作階段會自己關。想馬上釋放 GPU，到專案的 <strong>Pod</strong> 分頁，在 <strong>Ray 工作階段</strong> 按 <strong>結束工作階段</strong>。儲存空間裡的檔案不受影響。</p>
+<p>連續 30 分鐘沒有送新工作，工作階段會自動結束。想馬上把 GPU 還回去，打開專案的 <strong>Ray</strong> 分頁，在 <strong>Ray 工作階段</strong> 按 <strong>結束工作階段</strong>。儲存空間裡的檔案都會留著。</p>
 <h2 id="_3">成果<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>現在你可以在筆電上改程式，丟到平台的 GPU 一次跑兩組，結果留在儲存空間。換成你自己的工作：</p>
+<p>現在你在筆電上改程式，就能丟到平台用兩張 GPU 同時跑，結果都留在儲存空間。換成你自己的實驗：</p>
 <ul>
-<li>把 <code>make_data</code> 和 <code>train</code> 裡的迴圈換成你的模型，<code>tune.report</code> 留著。</li>
-<li>想同時跑更多組：調高 <code>X-CSCC-GPUs</code>（最多 10），再結束工作階段，下次送出才會用新設定。</li>
-<li>資料放在儲存空間直接讀；資料夾寫進 <code>.gitignore</code>，才不會跟著上傳（上限 500 MiB）。</li>
-<li>要 PyTorch：到 <strong>申請</strong> 頁申請（<a href="../../user-guide/ray/#what-goes-in-the-upload-and-what-goes-in-the-image">細節</a>）。</li>
+<li>把 <code>make_data</code> 和 <code>train</code> 裡的迴圈換成你的模型，<code>tune.report</code> 那行要留著。</li>
+<li>想同時跑更多組，就調高 <code>X-CSCC-GPUs</code>（最多 10），然後結束目前的工作階段，下次送出才會套用。</li>
+<li>資料放在儲存空間，程式直接讀。把資料夾寫進 <code>.gitignore</code>，它就不會跟著上傳（上傳上限 500 MiB）。</li>
+<li>需要 PyTorch，到 <strong>申請</strong> 頁提出（<a href="../../user-guide/ray/#what-goes-in-the-upload-and-what-goes-in-the-image">細節</a>）。</li>
 </ul>
 <h2 id="_4">延伸閱讀<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1968,7 +2455,7 @@ Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
       <nav class="md-footer__inner md-grid" aria-label="頁腳" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 使用案例">
+          <a href="../llm-vllm-multi-gpu/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 用兩張 GPU 跑 14B 模型">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1978,20 +2465,20 @@ Job 'raysubmit_71nNXy53QVGeXzrW' succeeded
                 上一頁
               </span>
               <div class="md-ellipsis">
-                使用案例
+                用兩張 GPU 跑 14B 模型
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../user-guide/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 使用指南">
+          <a href="../ray-batch-inference/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 用 Ray Data 批次推論">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一頁
               </span>
               <div class="md-ellipsis">
-                使用指南
+                用 Ray Data 批次推論
               </div>
             </div>
             <div class="md-footer__button md-icon">
