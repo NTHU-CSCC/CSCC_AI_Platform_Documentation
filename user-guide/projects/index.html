@@ -1713,6 +1713,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#my-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        My images
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2393,6 +2404,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#my-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        My images
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2798,7 +2820,34 @@
 </tbody>
 </table>
 <p>Builds run one at a time from a shared queue. Each gets fixed CPU, memory and scratch space that doesn't count against your quota. The platform checks uploaded archives for unsafe paths and size limits first.</p>
-<p>The build engine shuts down when idle, so the next build waits about a minute for it to start.</p>
+<p>The build engine shuts down when idle and starts when you submit a build, so the first build waits about a minute. A queued build shows why it is waiting. If the engine or the build scratch space isn't ready within 20 minutes, the build fails with the reason.</p>
+<p>A build that can't finish fails with one of these messages instead of waiting:</p>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Build pod cannot start: \&lt;reason&gt;</strong></td>
+<td>The build could not get a place to run, or its image could not be pulled. Submit it again later.</td>
+</tr>
+<tr>
+<td><strong>Build did not start within N minutes. \&lt;wait message&gt;</strong></td>
+<td>The build engine or the build scratch space wasn't ready in time. The wait message says which. Submit it again later.</td>
+</tr>
+<tr>
+<td><strong>Build did not finish within N minutes</strong></td>
+<td>The build hit the time limit.</td>
+</tr>
+<tr>
+<td><strong>The build's Kubernetes Job was removed before it reported a result</strong></td>
+<td>The build was stopped from outside. Submit it again.</td>
+</tr>
+</tbody>
+</table>
 <p>The build history shows status, source type, destination image and live logs. A failed build shows a short summary; click the log button for the full output. After a retry, the log view keeps the previous failure reason above the current one.</p>
 <p>Each build row has icon buttons: <strong>Cancel build</strong> while it runs (<strong>Delete image artifact</strong> once it has produced an image), <strong>Clear saved logs</strong> and <strong>Delete history record</strong>.</p>
 <ul>
@@ -2807,6 +2856,9 @@
 <li><strong>Clear my completed build images</strong>: deletes every finished image you built in this project. History and saved logs stay. A tag ID that appears more than once is deleted once.</li>
 <li><strong>Delete history record</strong>: removes only the history and saved logs, not the image artifact. The image registry frees the space in its daily garbage collection, and a recently uploaded image may need two runs before it can be removed.</li>
 </ul>
+<h3 id="my-images">My images<a class="headerlink" href="#my-images" title="Permanent link">&para;</a></h3>
+<p><strong>My images</strong> in the sidebar lists the images you built, across all your projects: image and tag, project, size, digest, <strong>Security check</strong> and push time. Click the delete icon, then confirm, to remove an image. To run one, see <a href="../workspaces/#run-a-built-image">Docker in a workspace</a>.</p>
+<p>A config file's <code>image</code> field suggests the project's built images as you type. You can still enter any image.</p>
 <div class="admonition note">
 <p class="admonition-title">Build access is project-governed</p>
 <p>No start form means the project has <strong>Image Build Permission</strong> off or your role can't start builds. You can still see build history and logs. Ask a project manager or platform admin to change it.</p>
