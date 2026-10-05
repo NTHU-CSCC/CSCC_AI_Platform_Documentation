@@ -2885,7 +2885,8 @@
 <li>在專案開啟 <strong>設定 → Docker Hub 帳號</strong>，填入 <strong>使用者名稱</strong> 和 <strong>Access token</strong>，按 <strong>儲存</strong>。平台會先向 Docker Hub 驗證，不對就拒絕並顯示 <em>Docker Hub could not be reached with this username and token</em>。</li>
 <li>照一般方式使用：在任務、部署或工作區寫 <code>image: &lt;user&gt;/&lt;repo&gt;:&lt;tag&gt;</code>，或在專案的 IDE 裡 <code>docker run</code>。</li>
 </ol>
-<p>連線後，這一區會顯示 <em>已連結帳號 <code>&lt;username&gt;</code>，於 <code>&lt;time&gt;</code> 更新</em>。token 不會再顯示；要更換就重新儲存一個。<strong>移除</strong> 會先確認，再中斷連線並刪除專案已快取的私有映像。公開的 Docker Hub 映像不受影響。Dockerfile 的 <code>FROM</code> 不能用私有 Docker Hub 映像，請改用公開或平台的基底映像。</p>
+<p>連線後，這一區會顯示 <em>已連結帳號 <code>&lt;username&gt;</code>，於 <code>&lt;time&gt;</code> 更新</em>。token 不會再顯示；要更換就重新儲存一個。<strong>移除</strong> 會先確認，再中斷連線並刪除專案已快取的私有映像。公開的 Docker Hub 映像不受影響。Dockerfile 的 <code>FROM</code> 也可以用私有 Docker Hub 映像。</p>
+<p>成員在 IDE 執行過 <code>docker login</code> 的話，那是他個人的 Docker Hub 登入，平台會先用它，再用專案帳號。見<a href="../cli/#private-docker-hub-images">私有 Docker Hub 映像</a>。</p>
 <p>私有映像一樣會做安全檢查，而且只有這個專案能用。專案內任何成員的工作負載都能拉取該帳號的所有私有映像，請連專為專案準備的帳號和 token。</p>
 <h3 id="_11">映像安全檢查<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p><strong>總覽</strong> 分頁的 <strong>映像安全檢查</strong> 卡片，列出專案的任務與工作區最近啟動的 10 個映像，以及各自的狀態：</p>

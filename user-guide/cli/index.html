@@ -1914,6 +1914,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Docker Hub images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2526,6 +2537,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Private Docker Hub images
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#limits" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2845,7 +2867,16 @@ docker<span class="w"> </span>images
 </code></pre></div>
 <p><code>docker build</code> uploads the folder, builds it on the platform and stores the image in your project. The <code>FROM</code> image can come from any registry; the platform scans it automatically. <code>-f</code> takes a Dockerfile from any path, <code>--build-arg KEY=VALUE</code> and <code>.dockerignore</code> work as in Docker, and the Dockerfile is always sent. A bare name such as <code>myimg</code> or <code>myimg:v2</code> (no registry, no <code>/</code>) then runs your build instead of a public image of the same name. <code>docker images</code> lists your project's builds.</p>
 <p>Like <code>cscc-cli build</code>, building needs the Project Manager role or above and <strong>Image Build Permission</strong> on the project.</p>
-<p>Every image is security-checked before its container starts; <code>docker run</code> shows <code>Waiting: image security check…</code>. Weekday working hours limit download speed, so a large image's first start can take much longer. <code>docker pull</code> only prints a reminder; images are fetched at container start.</p>
+<p>Every image is security-checked before its container starts; <code>docker run</code> shows <code>Waiting: image security check…</code>. Weekday working hours limit download speed, so a large image's first start can take much longer. <code>docker pull</code> checks that the image exists and prints its digest; the container fetches it when it starts.</p>
+<h3 id="private-docker-hub-images">Private Docker Hub images<a class="headerlink" href="#private-docker-hub-images" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Run <code>docker login</code> and sign in with a Docker Hub access token (read-only scope is enough) in place of your password. It takes <code>-u</code>, <code>-p</code> and <code>--password-stdin</code>, or asks for them. It prints <code>Login Succeeded</code>.</li>
+<li>Use the image: <code>docker pull</code>, <code>docker run</code>, or <code>FROM</code> in a <code>docker build</code> Dockerfile. <code>docker info</code> shows the signed-in Docker Hub user.</li>
+<li>Run <code>docker logout</code> to remove the login.</li>
+</ol>
+<p>The login is personal. It works in every project and workspace you use, and other members can't use it. The platform keeps the token in its registry, never in your storage. Only Docker Hub (<code>docker.io</code>) is supported. Project managers and administrators can open a shell in your workspace, so they can act with your login there; use a read-only token. If your account shares a workspace name with another account, <code>docker login</code> is refused; ask an administrator.</p>
+<p>For a private image, the platform tries your login first, then the project's Docker Hub account (see <a href="../projects/">Projects</a>). A container that is already running keeps running after <code>docker logout</code>, but a restart fails to pull the image.</p>
+<p>A build with a private <code>FROM</code> image is stored in your project like any build, so every project member can run it, including the private base layers.</p>
 <h3 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2924,7 +2955,11 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td><code>docker build</code>, <code>images</code>, <code>pull</code></td>
-<td>Build an image, list your project's builds, print a reminder</td>
+<td>Build an image, list your project's builds, check that an image exists. A missing or private image fails with <code>pull access denied</code> (exit 1).</td>
+</tr>
+<tr>
+<td><code>docker login [-u] [-p] [--password-stdin]</code>, <code>logout</code></td>
+<td>Sign in to or out of Docker Hub. See <a href="#private-docker-hub-images">Private Docker Hub images</a>.</td>
 </tr>
 <tr>
 <td><code>docker container ls</code>, <code>rm</code>, <code>prune</code>, <code>docker system prune</code></td>
@@ -2960,10 +2995,6 @@ docker<span class="w"> </span>images
 <tr>
 <td><code>stats</code>, <code>top</code>, <code>events</code></td>
 <td>The platform doesn't collect them. Use <code>docker exec NAME top</code>, or <code>docker ps</code> and <code>docker wait</code>.</td>
-</tr>
-<tr>
-<td><code>login</code></td>
-<td>The workspace is already signed in.</td>
 </tr>
 <tr>
 <td><code>-P</code>, <code>--network</code>, <code>--privileged</code>, <code>--cap-add</code>, <code>--device</code>, <code>--restart</code>, <code>--ipc</code>, <code>--pid</code>, UDP ports, <code>exec -u</code></td>
@@ -3034,7 +3065,19 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td><code>restart your workspace for full docker support</code></td>
-<td>The workspace is older than the update. Delete it and start a new one.</td>
+<td>The workspace is older than the update. Delete it and start a new one. <code>docker pull</code> prints only a reminder there, and <code>docker login</code> asks for a restart.</td>
+</tr>
+<tr>
+<td><code>pull access denied for X, repository does not exist or may require 'docker login'</code></td>
+<td>The image doesn't exist, or it is private and neither your login nor the project account can read it. Run <code>docker login</code>.</td>
+</tr>
+<tr>
+<td><code>the IDE is already signed in to the platform registry; to sign the CLI in, run cscc-cli login</code> after <code>docker login</code></td>
+<td>The workspace started from an older image. Restart it; it then starts from the current image.</td>
+</tr>
+<tr>
+<td><code>docker login</code> fails with <code>too many Docker Hub login attempts, try again in a minute</code></td>
+<td>Too many attempts. Wait a minute and retry.</td>
 </tr>
 </tbody>
 </table>

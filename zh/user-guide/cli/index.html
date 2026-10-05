@@ -1914,6 +1914,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        私有 Docker Hub 映像
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2526,6 +2537,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#private-docker-hub-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        私有 Docker Hub 映像
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2844,7 +2866,16 @@ docker<span class="w"> </span>images
 </code></pre></div>
 <p><code>docker build</code> 會上傳資料夾，在平台上建置，再把映像存進你的專案。<code>FROM</code> 的映像可以來自任何映像倉庫。平台會自動掃描 base image，不需要先核准。<code>-f</code> 可以指定任何路徑的 Dockerfile，<code>--build-arg KEY=VALUE</code> 的用法和 Docker 相同。建置完成後，單純的名稱如 <code>myimg</code> 或 <code>myimg:v2</code>（沒有映像倉庫、沒有 <code>/</code>）會啟動你建置的映像，而不是同名的公開映像。<code>docker images</code> 列出專案的建置結果。資料夾裡的 <code>.dockerignore</code> 用法和 Docker 相同，Dockerfile 一律會送出。</p>
 <p>和 <code>cscc-cli build</code> 一樣，建置需要專案管理者（Project Manager）以上的角色，專案也要開啟 <strong>映像建置權限</strong>。</p>
-<p>容器啟動前，平台會檢查每個映像的安全性。檢查期間 <code>docker run</code> 會顯示 <code>Waiting: image security check…</code>。平日上班時段平台會限制網際網路的下載速度，大型映像第一次啟動可能慢很多。<code>docker pull</code> 只會印出提醒，因為平台會在容器啟動時取得映像。</p>
+<p>容器啟動前，平台會檢查每個映像的安全性。檢查期間 <code>docker run</code> 會顯示 <code>Waiting: image security check…</code>。平日上班時段平台會限制網際網路的下載速度，大型映像第一次啟動可能慢很多。<code>docker pull</code> 會確認映像存在並印出 digest，容器啟動時才真正取得映像。</p>
+<h3 id="private-docker-hub-images">私有 Docker Hub 映像<a class="headerlink" href="#private-docker-hub-images" title="Permanent link">&para;</a></h3>
+<ol>
+<li>執行 <code>docker login</code>，用 Docker Hub access token（唯讀權限就夠）代替密碼登入。可以帶 <code>-u</code>、<code>-p</code>、<code>--password-stdin</code>，不帶的話會互動詢問。成功會印出 <code>Login Succeeded</code>。</li>
+<li>使用映像：<code>docker pull</code>、<code>docker run</code>，或在 <code>docker build</code> 的 Dockerfile 裡 <code>FROM</code>。<code>docker info</code> 會顯示登入的 Docker Hub 使用者。</li>
+<li>要移除登入就執行 <code>docker logout</code>。</li>
+</ol>
+<p>這個登入只屬於你。你用到的每個專案和工作區都能用，其他成員不能用。token 存在平台的映像倉庫，不會放進你的儲存空間。只支援 Docker Hub（<code>docker.io</code>）。專案管理者和管理員能進你的工作區開 shell，所以在那裡也能用你的登入，請用唯讀 token。如果你的帳號跟別的帳號對應到同一個工作區名稱，<code>docker login</code> 會被拒絕，請找管理員處理。</p>
+<p>拉私有映像時，平台先用你的登入，再用專案的 Docker Hub 帳號（見<a href="../projects/">專案</a>）。已經在跑的容器登出後照常執行，但重啟時會拉不到映像。</p>
+<p>用私有 <code>FROM</code> 映像建置的結果和一般建置一樣存在專案裡，所有專案成員都能執行，包含裡面的私有 base 層。</p>
 <h3 id="_12">限制<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2923,7 +2954,11 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td><code>docker build</code>、<code>images</code>、<code>pull</code></td>
-<td>建置映像、列出專案的建置結果、印出提醒</td>
+<td>建置映像、列出專案的建置結果、確認映像存在。映像不存在或是私有的，會失敗並顯示 <code>pull access denied</code>（結束碼 1）。</td>
+</tr>
+<tr>
+<td><code>docker login [-u] [-p] [--password-stdin]</code>、<code>logout</code></td>
+<td>登入或登出 Docker Hub。見<a href="#private-docker-hub-images">私有 Docker Hub 映像</a>。</td>
 </tr>
 <tr>
 <td><code>docker container ls</code>、<code>rm</code>、<code>prune</code>、<code>docker system prune</code></td>
@@ -2959,10 +2994,6 @@ docker<span class="w"> </span>images
 <tr>
 <td><code>stats</code>、<code>top</code>、<code>events</code></td>
 <td>平台不收集這些資料。用 <code>docker exec NAME top</code>，或 <code>docker ps</code> 和 <code>docker wait</code>。</td>
-</tr>
-<tr>
-<td><code>login</code></td>
-<td>工作區已經登入。</td>
 </tr>
 <tr>
 <td><code>-P</code>、<code>--network</code>、<code>--privileged</code>、<code>--cap-add</code>、<code>--device</code>、<code>--restart</code>、<code>--ipc</code>、<code>--pid</code>、UDP 連接埠、<code>exec -u</code></td>
@@ -3033,7 +3064,19 @@ docker<span class="w"> </span>images
 </tr>
 <tr>
 <td><code>restart your workspace for full docker support</code></td>
-<td>這個工作區是更新前啟動的。刪除它再啟動新的。</td>
+<td>這個工作區是更新前啟動的。刪除它再啟動新的。在這種工作區，<code>docker pull</code> 只印提醒，<code>docker login</code> 會要你重啟。</td>
+</tr>
+<tr>
+<td><code>pull access denied for X, repository does not exist or may require 'docker login'</code></td>
+<td>映像不存在，或是私有的，而你的登入和專案帳號都讀不到。執行 <code>docker login</code>。</td>
+</tr>
+<tr>
+<td><code>docker login</code> 後出現 <code>the IDE is already signed in to the platform registry; to sign the CLI in, run cscc-cli login</code></td>
+<td>這個工作區是用舊映像啟動的。重啟它，就會改用目前的映像。</td>
+</tr>
+<tr>
+<td><code>docker login</code> 顯示 <code>too many Docker Hub login attempts, try again in a minute</code></td>
+<td>嘗試太多次。等一分鐘再試。</td>
 </tr>
 </tbody>
 </table>
