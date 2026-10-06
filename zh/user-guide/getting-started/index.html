@@ -2547,7 +2547,7 @@
 <summary>進階：手動檢查 VPN 連線</summary>
 <p>開終端機執行 <code>nslookup dashboard.cscc.nthu.edu.tw</code>。解析得出來、儀表板也打得開，就是連上了。</p>
 <p>Windows 上 OpenVPN 顯示已連線、卻連不到 <code>192.168.109.1</code> 時，開 PowerShell 執行 <code>route print | findstr 192.168.109</code>。輸出要有一條走 OpenVPN 介面的 <code>192.168.109.0</code> 路由。沒有的話，重新匯入最新版 <code>Platform-VPN.ovpn</code>。</p>
-<p>設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器，並啟用 <code>block-outside-dns</code>，所以連線期間 Windows 只用這台 DNS。<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 可以確認平台 DNS，<code>http://192.168.109.1:30080</code> 用來測最底層的連線。</p>
+<p>設定檔會推送 <code>cscc.nthu.edu.tw</code> 的平台 DNS 伺服器，並啟用 <code>block-outside-dns</code>，所以連線期間 Windows 只用這台 DNS。<code>Resolve-DnsName dashboard.cscc.nthu.edu.tw</code> 可以確認平台 DNS；打開 <code>http://192.168.109.201</code> 可以測最底層的連線，只要有回應，就算是「404 Not Found」，網路也是通的。</p>
 </details>
 <details class="question">
 <summary>驗證碼輸入正確卻還是顯示錯誤</summary>
