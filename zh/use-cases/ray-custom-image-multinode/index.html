@@ -10,17 +10,17 @@
       
       
       
-        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/user-guide/home-dashboard/">
+        <link rel="canonical" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-custom-image-multinode/">
       
       
-        <link rel="prev" href="../concepts/">
+        <link rel="prev" href="../ray-batch-inference/">
       
       
-        <link rel="next" href="../workspaces/">
+        <link rel="next" href="../config-file-ddp/">
       
       
         
-          <link rel="alternate" href="../../../user-guide/home-dashboard/" hreflang="en">
+          <link rel="alternate" href="../../../use-cases/ray-custom-image-multinode/" hreflang="en">
         
           <link rel="alternate" href="./" hreflang="zh">
         
@@ -31,7 +31,7 @@
     
     
       
-        <title>首頁儀表板 - GPU Cluster Management Platform — User Guide</title>
+        <title>用自己的映像在多台機器跑 Ray - GPU Cluster Management Platform — User Guide</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#ray-gpu-nccl" class="md-skip">
           跳轉到
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              首頁儀表板
+              用自己的映像在多台機器跑 Ray
             
           </span>
         </div>
@@ -161,7 +161,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../user-guide/home-dashboard/" hreflang="en" class="md-select__link">
+            <a href="../../../use-cases/ray-custom-image-multinode/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -291,11 +291,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../use-cases/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -313,13 +315,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../user-guide/" class="md-tabs__link">
           
   
   
@@ -609,6 +609,8 @@
       
   
   
+    
+  
   
   
     
@@ -632,20 +634,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../use-cases/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -663,13 +668,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -699,17 +704,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
         
           
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
             
   
   
@@ -745,7 +753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/llm-vllm-multi-gpu/" class="md-nav__link">
+      <a href="../llm-vllm-multi-gpu/" class="md-nav__link">
         
   
   
@@ -778,8 +786,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -794,18 +804,21 @@
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
-          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
             
   
   
@@ -823,7 +836,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -841,7 +854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/ray-gpu-sweep/" class="md-nav__link">
+      <a href="../ray-gpu-sweep/" class="md-nav__link">
         
   
   
@@ -869,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/ray-batch-inference/" class="md-nav__link">
+      <a href="../ray-batch-inference/" class="md-nav__link">
         
   
   
@@ -894,10 +907,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../use-cases/ray-custom-image-multinode/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用自己的映像在多台機器跑 Ray
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -913,6 +953,147 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目錄">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目錄
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        會用到什麼
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 1：寫 Dockerfile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 2：建置映像
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 3：設定筆電
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-all-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 4：寫 all-reduce 測試
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 5：送出工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 6：看結果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 7：結束工作階段
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        成果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        延伸閱讀
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -943,17 +1124,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
         
           
-          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
             
   
   
@@ -989,7 +1173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/config-file-ddp/" class="md-nav__link">
+      <a href="../config-file-ddp/" class="md-nav__link">
         
   
   
@@ -1035,17 +1219,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
         
           
-          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="">
             
   
   
@@ -1081,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/cli-build-image/" class="md-nav__link">
+      <a href="../cli-build-image/" class="md-nav__link">
         
   
   
@@ -1127,17 +1314,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
         
           
-          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="">
             
   
   
@@ -1173,7 +1363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../use-cases/remote-desktop-tensorboard/" class="md-nav__link">
+      <a href="../remote-desktop-tensorboard/" class="md-nav__link">
         
   
   
@@ -1213,8 +1403,6 @@
       
   
   
-    
-  
   
   
     
@@ -1236,23 +1424,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../user-guide/" class="md-nav__link ">
               
   
   
@@ -1270,13 +1455,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1293,10 +1478,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -1313,21 +1496,18 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
   
   
@@ -1345,7 +1525,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1363,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting-started/" class="md-nav__link">
+      <a href="../../user-guide/getting-started/" class="md-nav__link">
         
   
   
@@ -1391,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../policy/" class="md-nav__link">
+      <a href="../../user-guide/policy/" class="md-nav__link">
         
   
   
@@ -1419,7 +1599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../concepts/" class="md-nav__link">
+      <a href="../../user-guide/concepts/" class="md-nav__link">
         
   
   
@@ -1444,37 +1624,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    首頁儀表板
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../user-guide/home-dashboard/" class="md-nav__link">
         
   
   
@@ -1490,103 +1643,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目錄">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目錄
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        元件說明
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        閱讀 GPU 可用性
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU Cluster Status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        資源使用歷史
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        最近活動
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        我的 GPU 任務
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1625,20 +1681,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
             
   
   
@@ -1674,7 +1727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../workspaces/" class="md-nav__link">
+      <a href="../../user-guide/workspaces/" class="md-nav__link">
         
   
   
@@ -1702,7 +1755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../desktops/" class="md-nav__link">
+      <a href="../../user-guide/desktops/" class="md-nav__link">
         
   
   
@@ -1730,7 +1783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../projects/" class="md-nav__link">
+      <a href="../../user-guide/projects/" class="md-nav__link">
         
   
   
@@ -1758,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ray/" class="md-nav__link">
+      <a href="../../user-guide/ray/" class="md-nav__link">
         
   
   
@@ -1786,7 +1839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
+      <a href="../../user-guide/cli/" class="md-nav__link">
         
   
   
@@ -1834,20 +1887,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
             
   
   
@@ -1883,7 +1933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../storage/" class="md-nav__link">
+      <a href="../../user-guide/storage/" class="md-nav__link">
         
   
   
@@ -1911,7 +1961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../groups/" class="md-nav__link">
+      <a href="../../user-guide/groups/" class="md-nav__link">
         
   
   
@@ -1961,20 +2011,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
         
           
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
             
   
   
@@ -2010,7 +2057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../requests/" class="md-nav__link">
+      <a href="../../user-guide/requests/" class="md-nav__link">
         
   
   
@@ -2038,7 +2085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../announcements/" class="md-nav__link">
+      <a href="../../user-guide/announcements/" class="md-nav__link">
         
   
   
@@ -2066,7 +2113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../settings/" class="md-nav__link">
+      <a href="../../user-guide/settings/" class="md-nav__link">
         
   
   
@@ -2129,10 +2176,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        元件說明
+        會用到什麼
       
     </span>
   </a>
@@ -2140,10 +2198,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu" class="md-nav__link">
+  <a href="#1-dockerfile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        閱讀 GPU 可用性
+        步驟 1：寫 Dockerfile
       
     </span>
   </a>
@@ -2151,10 +2209,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        GPU Cluster Status
+        步驟 2：建置映像
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 3：設定筆電
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-all-reduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 4：寫 all-reduce 測試
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 5：送出工作
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 6：看結果
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步驟 7：結束工作階段
       
     </span>
   </a>
@@ -2165,7 +2278,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        資源使用歷史
+        成果
       
     </span>
   </a>
@@ -2176,29 +2289,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        最近活動
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        我的 GPU 任務
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常見問題
+        延伸閱讀
       
     </span>
   </a>
@@ -2225,141 +2316,232 @@
   
 
 
-<h1 id="_1">首頁儀表板<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>首頁儀表板顯示還剩多少 GPU、你的配額用了多少、執行中的任務，以及最近送出的申請。</p>
-<p><strong>適用對象：</strong> 所有登入的使用者。</p>
-<hr />
-<h2 id="_2">元件說明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="ray-gpu-nccl">用自己的 Ray 映像，在多台機器的 GPU 上跑同一個 NCCL 工作<a class="headerlink" href="#ray-gpu-nccl" title="Permanent link">&para;</a></h1>
+<p>vLLM 的 data parallel 和大部分多 GPU 的 PyTorch 程式，每個 Ray worker 上都要有 PyTorch 和 NCCL，需要的 GPU 也常常超過一台機器的張數。平台的 Ray 映像沒有 PyTorch。加上 <code>X-CSCC-Image</code> 標頭，Ray 工作階段就會改用你自己建的映像，worker 也能分散在不同機器上。下面這次實測，三張 RTX 5090 分在兩台機器，組成同一個 NCCL group，all-reduce 的 bus bandwidth 是 0.74 GB/s。</p>
+<p>這篇先建一個含 PyTorch 和 vLLM 的 Ray 映像，再從筆電送出跨機器的 NCCL all-reduce。跟著做完，你會有：</p>
+<ul>
+<li>一個放在專案裡、Ray 工作階段能用的映像</li>
+<li>一個 worker 跑在不同機器上、都用這個映像的 Ray 工作階段</li>
+<li>實際量到的 worker 之間 NCCL 頻寬</li>
+</ul>
+<p>文中的指令和輸出，都是 2026-10-06 在平台上實際跑出來的。</p>
+<h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>連得上 VPN，在某個開了 <strong>映像建置權限</strong> 的專案裡有 <strong>管理者</strong> 角色，也已經有 API token（在<a href="../../user-guide/settings/#api-tokens-and-cli">設定</a>建立）</li>
+<li>從<a href="../../user-guide/settings/#downloads">設定 → 安全性 → 下載</a>拿到的 <code>cscc-cli</code> 和 <strong>根憑證</strong></li>
+<li>筆電裝了 Python 3.10 以上</li>
+<li>專案裡有一個能用 3 張以上 GPU 的佇列</li>
+<li>大約 45 分鐘，大部分是第一次建置映像</li>
+</ul>
+<h2 id="_2">會用到什麼<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>元件</th>
-<th>顯示內容</th>
-<th>更新時機</th>
+<th>在哪裡跑</th>
+<th>做什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>平台剩餘 GPU</strong></td>
-<td>全平台可用和已用的 GPU 單位，還有可搶佔佇列數</td>
-<td>頁面載入時，之後每 10 秒</td>
+<td><code>ray-vllm</code> 映像</td>
+<td>專案的映像倉庫</td>
+<td>Ray 2.58.0、PyTorch 2.9、vLLM 0.11.2</td>
 </tr>
 <tr>
-<td><strong>GPU Cluster Status</strong></td>
-<td>GPU 機器卡片（不顯示機器名稱），列出每張 GPU 的使用量</td>
-<td>頁面載入時，之後每 10 秒</td>
+<td><code>ray</code> 指令</td>
+<td>你的筆電</td>
+<td>上傳資料夾、送出工作、把輸出印回來</td>
 </tr>
 <tr>
-<td>專案數（標題列）</td>
-<td>你所屬的專案數，以及其中有計畫的有幾個</td>
-<td>頁面載入時，之後每 10 秒</td>
+<td>Ray 工作階段</td>
+<td>平台</td>
+<td>head 和 worker 都跑你的映像，一個 worker 一張 GPU</td>
 </tr>
 <tr>
-<td><strong>資源使用歷史</strong></td>
-<td>每個有計畫的專案，GPU/CPU/記憶體配額的已用量與總量，還有計畫時段狀態</td>
-<td>頁面載入時，之後每 10 秒；倒數每秒更新</td>
-</tr>
-<tr>
-<td><strong>最近活動</strong></td>
-<td>你最近送出的 8 筆申請</td>
-<td>頁面載入時，之後每 10 秒</td>
-</tr>
-<tr>
-<td><strong>我的 GPU 任務</strong></td>
-<td>你執行中的 GPU 任務，含 GPU 比例、記憶體與執行時間</td>
-<td>頁面載入時，之後每 15 秒</td>
+<td><code>allreduce.py</code></td>
+<td>worker</td>
+<td>一張 GPU 一個 NCCL rank，量 all-reduce 的時間</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="gpu">閱讀 GPU 可用性<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
-<p><strong>平台剩餘 GPU</strong> 顯示還剩多少 GPU。</p>
-<p><img alt="首頁儀表板 平台剩餘 GPU" src="../../../assets/screenshots/home-dashboard-overview.png" />
-<em>圖 1：首頁儀表板，顯示 GPU 可用量、資源使用量和執行中的任務。</em></p>
-<ol>
-<li>看 <strong>已分配 / 總數</strong>，例如 <code>6 / 8 GPUs</code>。</li>
-<li>可用 GPU = 總數 − 已分配。可用為 0 時，新工作區要排隊。</li>
-<li>卡片也會顯示 <strong>可搶佔佇列</strong> 數量。GPU 全部用完時，優先級較高的工作還是能啟動，因為平台會停掉可搶佔佇列裡優先級較低的工作區。</li>
-<li>管理員還會看到 <strong>查看報告</strong> 按鈕，點下去會開稽核頁面。</li>
-</ol>
-<div class="admonition info">
-<p class="admonition-title">有效 GPU 單位</p>
-<p>卡片算的是「有效」GPU 單位，不是整張卡。1 張 GPU 配 50% SM 比例算 0.5 GPU，而且要有工作在用才算。</p>
-</div>
-<hr />
-<h2 id="gpu-cluster-status">GPU Cluster Status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
-<p><strong>平台剩餘 GPU</strong> 下方的 <strong>GPU Cluster Status</strong> 網格，用小卡片列出每台 GPU 機器，不顯示真實的機器名稱：</p>
-<ul>
-<li><code>GPU node 1</code> 這類顯示名稱與 GPU 型號</li>
-<li>每張實體 GPU 及其編號與型號</li>
-<li>這台機器的 GPU 用掉幾份，例如 <code>3 / 8</code></li>
-<li>每張 GPU 的狀態長條與使用率</li>
-</ul>
-<p>送出工作前先看這個網格，就知道哪些型號有空，或哪台機器還放得下部分 GPU 的 claim。儀表板不會顯示其他使用者或工作的名稱。</p>
-<hr />
-<h2 id="_3">資源使用歷史<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>圖表列出你每個有計畫的專案的用量。沒有計畫的專案不會列出，全部都沒有計畫時，圖表會顯示提示。</p>
-<ul>
-<li>每個長條代表一個專案。</li>
-<li>填滿的部分是已用的配額（GPU 時數、CPU 時數或記憶體）。</li>
-<li>每個專案會標出計畫現在是全天開放、即將關閉、即將開啟，還是已過期。</li>
-<li>計畫時段的倒數每秒更新，不用重新整理。</li>
-</ul>
-<hr />
-<h2 id="_4">最近活動<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><strong>最近活動</strong> 列出你最近送出的 8 筆申請，附類型標籤和送出時間。點 <strong>查看全部</strong> 進申請頁面。</p>
-<hr />
-<h2 id="gpu_1">我的 GPU 任務<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
-<p><strong>我的 GPU 任務</strong> 表格列出你執行中的 GPU 任務（工作區與部署）。一列一個任務，跨多張卡的任務也只佔一列。</p>
+<h2 id="1-dockerfile">步驟 1：寫 Dockerfile<a class="headerlink" href="#1-dockerfile" title="Permanent link">&para;</a></h2>
+<p>在空資料夾裡存成 <code>Dockerfile</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">rayproject/ray:2.58.0-py311-gpu</span>
+
+<span class="k">USER</span><span class="w"> </span><span class="s">root</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>ibverbs-providers<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="k">USER</span><span class="w"> </span><span class="s">ray</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span><span class="s2">"vllm==0.11.2"</span><span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+</code></pre></div>
+<p>① Ray 一定要是 2.58.0，跟平台的 Ray 工作階段同一版。
+② 最後要切回 <code>USER ray</code>。worker 以 UID 1000 執行，在這個基底映像裡就是 <code>ray</code>。
+③ 有 <code>ibverbs-providers</code>，管理員幫專案開啟 <a href="../../user-guide/ray/#rdma-between-workers">RDMA 網路</a>後，NCCL 就能直接用；沒有的話 NCCL 只會走 TCP。</p>
+<p>建置失敗時：</p>
 <table>
 <thead>
 <tr>
-<th>欄位</th>
-<th>說明</th>
+<th>錯誤訊息</th>
+<th>解法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Status</strong></td>
-<td>一律是 <strong>Running</strong>；已結束的任務不會列出</td>
+<td><code>external Dockerfile frontend is not allowed</code></td>
+<td>刪掉 <code># syntax=</code> 那行</td>
 </tr>
 <tr>
-<td><strong>任務</strong></td>
-<td>任務 ID 的最後 8 個字元</td>
+<td><code>must be a regular file or directory</code></td>
+<td>資料夾裡的符號連結換成實際檔案</td>
 </tr>
 <tr>
-<td><strong>專案</strong></td>
-<td>所屬專案</td>
-</tr>
-<tr>
-<td><strong>GPU</strong></td>
-<td>持有的有效 GPU 比例，以及碰到幾張卡</td>
-</tr>
-<tr>
-<td><strong>記憶體</strong></td>
-<td>持有的 GPU 記憶體（GiB）</td>
-</tr>
-<tr>
-<td><strong>Running</strong></td>
-<td>已執行多久</td>
+<td><code>Dockerfile RUN instruction uses a disallowed flag</code></td>
+<td>把 <code>RUN</code> 裡的 <code>--mount=type=cache</code>、<code>secret</code> 或 <code>ssh</code> 拿掉</td>
 </tr>
 </tbody>
 </table>
-<p>這個表格只能看，不能操作。要開啟或刪除工作區，到<a href="../workspaces/">工作區</a>頁；部署在專案的 <strong>資源</strong> 分頁管理。</p>
-<hr />
-<h2 id="_5">常見問題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<details class="question">
-<summary>為什麼 <strong>平台剩餘 GPU</strong> 顯示 0？</summary>
-<p>卡片顯示的是「有效」可用量。符合條件的 GPU 或 SM 比例都被用掉時，就會顯示 0。工作區停止後，大約一分鐘內 GPU 就會空出來。</p>
-</details>
-<details class="question">
-<summary>最近活動是空的，有問題嗎？</summary>
-<p>沒有。這裡只列你送出過的申請。</p>
-</details>
-<details class="question">
-<summary>我執行中的工作區沒有出現在任務表格。</summary>
-<p>表格每 15 秒更新一次。下次更新後還沒出現，就按 <code>F5</code> 重新整理。</p>
-</details>
+<h2 id="2">步驟 2：建置映像<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>cscc-cli<span class="w"> </span>build<span class="w"> </span>--project<span class="w"> </span>&lt;project<span class="w"> </span>id&gt;<span class="w"> </span>--name<span class="w"> </span>ray-vllm<span class="w"> </span>--tag<span class="w"> </span><span class="m">2</span>.58.0-vllm0.11.2<span class="w"> </span>.
+</code></pre></div>
+<p>建置排入佇列時，<code>cscc-cli</code> 會印出映像的目的地。這次是：</p>
+<div class="highlight"><pre><span></span><code>Destination: 192.168.110.1:30003/p26000001/ray-vllm:2.58.0-vllm0.11.2
+</code></pre></div>
+<p>這次建置花了約 20 分鐘，大部分時間在下載 PyTorch 和 vLLM，映像約 11 GB。基底映像和套件不變時，重新建置會沿用快取的 layer。</p>
+<h2 id="3">步驟 3：設定筆電<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>裝好 Ray、信任平台的 <strong>根憑證</strong>，再把映像寫進標頭。每一行的意思見<a href="../../user-guide/ray/#submit-a-job">提交工作</a>。</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"ray[default]==2.58.0"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">REQUESTS_CA_BUNDLE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>~/Downloads/cscc-root-ca.pem
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"3","X-CSCC-Queue":"&lt;queue&gt;","X-CSCC-Image":"&lt;步驟 2 的目的地&gt;"}'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">RAY_ADDRESS</span><span class="o">=</span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>id&gt;/ray
+</code></pre></div>
+<p>要用 8 張 GPU，就把標頭改成 <code>"X-CSCC-GPUs":"8"</code>，執行時加 <code>--gpus 8</code>。</p>
+<h2 id="4-all-reduce">步驟 4：寫 all-reduce 測試<a class="headerlink" href="#4-all-reduce" title="Permanent link">&para;</a></h2>
+<p>在另一個空資料夾裡存成 <code>allreduce.py</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="sd">"""Measure NCCL all-reduce bandwidth across GPU workers on several machines."""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ray</span>
+
+
+<span class="nd">@ray</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">num_gpus</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rank</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s2">""</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ray</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">get_node_ip_address</span><span class="p">(),</span> <span class="n">port</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">mib</span><span class="p">,</span> <span class="n">iters</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">torch.distributed</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dist</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">MASTER_ADDR</span><span class="o">=</span><span class="n">addr</span><span class="p">,</span> <span class="n">MASTER_PORT</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">))</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">init_process_group</span><span class="p">(</span><span class="s2">"nccl"</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="o">=</span><span class="n">world</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">mib</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cuda"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">dist</span><span class="o">.</span><span class="n">all_reduce</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iters</span><span class="p">):</span>
+            <span class="n">dist</span><span class="o">.</span><span class="n">all_reduce</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">iters</span>
+        <span class="n">dist</span><span class="o">.</span><span class="n">destroy_process_group</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/proc/sys/kernel/random/boot_id"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">machine</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">busbw</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">world</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">world</span> <span class="o">/</span> <span class="n">seconds</span> <span class="o">/</span> <span class="mf">1e9</span>
+        <span class="k">return</span> <span class="n">rank</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(),</span> <span class="n">seconds</span> <span class="o">*</span> <span class="mf">1e3</span><span class="p">,</span> <span class="n">busbw</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--gpus"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--mib"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--iters"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">ranks</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rank</span><span class="o">.</span><span class="n">remote</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">gpus</span><span class="p">)]</span>
+    <span class="n">addr</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">endpoint</span><span class="o">.</span><span class="n">remote</span><span class="p">())</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">ray</span><span class="o">.</span><span class="n">get</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">gpus</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">mib</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">iters</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ranks</span><span class="p">)])</span>
+    <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">gpu</span><span class="p">,</span> <span class="n">ms</span><span class="p">,</span> <span class="n">busbw</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"rank </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">  machine </span><span class="si">{</span><span class="n">machine</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">gpu</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">ms</span><span class="si">:</span><span class="s2">7.1f</span><span class="si">}</span><span class="s2"> ms  </span><span class="si">{</span><span class="n">busbw</span><span class="si">:</span><span class="s2">5.2f</span><span class="si">}</span><span class="s2"> GB/s"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"machines: </span><span class="si">{</span><span class="nb">len</span><span class="p">({</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">rows</span><span class="p">})</span><span class="si">}</span><span class="s2">, GPUs: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="si">}</span><span class="s2">, "</span>
+          <span class="sa">f</span><span class="s2">"all-reduce </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">mib</span><span class="si">}</span><span class="s2"> MiB bus bandwidth: </span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">rows</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GB/s"</span><span class="p">)</span>
+</code></pre></div>
+<p>① <code>@ray.remote(num_gpus=1)</code>：一張 GPU 一個 actor，Ray 就會替每個 rank 開一個 worker。
+② rank 0 的位址加上一個沒被佔用的 port，當作 NCCL 的集合點。
+③ 同一台機器上的 worker 讀到的 <code>boot_id</code> 相同，數有幾種不同的值，就知道用了幾台機器。</p>
+<h2 id="5">步驟 5：送出工作<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--runtime-env-json<span class="w"> </span><span class="s1">'{"env_vars":{"NCCL_DEBUG":"INFO","NCCL_DEBUG_SUBSYS":"INIT,NET"}}'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>allreduce.py<span class="w"> </span>--gpus<span class="w"> </span><span class="m">3</span>
+</code></pre></div>
+<p>新映像的第一個工作，要等每台機器各下載一次映像，這次每台大約 2 分鐘。這段時間裡 <code>ray job submit</code> 可能提早結束：</p>
+<table>
+<thead>
+<tr>
+<th>訊息</th>
+<th>發生什麼事</th>
+<th>怎麼做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Failed to connect to Ray at address</code></td>
+<td>叢集 2 分鐘內沒準備好</td>
+<td>再執行一次同一個指令</td>
+</tr>
+<tr>
+<td><code>WebSocket connection closed unexpectedly with close code 1006</code></td>
+<td>工作已經收下，只是 worker 啟動時輸出串流斷了</td>
+<td>工作會繼續跑，用 <code>ray job logs &lt;job id&gt;</code> 和 <code>ray job status &lt;job id&gt;</code> 追蹤</td>
+</tr>
+</tbody>
+</table>
+<p>這次輸出串流在 2 分 23 秒時斷掉，工作在送出後 173 秒成功。worker 已經起來的叢集，同樣的工作只要 24 秒。</p>
+<h2 id="6">步驟 6：看結果<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>rank 0  machine 513bdbb4  NVIDIA GeForce RTX 5090    480.6 ms   0.74 GB/s
+rank 1  machine 513bdbb4  NVIDIA GeForce RTX 5090    480.6 ms   0.74 GB/s
+rank 2  machine 9e293410  NVIDIA GeForce RTX 5090    480.6 ms   0.74 GB/s
+machines: 2, GPUs: 3, all-reduce 256 MiB bus bandwidth: 0.74 GB/s
+</code></pre></div>
+<p><code>ray job status raysubmit_8X3jDzUBBWqFXkw3</code> 回報 <code>SUCCEEDED</code>。</p>
+<p>NCCL 的訊息看得出 rank 之間怎麼傳資料：</p>
+<div class="highlight"><pre><span></span><code>NCCL INFO NCCL version 2.27.5+cuda12.9
+NCCL INFO NET/IB : No device found.
+NCCL INFO Channel 00/0 : 0[0] -&gt; 1[0] [receive] via NET/Socket/0
+</code></pre></div>
+<ul>
+<li>兩個 rank 在同一台機器，第三個在另一台，三個都在同一個 NCCL group 裡。</li>
+<li><code>via NET/Socket</code> 代表走 TCP。同一台機器上的 rank 也一樣，因為每個 worker 是分開的。</li>
+<li>256 MiB 的 bus bandwidth 是 0.74 GB/s，一次 all-reduce 花 0.48 秒。幾次測下來介於 0.58 到 0.74 GB/s，設 <code>NCCL_SOCKET_NTHREADS=4</code>、<code>NCCL_NSOCKS_PERTHREAD=4</code> 也沒有變快，用預設值就好。</li>
+</ul>
+<p>每個 worker 會保留一張 GPU 和 16 GiB 記憶體。之前試過要 4 張 GPU，第四個 worker 一直在等：唯一還有空 GPU 的機器，記憶體不夠，程式也跟著卡住。送出前先到儀表板首頁的 <strong>GPU Cluster Status</strong> 看還有幾張空的 GPU。想少用幾張，就把 <code>--gpus</code> 調小；要調低 <code>X-CSCC-GPUs</code>，得先結束工作階段。</p>
+<h2 id="7">步驟 7：結束工作階段<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>想馬上把 GPU 還回去，打開專案的 <strong>Ray</strong> 分頁，在 <strong>Ray 工作階段</strong> 按 <strong>結束工作階段</strong>。</p>
+<h2 id="_3">成果<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>現在你有一個用自己映像、跨多台機器 GPU 的 Ray 工作階段，也知道 NCCL 的基準頻寬。換成你自己的工作：</p>
+<ul>
+<li>套件（PyTorch、vLLM）放進映像，程式碼用 <code>--working-dir</code> 上傳，改程式就不必重新建置。照 <code>allreduce.py</code> 的做法，一張 GPU 開一個 rank。</li>
+<li>在 Ray 上跑 vLLM 的 data parallel 時，模型權重放在群組儲存空間（<code>/mnt/shared/&lt;儲存空間名稱&gt;/...</code>），每個 worker 才讀得到同一個路徑。</li>
+<li><code>X-CSCC-Image</code> 用 tag 指定映像，重新建置就換新 tag；執行中的工作階段會一直用它開起來時的映像。</li>
+<li>worker 之間走 TCP，抓 0.6 到 0.7 GB/s：一次 256 MiB 的 all-reduce 大約半秒。每一步都要交換這麼多資料的工作，時間大多會花在網路上。</li>
+</ul>
+<h2 id="_4">延伸閱讀<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../user-guide/ray/">Ray 工作</a>：標頭、配額、錯誤、RDMA 網路</li>
+<li><a href="../cli-build-image/">從筆電建置映像</a></li>
+<li><a href="https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/env.html">NCCL 環境變數</a></li>
+<li><a href="https://docs.vllm.ai/en/latest/serving/data_parallel_deployment.html">vLLM data parallel 部署</a></li>
+</ul>
 
 
 
@@ -2397,7 +2579,7 @@
       <nav class="md-footer__inner md-grid" aria-label="頁腳" >
         
           
-          <a href="../concepts/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 概念與角色">
+          <a href="../ray-batch-inference/" class="md-footer__link md-footer__link--prev" aria-label="上一頁: 用 Ray Data 批次推論">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2407,20 +2589,20 @@
                 上一頁
               </span>
               <div class="md-ellipsis">
-                概念與角色
+                用 Ray Data 批次推論
               </div>
             </div>
           </a>
         
         
           
-          <a href="../workspaces/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 工作區">
+          <a href="../config-file-ddp/" class="md-footer__link md-footer__link--next" aria-label="下一頁: 用 config file 在兩張 GPU 上訓練">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一頁
               </span>
               <div class="md-ellipsis">
-                工作區
+                用 config file 在兩張 GPU 上訓練
               </div>
             </div>
             <div class="md-footer__button md-icon">

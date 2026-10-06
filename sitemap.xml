@@ -78,6 +78,13 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-batch-inference/"/>
     </url>
     <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-custom-image-multinode/</loc>
+        <lastmod>2026-10-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-custom-image-multinode/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-custom-image-multinode/"/>
+    </url>
+    <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-gpu-sweep/</loc>
         <lastmod>2026-10-06</lastmod>
         <changefreq>daily</changefreq>
@@ -272,6 +279,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-batch-inference/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-batch-inference/"/>
+    </url>
+    <url>
+        <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-custom-image-multinode/</loc>
+        <lastmod>2026-10-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-custom-image-multinode/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/use-cases/ray-custom-image-multinode/"/>
     </url>
     <url>
         <loc>https://nthu-cscc.github.io/CSCC_AI_Platform_Documentation/zh/use-cases/ray-gpu-sweep/</loc>

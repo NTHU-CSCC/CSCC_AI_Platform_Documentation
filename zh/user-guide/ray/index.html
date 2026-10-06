@@ -787,6 +787,8 @@
       
         
       
+        
+      
     
     
     
@@ -875,6 +877,34 @@
     
   
     用 Ray Data 批次推論
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../use-cases/ray-custom-image-multinode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用自己的映像在多台機器跑 Ray
   
 
     
@@ -1741,7 +1771,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#worker-rdma" class="md-nav__link">
+  <a href="#rdma-between-workers" class="md-nav__link">
     <span class="md-ellipsis">
       
         worker 之間的 RDMA
@@ -2198,7 +2228,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#worker-rdma" class="md-nav__link">
+  <a href="#rdma-between-workers" class="md-nav__link">
     <span class="md-ellipsis">
       
         worker 之間的 RDMA
@@ -2357,7 +2387,7 @@
 <li><code>runtime_env</code> 的下載（pip、conda、git）需要專案開啟對外網路。沒開的話，就把套件裝進映像，或從自己的儲存空間安裝。</li>
 </ul>
 <p>完整範例見<a href="../../use-cases/ray-gpu-sweep/">使用案例：用 Ray 在多張 GPU 上搜尋參數</a>。</p>
-<h2 id="worker-rdma">worker 之間的 RDMA<a class="headerlink" href="#worker-rdma" title="Permanent link">&para;</a></h2>
+<h2 id="rdma-between-workers">worker 之間的 RDMA<a class="headerlink" href="#rdma-between-workers" title="Permanent link">&para;</a></h2>
 <p>RDMA 由管理員逐專案開啟。開啟後，專案裡每個 worker 都會接上 25 Gbit/s 的 RoCE 網路，NCCL 不用設定就會使用。要和 TCP 比較，在工作的 <code>runtime_env</code> <code>env_vars</code> 設 <code>NCCL_IB_DISABLE=1</code>。</p>
 <p>你的映像需要 <code>ibverbs-providers</code> 套件，沒有的話 NCCL 會悄悄退回 TCP。用 <code>NCCL_DEBUG=INFO</code> 看 NCCL 日誌有沒有 <code>NET/IB</code>。</p>
 <h2 id="_5">錯誤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -2392,6 +2422,14 @@
 <tr>
 <td><code>503</code> 加 <code>Retry-After</code></td>
 <td>叢集還在啟動。再執行一次指令。如果超過幾分鐘還是這樣，請聯絡管理員。</td>
+</tr>
+<tr>
+<td><code>Failed to connect to Ray at address</code></td>
+<td>叢集 2 分鐘內沒準備好，常見於新映像還在下載。再執行一次同一個指令。</td>
+</tr>
+<tr>
+<td><code>WebSocket connection closed unexpectedly with close code 1006</code></td>
+<td>工作已經收下，只是輸出串流斷了，常見於 worker 啟動時。工作會繼續跑，用 <code>ray job logs &lt;job id&gt;</code> 追蹤。</td>
 </tr>
 <tr>
 <td>上傳失敗</td>

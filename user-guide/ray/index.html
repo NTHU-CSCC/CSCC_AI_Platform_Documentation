@@ -787,6 +787,8 @@
       
         
       
+        
+      
     
     
     
@@ -875,6 +877,34 @@
     
   
     Batch Inference with Ray Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../use-cases/ray-custom-image-multinode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your Own Image Across Machines with Ray
   
 
     
@@ -2392,6 +2422,14 @@
 <tr>
 <td><code>503</code> with <code>Retry-After</code></td>
 <td>The cluster is still starting. Run the command again. If it keeps happening for more than a few minutes, ask an admin.</td>
+</tr>
+<tr>
+<td><code>Failed to connect to Ray at address</code></td>
+<td>The cluster was not ready within 2 minutes, often while a new image downloads. Run the command again.</td>
+</tr>
+<tr>
+<td><code>WebSocket connection closed unexpectedly with close code 1006</code></td>
+<td>The job was accepted but the output stream dropped, often while workers start. The job keeps running; follow it with <code>ray job logs &lt;job id&gt;</code>.</td>
 </tr>
 <tr>
 <td>Upload fails</td>
