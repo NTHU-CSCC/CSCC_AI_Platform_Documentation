@@ -1741,6 +1741,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#worker-rdma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        worker 之間的 RDMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2187,6 +2198,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#worker-rdma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        worker 之間的 RDMA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2281,6 +2303,11 @@
 <td>要用哪種 GPU 型號</td>
 <td>你的方案和佇列只允許一種時，用那一種。允許多種就會提交失敗，要自己指定</td>
 </tr>
+<tr>
+<td><code>X-CSCC-Image</code></td>
+<td>head 與 worker 用的映像：專案可用於工作的任何映像，但不能是其他專案 Harbor 專案裡的映像，且須通過映像掃描。必須含 <code>ray[default]==2.58.0</code>，並以 UID 1000 執行</td>
+<td>平台的 Ray 映像</td>
+</tr>
 </tbody>
 </table>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -2289,7 +2316,7 @@
 <li><strong>GPU 時數</strong> 只算執行中的 worker。叢集結束後 GPU 就釋放。</li>
 <li>同一個專案裡，你同時最多持有 10 個 GPU claim，所以一個叢集最多 10 個 GPU worker。</li>
 </ul>
-<p>配額不夠時提交會馬上失敗，不會建立任何東西。請減少 GPU 或換佇列。</p>
+<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。</p>
 <h2 id="_2">第一次提交與叢集結束<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第一次提交要啟動新叢集，約 30–60 秒，指令最多等 2 分鐘。還沒就緒會回 <code>503</code>，再執行一次即可。之後的工作會馬上開始。</p>
 <p>出現以下任一情況，平台就會移除叢集：</p>
@@ -2326,10 +2353,13 @@
 <h2 id="what-goes-in-the-upload-and-what-goes-in-the-image">上傳的內容與映像的內容<a class="headerlink" href="#what-goes-in-the-upload-and-what-goes-in-the-image" title="Permanent link">&para;</a></h2>
 <ul>
 <li>上傳的是工作資料夾，壓成 zip，上限 500 MiB。<code>.gitignore</code> 列到的檔案不會上傳，所以資料集、模型權重和虛擬環境請寫進 <code>.gitignore</code>，或放在儲存空間。</li>
-<li>worker 用平台的 Ray 映像，內建 NumPy、CuPy、pandas、Ray Tune 和 Ray Data，沒有 PyTorch。需要其他大型套件，到 <strong>申請</strong> 頁申請加進映像。</li>
+<li>沒有指定 <code>X-CSCC-Image</code> 時，worker 用平台的 Ray 映像，內建 NumPy、CuPy、pandas、Ray Tune 和 Ray Data，沒有 PyTorch。需要其他大型套件，請自己建映像，再用 <code>X-CSCC-Image</code> 指定。</li>
 <li><code>runtime_env</code> 的下載（pip、conda、git）需要專案開啟對外網路。沒開的話，就把套件裝進映像，或從自己的儲存空間安裝。</li>
 </ul>
 <p>完整範例見<a href="../../use-cases/ray-gpu-sweep/">使用案例：用 Ray 在多張 GPU 上搜尋參數</a>。</p>
+<h2 id="worker-rdma">worker 之間的 RDMA<a class="headerlink" href="#worker-rdma" title="Permanent link">&para;</a></h2>
+<p>RDMA 由管理員逐專案開啟。開啟後，專案裡每個 worker 都會接上 25 Gbit/s 的 RoCE 網路，NCCL 不用設定就會使用。要和 TCP 比較，在工作的 <code>runtime_env</code> <code>env_vars</code> 設 <code>NCCL_IB_DISABLE=1</code>。</p>
+<p>你的映像需要 <code>ibverbs-providers</code> 套件，沒有的話 NCCL 會悄悄退回 TCP。用 <code>NCCL_DEBUG=INFO</code> 看 NCCL 日誌有沒有 <code>NET/IB</code>。</p>
 <h2 id="_5">錯誤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2341,7 +2371,7 @@
 <tbody>
 <tr>
 <td><code>400</code></td>
-<td><code>X-CSCC-Queue</code> 指到不存在的佇列。檢查名稱。</td>
+<td><code>X-CSCC-Queue</code> 指到不存在的佇列，或 <code>X-CSCC-Image</code> 不是有效的映像名稱。檢查設定值。</td>
 </tr>
 <tr>
 <td><code>401</code></td>
@@ -2353,7 +2383,7 @@
 </tr>
 <tr>
 <td><code>409</code> 或 <code>422</code></td>
-<td>要求違反配額或規則：GPU 太多、用了方案不允許的佇列或 GPU 型號、選了 burst 佇列，或超過 10 個 GPU claim。方案和佇列允許多種 GPU 型號時，要加 <code>X-CSCC-GPU-Model</code>。訊息會說明是哪一項。</td>
+<td>要求違反配額或規則：連一張 GPU 都放不下、<code>X-CSCC-Image</code> 來自其他專案或未通過映像掃描、用了方案不允許的佇列或 GPU 型號、選了 burst 佇列，或超過 10 個 GPU claim。方案和佇列允許多種 GPU 型號時，要加 <code>X-CSCC-GPU-Model</code>。訊息會說明是哪一項。</td>
 </tr>
 <tr>
 <td><code>422</code> 加原因</td>

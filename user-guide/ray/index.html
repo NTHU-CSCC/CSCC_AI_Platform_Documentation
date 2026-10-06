@@ -1741,6 +1741,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rdma-between-workers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RDMA between workers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2187,6 +2198,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rdma-between-workers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RDMA between workers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#errors" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2281,6 +2303,11 @@
 <td>Which GPU model to use</td>
 <td>The only model your plan and queue allow. If they allow several, the submit fails until you set it</td>
 </tr>
+<tr>
+<td><code>X-CSCC-Image</code></td>
+<td>Image for the head and workers: any image your project may use for jobs, except one from another project's Harbor project. The image scan applies. It must contain <code>ray[default]==2.58.0</code> and run as UID 1000</td>
+<td>The platform's Ray image</td>
+</tr>
 </tbody>
 </table>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
@@ -2289,7 +2316,7 @@
 <li><strong>GPU hours</strong> count only running workers.</li>
 <li>One project holds at most 10 GPU claims at once, so a cluster has at most 10 GPU workers.</li>
 </ul>
-<p>If the request does not fit, the submit fails and nothing is created; ask for fewer GPUs or another queue.</p>
+<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait.</p>
 <h2 id="first-submit-and-when-the-cluster-ends">First submit and when the cluster ends<a class="headerlink" href="#first-submit-and-when-the-cluster-ends" title="Permanent link">&para;</a></h2>
 <p>The first submit starts a cluster, which takes about 30–60 seconds. The command waits up to 2 minutes, then the platform answers <code>503</code>; run it again. Later jobs on the same cluster start at once.</p>
 <p>The platform removes the cluster after either of these:</p>
@@ -2326,10 +2353,13 @@
 <h2 id="what-goes-in-the-upload-and-what-goes-in-the-image">What goes in the upload and what goes in the image<a class="headerlink" href="#what-goes-in-the-upload-and-what-goes-in-the-image" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The upload is your working folder as a zip of at most 500 MiB. <code>.gitignore</code> matches are left out, so list datasets, model weights and virtual environments there, or keep them in storage.</li>
-<li>Workers run the platform's Ray image, which has NumPy, CuPy, pandas, Ray Tune and Ray Data, but not PyTorch. Large packages are not installed per job; ask for them in a <strong>Request</strong> for an image.</li>
+<li>Without <code>X-CSCC-Image</code>, workers run the platform's Ray image, which has NumPy, CuPy, pandas, Ray Tune and Ray Data, but not PyTorch. For other large packages, build your own image and name it in <code>X-CSCC-Image</code>.</li>
 <li><code>runtime_env</code> downloads (pip, conda, git) need the project's external network access. Without it, put the packages in the image or install them from your storage.</li>
 </ul>
 <p>For a complete run, see <a href="../../use-cases/ray-gpu-sweep/">Use case: sweep hyperparameters across GPUs</a>.</p>
+<h2 id="rdma-between-workers">RDMA between workers<a class="headerlink" href="#rdma-between-workers" title="Permanent link">&para;</a></h2>
+<p>An admin turns RDMA on per project. In such a project every worker gets the 25 Gbit/s RoCE network, and NCCL uses it without settings. To compare with TCP, set <code>NCCL_IB_DISABLE=1</code> in the job's <code>runtime_env</code> <code>env_vars</code>.</p>
+<p>Your image needs the <code>ibverbs-providers</code> package; without it NCCL silently falls back to TCP. Check the NCCL log (<code>NCCL_DEBUG=INFO</code>) for <code>NET/IB</code>.</p>
 <h2 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2341,7 +2371,7 @@
 <tbody>
 <tr>
 <td><code>400</code></td>
-<td><code>X-CSCC-Queue</code> names a queue that does not exist. Check the name.</td>
+<td><code>X-CSCC-Queue</code> names a queue that does not exist, or <code>X-CSCC-Image</code> is not a valid image reference. Check the value.</td>
 </tr>
 <tr>
 <td><code>401</code></td>
@@ -2353,7 +2383,7 @@
 </tr>
 <tr>
 <td><code>409</code> or <code>422</code></td>
-<td>The request breaks a quota or rule: too many GPUs, a queue or GPU model your plan does not allow, a burst queue, or the 10 GPU claim limit. If your plan and queue allow more than one GPU model, add <code>X-CSCC-GPU-Model</code>. The message says which.</td>
+<td>The request breaks a quota or rule: not even one GPU fits, an <code>X-CSCC-Image</code> from another project or one that fails the image scan, a queue or GPU model your plan does not allow, a burst queue, or the 10 GPU claim limit. If your plan and queue allow more than one GPU model, add <code>X-CSCC-GPU-Model</code>. The message says which.</td>
 </tr>
 <tr>
 <td><code>422</code> with a reason</td>
