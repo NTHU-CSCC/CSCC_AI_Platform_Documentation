@@ -2344,9 +2344,9 @@
 <ul>
 <li><strong>叢集開著的期間</strong>，你要的 GPU 會從專案的 GPU 配額和你個人的 GPU 上限扣掉，別人不能用。</li>
 <li><strong>GPU 時數</strong> 只算執行中的 worker。叢集結束後 GPU 就釋放。</li>
-<li>同一個專案裡，你同時最多持有 10 個 GPU claim，所以一個叢集最多 10 個 GPU worker。</li>
+<li>同一個專案裡，你同時最多持有 10 個 GPU claim，所以一個叢集最多 10 個 GPU worker。你在 <strong>GPU Claims</strong> 分頁建立的 claim，只要還在就佔掉一個名額，沒有工作在用也一樣。</li>
 </ul>
-<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。</p>
+<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。如果放不下是因為 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，提交會失敗，訊息會列出它們的名稱：刪掉不需要的，或調低 <code>X-CSCC-GPUs</code>。</p>
 <h2 id="_2">第一次提交與叢集結束<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第一次提交要啟動新叢集，約 30–60 秒，指令最多等 2 分鐘。還沒就緒會回 <code>503</code>，再執行一次即可。之後的工作會馬上開始。</p>
 <p>出現以下任一情況，平台就會移除叢集：</p>
@@ -2413,7 +2413,7 @@
 </tr>
 <tr>
 <td><code>409</code> 或 <code>422</code></td>
-<td>要求違反配額或規則：連一張 GPU 都放不下、<code>X-CSCC-Image</code> 來自其他專案或未通過映像掃描、用了方案不允許的佇列或 GPU 型號、選了 burst 佇列，或超過 10 個 GPU claim。方案和佇列允許多種 GPU 型號時，要加 <code>X-CSCC-GPU-Model</code>。訊息會說明是哪一項。</td>
+<td>要求違反配額或規則：連一張 GPU 都放不下、<code>X-CSCC-Image</code> 來自其他專案或未通過映像掃描、用了方案不允許的佇列或 GPU 型號、選了 burst 佇列，或超過 10 個 GPU claim（包含 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，訊息會列出名稱）。方案和佇列允許多種 GPU 型號時，要加 <code>X-CSCC-GPU-Model</code>。訊息會說明是哪一項。</td>
 </tr>
 <tr>
 <td><code>422</code> 加原因</td>

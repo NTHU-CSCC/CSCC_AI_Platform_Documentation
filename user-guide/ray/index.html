@@ -2344,9 +2344,9 @@
 <ul>
 <li><strong>While the cluster is open</strong>, the GPUs you asked for count against the project's GPU quota and your per-user GPU limit.</li>
 <li><strong>GPU hours</strong> count only running workers.</li>
-<li>One project holds at most 10 GPU claims at once, so a cluster has at most 10 GPU workers.</li>
+<li>You hold at most 10 GPU claims at once in a project, so a cluster has at most 10 GPU workers. Each claim you made on the <strong>GPU Claims</strong> tab takes one of the 10 while it exists, even when nothing uses it.</li>
 </ul>
-<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait.</p>
+<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait. If unused claims from the <strong>GPU Claims</strong> tab are the reason fewer GPUs fit, the submit fails and the message names them: delete the ones you no longer need, or lower <code>X-CSCC-GPUs</code>.</p>
 <h2 id="first-submit-and-when-the-cluster-ends">First submit and when the cluster ends<a class="headerlink" href="#first-submit-and-when-the-cluster-ends" title="Permanent link">&para;</a></h2>
 <p>The first submit starts a cluster, which takes about 30–60 seconds. The command waits up to 2 minutes, then the platform answers <code>503</code>; run it again. Later jobs on the same cluster start at once.</p>
 <p>The platform removes the cluster after either of these:</p>
@@ -2413,7 +2413,7 @@
 </tr>
 <tr>
 <td><code>409</code> or <code>422</code></td>
-<td>The request breaks a quota or rule: not even one GPU fits, an <code>X-CSCC-Image</code> from another project or one that fails the image scan, a queue or GPU model your plan does not allow, a burst queue, or the 10 GPU claim limit. If your plan and queue allow more than one GPU model, add <code>X-CSCC-GPU-Model</code>. The message says which.</td>
+<td>The request breaks a quota or rule: not even one GPU fits, an <code>X-CSCC-Image</code> from another project or one that fails the image scan, a queue or GPU model your plan does not allow, a burst queue, or the 10 GPU claim limit, including unused claims from the <strong>GPU Claims</strong> tab, which the message names. If your plan and queue allow more than one GPU model, add <code>X-CSCC-GPU-Model</code>. The message says which.</td>
 </tr>
 <tr>
 <td><code>422</code> with a reason</td>
