@@ -2459,7 +2459,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Idle shutdown</p>
-<p>A workspace with no activity for the idle limit under the list is stopped, GPU or not. Activity means opening pages, typing in the terminal or running a notebook; an open tab doesn't count. A workspace that is still computing keeps running; a background process using a fraction of a core isn't computing. Delete the stopped one and create a new one; files in mounted storage are kept.</p>
+<p>A workspace with no activity for the idle limit under the list is stopped, GPU or not. Time spent queued for a GPU doesn't count; the clock starts once the workspace has a node. Activity means opening pages, typing in the terminal or running a notebook; an open tab doesn't count. A workspace that is still computing keeps running; a background process using a fraction of a core isn't computing. Delete the stopped one and create a new one; files in mounted storage are kept.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Root shell</p>
