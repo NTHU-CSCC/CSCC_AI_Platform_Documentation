@@ -3029,7 +3029,7 @@
 <p>容器啟動後，到專案的 <strong>資源</strong> 分頁，留在 <strong>Pods</strong>，在那一列點 <strong>終端</strong>。Deployment 和 Job 沒有終端按鈕，它們建立的執行中項目在 <strong>Pods</strong> 裡。</p>
 <h3 id="_14">部署規則<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>配額算的是你所有還沒結束的工作，排隊等啟動的也佔配額，直到結束或移除。config file 可以部署 <code>Pod</code>、<code>Deployment</code> 和 <code>Job</code>，其他類型不接受。</p>
-<p>每個容器都要同時設定記憶體的 request 和 limit，而且至少 <code>128Mi</code>。少了任何一項，部署和 dry-run 驗證都會被拒絕。單位一定要寫：只寫 <code>memory: "1"</code> 是 1 byte，會被拒絕。</p>
+<p>每個容器都要同時設定記憶體的 request 和 limit，而且至少 <code>128Mi</code>。少了任何一項，部署和 dry-run 驗證都會被拒絕。單位一定要寫：只寫 <code>memory: "1"</code> 是 1 byte，會被拒絕。limit 最多是 request 的 1.9 倍；平台會自動把 request 調高到符合，設定檔部署也一樣。request 變高，Pod 排程時需要的節點空閒記憶體也會變多。</p>
 <h3 id="gpu">要 GPU 的兩種方式<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>直接寫在 config file 的 GPU 需求。</strong> 在資源精靈的容器資源設定選 GPU 型號。平台會把它算進配額、檢查型號在不在計畫允許的範圍內，並在部署時準備好 GPU。</li>
