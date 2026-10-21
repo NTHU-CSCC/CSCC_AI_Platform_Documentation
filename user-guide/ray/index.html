@@ -2417,15 +2417,7 @@
 <p>The memory you set is the most the head or one worker can use. About half of it (the value divided by 1.9) is reserved RAM; above that it spills into swap, which is slower. The head and all workers count against the project's and your memory quota.</p>
 <p>For a job that needs every GPU at once, see <a href="../../use-cases/ray-placement-group-gang/">Start a Ray job only when all its GPUs are there</a>.</p>
 <h3 id="find-your-queue-name">Find your queue name<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
-<p><code>X-CSCC-Queue</code> takes the queue's name, such as <code>rtx5090-queue</code>, not the label the dashboard shows (<strong>RTX 5090 Queue</strong>). List the queues your project may use:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.cscc.nthu.edu.tw/api/v1/queues/project/&lt;project<span class="w"> </span>id&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import json,sys; [print(q["name"], "-", q["display_name"]) for q in json.load(sys.stdin)["data"] if not q["is_burst"]]'</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>rtx5090-queue - RTX 5090 Queue
-rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
-</code></pre></div>
-<p>Burst queues are left out because Ray sessions cannot use them. If your job must not stop part-way, pick a queue without <em>(Preemptible)</em>.</p>
+<p><code>X-CSCC-Queue</code> takes the queue's name, such as <code>rtx5090-queue</code>, not its label (<strong>RTX 5090 Queue</strong>). With no session open, the <strong>Ray</strong> tab lists the queues you can use for Ray, each name with a copy button. The queue picker in the workspace and deploy forms also shows the name under each label. If your job must not stop part-way, pick a queue without <em>(Preemptible)</em>.</p>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>While the cluster is open</strong>, the GPUs you asked for count against the project's GPU quota and your per-user GPU limit.</li>
@@ -2444,7 +2436,7 @@ rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
 <h2 id="see-and-end-your-session">See and end your session<a class="headerlink" href="#see-and-end-your-session" title="Permanent link">&para;</a></h2>
 <p>In your project, open the <strong>Ray</strong> tab (shown only when Ray sessions are turned on). <strong>Ray sessions</strong> lists your open session: status, GPUs held, queue, start time, and <strong>Ends by</strong>, the latest time it can run. It ends sooner once idle for the time shown under <strong>Ends by</strong>.</p>
 <p>Select <strong>End session</strong> to stop it now: running Ray jobs stop and the GPUs are released at once. The next <code>ray job submit</code> starts a new session.</p>
-<p>With no session open, the section shows this project's <code>--address</code> with a copy button.</p>
+<p>With no session open, the section shows this project's <code>--address</code> and the <a href="#find-your-queue-name">queue names</a>, each with a copy button.</p>
 <h2 id="keep-your-data-in-storage">Keep your data in storage<a class="headerlink" href="#keep-your-data-in-storage" title="Permanent link">&para;</a></h2>
 <p>Every cluster mounts your files like a <a href="../workspaces/">workspace</a> does:</p>
 <table>

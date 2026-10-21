@@ -2417,15 +2417,7 @@
 <p>設定的記憶體是 head 或單一 worker 最多能用的量。其中約一半（設定值除以 1.9）是保留的實體記憶體，超過的部分會用到 swap，速度較慢。head 和所有 worker 都會計入專案與你個人的記憶體配額。</p>
 <p>工作需要所有 GPU 同時到齊時，請看<a href="../../use-cases/ray-placement-group-gang/">等所有 GPU 到齊再開始 Ray 工作</a>。</p>
 <h3 id="find-your-queue-name">查佇列名稱<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
-<p><code>X-CSCC-Queue</code> 要填佇列的名稱，例如 <code>rtx5090-queue</code>，不是儀表板上顯示的 <strong>RTX 5090 Queue</strong>。用下面的指令列出專案能用的佇列：</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>https://api.cscc.nthu.edu.tw/api/v1/queues/project/&lt;專案<span class="w"> </span>ID&gt;<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import json,sys; [print(q["name"], "-", q["display_name"]) for q in json.load(sys.stdin)["data"] if not q["is_burst"]]'</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>rtx5090-queue - RTX 5090 Queue
-rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
-</code></pre></div>
-<p>Ray 工作階段不能用 burst 佇列，清單已經把它們濾掉。工作不能中途被停掉的話，就選名稱沒有 <em>(Preemptible)</em> 的佇列。</p>
+<p><code>X-CSCC-Queue</code> 要填佇列的名稱，例如 <code>rtx5090-queue</code>，不是畫面上的 <strong>RTX 5090 Queue</strong>。沒有開著的工作階段時，<strong>Ray</strong> 分頁會列出 Ray 能用的佇列，每個名稱旁都有複製按鈕。建立工作區和部署時的佇列選單，也會在每個佇列底下顯示名稱。工作不能中途被停掉的話，就選沒有 <em>(Preemptible)</em> 的佇列。</p>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>叢集開著的期間</strong>，你要的 GPU 會從專案的 GPU 配額和你個人的 GPU 上限扣掉，別人不能用。</li>
@@ -2444,7 +2436,7 @@ rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
 <h2 id="_3">查看與結束工作階段<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>打開專案的 <strong>Ray</strong> 分頁（平台開了 Ray 工作階段才會出現）。<strong>Ray 工作階段</strong>列出你目前的工作階段：狀態、佔用的 GPU、佇列、開始時間，以及<strong>最晚結束</strong>（最晚會跑到什麼時候）。閒置超過<strong>最晚結束</strong>下方顯示的時間，會提早結束。</p>
 <p>選 <strong>結束工作階段</strong> 可立刻停止：Ray 工作停止，GPU 馬上釋放。下次 <code>ray job submit</code> 會開新的工作階段。</p>
-<p>沒有工作階段時，這一區會顯示這個專案的 <code>--address</code>，旁邊有複製按鈕。</p>
+<p>沒有工作階段時，這一區會顯示這個專案的 <code>--address</code> 和<a href="#find-your-queue-name">佇列名稱</a>，旁邊都有複製按鈕。</p>
 <h2 id="_4">把資料放在儲存空間<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>每個叢集都會掛載你的檔案，跟<a href="../workspaces/">工作區</a>一樣：</p>
 <table>
