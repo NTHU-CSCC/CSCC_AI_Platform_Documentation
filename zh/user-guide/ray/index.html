@@ -1743,6 +1743,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="選擇 GPU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-your-queue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查佇列名稱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2200,6 +2217,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="選擇 GPU">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-your-queue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查佇列名稱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2355,7 +2389,7 @@
 </tr>
 <tr>
 <td><code>X-CSCC-Queue</code></td>
-<td>worker 跑在哪個排程佇列。不能選 burst 佇列</td>
+<td>worker 跑在哪個排程佇列（<a href="#find-your-queue-name">查名稱</a>）。不能選 burst 佇列</td>
 <td>平台預設值</td>
 </tr>
 <tr>
@@ -2382,6 +2416,16 @@
 </table>
 <p>設定的記憶體是 head 或單一 worker 最多能用的量。其中約一半（設定值除以 1.9）是保留的實體記憶體，超過的部分會用到 swap，速度較慢。head 和所有 worker 都會計入專案與你個人的記憶體配額。</p>
 <p>工作需要所有 GPU 同時到齊時，請看<a href="../../use-cases/ray-placement-group-gang/">等所有 GPU 到齊再開始 Ray 工作</a>。</p>
+<h3 id="find-your-queue-name">查佇列名稱<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
+<p><code>X-CSCC-Queue</code> 要填佇列的名稱，例如 <code>rtx5090-queue</code>，不是儀表板上顯示的 <strong>RTX 5090 Queue</strong>。用下面的指令列出專案能用的佇列：</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.cscc.nthu.edu.tw/api/v1/queues/project/&lt;專案<span class="w"> </span>ID&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import json,sys; [print(q["name"], "-", q["display_name"]) for q in json.load(sys.stdin)["data"] if not q["is_burst"]]'</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>rtx5090-queue - RTX 5090 Queue
+rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
+</code></pre></div>
+<p>Ray 工作階段不能用 burst 佇列，清單已經把它們濾掉。工作不能中途被停掉的話，就選名稱沒有 <em>(Preemptible)</em> 的佇列。</p>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>叢集開著的期間</strong>，你要的 GPU 會從專案的 GPU 配額和你個人的 GPU 上限扣掉，別人不能用。</li>

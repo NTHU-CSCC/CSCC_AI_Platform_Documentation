@@ -1743,6 +1743,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Choose GPUs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-your-queue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Find your queue name
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2200,6 +2217,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Choose GPUs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-your-queue-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Find your queue name
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2355,7 +2389,7 @@
 </tr>
 <tr>
 <td><code>X-CSCC-Queue</code></td>
-<td>Queue the workers run in. Burst queues are not allowed</td>
+<td>Queue the workers run in (<a href="#find-your-queue-name">find its name</a>). Burst queues are not allowed</td>
 <td>The platform's default</td>
 </tr>
 <tr>
@@ -2382,6 +2416,16 @@
 </table>
 <p>The memory you set is the most the head or one worker can use. About half of it (the value divided by 1.9) is reserved RAM; above that it spills into swap, which is slower. The head and all workers count against the project's and your memory quota.</p>
 <p>For a job that needs every GPU at once, see <a href="../../use-cases/ray-placement-group-gang/">Start a Ray job only when all its GPUs are there</a>.</p>
+<h3 id="find-your-queue-name">Find your queue name<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
+<p><code>X-CSCC-Queue</code> takes the queue's name, such as <code>rtx5090-queue</code>, not the label the dashboard shows (<strong>RTX 5090 Queue</strong>). List the queues your project may use:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>https://api.cscc.nthu.edu.tw/api/v1/queues/project/&lt;project<span class="w"> </span>id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s1">'import json,sys; [print(q["name"], "-", q["display_name"]) for q in json.load(sys.stdin)["data"] if not q["is_burst"]]'</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>rtx5090-queue - RTX 5090 Queue
+rtx-5090-preemptible-queue - RTX 5090 Queue (Preemptible)
+</code></pre></div>
+<p>Burst queues are left out because Ray sessions cannot use them. If your job must not stop part-way, pick a queue without <em>(Preemptible)</em>.</p>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>While the cluster is open</strong>, the GPUs you asked for count against the project's GPU quota and your per-user GPU limit.</li>

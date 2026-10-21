@@ -1055,6 +1055,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scale-to-8-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        擴充到 8 張 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2217,6 +2228,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scale-to-8-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        擴充到 8 張 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2260,7 +2282,6 @@
 
 <h1 id="gpu-ray">等所有 GPU 到齊再開始 Ray 工作<a class="headerlink" href="#gpu-ray" title="Permanent link">&para;</a></h1>
 <p>需要兩張 GPU 同時跑的工作，如果只拿到一張就開始，不是卡住就是失敗。Ray 的 placement group 會把所有 GPU 當成一組來要：每張都拿到了，程式才往下走；等超過時限就放棄，把已拿到的 GPU 還回去。下面這次實測從沒有任何 GPU worker 開始，送出後 18.8 秒兩張 RTX 5090 就都到齊了。</p>
-<p>文中的指令和輸出，都是 2026-10-21 在平台上實際跑出來的。</p>
 <h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>筆電照<a href="../../user-guide/ray/#submit-a-job">提交工作</a>設定好：Ray <code>2.58.0</code>、根憑證、API token</li>
@@ -2308,6 +2329,7 @@
 <p>工作階段的設定寫在 <code>RAY_JOB_HEADERS</code>。<code>X-CSCC-GPUs</code> 不能小於 <code>N_GPUS</code>，不然程式一定會等到逾時：</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
 </code></pre></div>
+<p><code>&lt;queue&gt;</code> 要填什麼，請看<a href="../../user-guide/ray/#find-your-queue-name">查佇列名稱</a>。</p>
 <h2 id="step-3-submit">步驟 3：送出<a class="headerlink" href="#step-3-submit" title="Permanent link">&para;</a></h2>
 <p><code>N_GPUS</code> 和 <code>WAIT_SECONDS</code> 放在工作的 <code>runtime_env</code>，下面三種寫法挑一種：</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">命令列帶 JSON</label><label for="__tabbed_1_2">YAML 檔</label><label for="__tabbed_1_3">HTTP 送 JSON body</label></div>
@@ -2352,9 +2374,21 @@ rank 1: ray-session-gpu-workers-worker-59bs5 GPU [0]
 <p>同一個 2 張 GPU 的工作階段，把 <code>N_GPUS</code> 設成 <code>3</code>、<code>WAIT_SECONDS</code> 設成 <code>60</code>，程式等了 60 秒後停下：</p>
 <div class="highlight"><pre><span></span><code>not all 3 GPUs were free within 60s; released them
 </code></pre></div>
+<h2 id="scale-to-8-gpus">擴充到 8 張 GPU<a class="headerlink" href="#scale-to-8-gpus" title="Permanent link">&para;</a></h2>
+<p>程式不用改，只要把標頭和 <code>N_GPUS</code> 的張數改成 8：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"8","X-CSCC-Queue":"rtx5090-queue"}'</span>
+ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--runtime-env-json<span class="w"> </span><span class="s1">'{"env_vars":{"N_GPUS":"8","WAIT_SECONDS":"3600"}}'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>gang.py
+</code></pre></div>
+<ul>
+<li>專案方案、佇列和你的個人 GPU 上限都要允許 8 張。放不下 8 張時，工作階段只會拿到較少的張數，程式等滿 <code>WAIT_SECONDS</code> 就會放棄。工作階段拿到幾張，可以在 <strong>Ray</strong> 分頁看。</li>
+<li>每台機器有 4 張 RTX 5090，8 張一定會跨兩台機器。跨機器跑 NCCL 請看<a href="../ray-custom-image-multinode/">用自己的 Ray 映像，在多台機器的 GPU 上跑同一個 NCCL 工作</a>。</li>
+<li>選不可搶佔的佇列。在可搶佔的佇列上，只要一個 worker 被停掉，整個工作就會中斷。</li>
+</ul>
 <h2 id="_3">限制<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>先開起來的 worker 在等其他 worker 時會一直佔著 GPU。<code>WAIT_SECONDS</code> 設成你願意佔著等的時間。</li>
+<li>先開起來的 worker 在等其他 worker 時會一直佔著 GPU，這段時間也算 GPU 時數。<code>WAIT_SECONDS</code> 設成你願意佔著等的時間。</li>
 <li>等待不是預約：空出來的 GPU 可能先被別的工作拿走。如果一直逾時，就少要幾張，或晚點再試。</li>
 </ul>
 <h2 id="_4">參考資料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
