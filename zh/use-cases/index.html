@@ -797,6 +797,8 @@
       
         
       
+        
+      
     
     
     
@@ -916,6 +918,34 @@
     
   
     用自己的映像在多台機器跑 Ray
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ray-placement-group-gang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    等所有 GPU 到齊再開始 Ray 工作
   
 
     
@@ -2117,6 +2147,10 @@
 <tr>
 <td><a href="ray-custom-image-multinode/">用自己的 Ray 映像，在多台機器的 GPU 上跑同一個 NCCL 工作</a></td>
 <td>建一個含 PyTorch 和 vLLM 的 Ray 映像，跨機器跑 NCCL all-reduce，量出頻寬</td>
+</tr>
+<tr>
+<td><a href="ray-placement-group-gang/">等所有 GPU 到齊再開始 Ray 工作</a></td>
+<td>用 placement group 一次要齊所有 GPU，等超過時限就放手；工作設定可用 JSON、YAML 或 HTTP body 送出</td>
 </tr>
 </tbody>
 </table>
