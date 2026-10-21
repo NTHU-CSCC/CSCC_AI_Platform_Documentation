@@ -1727,6 +1727,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#start-all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start all GPUs at once
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#first-submit-and-when-the-cluster-ends" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2184,6 +2195,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#start-all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start all GPUs at once
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#first-submit-and-when-the-cluster-ends" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2338,6 +2360,16 @@
 <td>Image for the head and workers: any image your project may use for jobs, except one from another project's Harbor project. The image scan applies. It must contain <code>ray[default]==2.58.0</code> and run as UID 1000</td>
 <td>The platform's Ray image</td>
 </tr>
+<tr>
+<td><code>X-CSCC-Gang</code></td>
+<td><code>true</code> starts all <code>X-CSCC-GPUs</code> workers at once and waits in the queue until they fit (see <a href="#start-all-gpus-at-once">Start all GPUs at once</a>)</td>
+<td>Workers start one at a time</td>
+</tr>
+<tr>
+<td><code>X-CSCC-Gang-Timeout</code></td>
+<td>With <code>X-CSCC-Gang</code>, the longest wait in the queue, in seconds, from 60 to 86400</td>
+<td><code>86400</code> (24 hours)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
@@ -2346,7 +2378,20 @@
 <li><strong>GPU hours</strong> count only running workers.</li>
 <li>You hold at most 10 GPU claims at once in a project, so a cluster has at most 10 GPU workers. Each claim you made on the <strong>GPU Claims</strong> tab takes one of the 10 while it exists, even when nothing uses it.</li>
 </ul>
-<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait. If unused claims from the <strong>GPU Claims</strong> tab are the reason fewer GPUs fit, the submit fails and the message names them: delete the ones you no longer need, or lower <code>X-CSCC-GPUs</code>.</p>
+<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit; with <code>X-CSCC-Gang</code> the submit fails with <code>409</code> instead. If not even one fits, the submit fails and nothing is created; ask for another queue or wait. If unused claims from the <strong>GPU Claims</strong> tab are the reason fewer GPUs fit, the submit fails and the message names them: delete the ones you no longer need, or lower <code>X-CSCC-GPUs</code>.</p>
+<h2 id="start-all-gpus-at-once">Start all GPUs at once<a class="headerlink" href="#start-all-gpus-at-once" title="Permanent link">&para;</a></h2>
+<p>Without <code>X-CSCC-Gang</code>, workers join one at a time, so a job that needs every GPU before it can start (for example NCCL training) holds the first GPUs idle until the rest fit. With <code>X-CSCC-Gang: true</code>, the platform starts the cluster only when all <code>X-CSCC-GPUs</code> GPUs are free, and holds no GPU while it waits.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"4","X-CSCC-Queue":"default-batch","X-CSCC-Gang":"true","X-CSCC-Gang-Timeout":"7200"}'</span>
+ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--address<span class="w"> </span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;project<span class="w"> </span>number&gt;/ray<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>train.py
+</code></pre></div>
+<ol>
+<li>If the GPUs are not all free, the submit fails at once with <code>503</code>, and the session waits in the queue. The <strong>Ray</strong> tab shows it as waiting, with how many GPUs are free now.</li>
+<li>The platform checks again every 30 seconds. A waiting session never preempts other workloads.</li>
+<li>Once all GPUs are free, the platform starts every worker together. When all of them run, you get a <strong>Ray session ready</strong> notification in the dashboard and, if you linked Discord, a Discord direct message.</li>
+<li>Run the same <code>ray job submit</code> again. The session ends after 30 minutes without a Ray job, so submit soon.</li>
+</ol>
+<p>While it waits, the session counts against your GPU quota but not your GPU hours. Once it starts, all its GPUs count as GPU hours until the session ends, whether a job runs or not. If the GPUs are not free within <code>X-CSCC-Gang-Timeout</code>, the session fails and you get a <strong>Job failed</strong> notification. Select <strong>End session</strong> to stop waiting.</p>
+<p>The platform reserves nothing while you wait: smaller jobs can take free GPUs first, so a large request on a busy queue waits until its timeout. Then ask for fewer GPUs or use a quieter queue.</p>
 <h2 id="first-submit-and-when-the-cluster-ends">First submit and when the cluster ends<a class="headerlink" href="#first-submit-and-when-the-cluster-ends" title="Permanent link">&para;</a></h2>
 <p>The first submit starts a cluster, which takes about 30–60 seconds. The command waits up to 2 minutes, then the platform answers <code>503</code>; run it again. Later jobs on the same cluster start at once.</p>
 <p>The platform removes the cluster after either of these:</p>
@@ -2421,7 +2466,7 @@
 </tr>
 <tr>
 <td><code>503</code> with <code>Retry-After</code></td>
-<td>The cluster is still starting. Run the command again. If it keeps happening for more than a few minutes, ask an admin.</td>
+<td>The cluster is still starting, or, with <code>X-CSCC-Gang</code>, it waits for all its GPUs. Run the command again; for a waiting session, wait for the <strong>Ray session ready</strong> notification first. If a session without <code>X-CSCC-Gang</code> keeps answering <code>503</code> for more than a few minutes, ask an admin.</td>
 </tr>
 <tr>
 <td><code>Failed to connect to Ray at address</code></td>

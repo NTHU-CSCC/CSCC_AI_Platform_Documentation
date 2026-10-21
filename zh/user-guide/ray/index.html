@@ -1727,6 +1727,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#start-all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一次啟動所有 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2184,6 +2195,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#start-all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一次啟動所有 GPU
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2338,6 +2360,16 @@
 <td>head 與 worker 用的映像：專案可用於工作的任何映像，但不能是其他專案 Harbor 專案裡的映像，且須通過映像掃描。必須含 <code>ray[default]==2.58.0</code>，並以 UID 1000 執行</td>
 <td>平台的 Ray 映像</td>
 </tr>
+<tr>
+<td><code>X-CSCC-Gang</code></td>
+<td>設 <code>true</code> 就一次啟動全部 <code>X-CSCC-GPUs</code> 個 worker，湊不齊就在佇列等（見<a href="#start-all-gpus-at-once">一次啟動所有 GPU</a>）</td>
+<td>worker 一個一個加入</td>
+</tr>
+<tr>
+<td><code>X-CSCC-Gang-Timeout</code></td>
+<td>搭配 <code>X-CSCC-Gang</code>，在佇列最多等幾秒，60 到 86400</td>
+<td><code>86400</code>（24 小時）</td>
+</tr>
 </tbody>
 </table>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -2346,7 +2378,20 @@
 <li><strong>GPU 時數</strong> 只算執行中的 worker。叢集結束後 GPU 就釋放。</li>
 <li>同一個專案裡，你同時最多持有 10 個 GPU claim，所以一個叢集最多 10 個 GPU worker。你在 <strong>GPU Claims</strong> 分頁建立的 claim，只要還在就佔掉一個名額，沒有工作在用也一樣。</li>
 </ul>
-<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。如果放不下是因為 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，提交會失敗，訊息會列出它們的名稱：刪掉不需要的，或調低 <code>X-CSCC-GPUs</code>。</p>
+<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量；設了 <code>X-CSCC-Gang</code> 則直接回 <code>409</code>，不會縮減。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。如果放不下是因為 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，提交會失敗，訊息會列出它們的名稱：刪掉不需要的，或調低 <code>X-CSCC-GPUs</code>。</p>
+<h2 id="start-all-gpus-at-once">一次啟動所有 GPU<a class="headerlink" href="#start-all-gpus-at-once" title="Permanent link">&para;</a></h2>
+<p>沒設 <code>X-CSCC-Gang</code> 時，worker 一個一個加入。像 NCCL 訓練這種要等所有 GPU 到齊才能開始的工作，先拿到的 GPU 會空轉到其他 GPU 也排到為止。設了 <code>X-CSCC-Gang: true</code>，平台會等 <code>X-CSCC-GPUs</code> 張 GPU 全部空出來才啟動叢集，等待期間不佔任何 GPU。</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"4","X-CSCC-Queue":"default-batch","X-CSCC-Gang":"true","X-CSCC-Gang-Timeout":"7200"}'</span>
+ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--address<span class="w"> </span>https://api.cscc.nthu.edu.tw/api/v1/projects/&lt;專案編號&gt;/ray<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span>--<span class="w"> </span>python<span class="w"> </span>train.py
+</code></pre></div>
+<ol>
+<li>GPU 沒有全部空著時，提交會馬上回 <code>503</code>，工作階段留在佇列等。<strong>Ray</strong> 分頁會顯示它在等待，以及目前空著幾張。</li>
+<li>平台每 30 秒檢查一次。等待中的工作階段不會搶占其他工作。</li>
+<li>GPU 全部空出來後，平台同時啟動所有 worker。全部跑起來時，你會在儀表板收到 <strong>Ray 工作階段已就緒</strong> 通知；連結了 Discord 的話，也會收到 Discord 私訊。</li>
+<li>再執行一次同樣的 <code>ray job submit</code>。連續 30 分鐘沒有 Ray 工作，工作階段就會結束，收到通知後請盡快提交。</li>
+</ol>
+<p>等待期間會扣 GPU 配額，但不算 GPU 時數。啟動後，不管有沒有工作在跑，所有 GPU 都算 GPU 時數，直到工作階段結束。超過 <code>X-CSCC-Gang-Timeout</code> 還湊不齊，工作階段會失敗，你會收到 <strong>任務失敗</strong> 通知。想放棄等待，按 <strong>結束工作階段</strong>。</p>
+<p>等待期間平台不會替你保留 GPU：較小的工作可以先拿走空出來的 GPU，所以在忙碌的佇列要很多張 GPU，會一路等到逾時。遇到這種情況，請調低張數或換人少的佇列。</p>
 <h2 id="_2">第一次提交與叢集結束<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第一次提交要啟動新叢集，約 30–60 秒，指令最多等 2 分鐘。還沒就緒會回 <code>503</code>，再執行一次即可。之後的工作會馬上開始。</p>
 <p>出現以下任一情況，平台就會移除叢集：</p>
@@ -2421,7 +2466,7 @@
 </tr>
 <tr>
 <td><code>503</code> 加 <code>Retry-After</code></td>
-<td>叢集還在啟動。再執行一次指令。如果超過幾分鐘還是這樣，請聯絡管理員。</td>
+<td>叢集還在啟動；設了 <code>X-CSCC-Gang</code> 則是在等 GPU 到齊。再執行一次指令；在等 GPU 的工作階段，先等 <strong>Ray 工作階段已就緒</strong> 通知。沒設 <code>X-CSCC-Gang</code> 卻超過幾分鐘還是 <code>503</code>，請聯絡管理員。</td>
 </tr>
 <tr>
 <td><code>Failed to connect to Ray at address</code></td>
