@@ -1747,6 +1747,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        所有 GPU 一起拿
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#find-your-queue-name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2221,6 +2232,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        所有 GPU 一起拿
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#find-your-queue-name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2412,10 +2434,23 @@
 <td>每個 worker 的記憶體，整數 GiB，1 到 64</td>
 <td><code>16</code></td>
 </tr>
+<tr>
+<td><code>X-CSCC-Gang</code></td>
+<td>設成 <code>true</code> 時，工作階段的 GPU 要嘛一次全部拿到，要嘛一張都不拿（<a href="#all-gpus-at-once">所有 GPU 一起拿</a>）</td>
+<td><code>false</code></td>
+</tr>
 </tbody>
 </table>
 <p>設定的記憶體是 head 或單一 worker 最多能用的量。其中約一半（設定值除以 1.9）是保留的實體記憶體，超過的部分會用到 swap，速度較慢。head 和所有 worker 都會計入專案與你個人的記憶體配額。</p>
 <p>工作需要所有 GPU 同時到齊時，請看<a href="../../use-cases/ray-placement-group-gang/">等所有 GPU 到齊再開始 Ray 工作</a>。</p>
+<h3 id="all-gpus-at-once">所有 GPU 一起拿<a class="headerlink" href="#all-gpus-at-once" title="Permanent link">&para;</a></h3>
+<p>設定 <code>X-CSCC-Gang: true</code> 時：</p>
+<ul>
+<li>工作階段會一次啟動 <code>X-CSCC-GPUs</code> 個 worker。只要其中有一張 GPU 還在忙，就一個 worker 都不啟動，也不算 GPU 時數。</li>
+<li>所有 worker 都拿到 GPU 後才開始算 GPU 時數。之後 worker 會留到工作階段結束，一直算 GPU 時數，沒有工作在跑也一樣。用完請在 <strong>Ray</strong> 分頁選 <strong>結束工作階段</strong>。</li>
+<li>配額不夠給你要的全部 GPU 時，提交會直接失敗，不會改給比較少張。</li>
+<li>請選沒有 <em>(Preemptible)</em> 的佇列：只要一個 worker 被停掉，整個工作就會中斷。</li>
+</ul>
 <h3 id="find-your-queue-name">查佇列名稱<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
 <p><code>X-CSCC-Queue</code> 要填佇列的名稱，例如 <code>rtx5090-queue</code>，不是畫面上的 <strong>RTX 5090 Queue</strong>。沒有開著的工作階段時，<strong>Ray</strong> 分頁會列出 Ray 能用的佇列，每個名稱旁都有複製按鈕。建立工作區和部署時的佇列選單，也會在每個佇列底下顯示名稱。工作不能中途被停掉的話，就選沒有 <em>(Preemptible)</em> 的佇列。</p>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -2424,7 +2459,7 @@
 <li><strong>GPU 時數</strong> 只算執行中的 worker。叢集結束後 GPU 就釋放。</li>
 <li>同一個專案裡，你同時最多持有 10 個 GPU claim，所以一個叢集最多 10 個 GPU worker。你在 <strong>GPU Claims</strong> 分頁建立的 claim，只要還在就佔掉一個名額，沒有工作在用也一樣。</li>
 </ul>
-<p>可用的 GPU 比你要的少時，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。如果放不下是因為 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，提交會失敗，訊息會列出它們的名稱：刪掉不需要的，或調低 <code>X-CSCC-GPUs</code>。</p>
+<p>沒有設 <code>X-CSCC-Gang</code> 時，可用的 GPU 比你要的少，叢集的上限會降到放得下的數量。連一張都放不下，提交才會失敗，不會建立任何東西；請換佇列或稍後再試。如果放不下是因為 <strong>GPU Claims</strong> 分頁裡沒在用的 claim，提交會失敗，訊息會列出它們的名稱：刪掉不需要的，或調低 <code>X-CSCC-GPUs</code>。</p>
 <h2 id="_2">第一次提交與叢集結束<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第一次提交要啟動新叢集，約 30–60 秒，指令最多等 2 分鐘。還沒就緒會回 <code>503</code>，再執行一次即可。之後的工作會馬上開始。</p>
 <p>出現以下任一情況，平台就會移除叢集：</p>

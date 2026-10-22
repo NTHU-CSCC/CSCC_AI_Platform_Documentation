@@ -1747,6 +1747,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All GPUs at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#find-your-queue-name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2221,6 +2232,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#all-gpus-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        All GPUs at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#find-your-queue-name" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2412,10 +2434,23 @@
 <td>Memory for each worker, in whole GiB, from 1 to 64</td>
 <td><code>16</code></td>
 </tr>
+<tr>
+<td><code>X-CSCC-Gang</code></td>
+<td><code>true</code> gives the session all its GPUs at once or none (<a href="#all-gpus-at-once">all GPUs at once</a>)</td>
+<td><code>false</code></td>
+</tr>
 </tbody>
 </table>
 <p>The memory you set is the most the head or one worker can use. About half of it (the value divided by 1.9) is reserved RAM; above that it spills into swap, which is slower. The head and all workers count against the project's and your memory quota.</p>
 <p>For a job that needs every GPU at once, see <a href="../../use-cases/ray-placement-group-gang/">Start a Ray job only when all its GPUs are there</a>.</p>
+<h3 id="all-gpus-at-once">All GPUs at once<a class="headerlink" href="#all-gpus-at-once" title="Permanent link">&para;</a></h3>
+<p>With <code>X-CSCC-Gang: true</code>:</p>
+<ul>
+<li>The session starts all <code>X-CSCC-GPUs</code> workers together. While any of those GPUs is busy, no worker starts and no GPU hours count.</li>
+<li>GPU hours start when all the workers have their GPUs. The workers then stay until the session ends and keep counting GPU hours, even with no job running. Select <strong>End session</strong> on the <strong>Ray</strong> tab when you are done.</li>
+<li>If your quota cannot cover every GPU you asked for, the submit fails instead of giving you fewer.</li>
+<li>Pick a queue without <em>(Preemptible)</em>: if one worker is stopped, the whole job stops.</li>
+</ul>
 <h3 id="find-your-queue-name">Find your queue name<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
 <p><code>X-CSCC-Queue</code> takes the queue's name, such as <code>rtx5090-queue</code>, not its label (<strong>RTX 5090 Queue</strong>). With no session open, the <strong>Ray</strong> tab lists the queues you can use for Ray, each name with a copy button. The queue picker in the workspace and deploy forms also shows the name under each label. If your job must not stop part-way, pick a queue without <em>(Preemptible)</em>.</p>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>
@@ -2424,7 +2459,7 @@
 <li><strong>GPU hours</strong> count only running workers.</li>
 <li>You hold at most 10 GPU claims at once in a project, so a cluster has at most 10 GPU workers. Each claim you made on the <strong>GPU Claims</strong> tab takes one of the 10 while it exists, even when nothing uses it.</li>
 </ul>
-<p>If fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait. If unused claims from the <strong>GPU Claims</strong> tab are the reason fewer GPUs fit, the submit fails and the message names them: delete the ones you no longer need, or lower <code>X-CSCC-GPUs</code>.</p>
+<p>Without <code>X-CSCC-Gang</code>, if fewer GPUs fit than you asked for, the cluster is limited to the number that fit. If not even one fits, the submit fails and nothing is created; ask for another queue or wait. If unused claims from the <strong>GPU Claims</strong> tab are the reason fewer GPUs fit, the submit fails and the message names them: delete the ones you no longer need, or lower <code>X-CSCC-GPUs</code>.</p>
 <h2 id="first-submit-and-when-the-cluster-ends">First submit and when the cluster ends<a class="headerlink" href="#first-submit-and-when-the-cluster-ends" title="Permanent link">&para;</a></h2>
 <p>The first submit starts a cluster, which takes about 30–60 seconds. The command waits up to 2 minutes, then the platform answers <code>503</code>; run it again. Later jobs on the same cluster start at once.</p>
 <p>The platform removes the cluster after either of these:</p>
