@@ -3101,7 +3101,7 @@ group already has.</p>
   limit if that is smaller. It is skipped when any container in the pod
   already mounts something under <code>/dev/shm</code>.</li>
 <li>An inline GPU request goes straight into the container's resource
-  requests, for example <code>nvidia.com/rtx6000: "1"</code>.</li>
+  requests, for example <code>nvidia.com/rtx5090: "1"</code>.</li>
 <li>A GPU claim slot is an annotation on the Pod, or on the Deployment's
   template: <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>.
   <code>{{gpuClaimName}}</code> with no name still works as the default slot. Two
@@ -3128,9 +3128,10 @@ group already has.</p>
 <span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-image&gt;</span>
 <span class="w">          </span><span class="nt">resources</span><span class="p">:</span>
 <span class="w">            </span><span class="nt">requests</span><span class="p">:</span>
-<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx5090</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16Gi</span>
 <span class="w">            </span><span class="nt">limits</span><span class="p">:</span>
-<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx5090</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
 <span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16Gi</span>
 </code></pre></div>
 <ul>
