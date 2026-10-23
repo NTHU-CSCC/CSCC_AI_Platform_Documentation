@@ -2281,7 +2281,7 @@
 
 
 <h1 id="start-a-ray-job-only-when-all-its-gpus-are-there">Start a Ray job only when all its GPUs are there<a class="headerlink" href="#start-a-ray-job-only-when-all-its-gpus-are-there" title="Permanent link">&para;</a></h1>
-<p>A job that needs two GPUs at once hangs or fails if it starts with only one. A Ray placement group asks for all the GPUs as one unit: your code goes on only when every GPU is held, or gives up after a time limit and lets them go. In the run below, both RTX 5090s were ready 18.8 seconds after the submit, starting with no GPU workers running.</p>
+<p>A job that needs two GPUs at once hangs or fails if it starts with only one. With <code>X-CSCC-Gang: true</code>, the platform starts all of the session's GPU workers together or none of them, and a Ray placement group makes your code wait until Ray sees every GPU. In the run below, both RTX 5090 workers were placed in the same second, the script had both GPUs 2.7 seconds after it started, and the whole job took 29 seconds from submit on a session that did not exist yet.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Your laptop set up as in <a href="../../user-guide/ray/#submit-a-job">Submit a job</a>: Ray <code>2.58.0</code>, the root certificate, an API token</li>
@@ -2323,11 +2323,11 @@
 </code></pre></div>
 <ul>
 <li>Each bundle is <code>{"CPU": 1, "GPU": 1}</code> because a Ray actor also takes one CPU. With <code>{"GPU": 1}</code> alone, the actors do not fit and Ray stops with <em>cannot fit into any bundles</em>.</li>
-<li><code>pg.ready()</code> returns only when every bundle is placed. Replace the <code>Rank</code> part with your own training.</li>
+<li><code>pg.ready()</code> returns only when every bundle is placed. The workers start together, but each needs a few seconds to join Ray, so the script still waits for them. Replace the <code>Rank</code> part with your own training.</li>
 </ul>
 <h2 id="step-2-ask-for-the-gpus">Step 2: Ask for the GPUs<a class="headerlink" href="#step-2-ask-for-the-gpus" title="Permanent link">&para;</a></h2>
-<p>Put the session settings in <code>RAY_JOB_HEADERS</code>. <code>X-CSCC-GPUs</code> must be at least <code>N_GPUS</code>, or the script always times out:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
+<p>Put the session settings in <code>RAY_JOB_HEADERS</code>. <code>X-CSCC-Gang: true</code> starts all <code>X-CSCC-GPUs</code> workers together. Set <code>X-CSCC-GPUs</code> to <code>N_GPUS</code>: a session with fewer GPUs than the script asks for makes it wait until <code>WAIT_SECONDS</code> runs out.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;","X-CSCC-Gang":"true"}'</span>
 </code></pre></div>
 <p>For the value of <code>&lt;queue&gt;</code>, see <a href="../../user-guide/ray/#find-your-queue-name">Find your queue name</a>.</p>
 <h2 id="step-3-submit">Step 3: Submit<a class="headerlink" href="#step-3-submit" title="Permanent link">&para;</a></h2>
@@ -2357,7 +2357,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$RAY_ADDRESS</span><span class="s2">/api/jobs/"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-GPUs: 2"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Queue: &lt;queue&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-GPUs: 2"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Queue: &lt;queue&gt;"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Gang: true"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span>-d<span class="w"> </span>@job.json
 </code></pre></div>
 <p>Read the output with <code>ray job logs &lt;job id&gt;</code>, or <code>GET $RAY_ADDRESS/api/jobs/&lt;job id&gt;/logs</code>.</p>
@@ -2365,35 +2365,34 @@
 </div>
 </div>
 <h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
-<p>First submit, with no GPU workers running:</p>
-<div class="highlight"><pre><span></span><code>all 2 GPUs ready after 18.8s
-rank 0: ray-session-gpu-workers-worker-shfnn GPU [0]
-rank 1: ray-session-gpu-workers-worker-59bs5 GPU [0]
+<p>First submit, with no session running:</p>
+<div class="highlight"><pre><span></span><code>all 2 GPUs ready after 2.7s
+rank 0: ray-session-gpu-workers-worker-sw6vh GPU [0]
+rank 1: ray-session-gpu-workers-worker-7rnn2 GPU [0]
 </code></pre></div>
-<p>The YAML and HTTP runs right after took 0.2 seconds, because both workers were still up.</p>
-<p>With <code>N_GPUS</code> set to <code>3</code> and <code>WAIT_SECONDS</code> to <code>60</code> on the same 2-GPU session, the script waits, then stops:</p>
-<div class="highlight"><pre><span></span><code>not all 3 GPUs were free within 60s; released them
-</code></pre></div>
+<p>Both workers were placed in the same second. Two more submits to the same session each took 0.2 seconds, because the workers were still up.</p>
+<p>When only one RTX 5090 was free, neither worker started. Both waited, and no GPU hours counted until both GPUs were free.</p>
 <h2 id="scale-to-8-gpus">Scale to 8 GPUs<a class="headerlink" href="#scale-to-8-gpus" title="Permanent link">&para;</a></h2>
 <p>Change the GPU count in the headers and in <code>N_GPUS</code>; the script stays the same:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"8","X-CSCC-Queue":"rtx5090-queue"}'</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"8","X-CSCC-Queue":"rtx5090-queue","X-CSCC-Gang":"true"}'</span>
 ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--runtime-env-json<span class="w"> </span><span class="s1">'{"env_vars":{"N_GPUS":"8","WAIT_SECONDS":"3600"}}'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>gang.py
 </code></pre></div>
 <ul>
-<li>Your plan, the queue and your per-user GPU limit must all allow 8 GPUs. If fewer fit, the session gets fewer and the script gives up after <code>WAIT_SECONDS</code>. The <strong>Ray</strong> tab shows how many GPUs the session holds.</li>
+<li>Your plan and your per-user GPU limit must both allow 8 GPUs. If they allow fewer, the submit is refused with the number that fits.</li>
 <li>Each machine has 4 RTX 5090s, so 8 GPUs span two machines. For NCCL between machines, see <a href="../ray-custom-image-multinode/">Run one NCCL job on GPUs in several machines with your own Ray image</a>.</li>
-<li>Pick a queue that is not preemptible. On a preemptible queue, one stopped worker stops the whole job.</li>
+<li>Pick a queue that is not preemptible. If the session is preempted, all its workers stop together and the session ends; the next submit starts a new one.</li>
 </ul>
 <h2 id="limits">Limits<a class="headerlink" href="#limits" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Workers that start first keep their GPU while the rest wait, and those GPUs count toward your GPU hours. Set <code>WAIT_SECONDS</code> to how long you accept holding them.</li>
-<li>Waiting is not a reservation: another job can take a free GPU first. If the time limit keeps running out, ask for fewer GPUs or try later.</li>
+<li>The workers stay until the session ends and count GPU hours the whole time, even between jobs. Select <strong>End session</strong> on the <strong>Ray</strong> tab when you are done.</li>
+<li>If not every GPU is free, the session waits with none of them. If it keeps waiting, ask for fewer GPUs or try later.</li>
 </ul>
 <h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://docs.ray.io/en/latest/ray-core/scheduling/placement-group.html">Ray placement groups</a></li>
+<li><a href="../../user-guide/ray/#all-gpus-at-once">All GPUs at once</a></li>
 </ul>
 
 

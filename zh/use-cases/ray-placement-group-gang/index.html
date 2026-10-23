@@ -2281,7 +2281,7 @@
 
 
 <h1 id="gpu-ray">等所有 GPU 到齊再開始 Ray 工作<a class="headerlink" href="#gpu-ray" title="Permanent link">&para;</a></h1>
-<p>需要兩張 GPU 同時跑的工作，如果只拿到一張就開始，不是卡住就是失敗。Ray 的 placement group 會把所有 GPU 當成一組來要：每張都拿到了，程式才往下走；等超過時限就放棄，把已拿到的 GPU 還回去。下面這次實測從沒有任何 GPU worker 開始，送出後 18.8 秒兩張 RTX 5090 就都到齊了。</p>
+<p>需要兩張 GPU 同時跑的工作，如果只拿到一張就開始，不是卡住就是失敗。加上 <code>X-CSCC-Gang: true</code> 後，平台會讓工作階段的 GPU worker 一起啟動，要嘛全部、要嘛一個都不啟動；Ray 的 placement group 再讓程式等到 Ray 看見每一張 GPU 才往下走。下面這次實測從沒有工作階段開始，兩個 RTX 5090 worker 在同一秒排上機器，程式開始後 2.7 秒就拿到兩張 GPU，從送出到跑完共 29 秒。</p>
 <h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>筆電照<a href="../../user-guide/ray/#submit-a-job">提交工作</a>設定好：Ray <code>2.58.0</code>、根憑證、API token</li>
@@ -2323,11 +2323,11 @@
 </code></pre></div>
 <ul>
 <li>每個 bundle 寫成 <code>{"CPU": 1, "GPU": 1}</code>，因為 Ray actor 本身也要佔一顆 CPU。只寫 <code>{"GPU": 1}</code> 的話 actor 放不進去，Ray 會停在 <em>cannot fit into any bundles</em>。</li>
-<li><code>pg.ready()</code> 要等所有 bundle 都放好才會回傳。<code>Rank</code> 那段換成你自己的訓練程式即可。</li>
+<li><code>pg.ready()</code> 要等所有 bundle 都放好才會回傳。worker 雖然一起啟動，但每個都要幾秒鐘才會加入 Ray，所以程式還是要等。<code>Rank</code> 那段換成你自己的訓練程式即可。</li>
 </ul>
 <h2 id="step-2-ask-for-the-gpus">步驟 2：要 GPU<a class="headerlink" href="#step-2-ask-for-the-gpus" title="Permanent link">&para;</a></h2>
-<p>工作階段的設定寫在 <code>RAY_JOB_HEADERS</code>。<code>X-CSCC-GPUs</code> 不能小於 <code>N_GPUS</code>，不然程式一定會等到逾時：</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;"}'</span>
+<p>工作階段的設定寫在 <code>RAY_JOB_HEADERS</code>。<code>X-CSCC-Gang: true</code> 會讓 <code>X-CSCC-GPUs</code> 個 worker 一起啟動。<code>X-CSCC-GPUs</code> 請設成和 <code>N_GPUS</code> 一樣：工作階段的 GPU 比程式要的少，程式就會一直等到 <code>WAIT_SECONDS</code> 用完。</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"2","X-CSCC-Queue":"&lt;queue&gt;","X-CSCC-Gang":"true"}'</span>
 </code></pre></div>
 <p><code>&lt;queue&gt;</code> 要填什麼，請看<a href="../../user-guide/ray/#find-your-queue-name">查佇列名稱</a>。</p>
 <h2 id="step-3-submit">步驟 3：送出<a class="headerlink" href="#step-3-submit" title="Permanent link">&para;</a></h2>
@@ -2357,7 +2357,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$RAY_ADDRESS</span><span class="s2">/api/jobs/"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-GPUs: 2"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Queue: &lt;queue&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer cscc_xxx"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-GPUs: 2"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Queue: &lt;queue&gt;"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"X-CSCC-Gang: true"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span>-d<span class="w"> </span>@job.json
 </code></pre></div>
 <p>輸出用 <code>ray job logs &lt;job id&gt;</code> 看，或 <code>GET $RAY_ADDRESS/api/jobs/&lt;job id&gt;/logs</code>。</p>
@@ -2365,35 +2365,34 @@
 </div>
 </div>
 <h2 id="_2">結果<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>第一次送出，當時沒有任何 GPU worker：</p>
-<div class="highlight"><pre><span></span><code>all 2 GPUs ready after 18.8s
-rank 0: ray-session-gpu-workers-worker-shfnn GPU [0]
-rank 1: ray-session-gpu-workers-worker-59bs5 GPU [0]
+<p>第一次送出，當時沒有工作階段：</p>
+<div class="highlight"><pre><span></span><code>all 2 GPUs ready after 2.7s
+rank 0: ray-session-gpu-workers-worker-sw6vh GPU [0]
+rank 1: ray-session-gpu-workers-worker-7rnn2 GPU [0]
 </code></pre></div>
-<p>緊接著用 YAML 和 HTTP 各跑一次，都只花 0.2 秒，因為兩個 worker 還在。</p>
-<p>同一個 2 張 GPU 的工作階段，把 <code>N_GPUS</code> 設成 <code>3</code>、<code>WAIT_SECONDS</code> 設成 <code>60</code>，程式等了 60 秒後停下：</p>
-<div class="highlight"><pre><span></span><code>not all 3 GPUs were free within 60s; released them
-</code></pre></div>
+<p>兩個 worker 在同一秒排上機器。接著在同一個工作階段再送兩次，各只花 0.2 秒，因為 worker 還在。</p>
+<p>只剩一張 RTX 5090 有空時，兩個 worker 都沒有啟動，一起等；兩張都有空之前，不算 GPU 時數。</p>
 <h2 id="scale-to-8-gpus">擴充到 8 張 GPU<a class="headerlink" href="#scale-to-8-gpus" title="Permanent link">&para;</a></h2>
 <p>程式不用改，只要把標頭和 <code>N_GPUS</code> 的張數改成 8：</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"8","X-CSCC-Queue":"rtx5090-queue"}'</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">RAY_JOB_HEADERS</span><span class="o">=</span><span class="s1">'{"Authorization":"Bearer cscc_xxx","X-CSCC-GPUs":"8","X-CSCC-Queue":"rtx5090-queue","X-CSCC-Gang":"true"}'</span>
 ray<span class="w"> </span>job<span class="w"> </span>submit<span class="w"> </span>--working-dir<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--runtime-env-json<span class="w"> </span><span class="s1">'{"env_vars":{"N_GPUS":"8","WAIT_SECONDS":"3600"}}'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--<span class="w"> </span>python<span class="w"> </span>gang.py
 </code></pre></div>
 <ul>
-<li>專案方案、佇列和你的個人 GPU 上限都要允許 8 張。放不下 8 張時，工作階段只會拿到較少的張數，程式等滿 <code>WAIT_SECONDS</code> 就會放棄。工作階段拿到幾張，可以在 <strong>Ray</strong> 分頁看。</li>
+<li>專案方案和你的個人 GPU 上限都要允許 8 張。只允許比較少張的話，提交會被拒絕，訊息會告訴你放得下幾張。</li>
 <li>每台機器有 4 張 RTX 5090，8 張一定會跨兩台機器。跨機器跑 NCCL 請看<a href="../ray-custom-image-multinode/">用自己的 Ray 映像，在多台機器的 GPU 上跑同一個 NCCL 工作</a>。</li>
-<li>選不可搶佔的佇列。在可搶佔的佇列上，只要一個 worker 被停掉，整個工作就會中斷。</li>
+<li>選不可搶佔的佇列。工作階段被搶佔時，所有 worker 會一起停止，工作階段也會結束；下次送出會開新的工作階段。</li>
 </ul>
 <h2 id="_3">限制<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
-<li>先開起來的 worker 在等其他 worker 時會一直佔著 GPU，這段時間也算 GPU 時數。<code>WAIT_SECONDS</code> 設成你願意佔著等的時間。</li>
-<li>等待不是預約：空出來的 GPU 可能先被別的工作拿走。如果一直逾時，就少要幾張，或晚點再試。</li>
+<li>worker 會留到工作階段結束，期間一直算 GPU 時數，兩個工作之間沒在跑也一樣。用完請在 <strong>Ray</strong> 分頁選 <strong>結束工作階段</strong>。</li>
+<li>不是每張 GPU 都有空時，工作階段會一張都不拿，一直等。等太久的話，就少要幾張，或晚點再試。</li>
 </ul>
 <h2 id="_4">參考資料<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://docs.ray.io/en/latest/ray-core/scheduling/placement-group.html">Ray placement group 官方文件</a></li>
+<li><a href="../../user-guide/ray/#all-gpus-at-once">所有 GPU 一起拿</a></li>
 </ul>
 
 
