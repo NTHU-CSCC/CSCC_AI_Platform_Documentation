@@ -2451,6 +2451,7 @@
 <li>配額不夠給你要的全部 GPU 時，提交會直接失敗，不會改給比較少張。</li>
 <li>請選沒有 <em>(Preemptible)</em> 的佇列：只要一個 worker 被停掉，整個工作就會中斷。</li>
 </ul>
+<p>這和 config file 的<a href="../projects/#start-all-gpus-together">所有 GPU 一起開始</a>是同一種全有或全無的啟動方式。</p>
 <h3 id="find-your-queue-name">查佇列名稱<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
 <p><code>X-CSCC-Queue</code> 要填佇列的名稱，例如 <code>rtx5090-queue</code>，不是畫面上的 <strong>RTX 5090 Queue</strong>。沒有開著的工作階段時，<strong>Ray</strong> 分頁會列出 Ray 能用的佇列，每個名稱旁都有複製按鈕。建立工作區和部署時的佇列選單，也會在每個佇列底下顯示名稱。工作不能中途被停掉的話，就選沒有 <em>(Preemptible)</em> 的佇列。</p>
 <h2 id="_1">什麼會計入配額<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>

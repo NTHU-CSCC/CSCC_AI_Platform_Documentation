@@ -2451,6 +2451,7 @@
 <li>If your quota cannot cover every GPU you asked for, the submit fails instead of giving you fewer.</li>
 <li>Pick a queue without <em>(Preemptible)</em>: if one worker is stopped, the whole job stops.</li>
 </ul>
+<p>This is the same all-or-nothing start as <a href="../projects/#start-all-gpus-together">Start all GPUs together</a> in config files.</p>
 <h3 id="find-your-queue-name">Find your queue name<a class="headerlink" href="#find-your-queue-name" title="Permanent link">&para;</a></h3>
 <p><code>X-CSCC-Queue</code> takes the queue's name, such as <code>rtx5090-queue</code>, not its label (<strong>RTX 5090 Queue</strong>). With no session open, the <strong>Ray</strong> tab lists the queues you can use for Ray, each name with a copy button. The queue picker in the workspace and deploy forms also shows the name under each label. If your job must not stop part-way, pick a queue without <em>(Preemptible)</em>.</p>
 <h2 id="what-counts-against-your-quota">What counts against your quota<a class="headerlink" href="#what-counts-against-your-quota" title="Permanent link">&para;</a></h2>

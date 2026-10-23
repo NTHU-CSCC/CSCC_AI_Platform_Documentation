@@ -1923,6 +1923,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#start-all-gpus-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start all GPUs together
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2614,6 +2625,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#start-all-gpus-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Start all GPUs together
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3087,6 +3109,37 @@ group already has.</p>
   different claims.</li>
 </ul>
 </details>
+<h3 id="start-all-gpus-together">Start all GPUs together<a class="headerlink" href="#start-all-gpus-together" title="Permanent link">&para;</a></h3>
+<p>A job with several GPU pods can wait until every pod has its GPU. Add <code>cscc.io/gang: "true"</code> to the workload's own <code>metadata.annotations</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">cscc.io/gang</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">completions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-image&gt;</span>
+<span class="w">          </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">            </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16Gi</span>
+</code></pre></div>
+<ul>
+<li>All the job's GPU pods start together or none starts. While it waits, nothing runs and no GPU hours count.</li>
+<li>GPU hours start when the containers start.</li>
+<li>This works for a <code>Job</code>, a <code>Deployment</code> and a <code>Pod</code>. The same annotation in a config file works from the dashboard, the API and the CLI.</li>
+<li>A gang job with no GPU pods fails when it starts, with the message <code>cscc.io/gang needs GPU pods</code>.</li>
+<li>Pick a queue without <em>(Preemptible)</em>. If the job is preempted anyway, all its GPU pods stop together and the job shows as preempted.</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Config files and deployments require Project Manager role</p>
 <p>Only the <strong>Manager</strong> role or higher can create, edit, deploy, validate, inspect or delete config-file instances.</p>

@@ -1923,6 +1923,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#start-all-gpus-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        所有 GPU 一起開始
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2614,6 +2625,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#start-all-gpus-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        所有 GPU 一起開始
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3081,6 +3103,37 @@
   也可以用不同 slot 對應不同 claim。</li>
 </ul>
 </details>
+<h3 id="start-all-gpus-together">所有 GPU 一起開始<a class="headerlink" href="#start-all-gpus-together" title="Permanent link">&para;</a></h3>
+<p>有多個 GPU Pod 的工作，可以等到每個 Pod 都拿到 GPU 才開始。在工作負載自己的 <code>metadata.annotations</code> 加上 <code>cscc.io/gang: "true"</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">batch/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Job</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">cscc.io/gang</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">completions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Never</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-image&gt;</span>
+<span class="w">          </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">requests</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">            </span><span class="nt">limits</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">nvidia.com/rtx6000</span><span class="p">:</span><span class="w"> </span><span class="s">"1"</span>
+<span class="w">              </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16Gi</span>
+</code></pre></div>
+<ul>
+<li>工作的所有 GPU Pod 一起開始，要嘛全部啟動，要嘛一個都不啟動。等待期間沒有任何東西在跑，也不算 GPU 時數。</li>
+<li>GPU 時數從容器開始執行時算起。</li>
+<li><code>Job</code>、<code>Deployment</code> 和 <code>Pod</code> 都可以用。同樣的註記寫在 config file 裡，從儀表板、API 和 CLI 部署都有效。</li>
+<li>沒有 GPU Pod 的 gang 工作，開始執行時會失敗，訊息是 <code>cscc.io/gang needs GPU pods</code>。</li>
+<li>請選沒有 <em>(Preemptible)</em> 的佇列。工作還是被搶佔時，它所有的 GPU Pod 會一起停止，工作顯示為已搶佔。</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">config file 與部署需要專案管理者角色</p>
 <p>只有專案裡 <strong>管理者</strong> 以上角色的成員，才能建立、編輯、部署、驗證、查看或刪除 config file 的項目。</p>
