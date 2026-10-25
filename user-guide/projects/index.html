@@ -3132,7 +3132,7 @@ group already has.</p>
   already mounts something under <code>/dev/shm</code>.</li>
 <li>An inline GPU request goes straight into the container's resource
   requests, for example <code>nvidia.com/rtx5090: "1"</code>.</li>
-<li>A fraction below 1 is part of one card: <code>nvidia.com/rtx5090: "0.25"</code> gives each pod one card at a 25 % SM share and charges 0.25 GPU. Write a whole number or a fraction below 1. <code>1.5</code> and milli values such as <code>250m</code> are refused. A <code>gpu_count</code> or <code>sm_percentage</code> in the deploy request overrides the YAML. The <code>platform-go/dra-sm-pct</code> label applies only when the YAML has no fraction.</li>
+<li>A fraction below 1 is part of one card: <code>nvidia.com/rtx5090: "0.25"</code> gives each pod one card at a 25 % SM share and charges 0.25 GPU. The fraction is a cap: at most 25 % of the GPU's compute and a quarter of its memory, and allocating more memory fails with out-of-memory. A job on a fraction of a GPU is stopped, not paused, when it is preempted. Write a whole number or a fraction below 1. <code>1.5</code> and milli values such as <code>250m</code> are refused. A <code>gpu_count</code> or <code>sm_percentage</code> in the deploy request overrides the YAML. The <code>platform-go/dra-sm-pct</code> label applies only when the YAML has no fraction.</li>
 <li>A GPU claim slot is an annotation on the Pod, or on the Deployment's
   template: <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>.
   <code>{{gpuClaimName}}</code> with no name still works as the default slot. Two

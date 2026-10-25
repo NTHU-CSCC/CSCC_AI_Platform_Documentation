@@ -3127,7 +3127,7 @@
 <ul>
 <li>每個 Pod 有一個 <code>/dev/shm</code>，放在記憶體裡，由一般容器共用（不含 init 容器），最大 8 GiB；Pod 的記憶體上限比 8 GiB 小的話，就以上限為準。只要有任何容器已經在 <code>/dev/shm</code> 底下掛了東西，就不會再加。</li>
 <li>直接寫的 GPU 需求放在容器的資源需求裡，例如 <code>nvidia.com/rtx5090: "1"</code>。</li>
-<li>小於 1 的小數是一張卡的一部分：<code>nvidia.com/rtx5090: "0.25"</code> 讓每個 Pod 拿一張卡的 25 % SM 比例，只計 0.25 張 GPU。數量請寫整數或小於 1 的小數，<code>1.5</code> 或 <code>250m</code> 這種 milli 寫法會被拒絕。部署請求裡的 <code>gpu_count</code>、<code>sm_percentage</code> 會蓋過 YAML；<code>platform-go/dra-sm-pct</code> 標籤只在 YAML 沒寫小數時才生效。</li>
+<li>小於 1 的小數是一張卡的一部分：<code>nvidia.com/rtx5090: "0.25"</code> 讓每個 Pod 拿一張卡的 25 % SM 比例，只計 0.25 張 GPU。這是上限：最多用到這張 GPU 25 % 的算力與四分之一的記憶體，配置超過會出現記憶體不足（out-of-memory）錯誤。只用部分 GPU 的工作被搶佔時會直接停止，不會暫停。數量請寫整數或小於 1 的小數，<code>1.5</code> 或 <code>250m</code> 這種 milli 寫法會被拒絕。部署請求裡的 <code>gpu_count</code>、<code>sm_percentage</code> 會蓋過 YAML；<code>platform-go/dra-sm-pct</code> 標籤只在 YAML 沒寫小數時才生效。</li>
 <li>GPU claim slot 是加在 Pod 或 Deployment 範本上的註記：
   <code>platform-go/dra-claim-name: '{{ gpuClaimName "train-a" }}'</code>。
   不帶名稱的 <code>{{gpuClaimName}}</code> 仍是預設 slot。多個工作負載可以故意共用同一個 slot，

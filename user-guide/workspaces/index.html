@@ -2489,11 +2489,11 @@
 </tr>
 <tr>
 <td><strong>Compute quota (%)</strong></td>
-<td>Share of each GPU's compute. 100% is a full GPU; smaller values count as a fraction. Filled in for a fractional GPU.</td>
+<td>Share of each GPU's compute. 100% is a full GPU; smaller values count as a fraction. Filled in for a fractional GPU. A fraction is a cap: 25% means at most 25% of the GPU's compute.</td>
 </tr>
 <tr>
 <td><strong>GPU memory quota (%)</strong></td>
-<td>Share of each GPU's memory. <strong>Follow compute</strong> matches the compute quota; turn it off to set your own. Workloads on one card total at most 100%.</td>
+<td>Share of each GPU's memory. <strong>Follow compute</strong> matches the compute quota; turn it off to set your own. Workloads on one card total at most 100%. Allocating more GPU memory than the quota fails with an out-of-memory error. A workspace on a fraction of a GPU is stopped, not paused, when it is preempted.</td>
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
