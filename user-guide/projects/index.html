@@ -3111,6 +3111,7 @@
 <h3 id="deploy-rules">Deploy rules<a class="headerlink" href="#deploy-rules" title="Permanent link">&para;</a></h3>
 <p>Quota counts everything you already have going, including workloads still waiting to start. Config files can deploy <code>Pod</code>, <code>Deployment</code> and <code>Job</code>; other kinds are rejected.</p>
 <p>Every container must set a memory request and limit of at least <code>128Mi</code>, or deploy and dry-run validation rejects it. Write the unit: a bare <code>memory: "1"</code> means one byte. The limit can be at most 1.9 times the request; the platform raises the request to fit automatically, for config-file deploys too. A higher request can mean the pod needs more free node memory to schedule.</p>
+<p>Every container in a pod that uses a GPU, init containers and sidecars included, needs a CPU limit of at least 1 core, or no CPU limit. Container start-up runs within the CPU limit, and lower values are rejected.</p>
 <h3 id="asking-for-a-gpu">Asking for a GPU<a class="headerlink" href="#asking-for-a-gpu" title="Permanent link">&para;</a></h3>
 <p>Two ways to ask for a GPU:</p>
 <ul>
