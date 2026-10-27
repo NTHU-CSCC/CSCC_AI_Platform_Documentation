@@ -2497,7 +2497,7 @@
 </tr>
 <tr>
 <td><strong>CPU / Memory</strong></td>
-<td>Optional. Defaults to the plan's limits. With a GPU, the CPU limit must be at least 1 core, because container start-up runs within it. Leave it empty to get the default (2 cores). A memory limit can be at most 1.9 times its request, so the platform raises the request to fit.</td>
+<td>Optional. Defaults to the plan's limits. With a GPU, the CPU limit must be at least 1 core, because container start-up runs within it. Leave it empty to get the default (2 cores). A memory limit can be at most 1.9 times its request, so the platform raises the request to fit. Write memory with a <code>Mi</code> or <code>Gi</code> unit, such as <code>256Gi</code>, and at least <code>128Mi</code>; a bare number means bytes and is rejected. The raised request must fit on one node; the form shows how much memory a node can allocate.</td>
 </tr>
 <tr>
 <td><strong>Shared memory</strong> (<code>/dev/shm</code>)</td>

@@ -2497,7 +2497,7 @@
 </tr>
 <tr>
 <td><strong>CPU / 記憶體</strong></td>
-<td>選填，預設是計畫上限。選了 GPU 時 CPU limit 至少要 1 核，因為容器啟動也算在這個 limit 內。留空會用預設值（2 核）。記憶體 limit 最多是 request 的 1.9 倍，平台會自動把 request 調高到符合</td>
+<td>選填，預設是計畫上限。選了 GPU 時 CPU limit 至少要 1 核，因為容器啟動也算在這個 limit 內。留空會用預設值（2 核）。記憶體 limit 最多是 request 的 1.9 倍，平台會自動把 request 調高到符合。記憶體要寫單位 <code>Mi</code> 或 <code>Gi</code>（例如 <code>256Gi</code>），至少 <code>128Mi</code>；只寫數字會被當成 bytes，平台會拒絕。調高後的 request 必須放得進單一節點，表單會顯示每個節點可配置的記憶體。</td>
 </tr>
 <tr>
 <td><strong>共享記憶體</strong>（<code>/dev/shm</code>）</td>
