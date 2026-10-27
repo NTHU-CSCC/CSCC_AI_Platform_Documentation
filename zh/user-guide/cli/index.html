@@ -2886,7 +2886,7 @@ docker<span class="w"> </span>stop<span class="w"> </span>web
 <li><code>SRC</code> 必須在你的家目錄或群組儲存空間底下。唯讀的儲存空間在容器裡也是唯讀。</li>
 <li>映像自己的 <code>WORKDIR</code>、<code>ENTRYPOINT</code> 和 <code>CMD</code> 都會生效。映像名稱後面的指令取代 <code>CMD</code>，<code>--entrypoint</code> 取代 entrypoint。</li>
 <li>沒有指定 <code>-u</code> 時，容器以映像宣告的數字 <code>USER</code>（例如 <code>USER 101</code>）執行。映像沒有宣告 <code>USER</code>，或只宣告名稱（例如 <code>USER app</code>）時，以使用者 1000 執行（和工作區相同），所以寫進儲存空間的檔案在 IDE 裡仍可編輯。<code>-u 0</code> 和宣告 <code>USER 0</code> 的映像，專案允許 root 容器時（群組專案還要群組允許）才會以 root 執行，否則仍是使用者 1000。</li>
-<li>沒指定 <code>--cpus</code> 和 <code>-m</code> 時，每個容器是 1 個 CPU、4 GiB 記憶體。<code>--shm-size</code> 設定 <code>/dev/shm</code> 的大小。</li>
+<li>沒指定 <code>--cpus</code> 和 <code>-m</code> 時，每個容器是 1 個 CPU、4 GiB 記憶體。<code>-m</code> 至少 <code>128m</code>，換算的記憶體 request（<code>-m</code> ÷ 1.9）也要放得進單一節點。<code>--shm-size</code> 設定 <code>/dev/shm</code> 的大小。</li>
 <li><code>-e KEY=VALUE</code>、<code>-e KEY</code>（複製你目前的值）、<code>--env-file</code>、<code>-w</code>、<code>--rm</code> 和 <code>-d</code> 的用法都和 Docker 相同。</li>
 <li><code>--name</code> 是 2 到 63 個字元，可用英文字母、數字、<code>_</code>、<code>.</code> 和 <code>-</code>，開頭和結尾都必須是英文字母或數字。</li>
 <li><code>--entrypoint ""</code> 會清除映像的 entrypoint，之後要在映像名稱後面給指令。</li>
