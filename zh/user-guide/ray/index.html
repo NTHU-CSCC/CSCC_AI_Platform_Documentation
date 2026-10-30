@@ -2465,13 +2465,24 @@
 <td><code>16</code></td>
 </tr>
 <tr>
+<td><code>X-CSCC-Head-CPU</code></td>
+<td>head 的 CPU 核心數，整數，1 到 32</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>X-CSCC-Worker-CPU</code></td>
+<td>每個 worker 的 CPU 核心數，整數，1 到 32。資料載入跟不上、GPU 常在等時調高</td>
+<td><code>4</code></td>
+</tr>
+<tr>
 <td><code>X-CSCC-Gang</code></td>
 <td>設成 <code>true</code> 時，工作階段的 GPU 要嘛一次全部拿到，要嘛一張都不拿（<a href="#all-gpus-at-once">所有 GPU 一起拿</a>）</td>
 <td><code>false</code></td>
 </tr>
 </tbody>
 </table>
-<p>設定的記憶體是 head 或單一 worker 最多能用的量。其中約一半（設定值除以 1.9）是保留的實體記憶體，超過的部分會用到 swap，速度較慢。head 和所有 worker 都會計入專案與你個人的記憶體配額。</p>
+<p>設定的記憶體是 head 或單一 worker 最多能用的量。其中約一半（設定值除以 1.9）是保留的實體記憶體，超過的部分會用到 swap，速度較慢。head 和所有 worker 都會計入專案與你個人的記憶體和 CPU 配額。</p>
+<p>Ray 會把 <code>OMP_NUM_THREADS</code> 設成 task 的 <code>num_cpus</code>，沒設就是 1，PyTorch 和 NumPy 的運算只會用一條執行緒。worker 核心調多了，task 也要用 <code>num_cpus</code> 要對應的數量，例如 <code>X-CSCC-Worker-CPU</code> 至少 <code>8</code> 時用 <code>@ray.remote(num_gpus=1, num_cpus=8)</code>，並調高 data loader 的 <code>num_workers</code>。task 要的核心比 worker 多，就永遠不會開始。head 只跑你的進入點腳本，不跑 Ray task。</p>
 <p>工作需要所有 GPU 同時到齊時，請看<a href="../../use-cases/ray-placement-group-gang/">等所有 GPU 到齊再開始 Ray 工作</a>。</p>
 <h3 id="all-gpus-at-once">所有 GPU 一起拿<a class="headerlink" href="#all-gpus-at-once" title="Permanent link">&para;</a></h3>
 <p>設定 <code>X-CSCC-Gang: true</code> 時：</p>

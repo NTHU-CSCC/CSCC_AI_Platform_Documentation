@@ -2465,13 +2465,24 @@
 <td><code>16</code></td>
 </tr>
 <tr>
+<td><code>X-CSCC-Head-CPU</code></td>
+<td>CPU cores for the head, a whole number from 1 to 32</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>X-CSCC-Worker-CPU</code></td>
+<td>CPU cores for each worker, a whole number from 1 to 32. Raise it when data loading keeps the GPU waiting</td>
+<td><code>4</code></td>
+</tr>
+<tr>
 <td><code>X-CSCC-Gang</code></td>
 <td><code>true</code> gives the session all its GPUs at once or none (<a href="#all-gpus-at-once">all GPUs at once</a>)</td>
 <td><code>false</code></td>
 </tr>
 </tbody>
 </table>
-<p>The memory you set is the most the head or one worker can use. About half of it (the value divided by 1.9) is reserved RAM; above that it spills into swap, which is slower. The head and all workers count against the project's and your memory quota.</p>
+<p>The memory you set is the most the head or one worker can use. About half of it (the value divided by 1.9) is reserved RAM; above that it spills into swap, which is slower. The head and all workers count against the project's and your memory and CPU quota.</p>
+<p>Ray sets <code>OMP_NUM_THREADS</code> to a task's <code>num_cpus</code>, which is 1 unless you set it, so PyTorch and NumPy math runs on one thread. To use a larger worker, ask for the cores in the task, for example <code>@ray.remote(num_gpus=1, num_cpus=8)</code> with <code>X-CSCC-Worker-CPU</code> at least <code>8</code>, and raise <code>num_workers</code> in your data loader. A task asking for more cores than a worker has never starts. The head runs your entrypoint script but no Ray tasks.</p>
 <p>For a job that needs every GPU at once, see <a href="../../use-cases/ray-placement-group-gang/">Start a Ray job only when all its GPUs are there</a>.</p>
 <h3 id="all-gpus-at-once">All GPUs at once<a class="headerlink" href="#all-gpus-at-once" title="Permanent link">&para;</a></h3>
 <p>With <code>X-CSCC-Gang: true</code>:</p>
