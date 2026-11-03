@@ -2932,8 +2932,8 @@
 </tbody>
 </table>
 <p>Builds run one at a time from a shared queue. Each gets fixed CPU, memory and scratch space that doesn't count against your quota. The platform checks uploaded archives for unsafe paths and size limits first.</p>
-<p>The build engine shuts down when idle and starts when you submit a build, so the first build waits about a minute. A queued build shows why it is waiting. If the engine or the build scratch space isn't ready within 20 minutes, the build fails with the reason.</p>
-<p>A build that can't finish fails with one of these messages instead of waiting:</p>
+<p>The build engine shuts down when idle and starts when you submit a build, so the first build waits about a minute. A waiting build shows why it is waiting: the engine is starting, the scratch space is being checked, or the node has no free memory for it yet. It keeps waiting until resources free up. Once it has started, the wait counts toward the build time limit.</p>
+<p>A build that can't finish fails with one of these messages:</p>
 <table>
 <thead>
 <tr>
@@ -2944,11 +2944,7 @@
 <tbody>
 <tr>
 <td><strong>Build pod cannot start: \&lt;reason&gt;</strong></td>
-<td>The build could not get a place to run, or its image could not be pulled. Submit it again later.</td>
-</tr>
-<tr>
-<td><strong>Build did not start within N minutes. \&lt;wait message&gt;</strong></td>
-<td>The build engine or the build scratch space wasn't ready in time. The wait message says which. Submit it again later.</td>
+<td>The build's image could not be pulled or its pod could not be created. Submit it again later.</td>
 </tr>
 <tr>
 <td><strong>Build did not finish within N minutes</strong></td>
@@ -2960,7 +2956,7 @@
 </tr>
 </tbody>
 </table>
-<p>The build history shows status, source type, destination image and live logs. A failed build shows a short summary; click the log button for the full output. After a retry, the log view keeps the previous failure reason above the current one. The full log of every attempt is kept after the build ends, until you clear it or delete the record. The download button in the log view saves it as a <code>.log</code> file.</p>
+<p>The build history shows status, source type, destination image and live logs. A failed build shows a short summary; click the log button for the full output. A failed build is not retried; fix the Dockerfile and submit it again. The full log is kept after the build ends, until you clear it or delete the record. The download button in the log view saves it as a <code>.log</code> file.</p>
 <p>Each build row has icon buttons: <strong>Cancel build</strong> while it runs (<strong>Delete image artifact</strong> once it has produced an image), <strong>Clear saved logs</strong> and <strong>Delete history record</strong>.</p>
 <ul>
 <li><strong>Clear saved logs</strong>: builders and project managers can clear logs of finished or failed builds. History and images stay.</li>
