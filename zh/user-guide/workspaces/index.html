@@ -2609,7 +2609,7 @@
 </details>
 <details class="question">
 <summary>可以同時執行多個工作區嗎？</summary>
-<p>可以，只要它們用的 GPU 總量沒超過專案配額。</p>
+<p>每個專案可以同時各開一個 JupyterLab 和一個 VS Code 工作區，GPU 總量不能超過專案配額。在同一個專案再開一個 <strong>環境</strong> 相同的工作區，會被拒絕並顯示 <strong>a workspace of this type already exists in this project</strong>。要再跑另一支程式，在執行中的工作區多開一個終端機（或用 <code>tmux</code>）、改選另一種環境，或先刪掉執行中的那個。</p>
 </details>
 <details class="question">
 <summary>工作區被以「Plan window expired」原因驅逐了。</summary>

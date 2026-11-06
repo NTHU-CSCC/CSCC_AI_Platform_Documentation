@@ -2607,7 +2607,7 @@
 </details>
 <details class="question">
 <summary>Can I have multiple workspaces running at once?</summary>
-<p>Yes, as long as their total GPU use stays within your project's quota.</p>
+<p>One JupyterLab and one VS Code workspace per project, within the project's GPU quota. A second workspace with the same <strong>Environment</strong> in the same project is refused with <strong>a workspace of this type already exists in this project</strong>. To run another program, open a second terminal in the running workspace or use <code>tmux</code>, pick the other environment, or delete the running one first.</p>
 </details>
 <details class="question">
 <summary>My workspace was evicted with reason 'Plan window expired'.</summary>
