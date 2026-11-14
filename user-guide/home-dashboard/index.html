@@ -1548,10 +1548,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-gpu-available" class="md-nav__link">
+  <a href="#gpus-you-can-use-now" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform GPU Available
+        GPUs you can use now
       
     </span>
   </a>
@@ -2167,10 +2167,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-gpu-available" class="md-nav__link">
+  <a href="#gpus-you-can-use-now" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform GPU Available
+        GPUs you can use now
       
     </span>
   </a>
@@ -2223,7 +2223,7 @@
 <p>The Home dashboard answers three questions: when you can use GPUs, whether a GPU is free right now, and what you have running or waiting.</p>
 <p><strong>Who can use it:</strong> all signed-in users.</p>
 <p><img alt="Home dashboard" src="../../assets/screenshots/home-dashboard-overview.png" />
-<em>Figure 1: Home dashboard with project schedule, free GPUs, and My GPU jobs.</em></p>
+<em>Figure 1: Home dashboard with the week grid, usable GPUs, and My GPU jobs.</em></p>
 <table>
 <thead>
 <tr>
@@ -2235,12 +2235,12 @@
 <tbody>
 <tr>
 <td><strong>My project schedule</strong></td>
-<td>For each project: when its schedule window and priority window open or close</td>
+<td>Each project's week of schedule and priority hours, laid out like a calendar</td>
 <td>Every 10 seconds</td>
 </tr>
 <tr>
-<td><strong>Platform GPU Available</strong></td>
-<td>Free GPUs on the platform, and free cards on each GPU machine</td>
+<td><strong>GPUs you can use now</strong></td>
+<td>Free GPUs your plans allow, and the state of every card on each machine</td>
 <td>Every 10 seconds</td>
 </tr>
 <tr>
@@ -2252,20 +2252,45 @@
 </table>
 <hr />
 <h2 id="my-project-schedule">My project schedule<a class="headerlink" href="#my-project-schedule" title="Permanent link">&para;</a></h2>
-<p>Each project with a plan shows one line per window, in Taiwan time (UTC+8):</p>
+<p>Each project with a plan gets a tab with a week grid: one row per day (Monday to Sunday), one cell per hour, in Taiwan time (UTC+8).</p>
 <ul>
-<li><strong>Schedule window</strong>: when you can start work. Hidden when the plan has no weekly limit.</li>
-<li><strong>Priority window</strong>: when priority queues are open, for example <em>Priority window open, ends Fri 22:00 (3h 12m left)</em>. Below it, <em>Priority windows this week</em> lists only the hours that overlap the schedule window.</li>
+<li><strong>Light blue</strong>: schedule window, when you can start work.</li>
+<li><strong>Dark blue with a dot</strong>: priority window, when priority queues are open. It only counts inside the schedule window.</li>
+<li><strong>Black outline</strong>: the current hour. Today's row is highlighted.</li>
 </ul>
-<p>When a priority window ends, running work on a priority queue moves to a normal queue, or stops if the plan has no normal queue for that GPU model. See <a href="../concepts/#plan-window">Plan window</a>.</p>
-<p>Projects without a plan say so. Projects whose plan has no priority window show no priority line.</p>
+<p>A line above the grid gives the current state, for example <em>Priority window closed, next opens Sun 22:00 (1d 3h left)</em>. On a phone the grid scrolls sideways and opens at the current hour.</p>
+<p>When a priority window ends, running work on a priority queue moves to a normal queue, or stops if the plan has no normal queue for that GPU model. See <a href="../concepts/#plan-window">Plan window</a>. The project's <strong>Plan</strong> tab uses the same grid.</p>
 <hr />
-<h2 id="platform-gpu-available">Platform GPU Available<a class="headerlink" href="#platform-gpu-available" title="Permanent link">&para;</a></h2>
-<p>The large number is how many GPUs are free across the platform, out of the total. Below it, each GPU machine shows its model and how many cards are free, such as <code>1 / 4 free</code>. Each square is one card: blue is free, grey is in use.</p>
-<div class="admonition info">
-<p class="admonition-title">Effective GPU units</p>
-<p>The count uses <em>effective</em> GPU units. One GPU at 50% SM share counts as 0.5 GPU, and only while a workload is using it.</p>
-</div>
+<h2 id="gpus-you-can-use-now">GPUs you can use now<a class="headerlink" href="#gpus-you-can-use-now" title="Permanent link">&para;</a></h2>
+<p>The large number is how many whole cards your plans allow and are completely free right now, out of all the cards you could use.</p>
+<p>Below it, each GPU machine has a box. Its title lists the card models, such as <code>gpu2 · RTX 5090 ×4 · RTX PRO 6000 ×2</code>, followed by <code>2 / 4 free</code>. Each cell is one card, numbered as in <code>nvidia-smi</code>; when a machine has more than one NUMA node or PCIe root, cards in the same group sit together.</p>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Green outline, white</td>
+<td>Free, the whole card</td>
+</tr>
+<tr>
+<td>Grey filled part-way from the bottom</td>
+<td>Partly allocated</td>
+</tr>
+<tr>
+<td>Grey filled</td>
+<td>Allocated</td>
+</tr>
+<tr>
+<td>Hatched</td>
+<td>Not in your plan; the line under the box names the model</td>
+</tr>
+</tbody>
+</table>
+<p>Hover over a card, or Tab to a machine box and use the arrow keys, to see the card's model, state, and NUMA/PCIe placement under the box.</p>
 <p>When nothing is free, the card tells you whether a preemptible queue can still make room. Admins also see a <strong>View Reports</strong> button that opens the Audit page.</p>
 <hr />
 <h2 id="my-gpu-jobs">My GPU jobs<a class="headerlink" href="#my-gpu-jobs" title="Permanent link">&para;</a></h2>
@@ -2283,7 +2308,7 @@
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>Why does Platform GPU Available show 0?</summary>
+<summary>Why does GPUs you can use now show 0?</summary>
 <p>Every matching GPU or SM share is taken. When a workspace stops, its GPU is free again within about a minute.</p>
 </details>
 <details class="question">

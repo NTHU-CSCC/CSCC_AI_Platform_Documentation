@@ -1551,7 +1551,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        平台剩餘 GPU
+        你目前可用的 GPU
       
     </span>
   </a>
@@ -2170,7 +2170,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        平台剩餘 GPU
+        你目前可用的 GPU
       
     </span>
   </a>
@@ -2223,7 +2223,7 @@
 <p>首頁儀表板回答三件事：什麼時候能用 GPU、現在有沒有空閒的 GPU、你有哪些工作在跑或在等。</p>
 <p><strong>適用對象：</strong> 所有登入的使用者。</p>
 <p><img alt="首頁儀表板" src="../../../assets/screenshots/home-dashboard-overview.png" />
-<em>圖 1：首頁儀表板，包含專案時段、空閒 GPU 和我的 GPU 工作。</em></p>
+<em>圖 1：首頁儀表板，包含一週時段表、可用的 GPU 和我的 GPU 工作。</em></p>
 <table>
 <thead>
 <tr>
@@ -2235,12 +2235,12 @@
 <tbody>
 <tr>
 <td><strong>我的專案時段</strong></td>
-<td>每個專案的排程時段和優先時段什麼時候開、什麼時候關</td>
+<td>每個專案一週的排程時段和優先時段，像行事曆一樣排開</td>
 <td>每 10 秒</td>
 </tr>
 <tr>
-<td><strong>平台剩餘 GPU</strong></td>
-<td>全平台空閒的 GPU，以及每台 GPU 機器還有幾張卡空著</td>
+<td><strong>你目前可用的 GPU</strong></td>
+<td>你的方案能用、而且現在空著的 GPU，以及每台機器上每張卡的狀態</td>
 <td>每 10 秒</td>
 </tr>
 <tr>
@@ -2252,21 +2252,46 @@
 </table>
 <hr />
 <h2 id="_2">我的專案時段<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>有計畫的專案，每種時段各一行，時間一律是台灣時間（UTC+8）：</p>
+<p>每個有計畫的專案各有一個分頁，裡面是一週的時段表：每一列是一天（週一到週日），每一格是一小時，時間一律是台灣時間（UTC+8）。</p>
 <ul>
-<li><strong>排程時段</strong>：什麼時候可以啟動工作。計畫沒有每週時間限制時不顯示。</li>
-<li><strong>優先時段</strong>：優先佇列什麼時候開放，例如「優先時段開放中，週五 22:00 結束（還有 3 小時 12 分）」。下面的「本週優先時段」只列出和排程時段重疊的時間。</li>
+<li><strong>淺藍色</strong>：排程時段，可以啟動工作。</li>
+<li><strong>深藍色加圓點</strong>：優先時段，可以選優先佇列。優先時段只在排程時段內生效。</li>
+<li><strong>黑框</strong>：現在這一小時。今天那一列會反白。</li>
 </ul>
-<p>優先時段結束時，還在優先佇列上的工作會移到一般佇列；計畫沒有同型號 GPU 的一般佇列時，工作會停止。細節見<a href="../concepts/#plan-window">計畫時段</a>。</p>
-<p>沒有計畫的專案會直接註明。計畫沒設優先時段的話，就不會出現優先時段那一行。</p>
+<p>時段表上方會顯示目前狀態，例如「優先時段未開放，下次週日 22:00 開始（還有 1 天 3 小時）」。手機上時段表可以左右滑動，打開時會先捲到現在的時間。</p>
+<p>優先時段結束時，還在優先佇列上的工作會移到一般佇列；計畫沒有同型號 GPU 的一般佇列時，工作會停止。細節見<a href="../concepts/#plan-window">計畫時段</a>。專案的 <strong>計畫</strong> 分頁用的是同一張時段表。</p>
 <hr />
-<h2 id="gpu">平台剩餘 GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
-<p>大數字是全平台現在空著的 GPU 數，後面是總數。下面每台 GPU 機器一行，顯示型號和還有幾張卡空著，例如「空閒 1 / 4」。一個方塊代表一張卡：藍色是空的，灰色是有人在用。</p>
-<div class="admonition info">
-<p class="admonition-title">有效 GPU 單位</p>
-<p>這裡算的是 <em>有效</em> GPU 單位。一張 GPU 切 50% SM 給工作負載時算 0.5 張，而且只在真的有工作負載使用時才算。</p>
-</div>
-<p>完全沒有空閒 GPU 時，卡片會告訴你還有沒有可搶佔佇列能騰出位置。管理員另外會看到 <strong>View Reports</strong> 按鈕，可以開啟稽核頁面。</p>
+<h2 id="gpu">你目前可用的 GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>大數字是你的方案能用、而且現在整張空著的卡數，後面是你能用的總卡數。</p>
+<p>下面每台 GPU 機器一個框，標題寫出機器上各型號的卡數，例如「gpu2 · RTX 5090 ×4 · RTX PRO 6000 ×2」，後面是「可用 2 / 4」。框裡一格是一張卡，編號和 <code>nvidia-smi</code> 一樣；機器上有不只一個 NUMA 節點或 PCIe root 時，同一組的卡會排在一起。</p>
+<table>
+<thead>
+<tr>
+<th>外觀</th>
+<th>意義</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>綠框白底</td>
+<td>可用，整張空著</td>
+</tr>
+<tr>
+<td>灰色從下往上填一部分</td>
+<td>部分已分配</td>
+</tr>
+<tr>
+<td>灰色填滿</td>
+<td>已分配</td>
+</tr>
+<tr>
+<td>斜線</td>
+<td>不在你的方案內；框下方會寫出型號</td>
+</tr>
+</tbody>
+</table>
+<p>把滑鼠移到卡上，或用鍵盤 Tab 移到機器框再用方向鍵切換，框下方會顯示這張卡的型號、狀態和 NUMA／PCIe 位置。</p>
+<p>完全沒有可用的卡時，卡片會告訴你還有沒有可搶佔佇列能騰出位置。管理員另外會看到 <strong>View Reports</strong> 按鈕，可以開啟稽核頁面。</p>
 <hr />
 <h2 id="gpu_1">我的 GPU 工作<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
 <p>標題右邊顯示執行中和等待中的數量。一列是一個工作；用到好幾張卡的工作也只佔一列。</p>
@@ -2283,7 +2308,7 @@
 <hr />
 <h2 id="_3">常見問題<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>為什麼 <strong>平台剩餘 GPU</strong> 顯示 0？</summary>
+<summary>為什麼 <strong>你目前可用的 GPU</strong> 顯示 0？</summary>
 <p>符合條件的 GPU 或 SM 份額都被用掉了。有工作區停掉後，大約一分鐘內 GPU 就會空出來。</p>
 </details>
 <details class="question">
