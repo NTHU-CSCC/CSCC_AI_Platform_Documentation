@@ -27,7 +27,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -35,10 +35,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -3026,7 +3026,7 @@
 <li><em>永遠啟用</em> 表示沒有每週排程限制。</li>
 </ul>
 <p>排程快關閉時，部署對話框會提醒你。關閉後不能送出新部署，換佇列也沒用。已經在跑的工作依計畫的停止政策處理。</p>
-<p>計畫有 <strong>Burst 時段</strong> 的話，會另外顯示 <em>優先時段結束於 HH:MM:SS</em> 或 <em>優先時段開始於 HH:MM:SS</em>，只算它和排程時段重疊的部分。只有在重疊的時間裡，優先佇列才會和一般佇列一起出現。Burst 結束不會停掉已在跑的工作，也不會關閉排程。還在優先佇列上的部署怎麼處理，見<a href="../concepts/#plan-window">計畫時段</a>。部署對話框開著時如果時段變了，佇列選項會自動更新：還能選的會保留，過期的驗證結果會清掉。</p>
+<p>計畫有 <strong>Burst 時段</strong> 的話，會另外顯示優先時段什麼時候結束或下次開始，例如「優先時段開放中，週五 22:00 結束（還有 3 小時 12 分）」，以及本週的優先時段。兩者都只算和排程時段重疊的部分，優先佇列也只在重疊的時間裡和一般佇列一起出現。Burst 結束不會停掉已在跑的工作，也不會關閉排程。還在優先佇列上的部署怎麼處理，見<a href="../concepts/#plan-window">計畫時段</a>。部署對話框開著時如果時段變了，佇列選項會自動更新：還能選的會保留，過期的驗證結果會清掉。</p>
 <p>管理員可以替佇列設執行時間上限。你選的佇列有上限的話，工作負載到時間就會自動停止，通知鈴鐺會收到「已達執行時間上限」。config file 裡不能提高或關掉這個上限。專案的<strong>工作執行時間上限</strong>也一樣，兩者取較短的。有上限時，<strong>Resources</strong> 分頁會在工作負載下方顯示「剩餘 hh<img alt="🇲🇲" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f1f2-1f1f2.svg" title=":mm:" />ss」，從第一個 pod 開始執行時算起；同一個工作負載的所有 pod 會一起停止。</p>
 <p>計畫有 GPU 時數額度的話，<strong>總覽</strong> 分頁會多一條 <strong>GPU 時數</strong> 長條，顯示本期用量和額度。旁邊有重設週期（每月、每週或每 N 小時，由管理員設定）和下次重設時間（UTC+8）。額度用完後，要等重設才能啟動新的 GPU 任務和工作區，執行中的不受影響。</p>
 <h3 id="_11">專案可以執行的映像<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
@@ -3419,10 +3419,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

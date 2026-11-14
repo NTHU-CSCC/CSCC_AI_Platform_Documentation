@@ -27,7 +27,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -35,10 +35,10 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1540,7 +1540,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        元件說明
+        我的專案時段
       
     </span>
   </a>
@@ -1551,40 +1551,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        閱讀 GPU 可用性
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU Cluster Status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        資源使用歷史
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        最近活動
+        平台剩餘 GPU
       
     </span>
   </a>
@@ -1595,7 +1562,7 @@
   <a href="#gpu_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        我的 GPU 任務
+        我的 GPU 工作
       
     </span>
   </a>
@@ -1603,7 +1570,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -2192,7 +2159,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        元件說明
+        我的專案時段
       
     </span>
   </a>
@@ -2203,40 +2170,7 @@
   <a href="#gpu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        閱讀 GPU 可用性
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU Cluster Status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        資源使用歷史
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        最近活動
+        平台剩餘 GPU
       
     </span>
   </a>
@@ -2247,7 +2181,7 @@
   <a href="#gpu_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        我的 GPU 任務
+        我的 GPU 工作
       
     </span>
   </a>
@@ -2255,7 +2189,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         常見問題
@@ -2286,139 +2220,79 @@
 
 
 <h1 id="_1">首頁儀表板<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>首頁儀表板顯示還剩多少 GPU、你的配額用了多少、執行中的任務，以及最近送出的申請。</p>
+<p>首頁儀表板回答三件事：什麼時候能用 GPU、現在有沒有空閒的 GPU、你有哪些工作在跑或在等。</p>
 <p><strong>適用對象：</strong> 所有登入的使用者。</p>
-<hr />
-<h2 id="_2">元件說明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><img alt="首頁儀表板" src="../../../assets/screenshots/home-dashboard-overview.png" />
+<em>圖 1：首頁儀表板，包含專案時段、空閒 GPU 和我的 GPU 工作。</em></p>
 <table>
 <thead>
 <tr>
-<th>元件</th>
+<th>區塊</th>
 <th>顯示內容</th>
 <th>更新時機</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><strong>我的專案時段</strong></td>
+<td>每個專案的排程時段和優先時段什麼時候開、什麼時候關</td>
+<td>每 10 秒</td>
+</tr>
+<tr>
 <td><strong>平台剩餘 GPU</strong></td>
-<td>全平台可用和已用的 GPU 單位，還有可搶佔佇列數</td>
-<td>頁面載入時，之後每 10 秒</td>
+<td>全平台空閒的 GPU，以及每台 GPU 機器還有幾張卡空著</td>
+<td>每 10 秒</td>
 </tr>
 <tr>
-<td><strong>GPU Cluster Status</strong></td>
-<td>GPU 機器卡片（不顯示機器名稱），列出每張 GPU 的使用量</td>
-<td>頁面載入時，之後每 10 秒</td>
-</tr>
-<tr>
-<td>專案數（標題列）</td>
-<td>你所屬的專案數，以及其中有計畫的有幾個</td>
-<td>頁面載入時，之後每 10 秒</td>
-</tr>
-<tr>
-<td><strong>資源使用歷史</strong></td>
-<td>每個有計畫的專案，GPU/CPU/記憶體配額的已用量與總量，還有計畫時段狀態</td>
-<td>頁面載入時，之後每 10 秒；倒數每秒更新</td>
-</tr>
-<tr>
-<td><strong>最近活動</strong></td>
-<td>你最近送出的 8 筆申請</td>
-<td>頁面載入時，之後每 10 秒</td>
-</tr>
-<tr>
-<td><strong>我的 GPU 任務</strong></td>
-<td>你執行中的 GPU 任務，含 GPU 比例、記憶體與執行時間</td>
-<td>頁面載入時，之後每 15 秒</td>
+<td><strong>我的 GPU 工作</strong></td>
+<td>執行中和等待中的 GPU 工作，含已執行多久、何時自動停止、排第幾位</td>
+<td>每 15 秒</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="gpu">閱讀 GPU 可用性<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
-<p><strong>平台剩餘 GPU</strong> 顯示還剩多少 GPU。</p>
-<p><img alt="首頁儀表板 平台剩餘 GPU" src="../../../assets/screenshots/home-dashboard-overview.png" />
-<em>圖 1：首頁儀表板，顯示 GPU 可用量、資源使用量和執行中的任務。</em></p>
-<ol>
-<li>看 <strong>已分配 / 總數</strong>，例如 <code>6 / 8 GPUs</code>。</li>
-<li>可用 GPU = 總數 − 已分配。可用為 0 時，新工作區要排隊。</li>
-<li>卡片也會顯示 <strong>可搶佔佇列</strong> 數量。GPU 全部用完時，優先級較高的工作還是能啟動，因為平台會停掉可搶佔佇列裡優先級較低的工作區。</li>
-<li>管理員還會看到 <strong>查看報告</strong> 按鈕，點下去會開稽核頁面。</li>
-</ol>
+<h2 id="_2">我的專案時段<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>有計畫的專案，每種時段各一行，時間一律是台灣時間（UTC+8）：</p>
+<ul>
+<li><strong>排程時段</strong>：什麼時候可以啟動工作。計畫沒有每週時間限制時不顯示。</li>
+<li><strong>優先時段</strong>：優先佇列什麼時候開放，例如「優先時段開放中，週五 22:00 結束（還有 3 小時 12 分）」。下面的「本週優先時段」只列出和排程時段重疊的時間。</li>
+</ul>
+<p>優先時段結束時，還在優先佇列上的工作會移到一般佇列；計畫沒有同型號 GPU 的一般佇列時，工作會停止。細節見<a href="../concepts/#plan-window">計畫時段</a>。</p>
+<p>沒有計畫的專案會直接註明。計畫沒設優先時段的話，就不會出現優先時段那一行。</p>
+<hr />
+<h2 id="gpu">平台剩餘 GPU<a class="headerlink" href="#gpu" title="Permanent link">&para;</a></h2>
+<p>大數字是全平台現在空著的 GPU 數，後面是總數。下面每台 GPU 機器一行，顯示型號和還有幾張卡空著，例如「空閒 1 / 4」。一個方塊代表一張卡：藍色是空的，灰色是有人在用。</p>
 <div class="admonition info">
 <p class="admonition-title">有效 GPU 單位</p>
-<p>卡片算的是「有效」GPU 單位，不是整張卡。1 張 GPU 配 50% SM 比例算 0.5 GPU，而且要有工作在用才算。</p>
+<p>這裡算的是 <em>有效</em> GPU 單位。一張 GPU 切 50% SM 給工作負載時算 0.5 張，而且只在真的有工作負載使用時才算。</p>
 </div>
+<p>完全沒有空閒 GPU 時，卡片會告訴你還有沒有可搶佔佇列能騰出位置。管理員另外會看到 <strong>View Reports</strong> 按鈕，可以開啟稽核頁面。</p>
 <hr />
-<h2 id="gpu-cluster-status">GPU Cluster Status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
-<p><strong>平台剩餘 GPU</strong> 下方的 <strong>GPU Cluster Status</strong> 網格，用小卡片列出每台 GPU 機器，不顯示真實的機器名稱：</p>
+<h2 id="gpu_1">我的 GPU 工作<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
+<p>標題右邊顯示執行中和等待中的數量。一列是一個工作；用到好幾張卡的工作也只佔一列。</p>
+<p>執行中的工作會顯示：</p>
 <ul>
-<li><code>GPU node 1</code> 這類顯示名稱與 GPU 型號</li>
-<li>每張實體 GPU 及其編號與型號</li>
-<li>這台機器的 GPU 用掉幾份，例如 <code>3 / 8</code></li>
-<li>每張 GPU 的狀態長條與使用率</li>
+<li>專案、佇列和 GPU 數量</li>
+<li>「已執行」：跑了多久</li>
+<li>「自動停止」：執行時間上限到了會在什麼時候停，和實際停止的算法一樣，從第一個 Pod 開始跑時起算。剩不到一小時會變成橘色。「沒有執行時間上限」代表不會因為時間到而被停掉。</li>
+<li>在可搶佔佇列上時，會註明「可能被搶佔」</li>
+<li>在優先佇列上時，會註明優先時段結束時會移到一般佇列</li>
 </ul>
-<p>送出工作前先看這個網格，就知道哪些型號有空，或哪台機器還放得下部分 GPU 的 claim。儀表板不會顯示其他使用者或工作的名稱。</p>
+<p>等待中的工作會顯示佇列、GPU 數量、排第幾位（「第 3 位（共 8 位）」）和已經等了多久。</p>
+<p>這張卡片只能看不能操作。工作區到 <a href="../workspaces/">工作區</a> 頁面管理，部署到專案的 <strong>Resources</strong> 分頁管理。</p>
 <hr />
-<h2 id="_3">資源使用歷史<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>圖表列出你每個有計畫的專案的用量。沒有計畫的專案不會列出，全部都沒有計畫時，圖表會顯示提示。</p>
-<ul>
-<li>每個長條代表一個專案。</li>
-<li>填滿的部分是已用的配額（GPU 時數、CPU 時數或記憶體）。</li>
-<li>每個專案會標出計畫現在是全天開放、即將關閉、即將開啟，還是已過期。</li>
-<li>計畫時段的倒數每秒更新，不用重新整理。</li>
-</ul>
-<hr />
-<h2 id="_4">最近活動<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><strong>最近活動</strong> 列出你最近送出的 8 筆申請，附類型標籤和送出時間。點 <strong>查看全部</strong> 進申請頁面。</p>
-<hr />
-<h2 id="gpu_1">我的 GPU 任務<a class="headerlink" href="#gpu_1" title="Permanent link">&para;</a></h2>
-<p><strong>我的 GPU 任務</strong> 表格列出你執行中的 GPU 任務（工作區與部署）。一列一個任務，跨多張卡的任務也只佔一列。</p>
-<table>
-<thead>
-<tr>
-<th>欄位</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Status</strong></td>
-<td>一律是 <strong>Running</strong>；已結束的任務不會列出</td>
-</tr>
-<tr>
-<td><strong>任務</strong></td>
-<td>任務 ID 的最後 8 個字元</td>
-</tr>
-<tr>
-<td><strong>專案</strong></td>
-<td>所屬專案</td>
-</tr>
-<tr>
-<td><strong>GPU</strong></td>
-<td>持有的有效 GPU 比例，以及碰到幾張卡</td>
-</tr>
-<tr>
-<td><strong>記憶體</strong></td>
-<td>持有的 GPU 記憶體（GiB）</td>
-</tr>
-<tr>
-<td><strong>Running</strong></td>
-<td>已執行多久</td>
-</tr>
-</tbody>
-</table>
-<p>這個表格只能看，不能操作。要開啟或刪除工作區，到<a href="../workspaces/">工作區</a>頁；部署在專案的 <strong>資源</strong> 分頁管理。</p>
-<hr />
-<h2 id="_5">常見問題<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_3">常見問題<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>為什麼 <strong>平台剩餘 GPU</strong> 顯示 0？</summary>
-<p>卡片顯示的是「有效」可用量。符合條件的 GPU 或 SM 比例都被用掉時，就會顯示 0。工作區停止後，大約一分鐘內 GPU 就會空出來。</p>
+<p>符合條件的 GPU 或 SM 份額都被用掉了。有工作區停掉後，大約一分鐘內 GPU 就會空出來。</p>
 </details>
 <details class="question">
-<summary>最近活動是空的，有問題嗎？</summary>
-<p>沒有。這裡只列你送出過的申請。</p>
+<summary>我的工作沒有顯示自動停止時間。</summary>
+<p>它的佇列和專案都沒設執行時間上限，或是它的 Pod 還沒開始跑。第一個 Pod 排到機器上之後就會顯示。</p>
 </details>
 <details class="question">
-<summary>我執行中的工作區沒有出現在任務表格。</summary>
-<p>表格每 15 秒更新一次。下次更新後還沒出現，就按 <code>F5</code> 重新整理。</p>
+<summary>我執行中的工作區沒有出現在我的 GPU 工作。</summary>
+<p>卡片每 15 秒更新一次。下次更新後還是沒有，請重新整理頁面（<code>F5</code>）。</p>
 </details>
 
 
@@ -2533,10 +2407,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u8907\u88fd", "clipboard.copy": "\u8907\u88fd", "search.result.more.one": "\u6b64\u9801\u5c1a\u6709 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.more.other": "\u6b64\u9801\u5c1a\u6709 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.none": "\u6c92\u6709\u7b26\u5408\u7684\u9805\u76ee", "search.result.one": "\u627e\u5230 1 \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.other": "\u627e\u5230 # \u500b\u7b26\u5408\u7684\u9805\u76ee", "search.result.placeholder": "\u6253\u5b57\u9032\u884c\u641c\u5c0b", "search.result.term.missing": "\u7f3a\u5c11\u5b57\u8a5e", "select.version": "\u9078\u64c7\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>

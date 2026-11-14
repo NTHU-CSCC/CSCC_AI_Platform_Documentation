@@ -27,7 +27,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
     
     
       
@@ -35,10 +35,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1537,10 +1537,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#widget-reference" class="md-nav__link">
+  <a href="#my-project-schedule" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Widget reference
+        My project schedule
       
     </span>
   </a>
@@ -1548,43 +1548,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-gpu-availability" class="md-nav__link">
+  <a href="#platform-gpu-available" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading GPU availability
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU cluster status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resource-usage-history" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resource usage history
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recent-activity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recent activity
+        Platform GPU Available
       
     </span>
   </a>
@@ -2189,10 +2156,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#widget-reference" class="md-nav__link">
+  <a href="#my-project-schedule" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Widget reference
+        My project schedule
       
     </span>
   </a>
@@ -2200,43 +2167,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-gpu-availability" class="md-nav__link">
+  <a href="#platform-gpu-available" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading GPU availability
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gpu-cluster-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GPU cluster status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resource-usage-history" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resource usage history
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recent-activity" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Recent activity
+        Platform GPU Available
       
     </span>
   </a>
@@ -2286,139 +2220,79 @@
 
 
 <h1 id="home-dashboard">Home dashboard<a class="headerlink" href="#home-dashboard" title="Permanent link">&para;</a></h1>
-<p>The Home dashboard shows free GPUs, your quota use, your running jobs, and your recent requests.</p>
+<p>The Home dashboard answers three questions: when you can use GPUs, whether a GPU is free right now, and what you have running or waiting.</p>
 <p><strong>Who can use it:</strong> all signed-in users.</p>
-<hr />
-<h2 id="widget-reference">Widget reference<a class="headerlink" href="#widget-reference" title="Permanent link">&para;</a></h2>
+<p><img alt="Home dashboard" src="../../assets/screenshots/home-dashboard-overview.png" />
+<em>Figure 1: Home dashboard with project schedule, free GPUs, and My GPU jobs.</em></p>
 <table>
 <thead>
 <tr>
-<th>Widget</th>
+<th>Section</th>
 <th>What it shows</th>
 <th>Refresh</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>GPU Availability Card</strong></td>
-<td>Free and used GPU units across the platform, plus a preemptible-queue count</td>
-<td>On page load and every 10 seconds</td>
+<td><strong>My project schedule</strong></td>
+<td>For each project: when its schedule window and priority window open or close</td>
+<td>Every 10 seconds</td>
 </tr>
 <tr>
-<td><strong>GPU Cluster Status</strong></td>
-<td>Anonymous GPU machine cards showing how much of each GPU is in use</td>
-<td>On page load and every 10 seconds</td>
+<td><strong>Platform GPU Available</strong></td>
+<td>Free GPUs on the platform, and free cards on each GPU machine</td>
+<td>Every 10 seconds</td>
 </tr>
 <tr>
-<td>Project count (header line)</td>
-<td>Number of projects you belong to, and how many of them have a plan</td>
-<td>On page load and every 10 seconds</td>
-</tr>
-<tr>
-<td><strong>Resource Usage History</strong></td>
-<td>GPU/CPU/memory quota used vs. allocated for each project that has a plan, plus plan-window status</td>
-<td>On page load and every 10 seconds; countdown ticks every second</td>
-</tr>
-<tr>
-<td><strong>Recent Activity</strong></td>
-<td>Your 8 most recent requests</td>
-<td>On page load and every 10 seconds</td>
-</tr>
-<tr>
-<td><strong>My GPU Jobs</strong></td>
-<td>Your running GPU jobs with GPU share, memory, and running time</td>
-<td>On page load and every 15 seconds</td>
+<td><strong>My GPU jobs</strong></td>
+<td>Your running and waiting GPU jobs, with run time, auto-stop time, and queue position</td>
+<td>Every 15 seconds</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="reading-gpu-availability">Reading GPU availability<a class="headerlink" href="#reading-gpu-availability" title="Permanent link">&para;</a></h2>
-<p>The <strong>GPU Availability Card</strong> shows how many GPUs are free right now.</p>
-<p><img alt="Home dashboard GPU availability card" src="../../assets/screenshots/home-dashboard-overview.png" />
-<em>Figure 1: Home dashboard showing GPU availability, resource usage, and active jobs.</em></p>
-<ol>
-<li>Read the <strong>allocated / total</strong> fraction, for example <code>6 / 8 GPUs</code>.</li>
-<li>Free GPUs = total − allocated. At 0 free, a new workspace waits in line.</li>
-<li>The card also shows a <strong>Preemptible queues</strong> count. When every GPU is busy, higher-priority work can still start by stopping a lower-priority workspace in a preemptible queue.</li>
-<li>Admins also see a <strong>View Reports</strong> button that opens the Audit page.</li>
-</ol>
+<h2 id="my-project-schedule">My project schedule<a class="headerlink" href="#my-project-schedule" title="Permanent link">&para;</a></h2>
+<p>Each project with a plan shows one line per window, in Taiwan time (UTC+8):</p>
+<ul>
+<li><strong>Schedule window</strong>: when you can start work. Hidden when the plan has no weekly limit.</li>
+<li><strong>Priority window</strong>: when priority queues are open, for example <em>Priority window open, ends Fri 22:00 (3h 12m left)</em>. Below it, <em>Priority windows this week</em> lists only the hours that overlap the schedule window.</li>
+</ul>
+<p>When a priority window ends, running work on a priority queue moves to a normal queue, or stops if the plan has no normal queue for that GPU model. See <a href="../concepts/#plan-window">Plan window</a>.</p>
+<p>Projects without a plan say so. Projects whose plan has no priority window show no priority line.</p>
+<hr />
+<h2 id="platform-gpu-available">Platform GPU Available<a class="headerlink" href="#platform-gpu-available" title="Permanent link">&para;</a></h2>
+<p>The large number is how many GPUs are free across the platform, out of the total. Below it, each GPU machine shows its model and how many cards are free, such as <code>1 / 4 free</code>. Each square is one card: blue is free, grey is in use.</p>
 <div class="admonition info">
 <p class="admonition-title">Effective GPU units</p>
-<p>The card counts <em>effective</em> GPU units, not whole cards. One GPU at 50% SM share counts as 0.5 GPU, and only while a workload is using it.</p>
+<p>The count uses <em>effective</em> GPU units. One GPU at 50% SM share counts as 0.5 GPU, and only while a workload is using it.</p>
 </div>
-<hr />
-<h2 id="gpu-cluster-status">GPU cluster status<a class="headerlink" href="#gpu-cluster-status" title="Permanent link">&para;</a></h2>
-<p>Below the availability card, the <strong>GPU Cluster Status</strong> grid shows each GPU machine under an anonymous label:</p>
-<ul>
-<li>A display label such as <code>GPU node 1</code> and the GPU model</li>
-<li>Each physical GPU, with its index and model</li>
-<li>How many shares of that machine's GPUs are taken, such as <code>3 / 8</code></li>
-<li>A status bar and usage percentage for each GPU</li>
-</ul>
-<p>Check it before you submit to see which models are idle and whether a machine has room for a part-GPU claim. Other users' names and workloads are never shown.</p>
-<hr />
-<h2 id="resource-usage-history">Resource usage history<a class="headerlink" href="#resource-usage-history" title="Permanent link">&para;</a></h2>
-<p>The chart shows your usage per project that has a plan. Projects without a plan are not listed; if none has one, a notice appears.</p>
-<ul>
-<li>Each bar is one project.</li>
-<li>The fill shows how much quota you have used (GPU hours, CPU hours, or memory).</li>
-<li>Each project row shows whether its resource plan is always active, closing, opening, or expired.</li>
-<li>Plan-window countdowns update every second without a refresh.</li>
-</ul>
-<hr />
-<h2 id="recent-activity">Recent activity<a class="headerlink" href="#recent-activity" title="Permanent link">&para;</a></h2>
-<p>The <strong>Recent Activity</strong> panel lists your 8 most recent requests, with their tag and submit time. Click <strong>View All</strong> to open the Requests page.</p>
+<p>When nothing is free, the card tells you whether a preemptible queue can still make room. Admins also see a <strong>View Reports</strong> button that opens the Audit page.</p>
 <hr />
 <h2 id="my-gpu-jobs">My GPU jobs<a class="headerlink" href="#my-gpu-jobs" title="Permanent link">&para;</a></h2>
-<p>The <strong>My GPU Jobs</strong> table lists the GPU jobs (workspaces and deployments) you have running right now. One row is one job; a job that spans several cards is one row.</p>
-<table>
-<thead>
-<tr>
-<th>Column</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Status</strong></td>
-<td>Always <strong>Running</strong>; finished jobs are not listed</td>
-</tr>
-<tr>
-<td><strong>Job</strong></td>
-<td>The last 8 characters of the job ID</td>
-</tr>
-<tr>
-<td><strong>Project</strong></td>
-<td>Owning project</td>
-</tr>
-<tr>
-<td><strong>GPU</strong></td>
-<td>Effective GPU share held, and how many cards it touches</td>
-</tr>
-<tr>
-<td><strong>Memory</strong></td>
-<td>GPU memory held, in GiB</td>
-</tr>
-<tr>
-<td><strong>Running</strong></td>
-<td>How long the job has been running</td>
-</tr>
-</tbody>
-</table>
-<p>The table is read-only. Manage workspaces on the <a href="../workspaces/">Workspaces</a> page and deployments on the project's <strong>Resources</strong> tab.</p>
+<p>The header counts running and waiting jobs. One row is one job; a job that spans several cards is one row.</p>
+<p>Running jobs show:</p>
+<ul>
+<li>Project, queue, and GPU amount</li>
+<li><em>Running for</em>: how long it has run</li>
+<li><em>Stops automatically</em>: when the runtime limit stops it, counted the same way as the stop itself, from when its first pod started. It turns orange with under an hour left. <em>No runtime limit</em> means it is not stopped by time.</li>
+<li><em>May be preempted</em> if it is on a preemptible queue</li>
+<li>A note if it is on a priority queue and moves to a normal queue when the priority window ends</li>
+</ul>
+<p>Waiting jobs show the queue, the GPU amount, the position in line (<em>3 of 8</em>), and how long it has waited.</p>
+<p>The card is read-only. Manage workspaces on the <a href="../workspaces/">Workspaces</a> page and deployments on the project's <strong>Resources</strong> tab.</p>
 <hr />
 <h2 id="common-questions">Common questions<a class="headerlink" href="#common-questions" title="Permanent link">&para;</a></h2>
 <details class="question">
-<summary>Why does the availability card show 0 GPUs?</summary>
-<p>The card shows <em>effective</em> availability. If every matching GPU or SM share is taken, it shows 0. When a workspace stops, its GPU is free again within about a minute.</p>
+<summary>Why does Platform GPU Available show 0?</summary>
+<p>Every matching GPU or SM share is taken. When a workspace stops, its GPU is free again within about a minute.</p>
 </details>
 <details class="question">
-<summary>Recent Activity is empty. Is something wrong?</summary>
-<p>No. It lists only requests you sent.</p>
+<summary>My job has no auto-stop time.</summary>
+<p>Its queue and project set no runtime limit, or its pods have not started yet. The time appears once the first pod is placed.</p>
 </details>
 <details class="question">
-<summary>My running workspace is not in the jobs table.</summary>
-<p>The table refreshes every 15 seconds. If it is still missing after the next refresh, reload the page (<code>F5</code>).</p>
+<summary>My running workspace is not in My GPU jobs.</summary>
+<p>The card refreshes every 15 seconds. If it is still missing after the next refresh, reload the page (<code>F5</code>).</p>
 </details>
 
 
@@ -2533,10 +2407,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
       
     
   </body>
