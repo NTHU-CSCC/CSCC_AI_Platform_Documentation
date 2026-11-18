@@ -2395,7 +2395,8 @@
 </details>
 <details class="question">
 <summary>我的檔案在哪？</summary>
-<p>桌面結束後，只有掛載的儲存空間裡的檔案會留下（Isaac Sim 是 <code>/workspace</code>），請存在那裡。</p>
+<p>桌面結束後，只有掛載的儲存空間裡的檔案會留下（Isaac Sim 是 <code>/workspace</code>），請存在那裡。
+Isaac Sim 用自己的使用者身分執行，只能修改有群組寫入權限的檔案和資料夾。它建立的檔案都有群組寫入權限，所以工作區也改得動。要讓它改你在工作區建立的檔案或資料夾，先在工作區執行 <code>chmod -R g+w &lt;路徑&gt;</code>。</p>
 </details>
 <details class="question">
 <summary>桌面可以超過 8 小時嗎？</summary>

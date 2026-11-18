@@ -2395,7 +2395,8 @@
 </details>
 <details class="question">
 <summary>Where are my files?</summary>
-<p>In the mounted storage volume (for Isaac Sim, <code>/workspace</code>); nothing else survives the desktop.</p>
+<p>In the mounted storage volume (for Isaac Sim, <code>/workspace</code>); nothing else survives the desktop.
+Isaac Sim runs as its own user and can change only files and folders with group write. Files it creates have group write, so workspaces can change them too. To let it edit a file or folder you made in a workspace, run <code>chmod -R g+w &lt;path&gt;</code> there first.</p>
 </details>
 <details class="question">
 <summary>Can I keep the desktop for more than 8 hours?</summary>
